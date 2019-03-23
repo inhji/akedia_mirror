@@ -16,7 +16,20 @@ defmodule AkediaWeb.Router do
   scope "/", AkediaWeb do
     pipe_through :browser
 
-    get "/", PageController, :index
+    get "/", PublicController, :index
+
+    resources "/stories", StoryController
+    resources "/bookmarks", BookmarkController
+    resources "/pages", PageController
+    resources "/topics", TopicController
+    get "/tagged/:topic", TopicController, :tagged
+
+    scope "/auth" do
+      get "/register", UserController, :new
+      post "/register", UserController, :create
+    end
+
+    resources "/user", UserController, only: [:show, :edit, :update], singleton: true
   end
 
   # Other scopes may use custom stacks.

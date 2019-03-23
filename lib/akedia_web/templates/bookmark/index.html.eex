@@ -1,0 +1,37 @@
+<h1>Listing Bookmarks</h1>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Url</th>
+      <th>Content</th>
+      <th>Tags</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for bookmark <- @bookmarks do %>
+    <tr>
+      <td><%= bookmark.title %></td>
+      <td><%= bookmark.url %></td>
+      <td><%= bookmark.content %></td>
+      <td class="topics">
+        <%= for topic <- bookmark.entity.topics do %>
+          <%= link to: Routes.topic_path(@conn, :tagged, topic) do %>
+            <div class="badge badge-secondary"><%= topic.text %></div><% end %>
+        <% end %>
+      </td>
+
+      <td>
+        <%= link "Show", to: Routes.bookmark_path(@conn, :show, bookmark) %>
+        <%= link "Edit", to: Routes.bookmark_path(@conn, :edit, bookmark) %>
+        <%= link "Delete", to: Routes.bookmark_path(@conn, :delete, bookmark), method: :delete, data: [confirm: "Are you sure?"] %>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<span><%= link "New Bookmark", to: Routes.bookmark_path(@conn, :new) %></span>

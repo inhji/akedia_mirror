@@ -1,0 +1,23 @@
+<h1>Show Story</h1>
+
+<ul>
+
+  <li>
+    <strong>Title:</strong>
+    <%= @story.title %>
+  </li>
+
+  <li>
+    <strong>Slug:</strong>
+    <%= @story.slug %>
+  </li>
+
+  <li>
+    <strong>Content:</strong>
+    <%= raw(AkediaWeb.Markdown.to_html(@story)) %>
+  </li>
+
+</ul>
+
+<span><%= link "Edit", to: Routes.story_path(@conn, :edit, @story) %></span>
+<span><%= link "Back", to: Routes.story_path(@conn, :index) %></span>

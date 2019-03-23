@@ -41,6 +41,7 @@ defmodule AkediaWeb do
 
       import AkediaWeb.ErrorHelpers
       import AkediaWeb.Gettext
+      import AkediaWeb.Helpers.Tags, only: [list_tags: 1]
       alias AkediaWeb.Router.Helpers, as: Routes
     end
   end

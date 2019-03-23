@@ -1,0 +1,23 @@
+<h1>Show Page</h1>
+
+<ul>
+
+  <li>
+    <strong>Title:</strong>
+    <%= @page.title %>
+  </li>
+
+  <li>
+    <strong>Slug:</strong>
+    <%= @page.slug %>
+  </li>
+
+  <li>
+    <strong>Content:</strong>
+    <%= raw(AkediaWeb.Markdown.to_html(@page)) %>
+  </li>
+
+</ul>
+
+<span><%= link "Edit", to: Routes.page_path(@conn, :edit, @page) %></span>
+<span><%= link "Back", to: Routes.page_path(@conn, :index) %></span>

@@ -1,0 +1,8 @@
+<h1><%= @bookmark.title %></h1>
+
+<p><%= raw(AkediaWeb.Markdown.to_html(@bookmark)) %></p>
+
+<p><%= link @bookmark.url, to: @bookmark.url %></p>
+
+<span><%= link "Edit", to: Routes.bookmark_path(@conn, :edit, @bookmark) %></span>
+<span><%= link "Back", to: Routes.bookmark_path(@conn, :index) %></span>
