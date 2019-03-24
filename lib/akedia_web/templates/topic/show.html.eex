@@ -10,4 +10,3 @@
 </ul>
 
 <span><%= link "Edit", to: Routes.topic_path(@conn, :edit, @topic) %></span>
-<span><%= link "Back", to: Routes.topic_path(@conn, :index) %></span>
