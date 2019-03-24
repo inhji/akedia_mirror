@@ -21,3 +21,12 @@ a {
 
 .list thead { color: $purple; }
 .list a { color: $magenta; }
+
+footer {
+  margin-top: 2rem;
+  padding: 4rem 0;
+  text-align: center;
+  color: $gray-700;
+  background-color: $gray-200;
+  min-height: 100px;
+}
