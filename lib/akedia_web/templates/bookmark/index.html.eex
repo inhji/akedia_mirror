@@ -1,22 +1,19 @@
 <h1>Listing Bookmarks</h1>
 
-<table class="table">
+<table class="table list bookmarks">
   <thead>
     <tr>
       <th>Title</th>
       <th>Url</th>
-      <th>Content</th>
       <th>Tags</th>
-
       <th></th>
     </tr>
   </thead>
   <tbody>
 <%= for bookmark <- @bookmarks do %>
     <tr>
-      <td><%= bookmark.title %></td>
-      <td><%= bookmark.url %></td>
-      <td><%= bookmark.content %></td>
+      <td><%= link bookmark.title, to: bookmark.url %></td>
+      <td><%= link tld(bookmark.url), to: tld(bookmark.url) %></td>
       <td class="topics">
         <%= for topic <- bookmark.entity.topics do %>
           <%= link to: Routes.topic_path(@conn, :tagged, topic) do %>

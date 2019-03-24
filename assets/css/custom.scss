@@ -1,3 +1,23 @@
+$purple: #4145df;
+$magenta: #ff0bcd;
+$blue: #0992d6;
+
 .alert:empty {
   display: none;
 }
+
+a {
+  color: $purple;
+}
+
+.badge.type {
+  color: white;
+  font-weight: bold;
+}
+
+.badge.bookmark { background-color: $purple; }
+.badge.story { background-color: $magenta; }
+.badge.page { background-color: $blue; }
+
+.list thead { color: $purple; }
+.list a { color: $magenta; }

@@ -19,7 +19,7 @@
 
   <div class="form-group">
     <%= label f, :url %>
-    <%= text_input f, :url, class: "form-control" %>
+    <%= text_input f, :url, type: "url", class: "form-control" %>
     <%= error_tag f, :url %>
   </div>
 

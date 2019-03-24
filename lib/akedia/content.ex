@@ -126,7 +126,9 @@ defmodule Akedia.Content do
   alias Akedia.Content.Topic
 
   def list_topics do
-    Repo.all(Topic)
+    Topic
+    |> Repo.all()
+    |> Repo.preload(entities: [:bookmark, :story, :page])
   end
 
   def get_topic!(id) do
@@ -188,16 +190,18 @@ defmodule Akedia.Content do
 
   def add_tags(content, tags) when is_binary(tags) do
     Enum.each(split_tags(tags), &add_tag(content, &1))
+    content
   end
 
   def add_tags(content, tags) do
     Enum.each(tags, &add_tag(content, &1))
+    content
   end
 
-  def remove_tag(entity, topic_text) when is_binary(topic_text) do
+  def remove_tag(content, topic_text) when is_binary(topic_text) do
     case Repo.get_by(Topic, %{text: topic_text}) do
       nil -> nil
-      topic -> remove_tag(entity, topic.id)
+      topic -> remove_tag(content, topic.id)
     end
   end
 
@@ -210,6 +214,9 @@ defmodule Akedia.Content do
   end
 
   def remove_tag(entity_id, topic_id) do
+    IO.puts("remove_tagf")
+    IO.puts(inspect(entity_id))
+
     case Repo.get_by(EntityTopic, %{entity_id: entity_id, topic_id: topic_id}) do
       nil -> nil
       tag -> Repo.delete(tag)
@@ -218,10 +225,12 @@ defmodule Akedia.Content do
 
   def remove_tags(content, tags) when is_binary(tags) do
     Enum.each(split_tags(tags), &remove_tag(content, &1))
+    content
   end
 
   def remove_tags(content, tags) do
     Enum.each(tags, &remove_tag(content, &1))
+    content
   end
 
   def tags_loaded(%{entity: %{topics: topics}}) do
@@ -235,6 +244,11 @@ defmodule Akedia.Content do
   def update_tags(content, new_tags) when is_binary(new_tags) do
     old_tags = tags_loaded(content) |> split_tags()
     new_tags = new_tags |> split_tags()
+
+    IO.puts("old/new tags")
+    IO.puts(inspect(old_tags))
+    IO.puts(inspect(new_tags))
+    IO.puts(inspect(old_tags -- new_tags))
 
     content
     |> add_tags(new_tags -- old_tags)

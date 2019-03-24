@@ -1,11 +1,10 @@
 <h1>Listing Stories</h1>
 
-<table class="table">
+<table class="table list stories">
   <thead>
     <tr>
       <th>Title</th>
       <th>Slug</th>
-      <th>Content</th>
       <th>Tags</th>
 
       <th></th>
@@ -16,7 +15,6 @@
     <tr>
       <td><%= story.title %></td>
       <td><%= story.slug %></td>
-      <td><%= story.content %></td>
       <td class="topics">
         <%= for topic <- story.entity.topics do %>
           <%= link to: Routes.topic_path(@conn, :tagged, topic) do %>

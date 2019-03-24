@@ -16,7 +16,8 @@
     end %>
     <tr>
       <td>
-        <%= link type, to: content_path.(@conn, :index, []) %>
+        <%= link to: content_path.(@conn, :index, []) do %>
+          <div class="badge type <%= String.downcase(type) %>"><%= type %></div><% end %>
       </td>
       <td>
         <%= link content.title, to: content_path.(@conn, :show, content) %>

@@ -12,4 +12,8 @@ defmodule AkediaWeb.BookmarkView do
       <title>Bookmark: <%= @bookmark.title %></title>
     }
   end
+
+  def tld(url) when is_binary(url) do
+    URI.parse(url).host || url
+  end
 end

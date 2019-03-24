@@ -11,10 +11,13 @@
   <tbody>
 <%= for topic <- @topics do %>
     <tr>
-      <td><%= topic.text %></td>
+      <td>
+        <%= link to: Routes.topic_path(@conn, :tagged, topic) do %>
+          <%= topic.text %> <small class="small">(<%= Enum.count(topic.entities) %>)</small>
+        <% end %>
+      </td>
 
       <td>
-        <%= link "Show", to: Routes.topic_path(@conn, :show, topic) %>
         <%= link "Edit", to: Routes.topic_path(@conn, :edit, topic) %>
         <%= link "Delete", to: Routes.topic_path(@conn, :delete, topic), method: :delete, data: [confirm: "Are you sure?"] %>
       </td>
