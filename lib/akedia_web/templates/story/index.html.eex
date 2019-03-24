@@ -13,7 +13,7 @@
   <tbody>
 <%= for story <- @stories do %>
     <tr>
-      <td><%= story.title %></td>
+      <td><%= link story.title, to: Routes.story_path(@conn, :show, story) %></td>
       <td><%= story.slug %></td>
       <td class="topics">
         <%= for topic <- story.entity.topics do %>
@@ -23,7 +23,6 @@
       </td>
 
       <td>
-        <%= link "Show", to: Routes.story_path(@conn, :show, story) %>
         <%= link "Edit", to: Routes.story_path(@conn, :edit, story) %>
         <%= link "Delete", to: Routes.story_path(@conn, :delete, story), method: :delete, data: [confirm: "Are you sure?"] %>
       </td>

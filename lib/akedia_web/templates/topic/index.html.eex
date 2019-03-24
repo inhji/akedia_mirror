@@ -13,7 +13,7 @@
     <tr>
       <td>
         <%= link to: Routes.topic_path(@conn, :tagged, topic) do %>
-          <%= topic.text %> <small class="small">(<%= Enum.count(topic.entities) %>)</small>
+          <%= topic.text %> (<%= Enum.count(topic.entities) %>)
         <% end %>
       </td>
 

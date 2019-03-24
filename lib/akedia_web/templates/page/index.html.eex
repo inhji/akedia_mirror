@@ -14,7 +14,7 @@
   <tbody>
 <%= for page <- @pages do %>
     <tr>
-      <td><%= page.title %></td>
+      <td><%= link page.title, to: Routes.page_path(@conn, :show, page) %></td>
       <td><%= page.slug %></td>
       <td><%= page.content %></td>
       <td class="topics">
@@ -25,7 +25,6 @@
       </td>
 
       <td>
-        <%= link "Show", to: Routes.page_path(@conn, :show, page) %>
         <%= link "Edit", to: Routes.page_path(@conn, :edit, page) %>
         <%= link "Delete", to: Routes.page_path(@conn, :delete, page), method: :delete, data: [confirm: "Are you sure?"] %>
       </td>
