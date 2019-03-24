@@ -21,22 +21,26 @@
 
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
+              <li class="nav-item">
+                <a class="nav-link" href="<%= Routes.bookmark_path(@conn, :index) %>">Bookmarks</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="<%= Routes.story_path(@conn, :index) %>">Stories</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="<%= Routes.page_path(@conn, :index) %>">Pages</a>
+              </li>
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  Content
+                  More
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <a class="dropdown-item" href="<%= Routes.bookmark_path(@conn, :index) %>">Bookmarks</a>
-                  <a class="dropdown-item" href="<%= Routes.story_path(@conn, :index) %>">Stories</a>
-                  <a class="dropdown-item" href="<%= Routes.page_path(@conn, :index) %>">Pages</a>
-                  <div class="dropdown-divider"></div>
                   <a class="dropdown-item" href="<%= Routes.topic_path(@conn, :index) %>">Topics</a>
                 </div>
               </li>
             </ul>
             <form class="form-inline my-2 my-lg-0">
               <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-              <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
             </form>
           </div>
         </nav>
