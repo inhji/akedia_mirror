@@ -19,7 +19,11 @@
 
       <td>
         <%= link "Edit", to: Routes.topic_path(@conn, :edit, topic) %>
-        <%= link "Delete", to: Routes.topic_path(@conn, :delete, topic), method: :delete, data: [confirm: "Are you sure?"] %>
+        <%= if Enum.count(topic.entities) > 0 do %>
+          <a class="text-muted">Delete</a>
+        <% else %>
+          <%= link "Delete", to: Routes.topic_path(@conn, :delete, topic), method: :delete, data: [confirm: "Are you sure?"] %>
+        <% end %>
       </td>
     </tr>
 <% end %>
