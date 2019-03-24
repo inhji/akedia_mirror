@@ -6,7 +6,8 @@ defmodule AkediaWeb.PageController do
 
   def index(conn, _params) do
     pages = Content.list_pages()
-    render(conn, "index.html", pages: pages)
+
+    render_empty(conn, pages, pages: pages)
   end
 
   def new(conn, _params) do

@@ -6,7 +6,8 @@ defmodule AkediaWeb.StoryController do
 
   def index(conn, _params) do
     stories = Content.list_stories()
-    render(conn, "index.html", stories: stories)
+
+    render_empty(conn, stories, stories: stories)
   end
 
   def new(conn, _params) do

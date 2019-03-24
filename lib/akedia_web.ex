@@ -24,6 +24,13 @@ defmodule AkediaWeb do
       import Plug.Conn
       import AkediaWeb.Gettext
       alias AkediaWeb.Router.Helpers, as: Routes
+
+      def render_empty(conn, content, assigns \\ []) do
+        case Enum.count(content) do
+          0 -> render(conn, "empty.html")
+          _ -> render(conn, "index.html", assigns)
+        end
+      end
     end
   end
 
