@@ -3,7 +3,7 @@ defmodule Akedia.Repo.Migrations.CreateEntityTopics do
 
   def change do
     create table(:entity_topics) do
-      add :entity_id, references(:entities, on_delete: :nothing)
+      add :entity_id, references(:entities, on_delete: :delete_all)
       add :topic_id, references(:topics, on_delete: :nothing)
 
       timestamps()

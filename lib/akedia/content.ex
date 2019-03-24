@@ -22,6 +22,11 @@ defmodule Akedia.Content do
     |> Repo.update()
   end
 
+  def delete_entity(entity_id) when is_integer(entity_id) do
+    entity = Repo.get!(Entity, entity_id)
+    delete_entity(entity)
+  end
+
   def delete_entity(%Entity{} = entity) do
     Repo.delete(entity)
   end
@@ -55,6 +60,7 @@ defmodule Akedia.Content do
 
   def delete_story(%Story{} = story) do
     Repo.delete(story)
+    delete_entity(story.entity_id)
   end
 
   def change_story(%Story{} = story) do
@@ -86,6 +92,7 @@ defmodule Akedia.Content do
 
   def delete_page(%Page{} = page) do
     Repo.delete(page)
+    delete_entity(page.entity_id)
   end
 
   def change_page(%Page{} = page) do
@@ -117,6 +124,7 @@ defmodule Akedia.Content do
 
   def delete_bookmark(%Bookmark{} = bookmark) do
     Repo.delete(bookmark)
+    delete_entity(bookmark.entity_id)
   end
 
   def change_bookmark(%Bookmark{} = bookmark) do
