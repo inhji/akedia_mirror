@@ -8,5 +8,6 @@ defmodule Akedia.Repo.Migrations.CreateTopics do
       timestamps()
     end
 
+    create unique_index(:topics, [:text])
   end
 end

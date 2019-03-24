@@ -15,5 +15,7 @@ defmodule Akedia.Content.Topic do
     topic
     |> cast(attrs, [:text])
     |> validate_required([:text])
+    |> update_change(:text, &String.downcase/1)
+    |> unique_constraint(:text)
   end
 end
