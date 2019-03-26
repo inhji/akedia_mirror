@@ -30,6 +30,7 @@ defmodule AkediaWeb.Router do
     resources "/bookmarks", BookmarkController, only: [:show, :index]
     resources "/pages", PageController, only: [:show, :index]
     resources "/topics", TopicController, only: [:show, :index]
+    resources "/images", ImageController, only: [:show, :index]
 
     get "/tagged/:topic", TopicController, :tagged
 
@@ -56,6 +57,7 @@ defmodule AkediaWeb.Router do
     resources "/bookmarks", BookmarkController, except: [:show, :index]
     resources "/pages", PageController, except: [:show, :index]
     resources "/topics", TopicController, except: [:show, :index]
+    resources "/images", ImageController, except: [:show, :index]
   end
 
   # Other scopes may use custom stacks.

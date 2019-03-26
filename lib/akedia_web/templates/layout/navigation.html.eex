@@ -22,12 +22,10 @@
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
             <a class="dropdown-item" href="<%= Routes.topic_path(@conn, :index) %>">Topics</a>
+            <a class="dropdown-item" href="<%= Routes.image_path(@conn, :index) %>">Images</a>
           </div>
         </li>
       </ul>
-      <form class="form-inline my-2 my-lg-0">
-        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-      </form>
       <ul class="navbar-nav">
       <%= if @current_user do %>
         <li class="nav-item">

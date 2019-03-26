@@ -2,11 +2,15 @@ defmodule Akedia.Content.Entity do
   use Ecto.Schema
   import Ecto.Changeset
   alias Akedia.Content.{Topic, Bookmark, Page, Story}
+  alias Akedia.Media.Image
 
   schema "entities" do
     field :is_pinned, :boolean, default: false
     field :is_published, :boolean, default: false
+
     many_to_many(:topics, Topic, join_through: "entity_topics")
+    many_to_many(:images, Image, join_through: "entity_images")
+
     has_one :bookmark, Bookmark
     has_one :page, Page
     has_one :story, Story

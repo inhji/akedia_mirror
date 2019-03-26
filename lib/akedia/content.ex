@@ -222,9 +222,6 @@ defmodule Akedia.Content do
   end
 
   def remove_tag(entity_id, topic_id) do
-    IO.puts("remove_tagf")
-    IO.puts(inspect(entity_id))
-
     case Repo.get_by(EntityTopic, %{entity_id: entity_id, topic_id: topic_id}) do
       nil -> nil
       tag -> Repo.delete(tag)
@@ -252,11 +249,6 @@ defmodule Akedia.Content do
   def update_tags(content, new_tags) when is_binary(new_tags) do
     old_tags = tags_loaded(content) |> split_tags()
     new_tags = new_tags |> split_tags()
-
-    IO.puts("old/new tags")
-    IO.puts(inspect(old_tags))
-    IO.puts(inspect(new_tags))
-    IO.puts(inspect(old_tags -- new_tags))
 
     content
     |> add_tags(new_tags -- old_tags)
