@@ -23,10 +23,15 @@
       <%= text_input fc, :email, class: "form-control" %>
       <%= error_tag fc, :email %>
     </div>
+
+    <div class="form-group">
+      <%= label fc, :password %>
+      <%= password_input fc, :encrypted_password, class: "form-control" %>
+      <%= error_tag fc, :encrypted_password %>
+    </div>
   <% end %>
 
   <div class="form-group">
-    <%= submit "Save", class: "btn btn-primary" %>
+    <%= submit "Register", class: "btn btn-primary" %>
   </div>
-  
 <% end %>

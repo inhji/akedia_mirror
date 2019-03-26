@@ -1,0 +1,6 @@
+<div class="jumbotron">
+  <h1 class="display-4">(ノಠ益ಠ)ノ彡ɥʇnɐ</h1>
+  <p class="lead">This means you are not allowed to access the page you just navigated to.</p>
+  <p>If you know who you are, you might want to <%= link "login", to: Routes.session_path(@conn, :new) %>.</p>
+  <a class="btn btn-danger btn-lg" href="#" role="button" onclick="javascript:window.history.back();">Be sad and go back</a>
+</div>

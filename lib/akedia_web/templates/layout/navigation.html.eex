@@ -28,6 +28,20 @@
       <form class="form-inline my-2 my-lg-0">
         <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
       </form>
+      <ul class="navbar-nav">
+      <%= if @current_user do %>
+        <li class="nav-item">
+          <%= link "Logout", to: Routes.session_path(@conn, :delete), method: "delete", data: [confirm: "ಥ‿ಥ\nR u sure?"], class: "nav-link" %>
+        </li>
+        <li class="nav-item">
+          <%= link @current_user.username, to: Routes.user_path(@conn, :show), class: "nav-link" %>
+        </li>
+      <% else %>
+        <li class="nav-item">
+          <%= link "Login", to: Routes.session_path(@conn, :new), class: "nav-link" %>
+        </li>
+      <% end %>
+      </ul>
     </div>
   </div>
 </nav>

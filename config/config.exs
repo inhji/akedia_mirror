@@ -17,6 +17,10 @@ config :akedia, AkediaWeb.Endpoint,
   render_errors: [view: AkediaWeb.ErrorView, accepts: ~w(html json)],
   pubsub: [name: Akedia.PubSub, adapter: Phoenix.PubSub.PG2]
 
+config :akedia, Akedia.Auth.AuthPipeline,
+  module: Akedia.Auth.Guardian,
+  error_handler: Akedia.Auth.AuthErrorHandler
+
 # Configures Elixir's Logger
 config :logger, :console,
   format: "$time $metadata[$level] $message\n",
