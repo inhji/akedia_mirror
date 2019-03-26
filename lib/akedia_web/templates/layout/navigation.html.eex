@@ -29,10 +29,10 @@
       <ul class="navbar-nav">
       <%= if @current_user do %>
         <li class="nav-item">
-          <%= link "Logout", to: Routes.session_path(@conn, :delete), method: "delete", data: [confirm: "ಥ‿ಥ\nR u sure?"], class: "nav-link" %>
+          <%= link  "Hello, " <> @current_user.username, to: Routes.user_path(@conn, :show), class: "nav-link" %>
         </li>
         <li class="nav-item">
-          <%= link @current_user.username, to: Routes.user_path(@conn, :show), class: "nav-link" %>
+          <%= link "Logout", to: Routes.session_path(@conn, :delete), method: "delete", data: [confirm: "ಥ‿ಥ\nR u sure?"], class: "nav-link" %>
         </li>
       <% else %>
         <li class="nav-item">

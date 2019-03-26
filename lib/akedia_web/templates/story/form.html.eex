@@ -30,6 +30,12 @@
   </div>
 
   <div class="form-group">
+    <%= label f, :images %>
+    <%= text_input f, :images, value: @images, class: "form-control" %>
+    <%= error_tag f, :images %>
+  </div>
+
+  <div class="form-group">
     <%= submit "Save", class: "btn btn-primary" %>
   </div>
 <% end %>

@@ -7,6 +7,7 @@ defmodule Akedia.Content.Page do
     field :content, :string
     field :slug, :string
     field :title, :string
+
     belongs_to :entity, Entity
 
     timestamps()

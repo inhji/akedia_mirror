@@ -1,6 +1,7 @@
 defmodule AkediaWeb.StoryController do
   use AkediaWeb, :controller
 
+  alias Akedia.Media
   alias Akedia.Content
   alias Akedia.Content.Story
 
@@ -37,13 +38,20 @@ defmodule AkediaWeb.StoryController do
   def edit(conn, %{"id" => id}) do
     story = Content.get_story!(id)
     tags = Content.tags_loaded(story)
+    image_ids = Media.images_loaded(story)
     changeset = Content.change_story(story)
-    render(conn, "edit.html", story: story, changeset: changeset, tags: tags)
+
+    IO.inspect(image_ids)
+
+    render(conn, "edit.html", story: story, changeset: changeset, tags: tags, images: image_ids)
   end
 
-  def update(conn, %{"id" => id, "story" => %{"topics" => topics} = story_params}) do
+  def update(conn, %{"id" => id, "story" => %{"topics" => topics, "images" => images} = story_params}) do
+    IO.inspect(images)
+
     story = Content.get_story!(id)
     Content.update_tags(story, topics)
+    Media.update_images(story, images)
 
     case Content.update_story(story, story_params) do
       {:ok, story} ->

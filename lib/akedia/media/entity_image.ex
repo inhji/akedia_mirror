@@ -1,4 +1,4 @@
-defmodule Akedia.Media.EntityImages do
+defmodule Akedia.Media.EntityImage do
   use Ecto.Schema
   import Ecto.Changeset
 
@@ -10,9 +10,9 @@ defmodule Akedia.Media.EntityImages do
   end
 
   @doc false
-  def changeset(entity_images, attrs) do
-    entity_images
-    |> cast(attrs, [])
+  def changeset(entity_image, attrs) do
+    entity_image
+    |> cast(attrs, [:image_id, :entity_id])
     |> validate_required([])
   end
 end

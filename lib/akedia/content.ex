@@ -41,7 +41,7 @@ defmodule Akedia.Content do
     list(Story, asc: :inserted_at)
   end
 
-  def get_story!(id), do: Repo.get!(Story, id) |> Repo.preload(entity: [:topics])
+  def get_story!(id), do: Repo.get!(Story, id) |> Repo.preload(entity: [:topics, :images])
 
   def create_story(attrs \\ %{}) do
     {:ok, entity} = create_entity()
