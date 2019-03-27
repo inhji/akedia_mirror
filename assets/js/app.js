@@ -17,3 +17,4 @@ import "bootstrap"
 // Local files can be imported directly using relative paths, for example:
 // import socket from "./socket"
 import "./offcanvas"
+import "./media_library"

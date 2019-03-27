@@ -1,0 +1,22 @@
+<div class="modal fade" id="mediaLibrary" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Image Library</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <select multiple class="image-picker">
+          <%= for image <- @images do %>
+            <option value="<%= image.id %>" data-img-src="<%= image_url(image, :mini) %>"></option>
+          <% end %>
+        </select>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal" id="save">Save</button>
+      </div>
+    </div>
+  </div>
+</div>

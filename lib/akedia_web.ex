@@ -49,8 +49,9 @@ defmodule AkediaWeb do
       import AkediaWeb.ErrorHelpers
       import AkediaWeb.Gettext
       import AkediaWeb.Helpers.Tags, only: [list_tags: 1]
-      import AkediaWeb.Helpers.Media, only: [image_url: 2, image_url: 1]
+      import AkediaWeb.Helpers.Media, only: [image_url: 2, image_url: 1, media_input: 3]
       alias AkediaWeb.Router.Helpers, as: Routes
+      alias AkediaWeb.SharedView
     end
   end
 

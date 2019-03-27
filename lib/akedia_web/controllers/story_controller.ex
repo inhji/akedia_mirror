@@ -40,10 +40,11 @@ defmodule AkediaWeb.StoryController do
     tags = Content.tags_loaded(story)
     image_ids = Media.images_loaded(story)
     changeset = Content.change_story(story)
+    images = Media.list_images()
 
     IO.inspect(image_ids)
 
-    render(conn, "edit.html", story: story, changeset: changeset, tags: tags, images: image_ids)
+    render(conn, "edit.html", story: story, changeset: changeset, tags: tags, images: images, image_ids: image_ids)
   end
 
   def update(conn, %{"id" => id, "story" => %{"topics" => topics, "images" => images} = story_params}) do

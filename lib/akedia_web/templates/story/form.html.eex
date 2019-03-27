@@ -31,7 +31,7 @@
 
   <div class="form-group">
     <%= label f, :images %>
-    <%= text_input f, :images, value: @images, class: "form-control" %>
+    <%= media_input f, :images, value: @image_ids, class: "form-control", id: "image-ids" %>
     <%= error_tag f, :images %>
   </div>
 
