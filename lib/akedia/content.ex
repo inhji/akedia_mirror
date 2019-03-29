@@ -257,10 +257,11 @@ defmodule Akedia.Content do
 
   # Utils
 
-  def list(schema, constraint) do
+  def list(schema, constraint, limit \\ 12) do
     schema
     |> order_by(^constraint)
+    |> limit(^limit)
     |> Repo.all()
-    |> Repo.preload(entity: [:topics])
+    |> Repo.preload(entity: [:topics, :images])
   end
 end

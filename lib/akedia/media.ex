@@ -6,7 +6,7 @@ defmodule Akedia.Media do
   alias Akedia.Content.Entity
 
   def list_images do
-    Repo.all(Image)
+    list(Image, asc: :inserted_at)
   end
 
   def get_image!(id), do: Repo.get!(Image, id)
@@ -86,5 +86,14 @@ defmodule Akedia.Media do
     content
     |> add_images(new_image_ids -- old_image_ids)
     |> remove_images(old_image_ids -- new_image_ids)
+  end
+
+  # Utils
+
+  def list(schema, constraint) do
+    schema
+    |> order_by(^constraint)
+    |> Repo.all()
+    |> Repo.preload(entity: [:topics])
   end
 end

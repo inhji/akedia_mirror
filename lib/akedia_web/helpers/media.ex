@@ -9,6 +9,14 @@ defmodule AkediaWeb.Helpers.Media do
     image_url(image, :thumb)
   end
 
+  def img(image, version) do
+    img_tag(image_url(image, version), class: "image version-#{Atom.to_string(version)}")
+  end
+
+  def img(image) do
+    img(image, :thumb)
+  end
+
   def media_input(form, field, attrs) do
     content_tag :div, class: "input-group" do
       [

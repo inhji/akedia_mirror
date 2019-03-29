@@ -13,10 +13,17 @@ defmodule AkediaWeb.StoryController do
 
   def new(conn, _params) do
     changeset = Content.change_story(%Story{})
-    render(conn, "new.html", changeset: changeset, tags: [])
+    images = Media.list_images()
+    render(conn, "new.html",
+      changeset: changeset,
+      tags: [],
+      image_ids: [],
+      images: images)
   end
 
   def create(conn, %{"story" => %{"topics" => topics} = story_params}) do
+    images = Media.list_images()
+
     case Content.create_story(story_params) do
       {:ok, story} ->
         Content.add_tags(story, topics)
@@ -26,7 +33,7 @@ defmodule AkediaWeb.StoryController do
         |> redirect(to: Routes.story_path(conn, :show, story))
 
       {:error, %Ecto.Changeset{} = changeset} ->
-        render(conn, "new.html", changeset: changeset)
+        render(conn, "new.html", changeset: changeset, tags: [], image_ids: [], images: images)
     end
   end
 
@@ -42,15 +49,20 @@ defmodule AkediaWeb.StoryController do
     changeset = Content.change_story(story)
     images = Media.list_images()
 
-    IO.inspect(image_ids)
-
-    render(conn, "edit.html", story: story, changeset: changeset, tags: tags, images: images, image_ids: image_ids)
+    render(conn, "edit.html",
+      story: story,
+      changeset: changeset,
+      tags: tags,
+      images: images,
+      image_ids: image_ids)
   end
 
   def update(conn, %{"id" => id, "story" => %{"topics" => topics, "images" => images} = story_params}) do
     IO.inspect(images)
 
     story = Content.get_story!(id)
+    tags = Content.tags_loaded(story)
+    image_ids = Media.images_loaded(story)
     Content.update_tags(story, topics)
     Media.update_images(story, images)
 
@@ -61,7 +73,12 @@ defmodule AkediaWeb.StoryController do
         |> redirect(to: Routes.story_path(conn, :show, story))
 
       {:error, %Ecto.Changeset{} = changeset} ->
-        render(conn, "edit.html", story: story, changeset: changeset)
+        render(conn, "edit.html",
+          story: story,
+          changeset: changeset,
+          tags: tags,
+          images: images,
+          image_ids: image_ids)
     end
   end
 

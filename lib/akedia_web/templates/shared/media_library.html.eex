@@ -1,5 +1,5 @@
 <div class="modal fade" id="mediaLibrary" tabindex="-1" role="dialog">
-  <div class="modal-dialog" role="document">
+  <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">Image Library</h5>
@@ -15,7 +15,7 @@
         </select>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary" data-dismiss="modal" id="save">Save</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" id="save">Add selected</button>
       </div>
     </div>
   </div>

@@ -17,6 +17,10 @@
     <%= raw(AkediaWeb.Markdown.to_html(@story)) %>
   </li>
 
+  <%= for image <- @story.entity.images do %>
+    <%= img(image) %>
+  <% end %>
+
 </ul>
 
 <span><%= link "Edit", to: Routes.story_path(@conn, :edit, @story) %></span>
