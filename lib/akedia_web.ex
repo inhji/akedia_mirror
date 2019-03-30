@@ -50,6 +50,7 @@ defmodule AkediaWeb do
       import AkediaWeb.Gettext
       import AkediaWeb.Helpers.Tags, only: [list_tags: 1]
       import AkediaWeb.Helpers.Media, only: [image_url: 2, image_url: 1, media_input: 3, img: 1, img: 2]
+      import AkediaWeb.Helpers.User, only: [gravatar_url: 1]
       alias AkediaWeb.Router.Helpers, as: Routes
       alias AkediaWeb.SharedView
     end

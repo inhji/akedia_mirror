@@ -243,7 +243,10 @@ defmodule Akedia.Content do
   end
 
   def split_tags(tags_string) when is_binary(tags_string) do
-    tags_string |> String.split(",") |> Enum.map(&String.trim/1)
+    tags_string
+    |> String.split(",")
+    |> Enum.map(&String.trim/1)
+    |> Enum.filter(& String.length(&1) > 0)
   end
 
   def update_tags(content, new_tags) when is_binary(new_tags) do

@@ -3,10 +3,9 @@ defmodule Akedia.Media do
   alias Akedia.Repo
 
   alias Akedia.Media.{Image, ImageUploader, EntityImage}
-  alias Akedia.Content.Entity
 
   def list_images do
-    list(Image, asc: :inserted_at)
+    list(Image, desc: :inserted_at)
   end
 
   def get_image!(id), do: Repo.get!(Image, id)
@@ -32,14 +31,22 @@ defmodule Akedia.Media do
 
   # Image Assoc Helpers
 
+  def add_image(%{entity_id: entity_id}, image_id) when is_binary(image_id) do
+    add_image(entity_id, Integer.parse(image_id))
+  end
+
   def add_image(%{entity_id: entity_id}, image_id) do
     add_image(entity_id, image_id)
   end
 
   def add_image(entity_id, image_id) do
     %EntityImage{}
-    |> EntityImage.changeset(%{ image_id: image_id, entity_id: entity_id })
+    |> EntityImage.changeset(%{image_id: image_id, entity_id: entity_id})
     |> Repo.insert()
+  end
+
+  def add_images(content, image_ids) when is_binary(image_ids) do
+    add_images(content, split_image_ids(image_ids))
   end
 
   def add_images(content, image_ids) do
@@ -80,7 +87,7 @@ defmodule Akedia.Media do
   end
 
   def update_images(content, new_image_ids) do
-    old_image_ids = images_loaded(content) |> split_image_ids()
+    old_image_ids = content |> images_loaded() |> split_image_ids()
     new_image_ids = new_image_ids |> split_image_ids()
 
     content

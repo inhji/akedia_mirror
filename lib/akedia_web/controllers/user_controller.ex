@@ -8,12 +8,13 @@ defmodule AkediaWeb.UserController do
     render(conn, "new.html", changeset: changeset)
   end
 
-  def create(conn, %{ "user" => %{ "credential" => credential_params } = user_params }) do
+  def create(conn, %{"user" => %{"credential" => credential_params} = user_params}) do
     case Accounts.count_users() do
       0 ->
         case Accounts.create_user(user_params) do
           {:ok, user} ->
-            Ecto.build_assoc(user, :credential)
+            user
+            |> Ecto.build_assoc(:credential)
             |> Accounts.change_credential(credential_params)
             |> Repo.insert!()
 
@@ -43,7 +44,7 @@ defmodule AkediaWeb.UserController do
     render(conn, "edit.html", user: user, changeset: changeset)
   end
 
-  def update(conn, %{ "user" => %{ "credential" => credential_params } = user_params }) do
+  def update(conn, %{"user" => %{"credential" => credential_params} = user_params}) do
     user = Accounts.get_user!()
 
     case Accounts.update_user(user, user_params) do

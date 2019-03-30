@@ -7,7 +7,7 @@ $blue: #0992d6;
 }
 
 a {
-  color: $purple;
+  color: $blue;
 }
 
 .badge.type {
@@ -18,9 +18,6 @@ a {
 .badge.bookmark { background-color: $purple; }
 .badge.story { background-color: $magenta; }
 .badge.page { background-color: $blue; }
-
-.list thead { color: $purple; }
-.list a { color: $magenta; }
 
 header {
   margin-bottom: 2rem;
@@ -50,6 +47,10 @@ footer {
 
   .zennable {
     position: relative;
+
+    textarea {
+      resize: none;
+    }
   }
 
   .zennable input {
@@ -66,16 +67,17 @@ footer {
     z-index: 999;
 
     textarea {
+      max-width: 700px;
+      font-size: 150%;
+      font-family: monospace;
+      height: 100%;
+      margin: 0 auto;
+      padding-top: 5rem;
       border-radius: 0;
+      border: none;
       outline: none;
       resize: none;
-      height: 100%;
-      max-width: 700px;
-      margin: 0 auto;
-      font-size: 150%;
       box-shadow: none;
-      padding-top: 5rem;
-      font-family: monospace;
     }
   }
 

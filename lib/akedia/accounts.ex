@@ -11,7 +11,11 @@ defmodule Akedia.Accounts do
     Repo.one!(User)
     |> Repo.preload(:credential)
   end
-  def get_user!(id), do: Repo.get!(User, id)
+  def get_user!(id) do
+    Repo.get!(User, id)
+    |> Repo.preload(:credential)
+  end
+
   def get_user_by_email(email) do
     query = from c in Credential,
             join: u in User,

@@ -21,18 +21,18 @@ defmodule AkediaWeb.StoryController do
       images: images)
   end
 
-  def create(conn, %{"story" => %{"topics" => topics} = story_params}) do
-    images = Media.list_images()
-
+  def create(conn, %{"story" => %{"topics" => topics, "images" => images} = story_params}) do
     case Content.create_story(story_params) do
       {:ok, story} ->
         Content.add_tags(story, topics)
+        Media.add_images(story, images)
 
         conn
         |> put_flash(:info, "Story created successfully.")
         |> redirect(to: Routes.story_path(conn, :show, story))
 
       {:error, %Ecto.Changeset{} = changeset} ->
+        images = Media.list_images()
         render(conn, "new.html", changeset: changeset, tags: [], image_ids: [], images: images)
     end
   end
@@ -58,8 +58,6 @@ defmodule AkediaWeb.StoryController do
   end
 
   def update(conn, %{"id" => id, "story" => %{"topics" => topics, "images" => images} = story_params}) do
-    IO.inspect(images)
-
     story = Content.get_story!(id)
     tags = Content.tags_loaded(story)
     image_ids = Media.images_loaded(story)

@@ -7,7 +7,7 @@ defmodule Akedia.Auth.Guardian do
     {:ok, subject}
   end
 
-  def resource_from_claims(%{ "sub" => id }) do
+  def resource_from_claims(%{"sub" => id}) do
     user = Accounts.get_user!(id)
     {:ok, user}
   end

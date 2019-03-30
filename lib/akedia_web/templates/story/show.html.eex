@@ -1,26 +1,11 @@
-<h1>Show Story</h1>
+<h1><%= @story.title %></h1>
 
-<ul>
+<p>
+  <%= raw(AkediaWeb.Markdown.to_html(@story)) %>
+</p>
 
-  <li>
-    <strong>Title:</strong>
-    <%= @story.title %>
-  </li>
-
-  <li>
-    <strong>Slug:</strong>
-    <%= @story.slug %>
-  </li>
-
-  <li>
-    <strong>Content:</strong>
-    <%= raw(AkediaWeb.Markdown.to_html(@story)) %>
-  </li>
-
-  <%= for image <- @story.entity.images do %>
-    <%= img(image) %>
-  <% end %>
-
-</ul>
+<%= for image <- @story.entity.images do %>
+  <%= img(image) %>
+<% end %>
 
 <span><%= link "Edit", to: Routes.story_path(@conn, :edit, @story) %></span>
