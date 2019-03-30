@@ -15,6 +15,9 @@ defmodule Akedia.Accounts do
     Repo.get!(User, id)
     |> Repo.preload(:credential)
   end
+  def has_user?() do
+    count_users() > 0
+  end
 
   def get_user_by_email(email) do
     query = from c in Credential,

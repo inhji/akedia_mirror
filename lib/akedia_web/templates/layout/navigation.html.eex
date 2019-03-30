@@ -35,9 +35,16 @@
           <%= link "Logout", to: Routes.session_path(@conn, :delete), method: "delete", data: [confirm: "ಥ‿ಥ\nR u sure?"], class: "nav-link" %>
         </li>
       <% else %>
-        <li class="nav-item">
-          <%= link "Login", to: Routes.session_path(@conn, :new), class: "nav-link" %>
-        </li>
+        <%= if @has_user do %>
+          <li class="nav-item">
+            <%= link "Login", to: Routes.session_path(@conn, :new), class: "nav-link" %>
+          </li>
+        <% else %>
+          <li class="nav-item">
+            <%= link "Register", to: Routes.user_path(@conn, :new), class: "nav-link" %>
+          </li>
+        <% end %>
+
       <% end %>
       </ul>
     </div>
