@@ -48,7 +48,9 @@ defmodule Akedia.MixProject do
       {:plug_cowboy, "~> 2.0"},
       {:earmark, "~> 1.3"},
       {:arc, "~> 0.11.0"},
-      {:arc_ecto, "~> 0.11.1"}
+      {:arc_ecto, "~> 0.11.1"},
+      {:credo, "~> 1.0.0", only: [:dev, :test], runtime: false},
+      {:ex_machina, "~> 2.3", only: :test}
     ]
   end
 
