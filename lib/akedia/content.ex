@@ -44,11 +44,18 @@ defmodule Akedia.Content do
   def get_story!(id), do: Repo.get!(Story, id) |> Repo.preload(entity: [:topics, :images])
 
   def create_story(attrs \\ %{}) do
-    {:ok, entity} = create_entity()
+    Repo.transaction(fn ->
+      {:ok, entity} = create_entity()
 
-    %Story{}
-    |> Story.changeset(Map.put(attrs, "entity_id", entity.id))
-    |> Repo.insert()
+      changeset =
+        %Story{}
+        |> Story.changeset(Map.put(attrs, "entity_id", entity.id))
+
+      case Repo.insert(changeset) do
+        {:ok, story} -> story
+        {:error, changeset} -> Repo.rollback(changeset)
+      end
+    end)
   end
 
   def update_story(%Story{} = story, attrs) do
@@ -76,11 +83,18 @@ defmodule Akedia.Content do
   def get_page!(id), do: Repo.get!(Page, id) |> Repo.preload(entity: [:topics])
 
   def create_page(attrs \\ %{}) do
-    {:ok, entity} = create_entity()
+    Repo.transaction(fn ->
+      {:ok, entity} = create_entity()
 
-    %Page{}
-    |> Page.changeset(Map.put(attrs, "entity_id", entity.id))
-    |> Repo.insert()
+      changeset =
+        %Page{}
+        |> Page.changeset(Map.put(attrs, "entity_id", entity.id))
+
+      case Repo.insert(changeset) do
+        {:ok, page} -> page
+        {:error, changeset} -> Repo.rollback(changeset)
+      end
+    end)
   end
 
   def update_page(%Page{} = page, attrs) do
@@ -108,11 +122,18 @@ defmodule Akedia.Content do
   def get_bookmark!(id), do: Repo.get!(Bookmark, id) |> Repo.preload(entity: [:topics])
 
   def create_bookmark(attrs \\ %{}) do
-    {:ok, entity} = create_entity()
+    Repo.transaction(fn ->
+      {:ok, entity} = create_entity()
 
-    %Bookmark{}
-    |> Bookmark.changeset(Map.put(attrs, "entity_id", entity.id))
-    |> Repo.insert()
+      changeset =
+        %Bookmark{}
+        |> Bookmark.changeset(Map.put(attrs, "entity_id", entity.id))
+
+      case Repo.insert(changeset) do
+        {:ok, bookmark} -> bookmark
+        {:error, changeset} -> Repo.rollback(changeset)
+      end
+    end)
   end
 
   def update_bookmark(%Bookmark{} = bookmark, attrs) do
@@ -246,7 +267,7 @@ defmodule Akedia.Content do
     tags_string
     |> String.split(",")
     |> Enum.map(&String.trim/1)
-    |> Enum.filter(& String.length(&1) > 0)
+    |> Enum.filter(&(String.length(&1) > 0))
   end
 
   def update_tags(content, new_tags) when is_binary(new_tags) do
