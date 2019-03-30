@@ -4,7 +4,7 @@ defmodule Akedia.Repo.Migrations.CreateEntityImages do
   def change do
     create table(:entity_images) do
       add :image_id, references(:images, on_delete: :nothing)
-      add :entity_id, references(:entities, on_delete: :nothing)
+      add :entity_id, references(:entities, on_delete: :delete_all)
 
       timestamps()
     end
