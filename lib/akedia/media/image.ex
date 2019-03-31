@@ -9,7 +9,7 @@ defmodule Akedia.Media.Image do
     field :text, :string
     field :path, :string
 
-    many_to_many(:entity, Entity, join_through: "entity_images")
+    many_to_many(:entities, Entity, join_through: "entity_images")
 
     timestamps()
   end

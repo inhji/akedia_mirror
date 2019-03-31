@@ -24,9 +24,9 @@ defmodule Akedia.Media do
 
   def delete_image(%Image{} = image) do
     # Delete the files, the containing directory and the db record
+    Repo.delete(image)
     ImageUploader.delete({image.name, image})
     File.rmdir(ImageUploader.base_path() <> image.path)
-    Repo.delete(image)
   end
 
   # Image Assoc Helpers
@@ -101,6 +101,6 @@ defmodule Akedia.Media do
     schema
     |> order_by(^constraint)
     |> Repo.all()
-    |> Repo.preload(entity: [:topics])
+    |> Repo.preload(entities: [:topics])
   end
 end
