@@ -8,7 +8,7 @@ defmodule Akedia.Media do
     list(Image, desc: :inserted_at)
   end
 
-  def get_image!(id), do: Repo.get!(Image, id)
+  def get_image!(id), do: Repo.get!(Image, id) |> Repo.preload(:entities)
 
   def create_image(attrs \\ %{}) do
     %Image{path: Ecto.UUID.generate()}

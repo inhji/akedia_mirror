@@ -10,11 +10,9 @@ a {
   color: $blue;
 }
 
-.badge.type {
-  color: white;
-  font-weight: bold;
-}
+img.fit{ max-width: 100% }
 
+.badge.type { color: white; font-weight: bold; }
 .badge.bookmark { background-color: $purple; }
 .badge.story { background-color: $magenta; }
 .badge.page { background-color: $blue; }
@@ -30,6 +28,25 @@ footer {
   color: $gray-700;
   background-color: $gray-200;
   min-height: 100px;
+}
+
+.gallery {
+  display: flex;
+  flex-wrap: wrap;
+
+  .image {
+    width: 100%;
+    margin-bottom: 1rem;
+    margin-right: 1rem;
+
+    @include media-breakpoint-up(md) {
+      width: 200px;
+    }
+
+    img {
+      width: 100%;
+    }
+  }
 }
 
 .form {

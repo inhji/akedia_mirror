@@ -1,33 +1,16 @@
 <h1>Listing Images</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Text</th>
-      <th>Url</th>
-
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-<%= for image <- @images do %>
-    <tr>
-      <td><%= image.text %></td>
+<div class="gallery">
+  <%= for image <- @images do %>
+  <div class="image">
+    <%= link to: Routes.image_path(@conn, :show, image) do %>
       <img src="<%= Akedia.Media.ImageUploader.url({image.name, image}, :thumb) %>" />
-
-      <td>
-        <%= link "Show", to: Routes.image_path(@conn, :show, image) %>
-        <%= link "Edit", to: Routes.image_path(@conn, :edit, image) %>
-
-        <%= if Enum.count(image.entities) > 0 do %>
-          <a class="text-muted">Delete</a>
-        <% else %>
-          <%= link "Delete", to: Routes.image_path(@conn, :delete, image), method: :delete, data: [confirm: "Are you sure?"] %>
-        <% end %>
-      </td>
-    </tr>
-<% end %>
-  </tbody>
-</table>
+    <% end %>
+    <div class="description">
+      <%= image.text %>
+    </div>
+  </div>
+  <% end %>
+</div>
 
 <span><%= link "New Image", to: Routes.image_path(@conn, :new) %></span>
