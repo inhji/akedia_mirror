@@ -18,7 +18,12 @@
       <td>
         <%= link "Show", to: Routes.image_path(@conn, :show, image) %>
         <%= link "Edit", to: Routes.image_path(@conn, :edit, image) %>
-        <%= link "Delete", to: Routes.image_path(@conn, :delete, image), method: :delete, data: [confirm: "Are you sure?"] %>
+
+        <%= if Enum.count(image.entities) > 0 do %>
+          <a class="text-muted">Delete</a>
+        <% else %>
+          <%= link "Delete", to: Routes.image_path(@conn, :delete, image), method: :delete, data: [confirm: "Are you sure?"] %>
+        <% end %>
       </td>
     </tr>
 <% end %>
