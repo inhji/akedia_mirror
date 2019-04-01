@@ -7,9 +7,23 @@
 
   <div class="form-group">
     <%= text_input f, :title,
-        class: "form-control form-control-lg form-control-borderless",
+        class: "form-control form-control-lg",
         placeholder: "Title" %>
     <%= error_tag f, :title %>
+  </div>
+
+  <div class="form-group">
+    <div class="zennable">
+      <input type="checkbox" id="zen-toggle-comment">
+      <div class="zen-backdrop">
+        <%= textarea f, :content,
+            class: "form-control",
+            placeholder: "Compose an epic.",
+            rows: 10 %>
+        <label for="zen-toggle-comment">Zen Mode</label>
+      </div>
+    </div>
+    <%= error_tag f, :content %>
   </div>
 
   <div class="row">
@@ -34,20 +48,6 @@
           placeholder: "Images" %>
       <%= error_tag f, :images %>
     </div>
-  </div>
-
-  <div class="form-group">
-    <div class="zennable">
-      <input type="checkbox" id="zen-toggle-comment">
-      <div class="zen-backdrop">
-        <%= textarea f, :content,
-            class: "form-control",
-            placeholder: "Compose an epic.",
-            rows: 10 %>
-        <label for="zen-toggle-comment">Zen Mode</label>
-      </div>
-    </div>
-    <%= error_tag f, :content %>
   </div>
 
 
