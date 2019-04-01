@@ -3,6 +3,7 @@ defmodule Akedia.Content.Topic do
   import Ecto.Changeset
   alias Akedia.Content.Entity
 
+  @derive {Phoenix.Param, key: :text}
   schema "topics" do
     field :text, :string
     many_to_many(:entities, Entity, join_through: "entity_topics")

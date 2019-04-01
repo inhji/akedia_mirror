@@ -16,13 +16,16 @@
         <li class="nav-item">
           <a class="nav-link" href="<%= Routes.page_path(@conn, :index) %>">Pages</a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link" href="<%= Routes.image_path(@conn, :index) %>">Images</a>
+        </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             More
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
             <a class="dropdown-item" href="<%= Routes.topic_path(@conn, :index) %>">Topics</a>
-            <a class="dropdown-item" href="<%= Routes.image_path(@conn, :index) %>">Images</a>
+
           </div>
         </li>
       </ul>

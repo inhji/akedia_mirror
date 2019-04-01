@@ -3,6 +3,7 @@ defmodule Akedia.Content.Story do
   import Ecto.Changeset
   alias Akedia.Content.{Entity, TitleSlug}
 
+  @derive {Phoenix.Param, key: :slug}
   schema "stories" do
     field :content, :string
     field :title, :string

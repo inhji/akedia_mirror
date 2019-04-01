@@ -41,7 +41,7 @@ defmodule Akedia.Content do
     list(Story, asc: :inserted_at)
   end
 
-  def get_story!(id), do: Repo.get!(Story, id) |> Repo.preload(entity: [:topics, :images])
+  def get_story!(id), do: Repo.get_by!(Story, slug: id) |> Repo.preload(entity: [:topics, :images])
 
   def create_story(attrs \\ %{}) do
     Repo.transaction(fn ->
@@ -162,7 +162,7 @@ defmodule Akedia.Content do
 
   def get_topic!(id) do
     Topic
-    |> Repo.get!(id)
+    |> Repo.get_by!(text: id)
     |> Repo.preload(entities: [:bookmark, :story, :page])
   end
 
