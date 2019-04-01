@@ -21,7 +21,7 @@
 
     <div class="form-group col-md-4">
       <%= label f, :slug %>
-      <%= text_input f, :slug, class: "form-control", placeholder: "Slug" %>
+      <%= text_input f, :slug, class: "form-control", placeholder: "Slug", disabled: true %>
       <%= error_tag f, :slug %>
     </div>
 

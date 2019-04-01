@@ -50,7 +50,8 @@ defmodule Akedia.MixProject do
       {:arc, "~> 0.11.0"},
       {:arc_ecto, "~> 0.11.1"},
       {:credo, "~> 1.0.0", only: [:dev, :test], runtime: false},
-      {:ex_machina, "~> 2.3", only: :test}
+      {:ex_machina, "~> 2.3", only: :test},
+      {:ecto_autoslug_field, "~> 1.0"}
     ]
   end
 
