@@ -53,10 +53,17 @@ defmodule AkediaWeb.ImageController do
 
   def delete(conn, %{"id" => id}) do
     image = Media.get_image!(id)
-    {:ok, _image} = Media.delete_image(image)
 
-    conn
-    |> put_flash(:info, "Image deleted successfully.")
-    |> redirect(to: Routes.image_path(conn, :index))
+    case Media.delete_image(image) do
+      {:ok, _image} ->
+        conn
+        |> put_flash(:info, "Image deleted successfully.")
+        |> redirect(to: Routes.image_path(conn, :index))
+
+      {:error, _changeset} ->
+        conn
+        |> put_flash(:error, "Image could not be deleted.")
+        |> redirect(to: Routes.image_path(conn, :show, image))
+    end
   end
 end

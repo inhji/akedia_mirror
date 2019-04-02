@@ -8,31 +8,30 @@
     <div class="navbar-collapse offcanvas-collapse" id="navbarMain">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item">
-          <a class="nav-link" href="<%= Routes.bookmark_path(@conn, :index) %>">Bookmarks</a>
+          <a class="nav-link" href="<%= Routes.bookmark_path(@conn, :index) %>">Lesezeichen</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="<%= Routes.story_path(@conn, :index) %>">Stories</a>
+          <a class="nav-link" href="<%= Routes.story_path(@conn, :index) %>">Geschichten</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="<%= Routes.page_path(@conn, :index) %>">Pages</a>
+          <a class="nav-link" href="<%= Routes.page_path(@conn, :index) %>">Wiki</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="<%= Routes.image_path(@conn, :index) %>">Images</a>
+          <a class="nav-link" href="<%= Routes.image_path(@conn, :index) %>">Bilder</a>
         </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            More
+            Mehr
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="<%= Routes.topic_path(@conn, :index) %>">Topics</a>
-
+            <a class="dropdown-item" href="<%= Routes.topic_path(@conn, :index) %>">Themen</a>
           </div>
         </li>
       </ul>
       <ul class="navbar-nav">
       <%= if @current_user do %>
         <li class="nav-item">
-          <%= link  "Hello, " <> @current_user.username, to: Routes.user_path(@conn, :show), class: "nav-link" %>
+          <%= link  "Profile", to: Routes.user_path(@conn, :show), class: "nav-link" %>
         </li>
         <li class="nav-item">
           <%= link "Logout", to: Routes.session_path(@conn, :delete), method: "delete", data: [confirm: "ಥ‿ಥ\nR u sure?"], class: "nav-link" %>

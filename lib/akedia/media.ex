@@ -24,9 +24,14 @@ defmodule Akedia.Media do
 
   def delete_image(%Image{} = image) do
     # Delete the files, the containing directory and the db record
-    Repo.delete(image)
-    ImageUploader.delete({image.name, image})
-    File.rmdir(ImageUploader.base_path() <> image.path)
+    case Repo.delete(image) do
+      {:ok, image} ->
+        ImageUploader.delete({image.name, image})
+        File.rmdir(ImageUploader.base_path() <> image.path)
+        {:ok, image}
+
+      err -> err
+    end
   end
 
   # Image Assoc Helpers
@@ -79,6 +84,7 @@ defmodule Akedia.Media do
   end
 
   def split_image_ids(""), do: []
+
   def split_image_ids(image_string) do
     image_string
     |> String.split(",")

@@ -1,19 +1,10 @@
-<h1>Listing Bookmarks</h1>
+<h1>Lesezeichen</h1>
 
 <table class="table list bookmarks">
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Url</th>
-      <th>Tags</th>
-      <th></th>
-    </tr>
-  </thead>
   <tbody>
-<%= for bookmark <- @bookmarks do %>
+  <%= for bookmark <- @bookmarks do %>
     <tr>
       <td><%= link bookmark.title, to: bookmark.url %></td>
-      <td><%= link tld(bookmark.url), to: tld(bookmark.url) %></td>
       <td class="topics">
         <%= for topic <- bookmark.entity.topics do %>
           <%= link to: Routes.topic_path(@conn, :tagged, topic) do %>
@@ -21,14 +12,17 @@
         <% end %>
       </td>
 
+      <%= if @current_user do %>
       <td>
-        <%= link "Show", to: Routes.bookmark_path(@conn, :show, bookmark) %>
         <%= link "Edit", to: Routes.bookmark_path(@conn, :edit, bookmark) %>
         <%= link "Delete", to: Routes.bookmark_path(@conn, :delete, bookmark), method: :delete, data: [confirm: "Are you sure?"] %>
       </td>
+      <% end %>
     </tr>
-<% end %>
+  <% end %>
   </tbody>
 </table>
 
-<span><%= link "New Bookmark", to: Routes.bookmark_path(@conn, :new) %></span>
+<%= if @current_user do %>
+  <%= link "New Bookmark", to: Routes.bookmark_path(@conn, :new), class: "btn btn-outline-primary" %>
+<% end %>

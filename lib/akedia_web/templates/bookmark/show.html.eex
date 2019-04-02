@@ -4,4 +4,6 @@
 
 <p><%= link @bookmark.url, to: @bookmark.url %></p>
 
-<span><%= link "Edit", to: Routes.bookmark_path(@conn, :edit, @bookmark) %></span>
+<%= if @current_user do %>
+  <%= link "Edit", to: Routes.bookmark_path(@conn, :edit, @bookmark) %>
+<% end %>

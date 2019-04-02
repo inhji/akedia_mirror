@@ -1,22 +1,15 @@
-<h1>Listing Topics</h1>
+<h1>Themen</h1>
 
 <table class="table">
-  <thead>
-    <tr>
-      <th>Text</th>
-
-      <th></th>
-    </tr>
-  </thead>
   <tbody>
-<%= for topic <- @topics do %>
+  <%= for topic <- @topics do %>
     <tr>
       <td>
         <%= link to: Routes.topic_path(@conn, :tagged, topic) do %>
           <%= topic.text %> (<%= Enum.count(topic.entities) %>)
         <% end %>
       </td>
-
+      <%= if @current_user do %>
       <td>
         <%= link "Edit", to: Routes.topic_path(@conn, :edit, topic) %>
         <%= if Enum.count(topic.entities) > 0 do %>
@@ -25,7 +18,8 @@
           <%= link "Delete", to: Routes.topic_path(@conn, :delete, topic), method: :delete, data: [confirm: "Are you sure?"] %>
         <% end %>
       </td>
+      <% end %>
     </tr>
-<% end %>
+  <% end %>
   </tbody>
 </table>

@@ -1,4 +1,4 @@
-<h1>Listing Images</h1>
+<h1>Bilder</h1>
 
 <div class="gallery">
   <%= for image <- @images do %>
@@ -6,11 +6,10 @@
     <%= link to: Routes.image_path(@conn, :show, image) do %>
       <img src="<%= Akedia.Media.ImageUploader.url({image.name, image}, :thumb) %>" />
     <% end %>
-    <div class="description">
-      <%= image.text %>
-    </div>
   </div>
   <% end %>
 </div>
 
-<span><%= link "New Image", to: Routes.image_path(@conn, :new) %></span>
+<%= if @current_user do %>
+  <%= link "New Image", to: Routes.image_path(@conn, :new), class: "btn btn-outline-primary" %>
+<% end %>

@@ -8,11 +8,13 @@ defmodule Akedia.Accounts do
   end
 
   def get_user!() do
-    Repo.one!(User)
+    User
+    |> Repo.one!()
     |> Repo.preload(:credential)
   end
   def get_user!(id) do
-    Repo.get!(User, id)
+    User
+    |> Repo.get!(id)
     |> Repo.preload(:credential)
   end
   def has_user?() do

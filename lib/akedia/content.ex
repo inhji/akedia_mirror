@@ -1,8 +1,9 @@
 defmodule Akedia.Content do
   import Ecto.Query, warn: false
   alias Akedia.Repo
+  alias Akedia.Content.{Entity, Page, Story, Bookmark, Topic, EntityTopic}
 
-  alias Akedia.Content.Entity
+  # Entity
 
   def list_entities do
     Repo.all(Entity)
@@ -35,13 +36,17 @@ defmodule Akedia.Content do
     Entity.changeset(entity, %{})
   end
 
-  alias Akedia.Content.Story
+  # Story
 
   def list_stories do
     list(Story, asc: :inserted_at)
   end
 
-  def get_story!(id), do: Repo.get_by!(Story, slug: id) |> Repo.preload(entity: [:topics, :images])
+  def get_story!(id) do
+    Story
+    |> Repo.get_by!(slug: id)
+    |> Repo.preload(entity: [:topics, :images])
+  end
 
   def create_story(attrs \\ %{}) do
     Repo.transaction(fn ->
@@ -74,13 +79,17 @@ defmodule Akedia.Content do
     Story.changeset(story, %{})
   end
 
-  alias Akedia.Content.Page
+  # Page
 
   def list_pages do
     list(Page, asc: :inserted_at)
   end
 
-  def get_page!(id), do: Repo.get!(Page, id) |> Repo.preload(entity: [:topics])
+  def get_page!(id) do
+    Page
+    |> Repo.get_by!(slug: id)
+    |> Repo.preload(entity: [:topics, :images])
+  end
 
   def create_page(attrs \\ %{}) do
     Repo.transaction(fn ->
@@ -113,13 +122,17 @@ defmodule Akedia.Content do
     Page.changeset(page, %{})
   end
 
-  alias Akedia.Content.Bookmark
+  # Bookmark
 
   def list_bookmarks do
     list(Bookmark, asc: :inserted_at)
   end
 
-  def get_bookmark!(id), do: Repo.get!(Bookmark, id) |> Repo.preload(entity: [:topics])
+  def get_bookmark!(id) do
+    Bookmark
+    |> Repo.get_by!(slug: id)
+    |> Repo.preload(entity: [:topics, :images])
+  end
 
   def create_bookmark(attrs \\ %{}) do
     Repo.transaction(fn ->
@@ -152,7 +165,7 @@ defmodule Akedia.Content do
     Bookmark.changeset(bookmark, %{})
   end
 
-  alias Akedia.Content.Topic
+  # Topic
 
   def list_topics do
     Topic
@@ -186,7 +199,7 @@ defmodule Akedia.Content do
     Topic.changeset(topic, %{})
   end
 
-  alias Akedia.Content.EntityTopic
+  # Tag Utils
 
   def add_tag(entity, topic_text) when is_binary(topic_text) do
     topic =
@@ -279,7 +292,7 @@ defmodule Akedia.Content do
     |> remove_tags(old_tags -- new_tags)
   end
 
-  # Utils
+  # Query Utils
 
   def list(schema, constraint, limit \\ 12) do
     schema

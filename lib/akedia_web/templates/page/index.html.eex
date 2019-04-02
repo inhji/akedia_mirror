@@ -1,21 +1,10 @@
-<h1>Listing Pages</h1>
+<h1>Wiki</h1>
 
 <table class="table list pages">
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Slug</th>
-      <th>Content</th>
-      <th>Topics</th>
-
-      <th></th>
-    </tr>
-  </thead>
   <tbody>
-<%= for page <- @pages do %>
+  <%= for page <- @pages do %>
     <tr>
       <td><%= link page.title, to: Routes.page_path(@conn, :show, page) %></td>
-      <td><%= page.slug %></td>
       <td><%= page.content %></td>
       <td class="topics">
         <%= for topic <- page.entity.topics do %>
@@ -24,13 +13,15 @@
         <% end %>
       </td>
 
+      <%= if @current_user do %>
       <td>
         <%= link "Edit", to: Routes.page_path(@conn, :edit, page) %>
         <%= link "Delete", to: Routes.page_path(@conn, :delete, page), method: :delete, data: [confirm: "Are you sure?"] %>
       </td>
+      <% end %>
     </tr>
-<% end %>
+    <% end %>
   </tbody>
 </table>
 
-<span><%= link "New Page", to: Routes.page_path(@conn, :new) %></span>
+<span><%= link "New Page", to: Routes.page_path(@conn, :new), class: "btn btn-outline-primary" %></span>

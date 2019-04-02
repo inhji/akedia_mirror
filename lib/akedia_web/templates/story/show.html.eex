@@ -8,4 +8,6 @@
   <%= img(image) %>
 <% end %>
 
-<span><%= link "Edit", to: Routes.story_path(@conn, :edit, @story) %></span>
+<%= if @current_user do %>
+  <%= link "Edit", to: Routes.story_path(@conn, :edit, @story), class: "btn btn-outline-primary" %>
+<% end %>
