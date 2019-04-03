@@ -41,6 +41,11 @@ npm-debug.log
 # variables.
 /config/*.secret.exs
 
-/.elixir_ls/
+/uploads
+!/uploads/.gitkeep
 
-/uploads/
+.deliver/releases/
+
+.mix_tasks
+
+/.elixir_ls/
