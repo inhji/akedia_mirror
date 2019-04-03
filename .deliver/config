@@ -1,0 +1,49 @@
+APP="akedia"
+
+BUILD_HOST="inhji.de"
+BUILD_USER="akedia"
+BUILD_AT="/home/akedia/akedia/build"
+
+PRODUCTION_HOSTS="inhji.de"
+PRODUCTION_USER="akedia"
+DELIVER_TO="/home/akedia/akedia/release"
+
+# Skip cleaning dependencies:
+# https://github.com/edeliver/edeliver/wiki/Faster-builds
+SKIP_MIX_CLEAN="false"
+
+pre_erlang_get_and_update_deps() {
+  status "Copying production secrets" # log output prepended with "----->"
+  local _prod_secret_path="/home/akedia/akedia/config/prod.secret.exs"
+  if [ "$TARGET_MIX_ENV" = "prod" ]; then
+    __sync_remote "
+      ln -sfn '$_prod_secret_path' '$BUILD_AT/config/prod.secret.exs'
+    "
+  fi
+}
+
+post_erlang_clean_compile() {
+  status "Running phoenix.digest" # log output prepended with "----->"
+  __sync_remote " # runs the commands on the build host
+    set -e # fail if any command fails (recommended)
+    cd '$BUILD_AT' # enter the build directory on the build host (required)
+    # prepare something
+    mkdir -p priv/static # required by the phoenix.digest task
+    # run your custom task
+    APP='$APP' MIX_ENV='$TARGET_MIX_ENV' $MIX_CMD phx.digest $SILENCE
+  "
+  status "Installing NPM dependencies" # log output prepended with "----->"
+  __sync_remote " # runs the commands on the build host
+    set -e # fail if any command fails (recommended)
+    cd '$BUILD_AT/assets' # enter the build directory on the build host (required)
+    # run your custom task
+    npm install
+  "
+  status "Compiling Scripts" # log output prepended with "----->"
+  __sync_remote " # runs the commands on the build host
+    set -e # fail if any command fails (recommended)
+    cd '$BUILD_AT/assets' # enter the build directory on the build host (required)
+    # run your custom task
+    npm run deploy $SILENCE
+  "
+}

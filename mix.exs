@@ -20,7 +20,7 @@ defmodule Akedia.MixProject do
   def application do
     [
       mod: {Akedia.Application, []},
-      extra_applications: [:logger, :runtime_tools]
+      extra_applications: [:logger, :runtime_tools, :edeliver]
     ]
   end
 
@@ -51,7 +51,9 @@ defmodule Akedia.MixProject do
       {:arc_ecto, "~> 0.11.1"},
       {:credo, "~> 1.0.0", only: [:dev, :test], runtime: false},
       {:ex_machina, "~> 2.3", only: :test},
-      {:ecto_autoslug_field, "~> 1.0"}
+      {:ecto_autoslug_field, "~> 1.0"},
+      {:distillery, "~> 2.0"},
+      {:edeliver, "~> 1.6"}
     ]
   end
 
@@ -65,7 +67,8 @@ defmodule Akedia.MixProject do
     [
       "ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds.exs"],
       "ecto.reset": ["ecto.drop", "ecto.setup"],
-      test: ["ecto.create --quiet", "ecto.migrate", "test"]
+      test: ["ecto.create --quiet", "ecto.migrate", "test"],
+      build: ["edeliver build release"]
     ]
   end
 end
