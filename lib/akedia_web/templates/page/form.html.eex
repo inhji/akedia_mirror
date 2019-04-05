@@ -18,8 +18,15 @@
   </div>
 
   <div class="form-group">
-    <%= label f, :content %>
-    <%= textarea f, :content, class: "form-control" %>
+    <div class="zennable">
+      <input type="checkbox" id="zen-toggle-comment">
+      <div class="zen-backdrop">
+        <%= textarea f, :content,
+            class: "form-control",
+            rows: 10 %>
+        <label for="zen-toggle-comment">Zen Mode</label>
+      </div>
+    </div>
     <%= error_tag f, :content %>
   </div>
 
