@@ -11,6 +11,7 @@ import css from "../css/app.scss"
 //
 import "phoenix_html"
 import "bootstrap"
+import Prism from 'prismjs'
 
 // Import local files
 //
@@ -18,3 +19,7 @@ import "bootstrap"
 // import socket from "./socket"
 import "./offcanvas"
 import "./media_library"
+
+document.addEventListener('DOMContentLoaded', function() {
+  Prism.highlightAll()
+})

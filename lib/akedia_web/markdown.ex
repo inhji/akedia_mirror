@@ -8,6 +8,8 @@ defmodule AkediaWeb.Markdown do
 
   def to_html(markdown) do
     markdown
-    |> Earmark.as_html!(%Options{})
+    |> Earmark.as_html!(%Options{
+        code_class_prefix: "language-"
+      })
   end
 end
