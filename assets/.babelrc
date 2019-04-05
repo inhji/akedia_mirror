@@ -4,7 +4,16 @@
     ],
     "plugins": [
       ["prismjs", {
-          "languages": ["javascript", "css", "markup"],
+          "languages": [
+            "javascript"
+            ,"css"
+            ,"markup"
+            ,"nginx"
+            ,"yaml"
+            ,"elixir"
+            ,"bash"
+            ,"scss"
+          ],
           "plugins": [],
           "theme": "funky",
           "css": true
