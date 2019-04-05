@@ -19,6 +19,7 @@ import Prism from 'prismjs'
 // import socket from "./socket"
 import "./offcanvas"
 import "./media_library"
+import "./zenmode"
 
 document.addEventListener('DOMContentLoaded', function() {
   Prism.highlightAll()
