@@ -1,1 +1,2 @@
-&copy; 2019 Jonathan Jenne
+<p>&copy; 2019 Jonathan Jenne</p>
+<p>Akedia v<%= version() %></p>
