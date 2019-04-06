@@ -3,13 +3,13 @@ defmodule AkediaWeb.PageView do
 
   def render("meta.index.html", _assigns) do
     ~E{
-      <title>Pages</title>
+      <title>Wiki · Akedia</title>
     }
   end
 
   def render("meta.show.html", assigns) do
     ~E{
-      <title><%= @page.title %></title>
+      <title><%= @page.title %> · Akedia</title>
     }
   end
 end

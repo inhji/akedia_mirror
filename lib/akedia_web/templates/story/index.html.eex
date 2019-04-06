@@ -11,12 +11,14 @@
             <div class="badge badge-secondary"><%= topic.text %></div><% end %>
         <% end %>
       </td>
-      <td>
       <%= if @current_user do %>
-        <%= link "Edit", to: Routes.story_path(@conn, :edit, story) %>
-        <%= link "Delete", to: Routes.story_path(@conn, :delete, story), method: :delete, data: [confirm: "Are you sure?"] %>
-      <% end %>
+      <td>
+        <div class="btn-group" role="group" aria-label="Basic example">
+          <%= link "Edit", to: Routes.story_path(@conn, :edit, story), class: "btn btn-secondary" %>
+          <%= link "Delete", to: Routes.story_path(@conn, :delete, story), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger" %>
+        </div>
       </td>
+      <% end %>
     </tr>
 <% end %>
   </tbody>

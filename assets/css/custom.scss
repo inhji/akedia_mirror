@@ -2,8 +2,12 @@ $purple: #4145df;
 $magenta: #ff0bcd;
 $blue: #0992d6;
 
-.alert:empty {
-  display: none;
+.alert {
+  border-radius: 0;
+
+  &:empty {
+    display: none;
+  }
 }
 
 a {

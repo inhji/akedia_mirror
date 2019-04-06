@@ -3,7 +3,13 @@ defmodule AkediaWeb.UserView do
 
   def render("meta.show.html", _assigns) do
     ~E{
-      <title>Profile</title>
+      <title>Profil</title>
+    }
+  end
+
+  def render("meta.edit.html", _assigns) do
+    ~E{
+      <title>Profil bearbeiten</title>
     }
   end
 end

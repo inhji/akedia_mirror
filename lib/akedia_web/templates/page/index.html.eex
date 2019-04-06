@@ -5,7 +5,7 @@
   <%= for page <- @pages do %>
     <tr>
       <td><%= link page.title, to: Routes.page_path(@conn, :show, page) %></td>
-      <td><%= page.content %></td>
+      <td><%= page.content |> String.split("\n") |> List.first() %></td>
       <td class="topics">
         <%= for topic <- page.entity.topics do %>
           <%= link to: Routes.topic_path(@conn, :tagged, topic) do %>
@@ -15,8 +15,10 @@
 
       <%= if @current_user do %>
       <td>
-        <%= link "Edit", to: Routes.page_path(@conn, :edit, page) %>
-        <%= link "Delete", to: Routes.page_path(@conn, :delete, page), method: :delete, data: [confirm: "Are you sure?"] %>
+        <div class="btn-group" role="group" aria-label="Basic example">
+          <%= link "Edit", to: Routes.page_path(@conn, :edit, page), class: "btn btn-secondary" %>
+          <%= link "Delete", to: Routes.page_path(@conn, :delete, page), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger" %>
+        </div>
       </td>
       <% end %>
     </tr>

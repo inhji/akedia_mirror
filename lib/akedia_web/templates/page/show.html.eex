@@ -1,8 +1,8 @@
 <h1><%= @page.title %></h1>
 
-<p>
+<div class="page content">
   <%= raw(AkediaWeb.Markdown.to_html(@page)) %>
-</p>
+</div>
 
 <%= if @current_user do %>
   <%= link "Edit", to: Routes.page_path(@conn, :edit, @page), class: "btn btn-outline-primary" %>

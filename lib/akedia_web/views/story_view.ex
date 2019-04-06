@@ -3,13 +3,13 @@ defmodule AkediaWeb.StoryView do
 
   def render("meta.index.html", _assigns) do
     ~E{
-      <title>Stories</title>
+      <title>Geschichten · Akedia</title>
     }
   end
 
   def render("meta.show.html", assigns) do
     ~E{
-      <title><%= @story.title %></title>
+      <title><%= @story.title %> · Akedia</title>
     }
   end
 end

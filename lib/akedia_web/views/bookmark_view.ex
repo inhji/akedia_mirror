@@ -3,13 +3,13 @@ defmodule AkediaWeb.BookmarkView do
 
   def render("meta.index.html", _assigns) do
     ~E{
-      <title>Bookmarks</title>
+      <title>Lesezeichen · Akedia</title>
     }
   end
 
   def render("meta.show.html", assigns) do
     ~E{
-      <title>Bookmark: <%= @bookmark.title %></title>
+      <title><%= @bookmark.title %> · Akedia</title>
     }
   end
 end

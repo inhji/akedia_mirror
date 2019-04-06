@@ -3,13 +3,13 @@ defmodule AkediaWeb.TopicView do
 
   def render("meta.index.html", _assigns) do
     ~E{
-      <title>Topics</title>
+      <title>Themen</title>
     }
   end
 
   def render("meta.tagged.html", assigns) do
     ~E{
-      <title>Topic <%= @topic.text %></title>
+      <title>Thema <%= @topic.text %> · Akedia</title>
     }
   end
 end

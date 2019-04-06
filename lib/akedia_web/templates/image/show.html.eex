@@ -1,10 +1,12 @@
 <img src="<%= image_url(@image, :original) %>" class="fit" />
 <p><%= @image.text %></p>
 
-<span><%= link "Edit", to: Routes.image_path(@conn, :edit, @image) %></span>
-<span><%= link "Back", to: Routes.image_path(@conn, :index) %></span>
-<%= if Enum.count(@image.entities) > 0 do %>
-  <a class="text-muted">Delete</a>
-<% else %>
-  <%= link "Delete", to: Routes.image_path(@conn, :delete, @image), method: :delete, data: [confirm: "Are you sure?"] %>
+<%= if @current_user do %>
+  <span><%= link "Edit", to: Routes.image_path(@conn, :edit, @image) %></span>
+  <span><%= link "Back", to: Routes.image_path(@conn, :index) %></span>
+  <%= if Enum.count(@image.entities) > 0 do %>
+    <a class="text-muted">Delete</a>
+  <% else %>
+    <%= link "Delete", to: Routes.image_path(@conn, :delete, @image), method: :delete, data: [confirm: "Are you sure?"] %>
+  <% end %>
 <% end %>

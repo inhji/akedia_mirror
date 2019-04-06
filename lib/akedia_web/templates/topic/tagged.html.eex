@@ -1,12 +1,6 @@
 <h1>Tagged under "<%= @topic.text %>"</h1>
 
 <table class="table">
-  <thead>
-    <tr>
-      <th>Type</th>
-      <th>Title</th>
-    </tr>
-  </thead>
   <tbody>
   <%= for entity <- @topic.entities do %>
     <% {content, type, content_path} = case entity do

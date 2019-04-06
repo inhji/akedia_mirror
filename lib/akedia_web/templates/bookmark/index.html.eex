@@ -5,6 +5,7 @@
   <%= for bookmark <- @bookmarks do %>
     <tr>
       <td><%= link bookmark.title, to: bookmark.url %></td>
+      <td><%= raw(AkediaWeb.Markdown.to_html(bookmark.content)) %></td>
       <td class="topics">
         <%= for topic <- bookmark.entity.topics do %>
           <%= link to: Routes.topic_path(@conn, :tagged, topic) do %>
@@ -14,8 +15,10 @@
 
       <%= if @current_user do %>
       <td>
-        <%= link "Edit", to: Routes.bookmark_path(@conn, :edit, bookmark) %>
-        <%= link "Delete", to: Routes.bookmark_path(@conn, :delete, bookmark), method: :delete, data: [confirm: "Are you sure?"] %>
+        <div class="btn-group" role="group" aria-label="Basic example">
+          <%= link "Edit", to: Routes.bookmark_path(@conn, :edit, bookmark), class: "btn btn-secondary" %>
+          <%= link "Delete", to: Routes.bookmark_path(@conn, :delete, bookmark), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger" %>
+        </div>
       </td>
       <% end %>
     </tr>
