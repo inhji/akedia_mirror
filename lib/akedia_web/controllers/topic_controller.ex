@@ -7,7 +7,7 @@ defmodule AkediaWeb.TopicController do
   def index(conn, _params) do
     topics = Content.list_topics()
 
-    render_empty(conn, topics, topics: topics)
+    render_index_or_empty(conn, topics, topics: topics)
   end
 
   def tagged(conn, %{"topic" => topic}) do

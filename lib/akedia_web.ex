@@ -25,11 +25,15 @@ defmodule AkediaWeb do
       import AkediaWeb.Gettext
       alias AkediaWeb.Router.Helpers, as: Routes
 
-      def render_empty(conn, content, assigns \\ []) do
+      def render_index_or_empty(conn, content, assigns \\ []) do
         case Enum.count(content) do
           0 -> render(conn, "empty.html")
           _ -> render(conn, "index.html", assigns)
         end
+      end
+
+      def logged_in?(%{assigns: %{current_user: current_user}} = _conn) do
+        !!current_user
       end
     end
   end

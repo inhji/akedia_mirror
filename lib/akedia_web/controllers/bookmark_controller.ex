@@ -7,7 +7,7 @@ defmodule AkediaWeb.BookmarkController do
   def index(conn, _params) do
     bookmarks = Content.list_bookmarks()
 
-    render_empty(conn, bookmarks, bookmarks: bookmarks)
+    render_index_or_empty(conn, bookmarks, bookmarks: bookmarks)
   end
 
   def new(conn, _params) do

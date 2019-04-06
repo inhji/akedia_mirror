@@ -42,6 +42,10 @@ defmodule Akedia.Content do
     list(Story, asc: :inserted_at)
   end
 
+  def list_published_stories() do
+    list_published(Story, asc: :inserted_at)
+  end
+
   def get_story!(id) do
     Story
     |> Repo.get_by!(slug: id)
@@ -83,6 +87,10 @@ defmodule Akedia.Content do
 
   def list_pages do
     list(Page, asc: :inserted_at)
+  end
+
+  def list_published_pages() do
+    list_published(Page, asc: :inserted_at)
   end
 
   def get_page!(id) do
@@ -294,10 +302,17 @@ defmodule Akedia.Content do
 
   # Query Utils
 
-  def list(schema, constraint, limit \\ 12) do
+  def list(schema, constraint) do
     schema
     |> order_by(^constraint)
-    |> limit(^limit)
+    |> Repo.all()
+    |> Repo.preload(entity: [:topics, :images])
+  end
+
+  def list_published(schema, constraint) do
+    schema
+    |> join(:inner, [s], e in Entity, on: e.is_published == true)
+    |> order_by(^constraint)
     |> Repo.all()
     |> Repo.preload(entity: [:topics, :images])
   end
