@@ -5,7 +5,6 @@
   <%= for page <- @pages do %>
     <tr>
       <td><%= link page.title, to: Routes.page_path(@conn, :show, page) %></td>
-      <td><%= page.content |> String.split("\n") |> List.first() %></td>
       <td class="topics">
         <%= for topic <- page.entity.topics do %>
           <%= link to: Routes.topic_path(@conn, :tagged, topic) do %>
