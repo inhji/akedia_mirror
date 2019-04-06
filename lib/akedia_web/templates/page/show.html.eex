@@ -4,6 +4,14 @@
   <%= raw(AkediaWeb.Markdown.to_html(@page)) %>
 </div>
 
+<div class="topics">
+  <%= for topic <- @page.entity.topics do %>
+    <%= link to: Routes.topic_path(@conn, :tagged, topic) do %>
+      <div class="badge badge-secondary"><%= topic.text %></div>
+    <% end %>
+  <% end %>
+</div>
+
 <%= if @current_user do %>
   <%= link "Edit", to: Routes.page_path(@conn, :edit, @page), class: "btn btn-outline-primary" %>
 <% end %>

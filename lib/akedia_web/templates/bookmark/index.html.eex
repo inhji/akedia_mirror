@@ -9,7 +9,8 @@
       <td class="topics">
         <%= for topic <- bookmark.entity.topics do %>
           <%= link to: Routes.topic_path(@conn, :tagged, topic) do %>
-            <div class="badge badge-secondary"><%= topic.text %></div><% end %>
+            <div class="badge badge-secondary"><%= topic.text %></div>
+          <% end %>
         <% end %>
       </td>
 
