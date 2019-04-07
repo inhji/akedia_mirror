@@ -44,6 +44,6 @@ post_erlang_clean_compile() {
     set -e # fail if any command fails (recommended)
     cd '$BUILD_AT/assets' # enter the build directory on the build host (required)
     # run your custom task
-    npm run deploy $SILENCE
+    npm run deploy
   "
 }
