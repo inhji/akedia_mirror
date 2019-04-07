@@ -13,6 +13,8 @@
             ,"elixir"
             ,"bash"
             ,"scss"
+            ,"sql"
+            ,"coffee"
           ],
           "plugins": [],
           "theme": "funky",
