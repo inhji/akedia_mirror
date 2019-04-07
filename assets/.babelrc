@@ -14,7 +14,7 @@
             ,"bash"
             ,"scss"
             ,"sql"
-            ,"coffee"
+            ,"coffeescript"
           ],
           "plugins": [],
           "theme": "funky",
