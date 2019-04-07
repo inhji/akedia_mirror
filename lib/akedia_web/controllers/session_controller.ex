@@ -4,10 +4,12 @@ defmodule AkediaWeb.SessionController do
 
   def new(conn, _params) do
     changeset = Accounts.change_credential(%Accounts.Credential{})
-    referer = case get_req_header(conn, "referer") do
-      [referer] -> referer
-      _ -> nil
-    end
+
+    referer =
+      case get_req_header(conn, "referer") do
+        [referer] -> referer
+        _ -> nil
+      end
 
     conn
     |> Plug.Conn.put_session(:referer, referer)
@@ -17,9 +19,8 @@ defmodule AkediaWeb.SessionController do
   def create(conn, %{"credential" => %{"email" => email, "password" => password}}) do
     case Auth.authenticate_user(email, password) do
       {:ok, user} ->
-
         redirect_path =
-          case conn |> get_session(:referer) do
+          case get_session(conn, :referer) do
             nil -> Routes.user_path(conn, :show)
             referer -> URI.parse(referer).path
           end
@@ -29,6 +30,7 @@ defmodule AkediaWeb.SessionController do
         |> put_flash(:info, "Welcome back, #{user.name}")
         |> delete_session(:referer)
         |> redirect(to: redirect_path)
+
       {:error, reason} ->
         changeset = Accounts.change_credential(%Accounts.Credential{email: email})
 

@@ -1,6 +1,6 @@
 defmodule AkediaWeb.Router do
   use AkediaWeb, :router
-  import Akedia.Auth.Plug, only: [current_user: 2]
+  import Akedia.Auth.Plug, only: [current_user: 2, check_user: 2, refresh_user: 2]
 
   pipeline :browser do
     plug :accepts, ["html"]
@@ -8,8 +8,8 @@ defmodule AkediaWeb.Router do
     plug :fetch_flash
     plug :protect_from_forgery
     plug :put_secure_browser_headers
-    plug Akedia.Auth.BrowserPipeline
     plug :current_user
+    plug :refresh_user
   end
 
   pipeline :api do
@@ -17,8 +17,7 @@ defmodule AkediaWeb.Router do
   end
 
   pipeline :auth do
-    plug Akedia.Auth.AuthPipeline
-    plug :current_user
+    plug :check_user
   end
 
   scope "/", AkediaWeb do
@@ -59,9 +58,4 @@ defmodule AkediaWeb.Router do
     resources "/topics", TopicController, except: [:show, :index]
     resources "/images", ImageController, except: [:show, :index]
   end
-
-  # Other scopes may use custom stacks.
-  # scope "/api", AkediaWeb do
-  #   pipe_through :api
-  # end
 end

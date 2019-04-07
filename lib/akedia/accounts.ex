@@ -17,6 +17,11 @@ defmodule Akedia.Accounts do
     |> Repo.get!(id)
     |> Repo.preload(:credential)
   end
+  def get_user(id) do
+    User
+    |> Repo.get(id)
+  end
+
   def has_user?() do
     count_users() > 0
   end

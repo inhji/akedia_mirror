@@ -1,6 +1,5 @@
 defmodule Akedia.Auth do
   alias Akedia.{Accounts, Repo}
-  alias Akedia.Auth.Guardian
   import Plug.Conn
 
   @error_message "Incorrect email or password"
@@ -12,6 +11,7 @@ defmodule Akedia.Auth do
   end
 
   defp check_password(nil, _), do: {:error, @error_message}
+
   defp check_password(user, password) do
     case Bcrypt.verify_pass(password, user.credential.encrypted_password) do
       true -> {:ok, user}
@@ -21,12 +21,12 @@ defmodule Akedia.Auth do
 
   def login(conn, user) do
     conn
-    |> Guardian.Plug.sign_in(user)
     |> assign(:current_user, user)
+    |> put_session(:user_id, user.id)
   end
 
   def logout(conn) do
     conn
-    |> Guardian.Plug.sign_out()
+    |> configure_session(drop: true)
   end
 end
