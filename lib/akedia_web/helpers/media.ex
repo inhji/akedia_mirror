@@ -22,6 +22,9 @@ defmodule AkediaWeb.Helpers.Media do
       [
         content_tag :div, class: "input-group-prepend" do
           [
+            content_tag :span, class: "input-group-text" do
+              "Images"
+            end,
             content_tag :button, type: "button", class: "btn btn-outline-primary", data_toggle: "modal", data_target: "#mediaLibrary" do
               "Select"
             end,
