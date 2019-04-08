@@ -310,8 +310,12 @@ defmodule Akedia.Content do
   end
 
   def list_published(schema, constraint) do
+    # This seems utterly complicated but okay for now
+    # join is needed to show just published entities
+    # group_by is needed to remove duplicate items from joined query    
     schema
-    |> join(:inner, [s], e in Entity, on: e.is_published == true)
+    |> join(:left, [s], e in Entity, on: e.is_published == true)
+    |> group_by([s], [s.id, s.entity_id])
     |> order_by(^constraint)
     |> Repo.all()
     |> Repo.preload(entity: [:topics, :images])
