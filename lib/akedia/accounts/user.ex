@@ -1,13 +1,14 @@
 defmodule Akedia.Accounts.User do
   use Ecto.Schema
   import Ecto.Changeset
-  alias Akedia.Accounts.Credential
+  alias Akedia.Accounts.{Credential, Profile}
 
   schema "users" do
     field :name, :string
     field :username, :string
 
     has_one(:credential, Credential)
+    has_many(:profiles, Profile)
 
     timestamps()
   end

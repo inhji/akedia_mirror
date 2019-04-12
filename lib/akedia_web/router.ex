@@ -1,6 +1,7 @@
 defmodule AkediaWeb.Router do
   use AkediaWeb, :router
-  import Akedia.Auth.Plug, only: [current_user: 2, check_user: 2, refresh_user: 2]
+  import AkediaWeb.Plugs.Auth, only: [current_user: 2, check_user: 2, refresh_user: 2]
+  import AkediaWeb.Plugs.User, only: [assign_profiles: 2]
 
   pipeline :browser do
     plug :accepts, ["html"]
@@ -10,6 +11,7 @@ defmodule AkediaWeb.Router do
     plug :put_secure_browser_headers
     plug :current_user
     plug :refresh_user
+    plug :assign_profiles
   end
 
   pipeline :api do
@@ -47,6 +49,7 @@ defmodule AkediaWeb.Router do
     pipe_through [:browser, :auth]
 
     resources "/", UserController, only: [:show, :edit, :update], singleton: true
+    resources "/profiles", ProfileController
   end
 
   scope "/admin", AkediaWeb do

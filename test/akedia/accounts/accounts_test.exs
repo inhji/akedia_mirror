@@ -60,4 +60,67 @@ defmodule Akedia.AccountsTest do
       assert %Ecto.Changeset{} = Accounts.change_credential(credential)
     end
   end
+
+  describe "profiles" do
+    alias Akedia.Accounts.Profile
+
+    @valid_attrs %{name: "some name", url: "some url", username: "some username"}
+    @update_attrs %{name: "some updated name", url: "some updated url", username: "some updated username"}
+    @invalid_attrs %{name: nil, url: nil, username: nil}
+
+    def profile_fixture(attrs \\ %{}) do
+      {:ok, profile} =
+        attrs
+        |> Enum.into(@valid_attrs)
+        |> Accounts.create_profile()
+
+      profile
+    end
+
+    test "list_profiles/0 returns all profiles" do
+      profile = profile_fixture()
+      assert Accounts.list_profiles() == [profile]
+    end
+
+    test "get_profile!/1 returns the profile with given id" do
+      profile = profile_fixture()
+      assert Accounts.get_profile!(profile.id) == profile
+    end
+
+    test "create_profile/1 with valid data creates a profile" do
+      assert {:ok, %Profile{} = profile} = Accounts.create_profile(@valid_attrs)
+      assert profile.name == "some name"
+      assert profile.url == "some url"
+      assert profile.username == "some username"
+    end
+
+    test "create_profile/1 with invalid data returns error changeset" do
+      assert {:error, %Ecto.Changeset{}} = Accounts.create_profile(@invalid_attrs)
+    end
+
+    test "update_profile/2 with valid data updates the profile" do
+      profile = profile_fixture()
+      assert {:ok, %Profile{} = profile} = Accounts.update_profile(profile, @update_attrs)
+      assert profile.name == "some updated name"
+      assert profile.url == "some updated url"
+      assert profile.username == "some updated username"
+    end
+
+    test "update_profile/2 with invalid data returns error changeset" do
+      profile = profile_fixture()
+      assert {:error, %Ecto.Changeset{}} = Accounts.update_profile(profile, @invalid_attrs)
+      assert profile == Accounts.get_profile!(profile.id)
+    end
+
+    test "delete_profile/1 deletes the profile" do
+      profile = profile_fixture()
+      assert {:ok, %Profile{}} = Accounts.delete_profile(profile)
+      assert_raise Ecto.NoResultsError, fn -> Accounts.get_profile!(profile.id) end
+    end
+
+    test "change_profile/1 returns a profile changeset" do
+      profile = profile_fixture()
+      assert %Ecto.Changeset{} = Accounts.change_profile(profile)
+    end
+  end
 end

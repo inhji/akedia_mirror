@@ -1,7 +1,7 @@
 defmodule Akedia.Accounts do
   import Ecto.Query, warn: false
   alias Akedia.Repo
-  alias Akedia.Accounts.{User, Credential}
+  alias Akedia.Accounts.{User, Credential, Profile}
 
   def count_users do
     Repo.aggregate(from(u in User), :count, :id)
@@ -10,13 +10,15 @@ defmodule Akedia.Accounts do
   def get_user!() do
     User
     |> Repo.one!()
-    |> Repo.preload(:credential)
+    |> Repo.preload([:credential, :profiles])
   end
+
   def get_user!(id) do
     User
     |> Repo.get!(id)
-    |> Repo.preload(:credential)
+    |> Repo.preload([:credential, :profiles])
   end
+
   def get_user(id) do
     User
     |> Repo.get(id)
@@ -27,10 +29,11 @@ defmodule Akedia.Accounts do
   end
 
   def get_user_by_email(email) do
-    query = from c in Credential,
-            join: u in User,
-            where: c.email == ^email,
-            select: u
+    query =
+      from c in Credential,
+        join: u in User,
+        where: c.email == ^email,
+        select: u
 
     Repo.one(query)
   end
@@ -60,9 +63,11 @@ defmodule Akedia.Accounts do
   end
 
   def get_credential!(id), do: Repo.get!(Credential, id)
+
   def get_credential_by_user(id) do
-    query = from c in Credential,
-            where: c.user_id == ^id
+    query =
+      from c in Credential,
+        where: c.user_id == ^id
 
     Repo.one!(query)
   end
@@ -85,5 +90,36 @@ defmodule Akedia.Accounts do
 
   def change_credential(%Credential{} = credential, attrs \\ %{}) do
     Credential.changeset(credential, attrs)
+  end
+
+  alias Akedia.Accounts.Profile
+
+  def list_profiles do
+    Repo.all(Profile)
+  end
+
+  def get_profile!(id), do: Repo.get!(Profile, id)
+
+  def create_profile(attrs \\ %{}) do
+    user = get_user!()
+
+    user
+    |> Ecto.build_assoc(:profiles)
+    |> Profile.changeset(attrs)
+    |> Repo.insert()
+  end
+
+  def update_profile(%Profile{} = profile, attrs) do
+    profile
+    |> Profile.changeset(attrs)
+    |> Repo.update()
+  end
+
+  def delete_profile(%Profile{} = profile) do
+    Repo.delete(profile)
+  end
+
+  def change_profile(%Profile{} = profile) do
+    Profile.changeset(profile, %{})
   end
 end

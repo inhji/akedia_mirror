@@ -1,0 +1,21 @@
+<h1>Listing Profiles</h1>
+
+<table class="table">
+  <tbody>
+<%= for profile <- @profiles do %>
+    <tr>
+      <td><span class="badge badge-primary"><%= profile.name %></span></td>
+      <td><%= profile.username %></td>
+      <td><%= profile.url %></td>
+
+      <td>
+        <%= link "Show", to: Routes.profile_path(@conn, :show, profile) %>
+        <%= link "Edit", to: Routes.profile_path(@conn, :edit, profile) %>
+        <%= link "Delete", to: Routes.profile_path(@conn, :delete, profile), method: :delete, data: [confirm: "Are you sure?"] %>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<span><%= link "New Profile", to: Routes.profile_path(@conn, :new), class: "btn btn-outline-primary" %></span>
