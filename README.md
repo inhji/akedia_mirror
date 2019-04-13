@@ -27,7 +27,7 @@ mix edeliver migrate production
 deploy an upgrade:
 
 ```bash
-mix edeliver upgrade production
+mix deploy
 ```
 
 ## Sever Setup
