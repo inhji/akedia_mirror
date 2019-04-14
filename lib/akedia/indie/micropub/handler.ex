@@ -2,11 +2,9 @@ defmodule Akedia.Indie.Micropub.Handler do
   @behaviour PlugMicropub.HandlerBehaviour
   require Logger
 
-  alias Akedia.{Content, Accounts}
+  alias Akedia.{Content}
   alias AkediaWeb.Router.Helpers, as: Routes
   alias AkediaWeb.Endpoint
-
-  @supported_scopes ["create", "update", "delete"]
 
   @impl true
   def handle_create(type, properties, access_token) do

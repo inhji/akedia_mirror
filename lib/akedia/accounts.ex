@@ -100,6 +100,11 @@ defmodule Akedia.Accounts do
 
   def get_profile!(id), do: Repo.get!(Profile, id)
 
+  def get_profile_by_rel_value(rel_value) do
+    Profile
+    |> Repo.get_by!(rel_value: rel_value)
+  end
+
   def create_profile(attrs \\ %{}) do
     user = get_user!()
 
