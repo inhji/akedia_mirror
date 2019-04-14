@@ -17,7 +17,7 @@ defmodule AkediaWeb.Router do
   pipeline :api do
     plug :accepts, ["json"]
   end
-
+  
   pipeline :auth do
     plug :check_user
   end
@@ -43,6 +43,15 @@ defmodule AkediaWeb.Router do
       post "/login", SessionController, :create
       delete "/logout", SessionController, :delete
     end
+  end
+
+  scope "/indie" do
+    pipe_through [:api]
+
+    forward "/micropub",
+            PlugMicropub,
+            handler: Akedia.Indie.Micropub.Handler,
+            json_encoder: Phoenix.json_library()
   end
 
   scope "/user", AkediaWeb do

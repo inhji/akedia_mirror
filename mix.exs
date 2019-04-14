@@ -52,7 +52,9 @@ defmodule Akedia.MixProject do
       {:ex_machina, "~> 2.3", only: :test},
       {:ecto_autoslug_field, "~> 1.0"},
       {:distillery, "~> 2.0"},
-      {:edeliver, "~> 1.6"}
+      {:edeliver, "~> 1.6"},
+      {:plug_micropub, "~> 0.1.0"},
+      {:httpoison, "~> 1.5"}
     ]
   end
 
