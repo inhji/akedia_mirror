@@ -103,7 +103,7 @@ defmodule Akedia.Media do
 
   # Utils
 
-  def list(schema, constraint) do
+  def list(schema, constraint \\ [desc: :inserted_at]) do
     schema
     |> order_by(^constraint)
     |> Repo.all()

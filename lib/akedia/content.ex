@@ -39,11 +39,11 @@ defmodule Akedia.Content do
   # Story
 
   def list_stories do
-    list(Story, asc: :inserted_at)
+    list(Story)
   end
 
   def list_published_stories() do
-    list_published(Story, asc: :inserted_at)
+    list_published(Story)
   end
 
   def get_story!(id) do
@@ -86,11 +86,11 @@ defmodule Akedia.Content do
   # Page
 
   def list_pages do
-    list(Page, asc: :inserted_at)
+    list(Page)
   end
 
   def list_published_pages() do
-    list_published(Page, asc: :inserted_at)
+    list_published(Page)
   end
 
   def get_page!(id) do
@@ -133,7 +133,11 @@ defmodule Akedia.Content do
   # Bookmark
 
   def list_bookmarks do
-    list(Bookmark, asc: :inserted_at)
+    list(Bookmark)
+  end
+
+  def list_published_bookmarks do
+    list_published(Bookmark)
   end
 
   def get_bookmark!(id) do
@@ -302,14 +306,14 @@ defmodule Akedia.Content do
 
   # Query Utils
 
-  def list(schema, constraint) do
+  def list(schema, constraint \\ [desc: :inserted_at]) do
     schema
     |> order_by(^constraint)
     |> Repo.all()
     |> Repo.preload(entity: [:topics, :images])
   end
 
-  def list_published(schema, constraint) do
+  def list_published(schema, constraint \\ [desc: :inserted_at]) do
     # This seems utterly complicated but okay for now
     # join is needed to show just published entities
     # group_by is needed to remove duplicate items from joined query

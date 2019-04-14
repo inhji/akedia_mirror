@@ -5,7 +5,11 @@ defmodule AkediaWeb.BookmarkController do
   alias Akedia.Content.Bookmark
 
   def index(conn, _params) do
-    bookmarks = Content.list_bookmarks()
+    bookmarks =
+      case logged_in?(conn) do
+        true -> Content.list_bookmarks()
+        false -> Content.list_published_bookmarks()
+      end
 
     render_index_or_empty(conn, bookmarks, bookmarks: bookmarks)
   end
