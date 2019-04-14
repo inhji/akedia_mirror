@@ -7,7 +7,7 @@
 
     <%= if @user_profiles do %>
       <%= for profile <- @user_profiles do %>
-        <link rel="me" href="<%= profile.url %>" />
+        <link rel="<%= profile.rel_value %>" href="<%= profile.url %>" />
       <% end %>
     <% end %>
 

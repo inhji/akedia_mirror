@@ -7,6 +7,7 @@ defmodule Akedia.Accounts.Profile do
     field :name, :string
     field :url, :string
     field :username, :string
+    field :rel_value, :string, default: "me"
 
     belongs_to(:user, User)
 
@@ -16,7 +17,7 @@ defmodule Akedia.Accounts.Profile do
   @doc false
   def changeset(profile, attrs) do
     profile
-    |> cast(attrs, [:name, :username, :url, :user_id])
-    |> validate_required([:name, :username, :url, :user_id])
+    |> cast(attrs, [:name, :username, :url, :rel_value, :user_id])
+    |> validate_required([:name, :url, :user_id])
   end
 end
