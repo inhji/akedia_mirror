@@ -10,7 +10,6 @@ DELIVER_TO="/home/akedia/akedia/release"
 
 AUTO_VERSION=git-revision
 START_DEPLOY=true
-CLEAN_DEPLOY=true
 
 pre_erlang_get_and_update_deps() {
   status "Copying production secrets" # log output prepended with "----->"
