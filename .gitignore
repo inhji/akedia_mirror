@@ -49,3 +49,5 @@ npm-debug.log
 .mix_tasks
 
 /.elixir_ls/
+
+*.code-workspace
