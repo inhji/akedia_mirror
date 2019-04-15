@@ -48,8 +48,12 @@ defmodule Akedia.Indie.Micropub.Token do
     end
   end
 
+  def sanitize_hostname(hostname) do
+    String.trim_trailing(hostname, "/")
+  end
+
   def check_hostname(hostname) do
-    hostnames_match? = hostname == Akedia.url()
+    hostnames_match? = sanitize_hostname(hostname) == Akedia.url()
 
     case hostnames_match? do
       true ->

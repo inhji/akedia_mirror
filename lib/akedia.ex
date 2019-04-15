@@ -12,5 +12,6 @@ defmodule Akedia do
     Router.Helpers.url(Endpoint)
     |> URI.parse()
     |> to_string()
+    |> String.trim_trailing("/")
   end
 end
