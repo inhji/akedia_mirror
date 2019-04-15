@@ -8,8 +8,8 @@ defmodule Akedia.Indie.Micropub.Handler do
 
   @impl true
   def handle_create(type, properties, access_token) do
-    Logger.debug("Micropub Handler engaged")
-    Logger.debug("Post type is #{inspect(type)}")
+    Logger.info("Micropub Handler engaged")
+    Logger.info("Post type is #{inspect(type)}")
 
     tags = get_tags(properties)
     title = get_title(properties)
@@ -21,12 +21,12 @@ defmodule Akedia.Indie.Micropub.Handler do
       :ok ->
         case get_type(properties) do
           "bookmark" ->
-            Logger.debug("Creating new bookmark..")
+            Logger.info("Creating new bookmark..")
             create_bookmark(title, content, url, tags, is_published)
 
           "unknown" ->
             Logger.warn("Unknown or unsupported post type")
-            Logger.debug("Properties: #{inspect(properties, pretty: true)}")
+            Logger.info("Properties: #{inspect(properties, pretty: true)}")
             {:error, :insufficient_scope}
         end
 
@@ -37,8 +37,8 @@ defmodule Akedia.Indie.Micropub.Handler do
 
   @impl true
   def handle_media([file], access_token) do
-    Logger.debug("Micropub Media Handler engaged")
-    Logger.debug("Uploaded file is #{inspect(file)}")
+    Logger.info("Micropub Media Handler engaged")
+    Logger.info("Uploaded file is #{inspect(file)}")
 
     attrs = %{"name" => file, "text" => file.filename}
 

@@ -8,7 +8,7 @@ defmodule Akedia.Indie.Micropub.Token do
     %{url: token_endpoint} = Accounts.get_profile_by_rel_value("token_endpoint")
     headers = [authorization: "Bearer #{access_token}", accept: "application/json"]
 
-    Logger.debug("Token endpoint: #{token_endpoint}")
+    Logger.info("Token endpoint: #{token_endpoint}")
 
     case HTTPoison.get(token_endpoint, headers) do
       {:ok, %HTTPoison.Response{status_code: 200, body: body}} ->
@@ -36,9 +36,9 @@ defmodule Akedia.Indie.Micropub.Token do
         },
         required_scope
       ) do
-    Logger.debug("Hostname: '#{hostname}'")
-    Logger.debug("ClientId: #{client_id}")
-    Logger.debug("Scopes: '#{scope}'")
+    Logger.info("Hostname: '#{hostname}'")
+    Logger.info("ClientId: #{client_id}")
+    Logger.info("Scopes: '#{scope}'")
 
     with {:ok, _hostname} <- check_hostname(hostname),
          {:ok, _scope} <- check_scope(scope, required_scope) do
