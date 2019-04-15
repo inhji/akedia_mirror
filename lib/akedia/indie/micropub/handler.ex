@@ -2,7 +2,7 @@ defmodule Akedia.Indie.Micropub.Handler do
   @behaviour PlugMicropub.HandlerBehaviour
   require Logger
 
-  alias Akedia.{Content}
+  alias Akedia.{Content, Media}
   alias AkediaWeb.Router.Helpers, as: Routes
   alias AkediaWeb.Endpoint
 
@@ -31,6 +31,26 @@ defmodule Akedia.Indie.Micropub.Handler do
   end
 
   @impl true
+  def handle_media([file], _access_token) do
+    Logger.info("Micropub Media Handler engaged")
+    Logger.info("Uploaded file is #{inspect(file)}")
+
+    attrs = %{"name" => file, "text" => file.filename}
+
+    case Media.create_image(attrs) do
+      {:ok, image} ->
+        image_url = Media.ImageUploader.url({image.name, image}, :original)
+        url = abs_url(Routes.url(Endpoint), image_url)
+
+        {:ok, url}
+
+      {:error, _reason} ->
+        {:error, :insufficient_scope}
+    end
+  end
+  def handle_media(_, _), do: {:error, :insufficient_scope}
+
+  @impl true
   def handle_update(_url, _replace, _add, _delete, _access_token) do
     {:error, :insufficient_scope}
   end
@@ -41,9 +61,30 @@ defmodule Akedia.Indie.Micropub.Handler do
   end
 
   @impl true
+  def handle_undelete(_url, _access_token) do
+    {:error, :insufficient_scope}
+  end
+
+  @impl true
+  @spec handle_config_query(any()) :: {:ok, %{"media-endpoint": any(), "syndicate-to": []}}
   def handle_config_query(_access_token) do
-    media_url = Routes.url(Endpoint) <> "/micropub/media"
-    {:ok, %{"media-endpoint": media_url}}
+    media_url = abs_url(Routes.url(Endpoint), "/indie/micropub/media")
+    # media_url = abs_url("https://c31bb8f4.ngrok.io", "/indie/micropub/media")
+    response = %{"media-endpoint": media_url, "syndicate-to": []}
+
+    {:ok, response}
+  end
+
+  @impl true
+  def handle_source_query(_url, _filter_properties, _access_token) do
+    {:error, :insufficient_scope}
+  end
+
+  def abs_url(base, relative_path) do
+    base
+    |> URI.parse()
+    |> URI.merge(relative_path)
+    |> to_string()
   end
 
   def create_bookmark(title, content, url, tags, is_published) do
