@@ -3,14 +3,13 @@ defmodule Akedia.Indie.Micropub.Handler do
   require Logger
 
   alias Akedia.{Content, Media}
+  alias Akedia.Indie.Micropub.Token
   alias AkediaWeb.Router.Helpers, as: Routes
-  alias AkediaWeb.Endpoint
 
   @impl true
   def handle_create(type, properties, access_token) do
-    Logger.info("Micropub Handler engaged")
+    Logger.debug("Micropub Handler engaged")
     Logger.debug("Post type is #{inspect(type)}")
-    Logger.debug("Access token is #{inspect(access_token)}")
 
     tags = get_tags(properties)
     title = get_title(properties)
@@ -18,36 +17,49 @@ defmodule Akedia.Indie.Micropub.Handler do
     url = get_url(properties)
     is_published = is_published?(properties)
 
-    case get_type(properties) do
-      "bookmark" ->
-        Logger.info("Creating new bookmark..")
-        create_bookmark(title, content, url, tags, is_published)
+    case Token.verify_token(access_token, "create") do
+      :ok ->
+        case get_type(properties) do
+          "bookmark" ->
+            Logger.debug("Creating new bookmark..")
+            create_bookmark(title, content, url, tags, is_published)
 
-      "unknown" ->
-        Logger.warn("Unknown or unsupported post type")
-        Logger.debug("Properties: #{inspect(properties, pretty: true)}")
-        {:error, :insufficient_scope}
+          "unknown" ->
+            Logger.warn("Unknown or unsupported post type")
+            Logger.debug("Properties: #{inspect(properties, pretty: true)}")
+            {:error, :insufficient_scope}
+        end
+
+      error ->
+        error
     end
   end
 
   @impl true
-  def handle_media([file], _access_token) do
-    Logger.info("Micropub Media Handler engaged")
-    Logger.info("Uploaded file is #{inspect(file)}")
+  def handle_media([file], access_token) do
+    Logger.debug("Micropub Media Handler engaged")
+    Logger.debug("Uploaded file is #{inspect(file)}")
 
     attrs = %{"name" => file, "text" => file.filename}
 
-    case Media.create_image(attrs) do
-      {:ok, image} ->
-        image_url = Media.ImageUploader.url({image.name, image}, :original)
-        url = abs_url(Routes.url(Endpoint), image_url)
+    case Token.verify_token(access_token, "media") do
+      :ok ->
+        case Media.create_image(attrs) do
+          {:ok, image} ->
+            image_url = Media.ImageUploader.url({image.name, image}, :original)
+            url = abs_url(Akedia.url(), image_url)
 
-        {:ok, url}
+            {:ok, url}
 
-      {:error, _reason} ->
-        {:error, :insufficient_scope}
+          {:error, _reason} ->
+            {:error, :insufficient_scope}
+        end
+
+      error ->
+        error
     end
   end
+
   def handle_media(_, _), do: {:error, :insufficient_scope}
 
   @impl true
@@ -66,13 +78,16 @@ defmodule Akedia.Indie.Micropub.Handler do
   end
 
   @impl true
-  @spec handle_config_query(any()) :: {:ok, %{"media-endpoint": any(), "syndicate-to": []}}
-  def handle_config_query(_access_token) do
-    media_url = abs_url(Routes.url(Endpoint), "/indie/micropub/media")
-    # media_url = abs_url("https://c31bb8f4.ngrok.io", "/indie/micropub/media")
-    response = %{"media-endpoint": media_url, "syndicate-to": []}
+  def handle_config_query(access_token) do
+    case Token.verify_token(access_token, nil) do
+      :ok ->
+        media_url = abs_url(Akedia.url(), "/indie/micropub/media")
+        response = %{"media-endpoint": media_url, "syndicate-to": []}
+        {:ok, response}
 
-    {:ok, response}
+      error ->
+        error
+    end
   end
 
   @impl true
@@ -80,6 +95,7 @@ defmodule Akedia.Indie.Micropub.Handler do
     {:error, :insufficient_scope}
   end
 
+  @spec abs_url(binary(), binary()) :: binary()
   def abs_url(base, relative_path) do
     base
     |> URI.parse()
