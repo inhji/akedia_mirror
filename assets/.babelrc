@@ -16,7 +16,11 @@
             ,"sql"
             ,"coffeescript"
           ],
-          "plugins": [],
+          "plugins": [
+            "autolinker"
+            ,"highlight-keywords"
+            ,"command-line"
+          ],
           "theme": "funky",
           "css": true
       }]
