@@ -5,6 +5,7 @@ defmodule Akedia.Indie.Micropub.Handler do
   alias Akedia.{Content, Media}
   alias Akedia.Indie.Micropub.Token
   alias AkediaWeb.Router.Helpers, as: Routes
+  alias AkediaWeb.Endpoint
 
   @impl true
   def handle_create(type, properties, access_token) do
