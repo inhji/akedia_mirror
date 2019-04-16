@@ -37,6 +37,14 @@ table tr:first-child td {
     border-top: none;
 }
 
+.footnote {
+  vertical-align: super;
+  font-size: small;
+
+  &:before { content: "[" }
+  &:after { content: "]" }
+}
+
 .topics { margin-bottom: 2rem; }
 
 img.fit{ max-width: 100% }
