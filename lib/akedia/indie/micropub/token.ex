@@ -2,7 +2,7 @@ defmodule Akedia.Indie.Micropub.Token do
   alias Akedia.Accounts
   require Logger
 
-  @supported_scopes ["create", "update", "delete", "undelete"]
+  @supported_scopes ["create", "update", "delete", "undelete", "media"]
 
   def verify_token(access_token, required_scope) do
     %{url: token_endpoint} = Accounts.get_profile_by_rel_value("token_endpoint")
@@ -67,16 +67,18 @@ defmodule Akedia.Indie.Micropub.Token do
   def check_scope(_, nil), do: :ok
 
   def check_scope(scopes, required_scope) do
-    scopes_match? =
-      [@supported_scopes, String.split(scopes)]
-      |> Enum.all?(&Enum.member?(&1, required_scope))
+    required = Enum.member?(@supported_scopes, required_scope)
+    requested = Enum.member?(String.split(scopes), required_scope)
 
-    case scopes_match? do
-      true ->
+    cond do
+      required && requested ->
         {:ok, scopes}
 
-      _ ->
-        {:error, :insufficient_scope, "scopes do not match"}
+      !required ->
+        {:error, :insufficient_scope, "scope '#{required_scope}' is not supported"}
+
+      !requested ->
+        {:error, :insufficient_scope, "scope '#{required_scope}' was not requested"}
     end
   end
 end
