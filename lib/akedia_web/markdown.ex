@@ -9,6 +9,7 @@ defmodule AkediaWeb.Markdown do
   def to_html(markdown) do
     markdown
     |> Earmark.as_html!(%Options{
+        footnotes: true,
         code_class_prefix: "language-"
       })
   end
