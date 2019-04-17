@@ -24,6 +24,21 @@ header {
   margin-bottom: 2rem;
 }
 
+main#main {
+  .content {
+    h1 {
+      color: red;
+      text-decoration: line-through;
+    }
+
+    h2, h3, h4, h5, h6 {
+      &:not(:first-child) {
+        margin-top: 3rem;
+      }
+    }
+  }
+}
+
 footer {
   margin-top: 2rem;
   padding: 4rem 0;
@@ -31,6 +46,10 @@ footer {
   color: $gray-700;
   background-color: $gray-200;
   min-height: 100px;
+
+  img.avatar {
+    display: none;
+  }
 }
 
 table tr:first-child td {

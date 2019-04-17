@@ -4,7 +4,10 @@
         <a href="<%= canonical_url() %>" rel="me" class="url uid">
             <span class="fn">Jonathan Jenne</span>
         </a>
-        <img class="u-photo" src="<%= gravatar_url(@current_user.credential.email) %>" style="display:none;" />
+        <img class="u-photo avatar" src="<%= gravatar_url(@current_user.credential.email) %>" />
     </span> 
 </p>
 <p>Akedia v<%= version() %></p>
+
+
+
