@@ -96,6 +96,18 @@ defmodule Akedia.Indie.Micropub.Handler do
     {:error, :insufficient_scope}
   end
 
+  @impl true
+  def handle_syndicate_to_query(access_token) do
+    case Token.verify_token(access_token, nil) do
+      :ok ->
+        response = %{"syndicate-to": []}
+        {:ok, response}
+
+      error ->
+        error
+    end
+  end
+
   @spec abs_url(binary(), binary()) :: binary()
   def abs_url(base, relative_path) do
     base
