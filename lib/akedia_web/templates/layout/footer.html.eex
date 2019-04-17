@@ -1,2 +1,9 @@
-<p>&copy; 2019 Jonathan Jenne</p>
+<p>
+    <span>&copy; 2019</span>
+    <span class="h-card vcard">
+        <a href="<%= canonical_url() %>" rel="me" class="url uid">
+            <span class="fn">Jonathan Jenne</span>
+        </a>
+    </span> 
+</p>
 <p>Akedia v<%= version() %></p>
