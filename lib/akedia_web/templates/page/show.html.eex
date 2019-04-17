@@ -12,6 +12,6 @@
   <% end %>
 </div>
 
-<%= if @current_user do %>
+<%= if @logged_in do %>
   <%= link "Edit", to: Routes.page_path(@conn, :edit, @page), class: "btn btn-outline-primary" %>
 <% end %>

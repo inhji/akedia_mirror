@@ -10,6 +10,6 @@
   <% end %>
 </div>
 
-<%= if @current_user do %>
+<%= if @logged_in do %>
   <%= link "New Image", to: Routes.image_path(@conn, :new), class: "btn btn-outline-primary" %>
 <% end %>

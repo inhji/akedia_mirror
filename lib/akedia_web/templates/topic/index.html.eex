@@ -9,7 +9,7 @@
           <%= topic.text %> (<%= Enum.count(topic.entities) %>)
         <% end %>
       </td>
-      <%= if @current_user do %>
+      <%= if @logged_in do %>
       <td>
         <%= link "Edit", to: Routes.topic_path(@conn, :edit, topic) %>
         <%= if Enum.count(topic.entities) > 0 do %>

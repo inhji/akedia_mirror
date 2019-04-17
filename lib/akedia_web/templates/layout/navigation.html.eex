@@ -29,7 +29,7 @@
         </li>
       </ul>
       <ul class="navbar-nav">
-      <%= if @current_user do %>
+      <%= if @logged_in do %>
         <li class="nav-item">
           <%= link  "Profile", to: Routes.user_path(@conn, :show), class: "nav-link" %>
         </li>

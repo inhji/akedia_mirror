@@ -1,11 +1,15 @@
-<h1><%= @bookmark.title %></h1>
+<article class="h-entry bookmark">
+  <h1 class="p-name"><%= @bookmark.title %></h1>
 
-<div class="bookmark content">
-  <%= raw(AkediaWeb.Markdown.to_html(@bookmark)) %>
-</div>
+  <div class="e-content bookmark content">
+    <%= raw(AkediaWeb.Markdown.to_html(@bookmark)) %>
+  </div>
 
-<p><%= link @bookmark.url, to: @bookmark.url %></p>
+  <p>
+    <a href="<%= @bookmark.url %>" class="u-bookmark-of"><%= @bookmark.url %></a>
+  </p>
+</article>
 
-<%= if @current_user do %>
+<%= if @logged_in do %>
   <%= link "Edit", to: Routes.bookmark_path(@conn, :edit, @bookmark) %>
 <% end %>

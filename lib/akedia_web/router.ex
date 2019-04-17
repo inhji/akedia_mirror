@@ -1,7 +1,11 @@
 defmodule AkediaWeb.Router do
   use AkediaWeb, :router
-  import AkediaWeb.Plugs.Auth, only: [current_user: 2, check_user: 2, refresh_user: 2]
-  import AkediaWeb.Plugs.User, only: [assign_profiles: 2]
+  import AkediaWeb.Plugs.User, only: [
+    assign_user: 2,
+    check_user: 2,
+    refresh_user: 2,
+    check_loggedin: 2
+  ]
 
   pipeline :browser do
     plug :accepts, ["html"]
@@ -9,9 +13,9 @@ defmodule AkediaWeb.Router do
     plug :fetch_flash
     plug :protect_from_forgery
     plug :put_secure_browser_headers
-    plug :current_user
+    plug :check_loggedin
+    plug :assign_user
     plug :refresh_user
-    plug :assign_profiles
   end
 
   pipeline :api do

@@ -1,5 +1,5 @@
 <h1>No stories :/</h1>
 
-<%= if @current_user do %>
+<%= if @logged_in do %>
   <%= link "New Story", to: Routes.story_path(@conn, :new), class: "btn btn-outline-primary" %>
 <% end %>

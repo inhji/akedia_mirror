@@ -3,7 +3,7 @@ defmodule AkediaWeb.TopicView do
 
   def render("meta.index.html", _assigns) do
     ~E{
-      <title>Themen</title>
+      <title>Themen · Akedia</title>
     }
   end
 

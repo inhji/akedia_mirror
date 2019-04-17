@@ -12,7 +12,7 @@
         <% end %>
       </td>
 
-      <%= if @current_user do %>
+      <%= if @logged_in do %>
       <td>
         <%= if page.entity.is_published do %>
           <div class="badge badge-primary">Published</div>
@@ -32,6 +32,6 @@
   </tbody>
 </table>
 
-<%= if @current_user do %>
+<%= if @logged_in do %>
   <%= link "New Page", to: Routes.page_path(@conn, :new), class: "btn btn-outline-primary" %>
 <% end %>

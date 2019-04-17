@@ -11,7 +11,7 @@
             <div class="badge badge-secondary"><%= topic.text %></div><% end %>
         <% end %>
       </td>
-      <%= if @current_user do %>
+      <%= if @logged_in do %>
       <td>
         <%= if story.entity.is_published do %>
           <div class="badge badge-primary">Published</div>
@@ -31,6 +31,6 @@
   </tbody>
 </table>
 
-<%= if @current_user do %>
+<%= if @logged_in do %>
   <%= link "New Story", to: Routes.story_path(@conn, :new), class: "btn btn-outline-primary" %>
 <% end %>

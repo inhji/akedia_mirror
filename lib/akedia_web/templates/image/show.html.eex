@@ -1,7 +1,7 @@
 <img src="<%= image_url(@image, :original) %>" class="fit" />
 <p><%= @image.text %></p>
 
-<%= if @current_user do %>
+<%= if @logged_in do %>
   <span><%= link "Edit", to: Routes.image_path(@conn, :edit, @image) %></span>
   <span><%= link "Back", to: Routes.image_path(@conn, :index) %></span>
   <%= if Enum.count(@image.entities) > 0 do %>
