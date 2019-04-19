@@ -37,6 +37,8 @@ defmodule AkediaWeb.Router do
     resources "/topics", TopicController, only: [:show, :index]
     resources "/images", ImageController, only: [:show, :index]
 
+    get "/search", SearchController, :search
+
     get "/tagged-with/:topic", TopicController, :tagged
 
     scope "/auth" do

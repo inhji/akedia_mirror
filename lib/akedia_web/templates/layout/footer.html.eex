@@ -7,7 +7,7 @@
         <img class="u-photo avatar" src="<%= gravatar_url(@current_user.credential.email) %>" />
     </span> 
 </p>
-<p>Akedia v<%= version() %></p>
+<p>Akedia v<%= version() %> • Live slow, die old</p>
 
 
 

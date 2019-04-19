@@ -29,6 +29,11 @@
         </li>
       </ul>
       <ul class="navbar-nav">
+        <%= form_for @conn, Routes.search_path(@conn, :search), [method: :get, class: "from-inline"], fn f -> %>
+          <%= search_input f, :query, class: "form-control mr-sm-2", placeholder: "Search" %>
+        <% end %>
+      </ul>
+      <ul class="navbar-nav">
       <%= if @logged_in do %>
         <li class="nav-item">
           <%= link  "Profile", to: Routes.user_path(@conn, :show), class: "nav-link" %>

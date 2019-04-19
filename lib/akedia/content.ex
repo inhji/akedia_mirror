@@ -148,7 +148,7 @@ defmodule Akedia.Content do
 
   def create_bookmark(attrs \\ %{}, is_published \\ true) do
     Repo.transaction(fn ->
-      {:ok, entity} = create_entity(%{ is_published: is_published })
+      {:ok, entity} = create_entity(%{is_published: is_published})
 
       changeset =
         %Bookmark{}
@@ -305,6 +305,39 @@ defmodule Akedia.Content do
   end
 
   # Query Utils
+
+  def search(search_term) do
+    wildcard_search = "%#{search_term}%"
+
+    # Entity
+    # |> join(:inner, [entity], bookmark in Bookmark, entity.id == bookmark.entity_id)
+    # #|> where(ilike(^bookmark.title, ^wildcard_search))
+    # |> Repo.all
+    # |> Repo.preload(:bookmark)
+
+    # query =
+    #   from e in Entity,
+    #     join: b in Bookmark, on: e.id == b.entity_id,
+    #     join: p in Page, on: e.id == p.entity_id,
+    #     where: ilike(b.title, ^wildcard_search),
+    #     or_where: ilike(b.content, ^wildcard_search)
+
+    query =
+      from e in Entity,
+      left_join: b in assoc(e, :bookmark), on: e.id == b.entity_id,
+      left_join: p in assoc(e, :page), on: e.id == p.entity_id,
+      left_join: s in assoc(e, :story), on: e.id == s.entity_id,
+      where: ilike(b.title, ^wildcard_search),
+      or_where: ilike(b.content, ^wildcard_search),
+      or_where: ilike(p.title, ^wildcard_search),
+      or_where: ilike(p.content, ^wildcard_search),
+      or_where: ilike(s.title, ^wildcard_search),
+      or_where: ilike(s.content, ^wildcard_search)
+
+    query
+    |> Repo.all()
+    |> Repo.preload([:bookmark, :page, :story])
+  end
 
   def list(schema, constraint \\ [desc: :inserted_at]) do
     schema

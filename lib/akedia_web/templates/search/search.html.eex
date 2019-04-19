@@ -1,0 +1,22 @@
+<h1>Results for "<%= @query %>"</h1>
+
+<table class="table">
+  <tbody>
+  <%= for entity <- @entities do %>
+    <% {content, type, content_path} = case entity do
+      %{bookmark: %{id: _}} -> {entity.bookmark, "Bookmark", &Routes.bookmark_path/3}
+      %{page: %{id: _}} -> {entity.page, "Page", &Routes.page_path/3}
+      %{story: %{id: _}} -> {entity.story, "Story", &Routes.story_path/3}
+    end %>
+    <tr>
+      <td>
+        <%= link to: content_path.(@conn, :index, []) do %>
+          <div class="badge type <%= String.downcase(type) %>"><%= type %></div><% end %>
+      </td>
+      <td>
+        <%= link content.title, to: content_path.(@conn, :show, content) %>
+      </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
