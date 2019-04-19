@@ -49,12 +49,14 @@ defmodule AkediaWeb do
 
       # Use all HTML functionality (forms, tags, etc)
       use Phoenix.HTML
+      use Timex
 
       import AkediaWeb.ErrorHelpers
       import AkediaWeb.Gettext
       import AkediaWeb.Helpers.Tags, only: [list_tags: 1]
       import AkediaWeb.Helpers.Media, only: [image_url: 2, image_url: 1, media_input: 3, img: 1, img: 2]
       import AkediaWeb.Helpers.User, only: [gravatar_url: 1]
+      import AkediaWeb.Helpers.Time, only: [date_iso: 1, date_pretty: 1]
       alias AkediaWeb.Router.Helpers, as: Routes
       alias AkediaWeb.SharedView
     end

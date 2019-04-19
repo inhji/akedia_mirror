@@ -1,4 +1,13 @@
 /* This file is for your main application css. */
+$red: #d34;
+$purple: #4145df;
+$magenta: #ff0bcd;
+$blue: #0992d6;
+
+$theme-colors: (
+  "primary": $purple
+);
+
 @import "~bootstrap/scss/bootstrap";
 
 @import "~@fortawesome/fontawesome-free/scss/fontawesome";

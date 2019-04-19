@@ -1,31 +1,31 @@
 <h1>Lesezeichen</h1>
 
-<table class="table list bookmarks">
-  <tbody>
-  <%= for bookmark <- @bookmarks do %>
-    <tr>
-      <td><%= link bookmark.title, to: bookmark.url %></td>
-      <td><%= raw(AkediaWeb.Markdown.to_html(bookmark.content)) %></td>
-      <td class="topics">
+
+<div class="bookmarks">
+<%= for bookmark <- @bookmarks do %>
+  <article class="bookmark h-entry">
+    <%= link to: bookmark.url, target: "_blank", class: "u-bookmark-of h-cite" do %>
+      <h3 class="p-name"><%= bookmark.title %></h3>
+    <% end %>
+    <div class="e-content bookmark content">
+      <%= raw(AkediaWeb.Markdown.to_html(bookmark)) %>
+    </div>
+    <div class="text-muted meta">
+      <time class="dt-published" datetime="<%= date_iso(bookmark.inserted_at) %>">
+      <%= link date_pretty(bookmark.inserted_at), to: Routes.bookmark_url(@conn, :show, bookmark) %>
+      </time>
+      <span>|</span>
+      <span class="topics">
         <%= for topic <- bookmark.entity.topics do %>
           <%= link to: Routes.topic_path(@conn, :tagged, topic) do %>
-            <div class="badge badge-secondary"><%= topic.text %></div>
+            <span class="p-category"><%= topic.text %></span>
           <% end %>
         <% end %>
-      </td>
-
-      <%= if @logged_in do %>
-      <td>
-        <div class="btn-group" role="group" aria-label="Basic example">
-          <%= link "Edit", to: Routes.bookmark_path(@conn, :edit, bookmark), class: "btn btn-secondary" %>
-          <%= link "Delete", to: Routes.bookmark_path(@conn, :delete, bookmark), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger" %>
-        </div>
-      </td>
-      <% end %>
-    </tr>
-  <% end %>
-  </tbody>
-</table>
+      </span>
+    </div>
+  </article>
+<% end %>
+</div>
 
 <%= if @logged_in do %>
   <%= link "New Bookmark", to: Routes.bookmark_path(@conn, :new), class: "btn btn-outline-primary" %>

@@ -1,7 +1,3 @@
-$purple: #4145df;
-$magenta: #ff0bcd;
-$blue: #0992d6;
-
 .alert {
   border-radius: 0;
 
@@ -10,12 +6,8 @@ $blue: #0992d6;
   }
 }
 
-a {
-  color: $blue;
-}
-
 h1 {
-  border-bottom: 3px dashed rgba(0,0,0,0.2);
+  border-bottom: 3px dashed rgba(0, 0, 0, 0.2);
   padding-bottom: 0.5rem;
   margin-bottom: 2rem;
 }
@@ -25,17 +17,37 @@ header {
 }
 
 main#main {
+  // Markdown Styling!
   .content {
     h1 {
       color: red;
       text-decoration: line-through;
     }
 
-    h2, h3, h4, h5, h6 {
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
       &:not(:first-child) {
         margin-top: 3rem;
       }
     }
+  }
+
+  // General Post Styles
+  article {
+    .meta {
+      a {
+        color: $text-muted;
+      }
+    }
+  }
+
+  article.bookmark {
+    p { margin: 0; }
+    h3 { margin: 0; }
+    margin-bottom: 2rem;
   }
 }
 
@@ -53,25 +65,42 @@ footer {
 }
 
 table tr:first-child td {
-    border-top: none;
+  border-top: none;
 }
 
 .footnote {
   vertical-align: super;
   font-size: small;
 
-  &:before { content: "[" }
-  &:after { content: "]" }
+  &:before {
+    content: "[";
+  }
+  &:after {
+    content: "]";
+  }
 }
 
-.topics { margin-bottom: 2rem; }
+.topics {
+  margin-bottom: 2rem;
+}
 
-img.fit{ max-width: 100% }
+img.fit {
+  max-width: 100%;
+}
 
-.badge.type { color: white; font-weight: bold; }
-.badge.bookmark { background-color: $purple; }
-.badge.story { background-color: $magenta; }
-.badge.page { background-color: $blue; }
+.badge.type {
+  color: white;
+  font-weight: bold;
+}
+.badge.bookmark {
+  background-color: $purple;
+}
+.badge.story {
+  background-color: $magenta;
+}
+.badge.page {
+  background-color: $blue;
+}
 
 .gallery {
   display: flex;
@@ -97,9 +126,10 @@ img.fit{ max-width: 100% }
     position: relative;
     margin-bottom: 1rem;
 
-    > input, > label {
+    > input,
+    > label {
       height: 3.125rem;
-      padding: .75rem;
+      padding: 0.75rem;
     }
 
     > label {
@@ -114,8 +144,8 @@ img.fit{ max-width: 100% }
       pointer-events: none;
       cursor: text; /* Match the input under the label */
       border: 1px solid transparent;
-      border-radius: .25rem;
-      transition: all .1s ease-in-out;
+      border-radius: 0.25rem;
+      transition: all 0.1s ease-in-out;
     }
 
     input::placeholder {
@@ -124,11 +154,11 @@ img.fit{ max-width: 100% }
 
     input:not(:placeholder-shown) {
       padding-top: 1.25rem;
-      padding-bottom: .25rem;
+      padding-bottom: 0.25rem;
 
       ~ label {
-        padding-top: .25rem;
-        padding-bottom: .25rem;
+        padding-top: 0.25rem;
+        padding-bottom: 0.25rem;
         font-size: 12px;
         color: #777;
       }

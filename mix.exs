@@ -20,7 +20,7 @@ defmodule Akedia.MixProject do
   def application do
     [
       mod: {Akedia.Application, []},
-      extra_applications: [:logger, :runtime_tools]
+      extra_applications: [:logger, :runtime_tools, :timex]
     ]
   end
 
@@ -54,7 +54,8 @@ defmodule Akedia.MixProject do
       {:distillery, "~> 2.0"},
       {:edeliver, "~> 1.6"},
       {:plug_micropub, git: "https://github.com/inhji/plug_micropub.git", branch: "handle_syndicate_to_query"},
-      {:httpoison, "~> 1.5"}
+      {:httpoison, "~> 1.5"},
+      {:timex, "~> 3.5"}
     ]
   end
 
