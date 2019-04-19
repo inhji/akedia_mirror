@@ -18,7 +18,7 @@ defmodule Akedia.Content.Bookmark do
   def changeset(bookmark, attrs) do
     bookmark
     |> cast(attrs, [:title, :slug, :url, :content, :entity_id])
-    |> validate_required([:title, :url, :content])
+    |> validate_required([:url, :title])
     |> TitleSlug.maybe_generate_slug()
     |> TitleSlug.unique_constraint()
   end

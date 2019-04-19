@@ -9,7 +9,11 @@ defmodule Akedia do
   alias AkediaWeb.{Router, Endpoint}
 
   def url do
-    Router.Helpers.url(Endpoint)
+    url(Router.Helpers.url(Endpoint))
+  end
+
+  def url(url) do
+    url
     |> URI.parse()
     |> to_string()
     |> String.trim_trailing("/")

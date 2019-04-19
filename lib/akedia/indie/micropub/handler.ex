@@ -3,14 +3,18 @@ defmodule Akedia.Indie.Micropub.Handler do
   require Logger
 
   alias Akedia.{Content, Media}
-  alias Akedia.Indie.Micropub.Token
+  alias Akedia.Content.Bookmark
+  alias Akedia.Indie.Micropub.{Token, Properties}
   alias AkediaWeb.Router.Helpers, as: Routes
   alias AkediaWeb.Endpoint
+
+  @url_types_regex ~r/\/(?<type>bookmarks|stories)\/(?<slug>[\w\d-]*)\/?$/
 
   @impl true
   def handle_create(type, properties, access_token) do
     Logger.info("Micropub Handler engaged")
     Logger.info("Post type is #{inspect(type)}")
+    Logger.info("Properies: #{inspect(properties)}")
 
     tags = get_tags(properties)
     title = get_title(properties)
@@ -20,12 +24,12 @@ defmodule Akedia.Indie.Micropub.Handler do
 
     case Token.verify_token(access_token, "create") do
       :ok ->
-        case get_type(properties) do
-          "bookmark" ->
+        case get_type_by_props(properties) do
+          :bookmark ->
             Logger.info("Creating new bookmark..")
             create_bookmark(title, content, url, tags, is_published)
 
-          "unknown" ->
+          :unknown ->
             Logger.warn("Unknown or unsupported post type")
             Logger.info("Properties: #{inspect(properties, pretty: true)}")
             {:error, :insufficient_scope}
@@ -63,9 +67,24 @@ defmodule Akedia.Indie.Micropub.Handler do
 
   def handle_media(_, _), do: {:error, :insufficient_scope}
 
+  # TODO: This is untested!
   @impl true
-  def handle_update(_url, _replace, _add, _delete, _access_token) do
-    {:error, :insufficient_scope}
+  def handle_update(url, replace, add, delete, access_token) do
+    case Token.verify_token(access_token, "update") do
+      :ok ->
+        attrs = Properties.parse(replace, add, delete)
+
+        case get_post_by_url(url) do
+          %Bookmark{} = bookmark ->
+            Content.update_bookmark(bookmark, attrs)
+
+          nil ->
+            {:error, :invalid_request, "The post with the requested URL was not found"}
+        end
+
+      error ->
+        error
+    end
   end
 
   @impl true
@@ -108,6 +127,16 @@ defmodule Akedia.Indie.Micropub.Handler do
     end
   end
 
+  def get_post_by_url(url) do
+    case Regex.named_captures(@url_types_regex, url) do
+      %{"type" => "bookmarks", "slug" => slug} ->
+        Content.get_bookmark!(slug)
+
+      nil ->
+        nil
+    end
+  end
+
   @spec abs_url(binary(), binary()) :: binary()
   def abs_url(base, relative_path) do
     base
@@ -130,12 +159,12 @@ defmodule Akedia.Indie.Micropub.Handler do
         {:ok, :created, Routes.bookmark_url(Endpoint, :show, bookmark)}
 
       {:error, _error} ->
-        {:error, :insufficient_scope}
+        {:error, :invalid_request}
     end
   end
 
-  def get_type(%{"bookmark-of" => _bookmark_of}), do: "bookmark"
-  def get_type(_), do: "unknown"
+  def get_type_by_props(%{"bookmark-of" => _bookmark_of}), do: :bookmark
+  def get_type_by_props(_), do: :unknown
 
   def get_tags(%{"category" => tags}), do: tags
   def get_tags(_), do: []
