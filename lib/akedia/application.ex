@@ -10,6 +10,8 @@ defmodule Akedia.Application do
     children = [
       # Start the Ecto repository
       Akedia.Repo,
+      # Start the Root Repo for creating psql extensions
+      Akedia.RootRepo,
       # Start the endpoint when the application starts
       AkediaWeb.Endpoint
       # Starts a worker by calling: Akedia.Worker.start_link(arg)

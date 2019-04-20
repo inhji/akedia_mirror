@@ -1,5 +1,11 @@
 # Akedia
 
+## Database Setup
+
+```sql
+CREATE extension if not exists pg_trgm;
+```
+
 ## Deployment
 
 * Dependencies on the target system:

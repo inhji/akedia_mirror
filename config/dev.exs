@@ -74,6 +74,13 @@ config :akedia, Akedia.Repo,
   hostname: "localhost",
   pool_size: 10
 
+config :akedia, Akedia.RootRepo,
+  username: "postgres",
+  password: "postgres",
+  database: "akedia_dev",
+  hostname: "localhost",
+  pool_size: 10
+
 # Configure Guardian
 config :akedia, Akedia.Auth.Guardian,
        issuer: "akedia",

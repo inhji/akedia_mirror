@@ -307,36 +307,38 @@ defmodule Akedia.Content do
   # Query Utils
 
   def search(search_term) do
-    wildcard_search = "%#{search_term}%"
-
-    # Entity
-    # |> join(:inner, [entity], bookmark in Bookmark, entity.id == bookmark.entity_id)
-    # #|> where(ilike(^bookmark.title, ^wildcard_search))
-    # |> Repo.all
-    # |> Repo.preload(:bookmark)
-
-    # query =
-    #   from e in Entity,
-    #     join: b in Bookmark, on: e.id == b.entity_id,
-    #     join: p in Page, on: e.id == p.entity_id,
-    #     where: ilike(b.title, ^wildcard_search),
-    #     or_where: ilike(b.content, ^wildcard_search)
-
-    query =
-      from e in Entity,
-      left_join: b in assoc(e, :bookmark), on: e.id == b.entity_id,
-      left_join: p in assoc(e, :page), on: e.id == p.entity_id,
-      left_join: s in assoc(e, :story), on: e.id == s.entity_id,
-      where: ilike(b.title, ^wildcard_search),
-      or_where: ilike(b.content, ^wildcard_search),
-      or_where: ilike(p.title, ^wildcard_search),
-      or_where: ilike(p.content, ^wildcard_search),
-      or_where: ilike(s.title, ^wildcard_search),
-      or_where: ilike(s.content, ^wildcard_search)
-
-    query
+    search_query(search_term)
     |> Repo.all()
-    |> Repo.preload([:bookmark, :page, :story])
+  end
+
+  defmacro contains(content, search_term) do
+    quote do
+      fragment(
+        "? %> ?",
+        (unquote(content)),
+        (unquote(search_term))
+      )
+    end
+  end
+
+  def search_query(search_term) do
+    from e in Entity,
+      left_join: b in assoc(e, :bookmark),
+      on: e.id == b.entity_id,
+      left_join: p in assoc(e, :page),
+      on: e.id == p.entity_id,
+      left_join: s in assoc(e, :story),
+      on: e.id == s.entity_id,
+      left_join: t in assoc(e, :topics),
+      where: contains(b.title, ^search_term),
+      or_where: contains(b.content, ^search_term),
+      or_where: contains(p.title, ^search_term),
+      or_where: contains(p.content, ^search_term),
+      or_where: contains(s.title, ^search_term),
+      or_where: contains(s.content, ^search_term),
+      or_where: t.text in [^search_term],
+      distinct: true,
+      preload: [:bookmark, :page, :story, :topics]
   end
 
   def list(schema, constraint \\ [desc: :inserted_at]) do
