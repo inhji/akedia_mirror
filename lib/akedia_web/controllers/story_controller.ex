@@ -1,8 +1,7 @@
 defmodule AkediaWeb.StoryController do
   use AkediaWeb, :controller
 
-  alias Akedia.Media
-  alias Akedia.Content
+  alias Akedia.{Content, Media}
   alias Akedia.Content.Story
 
   def index(conn, _params) do
@@ -18,11 +17,13 @@ defmodule AkediaWeb.StoryController do
   def new(conn, _params) do
     changeset = Content.change_story(%Story{})
     images = Media.list_images()
+
     render(conn, "new.html",
       changeset: changeset,
       tags: [],
       image_ids: [],
-      images: images)
+      images: images
+    )
   end
 
   def create(conn, %{"story" => %{"topics" => topics, "images" => images} = story_params}) do
@@ -58,10 +59,14 @@ defmodule AkediaWeb.StoryController do
       changeset: changeset,
       tags: tags,
       images: images,
-      image_ids: image_ids)
+      image_ids: image_ids
+    )
   end
 
-  def update(conn, %{"id" => id, "story" => %{"topics" => topics, "images" => images} = story_params}) do
+  def update(conn, %{
+        "id" => id,
+        "story" => %{"topics" => topics, "images" => images} = story_params
+      }) do
     story = Content.get_story!(id)
     tags = Content.tags_loaded(story)
     image_ids = Media.images_loaded(story)
@@ -80,7 +85,8 @@ defmodule AkediaWeb.StoryController do
           changeset: changeset,
           tags: tags,
           images: images,
-          image_ids: image_ids)
+          image_ids: image_ids
+        )
     end
   end
 

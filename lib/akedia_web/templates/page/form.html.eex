@@ -23,13 +23,23 @@
     <%= error_tag f, :content %>
   </div>
 
-  <div class="form-group">
-    <div class="input-group">
-      <div class="input-group-prepend">
-        <span class="input-group-text">Tags</span>
+  <div class="row">
+    <div class="form-group col-md-6">
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text">Tags</span>
+        </div>
+        <%= text_input f, :topics, value: @tags, class: "form-control" %>
+        <%= error_tag f, :topics %>
       </div>
-      <%= text_input f, :topics, value: @tags, class: "form-control" %>
-      <%= error_tag f, :topics %>
+    </div>
+
+    <div class="form-group col-md-6">
+      <%= media_input f, :images,
+          value: @image_ids,
+          class: "form-control",
+          id: "image-ids" %>
+      <%= error_tag f, :images %>
     </div>
   </div>
 

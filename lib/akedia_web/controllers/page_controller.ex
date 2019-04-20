@@ -1,7 +1,7 @@
 defmodule AkediaWeb.PageController do
   use AkediaWeb, :controller
 
-  alias Akedia.Content
+  alias Akedia.{Content, Media}
   alias Akedia.Content.Page
 
   def index(conn, _params) do
@@ -16,20 +16,23 @@ defmodule AkediaWeb.PageController do
 
   def new(conn, _params) do
     changeset = Content.change_page(%Page{})
-    render(conn, "new.html", changeset: changeset, tags: [])
+    images = Media.list_images()
+
+    render(conn, "new.html", changeset: changeset, tags: [], images: images, image_ids: [])
   end
 
-  def create(conn, %{"page" => %{"topics" => topics} = page_params}) do
+  def create(conn, %{"page" => %{"topics" => topics, "images" => images} = page_params}) do
     case Content.create_page(page_params) do
       {:ok, page} ->
         Content.add_tags(page, topics)
+        Media.add_images(page, images)
 
         conn
         |> put_flash(:info, "Page created successfully.")
         |> redirect(to: Routes.page_path(conn, :show, page))
 
       {:error, %Ecto.Changeset{} = changeset} ->
-        render(conn, "new.html", changeset: changeset)
+        render(conn, "new.html", changeset: changeset, tags: [], image_ids: [], images: images)
     end
   end
 
@@ -42,12 +45,27 @@ defmodule AkediaWeb.PageController do
     page = Content.get_page!(id)
     tags = Content.tags_loaded(page)
     changeset = Content.change_page(page)
-    render(conn, "edit.html", page: page, changeset: changeset, tags: tags)
+    image_ids = Media.images_loaded(page)
+    images = Media.list_images()
+
+    render(conn, "edit.html",
+      page: page,
+      changeset: changeset,
+      tags: tags,
+      images: images,
+      image_ids: image_ids
+    )
   end
 
-  def update(conn, %{"id" => id, "page" => %{"topics" => topics} = page_params}) do
+  def update(conn, %{
+        "id" => id,
+        "page" => %{"topics" => topics, "images" => images} = page_params
+      }) do
     page = Content.get_page!(id)
+    image_ids = Media.images_loaded(page)
+    tags = Content.tags_loaded(page)
     Content.update_tags(page, topics)
+    Media.update_images(page, images)
 
     case Content.update_page(page, page_params) do
       {:ok, page} ->
@@ -56,7 +74,13 @@ defmodule AkediaWeb.PageController do
         |> redirect(to: Routes.page_path(conn, :show, page))
 
       {:error, %Ecto.Changeset{} = changeset} ->
-        render(conn, "edit.html", page: page, changeset: changeset)
+        render(conn, "edit.html",
+          page: page,
+          changeset: changeset,
+          tags: tags,
+          images: images,
+          image_ids: image_ids
+        )
     end
   end
 

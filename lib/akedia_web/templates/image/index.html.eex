@@ -1,6 +1,6 @@
 <h1>Bilder</h1>
 
-<div class="gallery">
+<div class="image-picker">
   <%= for image <- @images do %>
   <div class="image">
     <%= link to: Routes.image_path(@conn, :show, image) do %>
