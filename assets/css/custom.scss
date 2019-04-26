@@ -1,10 +1,7 @@
-.alert {
-  border-radius: 0;
-
-  &:empty {
-    display: none;
-  }
-}
+@import "custom/phoenix.scss";
+@import "custom/footer.scss";
+@import "custom/forms.scss";
+@import "custom/helpers.scss";
 
 h1 {
   border-bottom: 3px dashed rgba(0, 0, 0, 0.2);
@@ -12,11 +9,9 @@ h1 {
   margin-bottom: 2rem;
 }
 
-header {
-  margin-bottom: 2rem;
-}
+main#content {
+  padding-top: 2rem;
 
-main#main {
   // Markdown Styling!
   .content {
     h1 {
@@ -54,18 +49,7 @@ main#main {
 
 }
 
-footer {
-  margin-top: 2rem;
-  padding: 4rem 0;
-  text-align: center;
-  color: $gray-700;
-  background-color: $gray-200;
-  min-height: 100px;
 
-  img.avatar {
-    display: none;
-  }
-}
 
 table tr:first-child td {
   border-top: none;
@@ -87,9 +71,6 @@ table tr:first-child td {
   margin-bottom: 2rem;
 }
 
-img.fit {
-  max-width: 100%;
-}
 
 .badge.type {
   color: white;
@@ -124,110 +105,4 @@ img.fit {
   }
 }
 
-.form {
-  .form-group.floating-label {
-    position: relative;
-    margin-bottom: 1rem;
 
-    > input,
-    > label {
-      height: 3.125rem;
-      padding: 0.75rem;
-    }
-
-    > label {
-      position: absolute;
-      top: 0;
-      left: 0;
-      display: block;
-      width: 100%;
-      margin-bottom: 0; /* Override default `<label>` margin */
-      line-height: 1.5;
-      color: #777;
-      pointer-events: none;
-      cursor: text; /* Match the input under the label */
-      border: 1px solid transparent;
-      border-radius: 0.25rem;
-      transition: all 0.1s ease-in-out;
-    }
-
-    input::placeholder {
-      color: transparent;
-    }
-
-    input:not(:placeholder-shown) {
-      padding-top: 1.25rem;
-      padding-bottom: 0.25rem;
-
-      ~ label {
-        padding-top: 0.25rem;
-        padding-bottom: 0.25rem;
-        font-size: 12px;
-        color: #777;
-      }
-    }
-  }
-
-  .form-control-borderless {
-    border: none;
-  }
-
-  .form-control-underlined {
-    border-top: none;
-    border-left: none;
-    border-right: none;
-    border-bottom: 1px $gray-300 solid;
-    border-radius: 0;
-  }
-
-  .zennable {
-    position: relative;
-
-    textarea {
-      resize: none;
-    }
-  }
-
-  .zennable input {
-    display: none;
-  }
-
-  .zennable input:checked ~ .zen-backdrop {
-    background-color: white;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    z-index: 999;
-
-    textarea {
-      max-width: 700px;
-      font-size: 150%;
-      font-family: monospace;
-      height: 100%;
-      margin: 0 auto;
-      padding-top: 5rem;
-      border-radius: 0;
-      border: none;
-      outline: none;
-      resize: none;
-      box-shadow: none;
-    }
-  }
-
-  .zennable label {
-    position: absolute;
-    top: 0;
-    right: 0;
-    line-height: 1.5;
-    padding: 0.375rem 0.75rem;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: $gray-600;
-
-    &:hover {
-      color: $gray-800;
-    }
-  }
-}

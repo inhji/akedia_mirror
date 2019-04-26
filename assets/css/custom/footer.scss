@@ -1,0 +1,14 @@
+footer {
+  margin-top: 2rem;
+  padding: 4rem 0;
+  text-align: center;
+  color: $gray-400;
+  background-color: $gray-700;
+  min-height: 100px;
+
+  img.avatar {
+    display: none;
+  }
+
+  a { color: $gray-300; }
+}

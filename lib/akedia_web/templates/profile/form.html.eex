@@ -24,9 +24,26 @@
   </div>
 
   <div class="form-group">
+    <%= text_input f, :icon, class: "form-control",
+        placeholder: "Icon Class" %>
+    <%= error_tag f, :icon %>
+  </div>
+
+  <div class="form-group">
     <%= text_input f, :rel_value, class: "form-control",
         placeholder: "Rel value, default 'me'" %>
     <%= error_tag f, :rel_value %>
+  </div>
+
+  <div class="form-group">
+    <div class="form-check">
+      <%= checkbox f, :public, class: "form-check-input",
+          placeholder: "Icon Class" %>
+      <label class="form-check-label" for="profile_public">
+        Public Profile
+      </label>
+      <%= error_tag f, :public %>
+    </div>
   </div>
 
   <%= submit "Save", class: "btn btn-primary" %>

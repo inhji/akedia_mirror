@@ -4,11 +4,18 @@
   <tbody>
 <%= for profile <- @profiles do %>
     <tr>
+      <td>
+        <%= if profile.icon do %>
+          <i class="<%= profile.icon %>"></i>
+        <% else %>
+          <i class="fas fa-circle"></i>
+        <% end %>
+      </td>
       <td><span class="badge badge-primary"><%= profile.name %></span></td>
-
       <td>rel=<%= profile.rel_value %></td>
       <td><%= profile.username %></td>
       <td><%= profile.url %></td>
+      <td>Public: <%= profile.public %></td>
       <td>
         <%= link "Show", to: Routes.profile_path(@conn, :show, profile) %>
         <%= link "Edit", to: Routes.profile_path(@conn, :edit, profile) %>

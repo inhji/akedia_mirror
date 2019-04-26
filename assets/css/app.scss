@@ -15,6 +15,8 @@ $theme-colors: (
 @import "~@fortawesome/fontawesome-free/scss/solid";
 @import "~@fortawesome/fontawesome-free/scss/regular";
 
+@import "~openwebicons/css/openwebicons-bootstrap.css";
+
 @import "../vendor/image_picker/image_picker";
 
 @import "offcanvas";
