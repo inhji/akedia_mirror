@@ -25,6 +25,7 @@
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
             <a class="dropdown-item" href="<%= Routes.topic_path(@conn, :index) %>">Themen</a>
+            <a class="dropdown-item" href="<%= Routes.like_path(@conn, :index) %>">Likes</a>
           </div>
         </li>
       </ul>

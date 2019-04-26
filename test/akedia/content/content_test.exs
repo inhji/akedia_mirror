@@ -311,4 +311,63 @@ defmodule Akedia.ContentTest do
       assert %Ecto.Changeset{} = Content.change_topic(topic)
     end
   end
+
+  describe "likes" do
+    alias Akedia.Content.Like
+
+    @valid_attrs %{url: "some url"}
+    @update_attrs %{url: "some updated url"}
+    @invalid_attrs %{url: nil}
+
+    def like_fixture(attrs \\ %{}) do
+      {:ok, like} =
+        attrs
+        |> Enum.into(@valid_attrs)
+        |> Content.create_like()
+
+      like
+    end
+
+    test "list_likes/0 returns all likes" do
+      like = like_fixture()
+      assert Content.list_likes() == [like]
+    end
+
+    test "get_like!/1 returns the like with given id" do
+      like = like_fixture()
+      assert Content.get_like!(like.id) == like
+    end
+
+    test "create_like/1 with valid data creates a like" do
+      assert {:ok, %Like{} = like} = Content.create_like(@valid_attrs)
+      assert like.url == "some url"
+    end
+
+    test "create_like/1 with invalid data returns error changeset" do
+      assert {:error, %Ecto.Changeset{}} = Content.create_like(@invalid_attrs)
+    end
+
+    test "update_like/2 with valid data updates the like" do
+      like = like_fixture()
+      assert {:ok, %Like{} = like} = Content.update_like(like, @update_attrs)
+      assert like.url == "some updated url"
+    end
+
+    test "update_like/2 with invalid data returns error changeset" do
+      like = like_fixture()
+      assert {:error, %Ecto.Changeset{}} = Content.update_like(like, @invalid_attrs)
+      assert like == Content.get_like!(like.id)
+    end
+
+    test "delete_like/1 deletes the like" do
+      like = like_fixture()
+      assert {:ok, %Like{}} = Content.delete_like(like)
+      assert_raise Ecto.NoResultsError, fn -> Content.get_like!(like.id) end
+    end
+
+    test "change_like/1 returns a like changeset" do
+      like = like_fixture()
+      assert %Ecto.Changeset{} = Content.change_like(like)
+    end
+  end
 end

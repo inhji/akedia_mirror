@@ -1,0 +1,13 @@
+<h1>Show Like</h1>
+
+<ul>
+
+  <li>
+    <strong>Url:</strong>
+    <%= @like.url %>
+  </li>
+
+</ul>
+
+<span><%= link "Edit", to: Routes.like_path(@conn, :edit, @like) %></span>
+<span><%= link "Back", to: Routes.like_path(@conn, :index) %></span>
