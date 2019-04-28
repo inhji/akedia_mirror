@@ -9,7 +9,7 @@ defmodule Akedia do
   alias AkediaWeb.{Router, Endpoint}
 
   def url do
-    url(Router.Helpers.url(Endpoint))
+    url(System.get_env("HOST") || Router.Helpers.url(Endpoint))
   end
 
   def url(url) do

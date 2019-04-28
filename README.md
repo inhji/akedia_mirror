@@ -6,6 +6,12 @@
 CREATE extension if not exists pg_trgm;
 ```
 
+## Development with ngrok
+
+```bash
+HOST=http://xxx.ngrok.io mix phx.server
+```
+
 ## Deployment
 
 * Dependencies on the target system:
