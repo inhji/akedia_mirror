@@ -55,7 +55,8 @@ defmodule Akedia.MixProject do
       {:edeliver, "~> 1.6"},
       {:plug_micropub, git: "https://github.com/inhji/plug_micropub.git", branch: "master"},
       {:httpoison, "~> 1.5"},
-      {:timex, "~> 3.5"}
+      {:timex, "~> 3.5"},
+      {:indieweb, "~> 0.0.42"}
     ]
   end
 
