@@ -19,7 +19,6 @@ defmodule Akedia.Indie.Micropub.Handler do
     tags = get_tags(properties)
     title = get_title(properties)
     content = get_content(properties)
-    url = get_url(properties)
     is_published = is_published?(properties)
 
     case Token.verify_token(access_token, "create") do
@@ -27,11 +26,17 @@ defmodule Akedia.Indie.Micropub.Handler do
         case get_type_by_props(properties) do
           :bookmark ->
             Logger.info("Creating new bookmark..")
+            url = get_bookmarked_url(properties)
             create_bookmark(title, content, url, tags, is_published)
+
+          :like ->
+            Logger.info("Creating new like..")
+            url = get_liked_url(properties)
+            create_like(url, is_published)
 
           :unknown ->
             Logger.warn("Unknown or unsupported post type")
-            Logger.info("Properties: #{inspect(properties, pretty: true)}")
+            Logger.info("Properties:", [props: properties])
             {:error, :insufficient_scope}
         end
 
@@ -158,12 +163,27 @@ defmodule Akedia.Indie.Micropub.Handler do
         Logger.info("Bookmark created!")
         {:ok, :created, Routes.bookmark_url(Endpoint, :show, bookmark)}
 
-      {:error, _error} ->
+      {:error, error} ->
+        Logger.warn("Error while creating bookmark", [error: error])
         {:error, :invalid_request}
     end
   end
 
-  def get_type_by_props(%{"bookmark-of" => _bookmark_of}), do: :bookmark
+  def create_like(url, is_published) do
+    attrs = %{ "url" => url }
+
+    case Content.create_like(attrs, is_published) do
+     {:ok, like} ->
+        Logger.info("Bookmark created!")
+        {:ok, :created, Routes.like_url(Endpoint, :show, like)}
+      {:error, error} ->
+        Logger.warn("Error while creating like", [error: error])
+        {:error, :invalid_request}
+    end
+  end
+
+  def get_type_by_props(%{"bookmark-of" => _}), do: :bookmark
+  def get_type_by_props(%{"like-of" => _}), do: :like
   def get_type_by_props(_), do: :unknown
 
   def get_tags(%{"category" => tags}), do: tags
@@ -176,8 +196,11 @@ defmodule Akedia.Indie.Micropub.Handler do
   def get_content(%{"content" => [%{"html" => [content_html]}]}), do: content_html
   def get_content(_), do: nil
 
-  def get_url(%{"bookmark-of" => [url]}), do: url
-  def get_url(_), do: nil
+  def get_bookmarked_url(%{"bookmark-of" => [url]}), do: url
+  def get_bookmarked_url(_), do: nil
+
+  def get_liked_url(%{"like-of" => [url]}), do: url
+  def get_liked_url(_), do: nil
 
   def is_published?(%{"post-status" => ["draft"]}), do: false
   def is_published?(_), do: true

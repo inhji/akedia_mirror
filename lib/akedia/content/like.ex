@@ -1,9 +1,12 @@
 defmodule Akedia.Content.Like do
   use Ecto.Schema
   import Ecto.Changeset
+  alias Akedia.Entity
 
   schema "likes" do
     field :url, :string
+
+    belongs_to :entity, Entity
 
     timestamps()
   end

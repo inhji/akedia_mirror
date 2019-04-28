@@ -1,7 +1,7 @@
 defmodule Akedia.Content do
   import Ecto.Query, warn: false
   alias Akedia.Repo
-  alias Akedia.Content.{Entity, Page, Story, Bookmark, Topic, EntityTopic}
+  alias Akedia.Content.{Entity, Page, Story, Bookmark, Topic, EntityTopic, Like}
 
   # Entity
 
@@ -53,18 +53,7 @@ defmodule Akedia.Content do
   end
 
   def create_story(attrs \\ %{}) do
-    Repo.transaction(fn ->
-      {:ok, entity} = create_entity()
-
-      changeset =
-        %Story{}
-        |> Story.changeset(Map.put(attrs, "entity_id", entity.id))
-
-      case Repo.insert(changeset) do
-        {:ok, story} -> story
-        {:error, changeset} -> Repo.rollback(changeset)
-      end
-    end)
+    create_with_entity(Story, attrs)
   end
 
   def update_story(%Story{} = story, attrs) do
@@ -100,18 +89,7 @@ defmodule Akedia.Content do
   end
 
   def create_page(attrs \\ %{}) do
-    Repo.transaction(fn ->
-      {:ok, entity} = create_entity()
-
-      changeset =
-        %Page{}
-        |> Page.changeset(Map.put(attrs, "entity_id", entity.id))
-
-      case Repo.insert(changeset) do
-        {:ok, page} -> page
-        {:error, changeset} -> Repo.rollback(changeset)
-      end
-    end)
+    create_with_entity(Page, attrs)
   end
 
   def update_page(%Page{} = page, attrs) do
@@ -147,18 +125,7 @@ defmodule Akedia.Content do
   end
 
   def create_bookmark(attrs \\ %{}, is_published \\ true) do
-    Repo.transaction(fn ->
-      {:ok, entity} = create_entity(%{is_published: is_published})
-
-      changeset =
-        %Bookmark{}
-        |> Bookmark.changeset(Map.put(attrs, "entity_id", entity.id))
-
-      case Repo.insert(changeset) do
-        {:ok, bookmark} -> bookmark
-        {:error, changeset} -> Repo.rollback(changeset)
-      end
-    end)
+    create_with_entity(Bookmark, attrs, %{ is_published: is_published })
   end
 
   def update_bookmark(%Bookmark{} = bookmark, attrs) do
@@ -175,6 +142,32 @@ defmodule Akedia.Content do
 
   def change_bookmark(%Bookmark{} = bookmark) do
     Bookmark.changeset(bookmark, %{})
+  end
+
+  # Like
+
+  def list_likes do
+    Repo.all(Like)
+  end
+
+  def get_like!(id), do: Repo.get!(Like, id)
+
+  def create_like(attrs \\ %{}, is_published \\ false) do
+    create_with_entity(Like, attrs, %{ is_published: is_published })
+  end
+
+  def update_like(%Like{} = like, attrs) do
+    like
+    |> Like.changeset(attrs)
+    |> Repo.update()
+  end
+
+  def delete_like(%Like{} = like) do
+    Repo.delete(like)
+  end
+
+  def change_like(%Like{} = like) do
+    Like.changeset(like, %{})
   end
 
   # Topic
@@ -315,8 +308,8 @@ defmodule Akedia.Content do
     quote do
       fragment(
         "? %> ?",
-        (unquote(content)),
-        (unquote(search_term))
+        unquote(content),
+        unquote(search_term)
       )
     end
   end
@@ -360,99 +353,25 @@ defmodule Akedia.Content do
     |> Repo.preload(entity: [:topics, :images])
   end
 
-  alias Akedia.Content.Like
-
-  @doc """
-  Returns the list of likes.
-
-  ## Examples
-
-      iex> list_likes()
-      [%Like{}, ...]
-
-  """
-  def list_likes do
-    Repo.all(Like)
+  def create_with_entity(schema, attrs \\ %{}) do
+    create_with_entity(schema, attrs, %{is_published: false})
   end
 
-  @doc """
-  Gets a single like.
+  def create_with_entity(schema, attrs, entity_attrs) do
+    Repo.transaction(fn ->
+      {:ok, entity} = create_entity(entity_attrs)
 
-  Raises `Ecto.NoResultsError` if the Like does not exist.
+      IO.inspect(attrs)
 
-  ## Examples
+      changeset =
+        schema
+        |> Kernel.struct()
+        |> schema.changeset(Map.put(attrs, "entity_id", entity.id))
 
-      iex> get_like!(123)
-      %Like{}
-
-      iex> get_like!(456)
-      ** (Ecto.NoResultsError)
-
-  """
-  def get_like!(id), do: Repo.get!(Like, id)
-
-  @doc """
-  Creates a like.
-
-  ## Examples
-
-      iex> create_like(%{field: value})
-      {:ok, %Like{}}
-
-      iex> create_like(%{field: bad_value})
-      {:error, %Ecto.Changeset{}}
-
-  """
-  def create_like(attrs \\ %{}) do
-    %Like{}
-    |> Like.changeset(attrs)
-    |> Repo.insert()
-  end
-
-  @doc """
-  Updates a like.
-
-  ## Examples
-
-      iex> update_like(like, %{field: new_value})
-      {:ok, %Like{}}
-
-      iex> update_like(like, %{field: bad_value})
-      {:error, %Ecto.Changeset{}}
-
-  """
-  def update_like(%Like{} = like, attrs) do
-    like
-    |> Like.changeset(attrs)
-    |> Repo.update()
-  end
-
-  @doc """
-  Deletes a Like.
-
-  ## Examples
-
-      iex> delete_like(like)
-      {:ok, %Like{}}
-
-      iex> delete_like(like)
-      {:error, %Ecto.Changeset{}}
-
-  """
-  def delete_like(%Like{} = like) do
-    Repo.delete(like)
-  end
-
-  @doc """
-  Returns an `%Ecto.Changeset{}` for tracking like changes.
-
-  ## Examples
-
-      iex> change_like(like)
-      %Ecto.Changeset{source: %Like{}}
-
-  """
-  def change_like(%Like{} = like) do
-    Like.changeset(like, %{})
+      case Repo.insert(changeset) do
+        {:ok, item} -> item
+        {:error, changeset} -> Repo.rollback(changeset)
+      end
+    end)
   end
 end

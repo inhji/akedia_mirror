@@ -16,11 +16,13 @@ defmodule Akedia.Indie.Micropub.Token do
           {:ok, body} ->
             verify_token_response(body, required_scope)
 
-          _ ->
+          error ->
+            Logger.error("Could not decode response body", [error: error])
             {:error, :insufficient_scope, "Body of token response contains malformed json"}
         end
 
       {:error, %HTTPoison.Error{reason: reason}} ->
+        Logger.error("Could not reach token endpoint", [reason: reason])
         {:error, :insufficient_scope, reason}
     end
   end
@@ -44,7 +46,10 @@ defmodule Akedia.Indie.Micropub.Token do
          {:ok, _scope} <- check_scope(scope, required_scope) do
       :ok
     else
-      error -> error
+      error ->
+        IO.inspect(error)
+        Logger.error("Could not verify token response", [error: error])
+        error
     end
   end
 
@@ -60,6 +65,7 @@ defmodule Akedia.Indie.Micropub.Token do
         {:ok, hostname}
 
       _ ->
+        Logger.warn("Hostnames do not match: Given #{hostname}, Actual: #{Akedia.url()}")
         {:error, :insufficient_scope, "hostname does not match"}
     end
   end
