@@ -95,7 +95,9 @@ defmodule Akedia.Accounts do
   alias Akedia.Accounts.Profile
 
   def list_profiles do
-    Repo.all(Profile)
+    Profile
+    |> order_by([desc: :public, desc: :rel_value, desc: :username])
+    |> Repo.all()
   end
 
   def get_profile!(id), do: Repo.get!(Profile, id)
