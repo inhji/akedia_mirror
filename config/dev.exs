@@ -80,8 +80,3 @@ config :akedia, Akedia.RootRepo,
   database: "akedia_dev",
   hostname: "localhost",
   pool_size: 10
-
-# Configure Guardian
-config :akedia, Akedia.Auth.Guardian,
-       issuer: "akedia",
-       secret_key: "aOjeX5pucgtGa1miI6KKzA4AaNsuSTvcuofFu0cgDEgsDIyXYV8pz8UztCH5ln4g"

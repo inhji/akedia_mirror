@@ -47,7 +47,6 @@ defmodule Akedia.Indie.Micropub.Token do
       :ok
     else
       error ->
-        IO.inspect(error)
         Logger.error("Could not verify token response", [error: error])
         error
     end
