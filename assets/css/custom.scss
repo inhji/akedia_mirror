@@ -3,12 +3,6 @@
 @import "custom/forms.scss";
 @import "custom/helpers.scss";
 
-h1 {
-  border-bottom: 3px dashed rgba(0, 0, 0, 0.2);
-  padding-bottom: 0.5rem;
-  margin-bottom: 2rem;
-}
-
 main#content {
   padding-top: 2rem;
 
@@ -40,16 +34,32 @@ main#content {
   }
 
   article.bookmark {
-    p { margin: 0; }
-    h3 { margin: 0; }
+    p {
+      margin: 0;
+    }
+    h3 {
+      margin: 0;
+    }
     margin-bottom: 2rem;
   }
-
-  
-
 }
 
+// Homepage
+.intro {
+  background-image: url("/images/intro.jpg");
+  background-position: center center;
+  background-size: cover;
 
+  color: $white;
+  text-shadow: black 1px 1px 1px;
+
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+
+  img {
+    border-radius: 100px;
+  }
+}
 
 table tr:first-child td {
   border-top: none;
@@ -70,7 +80,6 @@ table tr:first-child td {
 .topics {
   margin-bottom: 2rem;
 }
-
 
 .badge.type {
   color: white;
@@ -104,5 +113,3 @@ table tr:first-child td {
     }
   }
 }
-
-
