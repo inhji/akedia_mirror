@@ -53,7 +53,7 @@ defmodule Akedia.MixProject do
       {:ecto_autoslug_field, "~> 1.0"},
       {:distillery, "~> 2.0"},
       {:edeliver, "~> 1.6"},
-      {:plug_micropub, git: "https://github.com/inhji/plug_micropub.git", branch: "handle_syndicate_to_query"},
+      {:plug_micropub, git: "https://github.com/inhji/plug_micropub.git", branch: "master"},
       {:httpoison, "~> 1.5"},
       {:timex, "~> 3.5"}
     ]
