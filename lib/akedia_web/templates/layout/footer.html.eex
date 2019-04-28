@@ -1,8 +1,8 @@
 <p>
     <span>&copy; 2019</span>
     <span class="h-card vcard">
-        <a href="<%= canonical_url() %>" rel="me" class="url uid">
-            <span class="fn">Jonathan Jenne</span>
+        <a href="<%= canonical_url() %>" rel="me" class="u-url url uid">
+            <span class="fn p-name">Jonathan Jenne</span>
         </a>
         <img class="u-photo avatar" src="<%= gravatar_url(@current_user.credential.email) %>" />
     </span> 
