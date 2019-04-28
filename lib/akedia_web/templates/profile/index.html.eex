@@ -1,29 +1,33 @@
 <h1>Listing Profiles</h1>
 
-<table class="table">
-  <tbody>
-<%= for profile <- @profiles do %>
-    <tr>
-      <td>
-        <%= if profile.icon do %>
-          <i class="<%= profile.icon %>"></i>
+
+<div class="list-group">
+  <%= for profile <- @profiles do %>
+    <%= link to: Routes.profile_path(@conn, :edit, profile), class: "list-group-item list-group-item-action" do %>
+      <div class="d-flex w-100 justify-content-between">
+        <h5 class="mb-1">
+          <%= if profile.icon do %>
+            <i class="<%= profile.icon %>"></i>
+          <% else %>
+            <i class="fas fa-circle"></i>
+          <% end %>
+          <%= profile.name %>
+        </h5>
+        <small>
+        <%= if profile.public do %>
+          <span class="text-primary">Public</span>
         <% else %>
-          <i class="fas fa-circle"></i>
+          <span class="text-muted">Private</span>
         <% end %>
-      </td>
-      <td><span class="badge badge-primary"><%= profile.name %></span></td>
-      <td>rel=<%= profile.rel_value %></td>
-      <td><%= profile.username %></td>
-      <td><%= profile.url %></td>
-      <td>Public: <%= profile.public %></td>
-      <td>
-        <%= link "Show", to: Routes.profile_path(@conn, :show, profile) %>
-        <%= link "Edit", to: Routes.profile_path(@conn, :edit, profile) %>
-        <%= link "Delete", to: Routes.profile_path(@conn, :delete, profile), method: :delete, data: [confirm: "Are you sure?"] %>
-      </td>
-    </tr>
-<% end %>
-  </tbody>
-</table>
+        </small>
+      </div>
+      
+      <p class="mb-1">
+        <%= profile.url %>
+      </p>
+      <small>rel=<%= profile.rel_value %></small>
+    <% end %>
+  <% end %>
+</div>
 
 <span><%= link "New Profile", to: Routes.profile_path(@conn, :new), class: "btn btn-outline-primary" %></span>
