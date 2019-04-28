@@ -36,7 +36,7 @@ defmodule AkediaWeb.Plugs.User do
 
   def assign_user(conn, _) do
     case Accounts.has_user?() do
-      nil ->
+      false ->
         conn
         |> assign(:current_user, nil)
         |> assign(:has_user, false)

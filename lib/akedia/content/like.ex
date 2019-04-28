@@ -1,7 +1,7 @@
 defmodule Akedia.Content.Like do
   use Ecto.Schema
   import Ecto.Changeset
-  alias Akedia.Entity
+  alias Akedia.Content.Entity
 
   schema "likes" do
     field :url, :string
