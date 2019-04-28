@@ -1,7 +1,7 @@
 <h1><%= @story.title %></h1>
 
 <div class="story content">
-  <%= raw(AkediaWeb.Markdown.to_html(@story)) %>
+  <%= to_html(@story) %>
 </div>
 
 <%= for image <- @story.entity.images do %>

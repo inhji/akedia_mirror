@@ -17,6 +17,18 @@
     <%= error_tag f, :username %>
   </div>
 
+  <div class="form-group">
+    <%= label f, :bio %>
+    <%= textarea f, :bio, class: "form-control" %>
+    <%= error_tag f, :bio %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :tagline %>
+    <%= textarea f, :tagline, class: "form-control" %>
+    <%= error_tag f, :tagline %>
+  </div>
+
   <%= inputs_for f, :credential, fn fc -> %>
     <div class="form-group">
       <%= label fc, :email %>

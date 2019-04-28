@@ -6,7 +6,9 @@
         <h5 class="mt-0">Hello <%= @user.name %>!</h5>
         <p>
           <span>Username: <%= @user.username %></span><br/>
-          <span>Email: <%= @user.credential.email %></span>
+          <span>Email: <%= @user.credential.email %></span><br/>
+          <span>Tagline: <%= raw(to_html(@user.tagline)) %></span><br/>
+          <span>Bio: <%= raw(to_html(@user.bio)) %></span>
         </p>
       </div>
     </div>

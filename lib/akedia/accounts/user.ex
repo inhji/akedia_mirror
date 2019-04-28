@@ -6,6 +6,8 @@ defmodule Akedia.Accounts.User do
   schema "users" do
     field :name, :string
     field :username, :string
+    field :bio, :string, default: ""
+    field :tagline, :string, default: ""
 
     has_one(:credential, Credential)
     has_many(:profiles, Profile)
@@ -16,7 +18,7 @@ defmodule Akedia.Accounts.User do
   @doc false
   def changeset(user, attrs) do
     user
-    |> cast(attrs, [:name, :username])
+    |> cast(attrs, [:name, :username, :bio, :tagline])
     |> validate_required([:name, :username])
     |> unique_constraint(:username)
   end

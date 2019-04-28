@@ -4,7 +4,7 @@
   <% end %>
 
   <div class="e-content bookmark content">
-    <%= raw(AkediaWeb.Markdown.to_html(@bookmark)) %>
+    <%= to_html(@bookmark) %>
   </div>
 
   <div class="text-muted meta">

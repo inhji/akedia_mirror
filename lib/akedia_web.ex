@@ -57,6 +57,7 @@ defmodule AkediaWeb do
       import AkediaWeb.Helpers.Media, only: [image_url: 2, image_url: 1, media_input: 3, img: 1, img: 2]
       import AkediaWeb.Helpers.User, only: [gravatar_url: 1, gravatar_url: 2]
       import AkediaWeb.Helpers.Time, only: [date_iso: 1, date_pretty: 1]
+      import AkediaWeb.Markdown, only: [to_html: 1]
       alias AkediaWeb.Router.Helpers, as: Routes
       alias AkediaWeb.SharedView
     end

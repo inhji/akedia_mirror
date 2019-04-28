@@ -17,7 +17,7 @@
 </div>
 
 <div class="page content">
-  <%= raw(AkediaWeb.Markdown.to_html(@page)) %>
+  <%= to_html(@page) %>
 </div>
 
 <div class="topics">

@@ -12,5 +12,6 @@ defmodule AkediaWeb.Markdown do
         footnotes: true,
         code_class_prefix: "language-"
       })
+    |> Phoenix.HTML.raw()
   end
 end
