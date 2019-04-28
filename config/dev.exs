@@ -73,10 +73,3 @@ config :akedia, Akedia.Repo,
   database: "akedia_dev",
   hostname: "localhost",
   pool_size: 10
-
-config :akedia, Akedia.RootRepo,
-  username: "postgres",
-  password: "postgres",
-  database: "akedia_dev",
-  hostname: "localhost",
-  pool_size: 10

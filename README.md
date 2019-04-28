@@ -45,3 +45,7 @@ mix deploy
 ## Sever Setup
 
 install nginx, certbot, build-essential, imagemagick, node (nodesource)
+
+```sql
+CREATE extension if not exists pg_trgm;
+```

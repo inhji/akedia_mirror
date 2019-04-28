@@ -10,6 +10,7 @@ DELIVER_TO="/home/akedia/akedia/release"
 
 AUTO_VERSION=git-revision
 START_DEPLOY=true
+ECTO_REPOSITORY=Elixir.Akedia.Repo
 
 pre_erlang_get_and_update_deps() {
   status "Copying production secrets" # log output prepended with "----->"

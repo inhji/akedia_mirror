@@ -8,7 +8,7 @@
 use Mix.Config
 
 config :akedia,
-  ecto_repos: [Akedia.Repo, Akedia.RootRepo]
+  ecto_repos: [Akedia.Repo]
 
 # Configures the endpoint
 config :akedia, AkediaWeb.Endpoint,
