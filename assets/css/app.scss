@@ -21,4 +21,137 @@ $theme-colors: (
 
 @import "offcanvas";
 @import "gallery";
-@import "custom";
+
+@import "custom/phoenix.scss";
+@import "custom/footer.scss";
+@import "custom/forms.scss";
+@import "custom/helpers.scss";
+
+nav.navbar {
+  .search-bar {
+    form {
+      display: none;
+    }
+
+    -moz-transition: all 0.35s;
+    -webkit-transition: all 0.35s;
+
+    &:focus, &:focus-within {
+      form {
+        display: inline-block;
+      }
+    }
+  }
+}
+
+main#content {
+  padding-top: 2rem;
+
+  // Markdown Styling!
+  .content {
+    h1 {
+      color: red;
+      text-decoration: line-through;
+    }
+
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      &:not(:first-child) {
+        margin-top: 3rem;
+      }
+    }
+  }
+
+  // General Post Styles
+  article {
+    .meta {
+      a {
+        color: $text-muted;
+      }
+    }
+  }
+
+  article.bookmark {
+    p {
+      margin: 0;
+    }
+    h3 {
+      margin: 0;
+    }
+    margin-bottom: 2rem;
+  }
+}
+
+// Homepage
+.intro {
+  background-image: url("/images/intro.jpg");
+  background-position: center center;
+  background-size: cover;
+
+  color: $white;
+  text-shadow: black 1px 1px 1px;
+
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+}
+
+table tr:first-child td {
+  border-top: none;
+}
+
+.footnote {
+  vertical-align: super;
+  font-size: small;
+
+  &:before {
+    content: "[";
+  }
+  &:after {
+    content: "]";
+  }
+}
+
+.topics {
+  margin-bottom: 2rem;
+}
+
+.badge.type {
+  color: white;
+  font-weight: bold;
+}
+.badge.bookmark {
+  background-color: $purple;
+}
+.badge.story {
+  background-color: $magenta;
+}
+.badge.page {
+  background-color: $blue;
+}
+
+.image-picker {
+  display: flex;
+  flex-wrap: wrap;
+
+  .image {
+    width: 45%;
+    margin-bottom: 1rem;
+    margin-right: 1rem;
+
+    @include media-breakpoint-up(md) {
+      width: 200px;
+    }
+
+    img {
+      width: 100%;
+    }
+  }
+}
+
+.user-navigation {
+  margin-bottom: 1rem;
+}
+

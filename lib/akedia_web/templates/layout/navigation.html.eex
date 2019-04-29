@@ -29,15 +29,23 @@
           </div>
         </li>
       </ul>
-      <ul class="navbar-nav">
-        <%= form_for @conn, Routes.search_path(@conn, :search), [method: :get, class: "from-inline"], fn f -> %>
+
+      <ul class="navbar-nav search-bar">
+        <%= form_for @conn, Routes.search_path(@conn, :search), [method: :get, class: "form-inline"], fn f -> %>
           <%= search_input f, :query, class: "form-control mr-sm-2", placeholder: "Search" %>
         <% end %>
+        <li class="nav-item">
+          <a href="#" class="nav-link">
+            <i class="fas fa-search"></i>
+          </a>               
+        </li>
       </ul>
       <ul class="navbar-nav">
       <%= if @logged_in do %>
         <li class="nav-item">
-          <%= link  "Profile", to: Routes.user_path(@conn, :show), class: "nav-link" %>
+          <%= link to: Routes.user_path(@conn, :show), class: "nav-link" do %>
+            <i class="fas fa-cog"></i>
+          <% end %>
         </li>
         <li class="nav-item">
           <%= link "Logout", to: Routes.session_path(@conn, :delete), method: "delete", data: [confirm: "ಥ‿ಥ\nR u sure?"], class: "nav-link" %>

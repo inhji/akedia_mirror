@@ -1,0 +1,4 @@
+<nav class="nav nav-tabs user-navigation">
+  <%= active_link(@conn, "User", to: Routes.user_path(@conn, :show), active: :exact, class_active: "active nav-link", class_inactive: "nav-link") %>
+  <%= active_link(@conn, "Profiles", to: Routes.profile_path(@conn, :index), class_active: "active nav-link", class_inactive: "nav-link") %>
+</nav>

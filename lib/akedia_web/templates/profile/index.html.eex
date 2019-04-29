@@ -1,5 +1,4 @@
-<h1>Listing Profiles</h1>
-
+<%= render SharedView, "user_nav.html", assigns %>
 
 <div class="list-group">
   <%= for profile <- @profiles do %>
