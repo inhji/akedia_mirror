@@ -20,7 +20,7 @@ defmodule Akedia.MixProject do
   def application do
     [
       mod: {Akedia.Application, []},
-      extra_applications: [:logger, :runtime_tools, :timex, :scrape]
+      extra_applications: [:logger, :runtime_tools, :timex, :scrape, :que]
     ]
   end
 
@@ -59,7 +59,8 @@ defmodule Akedia.MixProject do
       {:indieweb, "~> 0.0.42"},
       {:phoenix_active_link, "~> 0.2.1"},
       {:scrape, "~> 2.0"},
-      {:html5ever, "~> 0.7.0", override: true}
+      {:html5ever, "~> 0.7.0", override: true},
+      {:que, "~> 0.9.0"}
     ]
   end
 

@@ -361,8 +361,6 @@ defmodule Akedia.Content do
     Repo.transaction(fn ->
       {:ok, entity} = create_entity(entity_attrs)
 
-      IO.inspect(attrs)
-
       changeset =
         schema
         |> Kernel.struct()

@@ -7,6 +7,7 @@ defmodule Akedia.Indie.Micropub.Handler do
   alias Akedia.Indie.Micropub.{Token, Properties}
   alias AkediaWeb.Router.Helpers, as: Routes
   alias AkediaWeb.Endpoint
+  alias Akedia.Workers.URLScraper
 
   @url_types_regex ~r/\/(?<type>bookmarks|stories)\/(?<slug>[\w\d-]*)\/?$/
 
@@ -152,13 +153,14 @@ defmodule Akedia.Indie.Micropub.Handler do
 
   def create_bookmark(title, content, url, tags, is_published) do
     attrs = %{
-      "title" => title,
+      "title" => title || Slugger.slugify(url),
       "content" => content,
       "url" => url
     }
 
     case Content.create_bookmark(attrs, is_published) do
       {:ok, bookmark} ->
+        Que.add(URLScraper, bookmark)
         Content.add_tags(bookmark, tags)
         Logger.info("Bookmark created!")
         {:ok, :created, Routes.bookmark_url(Endpoint, :show, bookmark)}

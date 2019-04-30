@@ -4,8 +4,15 @@
 <div class="bookmarks">
 <%= for bookmark <- @bookmarks do %>
   <article class="bookmark h-entry">
-    <%= link to: bookmark.url, target: "_blank", class: "u-bookmark-of h-cite" do %>
-      <h3 class="p-name"><%= bookmark.title %></h3>
+    <%= link to: bookmark.url, target: "_blank", class: "u-bookmark-of h-cite" do %>       
+      <h3>
+        <%= if bookmark.favicon do %>
+          <img src="<%= bookmark.favicon %>" width=20>
+        <% end %>   
+        <span class="p-name">
+          <%= bookmark.title %>
+        </span>
+      </h3>
     <% end %>
     <div class="e-content bookmark content">
       <%= to_html(bookmark) %>
@@ -14,6 +21,7 @@
       <time class="dt-published" datetime="<%= date_iso(bookmark.inserted_at) %>">
       <%= link date_pretty(bookmark.inserted_at), to: Routes.bookmark_url(@conn, :show, bookmark) %>
       </time>
+      
       <span>|</span>
       <span class="topics">
         <%= for topic <- bookmark.entity.topics do %>

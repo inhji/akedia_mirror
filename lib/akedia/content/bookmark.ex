@@ -9,6 +9,7 @@ defmodule Akedia.Content.Bookmark do
     field :title, :string
     field :url, :string
     field :slug, TitleSlug.Type
+    field :favicon, :string
     belongs_to :entity, Entity
 
     timestamps()
@@ -17,7 +18,7 @@ defmodule Akedia.Content.Bookmark do
   @doc false
   def changeset(bookmark, attrs) do
     bookmark
-    |> cast(attrs, [:title, :slug, :url, :content, :entity_id])
+    |> cast(attrs, [:title, :slug, :url, :content, :favicon, :entity_id])
     |> validate_required([:url, :title])
     |> TitleSlug.maybe_generate_slug()
     |> TitleSlug.unique_constraint()
