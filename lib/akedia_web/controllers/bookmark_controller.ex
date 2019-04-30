@@ -29,7 +29,7 @@ defmodule AkediaWeb.BookmarkController do
         |> redirect(to: Routes.bookmark_path(conn, :show, bookmark))
 
       {:error, %Ecto.Changeset{} = changeset} ->
-        render(conn, "new.html", changeset: changeset)
+        render(conn, "new.html", changeset: changeset, tags: [])
     end
   end
 
