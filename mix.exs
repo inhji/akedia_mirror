@@ -60,7 +60,8 @@ defmodule Akedia.MixProject do
       {:phoenix_active_link, "~> 0.2.1"},
       {:scrape, "~> 2.0"},
       {:html5ever, "~> 0.7.0", override: true},
-      {:que, git: "https://github.com/inhji/que", branch: "remove_ex_utils" }
+      {:que, git: "https://github.com/inhji/que", branch: "remove_ex_utils" },
+      {:quantum, "~> 2.3"}
     ]
   end
 

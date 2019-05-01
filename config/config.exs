@@ -10,6 +10,11 @@ use Mix.Config
 config :akedia,
   ecto_repos: [Akedia.Repo]
 
+config :akedia, Akedia.Scheduler,
+  jobs: [
+    {"*/5 * * * *", fn -> Que.add(Akedia.Workers.Listenbrainz, "inhji") end},
+  ]
+
 # Configures the endpoint
 config :akedia, AkediaWeb.Endpoint,
   url: [host: "localhost"],

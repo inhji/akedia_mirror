@@ -11,9 +11,9 @@ defmodule Akedia.Application do
       # Start the Ecto repository
       Akedia.Repo,
       # Start the endpoint when the application starts
-      AkediaWeb.Endpoint
-      # Starts a worker by calling: Akedia.Worker.start_link(arg)
-      # {Akedia.Worker, arg},
+      AkediaWeb.Endpoint,
+      # Start the Quantum Scheduler
+      Akedia.Scheduler
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
