@@ -20,7 +20,7 @@ defmodule Akedia.MixProject do
   def application do
     [
       mod: {Akedia.Application, []},
-      extra_applications: [:logger, :runtime_tools, :timex, :scrape, :que]
+      extra_applications: [:logger, :runtime_tools, :timex, :scrape, :que, :ex_utils]
     ]
   end
 
@@ -60,7 +60,7 @@ defmodule Akedia.MixProject do
       {:phoenix_active_link, "~> 0.2.1"},
       {:scrape, "~> 2.0"},
       {:html5ever, "~> 0.7.0", override: true},
-      {:que, git: "https://github.com/inhji/que", branch: "remove_ex_utils" },
+      {:que, "~> 0.9.0" },
       {:quantum, "~> 2.3"}
     ]
   end
