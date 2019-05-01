@@ -12,7 +12,8 @@ config :akedia,
 
 config :akedia, Akedia.Scheduler,
   jobs: [
-    {"*/5 * * * *", fn -> Que.add(Akedia.Workers.Listenbrainz, "inhji") end},
+    # {"*/5 * * * *", fn -> Que.add(Akedia.Workers.Listenbrainz, "inhji") end},
+    {"* * * * *", {Que, :add, [Akedia.Workers.Listenbrainz, "inhji"]}}
   ]
 
 # Configures the endpoint
