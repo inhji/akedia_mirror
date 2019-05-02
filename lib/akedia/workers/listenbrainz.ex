@@ -28,7 +28,12 @@ defmodule Akedia.Workers.Listenbrainz do
   end
 
   def last_listen_timestamp do
-    last_listen = Repo.one(from l in Listen, order_by: [desc: l.id], limit: 1)
+    last_listen =
+      Repo.one(
+        from l in Listen,
+          order_by: [desc: l.listened_at],
+          limit: 1
+      )
 
     case last_listen do
       nil ->

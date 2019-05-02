@@ -42,6 +42,10 @@ defmodule AkediaWeb.Router do
 
     get "/tagged-with/:topic", TopicController, :tagged
 
+    scope "/listens" do
+      get "/by_artist", ListenController, :by_artist
+    end
+
     scope "/auth" do
       get "/register", UserController, :new
       post "/register", UserController, :create

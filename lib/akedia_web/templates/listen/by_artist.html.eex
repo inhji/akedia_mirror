@@ -1,0 +1,24 @@
+<ul class="nav">
+  <li class="nav-item">
+    <%= link "Hourly", to: Routes.listen_path(@conn, :by_artist, by: "hours"), class: "nav-link" %>
+  </li>
+  <li class="nav-item">
+    <%= link "Daily", to: Routes.listen_path(@conn, :by_artist, by: "days"), class: "nav-link" %>
+  </li>
+  <li class="nav-item">
+    <%= link "Weekly", to: Routes.listen_path(@conn, :by_artist, by: "weeks"), class: "nav-link" %>
+  </li>
+  <li class="nav-item">
+    <%= link "Monthly", to: Routes.listen_path(@conn, :by_artist, by: "months"), class: "nav-link" %>
+  </li>
+</ul>
+
+<ul class="list-group">
+<%= for listen <- @listens do %>
+  <li class="list-group-item d-flex justify-content-between align-items-center">
+    <%= listen.artist %>
+    <span class="badge badge-primary badge-pill"><%= listen.listens %></span>
+  </li>
+<% end %>
+</ul>
+
