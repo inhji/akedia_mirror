@@ -1,0 +1,26 @@
+<ul class="nav">
+  <li class="nav-item">
+    <%= link "Recent", to: Routes.listen_path(@conn, :index), class: "nav-link" %>
+  </li>
+</ul>
+
+<ul class="nav">
+  <li class="nav-item">
+    <a href="#" class="nav-link disabled">By Artist:</a>
+  </li>
+  <li class="nav-item">
+    <%= link "Hourly", to: Routes.listen_path(@conn, :by_artist, last: "hour"), class: "nav-link" %>
+  </li>
+  <li class="nav-item">
+    <%= link "Hourly", to: Routes.listen_path(@conn, :by_artist, last: "hour"), class: "nav-link" %>
+  </li>
+  <li class="nav-item">
+    <%= link "Daily", to: Routes.listen_path(@conn, :by_artist, last: "day"), class: "nav-link" %>
+  </li>
+  <li class="nav-item">
+    <%= link "Weekly", to: Routes.listen_path(@conn, :by_artist, last: "week"), class: "nav-link" %>
+  </li>
+  <li class="nav-item">
+    <%= link "Monthly", to: Routes.listen_path(@conn, :by_artist, last: "month"), class: "nav-link" %>
+  </li>
+</ul>

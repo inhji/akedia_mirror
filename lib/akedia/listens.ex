@@ -3,6 +3,13 @@ defmodule Akedia.Listens do
   alias Akedia.Repo
   alias Akedia.Content.Listen
 
+  def list(limit \\ 10) do
+    Listen
+    |> order_by(desc: :listened_at)
+    |> limit(^limit)
+    |> Repo.all()
+  end
+
   def group_by_artist(time_diff) do
     Repo.all(group_by_artist_query(time_diff))
   end

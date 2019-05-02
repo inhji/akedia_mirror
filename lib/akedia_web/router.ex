@@ -43,6 +43,7 @@ defmodule AkediaWeb.Router do
     get "/tagged-with/:topic", TopicController, :tagged
 
     scope "/listens" do
+      get "/", ListenController, :index
       get "/by_artist", ListenController, :by_artist
     end
 

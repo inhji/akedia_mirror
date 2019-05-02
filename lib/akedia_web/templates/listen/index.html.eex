@@ -8,9 +8,8 @@
 <% end %>
 <%= for listen <- @listens do %>
   <li class="list-group-item d-flex justify-content-between align-items-center">
-    <%= listen.artist %>
-    <span class="badge badge-primary badge-pill"><%= listen.listens %></span>
+    <span><%= listen.track %><span class="text-muted"> • <%= listen.artist %></span></span>
+    <span class="badge badge-primary badge-pill"><%= Timex.from_now(listen.listened_at) %></span>
   </li>
 <% end %>
 </ul>
-
