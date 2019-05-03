@@ -7,18 +7,27 @@
 
     <div class="navbar-collapse offcanvas-collapse" id="navbarMain">
       <ul class="navbar-nav mr-auto">
+        <%= if @show_bookmarks or @logged_in do %>
         <li class="nav-item">
           <a class="nav-link" href="<%= Routes.bookmark_path(@conn, :index) %>">Lesezeichen</a>
         </li>
+        <% end %>
+        <%= if @show_stories or @logged_in do %>
         <li class="nav-item">
           <a class="nav-link" href="<%= Routes.story_path(@conn, :index) %>">Geschichten</a>
         </li>
+        <% end %>
+        <%= if @show_wiki or @logged_in do %>
         <li class="nav-item">
           <a class="nav-link" href="<%= Routes.page_path(@conn, :index) %>">Wiki</a>
         </li>
+        <% end %>
+        <%= if @show_images or @logged_in do %>
         <li class="nav-item">
           <a class="nav-link" href="<%= Routes.image_path(@conn, :index) %>">Bilder</a>
         </li>
+        <% end %>
+        <%= if @show_more or @logged_in do %>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Mehr
@@ -29,8 +38,10 @@
             <a class="dropdown-item" href="<%= Routes.listen_path(@conn, :index) %>">Listens</a>
           </div>
         </li>
+        <% end %>
       </ul>
 
+      <%= if @show_search or @logged_in do %>
       <ul class="navbar-nav search-bar">
         <%= form_for @conn, Routes.search_path(@conn, :search), [method: :get, class: "form-inline"], fn f -> %>
           <%= search_input f, :query, class: "form-control mr-sm-2", placeholder: "Search" %>
@@ -41,6 +52,7 @@
           </a>               
         </li>
       </ul>
+      <% end %>
       <ul class="navbar-nav">
       <%= if @logged_in do %>
         <li class="nav-item">
@@ -61,7 +73,6 @@
             <%= link "Register", to: Routes.user_path(@conn, :new), class: "nav-link" %>
           </li>
         <% end %>
-
       <% end %>
       </ul>
     </div>

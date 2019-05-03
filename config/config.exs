@@ -10,6 +10,14 @@ use Mix.Config
 config :akedia,
   ecto_repos: [Akedia.Repo]
 
+config :akedia, Akedia.Settings,
+  show_wiki: false,
+  show_stories: false,
+  show_images: false,
+  show_search: false,
+  show_bookmarks: false,
+  show_more: false
+
 config :akedia, Akedia.Scheduler,
   jobs: [
     {"*/15 * * * *", {Que, :add, [Akedia.Workers.Listenbrainz, "inhji"]}}

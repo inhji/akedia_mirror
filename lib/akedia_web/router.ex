@@ -6,6 +6,7 @@ defmodule AkediaWeb.Router do
     refresh_user: 2,
     check_loggedin: 2
   ]
+  import AkediaWeb.Plugs.Settings, only: [assign_settings: 2]
 
   pipeline :browser do
     plug :accepts, ["html"]
@@ -16,6 +17,7 @@ defmodule AkediaWeb.Router do
     plug :check_loggedin
     plug :assign_user
     plug :refresh_user
+    plug :assign_settings
   end
 
   pipeline :api do
