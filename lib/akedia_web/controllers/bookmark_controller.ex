@@ -3,6 +3,7 @@ defmodule AkediaWeb.BookmarkController do
 
   alias Akedia.Content
   alias Akedia.Content.Bookmark
+  alias Akedia.Workers.URLScraper
 
   def index(conn, _params) do
     bookmarks =
@@ -22,6 +23,7 @@ defmodule AkediaWeb.BookmarkController do
   def create(conn, %{"bookmark" => %{"topics" => topics} = bookmark_params}) do
     case Content.create_bookmark(bookmark_params) do
       {:ok, bookmark} ->
+        Que.add(URLScraper, bookmark)
         Content.add_tags(bookmark, topics)
 
         conn
@@ -51,6 +53,8 @@ defmodule AkediaWeb.BookmarkController do
 
     case Content.update_bookmark(bookmark, bookmark_params) do
       {:ok, bookmark} ->
+        Que.add(URLScraper, bookmark)
+
         conn
         |> put_flash(:info, "Bookmark updated successfully.")
         |> redirect(to: Routes.bookmark_path(conn, :show, bookmark))
