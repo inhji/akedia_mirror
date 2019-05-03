@@ -12,4 +12,8 @@ defmodule AkediaWeb.BookmarkView do
       <title><%= @bookmark.title %> · Akedia</title>
     }
   end
+
+  def tld(url) do
+    URI.parse(url).host
+  end
 end

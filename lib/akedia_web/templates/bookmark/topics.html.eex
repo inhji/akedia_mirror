@@ -1,0 +1,8 @@
+<span class="topics">
+  <%= if Enum.count(@topics) == 0 do %>
+    <span>No topics</span>
+  <% end %>
+  <%= for topic <- @topics do %>
+    <%= link topic.text, to: Routes.topic_path(@conn, :tagged, topic), class: "p-category text-muted" %>
+  <% end %>
+</span>
