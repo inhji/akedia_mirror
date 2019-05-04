@@ -14,7 +14,9 @@ defmodule AkediaWeb.ImageController do
     render(conn, "new.html", changeset: changeset)
   end
 
+  @spec create(Plug.Conn.t(), map()) :: Plug.Conn.t()
   def create(conn, %{"image" => image_params}) do
+
     case Media.create_image(image_params) do
       {:ok, image} ->
         conn

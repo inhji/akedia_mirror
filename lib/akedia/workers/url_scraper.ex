@@ -3,9 +3,8 @@ defmodule Akedia.Workers.URLScraper do
   use Que.Worker
   alias Akedia.Repo
   alias Akedia.Content.{Bookmark}
-  alias Scrape.Website
 
-  @bookmark_scrape_attrs [:title, :favicon]
+  @bookmark_scrape_attrs [:title]
 
   def perform(%Bookmark{url: url} = bookmark) do
     website = Scrape.website(url)
