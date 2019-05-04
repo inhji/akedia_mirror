@@ -14,8 +14,23 @@ defmodule Akedia.Listens do
     Repo.all(group_by_artist_query(time_diff))
   end
 
+  def group_by_track(artist) do
+    Repo.all(group_by_track_query(artist))
+  end
+
+  def group_by_track_query(artist) do
+    Listen
+    |> select([l], %{
+      listens: fragment("count (?) as listens", l.id),
+      track: l.track
+    })
+    |> group_by([l], l.track)
+    |> where(artist: ^artist)
+    |> order_by(desc: fragment("listens"))
+  end
+
   def group_by_artist_query(time_diff \\ [days: -7]) do
-    time_ago = Timex.shift(DateTime.utc_now, time_diff)
+    time_ago = Timex.shift(DateTime.utc_now(), time_diff)
 
     Listen
     |> group_by([l], l.artist)

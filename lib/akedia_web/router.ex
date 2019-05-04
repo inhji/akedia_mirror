@@ -46,7 +46,8 @@ defmodule AkediaWeb.Router do
 
     scope "/listens" do
       get "/", ListenController, :index
-      get "/by_artist", ListenController, :by_artist
+      get "/artists", ListenController, :artists
+      get "/artist/:artist", ListenController, :artist
     end
 
     scope "/auth" do

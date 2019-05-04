@@ -9,7 +9,13 @@ defmodule AkediaWeb.ListenController do
     render(conn, "index.html", listens: listens)
   end
 
-  def by_artist(conn, %{"last" => timespan}) do
+  def artist(conn, %{"artist" => artist}) do
+    listens = Listens.group_by_track(artist)
+
+    render(conn, "artist.html", listens: listens, artist: artist)
+  end
+
+  def artists(conn, %{"last" => timespan}) do
     listens = case timespan do
       "hour" -> Listens.group_by_artist([hours: -1])
       "week" -> Listens.group_by_artist([weeks: -1])
@@ -18,10 +24,6 @@ defmodule AkediaWeb.ListenController do
       _ -> []
     end
 
-    render(conn, "by_artist.html", listens: listens)
-  end
-
-  def by_artist(conn, %{}) do
-    render(conn, "by_artist.html", listens: [])
+    render(conn, "artists.html", listens: listens)
   end
 end

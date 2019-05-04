@@ -1,26 +1,23 @@
-<ul class="nav">
+<ul class="nav nav-pills listen-navigation">
   <li class="nav-item">
-    <%= link "Recent", to: Routes.listen_path(@conn, :index), class: "nav-link" %>
+    <%= active_link @conn, "Recent", to: Routes.listen_path(@conn, :index), active: :exact, class: "nav-link" %>
   </li>
 </ul>
 
-<ul class="nav">
+<ul class="nav nav-pills listen-navigation">
   <li class="nav-item">
     <a href="#" class="nav-link disabled">By Artist:</a>
   </li>
   <li class="nav-item">
-    <%= link "Hourly", to: Routes.listen_path(@conn, :by_artist, last: "hour"), class: "nav-link" %>
+    <%= active_link @conn, "Hourly", to: Routes.listen_path(@conn, :artists, last: "hour"), active: :exact_with_params, class: "nav-link" %>
   </li>
   <li class="nav-item">
-    <%= link "Hourly", to: Routes.listen_path(@conn, :by_artist, last: "hour"), class: "nav-link" %>
+    <%= active_link @conn, "Daily", to: Routes.listen_path(@conn, :artists, last: "day"), active: :exact_with_params, class: "nav-link" %>
   </li>
   <li class="nav-item">
-    <%= link "Daily", to: Routes.listen_path(@conn, :by_artist, last: "day"), class: "nav-link" %>
+    <%= active_link @conn, "Weekly", to: Routes.listen_path(@conn, :artists, last: "week"), active: :exact_with_params, class: "nav-link" %>
   </li>
   <li class="nav-item">
-    <%= link "Weekly", to: Routes.listen_path(@conn, :by_artist, last: "week"), class: "nav-link" %>
-  </li>
-  <li class="nav-item">
-    <%= link "Monthly", to: Routes.listen_path(@conn, :by_artist, last: "month"), class: "nav-link" %>
+    <%= active_link @conn, "Monthly", to: Routes.listen_path(@conn, :artists, last: "month"), active: :exact_with_params, class: "nav-link" %>
   </li>
 </ul>
