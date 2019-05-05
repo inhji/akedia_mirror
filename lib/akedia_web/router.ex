@@ -6,6 +6,7 @@ defmodule AkediaWeb.Router do
     refresh_user: 2,
     check_loggedin: 2
   ]
+  import AkediaWeb.Plugs.Settings, only: [assign_settings: 2]
 
   pipeline :browser do
     plug :accepts, ["html"]
@@ -16,6 +17,7 @@ defmodule AkediaWeb.Router do
     plug :check_loggedin
     plug :assign_user
     plug :refresh_user
+    plug :assign_settings
   end
 
   pipeline :api do
@@ -41,6 +43,12 @@ defmodule AkediaWeb.Router do
     get "/search", SearchController, :search
 
     get "/tagged-with/:topic", TopicController, :tagged
+
+    scope "/listens" do
+      get "/", ListenController, :index
+      get "/artists", ListenController, :artists
+      get "/artist/:artist", ListenController, :artist
+    end
 
     scope "/auth" do
       get "/register", UserController, :new

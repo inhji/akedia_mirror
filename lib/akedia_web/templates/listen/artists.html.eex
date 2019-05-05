@@ -1,0 +1,16 @@
+<%= render("listen_nav.html", assigns) %>
+
+<ul class="list-group">
+<%= if Enum.count(@listens) == 0 do %>
+  <li class="list-group-item d-flex justify-content-between align-items-center">
+    No listens found.
+  </li>
+<% end %>
+<%= for listen <- @listens do %>
+  <li class="list-group-item d-flex justify-content-between align-items-center">
+    <%= link listen.artist, to: Routes.listen_url(@conn, :artist, listen.artist), class: "text-body" %>
+    <span class="badge badge-primary badge-pill"><%= listen.listens %></span>
+  </li>
+<% end %>
+</ul>
+

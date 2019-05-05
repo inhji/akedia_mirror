@@ -1,10 +1,10 @@
 <h1>Bilder</h1>
 
-<div>
+<div class="row">
   <%= for image <- @images do %>
-  <div class="image">
+  <div class="image col-3">
     <%= link to: Routes.image_path(@conn, :show, image) do %>
-      <img src="<%= Akedia.Media.ImageUploader.url({image.name, image}, :thumb) %>" />
+      <img src="<%= Akedia.Media.ImageUploader.url({image.name, image}, :thumb) %>" class="fit" />
     <% end %>
   </div>
   <% end %>

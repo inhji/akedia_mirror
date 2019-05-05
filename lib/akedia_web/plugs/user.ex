@@ -1,5 +1,4 @@
 defmodule AkediaWeb.Plugs.User do
-  import Plug.Conn, only: [assign: 3]
   import Plug.Conn, only: [assign: 3, get_session: 2, configure_session: 2]
   import Phoenix.Controller, only: [render: 2, put_layout: 2, put_view: 2]
   alias Akedia.Accounts

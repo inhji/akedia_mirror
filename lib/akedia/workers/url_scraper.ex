@@ -5,16 +5,19 @@ defmodule Akedia.Workers.URLScraper do
   alias Akedia.Content.{Bookmark}
   alias Scrape.Website
 
-  def perform(%Bookmark{url: url} = bookmark) do
-    %Website{title: title, favicon: favicon} = Scrape.website(url)
+  @bookmark_scrape_attrs [:title, :favicon]
 
-    IO.inspect(title)
-    IO.inspect(favicon)
+  def perform(%Bookmark{url: url} = bookmark) do
+    website = Scrape.website(url)
 
     attrs =
-      %{title: title, favicon: favicon}
-      |> Enum.reject(&is_nil/1)
-      |> Enum.into(%{})
+      @bookmark_scrape_attrs
+      |> Enum.reduce(%{}, fn attr, attrs ->
+        case Map.get(bookmark, attr) do
+          nil -> Map.put(attrs, attr, Map.get(website, attr))
+          _ -> attrs
+        end
+      end)
 
     bookmark
     |> Bookmark.changeset(attrs)

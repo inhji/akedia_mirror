@@ -4,7 +4,7 @@ defmodule Akedia.MixProject do
   def project do
     [
       app: :akedia,
-      version: "0.15.1",
+      version: "0.17.3",
       elixir: "~> 1.5",
       elixirc_paths: elixirc_paths(Mix.env()),
       compilers: [:phoenix, :gettext] ++ Mix.compilers(),
@@ -60,7 +60,8 @@ defmodule Akedia.MixProject do
       {:phoenix_active_link, "~> 0.2.1"},
       {:scrape, "~> 2.0"},
       {:html5ever, "~> 0.7.0", override: true},
-      {:que, git: "https://github.com/inhji/que", branch: "remove_ex_utils" }
+      {:que, "~> 0.10.0" },
+      {:quantum, "~> 2.3"}
     ]
   end
 
