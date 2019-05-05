@@ -1,3 +1,4 @@
+<%= if @has_user do %>
 <p>
     <span>&copy; 2019</span>
     <span class="h-card vcard">
@@ -5,9 +6,11 @@
             <span class="fn p-name">Jonathan Jenne</span>
         </a>
         <img class="u-photo avatar" src="<%= gravatar_url(@current_user.credential.email) %>" />
-    </span> 
+    </span>
 </p>
+<% else %>
+<p>
+    <span>&copy; 2019 You</span>
+</p>
+<% end %>
 <p>Akedia v<%= version() %> • Live slow, die old</p>
-
-
-
