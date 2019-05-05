@@ -5,12 +5,11 @@ defmodule AkediaWeb.Helpers.Media do
     Akedia.Media.ImageUploader.url({image.name, image}, version)
   end
 
-  def image_url(image) do
-    image_url(image, :thumb)
-  end
+  def image_url(image), do: image_url(image, :thumb)
+  def image_url(nil), do: ""
 
-  def img(image, version) do
-    img_tag(image_url(image, version), class: "image version-#{Atom.to_string(version)}")
+  def img(image, version, attrs \\ []) do
+    img_tag(image_url(image, version), attrs)
   end
 
   def img(image) do

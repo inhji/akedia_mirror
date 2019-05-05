@@ -83,6 +83,28 @@ main#content {
     }
     margin-bottom: 2rem;
   }
+
+  article.story {
+    .intro {
+      text-align: center;
+      padding-top: 10rem;
+      padding-bottom: 10rem;
+      margin-bottom: 2rem;
+      border-radius: 3px;
+    }
+
+    .content {
+      margin: 0 auto;
+      text-align: justify;
+      font-family: serif;
+      font-size: 1.1rem;
+      line-height: 1.8rem;
+
+      @include media-breakpoint-up(lg) {
+        width: 70%;
+      }
+    }
+  }
 }
 
 // Homepage
@@ -154,4 +176,3 @@ table tr:first-child td {
 .user-navigation, .listen-navigation {
   margin-bottom: 1rem;
 }
-
