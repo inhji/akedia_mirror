@@ -4,7 +4,7 @@ defmodule Akedia.MixProject do
   def project do
     [
       app: :akedia,
-      version: "0.17.3",
+      version: "0.17.7",
       elixir: "~> 1.5",
       elixirc_paths: elixirc_paths(Mix.env()),
       compilers: [:phoenix, :gettext] ++ Mix.compilers(),
@@ -20,7 +20,7 @@ defmodule Akedia.MixProject do
   def application do
     [
       mod: {Akedia.Application, []},
-      extra_applications: [:logger, :runtime_tools, :timex, :scrape, :que, :ex_utils]
+      extra_applications: [:logger, :runtime_tools, :timex, :scrape, :que]
     ]
   end
 
@@ -60,7 +60,7 @@ defmodule Akedia.MixProject do
       {:phoenix_active_link, "~> 0.2.1"},
       {:scrape, "~> 2.0"},
       {:html5ever, "~> 0.7.0", override: true},
-      {:que, "~> 0.9.0" },
+      {:que, "~> 0.10.0" },
       {:quantum, "~> 2.3"}
     ]
   end
@@ -77,7 +77,8 @@ defmodule Akedia.MixProject do
       "ecto.reset": ["ecto.drop", "ecto.setup"],
       test: ["ecto.create --quiet", "ecto.migrate", "test"],
       build: ["edeliver build release"],
-      deploy: ["edeliver upgrade production"]
+      upgrade: ["edeliver upgrade production"],
+      hotfix: ["edeliver upgrade production --skip-git-clean"]
     ]
   end
 end

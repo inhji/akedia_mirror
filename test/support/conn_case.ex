@@ -14,6 +14,8 @@ defmodule AkediaWeb.ConnCase do
   """
 
   use ExUnit.CaseTemplate
+  import Plug.Conn, only: [fetch_session: 1, put_session: 3]
+  import Akedia.Factory
 
   using do
     quote do
@@ -26,6 +28,16 @@ defmodule AkediaWeb.ConnCase do
     end
   end
 
+  def create_user() do
+    insert(:user)
+  end
+
+  def create_session(conn, user) do
+    conn
+    |> fetch_session()
+    |> put_session(:user_id, user.id)
+  end
+
   setup tags do
     :ok = Ecto.Adapters.SQL.Sandbox.checkout(Akedia.Repo)
 
@@ -33,6 +45,20 @@ defmodule AkediaWeb.ConnCase do
       Ecto.Adapters.SQL.Sandbox.mode(Akedia.Repo, {:shared, self()})
     end
 
-    {:ok, conn: Phoenix.ConnTest.build_conn()}
+    conn = Phoenix.ConnTest.build_conn()
+
+    cond do
+      tags[:signed_in] ->
+        user = create_user()
+
+        conn =
+          conn
+          |> create_session(user)
+
+        {:ok, conn: conn, current_user: user}
+
+      true ->
+        {:ok, conn: conn}
+    end
   end
 end

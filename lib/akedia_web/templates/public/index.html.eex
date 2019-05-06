@@ -1,5 +1,6 @@
 <div class="intro">
   <div class="container">
+    <%= if @has_user do %>
     <div class="media">
       <img src="<%= gravatar_url(@current_user.credential.email, 100) %>" class="mr-3 avatar">
       <div class="media-body">
@@ -7,5 +8,10 @@
         <p class="lead"><%= to_html(@current_user.tagline) %></p>
       </div>
     </div>
+    <% else %>
+    <h1>Welcome!</h1>
+    <p>Please register yourself.</p>
+    <%= link "Register", to: Routes.user_url(@conn, :new), class: "btn btn-lg btn-primary" %>
+    <% end %>
   </div>
 </div>
