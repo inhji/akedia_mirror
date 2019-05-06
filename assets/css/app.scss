@@ -8,6 +8,8 @@ $theme-colors: (
   "primary": $purple
 );
 
+$enable-gradients: true;
+
 @import "~bootstrap/scss/bootstrap";
 
 @import "~@fortawesome/fontawesome-free/scss/fontawesome";

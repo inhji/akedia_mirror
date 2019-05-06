@@ -1,5 +1,5 @@
 <article class="story h-entry">
-  <div class="intro" style="background-image: url('<%= image_url(List.first(@story.entity.images), :original) %>')">
+  <div class="intro <%= intro_class(@story) %>" style="<%= intro_style(@story) %>">
     <h1 class="display-4 p-name"><%= @story.title %></h1>
   </div>
 

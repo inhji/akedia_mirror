@@ -12,4 +12,18 @@ defmodule AkediaWeb.StoryView do
       <title><%= @story.title %> · Akedia</title>
     }
   end
+
+  def intro_style(story) do
+    case Enum.empty?(story.entity.images) do
+      false -> "background-image: url('#{image_url(List.first(story.entity.images), :original)}')"
+      true -> ""
+    end
+  end
+
+  def intro_class(story) do
+    case Enum.empty?(story.entity.images) do
+      true -> "bg-gradient-primary"
+      false -> ""
+    end
+  end
 end
