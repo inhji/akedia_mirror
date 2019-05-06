@@ -1,6 +1,8 @@
 defmodule Akedia.Factory do
   use ExMachina.Ecto, repo: Akedia.Repo
   alias Akedia.Accounts.{Credential, User, Profile}
+  alias Akedia.Content.{Story, Entity, Topic}
+  alias Akedia.Media.{Image}
 
   def credential_factory do
     %Credential{
@@ -22,6 +24,39 @@ defmodule Akedia.Factory do
       username: sequence(:username, &"my-username-#{&1}"),
       credential: build(:credential),
       profiles: build_list(3, :profile)
+    }
+  end
+
+  # TODO: name needs to be %Plug.Upload at some point
+  # def image_factory do
+  #   %Image{
+  #     name: sequence(:name, &"image-#{&1}"),
+  #     text: sequence(:text, &"imagetext-#{&1}"),
+  #     path: sequence(:path, &"imagepath-#{&1}")
+  #   }
+  # end
+
+  # TODO: This fails for some reason, somehow related to timestamps, see:
+  # https://github.com/thoughtbot/ex_machina/issues/269
+  # def topic_factory do
+  #   %Topic{
+  #     text: sequence(:text, &"topic-#{&1}")
+  #   }
+  # end
+
+  def entity_factory do
+    %Entity{
+      images: [],
+      topics: []
+    }
+  end
+
+  def story_factory do
+    %Story{
+      title: sequence(:title, &"Story-#{&1}"),
+      content: sequence(:content, &"Content-#{&1}"),
+      entity: build(:entity),
+      slug: sequence(:slug, &"story-#{&1}")
     }
   end
 end

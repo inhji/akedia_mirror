@@ -66,6 +66,7 @@ defmodule Akedia.Content do
   def delete_story(%Story{} = story) do
     Repo.delete(story)
     delete_entity(story.entity_id)
+    {:ok, story}
   end
 
   def change_story(%Story{} = story) do
@@ -125,7 +126,7 @@ defmodule Akedia.Content do
   end
 
   def create_bookmark(attrs \\ %{}, is_published \\ true) do
-    create_with_entity(Bookmark, attrs, %{ is_published: is_published })
+    create_with_entity(Bookmark, attrs, %{is_published: is_published})
   end
 
   def update_bookmark(%Bookmark{} = bookmark, attrs) do
@@ -153,7 +154,7 @@ defmodule Akedia.Content do
   def get_like!(id), do: Repo.get!(Like, id)
 
   def create_like(attrs \\ %{}, is_published \\ false) do
-    create_with_entity(Like, attrs, %{ is_published: is_published })
+    create_with_entity(Like, attrs, %{is_published: is_published})
   end
 
   def update_like(%Like{} = like, attrs) do
@@ -361,15 +362,30 @@ defmodule Akedia.Content do
     Repo.transaction(fn ->
       {:ok, entity} = create_entity(entity_attrs)
 
+      schema_attrs =
+        attrs
+        |> key_to_atom()
+        |> Map.put(:entity_id, entity.id)
+
       changeset =
         schema
         |> Kernel.struct()
-        |> schema.changeset(Map.put(attrs, "entity_id", entity.id))
+        |> schema.changeset(schema_attrs)
 
       case Repo.insert(changeset) do
         {:ok, item} -> item
         {:error, changeset} -> Repo.rollback(changeset)
       end
+    end)
+  end
+
+  def key_to_atom(map) do
+    Enum.reduce(map, %{}, fn
+      {key, value}, acc when is_atom(key) -> Map.put(acc, key, value)
+      # String.to_existing_atom saves us from overloading the VM by
+      # creating too many atoms. It'll always succeed because all the fields
+      # in the database already exist as atoms at runtime.
+      {key, value}, acc when is_binary(key) -> Map.put(acc, String.to_existing_atom(key), value)
     end)
   end
 end

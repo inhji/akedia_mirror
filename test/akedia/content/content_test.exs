@@ -3,135 +3,15 @@ defmodule Akedia.ContentTest do
 
   alias Akedia.Content
 
-  describe "entities" do
-    alias Akedia.Content.Entity
-
-    @valid_attrs %{is_pinned: true, is_published: true}
-    @update_attrs %{is_pinned: false, is_published: false}
-    @invalid_attrs %{is_pinned: nil, is_published: nil}
-
-    def entity_fixture(attrs \\ %{}) do
-      {:ok, entity} =
-        attrs
-        |> Enum.into(@valid_attrs)
-        |> Content.create_entity()
-
-      entity
-    end
-
-    test "list_entities/0 returns all entities" do
-      entity = entity_fixture()
-      assert Content.list_entities() == [entity]
-    end
-
-    test "get_entity!/1 returns the entity with given id" do
-      entity = entity_fixture()
-      assert Content.get_entity!(entity.id) == entity
-    end
-
-    test "create_entity/1 with valid data creates a entity" do
-      assert {:ok, %Entity{} = entity} = Content.create_entity(@valid_attrs)
-      assert entity.is_pinned == true
-      assert entity.is_published == true
-    end
-
-    test "create_entity/1 with invalid data returns error changeset" do
-      assert {:error, %Ecto.Changeset{}} = Content.create_entity(@invalid_attrs)
-    end
-
-    test "update_entity/2 with valid data updates the entity" do
-      entity = entity_fixture()
-      assert {:ok, %Entity{} = entity} = Content.update_entity(entity, @update_attrs)
-      assert entity.is_pinned == false
-      assert entity.is_published == false
-    end
-
-    test "update_entity/2 with invalid data returns error changeset" do
-      entity = entity_fixture()
-      assert {:error, %Ecto.Changeset{}} = Content.update_entity(entity, @invalid_attrs)
-      assert entity == Content.get_entity!(entity.id)
-    end
-
-    test "delete_entity/1 deletes the entity" do
-      entity = entity_fixture()
-      assert {:ok, %Entity{}} = Content.delete_entity(entity)
-      assert_raise Ecto.NoResultsError, fn -> Content.get_entity!(entity.id) end
-    end
-
-    test "change_entity/1 returns a entity changeset" do
-      entity = entity_fixture()
-      assert %Ecto.Changeset{} = Content.change_entity(entity)
-    end
-  end
-
-  describe "stories" do
-    alias Akedia.Content.Story
-
-    @valid_attrs %{content: "some content", slug: "some slug", title: "some title"}
-    @update_attrs %{content: "some updated content", slug: "some updated slug", title: "some updated title"}
-    @invalid_attrs %{content: nil, slug: nil, title: nil}
-
-    def story_fixture(attrs \\ %{}) do
-      {:ok, story} =
-        attrs
-        |> Enum.into(@valid_attrs)
-        |> Content.create_story()
-
-      story
-    end
-
-    test "list_stories/0 returns all stories" do
-      story = story_fixture()
-      assert Content.list_stories() == [story]
-    end
-
-    test "get_story!/1 returns the story with given id" do
-      story = story_fixture()
-      assert Content.get_story!(story.id) == story
-    end
-
-    test "create_story/1 with valid data creates a story" do
-      assert {:ok, %Story{} = story} = Content.create_story(@valid_attrs)
-      assert story.content == "some content"
-      assert story.slug == "some slug"
-      assert story.title == "some title"
-    end
-
-    test "create_story/1 with invalid data returns error changeset" do
-      assert {:error, %Ecto.Changeset{}} = Content.create_story(@invalid_attrs)
-    end
-
-    test "update_story/2 with valid data updates the story" do
-      story = story_fixture()
-      assert {:ok, %Story{} = story} = Content.update_story(story, @update_attrs)
-      assert story.content == "some updated content"
-      assert story.slug == "some updated slug"
-      assert story.title == "some updated title"
-    end
-
-    test "update_story/2 with invalid data returns error changeset" do
-      story = story_fixture()
-      assert {:error, %Ecto.Changeset{}} = Content.update_story(story, @invalid_attrs)
-      assert story == Content.get_story!(story.id)
-    end
-
-    test "delete_story/1 deletes the story" do
-      story = story_fixture()
-      assert {:ok, %Story{}} = Content.delete_story(story)
-      assert_raise Ecto.NoResultsError, fn -> Content.get_story!(story.id) end
-    end
-
-    test "change_story/1 returns a story changeset" do
-      story = story_fixture()
-      assert %Ecto.Changeset{} = Content.change_story(story)
-    end
-  end
-
   describe "pages" do
     alias Akedia.Content.Page
 
     @valid_attrs %{content: "some content", slug: "some slug", title: "some title"}
-    @update_attrs %{content: "some updated content", slug: "some updated slug", title: "some updated title"}
+    @update_attrs %{
+      content: "some updated content",
+      slug: "some updated slug",
+      title: "some updated title"
+    }
     @invalid_attrs %{content: nil, slug: nil, title: nil}
 
     def page_fixture(attrs \\ %{}) do
@@ -194,7 +74,11 @@ defmodule Akedia.ContentTest do
     alias Akedia.Content.Bookmark
 
     @valid_attrs %{content: "some content", title: "some title", url: "some url"}
-    @update_attrs %{content: "some updated content", title: "some updated title", url: "some updated url"}
+    @update_attrs %{
+      content: "some updated content",
+      title: "some updated title",
+      url: "some updated url"
+    }
     @invalid_attrs %{content: nil, title: nil, url: nil}
 
     def bookmark_fixture(attrs \\ %{}) do
