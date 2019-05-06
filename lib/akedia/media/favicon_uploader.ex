@@ -9,19 +9,16 @@ defmodule Akedia.Media.FaviconUploader do
 
   # Whitelist file extensions:
   def validate({file, _}) do
-    ~w(.jpg .jpeg .gif .png) |> Enum.member?(Path.extname(file.file_name))
+    ~w(.jpg .jpeg .gif .png .ico) |> Enum.member?(Path.extname(file.file_name))
   end
 
   # Override the persisted filenames:
-  def filename(version, {file, scope}) do
-    IO.inspect(version)
-    IO.inspect(file)
-    IO.inspect(scope)
-    scope.tld
+  def filename(_version, {_file, scope}) do
+    scope.hostname
   end
 
   # Override the storage directory:
-  def storage_dir(_version, _) do
+  def storage_dir(_, _) do
     "uploads/favicons"
   end
 

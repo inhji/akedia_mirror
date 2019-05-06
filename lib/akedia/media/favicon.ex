@@ -6,7 +6,7 @@ defmodule Akedia.Media.Favicon do
 
   schema "favicons" do
     field :name, FaviconUploader.Type
-    field :tld, :string
+    field :hostname, :string
 
     timestamps()
   end
@@ -14,8 +14,8 @@ defmodule Akedia.Media.Favicon do
   @doc false
   def changeset(favicon, attrs) do
     favicon
-    |> cast(attrs, [:tld])
+    |> cast(attrs, [:hostname])
     |> cast_attachments(attrs, [:name], allow_paths: true)
-    |> validate_required([:tld])
+    |> validate_required([:hostname])
   end
 end

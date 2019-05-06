@@ -8,17 +8,20 @@
 <article class="bookmark h-entry">
   <div class="card">
     <div class="card-body">
-      <h5 class="card-title"> 
+      <h5 class="card-title">
+        <%= if bookmark.favicon do %>
+          <img src="<%= favicon_url(bookmark.favicon) %>" class="round inline">
+        <% end %>
         <a href="<%= bookmark.url %>" target="_blank" class="u-bookmark-of h-cite p-name text-body">
           <%= bookmark.title %>
         </a>
       </h5>
       <h6 class="card-subtitle mb-2 text-muted">
-        <img src="<%= bookmark.favicon %>" class="round inline"> <a href="<%= bookmark.url %>" class="text-muted" target="_blank"><%= tld(bookmark.url) %></a>
-        <span>|</span>
         <time class="dt-published" datetime="<%= date_iso(bookmark.inserted_at) %>">
           <%= link date_pretty(bookmark.inserted_at), to: Routes.bookmark_url(@conn, :show, bookmark), class: "text-muted" %>
         </time>
+        <span>|</span>
+        <a href="<%= bookmark.url %>" class="text-muted" target="_blank"><%= tld(bookmark.url) %></a>
         <span>|</span>
         <%= render "topics.html", conn: @conn, topics: bookmark.entity.topics %>
       </h6>

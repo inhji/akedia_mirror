@@ -2,6 +2,7 @@ defmodule Akedia.Content.Bookmark do
   use Ecto.Schema
   import Ecto.Changeset
   alias Akedia.Content.{Entity, TitleSlug}
+  alias Akedia.Media.Favicon
 
   @derive {Phoenix.Param, key: :slug}
   schema "bookmarks" do
@@ -9,8 +10,8 @@ defmodule Akedia.Content.Bookmark do
     field :title, :string
     field :url, :string
     field :slug, TitleSlug.Type
-    field :favicon, :string
     belongs_to :entity, Entity
+    belongs_to :favicon, Favicon
 
     timestamps()
   end
@@ -18,7 +19,7 @@ defmodule Akedia.Content.Bookmark do
   @doc false
   def changeset(bookmark, attrs) do
     bookmark
-    |> cast(attrs, [:title, :slug, :url, :content, :favicon, :entity_id])
+    |> cast(attrs, [:title, :slug, :url, :content, :entity_id, :favicon_id])
     |> validate_required([:url, :title])
     |> TitleSlug.maybe_generate_slug()
     |> TitleSlug.unique_constraint()
