@@ -1,9 +1,17 @@
 defmodule AkediaWeb.Helpers.Media do
   use Phoenix.HTML
+  alias Akedia.Media.{FaviconUploader, ImageUploader}
 
   def image_url(nil, _), do: ""
+
   def image_url(image, version) do
-    Akedia.Media.ImageUploader.url({image.name, image}, version)
+    ImageUploader.url({image.name, image}, version)
+  end
+
+  def favicon_url(nil), do: ""
+
+  def favicon_url(favicon) do
+    FaviconUploader.url({favicon.name, favicon}, :original)
   end
 
   def image_url(nil), do: ""
@@ -25,7 +33,11 @@ defmodule AkediaWeb.Helpers.Media do
             content_tag :span, class: "input-group-text" do
               "Images"
             end,
-            content_tag :button, type: "button", class: "btn btn-outline-primary", data_toggle: "modal", data_target: "#mediaLibrary" do
+            content_tag :button,
+              type: "button",
+              class: "btn btn-outline-primary",
+              data_toggle: "modal",
+              data_target: "#mediaLibrary" do
               "Select"
             end,
             content_tag :button, type: "button", class: "btn btn-outline-danger", id: "clear" do

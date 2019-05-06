@@ -2,7 +2,7 @@ defmodule Akedia.Media do
   import Ecto.Query, warn: false
   alias Akedia.Repo
 
-  alias Akedia.Media.{Image, ImageUploader, EntityImage}
+  alias Akedia.Media.{Image, ImageUploader, EntityImage, Favicon}
 
   def list_images do
     list(Image, desc: :inserted_at)
@@ -30,7 +30,8 @@ defmodule Akedia.Media do
         File.rmdir(ImageUploader.base_path() <> image.path)
         {:ok, image}
 
-      err -> err
+      err ->
+        err
     end
   end
 
@@ -99,6 +100,19 @@ defmodule Akedia.Media do
     content
     |> add_images(new_image_ids -- old_image_ids)
     |> remove_images(old_image_ids -- new_image_ids)
+  end
+
+  # Favicon
+
+  def get_favicon(hostname) do
+    Favicon
+    |> Repo.get_by(hostname: hostname)
+  end
+
+  def create_favicon(attrs \\ %{}) do
+    %Favicon{}
+    |> Favicon.changeset(attrs)
+    |> Repo.insert()
   end
 
   # Utils

@@ -112,17 +112,22 @@ defmodule Akedia.Content do
   # Bookmark
 
   def list_bookmarks do
-    list(Bookmark)
+    Bookmark
+    |> list()
+    |> Repo.preload(:favicon)
   end
 
   def list_published_bookmarks do
-    list_published(Bookmark)
+    Bookmark
+    |> list_published()
+    |> Repo.preload(:favicon)
   end
 
   def get_bookmark!(id) do
     Bookmark
     |> Repo.get_by!(slug: id)
     |> Repo.preload(entity: [:topics, :images])
+    |> Repo.preload(:favicon)
   end
 
   def create_bookmark(attrs \\ %{}, is_published \\ true) do
