@@ -23,6 +23,7 @@ defmodule AkediaWeb do
 
       import Plug.Conn
       import AkediaWeb.Gettext
+      import AkediaWeb.Helpers.User, only: [logged_in?: 1]
       alias AkediaWeb.Router.Helpers, as: Routes
 
       def render_index_or_empty(conn, content, assigns \\ []) do
@@ -30,10 +31,6 @@ defmodule AkediaWeb do
           0 -> render(conn, "empty.html")
           _ -> render(conn, "index.html", assigns)
         end
-      end
-
-      def logged_in?(%{assigns: %{current_user: current_user}} = _conn) do
-        !!current_user
       end
     end
   end
@@ -55,7 +52,10 @@ defmodule AkediaWeb do
       import AkediaWeb.ErrorHelpers
       import AkediaWeb.Gettext
       import AkediaWeb.Helpers.Tags, only: [list_tags: 1]
-      import AkediaWeb.Helpers.Media, only: [image_url: 2, image_url: 1, media_input: 3, img: 1, img: 2, img: 3]
+
+      import AkediaWeb.Helpers.Media,
+        only: [image_url: 2, image_url: 1, media_input: 3, img: 1, img: 2, img: 3]
+
       import AkediaWeb.Helpers.User, only: [gravatar_url: 1, gravatar_url: 2]
       import AkediaWeb.Helpers.Time, only: [date_iso: 1, date_pretty: 1]
       import AkediaWeb.Markdown, only: [to_html: 1]
