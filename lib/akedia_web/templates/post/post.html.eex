@@ -1,0 +1,15 @@
+<article class="h-entry post">
+  <%= if @post.title do %>
+    <h3 class="p-name"> <%= @post.title %></h3>
+  <% end %>
+
+  <div class="e-content content <%= unless @post.title do %>p-name<% end %>">
+    <%= to_html(@post) %>
+  </div>
+
+  <div class="meta">
+    <time class="dt-published" datetime="<%= date_iso(@post.inserted_at) %>">
+      <%= link date_fuzzy(@post.inserted_at), to: Routes.post_url(@conn, :show, @post) %>
+    </time>
+  </div>
+</article>

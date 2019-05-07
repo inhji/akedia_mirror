@@ -1,6 +1,8 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<nav class="navbar navbar-expand-lg navbar-light">
   <div class="container">
-    <a class="navbar-brand" href="<%= Routes.public_path(@conn, :index) %>">Akedia</a>
+    <a class="navbar-brand" href="<%= Routes.public_path(@conn, :index) %>">
+      <img src="<%= Routes.static_path(@conn, "/images/logo.png") %>" width="30" height="30" alt="Inhji.de Logo">
+    </a>
     <button class="navbar-toggler" type="button" data-toggle="offcanvas" data-target="#navbarMain" aria-controls="navbarMain" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>

@@ -11,5 +11,7 @@ img.round {
 }
 
 img.inline {
-  height: 1rem;
+  height: $line-height;
+  vertical-align: middle;
+  display: inline-block;
 }

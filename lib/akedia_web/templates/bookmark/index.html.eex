@@ -1,35 +1,8 @@
-<h1>Lesezeichen
-<%= if @logged_in do %>
-  <%= link "New Bookmark", to: Routes.bookmark_path(@conn, :new), class: "btn btn-outline-primary btn-sm" %>
-<% end %>
-</h1>
-
-<%= for bookmark <- @bookmarks do %>
-<article class="bookmark h-entry">
-  <div class="card">
-    <div class="card-body">
-      <h5 class="card-title">
-        <%= if bookmark.favicon do %>
-          <img src="<%= favicon_url(bookmark.favicon) %>" class="round inline">
-        <% end %>
-        <a href="<%= bookmark.url %>" target="_blank" class="u-bookmark-of h-cite p-name text-body">
-          <%= bookmark.title %>
-        </a>
-      </h5>
-      <h6 class="card-subtitle mb-2 text-muted">
-        <time class="dt-published" datetime="<%= date_iso(bookmark.inserted_at) %>">
-          <%= link date_pretty(bookmark.inserted_at), to: Routes.bookmark_url(@conn, :show, bookmark), class: "text-muted" %>
-        </time>
-        <span>|</span>
-        <a href="<%= bookmark.url %>" class="text-muted" target="_blank"><%= tld(bookmark.url) %></a>
-        <span>|</span>
-        <%= render "topics.html", conn: @conn, topics: bookmark.entity.topics %>
-      </h6>
-      <p class="card-text e-content"><%= to_html(bookmark) %></p>
-    </div>
-  </div>
-</article>
-<% end %>
+<div class="bookmarks list h-feed">
+  <%= for bookmark <- @bookmarks do %>
+    <%= render "bookmark.html", conn: @conn, bookmark: bookmark %>
+  <% end %>
+</div>
 
 <%= if @logged_in do %>
   <%= link "New Bookmark", to: Routes.bookmark_path(@conn, :new), class: "btn btn-outline-primary" %>

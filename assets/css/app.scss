@@ -1,14 +1,26 @@
-/* This file is for your main application css. */
 $red: #d34;
 $purple: #4145df;
 $magenta: #ff0bcd;
 $blue: #0992d6;
 
+//
+// Bootstrap SASS Options
+//
+
 $theme-colors: (
   "primary": $purple
 );
-
 $enable-gradients: true;
+
+//
+// Custom Options
+//
+
+$line-height: 2rem;
+
+//
+// Imports
+//
 
 @import "~bootstrap/scss/bootstrap";
 
@@ -28,6 +40,10 @@ $enable-gradients: true;
 @import "custom/footer.scss";
 @import "custom/forms.scss";
 @import "custom/helpers.scss";
+
+//
+// App Styles
+//
 
 nav.navbar {
   .search-bar {
@@ -69,21 +85,24 @@ main#content {
 
   // General Post Styles
   article {
+    margin-bottom: 3rem;
+
+    .content {
+      font-family: serif;
+      font-size: 1.1rem;
+      line-height: $line-height;
+    }
+
     .meta {
-      a {
-        color: $text-muted;
-      }
+      color: $text-muted;
+      a { color: $text-muted; }
     }
   }
 
   article.bookmark {
-    p {
-      margin: 0;
+    .title a {
+      vertical-align: middle;
     }
-    h3 {
-      margin: 0;
-    }
-    margin-bottom: 2rem;
   }
 
   article.story {
@@ -96,15 +115,12 @@ main#content {
     }
 
     .content {
-      margin: 0 auto;
-      text-align: justify;
-      font-family: serif;
-      font-size: 1.1rem;
-      line-height: 1.8rem;
-
       @include media-breakpoint-up(lg) {
         width: 70%;
       }
+
+      margin: 0 auto;
+      text-align: justify;
     }
   }
 }

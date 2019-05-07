@@ -1,23 +1,4 @@
-<h1>Show Post</h1>
+<%= render "post.html", conn: @conn, post: @post %>
 
-<ul>
-
-  <li>
-    <strong>Title:</strong>
-    <%= @post.title %>
-  </li>
-
-  <li>
-    <strong>Content:</strong>
-    <%= @post.content %>
-  </li>
-
-  <li>
-    <strong>Slug:</strong>
-    <%= @post.slug %>
-  </li>
-
-</ul>
-
-<span><%= link "Edit", to: Routes.post_path(@conn, :edit, @post) %></span>
-<span><%= link "Back", to: Routes.post_path(@conn, :index) %></span>
+<%= link "Edit", to: Routes.post_path(@conn, :edit, @post) %>
+<%= link "Delete", to: Routes.post_path(@conn, :delete, @post), method: :delete, data: [confirm: "Are you sure?"] %>

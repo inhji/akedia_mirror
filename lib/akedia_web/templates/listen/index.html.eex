@@ -9,7 +9,7 @@
 <%= for listen <- @listens do %>
   <li class="list-group-item d-flex justify-content-between align-items-center">
     <span><%= listen.track %><span class="text-muted"> • <%= link listen.artist, to: Routes.listen_url(@conn, :artist, listen.artist), class: "text-muted" %></span></span>
-    <span class="badge badge-primary badge-pill"><%= Timex.from_now(listen.listened_at) %></span>
+    <span class="badge badge-primary badge-pill"><%= date_fuzzy(listen.listened_at) %></span>
   </li>
 <% end %>
 </ul>
