@@ -18,7 +18,7 @@ defmodule Akedia.Media.Image do
   def changeset(image, attrs) do
     image
     |> cast(attrs, [:text, :path])
-    |> cast_attachments(attrs, [:name])
+    |> cast_attachments(attrs, [:name], allow_paths: true)
     |> validate_required([:name, :text, :path])
   end
 end
