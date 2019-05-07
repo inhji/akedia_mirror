@@ -59,4 +59,33 @@ defmodule Akedia.Indie.Micropub.Properties do
       _ -> Map.put(props, key, nil)
     end
   end
+
+  def get_type_by_props(%{"bookmark-of" => _}), do: :bookmark
+  def get_type_by_props(%{"like-of" => _}), do: :like
+  def get_type_by_props(%{"in-reply-to" => _}), do: :post
+  def get_type_by_props(%{"content" => _}), do: :post
+  def get_type_by_props(_), do: :unknown
+
+  def get_tags(%{"category" => ""}), do: []
+  def get_tags(%{"category" => tags}), do: tags
+  def get_tags(_), do: []
+
+  def get_title(%{"name" => [title]}), do: title
+  def get_title(_), do: nil
+
+  def get_content(%{"content" => [content]}), do: content
+  def get_content(%{"content" => [%{"html" => [content_html]}]}), do: content_html
+  def get_content(_), do: nil
+
+  def get_bookmarked_url(%{"bookmark-of" => [url]}), do: url
+  def get_bookmarked_url(_), do: nil
+
+  def get_liked_url(%{"like-of" => [url]}), do: url
+  def get_liked_url(_), do: nil
+
+  def get_reply_to(%{"in-reply-to" => [reply_to]}), do: reply_to
+  def get_reply_to(_), do: nil
+
+  def is_published?(%{"post-status" => ["draft"]}), do: false
+  def is_published?(_), do: true
 end
