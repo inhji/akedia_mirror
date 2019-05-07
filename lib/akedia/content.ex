@@ -103,6 +103,7 @@ defmodule Akedia.Content do
   def delete_page(%Page{} = page) do
     Repo.delete(page)
     delete_entity(page.entity_id)
+    {:ok, page}
   end
 
   def change_page(%Page{} = page) do
@@ -144,6 +145,7 @@ defmodule Akedia.Content do
   def delete_bookmark(%Bookmark{} = bookmark) do
     Repo.delete(bookmark)
     delete_entity(bookmark.entity_id)
+    {:ok, bookmark}
   end
 
   def change_bookmark(%Bookmark{} = bookmark) do
