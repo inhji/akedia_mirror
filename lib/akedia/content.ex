@@ -1,7 +1,7 @@
 defmodule Akedia.Content do
   import Ecto.Query, warn: false
   alias Akedia.Repo
-  alias Akedia.Content.{Entity, Page, Story, Bookmark, Topic, EntityTopic, Like}
+  alias Akedia.Content.{Entity, Page, Story, Bookmark, Topic, EntityTopic, Like, Post}
 
   # Entity
 
@@ -210,6 +210,36 @@ defmodule Akedia.Content do
 
   def change_topic(%Topic{} = topic) do
     Topic.changeset(topic, %{})
+  end
+
+  # Post
+
+  def list_posts do
+    list(Post)
+  end
+
+  def get_post!(id) do
+    Post
+    |> Repo.get_by!(slug: id)
+    |> Repo.preload(entity: [:topics, :images])
+  end
+
+  def create_post(attrs \\ %{}, is_published \\ true) do
+    create_with_entity(Post, attrs, %{is_published: is_published})
+  end
+
+  def update_post(%Post{} = post, attrs) do
+    post
+    |> Post.changeset(attrs)
+    |> Repo.update()
+  end
+
+  def delete_post(%Post{} = post) do
+    Repo.delete(post)
+  end
+
+  def change_post(%Post{} = post) do
+    Post.changeset(post, %{})
   end
 
   # Tag Utils
