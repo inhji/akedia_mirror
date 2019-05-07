@@ -39,6 +39,7 @@ defmodule AkediaWeb.Router do
     resources "/topics", TopicController, only: [:show, :index]
     resources "/images", ImageController, only: [:show, :index]
     resources "/likes", LikeController, only: [:show, :index]
+    resources "/posts", PostController, only: [:show, :index]
 
     get "/search", SearchController, :search
 
@@ -85,5 +86,6 @@ defmodule AkediaWeb.Router do
     resources "/topics", TopicController, except: [:show, :index]
     resources "/images", ImageController, except: [:show, :index]
     resources "/likes", LikeController, except: [:show, :index]
+    resources "/posts", PostController, except: [:show, :index]
   end
 end
