@@ -16,7 +16,8 @@ config :akedia, Akedia.Settings,
   show_images: false,
   show_search: false,
   show_bookmarks: false,
-  show_more: false
+  show_more: false,
+  show_posts: false
 
 config :akedia, Akedia.Scheduler,
   jobs: [
