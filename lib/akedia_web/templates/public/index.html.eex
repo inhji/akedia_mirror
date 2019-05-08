@@ -2,7 +2,7 @@
   <div class="container">
     <%= if @has_user do %>
     <div class="media">
-      <img src="<%= gravatar_url(@current_user.credential.email, 100) %>" class="mr-3 avatar">
+      <img src="<%= avatar_path(@conn) %>" class="mr-3 avatar">
       <div class="media-body">
         <h1 class="display-4"><%= @current_user.name %></h1>
         <p class="lead"><%= to_html(@current_user.tagline) %></p>

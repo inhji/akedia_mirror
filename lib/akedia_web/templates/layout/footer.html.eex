@@ -5,7 +5,7 @@
         <a href="/" rel="me" class="u-url url uid">
             <span class="fn p-name"><%= @current_user.name %></span>
         </a>
-        <img class="u-photo avatar" src="<%= gravatar_url(@current_user.credential.email) %>" />
+        <img class="u-photo avatar" src="<%= avatar_path(@conn) %>" />
     </span>
 </p>
 <% else %>

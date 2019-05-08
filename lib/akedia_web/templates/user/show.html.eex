@@ -1,7 +1,7 @@
 <%= render SharedView, "user_nav.html", assigns %>
 
 <div class="media">
-  <img src="<%= gravatar_url(@user.credential.email) %>" class="mr-3 avatar" alt="...">
+  <img src="<%= avatar_path(@conn) %>" class="mr-3 avatar" alt="...">
   <div class="media-body">
     <h3 class="mt-0"><%= @user.name %> <small class="text-muted">aka <%= @user.username %></small></h3>
     <p>
