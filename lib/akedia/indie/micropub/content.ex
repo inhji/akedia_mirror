@@ -1,6 +1,7 @@
 defmodule Akedia.Indie.Micropub.Content do
   require Logger
   alias Akedia.Content
+  alias Akedia.Workers.URLScraper
   alias AkediaWeb.Endpoint
   alias AkediaWeb.Router.Helpers, as: Routes
 
