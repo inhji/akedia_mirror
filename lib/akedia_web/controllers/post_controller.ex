@@ -11,18 +11,20 @@ defmodule AkediaWeb.PostController do
 
   def new(conn, _params) do
     changeset = Content.change_post(%Post{})
-    render(conn, "new.html", changeset: changeset)
+    render(conn, "new.html", changeset: changeset, tags: [])
   end
 
-  def create(conn, %{"post" => post_params}) do
+  def create(conn, %{"post" => %{"topics" => topics} = post_params}) do
     case Content.create_post(post_params) do
       {:ok, post} ->
+        Content.add_tags(post, topics)
+
         conn
         |> put_flash(:info, "Post created successfully.")
         |> redirect(to: Routes.post_path(conn, :show, post))
 
       {:error, %Ecto.Changeset{} = changeset} ->
-        render(conn, "new.html", changeset: changeset)
+        render(conn, "new.html", changeset: changeset, tags: [])
     end
   end
 
@@ -33,11 +35,12 @@ defmodule AkediaWeb.PostController do
 
   def edit(conn, %{"id" => id}) do
     post = Content.get_post!(id)
+    tags = Content.tags_loaded(post)
     changeset = Content.change_post(post)
-    render(conn, "edit.html", post: post, changeset: changeset)
+    render(conn, "edit.html", post: post, changeset: changeset, tags: tags)
   end
 
-  def update(conn, %{"id" => id, "post" => post_params}) do
+  def update(conn, %{"id" => id, "post" => %{"topics" => topics} = post_params}) do
     post = Content.get_post!(id)
 
     case Content.update_post(post, post_params) do
