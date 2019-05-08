@@ -5,12 +5,18 @@
         <a href="/" rel="me" class="u-url url uid">
             <span class="fn p-name"><%= @current_user.name %></span>
         </a>
-        <img class="u-photo avatar" src="<%= avatar_path(@conn) %>" />
+        <noscript>
+          <img class="u-photo avatar" src="<%= avatar_path(@conn) %>" />
+          <span class="p-nickname"><%= @current_user.username %></span>
+          <span class="p-note"><%= @current_user.bio %></span>
+        </noscript>
     </span>
+    <span> · </span>
+    <a href="https://github.com/inhji/akedia" target="_blank">Akedia v<%= version() %></a>
 </p>
-<% else %>
 <p>
-    <span>&copy; 2019 You</span>
+  <a href="https://xn--sr8hvo.ws/%F0%9F%8F%84%F0%9F%93%80%F0%9F%8C%8F/previous">↤</a>
+  <span> 🕸💍 </span>
+  <a href="https://xn--sr8hvo.ws/%F0%9F%8F%84%F0%9F%93%80%F0%9F%8C%8F/next">↦</a>
 </p>
 <% end %>
-<p>Akedia v<%= version() %> • Live slow, die old</p>
