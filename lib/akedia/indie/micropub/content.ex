@@ -1,7 +1,7 @@
 defmodule Akedia.Indie.Micropub.Content do
   require Logger
   alias Akedia.Content
-  alias Akedia.Workers.{URLScraper, FaviconScraper}
+  alias Akedia.Workers.{FaviconScraper}
   alias AkediaWeb.Endpoint
   alias AkediaWeb.Router.Helpers, as: Routes
 
@@ -9,14 +9,13 @@ defmodule Akedia.Indie.Micropub.Content do
 
   def create_bookmark(title, content, url, tags, is_published) do
     attrs = %{
-      "title" => title || Slugger.slugify(url),
+      "title" => title,
       "content" => content,
       "url" => url
     }
 
     case Content.create_bookmark(attrs, is_published) do
       {:ok, bookmark} ->
-        Que.add(URLScraper, bookmark)
         Que.add(FaviconScraper, bookmark)
         Akedia.Content.add_tags(bookmark, tags)
         Logger.info("Bookmark created!")
