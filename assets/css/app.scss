@@ -123,6 +123,22 @@ main#content {
       text-align: justify;
     }
   }
+
+  .stories {
+    article.story {
+      margin-bottom: 0;
+
+      .intro {
+        padding-top: 2rem;
+        padding-bottom: 2rem;
+        margin-bottom: 1rem;
+      }
+
+      p {
+        margin: 0;
+      }
+    }
+  }
 }
 
 // Homepage
@@ -131,11 +147,16 @@ main#content {
   background-position: center center;
   background-size: cover;
 
-  color: $white;
+  color: white;
   text-shadow: black 1px 1px 1px;
 
   padding-top: 4rem;
   padding-bottom: 4rem;
+
+  a {
+    color: white;
+    text-decoration: none;
+  }
 }
 
 table tr:first-child td {

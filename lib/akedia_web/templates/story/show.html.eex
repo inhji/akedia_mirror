@@ -1,6 +1,12 @@
 <article class="story h-entry">
   <div class="intro <%= intro_class(@story) %>" style="<%= intro_style(@story) %>">
-    <h1 class="display-4 p-name"><%= @story.title %></h1>
+    <h1 class="display-3 p-name"><%= @story.title %></h1>
+    <p class="lead">
+      <time class="dt-published" datetime="<%= date_iso(@story.inserted_at) %>">
+        <%= date_pretty(@story.inserted_at) %>
+      </time>
+      <a href="/" rel="author" class="p-author h-card"> by <%= @current_user.name %> </a>
+    </p>
   </div>
 
   <div class="content e-content">
@@ -10,4 +16,5 @@
 
 <%= if @logged_in do %>
   <%= link "Edit", to: Routes.story_path(@conn, :edit, @story), class: "btn btn-outline-primary" %>
+  <%= link "Delete", to: Routes.story_path(@conn, :delete, @story), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-outline-danger" %>
 <% end %>

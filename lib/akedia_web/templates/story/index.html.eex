@@ -1,35 +1,24 @@
 <h1>Geschichten</h1>
 
-<table class="table list stories">
-  <tbody>
+<div class="stories list h-feed">
+  <div class="row">
     <%= for story <- @stories do %>
-    <tr>
-      <td><%= link story.title, to: Routes.story_path(@conn, :show, story) %></td>
-      <td class="topics">
-        <%= for topic <- story.entity.topics do %>
-          <%= link to: Routes.topic_path(@conn, :tagged, topic) do %>
-            <div class="badge badge-secondary"><%= topic.text %></div><% end %>
-        <% end %>
-      </td>
-      <%= if @logged_in do %>
-      <td>
-        <%= if story.entity.is_published do %>
-          <div class="badge badge-primary">Published</div>
-        <% else %>
-          <div class="badge badge-primary">Private</div>
-        <% end %>
-      </td>
-      <td>
-        <div class="btn-group" role="group" aria-label="Basic example">
-          <%= link "Edit", to: Routes.story_path(@conn, :edit, story), class: "btn btn-secondary" %>
-          <%= link "Delete", to: Routes.story_path(@conn, :delete, story), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger" %>
+    <article class="story col-lg-6 h-entry">
+      <a href="<%= Routes.story_path(@conn, :show, story) %>" class="u-url u-uid">
+        <div class="intro <%= intro_class(story) %>" style="<%= intro_style(story) %>">
+          <h1 class="display-5 p-name">
+            <%= story.title %>
+          </h1>
+          <time class="dt-published" datetime="<%= date_iso(story.inserted_at) %>">
+            <%= date_pretty(story.inserted_at) %>
+          </time>
+          <a href="/" rel="author" class="p-author h-card"> by <%= @current_user.name %> </a>
         </div>
-      </td>
-      <% end %>
-    </tr>
+      </a>
+    </article>
     <% end %>
-  </tbody>
-</table>
+  </div>
+</div>
 
 <%= if @logged_in do %>
   <%= link "New Story", to: Routes.story_path(@conn, :new), class: "btn btn-outline-primary" %>
