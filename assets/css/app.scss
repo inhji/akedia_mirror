@@ -183,15 +183,11 @@ table tr:first-child td {
   color: white;
   font-weight: bold;
 }
-.badge.bookmark {
-  background-color: $purple;
-}
-.badge.story {
-  background-color: $magenta;
-}
-.badge.page {
-  background-color: $blue;
-}
+
+.badge.post { background-color: $red;}
+.badge.bookmark { background-color: $purple;}
+.badge.story { background-color: $magenta;}
+.badge.page { background-color: $blue;}
 
 .image-picker {
   display: flex;

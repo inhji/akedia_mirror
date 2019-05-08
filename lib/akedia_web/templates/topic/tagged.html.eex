@@ -1,4 +1,4 @@
-<h1>Tagged with "<%= @topic.text %>" 
+<h1>Tagged with "<%= @topic.text %>"
   <%= if @logged_in do %>
     <small><%= link "Edit", to: Routes.topic_url(@conn, :edit, @topic) %></small>
   <% end %>
@@ -11,14 +11,16 @@
       %{bookmark: %{id: _}} -> {entity.bookmark, "Bookmark", &Routes.bookmark_path/3}
       %{page: %{id: _}} -> {entity.page, "Page", &Routes.page_path/3}
       %{story: %{id: _}} -> {entity.story, "Story", &Routes.story_path/3}
+      %{post: %{id: _}} -> {entity.post, "Post", &Routes.post_path/3}
+      %{like: %{id: _}} -> {entity.like, "Like", &Routes.like_path/3}
     end %>
     <tr>
       <td>
         <%= link to: content_path.(@conn, :index, []) do %>
-          <div class="badge type <%= String.downcase(type) %>"><%= type %></div><% end %>
+        <div class="badge type <%= String.downcase(type) %>"><%= type %></div><% end %>
       </td>
       <td>
-        <%= link content.title, to: content_path.(@conn, :show, content) %>
+        <%= link content.title || content.content, to: content_path.(@conn, :show, content) %>
       </td>
     </tr>
   <% end %>
