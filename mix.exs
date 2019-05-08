@@ -56,12 +56,12 @@ defmodule Akedia.MixProject do
       {:plug_micropub, git: "https://github.com/inhji/plug_micropub.git", branch: "master"},
       {:httpoison, "~> 1.5", override: true},
       {:timex, "~> 3.5"},
-      {:indieweb, "~> 0.0.42"},
       {:phoenix_active_link, "~> 0.2.1"},
       {:scrape, "~> 2.0"},
       {:html5ever, "~> 0.7.0", override: true},
-      {:que, "~> 0.10.0" },
-      {:quantum, "~> 2.3"}
+      {:que, "~> 0.10.0"},
+      {:quantum, "~> 2.3"},
+      {:webmentions, "~> 0.3.4"}
     ]
   end
 
