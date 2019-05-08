@@ -2,10 +2,13 @@ defmodule Akedia.Content.Topic do
   use Ecto.Schema
   import Ecto.Changeset
   alias Akedia.Content.Entity
+  alias Akedia.Slug
 
-  @derive {Phoenix.Param, key: :text}
+  @derive {Phoenix.Param, key: :slug}
   schema "topics" do
     field :text, :string
+    field :slug, :string
+
     many_to_many(:entities, Entity, join_through: "entity_topics")
 
     timestamps()
@@ -16,7 +19,7 @@ defmodule Akedia.Content.Topic do
     topic
     |> cast(attrs, [:text])
     |> validate_required([:text])
-    |> update_change(:text, &String.downcase/1)
-    |> unique_constraint(:text)
+    |> Slug.maybe_generate_slug(add_random: false)
+    |> unique_constraint(:slug)
   end
 end

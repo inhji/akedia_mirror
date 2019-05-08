@@ -50,7 +50,6 @@ defmodule Akedia.MixProject do
       {:arc_ecto, "~> 0.11.1"},
       {:credo, "~> 1.0.0", only: [:dev, :test], runtime: false},
       {:ex_machina, "~> 2.3", only: :test},
-      {:ecto_autoslug_field, "~> 1.0"},
       {:distillery, "~> 2.0"},
       {:edeliver, "~> 1.6"},
       {:plug_micropub, git: "https://github.com/inhji/plug_micropub.git", branch: "master"},
@@ -61,7 +60,8 @@ defmodule Akedia.MixProject do
       {:html5ever, "~> 0.7.0", override: true},
       {:que, "~> 0.10.0"},
       {:quantum, "~> 2.3"},
-      {:webmentions, "~> 0.3.4"}
+      {:webmentions, "~> 0.3.4"},
+      {:slugger, "~> 0.3.0"}
     ]
   end
 

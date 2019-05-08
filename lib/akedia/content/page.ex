@@ -1,12 +1,13 @@
 defmodule Akedia.Content.Page do
   use Ecto.Schema
   import Ecto.Changeset
-  alias Akedia.Content.{Entity, TitleSlug}
+  alias Akedia.Content.{Entity}
+  alias Akedia.Slug
 
   @derive {Phoenix.Param, key: :slug}
   schema "pages" do
     field :content, :string
-    field :slug, TitleSlug.Type
+    field :slug, :string
     field :title, :string
 
     belongs_to :entity, Entity
@@ -19,7 +20,6 @@ defmodule Akedia.Content.Page do
     page
     |> cast(attrs, [:title, :slug, :content, :entity_id])
     |> validate_required([:title, :content])
-    |> TitleSlug.maybe_generate_slug()
-    |> TitleSlug.unique_constraint()
+    |> Slug.maybe_generate_slug()
   end
 end
