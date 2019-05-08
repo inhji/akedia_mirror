@@ -2,16 +2,33 @@
   <div class="intro <%= intro_class(@story) %>" style="<%= intro_style(@story) %>">
     <h1 class="display-3 p-name"><%= @story.title %></h1>
     <p class="lead">
-      <time class="dt-published" datetime="<%= date_iso(@story.inserted_at) %>">
-        <%= date_pretty(@story.inserted_at) %>
-      </time>
-      <a href="/" rel="author" class="p-author h-card"> by <%= @current_user.name %> </a>
+      <a href="<%= Routes.story_path(@conn, :show, @story) %>" class="u-url u-uid">
+        <time class="dt-published" datetime="<%= date_iso(@story.inserted_at) %>">
+          <%= date_pretty(@story.inserted_at) %>
+        </time>
+      </a>
+      <span> by </span>
+      <a href="/" rel="author" class="h-card"><span class="p-author"><%= @current_user.name %></span></a>
     </p>
   </div>
 
-  <div class="content e-content">
-    <%= to_html(@story) %>
+  <div class="content">
+    <div class="e-content">
+      <%= to_html(@story) %>
+    </div>
+
+    <div class="text-muted">
+      <%= if !Enum.empty?(@story.entity.topics) do %>
+        <span>Topics: </span>
+        <%= for topic <- @story.entity.topics do %>
+          <a class="p-category text-muted" href="<%= Routes.topic_path(@conn, :tagged, topic) %>">
+            <%= topic.text %>
+          </a>
+        <% end %>
+      <% end %>
+    </div>
   </div>
+
 </article>
 
 <%= if @logged_in do %>

@@ -12,7 +12,7 @@
           <time class="dt-published" datetime="<%= date_iso(story.inserted_at) %>">
             <%= date_pretty(story.inserted_at) %>
           </time>
-          <a href="/" rel="author" class="p-author h-card"> by <%= @current_user.name %> </a>
+          <a href="/" rel="author" class="h-card"><span class="p-author"><%= @current_user.name %></span></a>
         </div>
       </a>
     </article>
