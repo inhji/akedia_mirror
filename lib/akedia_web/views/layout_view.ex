@@ -4,8 +4,4 @@ defmodule AkediaWeb.LayoutView do
   def version do
     Application.spec(:akedia, :vsn)
   end
-
-  def canonical_url do
-    Akedia.url()
-  end
 end
