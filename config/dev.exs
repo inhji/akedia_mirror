@@ -8,6 +8,7 @@ use Mix.Config
 # with webpack to recompile .js and .css sources.
 config :akedia, AkediaWeb.Endpoint,
   http: [port: 4000],
+  url: (System.get_env("TUNNEL") && [host: "tunnel.inhji.de", port: 443, scheme: "https"]) || nil,
   debug_errors: true,
   code_reloader: true,
   check_origin: false,
