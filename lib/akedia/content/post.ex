@@ -17,7 +17,7 @@ defmodule Akedia.Content.Post do
   @doc false
   def changeset(post, attrs) do
     post
-    |> cast(attrs, [:title, :content, :slug, :entity_id])
+    |> cast(attrs, [:title, :content, :slug, :reply_to, :entity_id])
     |> validate_required([:content])
     |> maybe_generate_slug()
     |> unique_constraint(:slug)

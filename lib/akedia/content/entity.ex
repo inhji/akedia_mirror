@@ -1,7 +1,7 @@
 defmodule Akedia.Content.Entity do
   use Ecto.Schema
   import Ecto.Changeset
-  alias Akedia.Content.{Topic, Bookmark, Page, Story, Like}
+  alias Akedia.Content.{Topic, Bookmark, Page, Story, Like, Post}
   alias Akedia.Media.Image
 
   schema "entities" do
@@ -15,6 +15,7 @@ defmodule Akedia.Content.Entity do
     has_one :page, Page
     has_one :story, Story
     has_one :like, Like
+    has_one :post, Post
 
     timestamps()
   end
