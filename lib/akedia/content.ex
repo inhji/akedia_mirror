@@ -183,13 +183,13 @@ defmodule Akedia.Content do
   def list_topics do
     Topic
     |> Repo.all()
-    |> Repo.preload(entities: [:bookmark, :story, :page])
+    |> Repo.preload(entities: [:bookmark, :story, :page, :post, :like])
   end
 
   def get_topic!(id) do
     Topic
-    |> Repo.get_by!(text: id)
-    |> Repo.preload(entities: [:bookmark, :story, :page])
+    |> Repo.get_by!(slug: id)
+    |> Repo.preload(entities: [:bookmark, :story, :page, :post, :like])
   end
 
   def create_topic(attrs \\ %{}) do
