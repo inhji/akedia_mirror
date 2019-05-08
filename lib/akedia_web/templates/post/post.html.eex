@@ -9,7 +9,20 @@
 
   <div class="meta">
     <time class="dt-published" datetime="<%= date_iso(@post.inserted_at) %>">
-      <%= link date_fuzzy(@post.inserted_at), to: Routes.post_url(@conn, :show, @post) %>
+      <%= link date_fuzzy(@post.inserted_at), to: Routes.post_url(@conn, :show, @post), class: "u-uid u-url" %>
     </time>
+    <%= if @post.reply_to do %>
+      <span>|</span>
+      <i class="fas fa-reply"></i> <a href="<%= @post.reply_to %>" class="u-in-reply-to" rel="in-reply-to"><%= @post.reply_to %></a>
+    <% end %>
   </div>
+
+  <noscript>  
+    <div class="h-card p-author">
+      <img src="<%= Routes.static_path(@conn, "/images/me.jpg") %>" class="u-photo">
+      <a href="/" class="u-url" rel="author">
+        <span class="p-name"><%= @current_user.name %></span>
+      </a>
+    </div>
+  </noscript>
 </article>

@@ -1,6 +1,6 @@
 <div class="posts list h-feed">
   <%= for post <- @posts do %>
-    <%= render "post.html", conn: @conn, post: post %>
+    <%= render "post.html", conn: @conn, post: post, current_user: @current_user %>
   <% end %>
 </div>
 
