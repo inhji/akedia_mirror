@@ -15,9 +15,10 @@
       <span>|</span>
       <i class="fas fa-reply"></i> <a href="<%= @post.reply_to %>" class="u-in-reply-to" rel="in-reply-to"><%= @post.reply_to %></a>
     <% end %>
+    <%= render SharedView, "topics.html", conn: @conn, topics: @post.entity.topics %>
   </div>
 
-  <noscript>  
+  <noscript>
     <div class="h-card p-author">
       <img src="<%= Routes.static_path(@conn, "/images/me.jpg") %>" class="u-photo">
       <a href="/" class="u-url" rel="author">
