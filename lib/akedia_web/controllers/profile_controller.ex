@@ -14,12 +14,12 @@ defmodule AkediaWeb.ProfileController do
     render(conn, "new.html", changeset: changeset)
   end
 
-  def create(conn, %{"profile" => profile_params}) do  
+  def create(conn, %{"profile" => profile_params}) do
     case Accounts.create_profile(profile_params) do
-      {:ok, profile} ->
+      {:ok, _profile} ->
         conn
         |> put_flash(:info, "Profile created successfully.")
-        |> redirect(to: Routes.profile_path(conn, :show, profile))
+        |> redirect(to: Routes.profile_path(conn, :index))
 
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "new.html", changeset: changeset)
@@ -41,10 +41,10 @@ defmodule AkediaWeb.ProfileController do
     profile = Accounts.get_profile!(id)
 
     case Accounts.update_profile(profile, profile_params) do
-      {:ok, profile} ->
+      {:ok, _profile} ->
         conn
         |> put_flash(:info, "Profile updated successfully.")
-        |> redirect(to: Routes.profile_path(conn, :show, profile))
+        |> redirect(to: Routes.profile_path(conn, :index))
 
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "edit.html", profile: profile, changeset: changeset)
