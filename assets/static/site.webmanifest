@@ -1,19 +1,33 @@
 {
-    "name": "",
-    "short_name": "",
+    "name": "Inhji.de",
+    "short_name": "Inhji.de",
+    "start_url": "/",
     "icons": [
         {
-            "src": "/android-chrome-192x192.png",
+            "src": "/images/icon/android-chrome-192x192.png",
             "sizes": "192x192",
             "type": "image/png"
         },
         {
-            "src": "/android-chrome-512x512.png",
+            "src": "/images/icon/android-chrome-512x512.png",
             "sizes": "512x512",
             "type": "image/png"
         }
     ],
+    "share_target":
+    {
+        "action": "/share",
+        "method": "POST",
+        "enctype": "application/x-www-form-urlencoded",
+        "params":
+        {
+            "title": "title",
+            "text": "text",
+            "url": "url"
+        }
+    },
     "theme_color": "#4145df",
     "background_color": "#ffffff",
-    "display": "standalone"
+    "orientation": "portrait",
+    "display": "minimal-ui"
 }

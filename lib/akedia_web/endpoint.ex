@@ -13,7 +13,7 @@ defmodule AkediaWeb.Endpoint do
     at: "/",
     from: :akedia,
     gzip: false,
-    only: ~w(css fonts images js favicon.ico robots.txt)
+    only: ~w(css fonts images js favicon.ico robots.txt site.webmanifest sw.js)
 
   plug Plug.Static,
     at: "/uploads",

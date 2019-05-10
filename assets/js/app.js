@@ -11,7 +11,6 @@ import css from "../css/app.scss"
 //
 import "phoenix_html"
 import "bootstrap"
-import Prism from 'prismjs'
 
 // Import local files
 //
@@ -20,7 +19,13 @@ import Prism from 'prismjs'
 import "./offcanvas"
 import "./media_library"
 import "./zenmode"
+import "./prism"
 
-document.addEventListener('DOMContentLoaded', function() {
-  Prism.highlightAll()
-})
+if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/sw.js')
+      .then(function(reg){
+        console.log("Service worker registered.");
+     }).catch(function(err) {
+        console.log("Service worker not registered. This happened:", err)
+    });
+ }

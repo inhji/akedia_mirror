@@ -12,7 +12,7 @@
         </noscript>
     </span>
     <span> · </span>
-    <a href="https://github.com/inhji/akedia" target="_blank">Akedia v<%= version() %></a>
+    <a href="https://github.com/inhji/akedia" target="_blank" rel="noreferrer">Akedia v<%= version() %></a>
 </p>
 <p>
   <a href="https://xn--sr8hvo.ws/%F0%9F%8F%84%F0%9F%93%80%F0%9F%8C%8F/previous">↤</a>
