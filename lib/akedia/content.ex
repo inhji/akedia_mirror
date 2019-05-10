@@ -181,7 +181,10 @@ defmodule Akedia.Content do
   # Topic
 
   def list_topics do
+
+
     Topic
+    |> order_by(:slug)
     |> Repo.all()
     |> Repo.preload(entities: [:bookmark, :story, :page, :post, :like])
   end
