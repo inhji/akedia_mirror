@@ -42,6 +42,7 @@ defmodule AkediaWeb.PostController do
 
   def update(conn, %{"id" => id, "post" => %{"topics" => topics} = post_params}) do
     post = Content.get_post!(id)
+    Content.update_tags(post, topics)
 
     case Content.update_post(post, post_params) do
       {:ok, post} ->
