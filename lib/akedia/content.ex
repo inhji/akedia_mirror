@@ -181,8 +181,6 @@ defmodule Akedia.Content do
   # Topic
 
   def list_topics do
-
-
     Topic
     |> order_by(:slug)
     |> Repo.all()
@@ -248,8 +246,13 @@ defmodule Akedia.Content do
   # Tag Utils
 
   def add_tag(entity, topic_text) when is_binary(topic_text) do
+    slug =
+      topic_text
+      |> Slugger.slugify()
+      |> String.downcase()
+
     topic =
-      case Repo.get_by(Topic, %{text: topic_text}) do
+      case Repo.get_by(Topic, %{slug: slug}) do
         nil ->
           %Topic{}
           |> Topic.changeset(%{text: topic_text})
