@@ -19,7 +19,7 @@ defmodule Akedia.Indie.Micropub.Content do
         Que.add(FaviconScraper, bookmark)
         Akedia.Content.add_tags(bookmark, tags)
         Logger.info("Bookmark created!")
-        {:ok, :created, Routes.bookmark_url(Endpoint, :show, bookmark)}
+        {:ok, :created, Akedia.url(bookmark)}
 
       {:error, error} ->
         Logger.warn("Error while creating bookmark: #{inspect(error)}")
@@ -33,7 +33,7 @@ defmodule Akedia.Indie.Micropub.Content do
     case Content.create_like(attrs, is_published) do
       {:ok, like} ->
         Logger.info("Like created!")
-        {:ok, :created, Routes.like_url(Endpoint, :show, like)}
+        {:ok, :created, Akedia.url(like)}
 
       {:error, error} ->
         Logger.warn("Error while creating like: #{inspect(error)}")
@@ -48,7 +48,7 @@ defmodule Akedia.Indie.Micropub.Content do
       {:ok, post} ->
         Logger.info("Post created!")
         Akedia.Content.add_tags(post, tags)
-        {:ok, :created, Routes.post_url(Endpoint, :show, post)}
+        {:ok, :created, Akedia.url(post)}
 
       {:error, error} ->
         Logger.warn("Error while creating post: #{inspect(error)}")
