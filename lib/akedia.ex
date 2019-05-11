@@ -7,12 +7,12 @@ defmodule Akedia do
   if it comes from the database, an external API or others.
   """
   alias Akedia.Content.{Bookmark, Like, Story, Page, Post}
-  alias AkediaWeb.{Router, Endpoint}
   alias AkediaWeb.Router.Helpers, as: Routes
+  alias AkediaWeb.Endpoint
 
   def url do
     Endpoint
-    |> Router.helpers().url()
+    |> Routes.url()
     |> URI.parse()
     |> to_string()
     |> String.trim_trailing("/")
