@@ -1,26 +1,5 @@
-<h1>Listing Likes</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Url</th>
-
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
 <%= for like <- @likes do %>
-    <tr>
-      <td><%= like.url %></td>
-
-      <td>
-        <%= link "Show", to: Routes.like_path(@conn, :show, like) %>
-        <%= link "Edit", to: Routes.like_path(@conn, :edit, like) %>
-        <%= link "Delete", to: Routes.like_path(@conn, :delete, like), method: :delete, data: [confirm: "Are you sure?"] %>
-      </td>
-    </tr>
+  <%= render "like.html", Map.put(assigns, :like, like) %>
 <% end %>
-  </tbody>
-</table>
 
-<span><%= link "New Like", to: Routes.like_path(@conn, :new) %></span>
+<span><%= link "New Like", to: Routes.like_path(@conn, :new), class: "btn btn-primary" %></span>

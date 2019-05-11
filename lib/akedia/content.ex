@@ -155,7 +155,7 @@ defmodule Akedia.Content do
   # Like
 
   def list_likes do
-    Repo.all(Like)
+    list(Like)
   end
 
   def get_like!(id) do
