@@ -17,6 +17,8 @@ defmodule AkediaWeb.LikeController do
   def create(conn, %{"like" => like_params}) do
     case Content.create_like(like_params) do
       {:ok, like} ->
+        Que.add(Akedia.Workers.Webmention, like)
+
         conn
         |> put_flash(:info, "Like created successfully.")
         |> redirect(to: Routes.like_path(conn, :show, like))
@@ -42,6 +44,8 @@ defmodule AkediaWeb.LikeController do
 
     case Content.update_like(like, like_params) do
       {:ok, like} ->
+        Que.add(Akedia.Workers.Webmention, like)
+
         conn
         |> put_flash(:info, "Like updated successfully.")
         |> redirect(to: Routes.like_path(conn, :show, like))
