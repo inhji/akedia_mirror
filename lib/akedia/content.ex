@@ -369,22 +369,18 @@ defmodule Akedia.Content do
   end
 
   def list(schema, show_all, constraint \\ [desc: :inserted_at]) do
-    case show_all do
-      true -> list_all(schema, constraint)
-      false -> list_published(schema, constraint)
-    end
-  end
+    results =
+      case show_all do
+        true ->
+          schema
 
-  def list_all(schema, constraint) do
-    schema
+        false ->
+          schema
+          |> join(:inner, [s], e in Entity, on: s.entity_id == e.id and e.is_published == true)
+      end
+
+    results
     |> order_by(^constraint)
-    |> Repo.all()
-    |> Repo.preload(entity: [:topics, :images])
-  end
-
-  def list_published(schema, constraint \\ [desc: :inserted_at]) do
-    schema
-    |> join(:inner, [s], e in Entity, on: s.entity_id == e.id and e.is_published == true)
     |> Repo.all()
     |> Repo.preload(entity: [:topics, :images])
   end
