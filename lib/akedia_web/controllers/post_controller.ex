@@ -5,7 +5,7 @@ defmodule AkediaWeb.PostController do
   alias Akedia.Content.Post
 
   def index(conn, _params) do
-    posts = Content.list_posts()
+    posts = Content.list_posts(logged_in?(conn))
     render(conn, "index.html", posts: posts)
   end
 

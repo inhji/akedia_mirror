@@ -6,12 +6,7 @@ defmodule AkediaWeb.BookmarkController do
   alias Akedia.Workers.{FaviconScraper}
 
   def index(conn, _params) do
-    bookmarks =
-      case logged_in?(conn) do
-        true -> Content.list_bookmarks()
-        false -> Content.list_published_bookmarks()
-      end
-
+    bookmarks = Content.list_bookmarks(logged_in?(conn))
     render_index_or_empty(conn, bookmarks, bookmarks: bookmarks)
   end
 

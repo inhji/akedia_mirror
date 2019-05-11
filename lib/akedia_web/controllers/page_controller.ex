@@ -5,12 +5,7 @@ defmodule AkediaWeb.PageController do
   alias Akedia.Content.Page
 
   def index(conn, _params) do
-    pages =
-      case logged_in?(conn) do
-        true -> Content.list_pages()
-        false -> Content.list_published_pages()
-      end
-
+    pages = Content.list_pages(logged_in?(conn))
     render_index_or_empty(conn, pages, pages: pages)
   end
 

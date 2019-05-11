@@ -38,12 +38,8 @@ defmodule Akedia.Content do
 
   # Story
 
-  def list_stories do
-    list(Story)
-  end
-
-  def list_published_stories() do
-    list_published(Story)
+  def list_stories(show_all \\ true) do
+    list(Story, show_all)
   end
 
   def get_story!(id) do
@@ -75,12 +71,8 @@ defmodule Akedia.Content do
 
   # Page
 
-  def list_pages do
-    list(Page)
-  end
-
-  def list_published_pages() do
-    list_published(Page)
+  def list_pages(show_all \\ true) do
+    list(Page, show_all)
   end
 
   def get_page!(id) do
@@ -112,15 +104,9 @@ defmodule Akedia.Content do
 
   # Bookmark
 
-  def list_bookmarks do
+  def list_bookmarks(show_all \\ true) do
     Bookmark
-    |> list()
-    |> Repo.preload(:favicon)
-  end
-
-  def list_published_bookmarks do
-    Bookmark
-    |> list_published()
+    |> list(show_all)
     |> Repo.preload(:favicon)
   end
 
@@ -154,8 +140,8 @@ defmodule Akedia.Content do
 
   # Like
 
-  def list_likes do
-    list(Like)
+  def list_likes(show_all \\ true) do
+    list(Like, show_all)
   end
 
   def get_like!(id) do
@@ -219,8 +205,8 @@ defmodule Akedia.Content do
 
   # Post
 
-  def list_posts do
-    list(Post)
+  def list_posts(show_all \\ true) do
+    list(Post, show_all)
   end
 
   def get_post!(id) do
@@ -382,7 +368,14 @@ defmodule Akedia.Content do
       preload: [:bookmark, :page, :story, :topics]
   end
 
-  def list(schema, constraint \\ [desc: :inserted_at]) do
+  def list(schema, show_all, constraint \\ [desc: :inserted_at]) do
+    case show_all do
+      true -> list_all(schema, constraint)
+      false -> list_published(schema, constraint)
+    end
+  end
+
+  def list_all(schema, constraint) do
     schema
     |> order_by(^constraint)
     |> Repo.all()
@@ -390,13 +383,8 @@ defmodule Akedia.Content do
   end
 
   def list_published(schema, constraint \\ [desc: :inserted_at]) do
-    # This seems utterly complicated but okay for now
-    # join is needed to show just published entities
-    # group_by is needed to remove duplicate items from joined query
     schema
-    |> join(:left, [s], e in Entity, on: e.is_published == true)
-    |> group_by([s], [s.id, s.entity_id])
-    |> order_by(^constraint)
+    |> join(:inner, [s], e in Entity, on: s.entity_id == e.id and e.is_published == true)
     |> Repo.all()
     |> Repo.preload(entity: [:topics, :images])
   end

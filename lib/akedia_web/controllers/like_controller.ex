@@ -5,7 +5,7 @@ defmodule AkediaWeb.LikeController do
   alias Akedia.Content.Like
 
   def index(conn, _params) do
-    likes = Content.list_likes()
+    likes = Content.list_likes(true)
     render(conn, "index.html", likes: likes)
   end
 
