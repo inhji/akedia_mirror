@@ -158,7 +158,11 @@ defmodule Akedia.Content do
     Repo.all(Like)
   end
 
-  def get_like!(id), do: Repo.get!(Like, id)
+  def get_like!(id) do
+    Like
+    |> Repo.get!(id)
+    |> Repo.preload(entity: [:topics, :images])
+  end
 
   def create_like(attrs \\ %{}, is_published \\ false) do
     create_with_entity(Like, attrs, %{is_published: is_published})

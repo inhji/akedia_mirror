@@ -14,7 +14,7 @@ defmodule Akedia.Content.Like do
   @doc false
   def changeset(like, attrs) do
     like
-    |> cast(attrs, [:url])
+    |> cast(attrs, [:url, :entity_id])
     |> validate_required([:url])
   end
 end

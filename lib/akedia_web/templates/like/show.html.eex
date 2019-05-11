@@ -1,13 +1,5 @@
-<h1>Show Like</h1>
-
-<ul>
-
-  <li>
-    <strong>Url:</strong>
-    <%= @like.url %>
-  </li>
-
-</ul>
+<%= render "like.html", assigns %>
 
 <span><%= link "Edit", to: Routes.like_path(@conn, :edit, @like) %></span>
 <span><%= link "Back", to: Routes.like_path(@conn, :index) %></span>
+<span><%= link "Delete", to: Routes.like_path(@conn, :delete, @like), method: :delete, data: [confirm: "Are you sure?"] %></span>

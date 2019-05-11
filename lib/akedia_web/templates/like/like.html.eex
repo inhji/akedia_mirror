@@ -1,0 +1,16 @@
+<article class="like h-entry">
+  <h3 class="title">
+    <a href="<%= @like.url %>" target="_blank" class="u-like-of h-cite p-name text-body">
+      <%= @like.url %>
+    </a>
+  </h3>
+
+  <div class="meta">
+    <time class="dt-published" datetime="<%= date_iso(@like.inserted_at) %>">
+      <%= link date_fuzzy(@like.inserted_at), to: Routes.like_url(@conn, :show, @like) %>
+    </time>
+    <%= render SharedView, "topics.html", conn: @conn, topics: @like.entity.topics %>
+  </div>
+
+  <%= render SharedView, "author.html", assigns %>
+</article>
