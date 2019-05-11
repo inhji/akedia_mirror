@@ -24,14 +24,8 @@ defmodule AkediaWeb do
       import Plug.Conn
       import AkediaWeb.Gettext
       import AkediaWeb.Helpers.User, only: [logged_in?: 1]
+      import AkediaWeb.Helpers.Content, only: [render_index_or_empty: 2, render_index_or_empty: 3]
       alias AkediaWeb.Router.Helpers, as: Routes
-
-      def render_index_or_empty(conn, content, assigns \\ []) do
-        case Enum.count(content) do
-          0 -> render(conn, "empty.html")
-          _ -> render(conn, "index.html", assigns)
-        end
-      end
     end
   end
 
