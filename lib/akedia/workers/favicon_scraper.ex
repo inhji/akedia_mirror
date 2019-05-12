@@ -1,18 +1,22 @@
-defmodule Akedia.Workers.FaviconScraper do
+defmodule Akedia.Workers.Favicon do
   require Logger
   use Que.Worker
   alias Akedia.Repo
   alias Akedia.Content.Bookmark
   alias Akedia.Media
   alias Scrape.Website
+  alias Akedia.Indie.Microformats
+  alias Akedia.Indie.Favicon
+  alias Akedia.HTTP
 
   def perform(%Bookmark{url: bookmark_url} = bookmark) do
     case get_favicon(bookmark_url) do
       {:ok, favicon_url} ->
+        Logger.debug("Favicon: #{favicon_url}")
+
         favicon =
           bookmark_url
-          |> URI.parse()
-          |> Map.get(:host)
+          |> HTTP.hostname()
           |> maybe_create_favicon(favicon_url)
 
         bookmark
@@ -36,12 +40,19 @@ defmodule Akedia.Workers.FaviconScraper do
   end
 
   def get_favicon(url) do
-    case Scrape.website(url) do
-      %Website{favicon: nil} ->
-        {:error, :no_favicon_found}
+    case Microformats.fetch_hcard(url) do
+      {:ok, properties} ->
+        hcard = Microformats.HCard.parse(properties)
+        {:ok, hcard.photo}
 
-      %Website{favicon: favicon} ->
-        {:ok, favicon}
+      {:error, _error} ->
+        case Favicon.fetch(url) do
+          {:ok, favicon} ->
+            {:ok, favicon}
+
+          {:error, _error} ->
+            {:error, :no_favicon_found}
+        end
     end
   end
 end

@@ -2,9 +2,10 @@ defmodule Akedia.Indie.Micropub.Handler do
   @behaviour PlugMicropub.HandlerBehaviour
   require Logger
 
+  alias Akedia.HTTP
   alias Akedia.Media
   alias Akedia.Content.{Bookmark, Post}
-  alias Akedia.Indie.Micropub.{Token, Properties, Content, Helpers}
+  alias Akedia.Indie.Micropub.{Token, Properties, Content}
 
   @impl true
   def handle_create(type, properties, access_token) do
@@ -58,7 +59,7 @@ defmodule Akedia.Indie.Micropub.Handler do
         case Media.create_image(attrs) do
           {:ok, image} ->
             image_url = Media.ImageUploader.url({image.name, image}, :original)
-            url = Helpers.abs_url(Akedia.url(), image_url)
+            url = HTTP.abs_url(Akedia.url(), image_url)
 
             {:ok, url}
 
@@ -110,7 +111,7 @@ defmodule Akedia.Indie.Micropub.Handler do
   def handle_config_query(access_token) do
     case Token.verify_token(access_token, nil) do
       :ok ->
-        media_url = Helpers.abs_url(Akedia.url(), "/indie/micropub/media")
+        media_url = HTTP.abs_url(Akedia.url(), "/indie/micropub/media")
         response = %{"media-endpoint": media_url, "syndicate-to": []}
         {:ok, response}
 

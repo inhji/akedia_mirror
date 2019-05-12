@@ -11,7 +11,7 @@ defmodule Akedia.Workers.Webmention do
 
         # TODO: handle results better
         results
-        |> Enum.each(fn {status, url, endpoint, text} = result ->
+        |> Enum.each(fn {_status, _url, _endpoint, _text} = result ->
           Logger.debug(inspect(result))
         end)
 

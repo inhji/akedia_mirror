@@ -3,7 +3,7 @@ defmodule AkediaWeb.BookmarkController do
 
   alias Akedia.Content
   alias Akedia.Content.Bookmark
-  alias Akedia.Workers.{FaviconScraper}
+  alias Akedia.Workers.{Favicon}
 
   def index(conn, _params) do
     bookmarks = Content.list_bookmarks(logged_in?(conn))
@@ -18,7 +18,7 @@ defmodule AkediaWeb.BookmarkController do
   def create(conn, %{"bookmark" => %{"topics" => topics} = bookmark_params}) do
     case Content.create_bookmark(bookmark_params) do
       {:ok, bookmark} ->
-        Que.add(FaviconScraper, bookmark)
+        Que.add(Favicon, bookmark)
         Content.add_tags(bookmark, topics)
 
         conn
@@ -48,7 +48,7 @@ defmodule AkediaWeb.BookmarkController do
 
     case Content.update_bookmark(bookmark, bookmark_params) do
       {:ok, bookmark} ->
-        Que.add(FaviconScraper, bookmark)
+        Que.add(Favicon, bookmark)
 
         conn
         |> put_flash(:info, "Bookmark updated successfully.")
