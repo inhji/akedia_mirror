@@ -4,7 +4,12 @@ defmodule Akedia.Indie.Microformats do
   def fetch(url) do
     case HTTP.get(url) do
       {:ok, %HTTPoison.Response{status_code: 200, body: body}} ->
-        {:ok, Microformats2.parse(body, url)}
+        html =
+          body
+          |> Floki.parse()
+          |> Floki.raw_html()
+
+        {:ok, Microformats2.parse(html, url)}
 
       {:ok, %HTTPoison.Response{status_code: 404}} ->
         {:error, :url_not_found}

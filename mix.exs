@@ -60,7 +60,8 @@ defmodule Akedia.MixProject do
       {:quantum, "~> 2.3"},
       {:webmentions, "~> 0.3.4"},
       {:slugger, "~> 0.3.0"},
-      {:microformats2, "~> 0.2.1"}
+      {:microformats2, "~> 0.2.1"},
+      {:floki, "~> 0.21.0"}
     ]
   end
 

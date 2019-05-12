@@ -8,8 +8,6 @@ defmodule Akedia.Workers.Favicon do
   def perform(%Bookmark{url: bookmark_url} = bookmark) do
     case get_favicon(bookmark_url) do
       {:ok, favicon_url} ->
-        Logger.debug("Favicon: #{favicon_url}")
-
         favicon =
           bookmark_url
           |> HTTP.hostname()
