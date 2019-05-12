@@ -69,7 +69,7 @@ defmodule Akedia.Indie.Micropub.Token do
     end
   end
 
-  def check_scope(_, nil), do: :ok
+  def check_scope(scopes, nil), do: {:ok, scopes}
 
   def check_scope(scopes, required_scope) do
     required = Enum.member?(@supported_scopes, required_scope)
