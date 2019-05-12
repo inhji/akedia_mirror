@@ -66,7 +66,7 @@ defmodule Akedia.Indie.Micropub.Properties do
   def get_type_by_props(%{"content" => _}), do: :post
   def get_type_by_props(_), do: :unknown
 
-  def get_tags(%{"category" => ""}), do: []
+  def get_tags(%{"category" => [""]}), do: []
   def get_tags(%{"category" => tags}), do: tags
   def get_tags(_), do: []
 
