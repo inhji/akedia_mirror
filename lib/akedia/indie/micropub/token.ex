@@ -17,12 +17,12 @@ defmodule Akedia.Indie.Micropub.Token do
             verify_token_response(body, required_scope)
 
           error ->
-            Logger.error("Could not decode response body", [error: error])
+            Logger.error("Could not decode response body: #{inspect(error)}")
             {:error, :insufficient_scope, "Body of token response contains malformed json"}
         end
 
       {:error, %HTTPoison.Error{reason: reason}} ->
-        Logger.error("Could not reach token endpoint", [reason: reason])
+        Logger.error("Could not reach token endpoint: #{inspect(reason)}")
         {:error, :insufficient_scope, reason}
     end
   end
@@ -47,7 +47,7 @@ defmodule Akedia.Indie.Micropub.Token do
       :ok
     else
       error ->
-        Logger.error("Could not verify token response", [error: error])
+        Logger.error("Could not verify token response: #{inspect(error)}")
         error
     end
   end
