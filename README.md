@@ -47,9 +47,6 @@ apt install esl-erlang elixir
 # Node 11, siehe https://github.com/nodesource/distributions#deb
 curl -sL https://deb.nodesource.com/setup_11.x | sudo -E bash -
 sudo apt-get install -y nodejs
-
-# Rust
-curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 ```
 
 ### Postgres
