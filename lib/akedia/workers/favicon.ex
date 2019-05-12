@@ -1,13 +1,9 @@
 defmodule Akedia.Workers.Favicon do
   require Logger
   use Que.Worker
-  alias Akedia.Repo
+  alias Akedia.{Repo, Media, HTTP}
   alias Akedia.Content.Bookmark
-  alias Akedia.Media
-  alias Scrape.Website
-  alias Akedia.Indie.Microformats
-  alias Akedia.Indie.Favicon
-  alias Akedia.HTTP
+  alias Akedia.Indie.{Microformats, Favicon}
 
   def perform(%Bookmark{url: bookmark_url} = bookmark) do
     case get_favicon(bookmark_url) do
