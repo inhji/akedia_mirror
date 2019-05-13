@@ -1,5 +1,10 @@
 <%= if @has_user do %>
-<p>
+<p class="social">
+  <%= for profile <- Enum.filter(@current_user.profiles, fn p -> p.public == true end) do %>
+    <a href="<%= profile.url %>" target="_blank" rel="<%= profile.rel_value %>"><i class="<%= profile.icon %>"></i></a>
+  <% end %>
+</p>
+<p class="info">
     <span>&copy; 2019</span>
     <span class="h-card vcard">
         <a href="/" rel="me" class="u-url url uid">
@@ -14,7 +19,7 @@
     <span> · </span>
     <a href="https://github.com/inhji/akedia" target="_blank" rel="noreferrer">Akedia v<%= version() %></a>
 </p>
-<p>
+<p class="webring">
   <a href="https://xn--sr8hvo.ws/%F0%9F%8F%84%F0%9F%93%80%F0%9F%8C%8F/previous">↤</a>
   <span> 🕸💍 </span>
   <a href="https://xn--sr8hvo.ws/%F0%9F%8F%84%F0%9F%93%80%F0%9F%8C%8F/next">↦</a>
