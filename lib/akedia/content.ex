@@ -147,7 +147,7 @@ defmodule Akedia.Content do
   def get_like!(id) do
     Like
     |> Repo.get!(id)
-    |> Repo.preload(entity: [:topics, :images])
+    |> Repo.preload(entity: [:topics, :images, :syndications])
   end
 
   def create_like(attrs \\ %{}, is_published \\ false) do
@@ -382,7 +382,7 @@ defmodule Akedia.Content do
     results
     |> order_by(^constraint)
     |> Repo.all()
-    |> Repo.preload(entity: [:topics, :images])
+    |> Repo.preload(entity: [:topics, :images, :syndications])
   end
 
   def create_with_entity(schema, attrs \\ %{}) do

@@ -1,12 +1,12 @@
 defmodule Akedia.HTTP do
-  @headers [
-    {"User-Agent", "Akedia/0.x (https://inhji.de)"}
-  ]
+  @user_agent {"User-Agent", "Akedia/0.x (https://inhji.de)"}
   @options [follow_redirect: true]
 
-  def get(url), do: HTTPoison.get(url, @headers, @options)
+  def get(url), do: HTTPoison.get(url, [@user_agent], @options)
 
-  def head(url), do: HTTPoison.head(url, @headers, @options)
+  def head(url), do: HTTPoison.head(url, [@user_agent], @options)
+
+  def user_agent(), do: @user_agent
 
   def hostname(url) do
     url

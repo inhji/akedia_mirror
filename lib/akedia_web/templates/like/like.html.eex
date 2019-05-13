@@ -10,7 +10,15 @@
       <%= link date_fuzzy(@like.inserted_at), to: Routes.like_url(@conn, :show, @like) %>
     </time>
     <%= render SharedView, "topics.html", conn: @conn, topics: @like.entity.topics %>
+    <%= if github_syndication(@like) do %>
+      <% github_syndication = github_syndication(@like) %>
+      <span>|</span>
+      <a href="https://brid.gy/publish/github"></a>
+      <a href=" <%= github_syndication.url %> "><i class="fab fa-github"></i></a>
+    <% end %>
   </div>
 
   <%= render SharedView, "author.html", assigns %>
+
+
 </article>
