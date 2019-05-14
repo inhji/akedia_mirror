@@ -3,6 +3,8 @@ defmodule Akedia.Content do
   alias Akedia.Repo
   alias Akedia.Content.{Entity, Page, Story, Bookmark, Topic, EntityTopic, Like, Post}
 
+  @preloads [entity: [:topics, :images, :syndications]]
+
   # Entity
 
   def list_entities do
@@ -45,7 +47,7 @@ defmodule Akedia.Content do
   def get_story!(id) do
     Story
     |> Repo.get_by!(slug: id)
-    |> Repo.preload(entity: [:topics, :images])
+    |> Repo.preload(@preloads)
   end
 
   def create_story(attrs \\ %{}) do
@@ -78,7 +80,7 @@ defmodule Akedia.Content do
   def get_page!(id) do
     Page
     |> Repo.get_by!(slug: id)
-    |> Repo.preload(entity: [:topics, :images])
+    |> Repo.preload(@preloads)
   end
 
   def create_page(attrs \\ %{}) do
@@ -113,7 +115,7 @@ defmodule Akedia.Content do
   def get_bookmark!(id) do
     Bookmark
     |> Repo.get_by!(slug: id)
-    |> Repo.preload(entity: [:topics, :images])
+    |> Repo.preload(@preloads)
     |> Repo.preload(:favicon)
   end
 
@@ -147,7 +149,7 @@ defmodule Akedia.Content do
   def get_like!(id) do
     Like
     |> Repo.get!(id)
-    |> Repo.preload(entity: [:topics, :images, :syndications])
+    |> Repo.preload(@preloads)
   end
 
   def create_like(attrs \\ %{}, is_published \\ false) do
@@ -212,7 +214,7 @@ defmodule Akedia.Content do
   def get_post!(id) do
     Post
     |> Repo.get_by!(slug: id)
-    |> Repo.preload(entity: [:topics, :images])
+    |> Repo.preload(@preloads)
   end
 
   def create_post(attrs \\ %{}, is_published \\ true) do
