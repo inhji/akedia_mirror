@@ -358,6 +358,8 @@ defmodule Akedia.Content do
       on: e.id == p.entity_id,
       left_join: s in assoc(e, :story),
       on: e.id == s.entity_id,
+      left_join: pp in assoc(e, :post),
+      on: e.id == pp.entity_id,
       left_join: t in assoc(e, :topics),
       where: contains(b.title, ^search_term),
       or_where: contains(b.content, ^search_term),
@@ -365,9 +367,11 @@ defmodule Akedia.Content do
       or_where: contains(p.content, ^search_term),
       or_where: contains(s.title, ^search_term),
       or_where: contains(s.content, ^search_term),
+      or_where: contains(pp.title, ^search_term),
+      or_where: contains(pp.content, ^search_term),
       or_where: t.text in [^search_term],
       distinct: true,
-      preload: [:bookmark, :page, :story, :topics]
+      preload: [:bookmark, :page, :story, :topics, :post]
   end
 
   def list(schema, show_all, constraint \\ [desc: :inserted_at]) do
