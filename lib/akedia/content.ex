@@ -11,7 +11,11 @@ defmodule Akedia.Content do
     Repo.all(Entity)
   end
 
-  def get_entity!(id), do: Repo.get!(Entity, id)
+  def get_entity!(id) do
+    Entity
+    |> Repo.get!(id)
+    |> Repo.preload([:bookmark, :story, :page, :like, :post])
+  end
 
   def create_entity(attrs \\ %{}) do
     %Entity{}
@@ -360,6 +364,8 @@ defmodule Akedia.Content do
       on: e.id == s.entity_id,
       left_join: pp in assoc(e, :post),
       on: e.id == pp.entity_id,
+      left_join: l in assoc(e, :like),
+      on: e.id == l.entity_id,
       left_join: t in assoc(e, :topics),
       where: contains(b.title, ^search_term),
       or_where: contains(b.content, ^search_term),
@@ -369,9 +375,11 @@ defmodule Akedia.Content do
       or_where: contains(s.content, ^search_term),
       or_where: contains(pp.title, ^search_term),
       or_where: contains(pp.content, ^search_term),
+      or_where: contains(l.url, ^search_term),
       or_where: t.text in [^search_term],
       distinct: true,
-      preload: [:bookmark, :page, :story, :topics, :post]
+      order_by: [desc: :inserted_at],
+      preload: [:bookmark, :page, :story, :topics, :post, :like]
   end
 
   def list(schema, show_all, constraint \\ [desc: :inserted_at]) do

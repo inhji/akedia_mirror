@@ -8,7 +8,7 @@ $blue: #0992d6;
 //
 
 $theme-colors: (
-  "primary": $purple
+  "primary": $red
 );
 
 //
@@ -187,6 +187,7 @@ table tr:first-child td {
 .badge.bookmark { background-color: $purple;}
 .badge.story { background-color: $magenta;}
 .badge.page { background-color: $blue;}
+.badge.like { background-color: $black; }
 
 .image-picker {
   display: flex;
@@ -204,6 +205,12 @@ table tr:first-child td {
     img {
       width: 100%;
     }
+  }
+}
+
+.search-results {
+  .result {
+    margin-bottom: 1rem;
   }
 }
 

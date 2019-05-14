@@ -1,22 +1,20 @@
 <h1>Results for "<%= @query %>"</h1>
 
-<table class="table">
-  <tbody>
+<div class="search-results">
   <%= for entity <- @entities do %>
-    <% {content, type, content_path} = case entity do
-      %{bookmark: %{id: _}} -> {entity.bookmark, "Bookmark", &Routes.bookmark_path/3}
-      %{page: %{id: _}} -> {entity.page, "Page", &Routes.page_path/3}
-      %{story: %{id: _}} -> {entity.story, "Story", &Routes.story_path/3}
-    end %>
-    <tr>
-      <td>
-        <%= link to: content_path.(@conn, :index, []) do %>
-          <div class="badge type <%= String.downcase(type) %>"><%= type %></div><% end %>
-      </td>
-      <td>
-        <%= link content.title, to: content_path.(@conn, :show, content) %>
-      </td>
-    </tr>
+  <% schema = inner_type(entity) %>
+  <div class="row result">
+    <div class="col-md-2">
+      <div class="badge type <%= String.downcase(inner_name(schema)) %>"><%= inner_name(schema) %></div>
+    </div>
+    <div class="col-md-2">
+      <time> <%= date_fuzzy(schema.inserted_at) %> </time>
+    </div>
+    <div class="col-md-8">
+      <a href="<%= Akedia.url(schema) %>">
+        <%= Map.get(schema, :title) || Map.get(schema, :content) || Map.get(schema, :url) %>
+      </a>
+    </div>
+  </div>
   <% end %>
-  </tbody>
-</table>
+</div>
