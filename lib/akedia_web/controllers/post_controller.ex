@@ -18,6 +18,7 @@ defmodule AkediaWeb.PostController do
     case Content.create_post(post_params) do
       {:ok, post} ->
         Content.add_tags(post, topics)
+        Que.add(Akedia.Workers.Webmention, post)
 
         conn
         |> put_flash(:info, "Post created successfully.")
@@ -46,6 +47,8 @@ defmodule AkediaWeb.PostController do
 
     case Content.update_post(post, post_params) do
       {:ok, post} ->
+        Que.add(Akedia.Workers.Webmention, post)
+
         conn
         |> put_flash(:info, "Post updated successfully.")
         |> redirect(to: Routes.post_path(conn, :show, post))

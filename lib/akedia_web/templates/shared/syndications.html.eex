@@ -1,0 +1,8 @@
+<%= if github_syndication(@schema) do %>
+  <% github_syndication = github_syndication(@schema) %>
+  <span>|</span>
+  <a href="https://brid.gy/publish/github"></a>
+  <a href="<%= github_syndication.url || "#" %>">
+    <i class="fab fa-github"></i>
+  </a>
+<% end %>
