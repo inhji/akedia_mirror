@@ -4,7 +4,18 @@ defmodule Akedia.Indie.Webmentions.Bridgy do
 
   require Logger
 
-  def publish_to_github(%{:entity_id => entity_id} = schema) do
+  def maybe_publish_to_github(%{:entity_id => entity_id} = schema, url) do
+    if String.starts_with?(url, "https://github.com/") do
+      Akedia.Indie.create_or_update_syndication(%{
+        type: "github",
+        entity_id: entity_id
+      })
+
+      do_publish_to_github(schema)
+    end
+  end
+
+  def do_publish_to_github(%{:entity_id => entity_id} = schema) do
     www_source = Akedia.url(schema)
     www_target = URI.encode_www_form(@bridgy_github_target)
     body = "source=#{www_source}&target=#{www_target}"
