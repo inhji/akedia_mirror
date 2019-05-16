@@ -399,6 +399,31 @@ defmodule Akedia.Content do
     |> Repo.preload(entity: [:topics, :images, :syndications])
   end
 
+  def list2(schema, options \\ []) do
+    published = options[:published] || nil
+    pinned = options[:pinned] || nil
+    sort_options = options[:sort] || [desc: :inserted_at]
+
+    query =
+      schema
+      |> join(:inner, [s], e in Entity, on: s.entity_id == e.id)
+
+    query =
+      if !is_nil(published) and is_boolean(published),
+        do: where(query, [_s, e], e.is_published == ^published),
+        else: query
+
+    query =
+      if !is_nil(pinned) and is_boolean(pinned),
+        do: query = where(query, [_s, e], e.is_pinned == ^pinned),
+        else: query
+
+    query
+    |> order_by(^sort_options)
+    |> Repo.all()
+    |> Repo.preload(entity: [:topics, :images, :syndications])
+  end
+
   def create_with_entity(schema, attrs \\ %{}) do
     create_with_entity(schema, attrs, %{is_published: false})
   end
