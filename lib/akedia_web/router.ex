@@ -1,11 +1,14 @@
 defmodule AkediaWeb.Router do
   use AkediaWeb, :router
-  import AkediaWeb.Plugs.User, only: [
-    assign_user: 2,
-    check_user: 2,
-    refresh_user: 2,
-    check_loggedin: 2
-  ]
+  # alias AkediaWeb.Plugs.PlugIndieAuth
+  import AkediaWeb.Plugs.User,
+    only: [
+      assign_user: 2,
+      check_user: 2,
+      refresh_user: 2,
+      check_loggedin: 2
+    ]
+
   import AkediaWeb.Plugs.Settings, only: [assign_settings: 2]
 
   pipeline :browser do
@@ -68,6 +71,11 @@ defmodule AkediaWeb.Router do
             PlugMicropub,
             handler: Akedia.Indie.Micropub.Handler,
             json_encoder: Phoenix.json_library()
+
+    # forward "/auth",
+    #         PlugIndieAuth,
+    #         handler: Akedia.Indie.IndieAuth.Handler,
+    #         json_encoder: Phoenix.json_library()
   end
 
   scope "/user", AkediaWeb do
