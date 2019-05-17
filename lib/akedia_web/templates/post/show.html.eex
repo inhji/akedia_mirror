@@ -1,6 +1,5 @@
+<%= render SharedView, "post_nav.html", conn: @conn, post: @post, path_helper: &Routes.post_path/3 %>
+
 <div class="content-wrapper">
   <%= render "post.html", conn: @conn, post: @post, current_user: @current_user %>
 </div>
-
-<%= link "Edit", to: Routes.post_path(@conn, :edit, @post) %>
-<%= link "Delete", to: Routes.post_path(@conn, :delete, @post), method: :delete, data: [confirm: "Are you sure?"] %>

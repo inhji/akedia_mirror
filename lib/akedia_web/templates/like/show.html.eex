@@ -1,7 +1,5 @@
+<%= render SharedView, "post_nav.html", conn: @conn, post: @like, path_helper: &Routes.like_path/3 %>
+
 <div class="content-wrapper">
   <%= render "like.html", assigns %>
 </div>
-
-<span><%= link "Edit", to: Routes.like_path(@conn, :edit, @like) %></span>
-<span><%= link "Back", to: Routes.like_path(@conn, :index) %></span>
-<span><%= link "Delete", to: Routes.like_path(@conn, :delete, @like), method: :delete, data: [confirm: "Are you sure?"] %></span>
