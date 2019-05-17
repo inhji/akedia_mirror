@@ -44,8 +44,8 @@ defmodule Akedia.Content do
 
   # Story
 
-  def list_stories(show_all \\ true) do
-    list(Story, show_all)
+  def list_stories(opts \\ []) do
+    list(Story, opts)
   end
 
   def get_story!(id) do
@@ -77,8 +77,8 @@ defmodule Akedia.Content do
 
   # Page
 
-  def list_pages(show_all \\ true) do
-    list(Page, show_all)
+  def list_pages(opts \\ []) do
+    list(Page, opts)
   end
 
   def get_page!(id) do
@@ -110,9 +110,9 @@ defmodule Akedia.Content do
 
   # Bookmark
 
-  def list_bookmarks(show_all \\ true) do
+  def list_bookmarks(opts \\ []) do
     Bookmark
-    |> list(show_all)
+    |> list(opts)
     |> Repo.preload(:favicon)
   end
 
@@ -146,8 +146,8 @@ defmodule Akedia.Content do
 
   # Like
 
-  def list_likes(show_all \\ true) do
-    list(Like, show_all)
+  def list_likes(opts \\ []) do
+    list(Like, opts)
   end
 
   def get_like!(id) do
@@ -211,8 +211,8 @@ defmodule Akedia.Content do
 
   # Post
 
-  def list_posts(show_all \\ true) do
-    list(Post, show_all)
+  def list_posts(opts \\ []) do
+    list(Post, opts)
   end
 
   def get_post!(id) do
@@ -382,26 +382,9 @@ defmodule Akedia.Content do
       preload: [:bookmark, :page, :story, :topics, :post, :like]
   end
 
-  def list(schema, show_all, constraint \\ [desc: :inserted_at]) do
-    results =
-      case show_all do
-        true ->
-          schema
-
-        false ->
-          schema
-          |> join(:inner, [s], e in Entity, on: s.entity_id == e.id and e.is_published == true)
-      end
-
-    results
-    |> order_by(^constraint)
-    |> Repo.all()
-    |> Repo.preload(entity: [:topics, :images, :syndications])
-  end
-
-  def list2(schema, options \\ []) do
-    published = options[:published] || nil
-    pinned = options[:pinned] || nil
+  def list(schema, options \\ []) do
+    published = options[:is_published] || nil
+    pinned = options[:is_pinned] || nil
     sort_options = options[:sort] || [desc: :inserted_at]
 
     query =

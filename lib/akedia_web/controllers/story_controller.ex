@@ -5,8 +5,13 @@ defmodule AkediaWeb.StoryController do
   alias Akedia.Content.Story
 
   def index(conn, _params) do
-    stories = Content.list_stories(logged_in?(conn))
-    render_index_or_empty(conn, stories, stories: stories)
+    stories = Content.list_stories(is_published: true)
+    render(conn, "index.html", stories: stories)
+  end
+
+  def drafts(conn, _params) do
+    stories = Content.list_stories(is_published: false)
+    render(conn, "index.html", stories: stories)
   end
 
   def new(conn, _params) do

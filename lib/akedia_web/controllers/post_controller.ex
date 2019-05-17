@@ -5,7 +5,12 @@ defmodule AkediaWeb.PostController do
   alias Akedia.Content.Post
 
   def index(conn, _params) do
-    posts = Content.list_posts(logged_in?(conn))
+    posts = Content.list_posts(is_published: true)
+    render(conn, "index.html", posts: posts)
+  end
+
+  def drafts(conn, _params) do
+    posts = Content.list_posts(is_published: false)
     render(conn, "index.html", posts: posts)
   end
 
