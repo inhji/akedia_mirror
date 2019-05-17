@@ -12,4 +12,11 @@ defmodule AkediaWeb.PageView do
       <title><%= @page.title %> · Akedia</title>
     }
   end
+
+  def pinned_class(page) do
+    case page.entity.is_pinned do
+      true -> "pinned"
+      false -> ""
+    end
+  end
 end

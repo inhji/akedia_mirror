@@ -32,4 +32,5 @@
 
 <%= if @logged_in do %>
   <%= link "Edit", to: Routes.page_path(@conn, :edit, @page), class: "btn btn-outline-primary" %>
+  <%= link "Delete", to: Routes.page_path(@conn, :delete, @page), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger" %>
 <% end %>

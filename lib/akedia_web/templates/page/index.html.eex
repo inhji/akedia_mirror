@@ -3,35 +3,19 @@
 <% end %>
 
 <div class="content-wrapper">
-  <table class="table list pages">
-    <tbody>
-    <%= for page <- @pages do %>
-      <tr>
-        <td><%= link page.title, to: Routes.page_path(@conn, :show, page) %></td>
-        <td class="topics">
-          <%= for topic <- page.entity.topics do %>
-            <%= link to: Routes.topic_path(@conn, :tagged, topic) do %>
-              <div class="badge badge-secondary"><%= topic.text %></div><% end %>
-          <% end %>
-        </td>
-
-        <%= if @logged_in do %>
-        <td>
-          <%= if page.entity.is_published do %>
-            <div class="badge badge-primary">Published</div>
-          <% else %>
-            <div class="badge badge-primary">Private</div>
-          <% end %>
-        </td>
-        <td>
-          <div class="btn-group" role="group" aria-label="Basic example">
-            <%= link "Edit", to: Routes.page_path(@conn, :edit, page), class: "btn btn-secondary" %>
-            <%= link "Delete", to: Routes.page_path(@conn, :delete, page), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger" %>
-          </div>
-        </td>
-        <% end %>
-      </tr>
+  <%= if !Enum.empty?(@pinned) do %>
+    <div class="grid">
+      <%= for page <- @pinned do %>
+      <%= render "page.html", conn: @conn, page: page %>
       <% end %>
-    </tbody>
-  </table>
+    </div>
+
+    <hr>
+  <% end %>
+
+  <div class="grid">
+    <%= for page <- @pages do %>
+      <%= render "page.html", conn: @conn, page: page %>
+    <% end %>
+  </div>
 </div>

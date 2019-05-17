@@ -383,7 +383,7 @@ defmodule Akedia.Content do
   end
 
   def list(schema, options \\ []) do
-    sort_options = options[:sort] || [desc: :inserted_at]
+    sort_options = options[:order_by] || [desc: :inserted_at]
 
     schema
     |> join(:inner, [s], e in Entity, on: s.entity_id == e.id)
