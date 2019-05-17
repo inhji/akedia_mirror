@@ -383,28 +383,22 @@ defmodule Akedia.Content do
   end
 
   def list(schema, options \\ []) do
-    published = options[:is_published] || nil
-    pinned = options[:is_pinned] || nil
     sort_options = options[:sort] || [desc: :inserted_at]
 
-    query =
-      schema
-      |> join(:inner, [s], e in Entity, on: s.entity_id == e.id)
-
-    query =
-      if !is_nil(published) and is_boolean(published),
-        do: where(query, [_s, e], e.is_published == ^published),
-        else: query
-
-    query =
-      if !is_nil(pinned) and is_boolean(pinned),
-        do: query = where(query, [_s, e], e.is_pinned == ^pinned),
-        else: query
-
-    query
+    schema
+    |> join(:inner, [s], e in Entity, on: s.entity_id == e.id)
+    |> maybe_where(options, [:is_published, :is_pinned])
     |> order_by(^sort_options)
     |> Repo.all()
     |> Repo.preload(entity: [:topics, :images, :syndications])
+  end
+
+  def maybe_where(query, options, valid_options) do
+    Enum.reduce(valid_options, query, fn p, q ->
+      if !is_nil(options[p]) and is_boolean(options[p]),
+        do: where(q, [_s, e], field(e, ^p) == ^options[p]),
+        else: q
+    end)
   end
 
   def create_with_entity(schema, attrs \\ %{}) do
