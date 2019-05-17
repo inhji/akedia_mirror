@@ -29,20 +29,16 @@
           <a class="nav-link" href="<%= Routes.page_path(@conn, :index) %>">Wiki</a>
         </li>
         <% end %>
-        <%= if @show_images or @logged_in do %>
-        <li class="nav-item">
-          <a class="nav-link" href="<%= Routes.image_path(@conn, :index) %>">Photos</a>
-        </li>
-        <% end %>
         <%= if @show_more or @logged_in do %>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Mehr
+            Moar
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="<%= Routes.topic_path(@conn, :index) %>">Tags</a>
-            <a class="dropdown-item" href="<%= Routes.like_path(@conn, :index) %>">Likes</a>
-            <a class="dropdown-item" href="<%= Routes.listen_path(@conn, :index) %>">Listens</a>
+            <a class="dropdown-item" href="<%= Routes.image_path(@conn, :index) %>"><i class="far fa-images"></i> Photos</a>
+            <a class="dropdown-item" href="<%= Routes.topic_path(@conn, :index) %>"><i class="fas fa-tags"></i> Tags</a>
+            <a class="dropdown-item" href="<%= Routes.like_path(@conn, :index) %>"><i class="far fa-heart"></i> Likes</a>
+            <a class="dropdown-item" href="<%= Routes.listen_path(@conn, :index) %>"><i class="fas fa-headphones-alt"></i> Listens</a>
           </div>
         </li>
         <% end %>
