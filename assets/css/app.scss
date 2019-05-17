@@ -62,8 +62,6 @@ nav.navbar {
 }
 
 main#content {
-  padding-top: 2rem;
-
   // Markdown Styling!
   .content {
     h1 {
@@ -80,6 +78,10 @@ main#content {
         margin-top: 3rem;
       }
     }
+  }
+
+  .content-wrapper{
+    padding-top: 2rem;
   }
 
   // General Post Styles

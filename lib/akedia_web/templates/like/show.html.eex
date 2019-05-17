@@ -1,4 +1,6 @@
-<%= render "like.html", assigns %>
+<div class="content-wrapper">
+  <%= render "like.html", assigns %>
+</div>
 
 <span><%= link "Edit", to: Routes.like_path(@conn, :edit, @like) %></span>
 <span><%= link "Back", to: Routes.like_path(@conn, :index) %></span>

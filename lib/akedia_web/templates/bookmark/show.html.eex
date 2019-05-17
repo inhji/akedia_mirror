@@ -1,4 +1,6 @@
-<%= render "bookmark.html", conn: @conn, bookmark: @bookmark %>
+<div class="content-wrapper">
+  <%= render "bookmark.html", conn: @conn, bookmark: @bookmark %>
+</div>
 
 <%= if @logged_in do %>
   <div class="btn-group" role="group" aria-label="Basic example">

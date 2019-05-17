@@ -1,31 +1,33 @@
-<h1><%= @page.title %></h1>
+<div class="content-wrapper">
+  <h1><%= @page.title %></h1>
 
-<% gallery_class = 
-      case Enum.count(@page.entity.images) do
-        0 -> "empty"
-        1 -> "one"
-        2 -> "two"
-        3 -> "three"
-        _ -> "multi"
-      end
-%>
+  <% gallery_class =
+        case Enum.count(@page.entity.images) do
+          0 -> "empty"
+          1 -> "one"
+          2 -> "two"
+          3 -> "three"
+          _ -> "multi"
+        end
+  %>
 
-<div class="gallery <%= gallery_class %>"> 
-  <%= for image <- @page.entity.images do %>
-  <div class="image"><%= img(image, :thumb) %></div>
-  <% end %>         
-</div>
-
-<div class="page content">
-  <%= to_html(@page) %>
-</div>
-
-<div class="topics">
-  <%= for topic <- @page.entity.topics do %>
-    <%= link to: Routes.topic_path(@conn, :tagged, topic) do %>
-      <div class="badge badge-secondary"><%= topic.text %></div>
+  <div class="gallery <%= gallery_class %>">
+    <%= for image <- @page.entity.images do %>
+    <div class="image"><%= img(image, :thumb) %></div>
     <% end %>
-  <% end %>
+  </div>
+
+  <div class="page content">
+    <%= to_html(@page) %>
+  </div>
+
+  <div class="topics">
+    <%= for topic <- @page.entity.topics do %>
+      <%= link to: Routes.topic_path(@conn, :tagged, topic) do %>
+        <div class="badge badge-secondary"><%= topic.text %></div>
+      <% end %>
+    <% end %>
+  </div>
 </div>
 
 <%= if @logged_in do %>

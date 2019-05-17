@@ -88,12 +88,22 @@ defmodule AkediaWeb.Router do
   scope "/admin", AkediaWeb do
     pipe_through [:browser, :auth]
 
+    resources "/posts", PostController, except: [:show, :index]
+    get "/posts/drafts", PostController, :drafts
+
     resources "/stories", StoryController, except: [:show, :index]
+    get "/stories/drafts", StoryController, :drafts
+
     resources "/bookmarks", BookmarkController, except: [:show, :index]
+    get "/bookmarks/drafts", BookmarkController, :drafts
+
     resources "/pages", PageController, except: [:show, :index]
+    get "/pages/drafts", PageController, :drafts
+
+    resources "/likes", LikeController, except: [:show, :index]
+    get "/likes/drafts", LikeController, :drafts
+
     resources "/topics", TopicController, except: [:show, :index]
     resources "/images", ImageController, except: [:show, :index]
-    resources "/likes", LikeController, except: [:show, :index]
-    resources "/posts", PostController, except: [:show, :index]
   end
 end

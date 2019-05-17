@@ -1,9 +1,11 @@
-<div class="bookmarks list h-feed">
-  <%= for bookmark <- @bookmarks do %>
-    <%= render "bookmark.html", conn: @conn, bookmark: bookmark %>
-  <% end %>
-</div>
-
 <%= if @logged_in do %>
-  <%= link "New Bookmark", to: Routes.bookmark_path(@conn, :new), class: "btn btn-outline-primary" %>
+  <%= render SharedView, "post_nav.html", conn: @conn, path_helper: &Routes.bookmark_path/2 %>
 <% end %>
+
+<div class="content-wrapper">
+  <div class="bookmarks list h-feed">
+    <%= for bookmark <- @bookmarks do %>
+      <%= render "bookmark.html", conn: @conn, bookmark: bookmark %>
+    <% end %>
+  </div>
+</div>
