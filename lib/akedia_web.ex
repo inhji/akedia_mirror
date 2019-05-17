@@ -24,7 +24,6 @@ defmodule AkediaWeb do
       import Plug.Conn
       import AkediaWeb.Gettext
       import AkediaWeb.Helpers.User, only: [logged_in?: 1]
-      import AkediaWeb.Helpers.Content, only: [render_index_or_empty: 2, render_index_or_empty: 3]
       alias AkediaWeb.Router.Helpers, as: Routes
     end
   end
@@ -45,7 +44,6 @@ defmodule AkediaWeb do
 
       import AkediaWeb.ErrorHelpers
       import AkediaWeb.Gettext
-      import AkediaWeb.Helpers.Tags, only: [list_tags: 1]
 
       import AkediaWeb.Helpers.Media
       import AkediaWeb.Helpers.User, only: [avatar_path: 1]
