@@ -6,7 +6,7 @@
 ## Development with ngrok
 
 ```bash
-AKEDIA_HOST=http://xxx.ngrok.io mix phx.server
+TUNNEL=true phx
 ```
 
 ## Deployment
