@@ -8,7 +8,7 @@
           <%= if profile.icon do %>
             <i class="<%= profile.icon %>"></i>
           <% else %>
-            <i class="fas fa-circle"></i>
+            <i class="fa fa-circle"></i>
           <% end %>
           <%= profile.name %>
         </h5>
@@ -20,7 +20,7 @@
         <% end %>
         </small>
       </div>
-      
+
       <p class="mb-1">
         <%= profile.url %>
       </p>

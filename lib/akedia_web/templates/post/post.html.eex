@@ -13,7 +13,7 @@
     </time>
     <%= if @post.reply_to do %>
       <span>|</span>
-      <i class="fas fa-reply"></i> <a href="<%= @post.reply_to %>" class="u-in-reply-to" rel="in-reply-to"><%= @post.reply_to %></a>
+      <i class="fa fa-reply"></i> <a href="<%= @post.reply_to %>" class="u-in-reply-to" rel="in-reply-to"><%= @post.reply_to %></a>
     <% end %>
     <%= render SharedView, "topics.html", conn: @conn, topics: @post.entity.topics %>
     <%= render SharedView, "syndications.html", conn: @conn, schema: @post %>

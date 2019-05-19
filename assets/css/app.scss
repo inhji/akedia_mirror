@@ -23,11 +23,7 @@ $line-height: 2rem;
 
 @import "~bootstrap/scss/bootstrap";
 
-@import "~@fortawesome/fontawesome-free/scss/fontawesome";
-@import "~@fortawesome/fontawesome-free/scss/brands";
-@import "~@fortawesome/fontawesome-free/scss/solid";
-@import "~@fortawesome/fontawesome-free/scss/regular";
-
+@import "~fork-awesome/scss/fork-awesome.scss";
 @import "~openwebicons/css/openwebicons-bootstrap.css";
 
 @import "../vendor/image_picker/image_picker";

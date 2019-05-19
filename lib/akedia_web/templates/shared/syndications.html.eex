@@ -3,6 +3,6 @@
   <span>|</span>
   <a href="https://brid.gy/publish/github"></a>
   <a href="<%= github_syndication.url || "#" %>">
-    <i class="fab fa-github"></i>
+    <i class="fa fa-github"></i>
   </a>
 <% end %>

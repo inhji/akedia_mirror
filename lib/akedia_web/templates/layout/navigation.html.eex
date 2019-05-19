@@ -35,10 +35,10 @@
             Moar
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="<%= Routes.image_path(@conn, :index) %>"><i class="far fa-images"></i> Photos</a>
-            <a class="dropdown-item" href="<%= Routes.topic_path(@conn, :index) %>"><i class="fas fa-tags"></i> Tags</a>
-            <a class="dropdown-item" href="<%= Routes.like_path(@conn, :index) %>"><i class="far fa-heart"></i> Likes</a>
-            <a class="dropdown-item" href="<%= Routes.listen_path(@conn, :index) %>"><i class="fas fa-headphones-alt"></i> Listens</a>
+            <a class="dropdown-item" href="<%= Routes.image_path(@conn, :index) %>"><i class="fa fa-image"></i> Photos</a>
+            <a class="dropdown-item" href="<%= Routes.topic_path(@conn, :index) %>"><i class="fa fa-tags"></i> Tags</a>
+            <a class="dropdown-item" href="<%= Routes.like_path(@conn, :index) %>"><i class="fa fa-heart"></i> Likes</a>
+            <a class="dropdown-item" href="<%= Routes.listen_path(@conn, :index) %>"><i class="fa fa-headphones"></i> Listens</a>
           </div>
         </li>
         <% end %>
@@ -51,7 +51,7 @@
         <% end %>
         <li class="nav-item">
           <a href="#" class="nav-link search-icon">
-            <i class="fas fa-search"></i>
+            <i class="fa fa-search"></i>
           </a>
         </li>
       </ul>
@@ -60,7 +60,7 @@
       <%= if @logged_in do %>
         <li class="nav-item">
           <%= link to: Routes.user_path(@conn, :show), class: "nav-link" do %>
-            <i class="fas fa-cog"></i>
+            <i class="fa fa-cog"></i>
           <% end %>
         </li>
         <li class="nav-item">
