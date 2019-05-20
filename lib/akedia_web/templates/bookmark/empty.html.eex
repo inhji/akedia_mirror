@@ -1,3 +1,0 @@
-<h1>No bookmarks :/</h1>
-
-<span><%= link "New Bookmark", to: Routes.bookmark_path(@conn, :new) %></span>

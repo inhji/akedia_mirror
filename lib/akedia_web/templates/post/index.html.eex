@@ -1,9 +1,11 @@
-<div class="posts list h-feed">
-  <%= for post <- @posts do %>
-    <%= render "post.html", conn: @conn, post: post, current_user: @current_user %>
-  <% end %>
-</div>
-
 <%= if @logged_in do %>
-  <%= link "New Post", to: Routes.post_path(@conn, :new), class: "btn btn-outline-primary" %>
+  <%= render SharedView, "posts_nav.html", conn: @conn, path_helper: &Routes.post_path/2 %>
 <% end %>
+
+<div class="content-wrapper">
+  <div class="posts list h-feed">
+    <%= for post <- @posts do %>
+      <%= render "post.html", conn: @conn, post: post, current_user: @current_user %>
+    <% end %>
+  </div>
+</div>

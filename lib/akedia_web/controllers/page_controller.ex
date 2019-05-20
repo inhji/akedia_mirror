@@ -5,8 +5,15 @@ defmodule AkediaWeb.PageController do
   alias Akedia.Content.Page
 
   def index(conn, _params) do
-    pages = Content.list_pages(logged_in?(conn))
-    render_index_or_empty(conn, pages, pages: pages)
+    pages = Content.list_pages(is_published: true, is_pinned: false)
+    pinned = Content.list_pages(is_published: true, is_pinned: true)
+    render(conn, "index.html", pages: pages, pinned: pinned)
+  end
+
+  def drafts(conn, _params) do
+    pages = Content.list_pages(is_published: false, is_pinned: false)
+    pinned = Content.list_pages(is_published: false, is_pinned: true)
+    render(conn, "index.html", pages: pages, pinned: pinned)
   end
 
   def new(conn, _params) do

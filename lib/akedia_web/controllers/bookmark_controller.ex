@@ -6,8 +6,13 @@ defmodule AkediaWeb.BookmarkController do
   alias Akedia.Workers.{Favicon}
 
   def index(conn, _params) do
-    bookmarks = Content.list_bookmarks(logged_in?(conn))
-    render_index_or_empty(conn, bookmarks, bookmarks: bookmarks)
+    bookmarks = Content.list_bookmarks(is_published: true)
+    render(conn, "index.html", bookmarks: bookmarks)
+  end
+
+  def drafts(conn, _params) do
+    bookmarks = Content.list_bookmarks(is_published: false)
+    render(conn, "index.html", bookmarks: bookmarks)
   end
 
   def new(conn, _params) do

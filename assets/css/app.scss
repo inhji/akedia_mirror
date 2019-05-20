@@ -7,9 +7,9 @@ $blue: #0992d6;
 // Bootstrap SASS Options
 //
 
-$theme-colors: (
-  "primary": $red
-);
+// $theme-colors: (
+//   "primary": $red
+// );
 
 //
 // Custom Options
@@ -23,11 +23,7 @@ $line-height: 2rem;
 
 @import "~bootstrap/scss/bootstrap";
 
-@import "~@fortawesome/fontawesome-free/scss/fontawesome";
-@import "~@fortawesome/fontawesome-free/scss/brands";
-@import "~@fortawesome/fontawesome-free/scss/solid";
-@import "~@fortawesome/fontawesome-free/scss/regular";
-
+@import "~fork-awesome/scss/fork-awesome.scss";
 @import "~openwebicons/css/openwebicons-bootstrap.css";
 
 @import "../vendor/image_picker/image_picker";
@@ -62,8 +58,6 @@ nav.navbar {
 }
 
 main#content {
-  padding-top: 2rem;
-
   // Markdown Styling!
   .content {
     h1 {
@@ -80,6 +74,10 @@ main#content {
         margin-top: 3rem;
       }
     }
+  }
+
+  .content-wrapper{
+    padding-top: 2rem;
   }
 
   // General Post Styles
@@ -123,6 +121,10 @@ main#content {
     }
   }
 
+  article.page {
+    margin-bottom: 0rem;
+  }
+
   .stories {
     article.story {
       margin-bottom: 0;
@@ -137,6 +139,16 @@ main#content {
         margin: 0;
       }
     }
+  }
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-gap: 1rem;
+
+  &> div {
+    padding: 1rem;
   }
 }
 
@@ -216,4 +228,8 @@ table tr:first-child td {
 
 .user-navigation, .listen-navigation {
   margin-bottom: 1rem;
+}
+
+.social {
+  font-size: 1.5rem;
 }

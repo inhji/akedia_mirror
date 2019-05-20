@@ -1,11 +1,14 @@
 defmodule AkediaWeb.Router do
   use AkediaWeb, :router
-  import AkediaWeb.Plugs.User, only: [
-    assign_user: 2,
-    check_user: 2,
-    refresh_user: 2,
-    check_loggedin: 2
-  ]
+  # alias AkediaWeb.Plugs.PlugIndieAuth
+  import AkediaWeb.Plugs.User,
+    only: [
+      assign_user: 2,
+      check_user: 2,
+      refresh_user: 2,
+      check_loggedin: 2
+    ]
+
   import AkediaWeb.Plugs.Settings, only: [assign_settings: 2]
 
   pipeline :browser do
@@ -68,6 +71,11 @@ defmodule AkediaWeb.Router do
             PlugMicropub,
             handler: Akedia.Indie.Micropub.Handler,
             json_encoder: Phoenix.json_library()
+
+    # forward "/auth",
+    #         PlugIndieAuth,
+    #         handler: Akedia.Indie.IndieAuth.Handler,
+    #         json_encoder: Phoenix.json_library()
   end
 
   scope "/user", AkediaWeb do
@@ -80,12 +88,22 @@ defmodule AkediaWeb.Router do
   scope "/admin", AkediaWeb do
     pipe_through [:browser, :auth]
 
+    resources "/posts", PostController, except: [:show, :index]
+    get "/posts/drafts", PostController, :drafts
+
     resources "/stories", StoryController, except: [:show, :index]
+    get "/stories/drafts", StoryController, :drafts
+
     resources "/bookmarks", BookmarkController, except: [:show, :index]
+    get "/bookmarks/drafts", BookmarkController, :drafts
+
     resources "/pages", PageController, except: [:show, :index]
+    get "/pages/drafts", PageController, :drafts
+
+    resources "/likes", LikeController, except: [:show, :index]
+    get "/likes/drafts", LikeController, :drafts
+
     resources "/topics", TopicController, except: [:show, :index]
     resources "/images", ImageController, except: [:show, :index]
-    resources "/likes", LikeController, except: [:show, :index]
-    resources "/posts", PostController, except: [:show, :index]
   end
 end

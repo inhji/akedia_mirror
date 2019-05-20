@@ -1,8 +1,5 @@
-<%= render "bookmark.html", conn: @conn, bookmark: @bookmark %>
+<%= render SharedView, "post_nav.html", conn: @conn, post: @bookmark, path_helper: &Routes.bookmark_path/3 %>
 
-<%= if @logged_in do %>
-  <div class="btn-group" role="group" aria-label="Basic example">
-    <%= link "Edit", to: Routes.bookmark_path(@conn, :edit, @bookmark), class: "btn btn-outline-primary" %>
-    <%= link "Delete", to: Routes.bookmark_path(@conn, :delete, @bookmark), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-outline-danger" %>
-  </div>
-<% end %>
+<div class="content-wrapper">
+  <%= render "bookmark.html", conn: @conn, bookmark: @bookmark %>
+</div>

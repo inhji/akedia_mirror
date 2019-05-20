@@ -1,25 +1,25 @@
-<h1>Geschichten</h1>
+<%= if @logged_in do %>
+  <%= render SharedView, "posts_nav.html", conn: @conn, path_helper: &Routes.story_path/2 %>
+<% end %>
 
-<div class="stories list h-feed">
-  <div class="row">
-    <%= for story <- @stories do %>
-    <article class="story col-lg-6 h-entry">
-      <a href="<%= Routes.story_path(@conn, :show, story) %>" class="u-url u-uid">
-        <div class="intro <%= intro_class(story) %>" style="<%= intro_style(story) %>">
-          <h1 class="display-5 p-name">
-            <%= story.title %>
-          </h1>
-          <time class="dt-published" datetime="<%= date_iso(story.inserted_at) %>">
-            <%= date_pretty(story.inserted_at) %>
-          </time>
-          <a href="/" rel="author" class="h-card"><span class="p-author"><%= @current_user.name %></span></a>
-        </div>
-      </a>
-    </article>
-    <% end %>
+<div class="content-wrapper">
+  <div class="stories list h-feed">
+    <div class="row">
+      <%= for story <- @stories do %>
+      <article class="story col-lg-6 h-entry">
+        <a href="<%= Routes.story_path(@conn, :show, story) %>" class="u-url u-uid">
+          <div class="intro <%= intro_class(story) %>" style="<%= intro_style(story) %>">
+            <h1 class="display-5 p-name">
+              <%= story.title %>
+            </h1>
+            <time class="dt-published" datetime="<%= date_iso(story.inserted_at) %>">
+              <%= date_pretty(story.inserted_at) %>
+            </time>
+            <a href="/" rel="author" class="h-card"><span class="p-author"><%= @current_user.name %></span></a>
+          </div>
+        </a>
+      </article>
+      <% end %>
+    </div>
   </div>
 </div>
-
-<%= if @logged_in do %>
-  <%= link "New Story", to: Routes.story_path(@conn, :new), class: "btn btn-outline-primary" %>
-<% end %>

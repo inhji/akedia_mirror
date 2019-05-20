@@ -5,7 +5,12 @@ defmodule AkediaWeb.LikeController do
   alias Akedia.Content.Like
 
   def index(conn, _params) do
-    likes = Content.list_likes(true)
+    likes = Content.list_likes(is_published: true)
+    render(conn, "index.html", likes: likes)
+  end
+
+  def drafts(conn, _params) do
+    likes = Content.list_likes(is_published: false)
     render(conn, "index.html", likes: likes)
   end
 

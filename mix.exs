@@ -4,7 +4,7 @@ defmodule Akedia.MixProject do
   def project do
     [
       app: :akedia,
-      version: "0.24.5",
+      version: "0.24.11",
       elixir: "~> 1.5",
       elixirc_paths: elixirc_paths(Mix.env()),
       compilers: [:phoenix, :gettext] ++ Mix.compilers(),
@@ -62,7 +62,8 @@ defmodule Akedia.MixProject do
       {:slugger, "~> 0.3.0"},
       {:microformats2, "~> 0.2.1"},
       {:floki, "~> 0.21.0"},
-      {:timber, "~> 3.0"}
+      {:timber, "~> 3.0"},
+      {:indieweb, "~> 0.0.42"}
     ]
   end
 

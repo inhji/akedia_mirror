@@ -1,0 +1,9 @@
+<article class="h-entry page <%= pinned_class(@page) %> ">
+  <h3>
+    <%= link @page.title, to: Routes.page_path(@conn, :show, @page) %>
+  </h3>
+  <div class="meta">
+    <time datetime="<%= date_iso(@page.inserted_at) %>"> <%= date_pretty(@page.inserted_at) %> </time>
+    <%= render SharedView, "topics.html", conn: @conn, topics: @page.entity.topics %>
+  </div>
+</article>
