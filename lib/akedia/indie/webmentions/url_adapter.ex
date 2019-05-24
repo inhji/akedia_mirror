@@ -5,6 +5,7 @@ defmodule Akedia.Indie.Webmentions.URLAdapter do
     Akedia.Indie.Micropub.Content.get_post_by_url(url)
   end
 
+  def to_source_url(url) when is_binary(url), do: URI.parse(url)
   def to_source_url(%Akedia.Content.Bookmark{} = bookmark), do: Akedia.url(bookmark)
   def to_source_url(%Akedia.Content.Post{} = post), do: Akedia.url(post)
 end
