@@ -1,14 +1,26 @@
+@charset "UTF-8";
+
+$red: #dd3344;
+$primary: $red;
+$link: $red;
+$layout-width: 600px;
+
 @import "reset";
 @import "~bulma/bulma";
 
 @import "~fork-awesome/scss/fork-awesome.scss";
-@import "~openwebicons/css/openwebicons-bootstrap.css";
+@import "~openwebicons/css/openwebicons.css";
 
 // @import "debug";
 
 .grid {
   display: grid;
-  grid-template-columns: [xl-start] 1fr 1.5rem [md-start] minmax(0, 600px) [md-end] 1.5rem 1fr [xl-end];
+  grid-template-columns: [xl-start] 1fr [md-start] minmax(0, $layout-width) [md-end] 1fr [xl-end];
+  grid-gap: 1.5rem;
+}
+
+@media (max-width: $tablet) {
+  .grid { grid-gap: 0; }
 }
 
 .grid * { grid-column: md; }

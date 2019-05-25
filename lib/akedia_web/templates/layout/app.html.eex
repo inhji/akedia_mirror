@@ -25,31 +25,53 @@
     <link rel="stylesheet" href="<%= Routes.static_path(@conn, "/css/app.css") %>"/>
   </head>
   <body>
+    <section class="hero">
+      <div class="hero-head">
+        <div class="container grid">
+          <nav class="navbar" role="navigation" aria-label="main navigation">
+            <div class="navbar-brand">
+              <a class="navbar-item" href="/">
+                <img src="<%= Routes.static_path(@conn, "/images/logo.png") %>" width="30" height="30" alt="Inhji.de Logo">
+              </a>
 
-    <section class="section">
-      <div class="container grid">
-        <%= render_existing(@view_module, "breadcrumb.html", assigns) ||
-            render(AkediaWeb.LayoutView, "breadcrumb.html", assigns) %>
+              <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+              </a>
+            </div>
+
+            <div id="navbarBasicExample" class="navbar-menu">
+              <div class="navbar-start">
+                <%= link "/bookmarks", to: Routes.bookmark_path(@conn, :index), class: "navbar-item" %>
+              </div>
+            </div>
+          </nav>
+        </div>
+      </div>
+    </section>
+
+    <section class="hero">
+      <div class="hero-body">
+        <div class="container grid">
+          <%= render @view_module, @view_template, assigns %>
+        </div>
       </div>
     </section>
 
     <section class="section">
       <div class="container grid">
-        <%= render @view_module, @view_template, assigns %>
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="container grid">
-          <footer class="footer has-text-grey">
-            &copy; 2019 by Jonathan Jenne. Powered by <a href="https://github.com/inhji/akedia" target="_blank" rel="noreferrer">Akedia v<%= version() %></a>.
+        <footer class="has-text-grey">
+          <p>
+            &copy; 2019 by Jonathan Jenne. Powered by <a href="https://github.com/inhji/akedia" target="_blank" rel="noreferrer" class="has-text-dark">Akedia v<%= version() %></a>.
             <br />
             <%= if @logged_in do %>
-              Go to <%= link "Profile", to: Routes.user_path(@conn, :show), class: "nav-link" %>. Or <%= link "Logout", to: Routes.session_path(@conn, :delete), method: "delete", data: [confirm: "ಥ‿ಥ\nR u sure?"], class: "nav-link" %>.
+            Go to <%= link "Profile", to: Routes.user_path(@conn, :show), class: "nav-link" %>. Or <%= link "Logout", to: Routes.session_path(@conn, :delete), method: "delete", data: [confirm: "ಥ‿ಥ\nR u sure?"], class: "nav-link" %>.
             <% else %>
-                <%= link "Login", to: Routes.session_path(@conn, :new), class: "nav-link" %>
+            <%= link "Login", to: Routes.session_path(@conn, :new), class: "has-text-dark" %>
             <% end %>
-          </footer>
+          </p>
+      </footer>
       </div>
     </section>
     <script type="text/javascript" src="<%= Routes.static_path(@conn, "/js/app.js") %>"></script>
