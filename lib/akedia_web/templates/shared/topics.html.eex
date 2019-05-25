@@ -1,8 +1,8 @@
 <span class="topics">
   <%= if !Enum.empty?(@topics) do %>
-    <span>|</span>
+    <span class="dot" />
     <%= for topic <- @topics do %>
-      <%= link topic.text, to: Routes.topic_path(@conn, :tagged, topic), class: "p-category text-muted" %>
+      <%= link topic.text, to: Routes.topic_path(@conn, :tagged, topic), class: "p-category has-text-grey" %>
     <% end %>
   <% end %>
 </span>

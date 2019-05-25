@@ -37,3 +37,12 @@ section, .footer {
 }
 
 .is-rounded, .is-rounded img { border-radius: 999px; }
+
+article {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+.dot:before {
+  content: '·';
+}

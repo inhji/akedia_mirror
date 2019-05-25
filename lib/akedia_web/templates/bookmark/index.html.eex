@@ -2,10 +2,8 @@
   <%= render SharedView, "posts_nav.html", conn: @conn, path_helper: &Routes.bookmark_path/2 %>
 <% end %>
 
-<div class="content-wrapper">
-  <div class="bookmarks list h-feed">
-    <%= for bookmark <- @bookmarks do %>
-      <%= render "bookmark.html", conn: @conn, bookmark: bookmark %>
-    <% end %>
-  </div>
+<div class="h-feed">
+  <%= for bookmark <- @bookmarks do %>
+    <%= render "bookmark.html", conn: @conn, bookmark: bookmark %>
+  <% end %>
 </div>

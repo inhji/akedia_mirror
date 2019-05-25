@@ -1,25 +1,39 @@
-<article class="bookmark h-entry">
-  <h3 class="title">
+<article class="h-entry bookmark">
+  <div class="media">
     <%= if @bookmark.favicon do %>
-      <img src="<%= favicon_url(@bookmark.favicon) %>" class="round inline">
+    <figure class="media-left">
+      <p class="image is-48x48">
+        <img src="<%= favicon_url(@bookmark.favicon) %>" class="is-rounded">
+      </p>
+    </figure>
+
+    <% else %>
+    <figure class="media-left">
+      <p class="image is-48x48">
+        <img src="" class="is-rounded">
+      </p>
+    </figure>
     <% end %>
-    <a href="<%= @bookmark.url %>" target="_blank" class="u-bookmark-of h-cite p-name text-body">
-      <%= @bookmark.title %>
-    </a>
-  </h3>
 
-  <div class="e-content content">
-    <%= to_html(@bookmark) %>
-  </div>
+    <div class="media-content">
+      <a href="<%= @bookmark.url %>" target="_blank" class="u-bookmark-of h-cite p-name has-text-dark is-size-5">
+        <strong><%= @bookmark.title %></strong>
+      </a>
 
-  <div class="meta">
-    <time class="dt-published" datetime="<%= date_iso(@bookmark.inserted_at) %>">
-      <%= link date_fuzzy(@bookmark.inserted_at), to: Routes.bookmark_url(@conn, :show, @bookmark) %>
-    </time>
-    <span>|</span>
-    <a href="<%= @bookmark.url %>" class="text-muted" target="_blank">
-      <%= tld(@bookmark.url) %>
-    </a>
-    <%= render SharedView, "topics.html", conn: @conn, topics: @bookmark.entity.topics %>
+      <div class="e-content content">
+        <%= to_html(@bookmark) %>
+      </div>
+
+      <div class="meta">
+        <time class="dt-published" datetime="<%= date_iso(@bookmark.inserted_at) %>">
+          <%= link date_fuzzy(@bookmark.inserted_at), to: Routes.bookmark_url(@conn, :show, @bookmark), class: "has-text-grey" %>
+        </time>
+        <span class="dot" />
+        <a href="<%= @bookmark.url %>" class="has-text-grey" target="_blank">
+          <%= tld(@bookmark.url) %>
+        </a>
+        <%= render SharedView, "topics.html", conn: @conn, topics: @bookmark.entity.topics %>
+      </div>
+    </div>
   </div>
 </article>
