@@ -51,11 +51,9 @@
       </div>
     </section>
 
-    <section class="hero">
-      <div class="hero-body">
-        <div class="container grid">
-          <%= render @view_module, @view_template, assigns %>
-        </div>
+    <section class="section">
+      <div class="container grid">
+        <%= render @view_module, @view_template, assigns %>
       </div>
     </section>
 
