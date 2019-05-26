@@ -1,13 +1,29 @@
 <%= render SharedView, "user_nav.html", assigns %>
 
-<div class="media">
-  <img src="<%= avatar_path(@conn) %>" class="mr-3 avatar" width="100">
-  <div class="media-body">
-    <h3 class="mt-0"><%= @user.name %> <small class="text-muted">aka <%= @user.username %></small></h3>
-    <p>
-      <span>Email: <%= @user.credential.email %></span><br/>
+<div class="media h-card vcard">
+  <figure class="media-left">
+    <p class="image is-rounded is-96x96">
+      <img src="<%= avatar_path(@conn) %>" class="u-photo" width="96">
+    </p>
+  </figure>
+  <div class="media-content">
+    <h1 class="title">
+      <a href="/" rel="me" class="has-text-dark u-url url uid">
+        <%= @current_user.name %>
+      </a>
+      <small class="has-text-primary">
+        @<span class="p-nickname">inhji</span>
+      </small>
+    </h1>
+    <h2 class="subtitle has-text-grey p-note"><%= @current_user.bio %></h2>
+    <p class="social">
+      <%= for profile <- Enum.filter(@current_user.profiles, fn p -> p.public end) do %>
+        <a href="<%= profile.url %>" target="_blank" rel="<%= profile.rel_value %>" class="has-text-dark">
+          <i class="<%= profile.icon %>"></i>
+        </a>
+      <% end %>
     </p>
   </div>
 </div>
 
-<%= link "Edit", to: Routes.user_path(@conn, :edit), class: "btn btn-success" %>
+<%= link "Edit", to: Routes.user_path(@conn, :edit), class: "button" %>

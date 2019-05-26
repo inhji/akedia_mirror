@@ -1,32 +1,32 @@
 <%= render SharedView, "user_nav.html", assigns %>
 
-<div class="list-group">
-  <%= for profile <- @profiles do %>
-    <%= link to: Routes.profile_path(@conn, :edit, profile), class: "list-group-item list-group-item-action" do %>
-      <div class="d-flex w-100 justify-content-between">
-        <h5 class="mb-1">
-          <%= if profile.icon do %>
-            <i class="<%= profile.icon %>"></i>
-          <% else %>
-            <i class="fa fa-circle"></i>
-          <% end %>
-          <%= profile.name %>
-        </h5>
-        <small>
-        <%= if profile.public do %>
-          <span class="text-primary">Public</span>
-        <% else %>
-          <span class="text-muted">Private</span>
-        <% end %>
-        </small>
-      </div>
-
-      <p class="mb-1">
-        <%= profile.url %>
-      </p>
-      <small>rel=<%= profile.rel_value %></small>
+<%= for profile <- @profiles do %>
+<article class="media">
+  <figure class="media-left">
+    <p class="image is-16x16">
+      <%= if profile.icon do %>
+        <i class="<%= profile.icon %>"></i>
+      <% else %>
+        <i class="fa fa-circle"></i>
+      <% end %>
+    </p>
+  </figure>
+  <div class="media-content">
+    <p>
+      <strong><%= profile.name %></strong> <small><%= visibility(profile) %></small>
+      <br>
+      <%= link profile.url, to: profile.url, target: "_blank" %>
+    </p>
+    <small class="has-text-grey">
+      rel=<%= profile.rel_value %>
+    </small>
+  </div>
+  <div class="media-right">
+    <%= link to: Routes.profile_path(@conn, :edit, profile), class: "button is-small" do %>
+      <i class="fa fa-edit"></i>
     <% end %>
-  <% end %>
-</div>
+  </div>
+</article>
+<% end %>
 
-<span><%= link "New Profile", to: Routes.profile_path(@conn, :new), class: "btn btn-outline-primary" %></span>
+<span><%= link "New Profile", to: Routes.profile_path(@conn, :new), class: "button" %></span>
