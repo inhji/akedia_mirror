@@ -1,19 +1,15 @@
 <article class="h-entry bookmark">
   <div class="media">
-    <%= if @bookmark.favicon do %>
-    <figure class="media-left">
-      <p class="image is-48x48">
-        <img src="<%= favicon_url(@bookmark.favicon) %>" class="is-rounded">
-      </p>
-    </figure>
 
-    <% else %>
     <figure class="media-left">
       <p class="image is-48x48">
-        <img src="" class="is-rounded">
+        <%= if @bookmark.favicon do %>
+          <img src="<%= favicon_url(@bookmark.favicon) %>" class="is-rounded">
+        <% else %>
+          <!-- TODO: Add nice placeholder image/icon -->
+        <% end %>
       </p>
     </figure>
-    <% end %>
 
     <div class="media-content">
       <a href="<%= @bookmark.url %>" target="_blank" class="u-bookmark-of h-cite p-name has-text-dark is-size-5">
@@ -35,5 +31,6 @@
         <%= render SharedView, "topics.html", conn: @conn, topics: @bookmark.entity.topics %>
       </div>
     </div>
+    
   </div>
 </article>

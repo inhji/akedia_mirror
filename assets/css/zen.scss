@@ -1,0 +1,50 @@
+.zen {
+  position: relative;
+
+  textarea {
+    resize: none;
+  }
+}
+
+.zen input {
+  display: none;
+}
+
+.zen input:checked ~ .zen-backdrop {
+  background-color: $white-ter;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 999;
+
+  textarea {
+    max-width: 700px;
+    font-size: 150%;
+    font-family: monospace;
+    height: 100%;
+    margin: 0 auto;
+    padding-top: 5rem;
+    border-radius: 0;
+    border: none;
+    outline: none;
+    resize: none;
+    box-shadow: none;
+  }
+}
+
+.zen label {
+  position: absolute;
+  top: 0;
+  right: 0;
+  line-height: 1.5;
+  padding: 0.375rem 0.75rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: $grey;
+
+  &:hover {
+    color: $grey-dark;
+  }
+}

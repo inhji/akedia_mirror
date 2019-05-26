@@ -1,9 +1,13 @@
-<%= if @logged_in do %>
-  <%= render SharedView, "posts_nav.html", conn: @conn, path_helper: &Routes.bookmark_path/2 %>
-<% end %>
+<%= render SharedView, "posts_nav.html", conn: @conn, path_helper: &Routes.bookmark_path/2 %>
 
 <div class="h-feed">
   <%= for bookmark <- @bookmarks do %>
     <%= render "bookmark.html", conn: @conn, bookmark: bookmark %>
   <% end %>
 </div>
+
+<%= if Enum.empty?(@bookmarks) do %>
+  <div>
+    Doh!
+  </div>
+<% end %>

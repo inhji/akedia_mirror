@@ -1,0 +1,7 @@
+.dot:before {
+  content: '·';
+}
+
+.is-rounded, .is-rounded img {
+  border-radius: $radius-rounded;
+}

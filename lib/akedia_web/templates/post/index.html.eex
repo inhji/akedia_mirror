@@ -1,6 +1,4 @@
-<%= if @logged_in do %>
-  <%= render SharedView, "posts_nav.html", conn: @conn, path_helper: &Routes.post_path/2 %>
-<% end %>
+<%= render SharedView, "posts_nav.html", conn: @conn, path_helper: &Routes.post_path/2 %>
 
 <div class="content-wrapper">
   <div class="posts list h-feed">

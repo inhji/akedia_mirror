@@ -1,6 +1,4 @@
-.alert {
-  border-radius: 0;
-
+.notification {
   &:empty {
     display: none;
   }
