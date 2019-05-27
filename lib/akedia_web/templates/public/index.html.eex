@@ -7,7 +7,7 @@
   </figure>
   <div class="media-content">
     <h1 class="title">
-      <a href="/" rel="me" class="has-text-dark u-url url uid">
+      <a href="/" rel="me" class="has-text-dark p-name u-url url uid">
         <%= @current_user.name %>
       </a>
       <small class="has-text-primary">
