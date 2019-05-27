@@ -45,6 +45,7 @@ defmodule Akedia.Indie.Micropub.Content do
 
     case Content.create_post(attrs, is_published) do
       {:ok, post} ->
+        Que.add(Workers.Webmention, post)
         Logger.info("Post created!")
         Akedia.Content.add_tags(post, tags)
         {:ok, :created, Akedia.url(post)}
