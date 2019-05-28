@@ -1,79 +1,24 @@
-<nav class="navbar navbar-expand-lg navbar-light">
-  <div class="container">
-    <a class="navbar-brand" href="<%= Routes.public_path(@conn, :index) %>">
+<nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a class="navbar-item" data-text="Inhji.de" href="/">
       <img src="<%= Routes.static_path(@conn, "/images/logo.png") %>" width="30" height="30" alt="Inhji.de Logo">
     </a>
-    <button class="navbar-toggler" type="button" data-toggle="offcanvas" data-target="#navbarMain" aria-controls="navbarMain" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
 
-    <div class="navbar-collapse offcanvas-collapse" id="navbarMain">
-      <ul class="navbar-nav mr-auto">
-        <%= if @show_bookmarks or @logged_in do %>
-        <li class="nav-item">
-          <a class="nav-link" href="<%= Routes.bookmark_path(@conn, :index) %>">Bookmarks</a>
-        </li>
-        <% end %>
-        <%= if @show_posts or @logged_in do %>
-        <li class="nav-item">
-          <a class="nav-link" href="<%= Routes.post_path(@conn, :index) %>">Posts</a>
-        </li>
-        <% end %>
-        <%= if @show_stories or @logged_in do %>
-        <li class="nav-item">
-          <a class="nav-link" href="<%= Routes.story_path(@conn, :index) %>">Stories</a>
-        </li>
-        <% end %>
-        <%= if @show_wiki or @logged_in do %>
-        <li class="nav-item">
-          <a class="nav-link" href="<%= Routes.page_path(@conn, :index) %>">Wiki</a>
-        </li>
-        <% end %>
-        <%= if @show_more or @logged_in do %>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Moar
-          </a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="<%= Routes.image_path(@conn, :index) %>"><i class="fa fa-image"></i> Photos</a>
-            <a class="dropdown-item" href="<%= Routes.topic_path(@conn, :index) %>"><i class="fa fa-tags"></i> Tags</a>
-            <a class="dropdown-item" href="<%= Routes.like_path(@conn, :index) %>"><i class="fa fa-heart"></i> Likes</a>
-            <a class="dropdown-item" href="<%= Routes.listen_path(@conn, :index) %>"><i class="fa fa-headphones"></i> Listens</a>
-          </div>
-        </li>
-        <% end %>
-      </ul>
+    <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
 
-      <%= if @show_search or @logged_in do %>
-      <ul class="navbar-nav search-bar">
-        <%= form_for @conn, Routes.search_path(@conn, :search), [method: :get, class: "form-inline"], fn f -> %>
-          <%= search_input f, :query, class: "form-control mr-sm-2 search-input", placeholder: "Search" %>
-        <% end %>
-        <li class="nav-item">
-          <a href="#" class="nav-link search-icon">
-            <i class="fa fa-search"></i>
-          </a>
-        </li>
-      </ul>
-      <% end %>
-      <ul class="navbar-nav">
-      <%= if @logged_in do %>
-        <li class="nav-item">
-          <%= link to: Routes.user_path(@conn, :show), class: "nav-link" do %>
-            <i class="fa fa-cog"></i>
-          <% end %>
-        </li>
-        <li class="nav-item">
-          <%= link "Logout", to: Routes.session_path(@conn, :delete), method: "delete", data: [confirm: "ಥ‿ಥ\nR u sure?"], class: "nav-link" %>
-        </li>
-      <% else %>
-        <%= if @has_user do %>
-          <li class="nav-item">
-            <%= link "Login", to: Routes.session_path(@conn, :new), class: "nav-link" %>
-          </li>
-        <% end %>
-      <% end %>
-      </ul>
+  <div id="navbarBasicExample" class="navbar-menu">
+    <div class="navbar-start">
+      <%= active_link @conn, "/bookmarks",
+          class_active: "is-active",
+          to: Routes.bookmark_path(@conn, :index), class: "navbar-item" %>
+      <%= active_link @conn, "/posts",
+          class_active: "is-active",
+          to: Routes.post_path(@conn, :index), class: "navbar-item" %>
     </div>
   </div>
 </nav>

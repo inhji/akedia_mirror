@@ -28,30 +28,7 @@
     <section class="hero">
       <div class="hero-head">
         <div class="container grid">
-          <nav class="navbar" role="navigation" aria-label="main navigation">
-            <div class="navbar-brand">
-              <a class="navbar-item" data-text="Inhji.de" href="/">
-                <img src="<%= Routes.static_path(@conn, "/images/logo.png") %>" width="30" height="30" alt="Inhji.de Logo">
-              </a>
-
-              <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
-                <span aria-hidden="true"></span>
-                <span aria-hidden="true"></span>
-                <span aria-hidden="true"></span>
-              </a>
-            </div>
-
-            <div id="navbarBasicExample" class="navbar-menu">
-              <div class="navbar-start">
-                <%= active_link @conn, "/bookmarks",
-                    class_active: "is-active",
-                    to: Routes.bookmark_path(@conn, :index), class: "navbar-item" %>
-                <%= active_link @conn, "/posts",
-                    class_active: "is-active",
-                    to: Routes.post_path(@conn, :index), class: "navbar-item" %>
-              </div>
-            </div>
-          </nav>
+          <%= render "navigation.html", conn: @conn %>
         </div>
       </div>
     </section>
@@ -66,21 +43,7 @@
 
     <section class="section">
       <div class="container grid">
-        <footer class="has-text-grey has-text-centered">
-          <p>&copy; 2019 by Jonathan Jenne. Powered by <a href="https://github.com/inhji/akedia" target="_blank" rel="noreferrer" class="has-text-dark">Akedia v<%= version() %></a>.</p>
-          <p class="webring">
-            <a href="https://xn--sr8hvo.ws/%F0%9F%8F%84%F0%9F%93%80%F0%9F%8C%8F/previous" class="has-text-grey">↤</a>
-            <span>Part of the Indie Webring 🕸💍 </span>
-            <a href="https://xn--sr8hvo.ws/%F0%9F%8F%84%F0%9F%93%80%F0%9F%8C%8F/next" class="has-text-grey">↦</a>
-          </p>
-          <p>
-            <%= if @logged_in do %>
-            Go to <%= link "Profile", to: Routes.user_path(@conn, :show), class: "nav-link" %>. Or <%= link "Logout", to: Routes.session_path(@conn, :delete), method: "delete", data: [confirm: "ಥ‿ಥ\nR u sure?"], class: "nav-link" %>.
-            <% else %>
-            <%= link "Login", to: Routes.session_path(@conn, :new), class: "has-text-dark" %>
-            <% end %>
-          </p>
-      </footer>
+        <%= render "footer.html", conn: @conn, logged_in: @logged_in %>
       </div>
     </section>
     <script type="text/javascript" src="<%= Routes.static_path(@conn, "/js/app.js") %>"></script>
