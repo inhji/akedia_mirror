@@ -1,9 +1,7 @@
 <%= render SharedView, "posts_nav.html", conn: @conn, path_helper: &Routes.post_path/2 %>
 
-<div class="content-wrapper">
-  <div class="posts list h-feed">
-    <%= for post <- @posts do %>
-      <%= render "post.html", conn: @conn, post: post, current_user: @current_user %>
-    <% end %>
-  </div>
+<div class="posts h-feed">
+  <%= for post <- @posts do %>
+    <%= render "post.html", conn: @conn, post: post, current_user: @current_user %>
+  <% end %>
 </div>

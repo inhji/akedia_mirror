@@ -7,15 +7,15 @@
     <%= to_html(@post) %>
   </div>
 
-  <div class="meta">
+  <div class="meta has-text-grey">
     <time class="dt-published" datetime="<%= date_iso(@post.inserted_at) %>">
-      <%= link date_fuzzy(@post.inserted_at), to: Routes.post_url(@conn, :show, @post), class: "u-uid u-url" %>
+      <%= link date_fuzzy(@post.inserted_at), to: Routes.post_url(@conn, :show, @post), class: "u-uid u-url has-text-grey" %>
     </time>
-    <%= if @post.reply_to do %>
-      <span>|</span>
-      <i class="fa fa-reply"></i> <a href="<%= @post.reply_to %>" class="u-in-reply-to" rel="in-reply-to"><%= @post.reply_to %></a>
-    <% end %>
     <%= render SharedView, "topics.html", conn: @conn, topics: @post.entity.topics %>
+    <%= if @post.reply_to do %>
+      <span class="dot"></span>
+      <i class="fa fa-reply"></i> <a href="<%= @post.reply_to %>" class="u-in-reply-to has-text-grey" rel="in-reply-to"><%= @post.reply_to %></a>
+    <% end %>
     <%= render SharedView, "syndications.html", conn: @conn, schema: @post %>
   </div>
 
