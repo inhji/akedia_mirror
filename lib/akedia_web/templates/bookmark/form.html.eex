@@ -5,24 +5,29 @@
     </div>
   <% end %>
 
-  <div class="form-group">
+  <div class="field">
+    <%= label f, :title, class: "label" %>
     <%= text_input f, :title,
-        class: "form-control form-control-lg",
+        class: "input",
         placeholder: "Title" %>
     <%= error_tag f, :title %>
   </div>
 
-  <div class="form-group">
-    <%= text_input f, :url, type: "url", class: "form-control", placeholder: "URL" %>
+  <div class="field">
+    <%= label f, :url, class: "label" %>
+    <%= text_input f, :url,
+        type: "url",
+        class: "input",
+        placeholder: "URL" %>
     <%= error_tag f, :url %>
   </div>
 
-  <div class="form-group">
-    <div class="zennable">
+  <div class="field">
+    <div class="zen">
       <input type="checkbox" id="zen-toggle-comment">
       <div class="zen-backdrop">
         <%= textarea f, :content,
-            class: "form-control",
+            class: "textarea",
             rows: 10 %>
         <label for="zen-toggle-comment">Zen Mode</label>
       </div>
@@ -30,22 +35,23 @@
     <%= error_tag f, :content %>
   </div>
 
-  <div class="form-group">
-    <%= label f, :topics %>
-    <%= text_input f, :topics, value: @tags, class: "form-control" %>
+  <div class="field">
+    <%= label f, :topics, class: "label" %>
+    <%= text_input f, :topics, value: @tags, class: "input" %>
     <%= error_tag f, :topics %>
   </div>
 
   <%= inputs_for f, :entity, fn(ef) -> %>
-  <div class="form-group">
-    <div class="form-check form-check-inline">
-      <%= checkbox ef, :is_published, class: "form-check-input" %>
-      <%= label ef, :is_published, class: "form-check-label" %>
-    </div>
+  <div class="field">
+    <%= label f, :public, class: "checkbox" do %>
+      <%= checkbox ef, :is_published, class: "checkbox" %>
+      Is Published
+    <% end %>
+    <%= error_tag ef, :is_published %>
   </div>
   <% end %>
 
-  <div class="form-group">
-    <%= submit "Save", class: "btn btn-primary" %>
+  <div class="field">
+    <%= submit "Save", class: "button is-primary" %>
   </div>
 <% end %>
