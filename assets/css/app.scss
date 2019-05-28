@@ -1,8 +1,6 @@
 @charset "UTF-8";
 
 $red: #dd3344;
-$primary: $red;
-$link: $red;
 $layout-width: 600px;
 
 @import "reset";
@@ -11,11 +9,11 @@ $layout-width: 600px;
 @import "~fork-awesome/scss/fork-awesome.scss";
 @import "~openwebicons/css/openwebicons.css";
 
-// @import "debug";
 @import "grid";
 @import "phoenix";
 @import "helpers";
 @import "zen";
+// @import "debug";
 
 section, .footer {
   padding-left: 0;
