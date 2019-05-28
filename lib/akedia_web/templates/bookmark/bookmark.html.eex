@@ -6,7 +6,7 @@
         <%= if @bookmark.favicon do %>
           <img src="<%= favicon_url(@bookmark.favicon) %>" class="is-rounded">
         <% else %>
-          <!-- TODO: Add nice placeholder image/icon -->
+          <img src="<%= Routes.static_path(@conn, "/images/bookmark.png") %>">
         <% end %>
       </p>
     </figure>
@@ -31,6 +31,6 @@
         <%= render SharedView, "topics.html", conn: @conn, topics: @bookmark.entity.topics %>
       </div>
     </div>
-    
+
   </div>
 </article>
