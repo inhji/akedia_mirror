@@ -1,6 +1,6 @@
 <article class="h-entry post">
   <%= if @post.title do %>
-    <h3 class="p-name"> <%= @post.title %></h3>
+    <h3 class="p-name title"><%= @post.title %></h3>
   <% end %>
 
   <div class="e-content content <%= unless @post.title do %>p-name<% end %>">
