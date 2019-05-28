@@ -1,7 +1,7 @@
-<h1>Tagged with "<%= @topic.text %>"
-  <%= if @logged_in do %>
-    <small><%= link "Edit", to: Routes.topic_url(@conn, :edit, @topic) %></small>
-  <% end %>
+<%= render SharedView, "topic_nav.html", conn: @conn, topic: @topic %>
+
+<h1 class="title">
+  Tagged with “<%= @topic.text %>”
 </h1>
 
 <table class="table">
@@ -13,7 +13,7 @@
       %{story: %{id: _}} -> {entity.story, "Story", &Routes.story_path/3}
       %{post: %{id: _}} -> {entity.post, "Post", &Routes.post_path/3}
       %{like: %{id: _}} -> {entity.like, "Like", &Routes.like_path/3}
-    end %>
+    end %>    
     <tr>
       <td>
         <%= link to: content_path.(@conn, :index, []) do %>

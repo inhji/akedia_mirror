@@ -8,6 +8,7 @@ defmodule Akedia.Content.Topic do
   schema "topics" do
     field :text, :string
     field :slug, :string
+    field :entity_count, :integer, virtual: true
 
     many_to_many(:entities, Entity, join_through: "entity_topics")
 

@@ -1,25 +1,11 @@
-<h1>Themen</h1>
+<h1 class="title">Topics</h1>
 
-<table class="table">
-  <tbody>
+<div class="topics">
   <%= for topic <- @topics do %>
-    <tr>
-      <td>
-        <%= link to: Routes.topic_path(@conn, :tagged, topic) do %>
-          <%= topic.text %> (<%= Enum.count(topic.entities) %>)
-        <% end %>
-      </td>
-      <%= if @logged_in do %>
-      <td>
-        <%= link "Edit", to: Routes.topic_path(@conn, :edit, topic) %>
-        <%= if Enum.count(topic.entities) > 0 do %>
-          <a class="text-muted">Delete</a>
-        <% else %>
-          <%= link "Delete", to: Routes.topic_path(@conn, :delete, topic), method: :delete, data: [confirm: "Are you sure?"] %>
-        <% end %>
-      </td>
-      <% end %>
-    </tr>
+  <span class="topic count-<%= topic.entity_count %>">
+    <%= link to: Routes.topic_path(@conn, :tagged, topic), class: "has-text-dark" do %>
+      <%= topic.text %> <span class="has-text-grey">(<%= Enum.count(topic.entities) %>)</span>
+    <% end %>
+  </span>
   <% end %>
-  </tbody>
-</table>
+</div>

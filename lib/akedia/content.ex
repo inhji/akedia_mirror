@@ -178,7 +178,10 @@ defmodule Akedia.Content do
 
   def list_topics do
     Topic
-    |> order_by(:slug)
+    |> join(:left, [t], et in EntityTopic, on: t.id == et.topic_id)
+    |> group_by([t], t.id)
+    |> order_by([t, et], [desc: count(et.id)])
+    |> select_merge([t, et], %{ entity_count: count(et.id) })
     |> Repo.all()
     |> Repo.preload(entities: [:bookmark, :story, :page, :post, :like])
   end

@@ -1,0 +1,19 @@
+<%= if logged_in?(@conn) do %>
+<div class="tabs is-fullwidth">
+  <ul>
+    <%= link to: Routes.topic_path(@conn, :edit, @topic), class: "nav-link" do %>
+      <span><i class="fa fa-edit has-text-success"></i> Edit</span>
+    <% end %>
+
+    <%= if not Enum.empty?(@topic.entities) do %>
+      <a class="has-text-grey">
+        <span><i class="fa fa-recycle has-text-grey"></i> Delete</span>
+      </a>
+    <% else %>
+      <%= link to: Routes.topic_path(@conn, :delete, @topic), method: :delete, data: [confirm: "Are you sure?"], class: "nav-link" do %>
+        <span><i class="fa fa-recycle has-text-danger"></i> Delete</span>
+      <% end %>
+    <% end %>
+  </ul>
+</div>
+<% end %>
