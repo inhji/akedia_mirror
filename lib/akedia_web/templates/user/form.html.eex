@@ -22,19 +22,26 @@
   </div>
 
   <div class="field">
-    <%= label f, :bio, class: "label" %>
-    <div class="control">
-      <%= textarea f, :bio, class: "textarea" %>
-    </div>
-    <%= error_tag f, :bio %>
-  </div>
-
-  <div class="field">
-    <%= label f, :tagline, class: "label" %>
+    <%= label f, "Short Bio", class: "label" %>
     <div class="control">
       <%= textarea f, :tagline, class: "textarea" %>
     </div>
     <%= error_tag f, :tagline %>
+  </div>
+
+  <div class="field">
+    <%= label f, :bio, class: "label" %>
+    <div class="zen">
+      <input type="checkbox" id="zen-toggle-comment">
+      <%= label f, :bio, class: "label" %>
+      <div class="zen-backdrop">
+        <%= textarea f, :bio,
+            class: "textarea",
+            rows: 5 %>
+        <label for="zen-toggle-comment">Zen Mode</label>
+      </div>
+    </div>
+    <%= error_tag f, :bio %>
   </div>
 
   <%= inputs_for f, :credential, fn fc -> %>

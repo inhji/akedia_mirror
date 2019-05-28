@@ -61,10 +61,14 @@
 
     <section class="section">
       <div class="container grid">
-        <footer class="has-text-grey">
+        <footer class="has-text-grey has-text-centered">
+          <p>&copy; 2019 by Jonathan Jenne. Powered by <a href="https://github.com/inhji/akedia" target="_blank" rel="noreferrer" class="has-text-dark">Akedia v<%= version() %></a>.</p>
+          <p class="webring">
+            <a href="https://xn--sr8hvo.ws/%F0%9F%8F%84%F0%9F%93%80%F0%9F%8C%8F/previous" class="has-text-grey">↤</a>
+            <span>Part of the Indie Webring 🕸💍 </span>
+            <a href="https://xn--sr8hvo.ws/%F0%9F%8F%84%F0%9F%93%80%F0%9F%8C%8F/next" class="has-text-grey">↦</a>
+          </p>
           <p>
-            &copy; 2019 by Jonathan Jenne. Powered by <a href="https://github.com/inhji/akedia" target="_blank" rel="noreferrer" class="has-text-dark">Akedia v<%= version() %></a>.
-            <br />
             <%= if @logged_in do %>
             Go to <%= link "Profile", to: Routes.user_path(@conn, :show), class: "nav-link" %>. Or <%= link "Logout", to: Routes.session_path(@conn, :delete), method: "delete", data: [confirm: "ಥ‿ಥ\nR u sure?"], class: "nav-link" %>.
             <% else %>
