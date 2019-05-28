@@ -9,7 +9,7 @@ defmodule Akedia.Media.FaviconUploader do
 
   # Whitelist file extensions:
   def validate({file, _}) do
-    ~w(.jpg .jpeg .gif .png .ico) |> Enum.member?(Path.extname(file.file_name))
+    ~w(.jpg .jpeg .gif .png .ico .svg) |> Enum.member?(Path.extname(file.file_name))
   end
 
   # Override the persisted filenames:
