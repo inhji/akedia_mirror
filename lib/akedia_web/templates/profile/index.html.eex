@@ -1,7 +1,7 @@
 <%= render SharedView, "user_nav.html", assigns %>
 
 <%= for profile <- @profiles do %>
-<article class="media">
+<article class="media is-marginless">
   <figure class="media-left">
     <p class="image is-16x16">
       <%= if profile.icon do %>
@@ -22,9 +22,7 @@
     </small>
   </div>
   <div class="media-right">
-    <%= link to: Routes.profile_path(@conn, :edit, profile), class: "button is-small" do %>
-      <i class="fa fa-edit"></i>
-    <% end %>
+    <%= link "Edit", to: Routes.profile_path(@conn, :edit, profile), class: "button" %>
   </div>
 </article>
 <% end %>
