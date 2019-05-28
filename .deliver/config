@@ -23,6 +23,20 @@ pre_erlang_get_and_update_deps() {
 }
 
 post_erlang_clean_compile() {
+  status "Installing NPM dependencies" # log output prepended with "----->"
+  __sync_remote " # runs the commands on the build host
+    set -e # fail if any command fails (recommended)
+    cd '$BUILD_AT/assets' # enter the build directory on the build host (required)
+    # run your custom task
+    npm install
+  "
+  status "Generating Assets" # log output prepended with "----->"
+  __sync_remote " # runs the commands on the build host
+    set -e # fail if any command fails (recommended)
+    cd '$BUILD_AT/assets' # enter the build directory on the build host (required)
+    # run your custom task
+    npm run deploy
+  "
   status "Running phoenix.digest" # log output prepended with "----->"
   __sync_remote " # runs the commands on the build host
     set -e # fail if any command fails (recommended)
@@ -31,19 +45,5 @@ post_erlang_clean_compile() {
     mkdir -p priv/static # required by the phoenix.digest task
     # run your custom task
     APP='$APP' MIX_ENV='$TARGET_MIX_ENV' $MIX_CMD phx.digest $SILENCE
-  "
-  status "Installing NPM dependencies" # log output prepended with "----->"
-  __sync_remote " # runs the commands on the build host
-    set -e # fail if any command fails (recommended)
-    cd '$BUILD_AT/assets' # enter the build directory on the build host (required)
-    # run your custom task
-    npm install
-  "
-  status "Compiling Scripts" # log output prepended with "----->"
-  __sync_remote " # runs the commands on the build host
-    set -e # fail if any command fails (recommended)
-    cd '$BUILD_AT/assets' # enter the build directory on the build host (required)
-    # run your custom task
-    npm run deploy
   "
 }
