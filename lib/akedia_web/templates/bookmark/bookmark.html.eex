@@ -2,9 +2,9 @@
   <div class="media">
 
     <figure class="media-left">
-      <p class="image is-48x48">
+      <p class="image is-48x48 is-rounded">
         <%= if @bookmark.favicon do %>
-          <img src="<%= favicon_url(@bookmark.favicon) %>" class="is-rounded">
+          <img src="<%= favicon_url(@bookmark.favicon) %>">
         <% else %>
           <img src="<%= Routes.static_path(@conn, "/images/bookmark.png") %>">
         <% end %>
@@ -12,7 +12,7 @@
     </figure>
 
     <div class="media-content">
-      <a href="<%= @bookmark.url %>" target="_blank" class="u-bookmark-of h-cite p-name has-text-dark is-size-5">
+      <a href="<%= @bookmark.url %>" target="_blank" class="u-bookmark-of h-cite p-name is-size-5">
         <strong><%= @bookmark.title %></strong>
       </a>
 

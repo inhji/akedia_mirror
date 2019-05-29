@@ -1,0 +1,13 @@
+@media (prefers-color-scheme: dark) {
+  .navbar-brand {
+    img {
+      filter: invert(100%);
+    }
+  }
+
+  .bookmark {
+    .image {
+      background-color: $white;
+    }
+  }
+}

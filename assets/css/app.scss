@@ -1,10 +1,24 @@
 @charset "UTF-8";
 
+@import "~bulma/sass/utilities/_all";
+
+// Custom Variables
 $red: #dd3344;
 $layout-width: 600px;
 
-@import "reset";
-@import "~bulma/bulma";
+// Bulma Overrides
+$link: $dark;
+
+// Bulma Prefers-Dark Overrides
+$link-dark: $grey-lighter;
+
+@import "~bulma/sass/base/_all";
+@import "~bulma/sass/elements/_all";
+@import "~bulma/sass/components/_all";
+@import "~bulma/sass/form/_all";
+@import "~bulma/sass/grid/_all";
+@import "~bulma/sass/layout/_all";
+@import "~bulma-prefers-dark/bulma-prefers-dark";
 
 @import "~fork-awesome/scss/fork-awesome.scss";
 @import "~openwebicons/css/openwebicons.css";
@@ -14,16 +28,12 @@ $layout-width: 600px;
 @import "helpers";
 @import "zen";
 @import "tagcloud";
+@import "dark";
 // @import "debug";
 
 section, .footer {
   padding-left: 0;
   padding-right: 0;
-}
-
-.social {
-  margin-top: -1.5rem;
-  font-size: 1.5rem;
 }
 
 article {
