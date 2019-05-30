@@ -62,8 +62,12 @@ defmodule Akedia.MixProject do
       {:slugger, "~> 0.3.0"},
       {:microformats2, "~> 0.2.1"},
       {:floki, "~> 0.21.0"},
+      {:indieweb, "~> 0.0.42"},
       {:timber, "~> 3.0"},
-      {:indieweb, "~> 0.0.42"}
+      {:timber_phoenix, "~> 1.1"},
+      {:timber_plug, "~> 1.1"},
+      {:timber_exceptions, "~> 2.1"},
+      {:timber_ecto, "~> 2.1"}
     ]
   end
 
