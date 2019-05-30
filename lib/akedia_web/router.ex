@@ -31,6 +31,10 @@ defmodule AkediaWeb.Router do
     plug :check_user
   end
 
+  pipeline :logging do
+    plug Timber.Plug.Event
+  end
+
   scope "/", AkediaWeb do
     pipe_through [:browser]
 
@@ -65,7 +69,7 @@ defmodule AkediaWeb.Router do
   end
 
   scope "/indie" do
-    pipe_through [:api]
+    pipe_through [:api, :logging]
 
     forward "/micropub",
             PlugMicropub,
