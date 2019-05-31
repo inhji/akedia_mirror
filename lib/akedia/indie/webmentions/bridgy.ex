@@ -4,6 +4,7 @@ defmodule Akedia.Indie.Webmentions.Bridgy do
 
   require Logger
 
+  def maybe_publish_to_github(_, nil), do: nil
   def maybe_publish_to_github(%{:entity_id => entity_id} = schema, url) do
     if String.starts_with?(url, "https://github.com/") do
       Akedia.Indie.create_or_update_syndication(%{
