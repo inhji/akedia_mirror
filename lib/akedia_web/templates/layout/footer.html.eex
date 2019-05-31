@@ -9,7 +9,7 @@
     <%= if @logged_in do %>
     Go to <%= link "Profile", to: Routes.user_path(@conn, :show), class: "nav-link" %>. Or <%= link "Logout", to: Routes.session_path(@conn, :delete), method: "delete", data: [confirm: "ಥ‿ಥ\nR u sure?"], class: "nav-link" %>.
     <% else %>
-    <%= link "Login", to: Routes.session_path(@conn, :new), class: "has-text-dark" %>
+    <%= link "Login", to: Routes.session_path(@conn, :new) %>
     <% end %>
   </p>
 </footer>
