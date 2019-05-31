@@ -5,3 +5,9 @@
 .is-rounded, .is-rounded img {
   border-radius: $radius-rounded;
 }
+
+.media.is-dense {
+  margin-top: 0;
+  padding-top: 0;
+  border: 0;
+}
