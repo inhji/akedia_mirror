@@ -1,23 +1,21 @@
 <%= form_for @changeset, @action, [class: "form login"], fn f -> %>
-  <%= if @changeset.action do %>
-    <div class="alert alert-danger">
-      <p>Oops, something went wrong! Please check the errors below.</p>
-    </div>
-  <% end %>
-
-  <div class="form-group floating-label">
-    <%= email_input f, :email, class: "form-control form-control-lg", placeholder: "Email" %>
+  <div class="field">
     <%= label f, :email %>
+    <div class="control">
+      <%= email_input f, :email, class: "input", placeholder: "Email", required: true %>
+    </div>
     <%= error_tag f, :email %>
   </div>
 
-  <div class="form-group floating-label">
-    <%= password_input f, :password, class: "form-control form-control-lg", placeholder: "Password" %>
+  <div class="field">
     <%= label f, :password %>
+    <div class="control">
+      <%= password_input f, :password, class: "input", placeholder: "Password", required: true %>
+    </div>
     <%= error_tag f, :password %>
   </div>
 
   <div class="form-group">
-    <%= submit "Login", class: "btn btn-outline-primary btn-block btn-lg" %>
+    <%= submit "Login", class: "button" %>
   </div>
 <% end %>
