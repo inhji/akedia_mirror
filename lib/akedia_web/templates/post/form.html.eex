@@ -40,7 +40,7 @@
 
   <%= inputs_for f, :entity, fn(ef) -> %>
   <div class="field">
-    <%= label ef, :public, class: "checkbox" do %>
+    <%= label ef, :is_published, class: "checkbox" do %>
       <%= checkbox ef, :is_published, class: "checkbox" %>
       Is Published
     <% end %>
@@ -50,7 +50,7 @@
   <div class="field">
     <%= label ef, :is_pinned, class: "checkbox" do %>
       <%= checkbox ef, :is_pinned, class: "checkbox" %>
-      Is Published
+      Is Pinned
     <% end %>
     <%= error_tag ef, :is_pinned %>
   </div>
