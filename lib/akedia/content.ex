@@ -231,6 +231,7 @@ defmodule Akedia.Content do
   def update_post(%Post{} = post, attrs) do
     post
     |> Post.changeset(attrs)
+    |> Ecto.Changeset.cast_assoc(:entity, with: &Entity.changeset/2)
     |> Repo.update()
   end
 
