@@ -1,12 +1,15 @@
 defmodule AkediaWeb.Helpers.Media do
   use Phoenix.HTML
-  alias Akedia.Media.{FaviconUploader, ImageUploader}
+  alias Akedia.Media.{FaviconUploader, ImageUploader, CoverartUploader}
 
   def image_url(nil, _), do: ""
+  def image_url(nil), do: ""
 
   def image_url(image, version) do
     ImageUploader.url({image.name, image}, version)
   end
+
+  def image_url(image), do: image_url(image, :thumb)
 
   def favicon_url(nil), do: ""
 
@@ -14,8 +17,16 @@ defmodule AkediaWeb.Helpers.Media do
     FaviconUploader.url({favicon.name, favicon}, :original)
   end
 
-  def image_url(nil), do: ""
-  def image_url(image), do: image_url(image, :thumb)
+  def cover_url(nil), do: ""
+  def cover_url(nil, _), do: ""
+
+  def cover_url(album) do
+    CoverartUploader.url({album.cover, album}, :large)
+  end
+
+  def cover_url(album, version) do
+    CoverartUploader.url({album.cover, album}, version)
+  end
 
   def img(image, version, attrs \\ []) do
     img_tag(image_url(image, version), attrs)

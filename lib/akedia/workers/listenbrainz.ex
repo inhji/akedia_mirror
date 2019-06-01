@@ -2,13 +2,50 @@ defmodule Akedia.Workers.Listenbrainz do
   use Que.Worker
   import Ecto.Query
   alias HTTPoison.Response
-  alias Akedia.Content.Listen
+  alias Akedia.Listens.{Listen, Artist, Album}
   alias Akedia.Repo
 
   def perform(user) do
     fetch_listens(user)
     |> Enum.map(&prepare_listen/1)
-    |> Enum.each(&Repo.insert/1)
+    |> Enum.filter(fn l -> !is_nil(l) end)
+    |> Enum.each(fn listen ->
+      Repo.insert(listen)
+    end)
+  end
+
+  def maybe_create_artist(name) when is_nil(name), do: {:error, :error}
+
+  def maybe_create_artist(name) do
+    artist =
+      case Repo.get_by(Artist, name: name) do
+        nil ->
+          %Artist{}
+          |> Artist.changeset(%{name: name})
+          |> Repo.insert!()
+
+        artist ->
+          artist
+      end
+
+    {:ok, artist}
+  end
+
+  def maybe_create_album(name, _artist) when is_nil(name), do: {:error, :error}
+
+  def maybe_create_album(name, artist) do
+    album =
+      case Repo.get_by(Album, name: name) do
+        nil ->
+          %Album{}
+          |> Album.changeset(%{name: name, artist_id: artist.id})
+          |> Repo.insert!()
+
+        album ->
+          album
+      end
+
+    {:ok, album}
   end
 
   def fetch_listens(user) do
@@ -18,7 +55,6 @@ defmodule Akedia.Workers.Listenbrainz do
       %Response{body: body} ->
         body
         |> Jason.decode!(keys: :atoms)
-        |> IO.inspect()
         |> Map.get(:payload)
         |> Map.get(:listens)
 
@@ -37,7 +73,8 @@ defmodule Akedia.Workers.Listenbrainz do
 
     case last_listen do
       nil ->
-        0
+        # min_ts=0 does not return anything from listenbrainz
+        1
 
       listen ->
         listen.listened_at
@@ -46,11 +83,16 @@ defmodule Akedia.Workers.Listenbrainz do
   end
 
   def prepare_listen(listen) do
-    Listen.changeset(%Listen{}, %{
-      track: listen.track_metadata.track_name,
-      album: listen.track_metadata.release_name,
-      artist: listen.track_metadata.artist_name,
-      listened_at: DateTime.from_unix!(listen.listened_at)
-    })
+    with {:ok, artist} <- maybe_create_artist(listen.track_metadata.artist_name),
+         {:ok, album} <- maybe_create_album(listen.track_metadata.release_name, artist) do
+      Listen.changeset(%Listen{}, %{
+        track: listen.track_metadata.track_name,
+        album_id: album.id,
+        artist_id: artist.id,
+        listened_at: DateTime.from_unix!(listen.listened_at)
+      })
+    else
+      _ -> nil
+    end
   end
 end

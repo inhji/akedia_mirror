@@ -1,0 +1,4 @@
+<%= render "album.html", conn: @conn, album: @album %>
+
+
+<%= link "Edit", to: Routes.album_path(@conn, :edit, @album), class: "button" %>

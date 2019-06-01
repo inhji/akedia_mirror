@@ -109,5 +109,8 @@ defmodule AkediaWeb.Router do
 
     resources "/topics", TopicController, except: [:show, :index]
     resources "/images", ImageController, except: [:show, :index]
+
+    resources "/artists", ArtistController
+    resources "/albums", AlbumController
   end
 end

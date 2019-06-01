@@ -1,0 +1,14 @@
+<%= for album <- @albums do %>
+<div class="media is-marginless is-paddingless">
+  <div class="media-left">
+    <figure class="image is-64x64">
+      <img src="<%= cover_url(album) %>">
+    </figure>
+  </div>
+  <div class="media-content">
+    <strong><%= link album.name, to: Routes.album_path(@conn, :show, album) %></strong>
+    <br />
+    <span>By <%= album.artist.name %></span>
+  </div>
+</div>
+<% end %>

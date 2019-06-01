@@ -10,8 +10,7 @@ use Mix.Config
 config :akedia,
   ecto_repos: [Akedia.Repo]
 
-config :akedia, Akedia.Repo,
-  log: false
+config :akedia, Akedia.Repo, log: false
 
 config :akedia, Akedia.Settings,
   show_wiki: false,
@@ -24,7 +23,8 @@ config :akedia, Akedia.Settings,
 
 config :akedia, Akedia.Scheduler,
   jobs: [
-    {"*/15 * * * *", {Que, :add, [Akedia.Workers.Listenbrainz, "inhji"]}}
+    {"*/5 * * * *", {Que, :add, [Akedia.Workers.Listenbrainz, "inhji"]}},
+    {"*/1 * * * *", {Que, :add, [Akedia.Workers.Coverartarchive, nil]}}
   ]
 
 # Configures the endpoint
