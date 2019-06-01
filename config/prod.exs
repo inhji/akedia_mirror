@@ -17,11 +17,6 @@ config :akedia, AkediaWeb.Endpoint,
   root: ".",
   version: Application.spec(:phoenix_distillery, :vsn)
 
-config :akedia, Akedia.Scheduler,
-  jobs: [
-    {"*/5 * * * *", {Que, :add, [Akedia.Workers.Listenbrainz, "inhji"]}}
-  ]
-
 # Do not print debug messages in production
 config :logger, level: :debug
 
