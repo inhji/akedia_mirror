@@ -51,7 +51,7 @@ defmodule Akedia.Workers.Listenbrainz do
   def fetch_listens(user) do
     min_ts = last_listen_timestamp()
 
-    case HTTPoison.get!("https://api.listenbrainz.org/1/user/#{user}/listens?min_ts=#{min_ts}") do
+    case HTTPoison.get!("https://api.listenbrainz.org/1/user/#{user}/listens?min_ts=#{min_ts}&count=100") do
       %Response{body: body} ->
         body
         |> Jason.decode!(keys: :atoms)
