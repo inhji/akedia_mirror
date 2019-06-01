@@ -5,8 +5,9 @@ defmodule AkediaWeb.ListenController do
 
   def index(conn, _params) do
     listens = Listens.list()
+    count = Listens.count()
 
-    render(conn, "index.html", listens: listens)
+    render(conn, "index.html", listens: listens, count: count)
   end
 
   def artist(conn, %{"artist" => artist}) do

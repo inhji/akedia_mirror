@@ -1,18 +1,3 @@
-<h1>Show Artist</h1>
-
-<ul>
-
-  <li>
-    <strong>Name:</strong>
-    <%= @artist.name %>
-  </li>
-
-  <li>
-    <strong>Mbid:</strong>
-    <%= @artist.mbid %>
-  </li>
-
-</ul>
-
-<span><%= link "Edit", to: Routes.artist_path(@conn, :edit, @artist) %></span>
-<span><%= link "Back", to: Routes.artist_path(@conn, :index) %></span>
+<h1 class="title">
+  <%= @artist.name %>
+</h1>

@@ -1,17 +1,11 @@
 <%= render("listen_nav.html", assigns) %>
+<%= render "empty.html", listens: @listens %>
 
-
-<%= if Enum.count(@listens) == 0 do %>
-
-    No listens found.
-
-<% end %>
 <%= for listen <- @listens do %>
-
 <div class="media is-dense">
   <div class="media-left">
     <figure class="image is-64x64">
-      <img src="<%= Routes.static_path(@conn, "/images/album.png") %>" alt="">
+      <img src="<%= cover_url(listen.album) %>">
     </figure>
   </div>
   <div class="media-content">
@@ -19,9 +13,12 @@
       <strong><%= listen.track %></strong> <small><%= date_fuzzy(listen.listened_at) %></small>
     </p>
     <p>
-      By <%= link listen.artist, to: Routes.listen_url(@conn, :artist, listen.artist) %>
+      By <%= link listen.artist.name, to: Routes.artist_url(@conn, :show, listen.artist) %> on <%= link listen.album.name, to: Routes.album_url(@conn, :show, listen.album) %>
     </p>
   </div>
 </div>
-
 <% end %>
+
+<hr />
+
+<p><%= @count %> listens in database.</p>

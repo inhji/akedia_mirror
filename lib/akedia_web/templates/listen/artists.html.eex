@@ -1,4 +1,5 @@
 <%= render("listen_nav.html", assigns) %>
+<%= render "empty.html", listens: @listens %>
 
 <%= for listen <- @listens do %>
 <div class="media is-dense">

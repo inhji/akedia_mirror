@@ -8,14 +8,23 @@ defmodule Akedia.Listens do
     |> order_by(desc: :listened_at)
     |> limit(^limit)
     |> Repo.all()
+    |> Repo.preload([:artist, :album])
+  end
+
+  def count() do
+    Repo.one(from l in Listen, select: count("*"))
   end
 
   def group_by_artist(time_diff) do
-    Repo.all(group_by_artist_query(time_diff))
+    group_by_artist_query(time_diff)
+    |> Repo.all()
+    |> Repo.preload([:artist, :album])
   end
 
   def group_by_track(artist) do
-    Repo.all(group_by_track_query(artist))
+    group_by_track_query(artist)
+    |> Repo.all()
+    |> Repo.preload([:artist, :album])
   end
 
   def group_by_track_query(artist) do
@@ -33,10 +42,11 @@ defmodule Akedia.Listens do
     time_ago = Timex.shift(DateTime.utc_now(), time_diff)
 
     Listen
-    |> group_by([l], l.artist)
-    |> select([listen], %{
+    |> join(:left, [l], a in Artist, on: l.artist_id == a.id)
+    |> group_by([l, a], a.name)
+    |> select([listen, artist], %{
       listens: fragment("count (?) as listens", listen.id),
-      artist: listen.artist
+      artist: artist.name
     })
     |> where([l], l.listened_at > ^time_ago)
     |> order_by(desc: fragment("listens"))

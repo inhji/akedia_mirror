@@ -19,6 +19,9 @@
       <%= active_link @conn, "/posts",
           class_active: "is-active",
           to: Routes.post_path(@conn, :index), class: "navbar-item" %>
+      <%= active_link @conn, "/listens",
+          class_active: "is-active",
+          to: Routes.listen_path(@conn, :index), class: "navbar-item" %>
     </div>
   </div>
 </nav>
