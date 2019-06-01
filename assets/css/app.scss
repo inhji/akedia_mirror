@@ -33,8 +33,8 @@ $navbar-item-active-color-dark: $primary;
 @import "dark";
 // @import "debug";
 
-::-moz-selection { background: $dark; }
-::selection { background: $dark; }
+::-moz-selection { background: $primary; color: $dark; }
+::selection { background: $primary; color: $dark; }
 
 .social a {
   margin-right: 0.3rem;
