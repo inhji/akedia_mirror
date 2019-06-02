@@ -31,7 +31,11 @@ defmodule Akedia.Workers.Listenbrainz do
     {:ok, artist}
   end
 
-  def maybe_create_album(name, _artist) when is_nil(name), do: {:error, :error}
+  # Create catch-all album when album name is empty
+  # This seems to happen for some reason in the listenbrainz api
+  def maybe_create_album(name, artist) when is_nil(name) do
+    maybe_create_album("Unknown", artist)
+  end
 
   def maybe_create_album(name, artist) do
     album =
