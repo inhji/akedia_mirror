@@ -2,8 +2,6 @@ defmodule Akedia.Workers.Coverartarchive do
   use Que.Worker
   require Logger
   alias HTTPoison.Response
-  alias Akedia.Listens.{Listen, Artist, Album}
-  alias Akedia.Repo
 
   def perform(_) do
     albums = Akedia.Listens.list_albums_with_mbid_but_no_cover()

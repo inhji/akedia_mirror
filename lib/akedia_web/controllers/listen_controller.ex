@@ -10,11 +10,11 @@ defmodule AkediaWeb.ListenController do
     render(conn, "index.html", listens: listens, count: count)
   end
 
-  def artist(conn, %{"artist" => artist}) do
-    listens = Listens.group_by_track(artist)
-
-    render(conn, "artist.html", listens: listens, artist: artist)
-  end
+  # def artist(conn, %{"artist" => artist}) do
+  #   listens = Listens.group_by_track(artist)
+  #
+  #   render(conn, "artist.html", listens: listens, artist: artist)
+  # end
 
   def artists(conn, %{"last" => timespan}) do
     listens = case timespan do
@@ -25,6 +25,11 @@ defmodule AkediaWeb.ListenController do
       _ -> []
     end
 
-    render(conn, "artists.html", listens: listens)
+    max_value =
+      listens
+      |> Enum.max_by(fn l -> l.listens end)
+      |> Map.get(:listens)
+
+    render(conn, "artists.html", listens: listens, max: max_value)
   end
 end

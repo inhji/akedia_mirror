@@ -3,14 +3,10 @@
 
 <%= for listen <- @listens do %>
 <div class="media is-dense">
-  <div class="media-left">
-    <figure class="image is-64x64">
-      <img src="<%= Routes.static_path(@conn, "/images/album.png") %>" alt="">
-    </figure>
-  </div>
   <div class="media-content">
     <p>
       <strong><%= listen.artist %></strong> <small><%= listen.listens %></small>
+      <progress class="progress" value="<%= listen.listens %>" max="<%= @max %>">15%</progress>
     </p>
   </div>
 </div>
