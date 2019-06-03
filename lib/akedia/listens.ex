@@ -18,7 +18,6 @@ defmodule Akedia.Listens do
   def group_by_artist(time_diff) do
     group_by_artist_query(time_diff)
     |> Repo.all()
-    |> Repo.preload([:artist, :album])
   end
 
   def group_by_track(artist) do
