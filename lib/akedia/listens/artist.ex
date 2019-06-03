@@ -14,5 +14,6 @@ defmodule Akedia.Listens.Artist do
     artist
     |> cast(attrs, [:name, :mbid])
     |> validate_required([:name])
+    |> unique_constraint(:name)
   end
 end
