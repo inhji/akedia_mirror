@@ -23,7 +23,7 @@ config :akedia, Akedia.Settings,
 
 config :akedia, Akedia.Scheduler,
   jobs: [
-    {"*/1 * * * *", {Que, :add, [Akedia.Workers.Listenbrainz, "inhji"]}},
+    {"*/3 * * * *", {Que, :add, [Akedia.Workers.Listenbrainz, "inhji"]}},
     {"*/1 * * * *", {Que, :add, [Akedia.Workers.Coverartarchive, nil]}}
   ]
 
