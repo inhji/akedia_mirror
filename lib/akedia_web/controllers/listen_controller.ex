@@ -27,7 +27,10 @@ defmodule AkediaWeb.ListenController do
 
     max_value =
       listens
-      |> Enum.max_by(fn l -> l.listens end)
+      |> Enum.max_by(
+        fn l -> l.listens end,
+        fn -> %{listens: 0} end
+      )
       |> Map.get(:listens)
 
     render(conn, "artists.html", listens: listens, max: max_value)
