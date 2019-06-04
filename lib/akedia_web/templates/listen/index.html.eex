@@ -3,17 +3,17 @@
 
 <%= for listen <- @listens do %>
 <div class="media is-dense">
-  <div class="media-left">
+  <a class="media-left" href="<%= Routes.album_url(@conn, :show, listen.album) %>">
     <figure class="image is-64x64">
       <img src="<%= cover_url(listen.album) %>">
     </figure>
-  </div>
+  </a>
   <div class="media-content">
     <p>
       <strong><%= listen.track %></strong> <small><%= date_fuzzy(listen.listened_at) %></small>
     </p>
     <p>
-      By <%= link listen.artist.name, to: Routes.artist_url(@conn, :show, listen.artist) %> on <%= link listen.album.name, to: Routes.album_url(@conn, :show, listen.album) %>
+      <span class="has-text-grey">By </span><%= link listen.artist.name, to: Routes.artist_url(@conn, :show, listen.artist) %>
     </p>
   </div>
 </div>
