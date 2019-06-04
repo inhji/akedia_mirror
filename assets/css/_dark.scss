@@ -1,4 +1,6 @@
 @media (prefers-color-scheme: dark) {
+  $background: $body-background-dark;
+
   .navbar-brand {
     img {
       filter: invert(100%);
@@ -10,4 +12,20 @@
       background-color: $white;
     }
   }
+
+  .content {
+    a {
+      text-decoration: none;
+      padding: 10px 0;
+      background-image: -webkit-linear-gradient($primary, $primary);
+      background-image: -o-linear-gradient($primary, $primary);
+      background-image: linear-gradient($primary, $primary);
+      background-repeat: no-repeat;
+      background-size: 100% 1px;
+      background-position: center bottom 29%;
+      background-origin: padding-box;
+      text-shadow: 3px 0 $background,2px 0 $background,1px 0 $background,-1px 0 $background,-2px 0 $background,-3px 0 $background;
+    }
+  }
+
 }

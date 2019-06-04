@@ -30,7 +30,7 @@ $navbar-item-active-color-dark: $primary;
 @import "helpers";
 @import "zen";
 @import "tagcloud";
-@import "dark";
+
 // @import "debug";
 
 ::-moz-selection { background: $primary; color: $dark; }
@@ -39,6 +39,22 @@ $navbar-item-active-color-dark: $primary;
 .social a {
   margin-right: 0.3rem;
 }
+
+.content {
+  a {
+    text-decoration: none;
+    padding: 10px 0;
+    background-image: -webkit-linear-gradient($primary, $primary);
+    background-image: -o-linear-gradient($primary, $primary);
+    background-image: linear-gradient($primary, $primary);
+    background-repeat: no-repeat;
+    background-size: 100% 1px;
+    background-position: center bottom 29%;
+    background-origin: padding-box;
+    text-shadow: 3px 0 $background,2px 0 $background,1px 0 $background,-1px 0 $background,-2px 0 $background,-3px 0 $background;
+  }
+}
+
 
 section, .footer {
   padding-left: 0;
@@ -52,3 +68,6 @@ article {
     margin-bottom: 4rem;
   }
 }
+
+// This needs to be last to override all other styles
+@import "dark";
