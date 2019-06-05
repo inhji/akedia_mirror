@@ -52,11 +52,9 @@ defmodule AkediaWeb.Router do
 
     get "/tagged-with/:topic", TopicController, :tagged
 
-    scope "/listens" do
-      get "/", ListenController, :index
-      get "/artists", ListenController, :artists
-      get "/artist/:artist", ListenController, :artist
-    end
+    get "/listens", ListenController, :index
+    resources "/artists", ArtistController, only: [:show, :index]
+    resources "/albums", AlbumController, only: [:show]
 
     scope "/auth" do
       get "/register", UserController, :new
@@ -110,7 +108,7 @@ defmodule AkediaWeb.Router do
     resources "/topics", TopicController, except: [:show, :index]
     resources "/images", ImageController, except: [:show, :index]
 
-    resources "/artists", ArtistController
-    resources "/albums", AlbumController
+    resources "/artists", ArtistController, except: [:show, :index]
+    resources "/albums", AlbumController, except: [:show]
   end
 end
