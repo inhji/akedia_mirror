@@ -1,6 +1,0 @@
-<%= if Enum.count(@listens) == 0 do %>
-  <div class="notification is-primary">
-    <p><strong>No listens found.</strong></p>
-    <p>I'm currently in the process of migrating all my listens from <a href="https://listenbrainz.org/">Listenbrainz</a> onto this site and it takes a while.</p>
-  </div>
-<% end %>

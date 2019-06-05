@@ -1,28 +1,13 @@
-<h1>Listing Artists</h1>
+<%= render SharedView, "listen_nav.html", assigns %>
+<%= render SharedView, "listens_empty.html", listens: @listens %>
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Mbid</th>
-
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-<%= for artist <- @artists do %>
-    <tr>
-      <td><%= artist.name %></td>
-      <td><%= artist.mbid %></td>
-
-      <td>
-        <%= link "Show", to: Routes.artist_path(@conn, :show, artist) %>
-        <%= link "Edit", to: Routes.artist_path(@conn, :edit, artist) %>
-        <%= link "Delete", to: Routes.artist_path(@conn, :delete, artist), method: :delete, data: [confirm: "Are you sure?"] %>
-      </td>
-    </tr>
+<%= for listen <- @listens do %>
+<div class="media is-dense">
+  <div class="media-content">
+    <p>
+      <strong><%= listen.artist %></strong> <span class="dot" /> <span class="has-text-grey"><%= listen.listens %></span>
+      <progress class="progress is-primary" value="<%= listen.listens %>" max="<%= @max %>">15%</progress>
+    </p>
+  </div>
+</div>
 <% end %>
-  </tbody>
-</table>
-
-<span><%= link "New Artist", to: Routes.artist_path(@conn, :new) %></span>

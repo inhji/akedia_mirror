@@ -15,15 +15,36 @@ defmodule Akedia.Listens do
     Repo.one(from l in Listen, select: count("*"))
   end
 
-  def group_by_artist(time_diff) do
+  def group_by_artist(time_diff \\ nil) do
     group_by_artist_query(time_diff)
     |> Repo.all()
+  end
+
+  def group_by_artist_query(time_diff \\ nil) do
+    query =
+      Listen
+      |> join(:left, [l], a in Artist, on: l.artist_id == a.id)
+      |> group_by([l, a], a.name)
+      |> select([listen, artist], %{
+        listens: fragment("count (?) as listens", listen.id),
+        artist: artist.name
+      })
+      |> order_by(desc: fragment("listens"))
+
+    query =
+      case time_diff do
+        nil ->
+          limit(query, 100)
+
+        _ ->
+          time_ago = Timex.shift(DateTime.utc_now(), time_diff)
+          where(query, [l], l.listened_at > ^time_ago)
+      end
   end
 
   def group_by_track(artist) do
     group_by_track_query(artist)
     |> Repo.all()
-    |> Repo.preload([:artist, :album])
   end
 
   def group_by_track_query(artist) do
@@ -33,21 +54,7 @@ defmodule Akedia.Listens do
       track: l.track
     })
     |> group_by([l], l.track)
-    |> where(artist: ^artist)
-    |> order_by(desc: fragment("listens"))
-  end
-
-  def group_by_artist_query(time_diff \\ [days: -7]) do
-    time_ago = Timex.shift(DateTime.utc_now(), time_diff)
-
-    Listen
-    |> join(:left, [l], a in Artist, on: l.artist_id == a.id)
-    |> group_by([l, a], a.name)
-    |> select([listen, artist], %{
-      listens: fragment("count (?) as listens", listen.id),
-      artist: artist.name
-    })
-    |> where([l], l.listened_at > ^time_ago)
+    |> where([l, a], artist_id: ^artist.id)
     |> order_by(desc: fragment("listens"))
   end
 

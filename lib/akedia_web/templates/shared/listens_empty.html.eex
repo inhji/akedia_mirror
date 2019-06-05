@@ -1,0 +1,5 @@
+<%= if Enum.count(@listens) == 0 do %>
+  <div class="notification is-primary">
+    <p><strong>No listens found.</strong></p>
+  </div>
+<% end %>
