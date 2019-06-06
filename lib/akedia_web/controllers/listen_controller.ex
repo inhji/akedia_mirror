@@ -3,10 +3,16 @@ defmodule AkediaWeb.ListenController do
 
   alias Akedia.Listens
 
-  def index(conn, _params) do
-    listens = Listens.list()
-    count = Listens.count()
+  def index(conn, params) do
+    page = Listens.listens_paginated(params)
 
-    render(conn, "index.html", listens: listens, count: count)
+    render(conn, "index.html",
+      page: page,
+      listens: page.entries,
+      page_number: page.page_number,
+      page_size: page.page_size,
+      total_pages: page.total_pages,
+      total_entries: page.total_entries
+    )
   end
 end

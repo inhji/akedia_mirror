@@ -20,7 +20,14 @@ defmodule Akedia.MixProject do
   def application do
     [
       mod: {Akedia.Application, []},
-      extra_applications: [:logger, :runtime_tools, :timex, :que]
+      extra_applications: [
+        :logger,
+        :runtime_tools,
+        :timex,
+        :que,
+        :scrivener_ecto,
+        :scrivener_html
+      ]
     ]
   end
 
@@ -67,7 +74,9 @@ defmodule Akedia.MixProject do
       {:timber_phoenix, "~> 1.1"},
       {:timber_plug, "~> 1.1"},
       {:timber_exceptions, "~> 2.1"},
-      {:timber_ecto, "~> 2.1"}
+      {:timber_ecto, "~> 2.1"},
+      {:scrivener_ecto, "~> 2.0"},
+      {:scrivener_html, "~> 1.8"}
     ]
   end
 

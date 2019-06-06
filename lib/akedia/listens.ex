@@ -3,16 +3,11 @@ defmodule Akedia.Listens do
   alias Akedia.Repo
   alias Akedia.Listens.{Listen, Artist}
 
-  def list(limit \\ 10) do
+  def listens_paginated(params) do
     Listen
     |> order_by(desc: :listened_at)
-    |> limit(^limit)
-    |> Repo.all()
-    |> Repo.preload([:artist, :album])
-  end
-
-  def count() do
-    Repo.one(from l in Listen, select: count("*"))
+    |> preload([:artist, :album])
+    |> Repo.paginate(params)
   end
 
   def group_by_artist(time_diff \\ nil) do

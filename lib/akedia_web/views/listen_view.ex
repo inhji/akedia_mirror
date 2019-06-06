@@ -1,5 +1,6 @@
 defmodule AkediaWeb.ListenView do
   use AkediaWeb, :view
+  import Scrivener.HTML
 
   def render("meta.index.html", _assigns) do
     ~E{
