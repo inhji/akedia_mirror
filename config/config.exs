@@ -12,14 +12,7 @@ config :akedia,
 
 config :akedia, Akedia.Repo, log: false
 
-config :akedia, Akedia.Settings,
-  show_wiki: false,
-  show_stories: false,
-  show_images: false,
-  show_search: false,
-  show_bookmarks: false,
-  show_more: false,
-  show_posts: false
+config :akedia, Akedia.Settings, site_title: "Inhji.de"
 
 config :akedia, Akedia.Scheduler,
   jobs: [
@@ -34,10 +27,6 @@ config :akedia, AkediaWeb.Endpoint,
   render_errors: [view: AkediaWeb.ErrorView, accepts: ~w(html json)],
   pubsub: [name: Akedia.PubSub, adapter: Phoenix.PubSub.PG2],
   instrumenters: [Timber.Phoenix]
-
-config :akedia, Akedia.Auth.AuthPipeline,
-  module: Akedia.Auth.Guardian,
-  error_handler: Akedia.Auth.AuthErrorHandler
 
 # Configures Elixir's Logger
 config :logger, :console,
