@@ -1,16 +1,12 @@
 defmodule AkediaWeb.BookmarkView do
   use AkediaWeb, :view
 
-  def render("meta.index.html", _assigns) do
-    ~E{
-      <title>Lesezeichen · Akedia</title>
-    }
+  def render("meta.index.html", assigns) do
+    [title("Bookmarks", assigns)]
   end
 
   def render("meta.show.html", assigns) do
-    ~E{
-      <title><%= @bookmark.title %> · Akedia</title>
-    }
+    [title(assigns.bookmark.title, assigns)]
   end
 
   def tld(url) do
