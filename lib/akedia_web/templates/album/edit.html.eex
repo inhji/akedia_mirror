@@ -1,3 +1,13 @@
 <%= render "form.html", Map.put(assigns, :action, Routes.album_path(@conn, :update, @album)) %>
 
-<a href="<%= musicbrainz_query_url(@album) %>" class="button is-danger">Search on Musicbrainz</a>
+<hr />
+
+<a href="<%= musicbrainz_query_url(@album) %>" class="button">
+  Search on Musicbrainz
+</a>
+
+<hr />
+
+<a href="<%= musicbrainz_query_url(@album) %>">
+  Search on Musicbrainz
+</a>
