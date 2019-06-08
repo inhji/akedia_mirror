@@ -13,13 +13,13 @@
 
   <div id="navbarBasicExample" class="navbar-menu">
     <div class="navbar-start">
-      <%= active_link @conn, "/bookmarks",
+      <%= active_link @conn, "Bookmarks",
           class_active: "is-active",
           to: Routes.bookmark_path(@conn, :index), class: "navbar-item" %>
-      <%= active_link @conn, "/posts",
+      <%= active_link @conn, "Posts",
           class_active: "is-active",
           to: Routes.post_path(@conn, :index), class: "navbar-item" %>
-      <%= active_link @conn, "/listens",
+      <%= active_link @conn, "Listens",
           class_active: "is-active",
           to: Routes.listen_path(@conn, :index), class: "navbar-item" %>
     </div>

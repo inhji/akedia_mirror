@@ -35,8 +35,19 @@ $navbar-item-active-color-dark: $primary;
 
 // @import "debug";
 
-::-moz-selection { background: $primary; color: $dark; }
-::selection { background: $primary; color: $dark; }
+::-moz-selection { background: $primary; color: $white; }
+::selection { background: $primary; color: $white; }
+
+nav.navbar {
+  .navbar-item.is-active {
+    font-weight: bold;
+
+    &::before{
+      content: '»';
+      margin-right: 0.25rem;
+    }
+  }
+}
 
 .social a {
   margin-right: 0.3rem;
@@ -44,16 +55,7 @@ $navbar-item-active-color-dark: $primary;
 
 .content {
   a {
-    text-decoration: none;
-    padding: 10px 0;
-    background-image: -webkit-linear-gradient($primary, $primary);
-    background-image: -o-linear-gradient($primary, $primary);
-    background-image: linear-gradient($primary, $primary);
-    background-repeat: no-repeat;
-    background-size: 100% 1px;
-    background-position: center bottom 29%;
-    background-origin: padding-box;
-    text-shadow: 3px 0 $background,2px 0 $background,1px 0 $background,-1px 0 $background,-2px 0 $background,-3px 0 $background;
+    @include nice-underline;
   }
 }
 
