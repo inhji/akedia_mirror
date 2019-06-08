@@ -5,8 +5,7 @@
     </figure>
   </div>
   <div class="media-content">
-    <strong><%= @album.name %></strong>
-    <br />
-    <span>By <%= @album.artist.name %></span>
+    <h1 class="title"><%= @album.name %></h1>
+    <h2 class="subtitle"><%= @album.artist.name %></h2>
   </div>
 </div>
