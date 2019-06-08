@@ -24,3 +24,9 @@
   background-origin: padding-box;
   text-shadow: 3px 0 $background,2px 0 $background,1px 0 $background,-1px 0 $background,-2px 0 $background,-3px 0 $background;
 }
+
+@mixin no-underline {
+  background: none;
+  text-shadow: none;
+  padding: 0;
+}
