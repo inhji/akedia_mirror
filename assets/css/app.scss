@@ -1,10 +1,12 @@
 @charset "UTF-8";
 
-@import "~bulma/sass/utilities/_all";
-
 // Custom Variables
-$red: #dd3344;
 $layout-width: 600px;
+
+$red: #dd3344;
+$primary: $red;
+
+@import "~bulma/sass/utilities/_all";
 
 // Bulma Overrides
 $link: $dark;
