@@ -1,15 +1,11 @@
 defmodule AkediaWeb.TopicView do
   use AkediaWeb, :view
 
-  def render("meta.index.html", _assigns) do
-    ~E{
-      <title>Tags · Akedia</title>
-    }
+  def render("meta.index.html", assigns) do
+    [title("Tags", assigns)]
   end
 
   def render("meta.tagged.html", assigns) do
-    ~E{
-      <title>Tagged with <%= @topic.text %> · Akedia</title>
-    }
+    [title("Tagged with #{assigns.topic.text}", assigns)]
   end
 end

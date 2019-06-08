@@ -1,16 +1,12 @@
 defmodule AkediaWeb.PageView do
   use AkediaWeb, :view
 
-  def render("meta.index.html", _assigns) do
-    ~E{
-      <title>Wiki · Akedia</title>
-    }
+  def render("meta.index.html", assigns) do
+    [title("Wiki", assigns)]
   end
 
   def render("meta.show.html", assigns) do
-    ~E{
-      <title><%= @page.title %> · Akedia</title>
-    }
+    [title(assigns.page.title, assigns)]
   end
 
   def pinned_class(page) do

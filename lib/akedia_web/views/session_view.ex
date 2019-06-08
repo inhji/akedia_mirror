@@ -1,9 +1,7 @@
 defmodule AkediaWeb.SessionView do
   use AkediaWeb, :view
 
-  def render("meta.new.html", _assigns) do
-    ~E{
-      <title>Login · Akedia</title>
-    }
+  def render("meta.new.html", assigns) do
+    [title("Login", assigns)]
   end
 end

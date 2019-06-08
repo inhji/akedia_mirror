@@ -1,10 +1,8 @@
 defmodule AkediaWeb.SearchView do
   use AkediaWeb, :view
 
-  def render("meta.search.html", _assigns) do
-    ~E{
-      <title>Search · Akedia</title>
-    }
+  def render("meta.search.html", assigns) do
+    [title("Search", assigns)]
   end
 
   def inner_type(%Akedia.Content.Entity{} = entity) do

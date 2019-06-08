@@ -1,16 +1,12 @@
 defmodule AkediaWeb.StoryView do
   use AkediaWeb, :view
 
-  def render("meta.index.html", _assigns) do
-    ~E{
-      <title>Geschichten · Akedia</title>
-    }
+  def render("meta.index.html", assigns) do
+    [title("Stories", assigns)]
   end
 
   def render("meta.show.html", assigns) do
-    ~E{
-      <title><%= @story.title %> · Akedia</title>
-    }
+    [title(assigns.story.title, assigns)]
   end
 
   def intro_style(story) do

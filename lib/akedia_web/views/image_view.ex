@@ -1,15 +1,11 @@
 defmodule AkediaWeb.ImageView do
   use AkediaWeb, :view
 
-  def render("meta.index.html", _assigns) do
-    ~E{
-      <title>Bilder · Akedia</title>
-    }
+  def render("meta.index.html", assigns) do
+    [title("Photos", assigns)]
   end
 
   def render("meta.show.html", assigns) do
-    ~E{
-      <title><%= @image.text %> · Akedia</title>
-    }
+    [title(assigns.image.text, assigns)]
   end
 end
