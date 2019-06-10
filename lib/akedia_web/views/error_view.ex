@@ -3,9 +3,17 @@ defmodule AkediaWeb.ErrorView do
 
   # If you want to customize a particular status code
   # for a certain format, you may uncomment below.
-  # def render("500.html", _assigns) do
-  #   "Internal Server Error"
-  # end
+  def render("500.html", _assigns) do
+    ~E"""
+    <html>
+      <head><title>666 Infernal Server Error</title></head>
+      <body bgcolor="white">
+        <center><h1>666 Infernal Server Error</h1></center>
+        <hr><center>nginx/6.6.6 (Satanic Linux)</center>
+      </body>
+    </html>
+    """
+  end
 
   # By default, Phoenix returns the status message from
   # the template name. For example, "404.html" becomes
