@@ -12,7 +12,7 @@
   border: 0;
 }
 
-@mixin nice-underline {
+@mixin nice-underline($background-color) {
   text-decoration: none;
   padding: 10px 0;
   background-image: -webkit-linear-gradient($primary, $primary);
@@ -22,7 +22,7 @@
   background-size: 100% 1px;
   background-position: center bottom 29%;
   background-origin: padding-box;
-  text-shadow: 3px 0 $background,2px 0 $background,1px 0 $background,-1px 0 $background,-2px 0 $background,-3px 0 $background;
+  text-shadow: 3px 0 $background-color,2px 0 $background-color,1px 0 $background-color,-1px 0 $background-color,-2px 0 $background-color,-3px 0 $background-color;
 }
 
 @mixin no-underline {

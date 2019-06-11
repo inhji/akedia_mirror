@@ -68,7 +68,7 @@ article {
 
   .content {
     a {
-      @include nice-underline;
+      @include nice-underline($white);
     }
 
     a.footnote, a.reversefootnote {
