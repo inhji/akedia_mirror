@@ -1,3 +1,17 @@
 <%= if @has_user do %>
   <%= render SharedView, "hcard.html", conn: @conn, current_user: @current_user %>
 <% end %>
+
+<hr />
+
+<%= for entity <- @entities do %>
+  <%= if entity.bookmark do %>
+    <%= render BookmarkView, "bookmark.html", conn: @conn, bookmark: entity.bookmark %>
+  <% end %>
+  <%= if entity.post do %>
+    <%= render PostView, "post.html", conn: @conn, current_user: @current_user, post: entity.post %>
+  <% end %>
+  <%= if entity.like do %>
+    <%= render LikeView, "like.html", conn: @conn, current_user: @current_user, like: entity.like %>
+  <% end %>
+<% end %>

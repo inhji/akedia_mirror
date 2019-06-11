@@ -9,6 +9,16 @@
   <%= text_input f, :url %>
   <%= error_tag f, :url %>
 
+  <%= inputs_for f, :entity, fn(ef) -> %>
+  <div class="field">
+    <%= label f, :public, class: "checkbox" do %>
+      <%= checkbox ef, :is_published, class: "checkbox" %>
+      Is Published
+    <% end %>
+    <%= error_tag ef, :is_published %>
+  </div>
+  <% end %>
+
   <div>
     <%= submit "Save" %>
   </div>

@@ -8,7 +8,17 @@ defmodule Akedia.Content do
   # Entity
 
   def list_entities do
-    Repo.all(Entity)
+    query =
+      from e in Entity,
+        order_by: [desc: :inserted_at],
+        preload: [
+          like: [entity: [:topics, :syndications]],
+          post: [entity: [:topics, :syndications]],
+          bookmark: [:favicon, entity: [:topics]]
+        ],
+        where: [is_published: true]
+
+    Repo.all(query)
   end
 
   def get_entity!(id) do
@@ -156,13 +166,14 @@ defmodule Akedia.Content do
     |> Repo.preload(@preloads)
   end
 
-  def create_like(attrs \\ %{}, is_published \\ false) do
+  def create_like(attrs \\ %{}, is_published \\ true) do
     create_with_entity(Like, attrs, %{is_published: is_published})
   end
 
   def update_like(%Like{} = like, attrs) do
     like
     |> Like.changeset(attrs)
+    |> Ecto.Changeset.cast_assoc(:entity, with: &Entity.changeset/2)
     |> Repo.update()
   end
 
@@ -180,8 +191,8 @@ defmodule Akedia.Content do
     Topic
     |> join(:left, [t], et in EntityTopic, on: t.id == et.topic_id)
     |> group_by([t], t.id)
-    |> order_by([t, et], [desc: count(et.id)])
-    |> select_merge([t, et], %{ entity_count: count(et.id) })
+    |> order_by([t, et], desc: count(et.id))
+    |> select_merge([t, et], %{entity_count: count(et.id)})
     |> Repo.all()
     |> Repo.preload(entities: [:bookmark, :story, :page, :post, :like])
   end
