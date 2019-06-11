@@ -13,7 +13,7 @@
 
   <div class="field">
     <%= label f, :mbid %>
-    <%= text_input f, :mbid, class: "input" %>
+    <%= text_input f, :mbid, class: "input", autocomplete: "off" %>
     <%= error_tag f, :mbid %>
   </div>
 
