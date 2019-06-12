@@ -4,6 +4,6 @@
   </h3>
   <div class="meta">
     <time datetime="<%= date_iso(@page.inserted_at) %>"> <%= date_pretty(@page.inserted_at) %> </time>
-    <%= render SharedView, "topics.html", conn: @conn, topics: @page.entity.topics %>
+    <%= render SharedView, "post_topics.html", conn: @conn, topics: @page.entity.topics %>
   </div>
 </article>

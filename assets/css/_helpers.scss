@@ -2,6 +2,12 @@
   content: '·';
 }
 
+.icon.is-dense {
+  justify-content: left;
+  height: 1rem;
+  width: 1rem;
+}
+
 .is-rounded, .is-rounded img {
   border-radius: $radius-rounded;
 }

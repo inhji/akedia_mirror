@@ -11,12 +11,12 @@
     <time class="dt-published" datetime="<%= date_iso(@post.inserted_at) %>">
       <%= link date_fuzzy(@post.inserted_at), to: Routes.post_url(@conn, :show, @post), class: "u-uid u-url has-text-grey" %>
     </time>
-    <%= render SharedView, "topics.html", conn: @conn, topics: @post.entity.topics %>
+    <%= render SharedView, "post_topics.html", conn: @conn, topics: @post.entity.topics %>
     <%= if @post.reply_to do %>
       <span class="dot"></span>
       <i class="fa fa-reply"></i> <a href="<%= @post.reply_to %>" class="u-in-reply-to has-text-grey" rel="in-reply-to"><%= @post.reply_to %></a>
     <% end %>
-    <%= render SharedView, "syndications.html", conn: @conn, schema: @post %>
+    <%= render SharedView, "post_syndications.html", conn: @conn, schema: @post %>
   </div>
 
   <%= render SharedView, "author.html", conn: @conn, current_user: @current_user %>

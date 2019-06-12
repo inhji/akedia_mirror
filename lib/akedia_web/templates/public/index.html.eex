@@ -2,16 +2,74 @@
   <%= render SharedView, "hcard.html", conn: @conn, current_user: @current_user %>
 <% end %>
 
-<hr />
-
+<section class="posts h-feed">
 <%= for entity <- @entities do %>
   <%= if entity.bookmark do %>
-    <%= render BookmarkView, "bookmark.html", conn: @conn, bookmark: entity.bookmark %>
+  <article class="bookmark h-entry">
+    <div class="media">
+      <div class="media-content">
+        <strong class="title">
+          <a href="<%= entity.bookmark.url %>" class="u-bookmark-of h-cite p-name">
+            <%= entity.bookmark.title %>
+          </a>
+        </strong>
+        <div class="content e-content">
+          <%= to_html(entity.bookmark.content) %>
+        </div>
+        <%= render SharedView, "post_meta.html",
+            conn: @conn,
+            schema: entity.bookmark,
+            url_helper: &Routes.bookmark_url/3 %>
+        <%= render SharedView, "author.html",
+            conn: @conn,
+            current_user: @current_user %>
+      </div>
+    </div>
+  </article>
   <% end %>
   <%= if entity.post do %>
-    <%= render PostView, "post.html", conn: @conn, current_user: @current_user, post: entity.post %>
+  <article class="post h-entry">
+    <div class="media">
+      <div class="media-content">
+        <%= if entity.post.title do %>
+        <strong class="title p-name">
+          <%= entity.post.title %>
+        </strong>
+        <% end %>
+        <div class="content e-content <%= unless entity.post.title do %>p-name<% end %>">
+          <%= to_html(entity.post.content) %>
+        </div>
+        <%= render SharedView, "post_meta.html",
+            conn: @conn,
+            schema: entity.post,
+            url_helper: &Routes.post_url/3 %>
+        <%= render SharedView, "author.html",
+            conn: @conn,
+            current_user: @current_user %>
+      </div>
+    </div>
+  </article>
   <% end %>
   <%= if entity.like do %>
-    <%= render LikeView, "like.html", conn: @conn, current_user: @current_user, like: entity.like %>
+  <article class="like h-entry">
+    <div class="media">
+      <div class="media-content">
+        <strong class="title">
+          <a href="<%= entity.like.url %>" class="u-like-of h-cite p-name">
+            <%= entity.like.url %>
+          </a>
+        </strong>
+        <div class="content"></div>
+        <%= render SharedView, "post_meta.html",
+            conn: @conn,
+            schema: entity.like,
+            url_helper: &Routes.like_url/3 %>
+        <%= render SharedView, "author.html", 
+            conn: @conn,
+            current_user: @current_user %>
+      </div>
+    </div>
+  </article>
   <% end %>
 <% end %>
+</section>

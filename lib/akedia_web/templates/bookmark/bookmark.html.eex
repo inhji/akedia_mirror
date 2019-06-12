@@ -28,7 +28,7 @@
         <a href="<%= @bookmark.url %>" class="has-text-grey" target="_blank">
           <%= tld(@bookmark.url) %>
         </a>
-        <%= render SharedView, "topics.html", conn: @conn, topics: @bookmark.entity.topics %>
+        <%= render SharedView, "post_topics.html", conn: @conn, topics: @bookmark.entity.topics %>
       </div>
     </div>
 

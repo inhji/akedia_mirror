@@ -14,7 +14,7 @@ defmodule Akedia.Content do
         preload: [
           like: [entity: [:topics, :syndications]],
           post: [entity: [:topics, :syndications]],
-          bookmark: [:favicon, entity: [:topics]]
+          bookmark: [:favicon, entity: [:topics, :syndications]]
         ],
         where: [is_published: true]
 

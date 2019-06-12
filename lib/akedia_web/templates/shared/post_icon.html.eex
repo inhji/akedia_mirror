@@ -1,0 +1,17 @@
+<span class="icon is-dense">
+  <%= case @schema do
+    %Akedia.Content.Post{ :reply_to => reply_to } ->
+      case reply_to do
+        nil -> content_tag :span, "", class: "fa fa-sticky-note-o has-text-grey"
+        _ -> content_tag :span, "", class: "fa fa-comment-o has-text-grey"
+      end
+
+    %Akedia.Content.Like{} ->
+      content_tag :span, "", class: "fa fa-heart-o has-text-grey"
+    %Akedia.Content.Bookmark{} ->
+      content_tag :span, "", class: "fa fa-bookmark-o has-text-grey"
+    _ ->
+      content_tag :span, "", class: "fa fa-circle-thin has-text-grey"
+    end
+  %>
+</span>

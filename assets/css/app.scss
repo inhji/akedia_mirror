@@ -59,12 +59,12 @@ section, .footer {
   padding-right: 0;
 }
 
-article {
-  margin-bottom:2rem;
+.h-card {
+  margin-bottom: 3rem;
+}
 
-  &.post {
-    margin-bottom: 4rem;
-  }
+article {
+  margin-bottom: 4rem;
 
   .content {
     a {

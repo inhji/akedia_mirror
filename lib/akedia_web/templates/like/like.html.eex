@@ -9,8 +9,8 @@
     <time class="dt-published" datetime="<%= date_iso(@like.inserted_at) %>">
       <%= link date_fuzzy(@like.inserted_at), to: Routes.like_url(@conn, :show, @like) %>
     </time>
-    <%= render SharedView, "topics.html", conn: @conn, topics: @like.entity.topics %>
-    <%= render SharedView, "syndications.html", conn: @conn, schema: @like %>
+    <%= render SharedView, "post_topics.html", conn: @conn, topics: @like.entity.topics %>
+    <%= render SharedView, "post_syndications.html", conn: @conn, schema: @like %>
   </div>
 
   <%= render SharedView, "author.html", assigns %>
