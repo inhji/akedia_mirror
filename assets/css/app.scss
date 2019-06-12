@@ -86,4 +86,29 @@ article {
 }
 
 // This needs to be last to override all other styles
-@import "dark";
+@include prefers-scheme(dark) {
+  .navbar-brand {
+    img {
+      filter: invert(100%);
+    }
+  }
+
+  .bookmark {
+    .image {
+      background-color: $white;
+    }
+  }
+
+  article {
+    .content {
+      a {
+        @include nice-underline($body-background-dark);
+      }
+
+      a.footnote, a.reversefootnote {
+        color: findColorInvert($primary);
+        background: findColorInvert($white);
+      }
+    }
+  }
+}
