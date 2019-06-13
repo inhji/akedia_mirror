@@ -9,6 +9,7 @@
     <%= URI.parse(@schema.url).host %>
   </a>
   <% end %>
+  <%= render SharedView, "post_reply.html", conn: @conn, schema: @schema %>
   <%= render SharedView, "post_topics.html", conn: @conn, topics: @schema.entity.topics %>
   <%= render SharedView, "post_syndications.html", conn: @conn, schema: @schema %>
 </aside>

@@ -10,4 +10,9 @@ defmodule AkediaWeb.SharedView do
         Enum.find(syndications, nil, fn %{:type => type} -> type == "github" end)
     end
   end
+
+  def short_url(url) do
+    uri = URI.parse(url)
+    Path.join(uri.host, uri.path)
+  end
 end
