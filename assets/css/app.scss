@@ -82,6 +82,11 @@ article {
         background: $primary;
       }
     }
+
+    blockquote {
+      border-left-color: $primary;
+      font-family: serif;
+    }
   }
 }
 
