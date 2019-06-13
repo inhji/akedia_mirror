@@ -8,7 +8,7 @@
   <article class="bookmark h-entry">
     <div class="media">
       <div class="media-content">
-        <h3 class="title has-text-weight-light">
+        <h3 class="title has-text-weight-normal">
           <a href="<%= entity.bookmark.url %>"
             class="u-bookmark-of h-cite p-name">
             <%= entity.bookmark.title %>
@@ -33,7 +33,7 @@
     <div class="media">
       <div class="media-content">
         <%= if entity.post.title do %>
-        <h3 class="title has-text-weight-light p-name">
+        <h3 class="title has-text-weight-normal p-name">
           <%= entity.post.title %>
         </h3>
         <% end %>
@@ -55,7 +55,7 @@
   <article class="like h-entry">
     <div class="media">
       <div class="media-content">
-        <h3 class="title has-text-weight-light">
+        <h3 class="title has-text-weight-normal">
           <a href="<%= entity.like.url %>" class="u-like-of h-cite p-name">
             <%= entity.like.url %>
           </a>
