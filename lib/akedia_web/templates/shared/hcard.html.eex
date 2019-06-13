@@ -5,7 +5,7 @@
     </p>
   </figure>
   <div class="media-content">
-    <h1 class="title">
+    <h1 class="title has-text-weight-normal">
       <span class="p-name"><%= @current_user.name %></span>
       <a href="/" rel="me" class="u-url url uid"></a>
       <small class="has-text-primary">

@@ -8,7 +8,7 @@
   <article class="bookmark h-entry">
     <div class="media">
       <div class="media-content">
-        <strong class="title">
+        <strong class="title has-text-weight-light">
           <a href="<%= entity.bookmark.url %>" class="u-bookmark-of h-cite p-name">
             <%= entity.bookmark.title %>
           </a>
@@ -32,7 +32,7 @@
     <div class="media">
       <div class="media-content">
         <%= if entity.post.title do %>
-        <strong class="title p-name">
+        <strong class="title has-text-weight-light p-name">
           <%= entity.post.title %>
         </strong>
         <% end %>
@@ -54,7 +54,7 @@
   <article class="like h-entry">
     <div class="media">
       <div class="media-content">
-        <strong class="title">
+        <strong class="title has-text-weight-light">
           <a href="<%= entity.like.url %>" class="u-like-of h-cite p-name">
             <%= entity.like.url %>
           </a>
@@ -64,7 +64,7 @@
             conn: @conn,
             schema: entity.like,
             url_helper: &Routes.like_url/3 %>
-        <%= render SharedView, "author.html", 
+        <%= render SharedView, "author.html",
             conn: @conn,
             current_user: @current_user %>
       </div>
