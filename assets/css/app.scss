@@ -39,12 +39,16 @@ $navbar-item-active-color-dark: $primary;
 ::selection { background: $primary; color: $white; }
 
 nav.navbar {
-  .navbar-item.is-active {
-    font-weight: bold;
+  .navbar-brand {
+    svg g {
+      fill: $black-ter;
+    }
+  }
 
-    &::before{
-      content: '»';
-      margin-right: 0.25rem;
+  .navbar-item.is-active {
+    color: $navbar-item-hover-color;
+    i.fa {
+      color: $primary;
     }
   }
 }
@@ -93,8 +97,8 @@ article {
 // This needs to be last to override all other styles
 @include prefers-scheme(dark) {
   .navbar-brand {
-    img {
-      filter: invert(100%);
+    svg g {
+      fill: $white;
     }
   }
 
