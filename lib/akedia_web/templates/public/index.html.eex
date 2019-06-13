@@ -8,11 +8,12 @@
   <article class="bookmark h-entry">
     <div class="media">
       <div class="media-content">
-        <strong class="title has-text-weight-light">
-          <a href="<%= entity.bookmark.url %>" class="u-bookmark-of h-cite p-name">
+        <h3 class="title has-text-weight-light">
+          <a href="<%= entity.bookmark.url %>"
+            class="u-bookmark-of h-cite p-name">
             <%= entity.bookmark.title %>
           </a>
-        </strong>
+        </h3>
         <div class="content e-content">
           <%= to_html(entity.bookmark.content) %>
         </div>
@@ -32,9 +33,9 @@
     <div class="media">
       <div class="media-content">
         <%= if entity.post.title do %>
-        <strong class="title has-text-weight-light p-name">
+        <h3 class="title has-text-weight-light p-name">
           <%= entity.post.title %>
-        </strong>
+        </h3>
         <% end %>
         <div class="content e-content <%= unless entity.post.title do %>p-name<% end %>">
           <%= to_html(entity.post.content) %>
@@ -54,11 +55,11 @@
   <article class="like h-entry">
     <div class="media">
       <div class="media-content">
-        <strong class="title has-text-weight-light">
+        <h3 class="title has-text-weight-light">
           <a href="<%= entity.like.url %>" class="u-like-of h-cite p-name">
             <%= entity.like.url %>
           </a>
-        </strong>
+        </h3>
         <div class="content"></div>
         <%= render SharedView, "post_meta.html",
             conn: @conn,
