@@ -44,13 +44,6 @@ nav.navbar {
       fill: $black-ter;
     }
   }
-
-  .navbar-item.is-active {
-    color: $navbar-item-hover-color;
-    i.fa {
-      color: $primary;
-    }
-  }
 }
 
 .social a {
