@@ -20,9 +20,7 @@
         <%= render SharedView, "post_meta.html",
             conn: @conn,
             schema: entity.bookmark,
-            url_helper: &Routes.bookmark_url/3 %>
-        <%= render SharedView, "author.html",
-            conn: @conn,
+            url_helper: &Routes.bookmark_url/3,
             current_user: @current_user %>
       </div>
     </div>
@@ -43,9 +41,7 @@
         <%= render SharedView, "post_meta.html",
             conn: @conn,
             schema: entity.post,
-            url_helper: &Routes.post_url/3 %>
-        <%= render SharedView, "author.html",
-            conn: @conn,
+            url_helper: &Routes.post_url/3,
             current_user: @current_user %>
       </div>
     </div>
@@ -64,9 +60,7 @@
         <%= render SharedView, "post_meta.html",
             conn: @conn,
             schema: entity.like,
-            url_helper: &Routes.like_url/3 %>
-        <%= render SharedView, "author.html",
-            conn: @conn,
+            url_helper: &Routes.like_url/3,
             current_user: @current_user %>
       </div>
     </div>

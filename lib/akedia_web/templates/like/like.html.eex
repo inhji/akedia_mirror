@@ -13,7 +13,7 @@
     <%= render SharedView, "post_syndications.html", conn: @conn, schema: @like %>
   </div>
 
-  <%= render SharedView, "author.html", assigns %>
+  <%= render SharedView, "post_author.html", assigns %>
 
 
 </article>

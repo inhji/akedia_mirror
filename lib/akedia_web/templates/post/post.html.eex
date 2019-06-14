@@ -19,5 +19,5 @@
     <%= render SharedView, "post_syndications.html", conn: @conn, schema: @post %>
   </div>
 
-  <%= render SharedView, "author.html", conn: @conn, current_user: @current_user %>
+  <%= render SharedView, "post_author.html", conn: @conn, current_user: @current_user %>
 </article>
