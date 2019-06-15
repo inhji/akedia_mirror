@@ -97,6 +97,12 @@ article {
     }
   }
 
+  .pagination-link.is-current {
+    color: $white;
+    background-color: $dark;
+    border-color: $primary;
+  }
+
   .bookmark {
     .image {
       background-color: $white;
