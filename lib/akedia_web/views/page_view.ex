@@ -9,6 +9,9 @@ defmodule AkediaWeb.PageView do
     [title(assigns.page.title, assigns)]
   end
 
+  def render("scripts.edit.html", assigns), do: AkediaWeb.Helpers.Meta.admin_scripts(assigns)
+  def render("scripts.new.html", assigns), do: AkediaWeb.Helpers.Meta.admin_scripts(assigns)
+
   def pinned_class(page) do
     case page.entity.is_pinned do
       true -> "pinned"

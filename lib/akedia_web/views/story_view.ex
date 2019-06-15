@@ -9,6 +9,9 @@ defmodule AkediaWeb.StoryView do
     [title(assigns.story.title, assigns)]
   end
 
+  def render("scripts.edit.html", assigns), do: AkediaWeb.Helpers.Meta.admin_scripts(assigns)
+  def render("scripts.new.html", assigns), do: AkediaWeb.Helpers.Meta.admin_scripts(assigns)
+
   def intro_style(story) do
     image_style = case Enum.empty?(story.entity.images) do
       false -> "background-image: url('#{image_url(List.first(story.entity.images), :original)}')"

@@ -19,6 +19,7 @@
       <% end %>
     <% end %>
 
+    <!-- Page Specific Meta Tags -->
     <%= render_existing(@view_module, "meta." <> @view_template, assigns) ||
         render(AkediaWeb.LayoutView, "meta.html", assigns) %>
 
@@ -46,6 +47,11 @@
         <%= render "footer.html", conn: @conn, logged_in: @logged_in %>
       </div>
     </section>
+
     <script type="text/javascript" src="<%= Routes.static_path(@conn, "/js/app.js") %>"></script>
+
+    <!-- View Specific Scripts -->
+    <%= render_existing(@view_module, "scripts." <> @view_template, assigns) ||
+        render_existing(@view_module, "scripts.html", assigns) %>
   </body>
 </html>
