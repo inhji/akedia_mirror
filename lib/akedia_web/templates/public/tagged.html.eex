@@ -1,0 +1,7 @@
+<h1 class="title">Tagged with “<%= @topic.text %>”</h1>
+<h2 class="subtitle has-text-grey"><%= Enum.count(@entities) %> posts found.</h2>
+
+<%= render "feed.html",
+    conn: @conn,
+    entities: @entities,
+    current_user: @current_user %>

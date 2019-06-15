@@ -2,7 +2,7 @@
   <%= if !Enum.empty?(@topics) do %>
     <span class="dot" />
     <%= for topic <- @topics do %>
-      <%= link topic.text, to: Routes.topic_path(@conn, :tagged, topic), class: "p-category has-text-grey" %>
+      <%= link topic.text, to: Routes.public_path(@conn, :tagged, topic), class: "p-category has-text-grey" %>
     <% end %>
   <% end %>
 </span>

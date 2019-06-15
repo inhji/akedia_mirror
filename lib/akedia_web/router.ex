@@ -39,6 +39,8 @@ defmodule AkediaWeb.Router do
     pipe_through [:browser]
 
     get "/", PublicController, :index
+    get "/tagged-with/:topic", PublicController, :tagged
+    get "/search", SearchController, :search
 
     resources "/stories", StoryController, only: [:show, :index]
     resources "/bookmarks", BookmarkController, only: [:show, :index]
@@ -47,10 +49,6 @@ defmodule AkediaWeb.Router do
     resources "/images", ImageController, only: [:show, :index]
     resources "/likes", LikeController, only: [:show, :index]
     resources "/posts", PostController, only: [:show, :index]
-
-    get "/search", SearchController, :search
-
-    get "/tagged-with/:topic", TopicController, :tagged
 
     get "/listens", ListenController, :index
     resources "/artists", ArtistController, only: [:show, :index]

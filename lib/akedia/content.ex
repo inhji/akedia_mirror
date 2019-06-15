@@ -200,7 +200,13 @@ defmodule Akedia.Content do
   def get_topic!(id) do
     Topic
     |> Repo.get_by!(slug: id)
-    |> Repo.preload(entities: [:bookmark, :story, :page, :post, :like])
+    |> Repo.preload(
+      entities: [
+        like: [entity: [:topics, :syndications]],
+        post: [entity: [:topics, :syndications]],
+        bookmark: [:favicon, entity: [:topics, :syndications]]
+      ]
+    )
   end
 
   def create_topic(attrs \\ %{}) do
