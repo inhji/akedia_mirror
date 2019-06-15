@@ -55,7 +55,7 @@ defmodule Akedia.MixProject do
       {:earmark, "~> 1.3"},
       {:arc, "~> 0.11.0"},
       {:arc_ecto, "~> 0.11.1"},
-      {:credo, "~> 1.0.0", only: [:dev, :test], runtime: false},
+      {:credo, "~> 1.1.0", only: [:dev, :test], runtime: false},
       {:ex_machina, "~> 2.3", only: :test},
       {:distillery, "~> 2.0"},
       {:edeliver, "~> 1.6"},
