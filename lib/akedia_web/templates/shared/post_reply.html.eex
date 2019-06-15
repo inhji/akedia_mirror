@@ -1,0 +1,7 @@
+<%= if Map.has_key?(@schema, :reply_to) and not is_nil(@schema.reply_to) do %>
+  <span class="dot"></span>
+  <span class="reply">
+    <span class="has-text-grey">In reply to</span>
+    <a href="<%= @schema.reply_to %>" class="u-in-reply-to has-text-grey" rel="in-reply-to"><%= short_url(@schema.reply_to) %></a>
+  </span>
+<% end %>

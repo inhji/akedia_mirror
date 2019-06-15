@@ -3,7 +3,8 @@ defmodule AkediaWeb.Markdown do
 
   @opts %Options{
     footnotes: true,
-    code_class_prefix: "language-"
+    code_class_prefix: "language-",
+    breaks: true
   }
 
   def to_html(nil), do: ""

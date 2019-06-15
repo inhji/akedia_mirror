@@ -39,12 +39,9 @@ $navbar-item-active-color-dark: $primary;
 ::selection { background: $primary; color: $white; }
 
 nav.navbar {
-  .navbar-item.is-active {
-    font-weight: bold;
-
-    &::before{
-      content: '»';
-      margin-right: 0.25rem;
+  .navbar-brand {
+    svg g {
+      fill: $black-ter;
     }
   }
 }
@@ -59,12 +56,12 @@ section, .footer {
   padding-right: 0;
 }
 
-article {
-  margin-bottom:2rem;
+.h-card {
+  margin-bottom: 3rem;
+}
 
-  &.post {
-    margin-bottom: 4rem;
-  }
+article {
+  margin-bottom: 4rem;
 
   .content {
     a {
@@ -82,8 +79,40 @@ article {
         background: $primary;
       }
     }
+
+    blockquote {
+      border-left-color: $primary;
+      font-family: serif;
+    }
   }
 }
 
 // This needs to be last to override all other styles
-@import "dark";
+@include prefers-scheme(dark) {
+  nav.navbar {
+    .navbar-brand {
+      svg g {
+        fill: $white;
+      }
+    }
+  }
+
+  .bookmark {
+    .image {
+      background-color: $white;
+    }
+  }
+
+  article {
+    .content {
+      a {
+        @include nice-underline($body-background-dark);
+      }
+
+      a.footnote, a.reversefootnote {
+        color: findColorInvert($primary);
+        background: findColorInvert($white);
+      }
+    }
+  }
+}
