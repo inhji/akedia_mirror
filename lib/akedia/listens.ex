@@ -26,15 +26,14 @@ defmodule Akedia.Listens do
       })
       |> order_by(desc: fragment("listens"))
 
-    query =
-      case time_diff do
-        nil ->
-          limit(query, 100)
+    case time_diff do
+      nil ->
+        limit(query, 100)
 
-        _ ->
-          time_ago = Timex.shift(DateTime.utc_now(), time_diff)
-          where(query, [l], l.listened_at > ^time_ago)
-      end
+      _ ->
+        time_ago = Timex.shift(DateTime.utc_now(), time_diff)
+        where(query, [l], l.listened_at > ^time_ago)
+    end
   end
 
   def group_by_track(artist) do

@@ -15,7 +15,7 @@ defmodule AkediaWeb.SearchView do
     end
   end
 
-  def inner_name(%{ :entity_id => _entity_id } = schema) do
+  def inner_name(%{:entity_id => _entity_id} = schema) do
     %name{} = schema
 
     name

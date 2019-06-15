@@ -28,28 +28,30 @@ defmodule Akedia.Indie.Micropub.Properties do
   end
 
   def add_replace_properties({k, [head | tail]}, props) do
-    case key = @allowed_properties[k] do
-      nil ->
-        props
+    if Enum.member?(@allowed_properties, k) do
+      key = @allowed_properties[k]
 
-      _ ->
-        cond do
-          Enum.member?(@array_attributes, k) ->
-            Map.put(props, key, [head | tail])
+      cond do
+        Enum.member?(@array_attributes, k) ->
+          Map.put(props, key, [head | tail])
 
-          Enum.member?(@html_attributes, k) and is_map(head) ->
-            value =
-              cond do
-                Map.has_key?(head, "html") -> head["html"]
-                Map.has_key?(head, "value") -> head["value"]
-                true -> ""
-              end
+        Enum.member?(@html_attributes, k) and is_map(head) ->
+          value = get_html_content(head)
+          Map.put(props, key, value)
 
-            Map.put(props, key, value)
+        true ->
+          Map.put(props, key, head)
+      end
+    else
+      props
+    end
+  end
 
-          true ->
-            Map.put(props, key, head)
-        end
+  def get_html_content(content_map) do
+    cond do
+      Map.has_key?(content_map, "html") -> content_map["html"]
+      Map.has_key?(content_map, "value") -> content_map["value"]
+      true -> ""
     end
   end
 

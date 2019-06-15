@@ -6,12 +6,11 @@ defmodule Akedia.Workers.Listenbrainz do
   alias Akedia.Repo
 
   def perform(user) do
-    fetch_listens(user)
+    user
+    |> fetch_listens()
     |> Enum.map(&prepare_listen/1)
     |> Enum.filter(fn l -> !is_nil(l) end)
-    |> Enum.each(fn listen ->
-      Repo.insert(listen)
-    end)
+    |> Enum.each(&Repo.insert/1)
   end
 
   def maybe_create_artist(name) when is_nil(name), do: {:error, :error}
