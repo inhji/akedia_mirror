@@ -1,0 +1,23 @@
+<%= render SharedView, "user_nav.html", assigns %>
+
+<h1 class="subtitle">
+  <%= if Map.has_key?(@feed, :title) do %>
+    First entry of <%= @feed.title %>
+  <% else %>
+    First entry of <%= @feed.url %>
+  <% end %>
+</h1>
+
+<%= for entry <- Enum.take(@feed.entries, 1) do %>
+  <div class="media">
+    <div class="media-content">
+      <h1 class="title"><%= link entry.title, to: entry.url %></h1>
+
+      <div class="content">
+        <p><em>By <%= entry.author %></em></p>
+
+        <%= raw(entry.summary) %>
+      </div>
+    </div>
+  </div>
+<% end %>

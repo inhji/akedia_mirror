@@ -38,12 +38,21 @@ $navbar-item-active-color-dark: $primary;
 ::-moz-selection { background: $primary; color: $white; }
 ::selection { background: $primary; color: $white; }
 
+.container.is-root, .media .media-content {
+  max-width: $layout-width;
+}
+
 nav.navbar {
   .navbar-brand {
     svg g {
       fill: $black-ter;
     }
   }
+}
+
+nav.user {
+  margin-top: -3rem;
+  margin-bottom: 0;
 }
 
 .social a {

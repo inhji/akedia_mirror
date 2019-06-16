@@ -1,0 +1,22 @@
+<%= render SharedView, "user_nav.html", assigns %>
+
+<%= for channel <- @channels do %>
+<article class="media is-marginless">
+  <div class="media-content">
+    <p>
+      <h1 class="is-size-5">
+        <%= link channel.name, to: Routes.channel_path(@conn, :show, channel) %>
+      </h1>
+      <small class="has-text-grey"><%= Enum.count(channel.feeds) %> feeds</small>
+    </p>
+  </div>
+  <div class="media-right">
+    <%= link "Edit", to: Routes.channel_path(@conn, :edit, channel), class: "button is-info" %>
+    <%= link "Delete", to: Routes.channel_path(@conn, :delete, channel), method: :delete, data: [confirm: "Are you sure?"], class: "button is-danger" %>
+  </div>
+</article>
+<% end %>
+
+<span>
+  <%= link "New Channel", to: Routes.channel_path(@conn, :new), class: "button is-success" %>
+</span>

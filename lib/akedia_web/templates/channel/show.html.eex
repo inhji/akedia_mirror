@@ -1,0 +1,32 @@
+<%= render SharedView, "user_nav.html", assigns %>
+
+<h1 class="title"><%= @channel.name %></h1>
+
+<%= for feed <- @channel.feeds do %>
+<div class="media">
+  <div class="media-content">
+    <h3 class="is-size-5">
+      <%= if Map.has_key?(feed, :title) do %>
+        <%= link feed.title, to: Routes.channel_feed_path(@conn, :show, @channel, feed) %>
+      <% else %>
+        <%= link feed.url, to: Routes.channel_feed_path(@conn, :show, @channel, feed) %>
+      <% end %>
+      <small><%= Enum.count(feed.entries) %> entries</small>
+    </h3>
+
+    <%= if Map.has_key?(feed, :description) do %>
+      <span>
+        <%= feed.description %>
+      </span>
+    <% end %>
+  </div>
+  <div class="media-right">
+    <%= link "Edit", to: Routes.channel_feed_path(@conn, :edit, @channel, feed), class: "button is-info is-small" %>
+    <%= link "Delete", to: Routes.channel_feed_path(@conn, :delete, @channel, feed), method: :delete, data: [confirm: "Are you sure?"], class: "button is-danger is-small" %>
+  </div>
+</div>
+<% end %>
+
+<span>
+  <%= link "Add Feed", to: Routes.channel_feed_path(@conn, :new, @channel), class: "button is-success" %>
+</span>

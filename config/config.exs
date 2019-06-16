@@ -17,7 +17,8 @@ config :akedia, Akedia.Settings, site_title: "Inhji.de"
 config :akedia, Akedia.Scheduler,
   jobs: [
     {"*/3 * * * *", {Que, :add, [Akedia.Workers.Listenbrainz, "inhji"]}},
-    {"*/1 * * * *", {Que, :add, [Akedia.Workers.Coverartarchive, nil]}}
+    {"*/1 * * * *", {Que, :add, [Akedia.Workers.Coverartarchive, nil]}},
+    {"*/1 * * * *", {Que, :add, [Akedia.Workers.Feeder, nil]}}
   ]
 
 # Configures the endpoint

@@ -28,14 +28,14 @@
   <body>
     <section class="hero">
       <div class="hero-head">
-        <div class="container grid">
+        <div class="container is-root">
           <%= render "navigation.html", conn: @conn %>
         </div>
       </div>
     </section>
 
     <section class="section">
-      <div class="container grid">
+      <div class="container is-root">
         <p class="notification is-info" role="alert"><%= get_flash(@conn, :info) %></p>
         <p class="notification is-danger" role="alert"><%= get_flash(@conn, :error) %></p>
         <%= render @view_module, @view_template, assigns %>
@@ -43,7 +43,7 @@
     </section>
 
     <section class="section">
-      <div class="container grid">
+      <div class="container is-root">
         <%= render "footer.html", conn: @conn, logged_in: @logged_in %>
       </div>
     </section>

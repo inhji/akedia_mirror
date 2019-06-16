@@ -1,0 +1,5 @@
+<%= render SharedView, "user_nav.html", assigns %>
+
+<h1 class="title">New Feed</h1>
+
+<%= render "form.html", Map.put(assigns, :action, Routes.channel_feed_path(@conn, :create, @channel_id)) %>

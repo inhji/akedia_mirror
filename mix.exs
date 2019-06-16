@@ -76,7 +76,8 @@ defmodule Akedia.MixProject do
       {:timber_exceptions, "~> 2.1"},
       {:timber_ecto, "~> 2.1"},
       {:scrivener_ecto, "~> 2.0"},
-      {:scrivener_html, "~> 1.8"}
+      {:scrivener_html, "~> 1.8"},
+      {:feeder_ex, "~> 1.1"}
     ]
   end
 
