@@ -72,6 +72,10 @@ defmodule AkediaWeb.Router do
             handler: Akedia.Indie.Micropub.Handler,
             json_encoder: Phoenix.json_library()
 
+    forward "/microsub",
+            Akedia.Indie.MicrosubRouter,
+            foo: "bar"
+
     # forward "/auth",
     #         PlugIndieAuth,
     #         handler: Akedia.Indie.IndieAuth.Handler,
