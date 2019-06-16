@@ -20,9 +20,15 @@ defmodule Akedia.Indie.Microsub do
     |> Repo.preload(feeds: [:entries])
   end
 
+  def get_notification_channel() do
+    Channel
+    |> Repo.get_by!(uid: "notifications")
+    |> Repo.preload(feeds: [:entries])
+  end
+
   def create_channel(attrs \\ %{}) do
-    %Channel{}
-    |> Channel.changeset(attrs)
+    %Channel{uid: Ecto.UUID.generate()}
+    |> Channel.changeset(%{name: attrs["name"]})
     |> Repo.insert()
   end
 
