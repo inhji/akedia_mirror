@@ -48,7 +48,7 @@
       </div>
     </section>
 
-    <script type="text/javascript" src="<%= Routes.static_path(@conn, "/js/app.js") %>"></script>
+    <script type="text/javascript" src="<%= Routes.static_path(@conn, "/js/common.js") %>"></script>
 
     <!-- View Specific Scripts -->
     <%= render_existing(@view_module, "scripts." <> @view_template, assigns) ||

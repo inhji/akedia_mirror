@@ -21,7 +21,7 @@ module.exports = (env, options) => ({
     }
   },
   entry: {
-    app: './js/app.js',
+    common: './js/common.js',
     admin: './js/admin.js'
   },
   output: {
