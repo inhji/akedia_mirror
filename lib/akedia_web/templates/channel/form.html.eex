@@ -14,6 +14,14 @@
   </div>
 
   <div class="field">
+    <%= label f, :uid, class: "label" %>
+    <%= text_input f, :uid,
+        class: "input",
+        placeholder: "Channel UID" %>
+    <%= error_tag f, :uid %>
+  </div>
+
+  <div class="field">
     <%= submit "Save", class: "button is-success" %>
   </div>
 <% end %>

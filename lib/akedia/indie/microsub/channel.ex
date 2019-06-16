@@ -4,6 +4,7 @@ defmodule Akedia.Indie.Microsub.Channel do
 
   schema "channels" do
     field :name, :string
+    field :uid, :string
 
     has_many :feeds, Akedia.Indie.Microsub.Feed
 
@@ -13,7 +14,7 @@ defmodule Akedia.Indie.Microsub.Channel do
   @doc false
   def changeset(channel, attrs) do
     channel
-    |> cast(attrs, [:name])
-    |> validate_required([:name])
+    |> cast(attrs, [:name, :uid])
+    |> validate_required([:name, :uid])
   end
 end
