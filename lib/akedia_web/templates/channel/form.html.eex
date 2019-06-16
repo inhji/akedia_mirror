@@ -19,6 +19,7 @@
         class: "input",
         placeholder: "Channel UID" %>
     <%= error_tag f, :uid %>
+    <p class="help is-info">Not needed when new channel is created!</p>
   </div>
 
   <div class="field">
