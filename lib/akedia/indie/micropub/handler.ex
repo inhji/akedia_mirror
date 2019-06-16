@@ -5,7 +5,8 @@ defmodule Akedia.Indie.Micropub.Handler do
   alias Akedia.HTTP
   alias Akedia.Media
   alias Akedia.Content.{Bookmark, Post}
-  alias Akedia.Indie.Micropub.{Token, Properties, Content}
+  alias Akedia.Indie.Micropub.{Properties, Content}
+  alias Akedia.Indie.Auth.Token
 
   @impl true
   def handle_create(type, properties, access_token) do

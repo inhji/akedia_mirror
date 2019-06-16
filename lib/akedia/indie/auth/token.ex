@@ -1,8 +1,21 @@
-defmodule Akedia.Indie.Micropub.Token do
+defmodule Akedia.Indie.Auth.Token do
   alias Akedia.Accounts
   require Logger
 
-  @supported_scopes ["create", "update", "delete", "undelete", "media"]
+  @supported_scopes [
+    # Micropub scopes
+    "create",
+    "update",
+    "delete",
+    "undelete",
+    "media",
+    # Microsub scopes
+    "read",
+    "follow",
+    "mute",
+    "block",
+    "channels"
+  ]
 
   def verify_token(access_token, required_scope) do
     %{url: token_endpoint} = Accounts.get_profile_by_rel_value("token_endpoint")
