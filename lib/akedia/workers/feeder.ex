@@ -50,7 +50,13 @@ defmodule Akedia.Workers.Feeder do
   end
 
   def insert_feed_entry(
-        %FeederEx.Entry{author: author, summary: summary, title: title, link: url},
+        %FeederEx.Entry{
+          author: author,
+          summary: summary,
+          title: title,
+          link: url,
+          updated: published_at
+        },
         feed_id
       ) do
     Microsub.create_feed_entry(
@@ -58,7 +64,8 @@ defmodule Akedia.Workers.Feeder do
         author: author,
         summary: summary,
         title: title,
-        url: url
+        url: url,
+        published_at: Akedia.DateTime.to_datetime_utc(published_at)
       },
       feed_id
     )
