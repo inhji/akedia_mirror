@@ -67,9 +67,36 @@ defmodule Akedia.Plugs.PlugMicrosub do
   end
 
   def handle_action(conn, :post, :timeline, :mark_read) do
-    entry_ids = get_query_param!(conn, "entry_id")
-    IO.inspect(entry_ids)
-    send_response(conn, [])
+    cond do
+      get_query_param!(conn, "entry_id") != nil ->
+        entry_ids = get_query_param!(conn, "entry_id")
+        handle_mark_read(conn, entry_ids)
+
+      get_query_param!(conn, "last_read_entry") != nil ->
+        last_read_entry = get_query_param!(conn, "last_read_entry")
+        # TODO
+        send_error(conn, "Not implemented")
+    end
+  end
+
+  def handle_mark_read(conn, entry_ids) do
+    handler = get_opt(conn, :handler)
+
+    with {:ok, channel} <- get_query_param(conn, "channel"),
+         entry_ids <- maybe_wrap_entry_ids(entry_ids),
+         :ok <- handler.handle_mark_read(channel, entry_ids) do
+      send_response(conn)
+    else
+      {:error, reason} ->
+        send_error(conn, reason)
+    end
+  end
+
+  def maybe_wrap_entry_ids(entry_ids) do
+    case is_list(entry_ids) do
+      true -> entry_ids
+      false -> [entry_ids]
+    end
   end
 
   def handle_action(conn, :post, :timeline, :mark_unread) do
@@ -82,10 +109,7 @@ defmodule Akedia.Plugs.PlugMicrosub do
     with {:ok, channel} <- get_query_param(conn, "channel"),
          {:ok, page_before, page_after} <- validate_paging(conn),
          {:ok, items, paging} <- handler.handle_timeline(channel, page_before, page_after) do
-      send_response(conn, %{
-        items: items,
-        paging: paging
-      })
+      send_response(conn, %{})
     else
       {:error, reason} ->
         send_error(conn, reason)
@@ -171,6 +195,10 @@ defmodule Akedia.Plugs.PlugMicrosub do
     conn
     |> put_resp_content_type("application/json")
     |> send_resp(:ok, body)
+  end
+
+  def send_response(conn) do
+    send_response(conn, %{})
   end
 
   def send_error(conn, reason, code \\ :invalid_request) do

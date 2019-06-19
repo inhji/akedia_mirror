@@ -15,4 +15,19 @@ defmodule Akedia.Plugs.PlugMicrosub.HandlerBehaviour do
               paging_before :: String.t(),
               paging_after :: String.t()
             ) :: {:ok, list, map} | handler_error
+
+  @callback handle_mark_read(
+              channel :: String.t(),
+              entry_ids :: list
+            ) :: :ok | handler_error
+
+  # @callback handle_mark_unread(
+  #             channel :: String.t(),
+  #             entry_ids :: list
+  #           )
+
+  # @callback handle_mark_read_before(
+  #             channel :: String.t(),
+  #             entry_id :: String.t()
+  #           )
 end

@@ -98,29 +98,50 @@ defmodule Akedia.Indie.Microsub do
   end
 
   def list_feed_entries(channel_id, nil, nil) do
-    entries =
-      channel_id
-      |> list_feed_entries_query()
-      |> Repo.all()
+    channel_id
+    |> list_feed_entries_query()
+    |> Repo.all()
   end
 
   def list_feed_entries(channel_id, paging_before, nil) do
     {:ok, date} = DateTime.from_unix(paging_before)
 
-    entries =
-      channel_id
-      |> list_feed_entries_query()
-      |> where([e], e.published_at > ^date)
-      |> Repo.all()
+    channel_id
+    |> list_feed_entries_query()
+    |> where([e], e.published_at > ^date)
+    |> Repo.all()
   end
 
   def list_feed_entries(channel_id, nil, paging_after) do
     {:ok, date} = DateTime.from_unix(paging_after)
 
-    entries =
-      channel_id
-      |> list_feed_entries_query()
-      |> where([e], e.published_at < ^date)
-      |> Repo.all()
+    channel_id
+    |> list_feed_entries_query()
+    |> where([e], e.published_at < ^date)
+    |> Repo.all()
+  end
+
+  def get_feed_entry!(id) do
+    Repo.get!(FeedEntry, id)
+  end
+
+  def get_feed_entry(id) do
+    Repo.get(FeedEntry, id)
+  end
+
+  def update_feed_entry(%FeedEntry{} = entry, attrs) do
+    entry
+    |> FeedEntry.changeset(attrs)
+    |> Repo.update()
+  end
+
+  def mark_feed_entry(id, mark_read) do
+    case Repo.get(FeedEntry, id) do
+      nil ->
+        nil
+
+      entry ->
+        update_feed_entry(entry, %{is_read: mark_read})
+    end
   end
 end

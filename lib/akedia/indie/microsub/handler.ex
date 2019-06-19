@@ -34,6 +34,26 @@ defmodule Akedia.Indie.Microsub.Handler do
     end
   end
 
+  @impl true
+  def handle_mark_read(channel, entry_ids) do
+    case Microsub.get_channel_by_uid!(channel) do
+      nil ->
+        {:error, "Channel #{channel} does not exist"}
+
+      channel ->
+        IO.inspect(entry_ids)
+
+        entry_ids
+        |> Enum.map(fn id ->
+          IO.inspect(id)
+          Microsub.mark_feed_entry(id, true)
+        end)
+        |> IO.inspect()
+
+        :ok
+    end
+  end
+
   def prepare_paging([]), do: %{}
 
   def prepare_paging(entries) do
@@ -56,11 +76,11 @@ defmodule Akedia.Indie.Microsub.Handler do
       url: entry.url,
       published: DateTime.to_iso8601(entry.published_at),
       content: %{
-        text: entry.summary,
+        text: HtmlSanitizeEx.strip_tags(entry.summary),
         html: entry.summary
       },
       _id: entry.id,
-      _is_read: false
+      _is_read: entry.is_read
     }
   end
 
