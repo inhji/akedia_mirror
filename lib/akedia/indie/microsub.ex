@@ -120,7 +120,7 @@ defmodule Akedia.Indie.Microsub do
     entries =
       channel_id
       |> list_feed_entries_query()
-      |> where([e], e.id < ^date)
+      |> where([e], e.published_at < ^date)
       |> Repo.all()
   end
 end

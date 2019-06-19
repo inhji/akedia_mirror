@@ -1,4 +1,4 @@
-defmodule PlugMicrosub.HandlerBehaviour do
+defmodule Akedia.Plugs.PlugMicrosub.HandlerBehaviour do
   @moduledoc """
   Behaviour defining the interface for a PlugMicrosub Handler
   """
