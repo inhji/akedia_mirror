@@ -6,7 +6,7 @@ defmodule Akedia.Plugs.PlugMicrosub do
   require Logger
 
   @supported_actions ["channels", "timeline"]
-  @supported_methods ["delete"]
+  @supported_methods ["delete", "mark_read", "mark_unread"]
 
   plug(:match)
   plug(:dispatch)
@@ -37,8 +37,13 @@ defmodule Akedia.Plugs.PlugMicrosub do
   end
 
   post "/" do
-    with {:ok, action, conn} <- get_action(conn) do
-      handle_action(conn, :post, action)
+    with {:ok, action, conn} <- get_action(conn),
+         {:ok, method, conn} <- get_method(conn) do
+      if is_nil(method) do
+        handle_action(conn, :post, action)
+      else
+        handle_action(conn, :post, action, method)
+      end
     else
       {:error, reason} ->
         send_error(conn, reason)
@@ -61,10 +66,18 @@ defmodule Akedia.Plugs.PlugMicrosub do
     end
   end
 
-  def handle_action(%{query_params: params} = conn, :get, :timeline) do
-    handler = get_opt(conn, :handler)
+  def handle_action(conn, :post, :timeline, :mark_read) do
+    entry_ids = get_query_param!(conn, "entry_id")
+    IO.inspect(entry_ids)
+    send_response(conn, [])
+  end
 
-    IO.inspect(params)
+  def handle_action(conn, :post, :timeline, :mark_unread) do
+    send_response(conn, [])
+  end
+
+  def handle_action(conn, :get, :timeline) do
+    handler = get_opt(conn, :handler)
 
     with {:ok, channel} <- get_query_param(conn, "channel"),
          {:ok, page_before, page_after} <- validate_paging(conn),
@@ -79,12 +92,13 @@ defmodule Akedia.Plugs.PlugMicrosub do
     end
   end
 
+  # def handle_action(conn, _, _) do
+  #   send_error(conn, "Bad Request (Catchall)")
+  # end
+
   def validate_paging(conn) do
     page_before = get_query_param!(conn, "before")
     page_after = get_query_param!(conn, "after")
-
-    IO.inspect(page_before)
-    IO.inspect(page_after)
 
     cond do
       is_nil(page_before) and is_nil(page_after) ->
@@ -111,6 +125,27 @@ defmodule Akedia.Plugs.PlugMicrosub do
 
   def get_action(%{query_params: _}), do: {:error, "Bad Request"}
 
+  def get_method(%{query_params: _params} = conn) do
+    with method <- get_query_param!(conn, "method"),
+         {:ok, method} <- validate_method(method) do
+      {:ok, String.to_atom(method), conn}
+    else
+      error -> error
+    end
+  end
+
+  def validate_method(nil), do: {:ok, nil}
+
+  def validate_method(method) do
+    IO.inspect("Validating method #{inspect(method)}")
+
+    if not Enum.member?(@supported_methods, method) do
+      {:error, "Unsupported method"}
+    else
+      {:ok, method}
+    end
+  end
+
   def get_query_param(%{:query_params => params}, param_name) do
     case Map.fetch(params, param_name) do
       {:ok, value} -> {:ok, value}
@@ -118,7 +153,7 @@ defmodule Akedia.Plugs.PlugMicrosub do
     end
   end
 
-  def get_query_param!(%{:query_params => params} = conn, param_name) do
+  def get_query_param!(conn, param_name) do
     case get_query_param(conn, param_name) do
       {:ok, value} -> value
       {:error, _} -> nil
