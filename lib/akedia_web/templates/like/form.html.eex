@@ -5,9 +5,14 @@
     </div>
   <% end %>
 
-  <%= label f, :url %>
-  <%= text_input f, :url %>
-  <%= error_tag f, :url %>
+  <div class="field">
+    <%= label f, :url, class: "label" %>
+    <%= text_input f, :url,
+        type: "url",
+        class: "input",
+        placeholder: "URL" %>
+    <%= error_tag f, :url %>
+  </div>
 
   <%= inputs_for f, :entity, fn(ef) -> %>
   <div class="field">
@@ -19,7 +24,7 @@
   </div>
   <% end %>
 
-  <div>
-    <%= submit "Save" %>
+  <div class="field">
+    <%= submit "Save", class: "button is-primary" %>
   </div>
 <% end %>
