@@ -4,5 +4,10 @@
 
 <%= render "feed.html",
     conn: @conn,
-    entities: @entities, 
+    entities: @entities,
     current_user: @current_user %>
+
+<%= pagination_links @page,
+  previous: ~E(<i class="fa fa-caret-left" aria-hidden="true"></i>),
+  next: ~E(<i class="fa fa-caret-right" aria-hidden="true"></i>)
+%>

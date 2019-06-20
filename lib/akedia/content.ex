@@ -7,18 +7,28 @@ defmodule Akedia.Content do
 
   # Entity
 
-  def list_entities do
+  def list_entities(params) do
     query =
-      from e in Entity,
+      from entity in Entity,
+        left_join: like in Like,
+        on: entity.id == like.entity_id,
+        left_join: post in Post,
+        on: entity.id == post.entity_id,
+        left_join: bookmark in Bookmark,
+        on: entity.id == bookmark.entity_id,
         order_by: [desc: :inserted_at],
         preload: [
-          like: [entity: [:topics, :syndications]],
-          post: [entity: [:topics, :syndications]],
-          bookmark: [:favicon, entity: [:topics, :syndications]]
+          like: ^@preloads,
+          post: ^@preloads,
+          bookmark: [:favicon, ^@preloads]
         ],
-        where: [is_published: true]
+        where: [is_published: true],
+        where: not is_nil(like.id),
+        or_where: not is_nil(post.id),
+        or_where: not is_nil(bookmark.id),
+        select: entity
 
-    Repo.all(query)
+    Repo.paginate(query, params)
   end
 
   def get_entity!(id) do

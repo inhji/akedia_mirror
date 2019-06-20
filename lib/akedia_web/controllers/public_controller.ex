@@ -1,12 +1,18 @@
 defmodule AkediaWeb.PublicController do
   use AkediaWeb, :controller
 
-  def index(conn, _params) do
-    entities =
-      Akedia.Content.list_entities()
-      |> Enum.filter(&post_type_filter/1)
+  def index(conn, params) do
+    page = Akedia.Content.list_entities(params)
 
-    render(conn, "index.html", conn: conn, entities: entities)
+    render(conn, "index.html",
+      conn: conn,
+      page: page,
+      entities: page.entries,
+      page_number: page.page_number,
+      page_size: page.page_size,
+      total_pages: page.total_pages,
+      total_entries: page.total_entries
+    )
   end
 
   def tagged(conn, %{"topic" => topic}) do
