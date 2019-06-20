@@ -109,16 +109,19 @@ defmodule Akedia.Plugs.PlugMicrosub do
     with {:ok, channel} <- get_query_param(conn, "channel"),
          {:ok, page_before, page_after} <- validate_paging(conn),
          {:ok, items, paging} <- handler.handle_timeline(channel, page_before, page_after) do
-      send_response(conn, %{})
+      send_response(conn, %{
+        items: items,
+        paging: paging
+      })
     else
       {:error, reason} ->
         send_error(conn, reason)
     end
   end
 
-  # def handle_action(conn, _, _) do
-  #   send_error(conn, "Bad Request (Catchall)")
-  # end
+  def handle_action(conn, _, _) do
+    send_error(conn, "Bad Request (Catchall)")
+  end
 
   def validate_paging(conn) do
     page_before = get_query_param!(conn, "before")
