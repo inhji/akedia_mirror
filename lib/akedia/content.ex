@@ -177,14 +177,15 @@ defmodule Akedia.Content do
   end
 
   def create_like(attrs \\ %{}, is_published \\ true) do
-    create_with_entity(Like, attrs, %{is_published: is_published})
+    like = create_with_entity(Like, attrs, %{is_published: is_published})
   end
 
   def update_like(%Like{} = like, attrs) do
-    like
-    |> Like.changeset(attrs)
-    |> Ecto.Changeset.cast_assoc(:entity, with: &Entity.changeset/2)
-    |> Repo.update()
+    {:ok, like} =
+      like
+      |> Like.changeset(attrs)
+      |> Ecto.Changeset.cast_assoc(:entity, with: &Entity.changeset/2)
+      |> Repo.update()
   end
 
   def delete_like(%Like{} = like) do

@@ -1,7 +1,7 @@
 <article class="like h-entry">
   <h3 class="title">
     <a href="<%= @like.url %>" target="_blank" class="u-like-of h-cite p-name text-body">
-      <%= @like.url %>
+      <%= @like.title || @like.url %>
     </a>
   </h3>
 

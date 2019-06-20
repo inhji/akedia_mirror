@@ -9,6 +9,27 @@ defmodule Akedia.HTTP do
 
   def user_agent(), do: @user_agent
 
+  def scrape(url, selectors) do
+    case get!(url) do
+      %HTTPoison.Response{status_code: 200, body: body} ->
+        values =
+          Enum.map(selectors, fn {name, selector} ->
+            value =
+              body
+              |> Floki.find(selector)
+              |> Floki.text()
+              |> IO.inspect()
+
+            {name, value}
+          end)
+
+        {:ok, values}
+
+      error ->
+        error
+    end
+  end
+
   def hostname(url) do
     url_part(url, :host)
   end

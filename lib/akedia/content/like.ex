@@ -5,6 +5,7 @@ defmodule Akedia.Content.Like do
 
   schema "likes" do
     field :url, :string
+    field :title, :string
 
     belongs_to :entity, Entity
 
@@ -14,7 +15,7 @@ defmodule Akedia.Content.Like do
   @doc false
   def changeset(like, attrs) do
     like
-    |> cast(attrs, [:url, :entity_id])
+    |> cast(attrs, [:url, :title, :entity_id])
     |> validate_required([:url])
   end
 end
