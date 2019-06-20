@@ -53,6 +53,16 @@
           </span>
           <span>Listens</span>
       <% end %>
+      <%= if @logged_in do %>
+        <%= active_link @conn,
+            class_active: "is-active",
+            to: Routes.user_path(@conn, :show), class: "navbar-item" do %>
+            <span class="icon">
+              <i class="fa fa-user"></i>
+            </span>
+            <span>User</span>
+        <% end %>
+      <% end %>
     </div>
   </div>
 </nav>
