@@ -2,7 +2,7 @@
 
 <div class="h-feed">
   <%= for bookmark <- @bookmarks do %>
-    <%= render "bookmark.html", conn: @conn, bookmark: bookmark %>
+    <%= render "bookmark.html", conn: @conn, bookmark: bookmark, current_user: @current_user %>
   <% end %>
 </div>
 

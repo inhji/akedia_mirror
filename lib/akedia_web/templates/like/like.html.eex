@@ -1,19 +1,17 @@
 <article class="like h-entry">
-  <h3 class="title">
-    <a href="<%= @like.url %>" target="_blank" class="u-like-of h-cite p-name text-body">
-      <%= @like.title || @like.url %>
-    </a>
-  </h3>
-
-  <div class="meta">
-    <time class="dt-published" datetime="<%= date_iso(@like.inserted_at) %>">
-      <%= link date_fuzzy(@like.inserted_at), to: Routes.like_url(@conn, :show, @like) %>
-    </time>
-    <%= render SharedView, "post_topics.html", conn: @conn, topics: @like.entity.topics %>
-    <%= render SharedView, "post_syndications.html", conn: @conn, schema: @like %>
+  <div class="media">
+    <div class="media-content">
+      <h3 class="title has-text-weight-normal">
+        <a href="<%= @like.url %>" class="u-like-of h-cite p-name">
+          <%= @like.title || @like.url %>
+        </a>
+      </h3>
+      <div class="content"></div>
+      <%= render SharedView, "post_meta.html",
+          conn: @conn,
+          schema: @like,
+          url_helper: &Routes.like_url/3,
+          current_user: @current_user %>
+    </div>
   </div>
-
-  <%= render SharedView, "post_author.html", assigns %>
-
-
 </article>

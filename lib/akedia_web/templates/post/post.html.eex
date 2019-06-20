@@ -1,23 +1,19 @@
-<article class="h-entry post">
-  <%= if @post.title do %>
-    <h3 class="p-name title"><%= @post.title %></h3>
-  <% end %>
-
-  <div class="e-content content <%= unless @post.title do %>p-name<% end %>">
-    <%= to_html(@post) %>
+<article class="post h-entry">
+  <div class="media">
+    <div class="media-content">
+      <%= if @post.title do %>
+      <h3 class="title has-text-weight-normal p-name">
+        <%= @post.title %>
+      </h3>
+      <% end %>
+      <div class="content e-content <%= unless @post.title do %>p-name<% end %>">
+        <%= to_html(@post.content) %>
+      </div>
+      <%= render SharedView, "post_meta.html",
+          conn: @conn,
+          schema: @post,
+          url_helper: &Routes.post_url/3,
+          current_user: @current_user %>
+    </div>
   </div>
-
-  <div class="meta has-text-grey">
-    <time class="dt-published" datetime="<%= date_iso(@post.inserted_at) %>">
-      <%= link date_fuzzy(@post.inserted_at), to: Routes.post_url(@conn, :show, @post), class: "u-uid u-url has-text-grey" %>
-    </time>
-    <%= render SharedView, "post_topics.html", conn: @conn, topics: @post.entity.topics %>
-    <%= if @post.reply_to do %>
-      <span class="dot"></span>
-      <i class="fa fa-reply"></i> <a href="<%= @post.reply_to %>" class="u-in-reply-to has-text-grey" rel="in-reply-to"><%= @post.reply_to %></a>
-    <% end %>
-    <%= render SharedView, "post_syndications.html", conn: @conn, schema: @post %>
-  </div>
-
-  <%= render SharedView, "post_author.html", conn: @conn, current_user: @current_user %>
 </article>
