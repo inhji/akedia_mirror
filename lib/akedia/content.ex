@@ -22,10 +22,10 @@ defmodule Akedia.Content do
           post: ^@preloads,
           bookmark: [:favicon, ^@preloads]
         ],
-        where: [is_published: true],
         where: not is_nil(like.id),
         or_where: not is_nil(post.id),
         or_where: not is_nil(bookmark.id),
+        where: [is_published: true],
         select: entity
 
     Repo.paginate(query, params)
