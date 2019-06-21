@@ -32,6 +32,7 @@ defmodule AkediaWeb do
     quote do
       use Phoenix.View,
         root: "lib/akedia_web/templates",
+        pattern: "**/*",
         namespace: AkediaWeb
 
       # Import convenience functions from controllers
