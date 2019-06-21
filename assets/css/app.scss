@@ -72,6 +72,13 @@ section, .footer {
 article {
   margin-bottom: 4rem;
 
+  .title {
+    .image {
+      display: inline-block;
+      vertical-align: bottom;
+    }
+  }
+
   .content {
     a {
       @include nice-underline($white);

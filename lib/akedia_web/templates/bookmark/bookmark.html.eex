@@ -2,7 +2,7 @@
   <div class="media">
     <div class="media-content">
       <h3 class="title has-text-weight-normal">
-        <span class="image is-32x32 is-rounded" style="padding-top: .3rem; display: inline-block;">
+        <span class="image is-32x32 is-rounded">
           <%= if @bookmark.favicon do %>
             <img src="<%= favicon_url(@bookmark.favicon) %>">
           <% else %>
