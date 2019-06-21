@@ -14,6 +14,15 @@
     <%= error_tag f, :url %>
   </div>
 
+  <div class="field">
+    <%= label f, :title, class: "label" %>
+    <%= text_input f, :title,
+        type: "text",
+        class: "input",
+        placeholder: "URL" %>
+    <%= error_tag f, :title %>
+  </div>
+
   <%= inputs_for f, :entity, fn(ef) -> %>
   <div class="field">
     <%= label f, :public, class: "checkbox" do %>
