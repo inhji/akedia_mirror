@@ -41,14 +41,10 @@ defmodule Akedia.Indie.Microsub.Handler do
         {:error, "Channel #{channel} does not exist"}
 
       channel ->
-        IO.inspect(entry_ids)
-
         entry_ids
         |> Enum.map(fn id ->
-          IO.inspect(id)
           Microsub.mark_feed_entry(id, true)
         end)
-        |> IO.inspect()
 
         :ok
     end
