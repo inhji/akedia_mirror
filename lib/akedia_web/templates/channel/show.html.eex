@@ -27,6 +27,8 @@
 </div>
 <% end %>
 
+<hr />
+
 <span>
   <%= link "Add Feed", to: Routes.channel_feed_path(@conn, :new, @channel), class: "button is-success" %>
 </span>
