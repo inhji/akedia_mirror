@@ -8,6 +8,9 @@ defmodule Akedia.Plugs.PlugMicrosub do
   @supported_actions ["channels", "timeline"]
   @supported_methods ["delete", "mark_read", "mark_unread"]
 
+  @param_entry "entry"
+  @param_last_read "last_read_entry"
+
   plug(:match)
   plug(:dispatch)
 
@@ -28,6 +31,8 @@ defmodule Akedia.Plugs.PlugMicrosub do
   end
 
   get "/" do
+    Logger.debug("Handling GET Request")
+
     with {:ok, action, conn} <- get_action(conn) do
       handle_action(conn, :get, action)
     else
@@ -37,8 +42,13 @@ defmodule Akedia.Plugs.PlugMicrosub do
   end
 
   post "/" do
+    Logger.debug("Handling POST Request")
+
     with {:ok, action, conn} <- get_action(conn),
          {:ok, method, conn} <- get_method(conn) do
+      Logger.debug("Action: #{action}")
+      Logger.debug("Method: #{method}")
+
       if is_nil(method) do
         handle_action(conn, :post, action)
       else
@@ -46,11 +56,14 @@ defmodule Akedia.Plugs.PlugMicrosub do
       end
     else
       {:error, reason} ->
+        Logger.error(reason)
         send_error(conn, reason)
     end
   end
 
   match _ do
+    IO.inspect(conn)
+    Logger.debug("Unknown route!")
     send_resp(conn, 404, "Not found!")
   end
 
@@ -67,13 +80,15 @@ defmodule Akedia.Plugs.PlugMicrosub do
   end
 
   def handle_action(conn, :post, :timeline, :mark_read) do
+    Logger.debug("Timeline/MarkRead")
+
     cond do
-      get_query_param!(conn, "entry_id") != nil ->
-        entry_ids = get_query_param!(conn, "entry_id")
+      get_param!(conn, @param_entry) != nil ->
+        entry_ids = get_param!(conn, @param_entry)
         handle_mark_read(conn, entry_ids)
 
-      get_query_param!(conn, "last_read_entry") != nil ->
-        last_read_entry = get_query_param!(conn, "last_read_entry")
+      get_param!(conn, @param_last_read) != nil ->
+        last_read_entry = get_param!(conn, @param_last_read)
         # TODO
         send_error(conn, "Not implemented")
     end
@@ -82,12 +97,13 @@ defmodule Akedia.Plugs.PlugMicrosub do
   def handle_mark_read(conn, entry_ids) do
     handler = get_opt(conn, :handler)
 
-    with {:ok, channel} <- get_query_param(conn, "channel"),
+    with {:ok, channel} <- get_param(conn, "channel"),
          entry_ids <- maybe_wrap_entry_ids(entry_ids),
          :ok <- handler.handle_mark_read(channel, entry_ids) do
       send_response(conn)
     else
       {:error, reason} ->
+        Logger.debug("Timeline/MarkRead: #{reason}")
         send_error(conn, reason)
     end
   end
@@ -106,7 +122,7 @@ defmodule Akedia.Plugs.PlugMicrosub do
   def handle_action(conn, :get, :timeline) do
     handler = get_opt(conn, :handler)
 
-    with {:ok, channel} <- get_query_param(conn, "channel"),
+    with {:ok, channel} <- get_param(conn, "channel"),
          {:ok, page_before, page_after} <- validate_paging(conn),
          {:ok, items, paging} <- handler.handle_timeline(channel, page_before, page_after) do
       send_response(conn, %{
@@ -124,8 +140,8 @@ defmodule Akedia.Plugs.PlugMicrosub do
   end
 
   def validate_paging(conn) do
-    page_before = get_query_param!(conn, "before")
-    page_after = get_query_param!(conn, "after")
+    page_before = get_param!(conn, "before")
+    page_after = get_param!(conn, "after")
 
     cond do
       is_nil(page_before) and is_nil(page_after) ->
@@ -150,41 +166,73 @@ defmodule Akedia.Plugs.PlugMicrosub do
     end
   end
 
-  def get_action(%{query_params: _}), do: {:error, "Bad Request"}
-
-  def get_method(%{query_params: _params} = conn) do
-    with method <- get_query_param!(conn, "method"),
-         {:ok, method} <- validate_method(method) do
-      {:ok, String.to_atom(method), conn}
+  def get_action(%{params: %{"action" => action}} = conn) do
+    if not Enum.member?(@supported_actions, action) do
+      {:error, "Unsupported action"}
     else
-      error -> error
+      {:ok, String.to_atom(action), conn}
     end
   end
 
-  def validate_method(nil), do: {:ok, nil}
+  def get_action(%{query_params: _} = conn) do
+    Logger.error("Could not find action parameter")
+    {:error, "Bad Request"}
+  end
 
-  def validate_method(method) do
-    IO.inspect("Validating method #{inspect(method)}")
-
+  def get_method(%{query_params: %{"method" => method}} = conn) do
     if not Enum.member?(@supported_methods, method) do
       {:error, "Unsupported method"}
     else
-      {:ok, method}
+      {:ok, String.to_atom(method), conn}
     end
   end
 
-  def get_query_param(%{:query_params => params}, param_name) do
-    case Map.fetch(params, param_name) do
-      {:ok, value} -> {:ok, value}
-      :error -> {:error, "Param #{param_name} missing"}
+  def get_method(%{params: %{"method" => method}} = conn) do
+    if not Enum.member?(@supported_methods, method) do
+      {:error, "Unsupported method"}
+    else
+      {:ok, String.to_atom(method), conn}
     end
   end
 
-  def get_query_param!(conn, param_name) do
-    case get_query_param(conn, param_name) do
-      {:ok, value} -> value
-      {:error, _} -> nil
+  def get_method(conn) do
+    {:ok, nil, conn}
+  end
+
+  def get_param(conn, param_name) do
+    case get_param!(conn, param_name) do
+      nil -> {:error, "Parameter #{param_name} not found!"}
+      value -> {:ok, value}
     end
+  end
+
+  def get_param!(conn, param_name) do
+    Enum.reduce_while(
+      [
+        &maybe_get_from_query_params/2,
+        &maybe_get_from_body_params/2
+      ],
+      nil,
+      fn strategy, acc ->
+        case strategy.(conn, param_name) do
+          nil ->
+            Logger.debug("Nothing found for #{param_name}")
+            {:cont, acc}
+
+          value ->
+            Logger.debug("Value found for #{param_name}")
+            {:halt, value}
+        end
+      end
+    )
+  end
+
+  def maybe_get_from_query_params(%{:query_params => params}, param_name) do
+    Map.get(params, param_name)
+  end
+
+  def maybe_get_from_body_params(%{:body_params => params}, param_name) do
+    Map.get(params, param_name)
   end
 
   def get_opt(conn, opt) do
