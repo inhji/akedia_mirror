@@ -84,7 +84,14 @@ defmodule Akedia.Indie.Microsub.Handler do
   def prepare_channel(channel) do
     %{
       uid: channel.uid,
-      name: channel.name
+      name: channel.name,
+      unread: get_unread_count(channel.feeds)
     }
+  end
+
+  def get_unread_count(feeds) do
+    Enum.reduce(feeds, 0, fn feed, acc ->
+      acc + Enum.count(feed.entries, fn e -> !!e[:_is_read] end)
+    end)
   end
 end
