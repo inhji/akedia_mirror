@@ -108,12 +108,12 @@ defmodule Akedia.Plugs.PlugMicrosub do
     end
   end
 
-  def maybe_wrap_entry_ids(entry_ids) do
-    case is_list(entry_ids) do
-      true -> entry_ids
-      false -> [entry_ids]
-    end
-  end
+  def maybe_wrap_entry_ids(entry_ids) when is_list(entry_ids), do: entry_ids
+
+  def maybe_wrap_entry_ids(entry_ids) when is_map(entry_ids),
+    do: Map.values(entry_ids)
+
+  def maybe_wrap_entry_ids(entry_ids), do: [entry_ids]
 
   def handle_action(conn, :post, :timeline, :mark_unread) do
     send_response(conn, [])
