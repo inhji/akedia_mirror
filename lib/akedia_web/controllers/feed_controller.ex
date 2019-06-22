@@ -46,7 +46,7 @@ defmodule AkediaWeb.FeedController do
     Que.add(Akedia.Workers.Feeder, %{feed_id: feed.id})
 
     case Microsub.update_feed(feed, feed_params) do
-      {:ok, feed} ->
+      {:ok, _feed} ->
         conn
         |> put_flash(:info, "Feed updated successfully.")
         |> redirect(to: Routes.channel_path(conn, :show, channel_id))

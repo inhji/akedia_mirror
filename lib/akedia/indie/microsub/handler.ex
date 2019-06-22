@@ -40,7 +40,7 @@ defmodule Akedia.Indie.Microsub.Handler do
       nil ->
         {:error, "Channel #{channel} does not exist"}
 
-      channel ->
+      _channel ->
         entry_ids
         |> Enum.map(fn id ->
           Microsub.mark_feed_entry(id, true)
@@ -91,7 +91,7 @@ defmodule Akedia.Indie.Microsub.Handler do
 
   def get_unread_count(feeds) do
     Enum.reduce(feeds, 0, fn feed, acc ->
-      acc + Enum.count(feed.entries, fn e -> !!e[:_is_read] end)
+      acc + Enum.count(feed.entries, fn e -> !!e.is_read end)
     end)
   end
 end
