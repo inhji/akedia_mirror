@@ -73,6 +73,7 @@ defmodule Akedia.Indie.Microsub.Handler do
         type: "card",
         name: entry.author
       },
+      title: entry.title,
       url: entry.url,
       published: DateTime.to_iso8601(entry.published_at),
       content: %{
