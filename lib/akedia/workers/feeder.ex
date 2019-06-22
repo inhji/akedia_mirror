@@ -59,13 +59,18 @@ defmodule Akedia.Workers.Feeder do
         },
         feed_id
       ) do
+      date = case published_at do
+        nil -> DateTime.utc_now()
+        d ->Akedia.DateTime.to_datetime_utc(d)
+      end
+
     Microsub.create_feed_entry(
       %{
         author: author,
         summary: summary,
         title: title,
         url: url,
-        published_at: Akedia.DateTime.to_datetime_utc(published_at)
+        published_at: date
       },
       feed_id
     )
