@@ -5,16 +5,9 @@ defmodule Akedia.Indie.Microsub.Handler do
 
   @impl true
   def handle_list_channels() do
-    notification_channel =
-      Akedia.Indie.Microsub.get_notification_channel()
-      |> prepare_channel()
-
-    other_channels =
+    channels =
       Microsub.list_channels()
-      |> Enum.filter(fn c -> c.uid != "notifications" end)
       |> Enum.map(&prepare_channel/1)
-
-    channels = [notification_channel | other_channels]
 
     {:ok, channels}
   end

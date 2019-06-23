@@ -9,9 +9,19 @@ defmodule Akedia.Indie.Microsub do
   alias Akedia.Indie.Microsub.{Channel, Feed, FeedEntry}
 
   def list_channels do
-    Channel
-    |> Repo.all()
-    |> Repo.preload(feeds: [:entries])
+    notification_channel = get_notification_channel()
+    user_channels = list_user_channels()
+
+    [notification_channel | user_channels]
+  end
+
+  def list_user_channels do
+    query =
+      from c in Channel,
+        where: c.uid != "notifications",
+        preload: [feeds: [:entries]]
+
+    Repo.all(query)
   end
 
   def get_channel!(id) do
