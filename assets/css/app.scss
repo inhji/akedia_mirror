@@ -69,6 +69,14 @@ section, .footer {
   margin-bottom: 3rem;
 }
 
+.card {
+  margin-bottom: 4rem;
+
+  &> .card-content > article {
+    margin-bottom: 0;
+  }
+}
+
 article {
   margin-bottom: 4rem;
 

@@ -8,27 +8,37 @@ defmodule Akedia.Content do
   # Entity
 
   def list_entities(params) do
-    query =
-      from entity in Entity,
-        left_join: like in Like,
-        on: entity.id == like.entity_id,
-        left_join: post in Post,
-        on: entity.id == post.entity_id,
-        left_join: bookmark in Bookmark,
-        on: entity.id == bookmark.entity_id,
-        order_by: [desc: :inserted_at],
-        preload: [
-          like: ^@preloads,
-          post: ^@preloads,
-          bookmark: [:favicon, ^@preloads]
-        ],
-        where: not is_nil(like.id),
-        or_where: not is_nil(post.id),
-        or_where: not is_nil(bookmark.id),
-        where: [is_published: true],
-        select: entity
-
+    query = entity_query()
     Repo.paginate(query, params)
+  end
+
+  def list_pinned_entities() do
+    query =
+      from entity in entity_query(),
+        where: [is_pinned: true]
+
+    Repo.all(query)
+  end
+
+  def entity_query() do
+    from entity in Entity,
+      left_join: like in Like,
+      on: entity.id == like.entity_id,
+      left_join: post in Post,
+      on: entity.id == post.entity_id,
+      left_join: bookmark in Bookmark,
+      on: entity.id == bookmark.entity_id,
+      order_by: [desc: :inserted_at],
+      preload: [
+        like: ^@preloads,
+        post: ^@preloads,
+        bookmark: [:favicon, ^@preloads]
+      ],
+      where: not is_nil(like.id),
+      or_where: not is_nil(post.id),
+      or_where: not is_nil(bookmark.id),
+      where: [is_published: true],
+      select: entity
   end
 
   def get_entity!(id) do

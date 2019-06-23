@@ -2,6 +2,11 @@
   <%= render SharedView, "hcard.html", conn: @conn, current_user: @current_user %>
 <% end %>
 
+<%= render "feed_pinned.html",
+    conn: @conn,
+    entities: @pinned,
+    current_user: @current_user %>
+
 <%= render "feed.html",
     conn: @conn,
     entities: @entities,
