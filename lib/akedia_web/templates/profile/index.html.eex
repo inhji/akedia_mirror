@@ -28,4 +28,6 @@
 </article>
 <% end %>
 
+<hr />
+
 <span><%= link "New Profile", to: Routes.profile_path(@conn, :new), class: "button" %></span>
