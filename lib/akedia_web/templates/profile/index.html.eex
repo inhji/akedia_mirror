@@ -22,7 +22,7 @@
     </small>
   </div>
   <div class="media-right">
-    <%= link "Edit", to: Routes.profile_path(@conn, :edit, profile), class: "button is-primary" %>
+    <%= link "Edit", to: Routes.profile_path(@conn, :edit, profile), class: "button is-info" %>
     <%= link "Delete", to: Routes.profile_path(@conn, :delete, profile), method: :delete, data: [confirm: "Are you sure?"], class: "button is-danger" %>
   </div>
 </article>
@@ -30,4 +30,4 @@
 
 <hr />
 
-<span><%= link "New Profile", to: Routes.profile_path(@conn, :new), class: "button" %></span>
+<span><%= link "New Profile", to: Routes.profile_path(@conn, :new), class: "button is-success" %></span>

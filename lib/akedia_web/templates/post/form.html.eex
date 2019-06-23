@@ -57,6 +57,6 @@
   <% end %>
 
   <div class="field">
-    <%= submit "Save", class: "button" %>
+    <%= submit "Save", class: "button is-success" %>
   </div>
 <% end %>

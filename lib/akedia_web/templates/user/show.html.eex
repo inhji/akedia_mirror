@@ -2,4 +2,6 @@
 
 <%= render SharedView, "hcard.html", conn: @conn, current_user: @current_user %>
 
-<%= link "Edit", to: Routes.user_path(@conn, :edit), class: "button" %>
+<hr />
+
+<%= link "Edit", to: Routes.user_path(@conn, :edit), class: "button is-info" %>

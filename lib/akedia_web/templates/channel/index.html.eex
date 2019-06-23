@@ -13,11 +13,10 @@
     </p>
   </div>
   <div class="media-right">
-    <%= link "Edit", to: Routes.channel_path(@conn, :edit, channel), class: "button is-info" %>
-
     <%= if channel.uid != "notifications" do %>
       <%= link "Delete", to: Routes.channel_path(@conn, :delete, channel), method: :delete, data: [confirm: "Are you sure?"], class: "button is-danger" %>
     <% end %>
+    <%= link "Edit", to: Routes.channel_path(@conn, :edit, channel), class: "button is-info" %>
   </div>
 </article>
 <% end %>
