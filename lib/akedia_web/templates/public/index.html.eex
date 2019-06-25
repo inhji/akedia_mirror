@@ -1,7 +1,3 @@
-<%= if @has_user do %>
-  <%= render SharedView, "hcard.html", conn: @conn, current_user: @current_user %>
-<% end %>
-
 <%= render "feed_pinned.html",
     conn: @conn,
     entities: @pinned,

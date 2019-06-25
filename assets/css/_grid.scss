@@ -1,12 +1,42 @@
-.grid {
+$full-width: 2 / span 2;
+
+.grid-wrapper {
   display: grid;
-  grid-template-columns: [xl-start] 1fr [md-start] minmax(0, $layout-width) [md-end] 1fr [xl-end];
-  grid-gap: 1.5rem;
+  grid-template-columns: 1fr 1fr 2fr 1fr;
 }
 
-@media (max-width: $tablet) {
-  .grid { grid-gap: 0; }
+.header-wrapper {
+  grid-column: $full-width;
 }
 
-.grid * { grid-column: md; }
-.grid-xl { grid-column: xl; }
+.sidebar-wrapper {
+  grid-column: 2 / span 1;
+}
+
+.main-wrapper {
+  grid-column: 3 / span 1;
+}
+
+.footer-wrapper {
+  grid-column: $full-width;
+}
+
+@media screen and (max-width: $widescreen) {
+  .sidebar-wrapper {
+    grid-column: $full-width;
+  }
+
+  .main-wrapper {
+    grid-column: $full-width;
+  }
+}
+
+@media screen and (max-width: $tablet) {
+  .header-wrapper,
+  .sidebar-wrapper,
+  .main-wrapper,
+  .footer-wrapper{
+    grid-column: 1 / span 4;
+  }
+
+}
