@@ -35,6 +35,8 @@ defmodule Akedia.Workers.Feeder do
   def update_feed(%FeederEx.Feed{title: title, subtitle: subtitle} = parsed_feed, feed_id) do
     feed = Microsub.get_feed!(feed_id)
 
+    Logger.info("Updating feed #{title}")
+
     Microsub.update_feed(feed, %{
       title: title,
       description: subtitle
@@ -43,9 +45,9 @@ defmodule Akedia.Workers.Feeder do
     parsed_feed
   end
 
-  def update_feed_entries(%FeederEx.Feed{entries: entries} = parsed_feed, feed_id) do
-    Enum.each(entries, &insert_feed_entry(&1, feed_id))
-
+  def update_feed_entries(%FeederEx.Feed{entries: entries, title: title} = parsed_feed, feed_id) do
+    Logger.info("Inserting #{Enum.count(entries)} new items for #{title}")
+    Enum.each(entries, &insert_feed_entry(&1, feed_id, title))
     parsed_feed
   end
 
@@ -57,18 +59,31 @@ defmodule Akedia.Workers.Feeder do
           link: url,
           updated: published_at
         },
-        feed_id
+        feed_id,
+        feed_title
       ) do
-    Microsub.create_feed_entry(
-      %{
-        author: author,
-        summary: summary,
-        title: title,
-        url: url,
-        published_at: Akedia.DateTime.to_datetime_utc(published_at)
-      },
-      feed_id
-    )
+    date =
+      case published_at do
+        nil -> DateTime.utc_now()
+        d -> Akedia.DateTime.to_datetime_utc(d)
+      end
+
+    case Microsub.create_feed_entry(
+           %{
+             author: author || feed_title,
+             summary: summary,
+             title: title,
+             url: url,
+             published_at: date
+           },
+           feed_id
+         ) do
+      {:ok, entry} ->
+        Logger.debug("Entry inserted with title: #{title}")
+
+      {:error, error} ->
+        Logger.error("Could not insert entry: #{inspect(error)}")
+    end
   end
 
   def fetch_feed(%Microsub.Feed{url: url} = _feed) do

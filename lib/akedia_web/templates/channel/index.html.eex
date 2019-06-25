@@ -1,5 +1,7 @@
 <%= render SharedView, "user_nav.html", assigns %>
 
+<h1 class="title">Channels</h1>
+
 <%= for channel <- @channels do %>
 <article class="media is-marginless">
   <div class="media-content">
@@ -11,11 +13,15 @@
     </p>
   </div>
   <div class="media-right">
+    <%= if channel.uid != "notifications" do %>
+      <%= link "Delete", to: Routes.channel_path(@conn, :delete, channel), method: :delete, data: [confirm: "Are you sure?"], class: "button is-danger" %>
+    <% end %>
     <%= link "Edit", to: Routes.channel_path(@conn, :edit, channel), class: "button is-info" %>
-    <%= link "Delete", to: Routes.channel_path(@conn, :delete, channel), method: :delete, data: [confirm: "Are you sure?"], class: "button is-danger" %>
   </div>
 </article>
 <% end %>
+
+<hr />
 
 <span>
   <%= link "New Channel", to: Routes.channel_path(@conn, :new), class: "button is-success" %>

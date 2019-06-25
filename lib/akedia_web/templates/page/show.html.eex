@@ -1,38 +1,15 @@
 <%= render SharedView, "post_nav.html", conn: @conn, post: @page, path_helper: &Routes.page_path/3 %>
 
 <div class="content-wrapper">
-  <h1><%= @page.title %></h1>
-
-  <% gallery_class =
-        case Enum.count(@page.entity.images) do
-          0 -> "empty"
-          1 -> "one"
-          2 -> "two"
-          3 -> "three"
-          _ -> "multi"
-        end
-  %>
-
-  <div class="gallery <%= gallery_class %>">
-    <%= for image <- @page.entity.images do %>
-    <div class="image"><%= img(image, :thumb) %></div>
-    <% end %>
-  </div>
+  <h1 class="title"><%= @page.title %></h1>
 
   <div class="page content">
     <%= to_html(@page) %>
   </div>
 
-  <div class="topics">
-    <%= for topic <- @page.entity.topics do %>
-      <%= link to: Routes.topic_path(@conn, :tagged, topic) do %>
-        <div class="badge badge-secondary"><%= topic.text %></div>
-      <% end %>
-    <% end %>
-  </div>
+  <%= render SharedView, "post_meta.html",
+      conn: @conn,
+      schema: @page,
+      url_helper: &Routes.page_url/3,
+      current_user: @current_user %>
 </div>
-
-<%= if @logged_in do %>
-  <%= link "Edit", to: Routes.page_path(@conn, :edit, @page), class: "btn btn-outline-primary" %>
-  <%= link "Delete", to: Routes.page_path(@conn, :delete, @page), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger" %>
-<% end %>

@@ -46,15 +46,23 @@
 
   <%= inputs_for f, :entity, fn(ef) -> %>
   <div class="field">
-    <%= label f, :public, class: "checkbox" do %>
+    <%= label f, :is_published, class: "checkbox" do %>
       <%= checkbox ef, :is_published, class: "checkbox" %>
       Is Published
     <% end %>
     <%= error_tag ef, :is_published %>
   </div>
+
+  <div class="field">
+    <%= label f, :is_pinned, class: "checkbox" do %>
+      <%= checkbox ef, :is_pinned, class: "checkbox" %>
+      Is Pinned
+    <% end %>
+    <%= error_tag ef, :is_pinned %>
+  </div>
   <% end %>
 
   <div class="field">
-    <%= submit "Save", class: "button is-primary" %>
+    <%= submit "Save", class: "button is-success" %>
   </div>
 <% end %>

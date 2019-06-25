@@ -1,17 +1,14 @@
 <article class="bookmark h-entry">
   <div class="media">
-    <figure class="media-left" style="padding-top: .2rem;">
-      <p class="image is-32x32 is-rounded">
-        <%= if @bookmark.favicon do %>
-          <img src="<%= favicon_url(@bookmark.favicon) %>">
-        <% else %>
-          <img src="<%= Routes.static_path(@conn, "/images/bookmark.png") %>">
-        <% end %>
-      </p>
-    </figure>
-
     <div class="media-content">
       <h3 class="title has-text-weight-normal">
+        <span class="image is-32x32 is-rounded">
+          <%= if @bookmark.favicon do %>
+            <img src="<%= favicon_url(@bookmark.favicon) %>">
+          <% else %>
+            <img src="<%= Routes.static_path(@conn, "/images/bookmark.png") %>">
+          <% end %>
+        </span>
         <a href="<%= @bookmark.url %>"
           class="u-bookmark-of h-cite p-name">
           <%= @bookmark.title %>

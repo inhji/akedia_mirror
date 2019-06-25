@@ -6,6 +6,15 @@
   <% end %>
 
   <div class="field">
+    <%= label f, :title, class: "label" %>
+    <%= text_input f, :title,
+        type: "text",
+        class: "input",
+        placeholder: "Title" %>
+    <%= error_tag f, :title %>
+  </div>
+
+  <div class="field">
     <%= label f, :url, class: "label" %>
     <%= text_input f, :url,
         type: "url",
@@ -25,6 +34,6 @@
   <% end %>
 
   <div class="field">
-    <%= submit "Save", class: "button is-primary" %>
+    <%= submit "Save", class: "button is-success" %>
   </div>
 <% end %>

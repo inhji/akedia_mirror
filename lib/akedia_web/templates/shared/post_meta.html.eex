@@ -1,18 +1,9 @@
 <aside class="meta">
-  <%= render SharedView, "post_icon.html", schema: @schema %>
-  <time class="dt-published" datetime="<%= date_iso(@schema.inserted_at) %>">
-    <%= link date_fuzzy(@schema.inserted_at),
-        to: @url_helper.(@conn, :show, @schema),
-        class: "has-text-grey u-url" %>
-  </time>
-  <%= if Map.has_key?(@schema, :url) do %>
-  <span class="dot has-text-grey" />
-  <a href="<%= @schema.url %>" class="has-text-grey" target="_blank">
-    <%= URI.parse(@schema.url).host %>
-  </a>
-  <% end %>
-  <%= render SharedView, "post_reply.html", conn: @conn, schema: @schema %>
-  <%= render SharedView, "post_topics.html", conn: @conn, topics: @schema.entity.topics %>
-  <%= render SharedView, "post_syndications.html", conn: @conn, schema: @schema %>
-  <%= render SharedView, "post_author.html", conn: @conn, current_user: @current_user %>
+  <%= render SharedView, "post/post_icon.html", schema: @schema %>
+  <%= render SharedView, "post/post_date.html", conn: @conn, schema: @schema, url_helper: @url_helper %>
+  <%= render SharedView, "post/post_url.html", conn: @conn, schema: @schema %>
+  <%= render SharedView, "post/post_reply.html", conn: @conn, schema: @schema %>
+  <%= render SharedView, "post/post_topics.html", conn: @conn, topics: @schema.entity.topics %>
+  <%= render SharedView, "post/post_syndications.html", conn: @conn, schema: @schema %>
+  <%= render SharedView, "post/post_author.html", conn: @conn, current_user: @current_user %>
 </aside>

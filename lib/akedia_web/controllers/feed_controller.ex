@@ -23,7 +23,7 @@ defmodule AkediaWeb.FeedController do
 
         conn
         |> put_flash(:info, "Feed created successfully.")
-        |> redirect(to: Routes.channel_feed_path(conn, :show, channel_id, feed))
+        |> redirect(to: Routes.channel_path(conn, :show, channel_id))
 
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "new.html", changeset: changeset, channel_id: channel_id)
@@ -46,10 +46,10 @@ defmodule AkediaWeb.FeedController do
     Que.add(Akedia.Workers.Feeder, %{feed_id: feed.id})
 
     case Microsub.update_feed(feed, feed_params) do
-      {:ok, feed} ->
+      {:ok, _feed} ->
         conn
         |> put_flash(:info, "Feed updated successfully.")
-        |> redirect(to: Routes.channel_feed_path(conn, :show, channel_id, feed))
+        |> redirect(to: Routes.channel_path(conn, :show, channel_id))
 
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "edit.html", feed: feed, changeset: changeset, channel_id: channel_id)
@@ -62,6 +62,6 @@ defmodule AkediaWeb.FeedController do
 
     conn
     |> put_flash(:info, "Feed deleted successfully.")
-    |> redirect(to: Routes.channel_feed_path(conn, :index, channel_id))
+    |> redirect(to: Routes.channel_path(conn, :show, channel_id))
   end
 end

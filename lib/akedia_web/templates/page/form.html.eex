@@ -5,17 +5,20 @@
     </div>
   <% end %>
 
-  <div class="form-group">
-    <%= text_input f, :title, class: "form-control form-control-lg", placeholder: "Title" %>
+  <div class="field">
+    <%= label f, :title, class: "label " %>
+    <%= text_input f, :title,
+        class: "input",
+        placeholder: "Title" %>
     <%= error_tag f, :title %>
   </div>
 
-  <div class="form-group">
-    <div class="zennable">
+  <div class="field">
+    <div class="zen">
       <input type="checkbox" id="zen-toggle-comment">
       <div class="zen-backdrop">
         <%= textarea f, :content,
-            class: "form-control",
+            class: "textarea",
             rows: 10 %>
         <label for="zen-toggle-comment">Zen Mode</label>
       </div>
@@ -23,40 +26,31 @@
     <%= error_tag f, :content %>
   </div>
 
-  <div class="row">
-    <div class="form-group col-md-6">
-      <div class="input-group">
-        <div class="input-group-prepend">
-          <span class="input-group-text">Tags</span>
-        </div>
-        <%= text_input f, :topics, value: @tags, class: "form-control" %>
-        <%= error_tag f, :topics %>
-      </div>
-    </div>
-
-    <div class="form-group col-md-6">
-      <%= media_input f, :images,
-          value: @image_ids,
-          class: "form-control",
-          id: "image-ids" %>
-      <%= error_tag f, :images %>
-    </div>
+  <div class="field">
+    <%= label f, :topics, class: "label " %>
+    <%= text_input f, :topics, value: @tags, class: "input" %>
+    <%= error_tag f, :topics %>
   </div>
 
   <%= inputs_for f, :entity, fn(ef) -> %>
-  <div class="form-group">
-    <div class="form-check form-check-inline">
-      <%= checkbox ef, :is_published, class: "form-check-input" %>
-      <%= label ef, :is_published, class: "form-check-label" %>
-    </div>
-    <div class="form-check form-check-inline">
-      <%= checkbox ef, :is_pinned, class: "form-check-input" %>
-      <%= label ef, :is_pinned, class: "form-check-label" %>
-    </div>
+  <div class="field">
+    <%= label ef, :is_published, class: "checkbox" do %>
+      <%= checkbox ef, :is_published, class: "checkbox" %>
+      Is Published
+    <% end %>
+    <%= error_tag ef, :is_published %>
+  </div>
+
+  <div class="field">
+    <%= label ef, :is_pinned, class: "checkbox" do %>
+      <%= checkbox ef, :is_pinned, class: "checkbox" %>
+      Is Pinned
+    <% end %>
+    <%= error_tag ef, :is_pinned %>
   </div>
   <% end %>
 
   <div class="form-group">
-    <%= submit "Save", class: "btn btn-primary" %>
+    <%= submit "Save", class: "button is-success" %>
   </div>
 <% end %>

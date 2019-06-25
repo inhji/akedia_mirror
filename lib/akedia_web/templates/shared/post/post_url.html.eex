@@ -1,0 +1,6 @@
+<%= if Map.has_key?(@schema, :url) do %>
+<span class="dot has-text-grey" />
+<a href="<%= @schema.url %>" class="has-text-grey" target="_blank">
+  <%= URI.parse(@schema.url).host %>
+</a>
+<% end %>

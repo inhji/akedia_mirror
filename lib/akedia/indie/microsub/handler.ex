@@ -5,16 +5,9 @@ defmodule Akedia.Indie.Microsub.Handler do
 
   @impl true
   def handle_list_channels() do
-    notification_channel =
-      Akedia.Indie.Microsub.get_notification_channel()
-      |> prepare_channel()
-
-    other_channels =
+    channels =
       Microsub.list_channels()
-      |> Enum.filter(fn c -> c.uid != "notifications" end)
       |> Enum.map(&prepare_channel/1)
-
-    channels = [notification_channel | other_channels]
 
     {:ok, channels}
   end
@@ -40,15 +33,11 @@ defmodule Akedia.Indie.Microsub.Handler do
       nil ->
         {:error, "Channel #{channel} does not exist"}
 
-      channel ->
-        IO.inspect(entry_ids)
-
+      _channel ->
         entry_ids
         |> Enum.map(fn id ->
-          IO.inspect(id)
           Microsub.mark_feed_entry(id, true)
         end)
-        |> IO.inspect()
 
         :ok
     end
@@ -73,6 +62,7 @@ defmodule Akedia.Indie.Microsub.Handler do
         type: "card",
         name: entry.author
       },
+      title: entry.title,
       url: entry.url,
       published: DateTime.to_iso8601(entry.published_at),
       content: %{
@@ -87,7 +77,14 @@ defmodule Akedia.Indie.Microsub.Handler do
   def prepare_channel(channel) do
     %{
       uid: channel.uid,
-      name: channel.name
+      name: channel.name,
+      unread: get_unread_count(channel.feeds)
     }
+  end
+
+  def get_unread_count(feeds) do
+    Enum.reduce(feeds, 0, fn feed, acc ->
+      acc + Enum.count(feed.entries, fn e -> !e.is_read end)
+    end)
   end
 end

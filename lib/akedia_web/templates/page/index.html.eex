@@ -4,7 +4,7 @@
   <%= if !Enum.empty?(@pinned) do %>
     <div class="grid">
       <%= for page <- @pinned do %>
-      <%= render "page.html", conn: @conn, page: page %>
+      <%= render "page.html", conn: @conn, page: page, current_user: @current_user %>
       <% end %>
     </div>
 
@@ -13,7 +13,7 @@
 
   <div class="grid">
     <%= for page <- @pages do %>
-      <%= render "page.html", conn: @conn, page: page %>
+      <%= render "page.html", conn: @conn, page: page, current_user: @current_user %>
     <% end %>
   </div>
 </div>
