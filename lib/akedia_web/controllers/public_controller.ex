@@ -1,10 +1,11 @@
 defmodule AkediaWeb.PublicController do
   use AkediaWeb, :controller
 
+  plug :plug_assigns
+
   def index(conn, params) do
     page = Akedia.Content.list_entities(params)
     pinned = Akedia.Content.list_pinned_entities()
-    topics = Akedia.Content.list_topics()
 
     render(conn, "index.html",
       conn: conn,
@@ -14,22 +15,28 @@ defmodule AkediaWeb.PublicController do
       page_size: page.page_size,
       total_pages: page.total_pages,
       total_entries: page.total_entries,
-      pinned: pinned,
-      topics: topics
+      pinned: pinned
     )
   end
 
   def tagged(conn, %{"topic" => topic}) do
     topic = Akedia.Content.get_topic!(topic)
-    topics = Akedia.Content.list_topics()
     entities = Enum.filter(topic.entities, &post_type_filter/1)
 
     render(conn, "tagged.html",
       conn: conn,
       topic: topic,
-      topics: topics,
       entities: entities
     )
+  end
+
+  def plug_assigns(conn, _opts) do
+    topics = Akedia.Content.list_topics()
+    last_listen = Akedia.Listens.listens(1)
+
+    conn
+    |> assign(:topics, topics)
+    |> assign(:last_listen, last_listen)
   end
 
   def post_type_filter(entity) do

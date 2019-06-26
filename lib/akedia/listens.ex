@@ -10,6 +10,14 @@ defmodule Akedia.Listens do
     |> Repo.paginate(params)
   end
 
+  def listens(limit \\ 10) do
+    Listen
+    |> order_by(desc: :listened_at)
+    |> limit(^limit)
+    |> preload([:artist, :album])
+    |> Repo.one!
+  end
+
   def group_by_artist(time_diff \\ nil) do
     group_by_artist_query(time_diff)
     |> Repo.all()

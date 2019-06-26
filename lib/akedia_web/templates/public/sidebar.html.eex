@@ -3,6 +3,26 @@
 </div>
 
 <div class="widget">
+  <h3 class="title">last_listen()</h3>
+
+  <div class="media is-dense">
+    <a class="media-left" href="<%= Routes.album_url(@conn, :show, @last_listen.album) %>">
+      <figure class="image is-64x64">
+        <img src="<%= cover_url(@last_listen.album, :thumb) %>">
+      </figure>
+    </a>
+    <div class="media-content">
+      <p>
+        <strong><%= @last_listen.track %></strong> <small><%= date_fuzzy(@last_listen.listened_at) %></small>
+      </p>
+      <p>
+        <span class="has-text-grey">By </span><%= link @last_listen.artist.name, to: Routes.artist_url(@conn, :show, @last_listen.artist) %>
+      </p>
+    </div>
+  </div>
+</div>
+
+<div class="widget">
   <h3 class="title">tags()</h3>
   <%= render SharedView, "cloud.html", assigns %>
 </div>
