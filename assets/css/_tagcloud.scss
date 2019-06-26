@@ -1,6 +1,6 @@
 // Tagcloud classes
 @for $i from 1 through 30 {
   .topic.count-#{$i} {
-    font-size: 100% + percentage(($i*20) / 100);
+    font-size: 100% + percentage(($i*5) / 100);
   }
 }
