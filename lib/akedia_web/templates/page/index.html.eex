@@ -1,4 +1,4 @@
-<%= render SharedView, "posts_nav.html", conn: @conn, path_helper: &Routes.page_path/2 %>
+<%= render SharedView, "nav/posts_nav.html", conn: @conn, path_helper: &Routes.page_path/2 %>
 
 <div class="content-wrapper">
   <%= if !Enum.empty?(@pinned) do %>

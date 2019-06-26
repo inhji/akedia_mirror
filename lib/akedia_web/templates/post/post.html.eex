@@ -9,7 +9,7 @@
       <div class="content e-content <%= unless @post.title do %>p-name<% end %>">
         <%= to_html(@post.content) %>
       </div>
-      <%= render SharedView, "post_meta.html",
+      <%= render SharedView, "post/post_meta.html",
           conn: @conn,
           schema: @post,
           url_helper: &Routes.post_url/3,

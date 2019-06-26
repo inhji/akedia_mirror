@@ -1,4 +1,4 @@
-<%= render SharedView, "topic_nav.html", conn: @conn, topic: @topic %>
+<%= render SharedView, "nav/topic_nav.html", conn: @conn, topic: @topic %>
 
 <h1 class="title">
   Tagged with “<%= @topic.text %>”

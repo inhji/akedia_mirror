@@ -24,5 +24,5 @@
 
 <div class="widget">
   <h3 class="title">tags()</h3>
-  <%= render SharedView, "cloud.html", assigns %>
+  <%= render SharedView, "tag_cloud.html", assigns %>
 </div>

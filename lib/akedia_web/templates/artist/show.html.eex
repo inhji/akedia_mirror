@@ -1,4 +1,4 @@
-<%= render SharedView, "listen_nav.html", assigns %>
+<%= render SharedView, "nav/listen_nav.html", assigns %>
 
 <h1 class="title">
   <%= @artist.name %>

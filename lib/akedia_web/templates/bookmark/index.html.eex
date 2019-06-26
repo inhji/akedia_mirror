@@ -1,4 +1,4 @@
-<%= render SharedView, "posts_nav.html", conn: @conn, path_helper: &Routes.bookmark_path/2 %>
+<%= render SharedView, "nav/posts_nav.html", conn: @conn, path_helper: &Routes.bookmark_path/2 %>
 
 <div class="h-feed">
   <%= for bookmark <- @bookmarks do %>
