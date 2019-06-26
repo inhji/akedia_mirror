@@ -1,4 +1,4 @@
-<%= render SharedView, "post_nav.html", conn: @conn, post: @page, path_helper: &Routes.page_path/3 %>
+<%= render SharedView, "nav/post_nav.html", conn: @conn, post: @page, path_helper: &Routes.page_path/3 %>
 
 <div class="content-wrapper">
   <h1 class="title"><%= @page.title %></h1>
@@ -7,7 +7,7 @@
     <%= to_html(@page) %>
   </div>
 
-  <%= render SharedView, "post_meta.html",
+  <%= render SharedView, "post/post_meta.html",
       conn: @conn,
       schema: @page,
       url_helper: &Routes.page_url/3,

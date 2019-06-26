@@ -1,5 +1,5 @@
-<%= render SharedView, "listen_nav.html", assigns %>
-<%= render SharedView, "listens_empty.html", listens: @listens %>
+<%= render SharedView, "nav/listen_nav.html", assigns %>
+<%= render SharedView, "listens/listens_empty.html", listens: @listens %>
 
 <%= for listen <- @listens do %>
 <div class="media is-dense">

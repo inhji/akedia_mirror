@@ -17,7 +17,7 @@
       <div class="content e-content">
         <%= to_html(@bookmark.content) %>
       </div>
-      <%= render SharedView, "post_meta.html",
+      <%= render SharedView, "post/post_meta.html",
           conn: @conn,
           schema: @bookmark,
           url_helper: &Routes.bookmark_url/3,

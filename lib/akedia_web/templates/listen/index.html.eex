@@ -1,22 +1,6 @@
-<%= render SharedView, "listen_nav.html", assigns %>
+<%= render SharedView, "nav/listen_nav.html", assigns %>
 
-<%= for listen <- @listens do %>
-<div class="media is-dense">
-  <a class="media-left" href="<%= Routes.album_url(@conn, :show, listen.album) %>">
-    <figure class="image is-64x64">
-      <img src="<%= cover_url(listen.album, :thumb) %>">
-    </figure>
-  </a>
-  <div class="media-content">
-    <p>
-      <strong><%= listen.track %></strong> <small><%= date_fuzzy(listen.listened_at) %></small>
-    </p>
-    <p>
-      <span class="has-text-grey">By </span><%= link listen.artist.name, to: Routes.artist_url(@conn, :show, listen.artist) %>
-    </p>
-  </div>
-</div>
-<% end %>
+<%= render_many @listens, SharedView, "listens/listen.html", as: :listen, conn: @conn %>
 
 <%= pagination_links @page,
   previous: ~E(<i class="fa fa-caret-left" aria-hidden="true"></i>),

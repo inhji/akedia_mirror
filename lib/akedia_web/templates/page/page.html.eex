@@ -2,7 +2,7 @@
   <h3 class="title has-text-weight-normal">
     <%= link @page.title, to: Routes.page_path(@conn, :show, @page) %>
   </h3>
-  <%= render SharedView, "post_meta.html",
+  <%= render SharedView, "post/post_meta.html",
       conn: @conn,
       schema: @page,
       url_helper: &Routes.page_url/3,

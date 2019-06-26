@@ -1,4 +1,4 @@
-<%= render SharedView, "user_nav.html", assigns %>
+<%= render SharedView, "nav/user_nav.html", assigns %>
 
 <h1 class="title">
   <%= if Map.has_key?(@feed, :title) do %>

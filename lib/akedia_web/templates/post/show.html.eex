@@ -1,4 +1,4 @@
-<%= render SharedView, "post_nav.html", conn: @conn, post: @post, path_helper: &Routes.post_path/3 %>
+<%= render SharedView, "nav/post_nav.html", conn: @conn, post: @post, path_helper: &Routes.post_path/3 %>
 
 <div class="content-wrapper">
   <%= render "post.html", conn: @conn, post: @post, current_user: @current_user %>
