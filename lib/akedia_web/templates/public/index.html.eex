@@ -1,7 +1,9 @@
-<%= render "feed_pinned.html",
-    conn: @conn,
-    entities: @pinned,
-    current_user: @current_user %>
+<%= if @page_number == 1 do %>
+  <%= render "feed_pinned.html",
+              conn: @conn,
+              entities: @pinned,
+              current_user: @current_user %>
+<% end %>
 
 <%= render "feed.html",
     conn: @conn,
