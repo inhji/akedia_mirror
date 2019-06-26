@@ -38,10 +38,6 @@ $navbar-item-active-color-dark: $primary;
 ::-moz-selection { background: $primary; color: $white; }
 ::selection { background: $primary; color: $white; }
 
-.container.is-root, .media .media-content {
-  max-width: $layout-width;
-}
-
 nav.navbar {
   .navbar-brand {
     svg g {
@@ -50,23 +46,19 @@ nav.navbar {
   }
 }
 
-nav.user {
-  margin-top: -3rem;
-  margin-bottom: 0;
-}
-
 .social a {
   margin-right: 0.3rem;
 }
-
 
 section, .footer {
   padding-left: 0;
   padding-right: 0;
 }
 
-.h-card {
-  margin-bottom: 3rem;
+.author-card {
+  .media + .media {
+    border-top: 0;
+  }
 }
 
 .card {
@@ -112,6 +104,16 @@ article {
       p:before { content: '“';}
       p:after { content: '”'; }
     }
+  }
+}
+
+@media screen and (max-width: $tablet) {
+  .section {
+    padding: 1rem;
+  }
+
+  .title {
+    font-size: 1.5rem;
   }
 }
 
