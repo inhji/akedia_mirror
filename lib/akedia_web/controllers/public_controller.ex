@@ -21,9 +21,15 @@ defmodule AkediaWeb.PublicController do
 
   def tagged(conn, %{"topic" => topic}) do
     topic = Akedia.Content.get_topic!(topic)
+    topics = Akedia.Content.list_topics()
     entities = Enum.filter(topic.entities, &post_type_filter/1)
 
-    render(conn, "tagged.html", conn: conn, topic: topic, entities: entities)
+    render(conn, "tagged.html",
+      conn: conn,
+      topic: topic,
+      topics: topics,
+      entities: entities
+    )
   end
 
   def post_type_filter(entity) do
