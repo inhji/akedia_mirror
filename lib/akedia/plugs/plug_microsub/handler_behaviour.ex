@@ -21,6 +21,11 @@ defmodule Akedia.Plugs.PlugMicrosub.HandlerBehaviour do
               entry_ids :: list
             ) :: :ok | handler_error
 
+  @callback handle_mark_read_before(
+              channel :: String.t(),
+              before_id :: String.t()
+            ) :: :ok | handler_error
+
   # @callback handle_mark_unread(
   #             channel :: String.t(),
   #             entry_ids :: list

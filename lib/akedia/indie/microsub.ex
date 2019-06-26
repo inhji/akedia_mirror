@@ -3,6 +3,8 @@ defmodule Akedia.Indie.Microsub do
   The Indie.Microsub context.
   """
 
+  @default_entry_limit 10
+
   import Ecto.Query, warn: false
   alias Akedia.Repo
 
@@ -97,19 +99,19 @@ defmodule Akedia.Indie.Microsub do
     |> Repo.insert()
   end
 
-  def list_feed_entries_query(channel_id, limit \\ 10) do
+  def list_feed_entries_query(channel_id) do
     channel = get_channel!(channel_id)
     feed_ids = Enum.map(channel.feeds, fn f -> f.id end)
 
     FeedEntry
     |> where([e], e.feed_id in ^feed_ids)
     |> order_by(desc: :published_at)
-    |> limit(^limit)
   end
 
   def list_feed_entries(channel_id, nil, nil) do
     channel_id
     |> list_feed_entries_query()
+    |> limit(^@default_entry_limit)
     |> Repo.all()
   end
 
@@ -119,6 +121,7 @@ defmodule Akedia.Indie.Microsub do
     channel_id
     |> list_feed_entries_query()
     |> where([e], e.published_at > ^date)
+    |> limit(^@default_entry_limit)
     |> Repo.all()
   end
 
@@ -128,6 +131,14 @@ defmodule Akedia.Indie.Microsub do
     channel_id
     |> list_feed_entries_query()
     |> where([e], e.published_at < ^date)
+    |> limit(^@default_entry_limit)
+    |> Repo.all()
+  end
+
+  def list_feed_entries_before(channel_id, entry_id) do
+    channel_id
+    |> list_feed_entries_query()
+    |> where([e], e.id < ^entry_id)
     |> Repo.all()
   end
 

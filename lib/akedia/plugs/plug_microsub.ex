@@ -62,7 +62,6 @@ defmodule Akedia.Plugs.PlugMicrosub do
   end
 
   match _ do
-    IO.inspect(conn)
     Logger.debug("Unknown route!")
     send_resp(conn, 404, "Not found!")
   end
@@ -84,13 +83,29 @@ defmodule Akedia.Plugs.PlugMicrosub do
 
     cond do
       get_param!(conn, @param_entry) != nil ->
-        entry_ids = get_param!(conn, @param_entry)
+        entry_ids =
+          conn
+          |> get_param!(@param_entry)
+          |> maybe_wrap_entry_ids()
+
         handle_mark_read(conn, entry_ids)
 
       get_param!(conn, @param_last_read) != nil ->
         last_read_entry = get_param!(conn, @param_last_read)
-        # TODO
-        send_error(conn, "Not implemented")
+        handle_mark_read_before(conn, last_read_entry)
+    end
+  end
+
+  def handle_mark_read_before(conn, before_id) do
+    handler = get_opt(conn, :handler)
+
+    with {:ok, channel} <- get_param(conn, "channel"),
+         :ok <- handler.handle_mark_read_before(channel, before_id) do
+      send_response(conn)
+    else
+      {:error, reason} ->
+        Logger.debug("Timeline/MarkRead: #{reason}")
+        send_error(conn, reason)
     end
   end
 
@@ -98,7 +113,6 @@ defmodule Akedia.Plugs.PlugMicrosub do
     handler = get_opt(conn, :handler)
 
     with {:ok, channel} <- get_param(conn, "channel"),
-         entry_ids <- maybe_wrap_entry_ids(entry_ids),
          :ok <- handler.handle_mark_read(channel, entry_ids) do
       send_response(conn)
     else

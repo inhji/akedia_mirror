@@ -43,6 +43,21 @@ defmodule Akedia.Indie.Microsub.Handler do
     end
   end
 
+  @impl true
+  def handle_mark_read_before(channel, before_id) do
+    case Microsub.get_channel_by_uid!(channel) do
+      nil ->
+        {:error, "Channel #{channel} does not exist"}
+
+      channel ->
+        Microsub.list_feed_entries_before(channel.id, before_id)
+        |> Enum.map(fn entry -> entry.id end)
+        |> Enum.each(&Microsub.mark_feed_entry(&1, true))
+
+        :ok
+    end
+  end
+
   def prepare_paging([]), do: %{}
 
   def prepare_paging(entries) do
