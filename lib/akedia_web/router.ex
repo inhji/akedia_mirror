@@ -45,7 +45,6 @@ defmodule AkediaWeb.Router do
     resources "/stories", StoryController, only: [:show, :index]
     resources "/bookmarks", BookmarkController, only: [:show, :index]
     resources "/pages", PageController, only: [:show, :index]
-    resources "/topics", TopicController, only: [:show, :index]
     resources "/images", ImageController, only: [:show, :index]
     resources "/likes", LikeController, only: [:show, :index]
     resources "/posts", PostController, only: [:show, :index]
