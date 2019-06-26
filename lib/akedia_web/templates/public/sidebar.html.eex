@@ -1,5 +1,6 @@
 <div class="widget">
   <%= render SharedView, "hcard.html", conn: @conn, current_user: @current_user %>
+  <%= to_html(@current_user.bio) %>
 </div>
 
 <div class="widget">
