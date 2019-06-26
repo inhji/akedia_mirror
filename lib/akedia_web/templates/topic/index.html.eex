@@ -1,11 +1,3 @@
 <h1 class="title">Topics</h1>
 
-<div class="topics">
-  <%= for topic <- @topics do %>
-  <span class="topic count-<%= topic.entity_count %>">
-    <%= link to: Routes.public_path(@conn, :tagged, topic), class: "has-text-dark" do %>
-      <%= topic.text %> <span class="has-text-grey">(<%= Enum.count(topic.entities) %>)</span>
-    <% end %>
-  </span>
-  <% end %>
-</div>
+<%= render SharedView, "cloud.html", assigns %>

@@ -1,0 +1,8 @@
+<div class="widget">
+  <%= render SharedView, "hcard.html", conn: @conn, current_user: @current_user %>
+</div>
+
+<div class="widget">
+  <h3 class="title">tags()</h3>
+  <%= render SharedView, "cloud.html", assigns %>
+</div>

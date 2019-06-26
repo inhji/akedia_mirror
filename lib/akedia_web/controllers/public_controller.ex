@@ -4,6 +4,7 @@ defmodule AkediaWeb.PublicController do
   def index(conn, params) do
     page = Akedia.Content.list_entities(params)
     pinned = Akedia.Content.list_pinned_entities()
+    topics = Akedia.Content.list_topics()
 
     render(conn, "index.html",
       conn: conn,
@@ -13,7 +14,8 @@ defmodule AkediaWeb.PublicController do
       page_size: page.page_size,
       total_pages: page.total_pages,
       total_entries: page.total_entries,
-      pinned: pinned
+      pinned: pinned,
+      topics: topics
     )
   end
 

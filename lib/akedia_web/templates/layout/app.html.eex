@@ -1,53 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <meta name="msapplication-TileColor" content="#4145df">
-    <meta name="theme-color" content="#4145df">
+  <%= render "head.html", assigns %>
 
-    <link rel="apple-touch-icon" sizes="180x180" href="<%= Routes.static_path(@conn, "/images/icon/apple-touch-icon.png") %>" />
-    <link rel="icon" type="image/png" sizes="32x32" href="<%= Routes.static_path(@conn, "/images/icon/favicon-32x32.png") %>" />
-    <link rel="icon" type="image/png" sizes="16x16" href="<%= Routes.static_path(@conn, "/images/icon/favicon-16x16.png") %>" />
-    <link rel="mask-icon" href="<%= Routes.static_path(@conn, "/images/icon/safari-pinned-tab.svg") %>" color="#5bbad5" />
-    <link rel="manifest" href="<%= Routes.static_path(@conn, "/site.webmanifest") %>" />
-
-    <%= if @has_user do %>
-      <%= for profile <- @current_user.profiles do %>
-        <link rel="<%= profile.rel_value %>" href="<%= profile.url %>" />
-      <% end %>
-    <% end %>
-
-    <!-- Page Specific Meta Tags -->
-    <%= render_existing(@view_module, "meta." <> @view_template, assigns) ||
-        render(AkediaWeb.LayoutView, "meta.html", assigns) %>
-
-    <link rel="stylesheet" href="<%= Routes.static_path(@conn, "/css/app.css") %>"/>
-  </head>
-  <body class="grid-wrapper">
-    <section class="header-wrapper">
-        <%= render "navigation.html", conn: @conn, logged_in: @logged_in %>
-    </section>
-
-    <section class="section sidebar-wrapper">
+  <body>
+    <section class="section is-paddingless">
       <div class="container">
-        <%= if @has_user do %>
-          <%= render SharedView, "hcard.html", conn: @conn, current_user: @current_user %>
-        <% end %>
+        <%= render "navigation.html", conn: @conn, logged_in: @logged_in %>
       </div>
     </section>
 
-    <section class="section main-wrapper">
-      <div class="container is-root">
-        <p class="notification is-info" role="alert"><%= get_flash(@conn, :info) %></p>
-        <p class="notification is-danger" role="alert"><%= get_flash(@conn, :error) %></p>
-        <%= render @view_module, @view_template, assigns %>
+    <div class="section">
+      <div class="container">
+        <div class="columns">
+          <main class="column is-two-thirds" id="content">
+            <p class="notification is-info" role="alert"><%= get_flash(@conn, :info) %></p>
+            <p class="notification is-danger" role="alert"><%= get_flash(@conn, :error) %></p>
+            <%= render @view_module, @view_template, assigns %>
+          </main>
+          <aside class="column is-one-third" id="sidebar">
+            <%= render_existing(@view_module, "sidebar.html", assigns) %>
+          </aside>
+        </div>
       </div>
-    </section>
+    </div>
 
-    <section class="section footer-wrapper">
-      <div class="container is-root">
+    <section class="section">
+      <div class="container ">
         <%= render "footer.html", conn: @conn, logged_in: @logged_in %>
       </div>
     </section>

@@ -52,7 +52,7 @@ defmodule AkediaWeb do
       import AkediaWeb.Helpers.Meta, only: [title: 2]
       import AkediaWeb.Markdown, only: [to_html: 1]
       alias AkediaWeb.Router.Helpers, as: Routes
-      alias AkediaWeb.SharedView
+      alias AkediaWeb.{SharedView, LayoutView}
     end
   end
 

@@ -1,0 +1,9 @@
+<div class="topics">
+  <%= for topic <- @topics do %>
+  <span class="topic count-<%= topic.entity_count %>">
+    <%= link to: Routes.public_path(@conn, :tagged, topic) do %>
+      <%= topic.text %> <span class="has-text-grey">(<%= Enum.count(topic.entities) %>)</span>
+    <% end %>
+  </span>
+  <% end %>
+</div>
