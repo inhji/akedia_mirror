@@ -3,9 +3,9 @@
 
   <div class="columns is-multiline is-mobile">
     <%= for album <- @albums do %>
-    <div class="column is-one-quarter">
+    <div class="column is-one-third">
       <a href="<%= Routes.album_url(@conn, :show, album.album) %>">
-        <figure class="image is-64x64">
+        <figure class="image is-128x128">
           <img src="<%= cover_url(album.album, :thumb) %>">
         </figure>
       </a>
