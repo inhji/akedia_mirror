@@ -4,9 +4,7 @@
 
   <body>
     <section class="section is-paddingless">
-      <div class="container">
-        <%= render "navigation.html", conn: @conn, logged_in: @logged_in %>
-      </div>
+      <%= render "navigation.html", conn: @conn, logged_in: @logged_in %>
     </section>
 
     <div class="section">

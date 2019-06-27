@@ -40,7 +40,7 @@ $navbar-item-active-color-dark: $primary;
 nav.navbar {
   .navbar-brand {
     svg g {
-      fill: $black-ter;
+      fill: $white;
     }
   }
 }
@@ -132,14 +132,6 @@ article {
 
 // This needs to be last to override all other styles
 @include prefers-scheme(dark) {
-  nav.navbar {
-    .navbar-brand {
-      svg g {
-        fill: $white;
-      }
-    }
-  }
-
   .pagination-link.is-current {
     color: $white;
     background-color: $dark;
