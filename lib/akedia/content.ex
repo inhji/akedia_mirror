@@ -7,7 +7,13 @@ defmodule Akedia.Content do
 
   # Entity
 
-  def list_entities(params) do
+  def list_entities(limit \\ 10) do
+    entity_query()
+    |> limit(^limit)
+    |> Repo.all()
+  end
+
+  def list_entities_paginated(params \\ %{}) do
     query = entity_query()
     Repo.paginate(query, params)
   end

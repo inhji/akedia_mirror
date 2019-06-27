@@ -4,7 +4,7 @@ defmodule AkediaWeb.PublicController do
   plug :plug_assigns
 
   def index(conn, params) do
-    page = Akedia.Content.list_entities(params)
+    page = Akedia.Content.list_entities_paginated(params)
     pinned = Akedia.Content.list_pinned_entities()
 
     render(conn, "index.html",

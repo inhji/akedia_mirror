@@ -79,7 +79,8 @@ defmodule Akedia.MixProject do
       {:scrivener_html, "~> 1.8"},
       {:feeder_ex, "~> 1.1"},
       {:tzdata, "~> 1.0.0", override: true},
-      {:html_sanitize_ex, "~> 1.3"}
+      {:html_sanitize_ex, "~> 1.3"},
+      {:atomex, "~> 0.3.0"}
     ]
   end
 

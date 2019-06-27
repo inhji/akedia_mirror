@@ -23,6 +23,11 @@ defmodule AkediaWeb.Markdown do
     |> Phoenix.HTML.raw()
   end
 
+  def to_html!(markdown) do
+    {:safe, html} = to_html(markdown)
+    html
+  end
+
   def render_markdown!(blocks, context) do
     {_, html} = context.options.renderer.render(blocks, context)
     html
