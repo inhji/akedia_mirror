@@ -6,16 +6,6 @@ defmodule Akedia.Application do
   use Application
 
   def start(_type, _args) do
-    :ok = Logger.add_translator({Timber.Exceptions.Translator, :translate})
-
-    :ok =
-      :telemetry.attach(
-        "timber-ecto-query-handler",
-        [:akedia, :repo, :query],
-        &Timber.Ecto.handle_event/4,
-        []
-      )
-
     # List all child processes to be supervised
     children = [
       # Start the Ecto repository

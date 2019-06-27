@@ -13,8 +13,6 @@ config :elixir,
 config :akedia,
   ecto_repos: [Akedia.Repo]
 
-config :akedia, Akedia.Repo, log: false
-
 config :akedia, Akedia.Settings, site_title: "Inhji.de"
 
 config :akedia, Akedia.Scheduler,
@@ -29,8 +27,7 @@ config :akedia, AkediaWeb.Endpoint,
   url: [host: "localhost"],
   secret_key_base: "iVePfwoS3NVsO3P3lcGct/05yT8xDjWNANBanomxJtdlEn60UoUfYiyShUA5c3KH",
   render_errors: [view: AkediaWeb.ErrorView, accepts: ~w(html json)],
-  pubsub: [name: Akedia.PubSub, adapter: Phoenix.PubSub.PG2],
-  instrumenters: [Timber.Phoenix]
+  pubsub: [name: Akedia.PubSub, adapter: Phoenix.PubSub.PG2]
 
 # Configures Elixir's Logger
 config :logger, :console,

@@ -50,6 +50,5 @@ defmodule AkediaWeb.Endpoint do
     max_age: 60 * 60 * 24 * 7 * 2, # 2 Weeks
     http_only: true
 
-  plug Timber.Plug.HTTPContext
   plug AkediaWeb.Router
 end
