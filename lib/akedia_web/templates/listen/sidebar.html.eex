@@ -1,0 +1,16 @@
+<div class="widget">
+  <h3 class="title">Top Albums</h3>
+
+  <div class="columns is-multiline is-mobile">
+    <%= for album <- @albums do %>
+    <div class="column is-one-quarter">
+      <a href="<%= Routes.album_url(@conn, :show, album.album) %>">
+        <figure class="image is-64x64">
+          <img src="<%= cover_url(album.album, :thumb) %>">
+        </figure>
+      </a>
+      <link rel="stylesheet" href="/css/master.css">
+    </div>
+    <% end %>
+  </div>
+</div>

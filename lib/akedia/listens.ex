@@ -1,7 +1,7 @@
 defmodule Akedia.Listens do
   import Ecto.Query, warn: false
   alias Akedia.Repo
-  alias Akedia.Listens.{Listen, Artist}
+  alias Akedia.Listens.{Listen, Artist, Album}
 
   def listens_paginated(params) do
     Listen
@@ -15,7 +15,7 @@ defmodule Akedia.Listens do
     |> order_by(desc: :listened_at)
     |> limit(^limit)
     |> preload([:artist, :album])
-    |> Repo.one!
+    |> Repo.one!()
   end
 
   def group_by_artist(time_diff \\ nil) do
@@ -42,6 +42,30 @@ defmodule Akedia.Listens do
         time_ago = Timex.shift(DateTime.utc_now(), time_diff)
         where(query, [l], l.listened_at > ^time_ago)
     end
+  end
+
+  def group_by_album_query() do
+    query =
+      Listen
+      |> join(:left, [l], a in Album, on: l.album_id == a.id)
+      |> group_by([l, a], a.id)
+      |> select([l, a], %{
+        listens: fragment("count (?) as listens", l.id),
+        id: a.id
+      })
+      |> order_by(desc: fragment("listens"))
+  end
+
+  def group_by_album(limit \\ 8) do
+    group_by_album_query()
+    |> limit(^limit)
+    |> Repo.all()
+    |> Enum.map(fn al ->
+      %{
+        listens: al.listens,
+        album: get_album!(al.id)
+      }
+    end)
   end
 
   def group_by_track(artist) do
