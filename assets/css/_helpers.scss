@@ -18,6 +18,10 @@
   border: 0;
 }
 
+.has-text-red {
+  color: $red;
+}
+
 @mixin prefers-scheme($scheme) {
   @media (prefers-color-scheme: $scheme) {
     @content;

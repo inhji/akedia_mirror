@@ -7,9 +7,22 @@
   <h3 class="title">last_listen()</h3>
 
   <%= render SharedView, "listens/listen.html", conn: @conn, listen: @last_listen %>
+
+  <p class="more">
+    <a href="<%= Routes.listen_path(@conn, :index) %>">
+      <i class="fa fa-chevron-right has-text-red" aria-hidden="true"></i>
+      all_listens()
+    </a>
+  </p>
 </div>
 
 <div class="widget">
-  <h3 class="title">tags()</h3>
+  <h3 class="title">top_tags()</h3>
   <%= render SharedView, "tag_cloud.html", assigns %>
+  <p class="more">
+    <a href="<%= Routes.topic_path(@conn, :index) %>">
+      <i class="fa fa-chevron-right has-text-red" aria-hidden="true"></i>
+      all_tags()
+    </a>
+  </p>
 </div>
