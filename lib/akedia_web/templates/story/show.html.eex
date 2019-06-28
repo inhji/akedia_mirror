@@ -2,8 +2,8 @@
 
 <div class="content-wrapper">
   <article class="story h-entry">
-    <div class="intro <%= intro_class(@story) %>" style="<%= intro_style(@story) %>">
-      <h1 class="display-3 p-name"><%= @story.title %></h1>
+    <div class="intro has-text-centered">
+      <h1 class="is-size-3 p-name"><%= @story.title %></h1>
       <p class="lead">
         <a href="<%= Routes.story_path(@conn, :show, @story) %>" class="u-url u-uid">
           <time class="dt-published" datetime="<%= date_iso(@story.inserted_at) %>">
@@ -24,7 +24,7 @@
         <%= if !Enum.empty?(@story.entity.topics) do %>
           <span>Topics: </span>
           <%= for topic <- @story.entity.topics do %>
-            <a class="p-category text-muted" href="<%= Routes.topic_path(@conn, :tagged, topic) %>">
+            <a class="p-category text-muted" href="<%= Routes.public_path(@conn, :tagged, topic) %>">
               <%= topic.text %>
             </a>
           <% end %>

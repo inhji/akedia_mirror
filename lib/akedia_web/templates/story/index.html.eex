@@ -6,7 +6,7 @@
       <%= for story <- @stories do %>
       <article class="story col-lg-6 h-entry">
         <a href="<%= Routes.story_path(@conn, :show, story) %>" class="u-url u-uid">
-          <div class="intro <%= intro_class(story) %>" style="<%= intro_style(story) %>">
+          <div class="intro">
             <h1 class="display-5 p-name">
               <%= story.title %>
             </h1>
