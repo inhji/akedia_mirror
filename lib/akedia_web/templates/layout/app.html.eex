@@ -22,10 +22,8 @@
       </div>
     </div>
 
-    <section class="section">
-      <div class="container ">
-        <%= render "footer.html", conn: @conn, logged_in: @logged_in %>
-      </div>
+    <section class="section is-paddingless">
+      <%= render "footer.html", conn: @conn, logged_in: @logged_in %>
     </section>
 
     <script type="text/javascript" src="<%= Routes.static_path(@conn, "/js/common.js") %>"></script>

@@ -1,18 +1,20 @@
-<footer class="has-text-grey has-text-centered">
-  <p>&copy; 2019 by Jonathan Jenne. Powered by <a href="https://github.com/inhji/akedia" target="_blank" rel="noreferrer">Akedia v<%= version() %></a>.</p>
-  <p>
-    <i class="fa fa-exclamation-triangle" aria-hidden="true"></i> This page is under construction. Forever <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
-  </p>
-  <p class="webring">
-    <a href="https://xn--sr8hvo.ws/%F0%9F%8F%84%F0%9F%93%80%F0%9F%8C%8F/previous">↤</a>
-    <span>Part of the Indie Webring 🕸💍 </span>
-    <a href="https://xn--sr8hvo.ws/%F0%9F%8F%84%F0%9F%93%80%F0%9F%8C%8F/next">↦</a>
-  </p>
-  <p>
-    <%= if @logged_in do %>
-    Do you really wanna hurt me and <%= link "Logout", to: Routes.session_path(@conn, :delete), method: "delete", data: [confirm: "ಥ‿ಥ\nR u sure?"], class: "nav-link" %>?
-    <% else %>
-    <%= link "Login", to: Routes.session_path(@conn, :new) %>
-    <% end %>
-  </p>
+<footer class="footer has-text-centered" id="footer">
+  <div class="container">
+    <p>&copy; 2019 by Jonathan Jenne. Powered by <a href="https://github.com/inhji/akedia" target="_blank" rel="noreferrer">Akedia v<%= version() %></a>.</p>
+    <p>
+      <i class="fa fa-exclamation-triangle" aria-hidden="true"></i> This page is under construction. Forever <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+    </p>
+    <p class="webring">
+      <a href="https://xn--sr8hvo.ws/%F0%9F%8F%84%F0%9F%93%80%F0%9F%8C%8F/previous">↤</a>
+      <span>Part of the Indie Webring 🕸💍 </span>
+      <a href="https://xn--sr8hvo.ws/%F0%9F%8F%84%F0%9F%93%80%F0%9F%8C%8F/next">↦</a>
+    </p>
+    <p>
+      <%= if @logged_in do %>
+      Do you really wanna hurt me and <%= link "Logout", to: Routes.session_path(@conn, :delete), method: "delete", data: [confirm: "ಥ‿ಥ\nR u sure?"], class: "nav-link" %>?
+      <% else %>
+      <%= link "Login", to: Routes.session_path(@conn, :new) %>
+      <% end %>
+    </p>
+  </div>
 </footer>

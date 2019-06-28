@@ -11,6 +11,7 @@ $primary: $red;
 // Bulma Overrides
 $link: $dark;
 $navbar-item-active-color: $primary;
+$footer-background-color: $black;
 
 // Bulma Prefers-Dark Overrides
 $link-dark: $grey-lighter;
@@ -49,11 +50,6 @@ nav.navbar {
   margin-right: 0.3rem;
 }
 
-section, .footer {
-  padding-left: 0;
-  padding-right: 0;
-}
-
 .author-card {
   margin-bottom: 1rem;
 
@@ -84,6 +80,14 @@ section, .footer {
       display: block;
       margin-top: 1rem;
     }
+  }
+}
+
+#footer {
+  color: $grey-light;
+
+  a {
+    color: $red;
   }
 }
 
