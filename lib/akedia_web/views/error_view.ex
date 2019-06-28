@@ -7,7 +7,7 @@ defmodule AkediaWeb.ErrorView do
     ~E"""
     <html>
       <head><title>666 Infernal Server Error</title></head>
-      <body bgcolor="white">
+      <body bgcolor="black" text="crimson">
         <center><h1>666 Infernal Server Error</h1></center>
         <hr><center>nginx/6.6.6 (Satanic Linux)</center>
       </body>
