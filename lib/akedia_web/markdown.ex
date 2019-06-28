@@ -23,6 +23,8 @@ defmodule AkediaWeb.Markdown do
     |> Phoenix.HTML.raw()
   end
 
+  def to_html!(nil), do: ""
+
   def to_html!(markdown) do
     {:safe, html} = to_html(markdown)
     html
