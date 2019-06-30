@@ -40,9 +40,6 @@ config :phoenix, :json_library, Jason
 config :arc,
   storage: Arc.Storage.Local
 
-config :indieweb,
-  webmention_url_adapter: Akedia.Indie.Webmentions.URLAdapter
-
 config :scrivener_html,
   routes_helper: AkediaWeb.Router.Helpers,
   view_style: :bulma

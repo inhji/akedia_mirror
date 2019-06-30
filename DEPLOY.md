@@ -2,6 +2,8 @@
 
 ## Deploy a release
 
+Deploying a new release shouldn't be needed very often.
+
 ```bash
 mix edeliver build release
 mix edeliver deploy release to production --version=x.x.x
@@ -11,13 +13,22 @@ mix edeliver migrate production
 
 ## Deploy an upgrade
 
+There are two tasks to deploy an upgrade:
+
+### Upgrade
+
+Upgrading cleans all dependencies from the previous build and therefore takes longer
+
 ```bash
 mix upgrade
 ```
 
-or
+### Hotfix
+
+Hotfix is the same as upgrade but without cleaning the dependencies, thus making it faster but also more prone to weird dependency-errors. Restarting the server is recommended to make sure the newest css styles are used.
 
 ```bash
 # Don't clean mix & npm deps
 mix hotfix
+mix restart
 ```
