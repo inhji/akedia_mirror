@@ -47,7 +47,7 @@ defmodule AkediaWeb do
       import AkediaWeb.Gettext
 
       import AkediaWeb.Helpers.Media
-      import AkediaWeb.Helpers.User, only: [avatar_path: 1, logged_in?: 1]
+      import AkediaWeb.Helpers.User, only: [logged_in?: 1]
       import AkediaWeb.Helpers.Time, only: [date_iso: 1, date_pretty: 1, date_fuzzy: 1]
       import AkediaWeb.Helpers.Meta, only: [title: 2]
       import AkediaWeb.Markdown, only: [to_html: 1]

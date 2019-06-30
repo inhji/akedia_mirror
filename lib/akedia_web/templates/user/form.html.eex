@@ -1,4 +1,4 @@
-<%= form_for @changeset, @action, [class: "form user"], fn f -> %>
+<%= form_for @changeset, @action, [multipart: true, class: "form user"], fn f -> %>
   <%= if @changeset.action do %>
     <div class="alert alert-danger">
       <p>Oops, something went wrong! Please check the errors below.</p>
@@ -42,6 +42,23 @@
       </div>
     </div>
     <%= error_tag f, :bio %>
+  </div>
+
+  <div class="field">
+    <%= label f, :avatar, class: "label" %>
+    <div class="file">
+      <label class="file-label">
+        <%= file_input f, :avatar, class: "file-input" %>
+        <span class="file-cta">
+          <span class="file-icon">
+            <i class="fa fa-upload"></i>
+          </span>
+          <span class="file-label">
+            Choose a file…
+          </span>
+        </span>
+      </label>
+    </div>
   </div>
 
   <%= inputs_for f, :credential, fn fc -> %>

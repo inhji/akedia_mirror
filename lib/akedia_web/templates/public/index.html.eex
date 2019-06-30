@@ -1,3 +1,5 @@
+<%= render SharedView, "hcard.html", conn: @conn, current_user: @current_user %>
+
 <%= if @page_number == 1 do %>
   <%= render "feed_pinned.html",
               conn: @conn,

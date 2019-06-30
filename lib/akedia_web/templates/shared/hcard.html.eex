@@ -2,7 +2,7 @@
   <div class="media">
     <figure class="media-left">
       <p class="image is-rounded is-96x96">
-        <img src="<%= avatar_path(@conn) %>" class="u-photo" width="96">
+        <img src="<%= avatar_url(@current_user) %>" class="u-photo" width="96">
       </p>
     </figure>
     <div class="media-content">

@@ -8,8 +8,4 @@ defmodule AkediaWeb.Helpers.User do
       _ -> true
     end
   end
-
-  def avatar_path(conn) do
-    Routes.static_path(conn, "/images/me.jpg")
-  end
 end

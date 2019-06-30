@@ -1,6 +1,6 @@
 <noscript>
   <div class="h-card p-author">
-    <img src="<%= avatar_path(@conn) %>" class="u-photo">
+    <img src="<%= avatar_url(@current_user) %>" class="u-photo">
     <a href="/" class="u-url" rel="author">
       <span class="p-name"><%= @current_user.name %></span>
     </a>
