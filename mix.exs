@@ -4,7 +4,7 @@ defmodule Akedia.MixProject do
   def project do
     [
       app: :akedia,
-      version: "0.39.0",
+      version: "0.40.0",
       elixir: "~> 1.5",
       elixirc_paths: elixirc_paths(Mix.env()),
       compilers: [:phoenix, :gettext] ++ Mix.compilers(),
@@ -90,7 +90,7 @@ defmodule Akedia.MixProject do
       {:tzdata, "~> 1.0.0", override: true},
       {:html_sanitize_ex, "~> 1.3"},
       {:atomex, "~> 0.3.0"},
-      {:ex_doc, "~> 0.19", only: :dev, runtime: false},
+      {:ex_doc, "~> 0.19", only: :dev, runtime: false}
     ]
   end
 
