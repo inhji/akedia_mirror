@@ -1,3 +1,5 @@
+<h1 class="title">Artists</h1>
+
 <%= render SharedView, "nav/listen_nav.html", assigns %>
 <%= render SharedView, "listens/listens_empty.html", listens: @listens %>
 

@@ -72,6 +72,15 @@ nav.navbar {
   background-size: cover;
 }
 
+#content {
+  >h1.title {
+    display: inline-block;
+    font-weight: normal;
+    border-bottom: 2px solid $red;
+    padding-right: 1rem;
+  }
+}
+
 #sidebar {
   .widget {
     margin-bottom: 3rem;
