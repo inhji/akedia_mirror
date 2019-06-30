@@ -9,7 +9,9 @@ defmodule Akedia.Content.Post do
     field :content, :string
     field :slug, :string
     field :title, :string
+
     field :reply_to, :string
+
     belongs_to :entity, Entity
 
     timestamps()

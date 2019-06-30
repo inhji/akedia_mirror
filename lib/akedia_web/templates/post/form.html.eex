@@ -54,6 +54,14 @@
     <% end %>
     <%= error_tag ef, :is_pinned %>
   </div>
+
+  <div class="field">
+    <%= label ef, :bridgy_fed, class: "checkbox" do %>
+      <%= checkbox ef, :bridgy_fed, class: "checkbox" %>
+      Forward to fed.brid.gy
+    <% end %>
+    <%= error_tag ef, :bridgy_fed %>
+  </div>
   <% end %>
 
   <div class="field">

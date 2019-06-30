@@ -1,4 +1,5 @@
 <aside class="meta">
+  <%= render SharedView, "post/post_bridgy.html", schema: @schema %>
   <%= render SharedView, "post/post_icon.html", schema: @schema %>
   <%= render SharedView, "post/post_date.html", conn: @conn, schema: @schema, url_helper: @url_helper %>
   <%= render SharedView, "post/post_url.html", conn: @conn, schema: @schema %>

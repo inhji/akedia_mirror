@@ -9,6 +9,8 @@ defmodule Akedia.Content.Entity do
     field :is_pinned, :boolean, default: false
     field :is_published, :boolean, default: false
 
+    field :bridgy_fed, :boolean, default: false
+
     many_to_many(:topics, Topic, join_through: "entity_topics")
     many_to_many(:images, Image, join_through: "entity_images")
 
@@ -26,7 +28,7 @@ defmodule Akedia.Content.Entity do
   @doc false
   def changeset(entity, attrs) do
     entity
-    |> cast(attrs, [:is_published, :is_pinned])
-    |> validate_required([:is_published, :is_pinned])
+    |> cast(attrs, [:is_published, :is_pinned, :bridgy_fed])
+    |> validate_required([:is_published, :is_pinned, :bridgy_fed])
   end
 end
