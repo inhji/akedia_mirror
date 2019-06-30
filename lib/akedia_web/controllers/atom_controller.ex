@@ -4,22 +4,25 @@ defmodule AkediaWeb.AtomController do
   alias AkediaWeb.Router.Helpers, as: Routes
   import Ecto.Query
 
-  @author_name "Jonathan Jenne"
+  @content_type "application/atom+xml"
 
   def index(conn, _params) do
+    user = Akedia.Accounts.get_user!()
     feed =
       Akedia.Content.list_entities()
-      |> build_feed(conn)
+      |> build_feed(conn, user)
 
     conn
-    |> put_resp_header("Content-Type", "application/atom+xml")
+    |> put_resp_header("Content-Type", @content_type)
     |> send_resp(200, feed)
   end
 
-  def build_feed(entities, conn) do
+  def build_feed(entities, conn, user) do
     Feed.new(Akedia.url(), DateTime.utc_now(), "Inhji.de Homepage Feed")
-    |> Feed.author(@author_name, email: "johnnie@posteo.de")
-    |> Feed.link(Routes.atom_url(conn, :index), rel: "self")
+    |> Feed.author(user.name, email: user.credential.email)
+    |> Feed.link(Routes.atom_url(conn, :index), rel: "self", type: @content_type)
+    |> Feed.link("https://inhji.superfeedr.com", rel: "hub")
+    |> Feed.generator()
     |> Feed.entries(Enum.map(entities, &build_entry/1))
     |> Feed.build()
     |> Atomex.generate_document()
