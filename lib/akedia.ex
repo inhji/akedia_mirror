@@ -1,5 +1,7 @@
 defmodule Akedia do
   @moduledoc """
+  > „Der Dämon der Trägheit, der auch Mittagsdämon genannt wird, ist belastender als alle anderen Dämonen.“
+
   Akedia keeps the contexts that define your domain
   and business logic.
 
@@ -10,7 +12,10 @@ defmodule Akedia do
   alias AkediaWeb.Router.Helpers, as: Routes
   alias AkediaWeb.Endpoint
 
-  def url do
+  @doc """
+  Returns the absolute url of the site.
+  """
+  def url() do
     Endpoint
     |> Routes.url()
     |> URI.parse()
@@ -18,9 +23,14 @@ defmodule Akedia do
     |> String.trim_trailing("/")
   end
 
-  def url(%Like{} = like), do: Routes.like_url(Endpoint, :show, like)
-  def url(%Bookmark{} = bookmark), do: Routes.bookmark_url(Endpoint, :show, bookmark)
-  def url(%Story{} = story), do: Routes.story_url(Endpoint, :show, story)
-  def url(%Page{} = page), do: Routes.page_url(Endpoint, :show, page)
-  def url(%Post{} = post), do: Routes.post_url(Endpoint, :show, post)
+  @doc """
+  Returns the absolute url to the supplied post
+  """
+  def url(schema), do: do_url(schema)
+
+  defp do_url(%Like{} = like), do: Routes.like_url(Endpoint, :show, like)
+  defp do_url(%Bookmark{} = bookmark), do: Routes.bookmark_url(Endpoint, :show, bookmark)
+  defp do_url(%Story{} = story), do: Routes.story_url(Endpoint, :show, story)
+  defp do_url(%Page{} = page), do: Routes.page_url(Endpoint, :show, page)
+  defp do_url(%Post{} = post), do: Routes.post_url(Endpoint, :show, post)
 end

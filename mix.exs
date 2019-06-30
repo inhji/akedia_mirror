@@ -10,7 +10,16 @@ defmodule Akedia.MixProject do
       compilers: [:phoenix, :gettext] ++ Mix.compilers(),
       start_permanent: Mix.env() == :prod,
       aliases: aliases(),
-      deps: deps()
+      deps: deps(),
+
+      # Docs
+      name: "Akedia",
+      source_url: "https://github.com/inhji/akedia",
+      homepage_url: "https://inhji.de",
+      docs: [
+        main: "Akedia",
+        extras: ["DEPLOY.md", "INSTALL.md"]
+      ]
     ]
   end
 
@@ -80,7 +89,8 @@ defmodule Akedia.MixProject do
       {:feeder_ex, "~> 1.1"},
       {:tzdata, "~> 1.0.0", override: true},
       {:html_sanitize_ex, "~> 1.3"},
-      {:atomex, "~> 0.3.0"}
+      {:atomex, "~> 0.3.0"},
+      {:ex_doc, "~> 0.19", only: :dev, runtime: false},
     ]
   end
 
