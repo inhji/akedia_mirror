@@ -13,4 +13,11 @@
     </div>
     <% end %>
   </div>
+
+  <p class="more">
+    <a href="<%= Routes.album_path(@conn, :index) %>">
+      <i class="fa fa-chevron-right has-text-red" aria-hidden="true"></i>
+      all_albums()
+    </a>
+  </p>
 </div>

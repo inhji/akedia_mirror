@@ -1,14 +1,19 @@
+<h1 class="title">Top 100 Albums</h1>
+
 <%= for album <- @albums do %>
-<div class="media is-marginless is-paddingless">
+<div class="media">
   <div class="media-left">
-    <figure class="image is-64x64">
-      <img src="<%= cover_url(album) %>">
+    <figure class="image is-128x128">
+      <img src="<%= cover_url(album.album, :large) %>">
     </figure>
   </div>
   <div class="media-content">
-    <strong><%= link album.name, to: Routes.album_path(@conn, :show, album) %></strong>
-    <br />
-    <span>By <%= album.artist.name %></span>
+    <h2 class="title">
+      <%= link album.album.name, to: Routes.album_path(@conn, :show, album.album) %>
+      <small class="has-text-grey"><%= album.listens %></small>
+    </h2>
+    <h3 class="subtitle">By <%= album.album.artist.name %></h3>
+    <progress class="progress" value="<%= album.listens %>" max="<%= @max_listens %>"></progress>
   </div>
 </div>
 <% end %>

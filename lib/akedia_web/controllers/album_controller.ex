@@ -5,8 +5,14 @@ defmodule AkediaWeb.AlbumController do
   alias Akedia.Listens.Album
 
   def index(conn, _params) do
-    albums = Listens.list_albums()
-    render(conn, "index.html", albums: albums)
+    albums = Listens.group_by_album(100)
+
+    max_listens =
+      albums
+      |> List.first()
+      |> Map.get(:listens)
+
+    render(conn, "index.html", albums: albums, max_listens: max_listens)
   end
 
   def new(conn, _params) do

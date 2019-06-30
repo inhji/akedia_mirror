@@ -49,7 +49,7 @@ defmodule AkediaWeb.Router do
 
     get "/listens", ListenController, :index
     resources "/artists", ArtistController, only: [:show, :index]
-    resources "/albums", AlbumController, only: [:show]
+    resources "/albums", AlbumController, only: [:show, :index]
 
     scope "/auth" do
       get "/register", UserController, :new

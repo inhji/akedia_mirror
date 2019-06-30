@@ -1,4 +1,5 @@
 <%= render "album.html", conn: @conn, album: @album %>
 
-
-<%= link "Edit", to: Routes.album_path(@conn, :edit, @album), class: "button" %>
+<%= if @logged_in do %>
+  <%= link "Edit", to: Routes.album_path(@conn, :edit, @album), class: "button" %>
+<% end %>
