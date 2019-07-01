@@ -3,7 +3,7 @@ defmodule Akedia.Indie.Micropub.Content do
   alias Akedia.Workers
   alias Akedia.Content
 
-  @url_types_regex ~r/\/(?<type>bookmarks|stories|posts)\/(?<slug>[\w\d-]*)\/?$/
+  @url_types_regex ~r/\/(?<type>bookmarks|stories|posts|likes)\/(?<slug>[\w\d-]*)\/?$/
 
   def create_bookmark(title, content, url, tags, is_published) do
     attrs = %{
@@ -67,6 +67,9 @@ defmodule Akedia.Indie.Micropub.Content do
 
       %{"type" => "stories", "slug" => slug} ->
         Akedia.Content.get_story!(slug)
+
+      %{"type" => "likes", "slug" => id} ->
+        Akedia.Content.get_like!(id)
 
       nil ->
         nil
