@@ -6,7 +6,7 @@ defmodule Akedia.Indie do
   import Ecto.Query, warn: false
   alias Akedia.Repo
 
-  alias Akedia.Indie.Syndication
+  alias Akedia.Content.Syndication
 
   def list_syndications do
     Repo.all(Syndication)

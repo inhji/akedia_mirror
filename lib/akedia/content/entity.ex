@@ -3,7 +3,7 @@ defmodule Akedia.Content.Entity do
   import Ecto.Changeset
   alias Akedia.Content.{Topic, Bookmark, Page, Story, Like, Post}
   alias Akedia.Media.Image
-  alias Akedia.Indie.Syndication
+  alias Akedia.Content.Syndication
 
   schema "entities" do
     field :is_pinned, :boolean, default: false
