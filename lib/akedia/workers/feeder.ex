@@ -2,22 +2,22 @@ defmodule Akedia.Workers.Feeder do
   use Que.Worker
   require Logger
   alias HTTPoison.Response
-  alias Akedia.Indie.Microsub
+  alias Akedia.Feeds
 
   def perform(%{feed_id: feed_id}) do
     feed_id
-    |> Microsub.get_feed!()
+    |> Feeds.get_feed!()
     |> process_feed()
   end
 
   def perform(_args) do
     Logger.info("Triggering Feed fetching")
 
-    Microsub.list_feeds()
+    Feeds.list_feeds()
     |> Enum.map(&process_feed/1)
   end
 
-  def process_feed(%Microsub.Feed{} = feed) do
+  def process_feed(%Feeds.Feed{} = feed) do
     Logger.info("Processing feed #{feed.url}")
 
     case fetch_feed(feed) do
@@ -33,11 +33,11 @@ defmodule Akedia.Workers.Feeder do
   end
 
   def update_feed(%FeederEx.Feed{title: title, subtitle: subtitle} = parsed_feed, feed_id) do
-    feed = Microsub.get_feed!(feed_id)
+    feed = Feeds.get_feed!(feed_id)
 
     Logger.info("Updating feed #{title}")
 
-    Microsub.update_feed(feed, %{
+    Feeds.update_feed(feed, %{
       title: title,
       description: subtitle
     })
@@ -68,7 +68,7 @@ defmodule Akedia.Workers.Feeder do
         d -> Akedia.DateTime.to_datetime_utc(d)
       end
 
-    case Microsub.create_feed_entry(
+    case Feeds.create_feed_entry(
            %{
              author: author || feed_title,
              summary: summary,
@@ -78,7 +78,7 @@ defmodule Akedia.Workers.Feeder do
            },
            feed_id
          ) do
-      {:ok, entry} ->
+      {:ok, _entry} ->
         Logger.debug("Entry inserted with title: #{title}")
 
       {:error, error} ->
@@ -86,7 +86,7 @@ defmodule Akedia.Workers.Feeder do
     end
   end
 
-  def fetch_feed(%Microsub.Feed{url: url} = _feed) do
+  def fetch_feed(%Feeds.Feed{url: url} = _feed) do
     case Akedia.HTTP.get!(url) do
       %Response{body: body, status_code: 200} ->
         body

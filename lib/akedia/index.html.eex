@@ -1,0 +1,10 @@
+<h1 class="title">Listens</h1>
+
+<%= render SharedView, "nav/listen_nav.html", assigns %>
+
+<%= render_many @listens, SharedView, "listens/listen.html", as: :listen, conn: @conn %>
+
+<%= pagination_links @page,
+  previous: ~E(<i class="fa fa-caret-left" aria-hidden="true"></i>),
+  next: ~E(<i class="fa fa-caret-right" aria-hidden="true"></i>)
+%>

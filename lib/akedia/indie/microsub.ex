@@ -1,4 +1,4 @@
-defmodule Akedia.Indie.Microsub do
+defmodule Akedia.Feeds do
   @moduledoc """
   The Indie.Microsub context.
   """
@@ -8,7 +8,7 @@ defmodule Akedia.Indie.Microsub do
   import Ecto.Query, warn: false
   alias Akedia.Repo
 
-  alias Akedia.Indie.Microsub.{Channel, Feed, FeedEntry}
+  alias Akedia.Feeds.{Channel, Feed, FeedEntry}
 
   def list_channels do
     notification_channel = get_notification_channel()

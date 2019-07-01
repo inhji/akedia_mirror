@@ -1,4 +1,4 @@
-defmodule Akedia.Indie.Microsub.Channel do
+defmodule Akedia.Feeds.Channel do
   use Ecto.Schema
   import Ecto.Changeset
 
@@ -6,7 +6,7 @@ defmodule Akedia.Indie.Microsub.Channel do
     field :name, :string
     field :uid, :string
 
-    has_many :feeds, Akedia.Indie.Microsub.Feed
+    has_many :feeds, Akedia.Feeds.Feed
 
     timestamps()
   end
