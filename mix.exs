@@ -4,8 +4,8 @@ defmodule Akedia.MixProject do
   def project do
     [
       app: :akedia,
-      version: "0.41.0",
-      elixir: "~> 1.5",
+      version: "0.42.0",
+      elixir: "~> 1.9",
       elixirc_paths: elixirc_paths(Mix.env()),
       compilers: [:phoenix, :gettext] ++ Mix.compilers(),
       start_permanent: Mix.env() == :prod,
@@ -87,7 +87,7 @@ defmodule Akedia.MixProject do
       {:scrivener_ecto, "~> 2.0"},
       {:scrivener_html, "~> 1.8"},
       {:feeder_ex, "~> 1.1"},
-      {:tzdata, "~> 1.0.0", override: true},
+      {:tzdata, "~> 1.0.0"},
       {:html_sanitize_ex, "~> 1.3"},
       {:atomex, "~> 0.3.0"},
       {:ex_doc, "~> 0.19", only: :dev, runtime: false}
