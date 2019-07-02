@@ -74,6 +74,11 @@ defmodule AkediaWeb.Router do
             handler: Akedia.Indie.Microsub.Handler,
             json_encoder: Phoenix.json_library()
 
+    forward "/webmention",
+            Akedia.Plugs.PlugWebmention,
+            handler: Akedia.Indie.Webmentions.Handler,
+            json_encoder: Phoenix.json_library()
+
     # forward "/auth",
     #         PlugIndieAuth,
     #         handler: Akedia.Indie.IndieAuth.Handler,

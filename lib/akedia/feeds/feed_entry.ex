@@ -1,4 +1,4 @@
-defmodule Akedia.Indie.Microsub.FeedEntry do
+defmodule Akedia.Feeds.FeedEntry do
   use Ecto.Schema
   import Ecto.Changeset
 
@@ -11,7 +11,7 @@ defmodule Akedia.Indie.Microsub.FeedEntry do
 
     field :is_read, :boolean, default: false
 
-    belongs_to :feed, Akedia.Indie.Microsub.Feed
+    belongs_to :feed, Akedia.Feeds.Feed
 
     timestamps()
   end

@@ -1,12 +1,12 @@
 defmodule Akedia.Indie.Microsub.Handler do
   @behaviour Akedia.Plugs.PlugMicrosub.HandlerBehaviour
 
-  alias Akedia.Indie.Microsub
+  alias Akedia.Feeds
 
   @impl true
   def handle_list_channels() do
     channels =
-      Microsub.list_channels()
+      Feeds.list_channels()
       |> Enum.map(&prepare_channel/1)
 
     {:ok, channels}
@@ -14,12 +14,12 @@ defmodule Akedia.Indie.Microsub.Handler do
 
   @impl true
   def handle_timeline(channel, paging_before, paging_after) do
-    case Microsub.get_channel_by_uid!(channel) do
+    case Feeds.get_channel_by_uid!(channel) do
       nil ->
         {:error, "Channel #{channel} does not exist"}
 
       channel ->
-        entries = Microsub.list_feed_entries(channel.id, paging_before, paging_after)
+        entries = Feeds.list_feed_entries(channel.id, paging_before, paging_after)
         prepared = Enum.map(entries, &prepare_entry/1)
         paging = prepare_paging(entries)
 
@@ -29,14 +29,14 @@ defmodule Akedia.Indie.Microsub.Handler do
 
   @impl true
   def handle_mark_read(channel, entry_ids) do
-    case Microsub.get_channel_by_uid!(channel) do
+    case Feeds.get_channel_by_uid!(channel) do
       nil ->
         {:error, "Channel #{channel} does not exist"}
 
       _channel ->
         entry_ids
         |> Enum.map(fn id ->
-          Microsub.mark_feed_entry(id, true)
+          Feeds.mark_feed_entry(id, true)
         end)
 
         :ok
@@ -45,14 +45,14 @@ defmodule Akedia.Indie.Microsub.Handler do
 
   @impl true
   def handle_mark_read_before(channel, before_id) do
-    case Microsub.get_channel_by_uid!(channel) do
+    case Feeds.get_channel_by_uid!(channel) do
       nil ->
         {:error, "Channel #{channel} does not exist"}
 
       channel ->
-        Microsub.list_feed_entries_before(channel.id, before_id)
+        Feeds.list_feed_entries_before(channel.id, before_id)
         |> Enum.map(fn entry -> entry.id end)
-        |> Enum.each(&Microsub.mark_feed_entry(&1, true))
+        |> Enum.each(&Feeds.mark_feed_entry(&1, true))
 
         :ok
     end

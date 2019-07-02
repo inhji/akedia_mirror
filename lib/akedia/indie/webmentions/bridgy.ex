@@ -5,9 +5,10 @@ defmodule Akedia.Indie.Webmentions.Bridgy do
   require Logger
 
   def maybe_publish_to_github(_, nil), do: nil
+
   def maybe_publish_to_github(%{:entity_id => entity_id} = schema, url) do
     if String.starts_with?(url, "https://github.com/") do
-      Akedia.Indie.create_or_update_syndication(%{
+      Akedia.Content.create_or_update_syndication(%{
         type: "github",
         entity_id: entity_id
       })
@@ -30,7 +31,7 @@ defmodule Akedia.Indie.Webmentions.Bridgy do
       {:ok, %HTTPoison.Response{status_code: 201, body: body}} ->
         json = Jason.decode!(body)
 
-        Akedia.Indie.create_or_update_syndication(%{
+        Akedia.Content.create_or_update_syndication(%{
           type: "github",
           entity_id: entity_id,
           url: json["url"]

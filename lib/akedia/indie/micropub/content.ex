@@ -3,8 +3,6 @@ defmodule Akedia.Indie.Micropub.Content do
   alias Akedia.Workers
   alias Akedia.Content
 
-  @url_types_regex ~r/\/(?<type>bookmarks|stories|posts)\/(?<slug>[\w\d-]*)\/?$/
-
   def create_bookmark(title, content, url, tags, is_published) do
     attrs = %{
       "title" => title,
@@ -54,22 +52,6 @@ defmodule Akedia.Indie.Micropub.Content do
       {:error, error} ->
         Logger.warn("Error while creating post: #{inspect(error)}")
         {:error, :invalid_request}
-    end
-  end
-
-  def get_post_by_url(url) do
-    case Regex.named_captures(@url_types_regex, url) do
-      %{"type" => "bookmarks", "slug" => slug} ->
-        Akedia.Content.get_bookmark!(slug)
-
-      %{"type" => "posts", "slug" => slug} ->
-        Akedia.Content.get_post!(slug)
-
-      %{"type" => "stories", "slug" => slug} ->
-        Akedia.Content.get_story!(slug)
-
-      nil ->
-        nil
     end
   end
 end

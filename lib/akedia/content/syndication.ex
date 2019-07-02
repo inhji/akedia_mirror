@@ -1,4 +1,4 @@
-defmodule Akedia.Indie.Syndication do
+defmodule Akedia.Content.Syndication do
   use Ecto.Schema
   import Ecto.Changeset
 
