@@ -16,7 +16,7 @@ defmodule Akedia.Mentions.Mention do
     field :url, :string
     field :wm_property, :string
 
-    has_one :author, Akedia.Mentions.Author
+    belongs_to :author, Akedia.Mentions.Author
     belongs_to :entity, Akedia.Content.Entity
 
     timestamps()
@@ -38,7 +38,8 @@ defmodule Akedia.Mentions.Mention do
       :repost_of,
       :bookmark_of,
       :wm_property,
-      :author_id
+      :author_id,
+      :entity_id
     ])
     |> validate_required([
       :source,
@@ -48,12 +49,9 @@ defmodule Akedia.Mentions.Mention do
       :title,
       :published_at,
       :url,
-      :in_reply_to,
-      :like_of,
-      :repost_of,
-      :bookmark_of,
       :wm_property,
-      :author_id
+      :author_id,
+      :entity_id
     ])
   end
 end

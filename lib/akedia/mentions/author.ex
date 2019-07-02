@@ -8,6 +8,8 @@ defmodule Akedia.Mentions.Author do
     field :type, :string
     field :url, :string
 
+    has_many :mentions, Akedia.Mentions.Mention
+
     timestamps()
   end
 

@@ -15,11 +15,13 @@ defmodule Akedia.Repo.Migrations.CreateMentions do
       add :repost_of, :string
       add :bookmark_of, :string
       add :wm_property, :string
-      add :author, references(:mention_authors, on_delete: :nothing)
+      add :author_id, references(:mention_authors, on_delete: :nothing)
+      add :entity_id, references(:entities, on_delete: :delete_all)
 
       timestamps()
     end
 
-    create index(:mentions, [:author])
+    create index(:mentions, [:entity_id])
+    create index(:mentions, [:author_id])
   end
 end
