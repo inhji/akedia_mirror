@@ -5,8 +5,6 @@ defmodule Akedia.Indie.Webmentions.Handler do
 
   @impl true
   def handle_receive(%{:target => target, :post => post} = body) do
-    IO.inspect(post)
-
     with {:ok, author} <- maybe_create_author(post.author),
          {:ok, schema} <- Helpers.get_post_by_url(target) do
       entity_id = schema.entity.id
