@@ -5,6 +5,8 @@ defmodule Akedia.Indie.Webmentions.Handler do
 
   @impl true
   def handle_receive(%{:target => target, :post => post} = body) do
+    IO.inspect(post)
+
     with {:ok, author} <- maybe_create_author(post.author),
          {:ok, schema} <- Helpers.get_post_by_url(target) do
       entity_id = schema.entity.id
@@ -17,9 +19,6 @@ defmodule Akedia.Indie.Webmentions.Handler do
           author_id: author.id
         })
         |> Mentions.create_mention()
-
-      IO.inspect(post)
-      IO.inspect(mention)
       :ok
     else
       _ -> {:error, "Bad Request"}
@@ -54,6 +53,8 @@ defmodule Akedia.Indie.Webmentions.Handler do
     author =
       if author.url == "" do
         Map.put(author, :url, "https://example.com")
+      else
+        author
       end
 
     case Mentions.get_author_by_url(author.url) do
