@@ -2,4 +2,5 @@
 
 <div class="content-wrapper">
   <%= render "post.html", conn: @conn, post: @post, current_user: @current_user %>
+  <%= render SharedView, "mentions.html", schema: @post %>
 </div>

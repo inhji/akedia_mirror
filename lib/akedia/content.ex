@@ -14,7 +14,7 @@ defmodule Akedia.Content do
     Syndication
   }
 
-  @preloads [entity: [:topics, :images, :syndications]]
+  @preloads [entity: [:topics, :images, :syndications, mentions: [:author]]]
 
   # Entity
 
