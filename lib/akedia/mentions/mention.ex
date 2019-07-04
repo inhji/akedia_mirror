@@ -46,7 +46,6 @@ defmodule Akedia.Mentions.Mention do
       :target,
       :content_plain,
       :content_html,
-      :title,
       :published_at,
       :url,
       :wm_property,

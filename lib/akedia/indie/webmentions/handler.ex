@@ -3,24 +3,30 @@ defmodule Akedia.Indie.Webmentions.Handler do
   alias Akedia.Mentions
   alias Akedia.Indie.Helpers
 
+  require Logger
+
   @impl true
   def handle_receive(%{:target => target, :post => post} = body) do
     with {:ok, author} <- maybe_create_author(post.author),
          {:ok, schema} <- Helpers.get_post_by_url(target) do
       entity_id = schema.entity.id
 
-      mention =
-        prepare_mention(body)
-        |> Enum.into(prepare_wm_property(body))
-        |> Enum.into(%{
-          entity_id: entity_id,
-          author_id: author.id
-        })
-        |> Mentions.create_mention()
+      prepare_mention(body)
+      |> Enum.into(prepare_wm_property(body))
+      |> Enum.into(%{
+        entity_id: entity_id,
+        author_id: author.id
+      })
+      |> Mentions.create_or_update_mention()
+
       :ok
     else
       _ -> {:error, "Bad Request"}
     end
+  end
+
+  def handle_receive(%{deleted: true} = body) do
+    # TODO: Delete mention
   end
 
   def prepare_mention(%{:source => source, :target => target, :post => post} = body) do

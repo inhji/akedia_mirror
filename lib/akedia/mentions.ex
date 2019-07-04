@@ -14,10 +14,28 @@ defmodule Akedia.Mentions do
     |> Repo.get!(id)
   end
 
+  def get_mention(source, target) do
+    Mention
+    |> Repo.get_by(source: source, target: target)
+  end
+
   def create_mention(attrs \\ %{}) do
     %Mention{}
     |> Mention.changeset(attrs)
     |> Repo.insert()
+  end
+
+  def update_mention(%Mention{} = mention, attrs \\ %{}) do
+    mention
+    |> Mention.changeset(attrs)
+    |> Repo.update()
+  end
+
+  def create_or_update_mention(%{:source => source, :target => target} = attrs) do
+    case get_mention(source, target) do
+      nil -> create_mention(attrs)
+      mention -> update_mention(mention, attrs)
+    end
   end
 
   def list_authors do
