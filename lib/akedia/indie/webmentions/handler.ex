@@ -24,13 +24,15 @@ defmodule Akedia.Indie.Webmentions.Handler do
   end
 
   def prepare_mention(%{:source => source, :target => target, :post => post} = body) do
+    content = Map.get(post, :content, %{})
+
     %{
       source: source,
       target: target,
-      title: post.name,
-      content_html: post.content.html,
-      content_plain: post.content.text,
-      url: post.url,
+      title: Map.get(post, :name),
+      content_html: Map.get(content, :html),
+      content_plain: Map.get(content, :text),
+      url: Map.get(post, :url),
       published_at: Akedia.DateTime.to_datetime(post.published)
     }
   end
