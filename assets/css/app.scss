@@ -142,6 +142,20 @@ article {
       p:after { content: '”'; }
     }
   }
+
+  .meta {
+    .topics a {
+      &::after {
+        content: " / "
+      }
+
+      &:last-child {
+        &::after {
+          content: none;
+        }
+      }
+    }
+  }
 }
 
 @media screen and (max-width: $tablet) {
