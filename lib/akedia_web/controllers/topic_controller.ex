@@ -49,7 +49,7 @@ defmodule AkediaWeb.TopicController do
       {:ok, topic} ->
         conn
         |> put_flash(:info, "Topic updated successfully.")
-        |> redirect(to: Routes.topic_path(conn, :show, topic))
+        |> redirect(to: Routes.public_path(conn, :tagged, topic))
 
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "edit.html", topic: topic, changeset: changeset)

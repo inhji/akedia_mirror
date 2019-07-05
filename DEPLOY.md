@@ -25,7 +25,9 @@ mix upgrade
 
 ### Hotfix
 
-Hotfix is the same as upgrade but without cleaning the dependencies, thus making it faster but also more prone to weird dependency-errors. Restarting the server is recommended to make sure the newest css styles are used.
+Hotfix is the same as upgrade but without cleaning the dependencies, thus making it faster but also more prone to weird dependency-errors.
+
+*Restarting the server is recommended to make sure the newest css styles are used.*
 
 ```bash
 # Don't clean mix & npm deps
