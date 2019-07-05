@@ -1,7 +1,5 @@
 <%= render SharedView, "nav/user_nav.html", assigns %>
 
-<h1 class="title">Mentions</h1>
-
 <%= for mention <- @mentions do %>
   <div class="media">
     <a class="media-left" href="<%= mention.author.url %>" target="_blank">

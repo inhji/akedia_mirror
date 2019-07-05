@@ -12,6 +12,7 @@ $primary: $red;
 $link: $dark;
 $navbar-item-active-color: $primary;
 $footer-background-color: $black;
+$tabs-link-active-border-bottom-color: $primary;
 
 // Bulma Prefers-Dark Overrides
 $link-dark: $grey-lighter;
@@ -77,6 +78,7 @@ nav.navbar {
     display: inline-block;
     font-weight: normal;
     border-bottom: 2px solid $red;
+    padding-bottom: 0.25rem;
     padding-right: 1rem;
   }
 }
@@ -88,6 +90,7 @@ nav.navbar {
     >.title {
       font-weight: normal;
       margin-bottom: 0.5rem;
+      padding-bottom: 0.25rem;
       border-bottom: 2px solid $red;
     }
 

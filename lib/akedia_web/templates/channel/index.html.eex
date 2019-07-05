@@ -1,7 +1,5 @@
 <%= render SharedView, "nav/user_nav.html", assigns %>
 
-<h1 class="title">Channels</h1>
-
 <%= for channel <- @channels do %>
 <article class="media is-marginless">
   <div class="media-content">
