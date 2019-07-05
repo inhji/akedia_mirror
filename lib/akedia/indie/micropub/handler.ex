@@ -4,7 +4,7 @@ defmodule Akedia.Indie.Micropub.Handler do
 
   alias Akedia.HTTP
   alias Akedia.Media
-  alias Akedia.Content.{Bookmark, Post}
+  alias Akedia.Content.Post
   alias Akedia.Indie.Micropub.{Properties, Content}
   alias Akedia.Indie.Auth.Token
 
@@ -79,29 +79,6 @@ defmodule Akedia.Indie.Micropub.Handler do
   def handle_update(_, _, _, _, _) do
     {:error, :insufficient_scope}
   end
-
-  # TODO: This is untested!
-  # @impl true
-  # def handle_update(url, replace, add, delete, access_token) do
-  #   case Token.verify_token(access_token, "update") do
-  #     :ok ->
-  #       attrs = Properties.parse(replace, add, delete)
-  #
-  #       case Akedia.Indie.Helpers.get_post_by_url(url) do
-  #         %Bookmark{} = bookmark ->
-  #           Akedia.Content.update_bookmark(bookmark, attrs)
-  #
-  #         %Post{} = post ->
-  #           Akedia.Content.update_post(post, attrs)
-  #
-  #         nil ->
-  #           {:error, :invalid_request, "The post with the requested URL was not found"}
-  #       end
-  #
-  #     error ->
-  #       error
-  #   end
-  # end
 
   @impl true
   def handle_delete(_url, _access_token) do

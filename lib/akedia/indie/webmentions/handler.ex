@@ -25,11 +25,11 @@ defmodule Akedia.Indie.Webmentions.Handler do
     end
   end
 
-  def handle_receive(%{deleted: true} = body) do
+  def handle_receive(%{deleted: true} = _body) do
     # TODO: Delete mention
   end
 
-  def prepare_mention(%{:source => source, :target => target, :post => post} = body) do
+  def prepare_mention(%{:source => source, :target => target, :post => post} = _body) do
     content = Map.get(post, :content, %{})
 
     %{
@@ -43,7 +43,7 @@ defmodule Akedia.Indie.Webmentions.Handler do
     }
   end
 
-  def prepare_wm_property(%{:post => post} = body) do
+  def prepare_wm_property(%{:post => post} = _body) do
     wm_property = Map.get(post, :"wm-property")
     result = %{wm_property: wm_property}
 
@@ -67,7 +67,7 @@ defmodule Akedia.Indie.Webmentions.Handler do
       nil ->
         case Mentions.create_author(author) do
           {:ok, author} -> {:ok, author}
-          {:error, error} -> {:error, "Bad Request"}
+          {:error, _error} -> {:error, "Bad Request"}
         end
 
       author ->

@@ -188,7 +188,7 @@ defmodule Akedia.Plugs.PlugMicrosub do
     end
   end
 
-  def get_action(%{query_params: _} = conn) do
+  def get_action(%{query_params: _} = _conn) do
     Logger.error("Could not find action parameter")
     {:error, "Bad Request"}
   end

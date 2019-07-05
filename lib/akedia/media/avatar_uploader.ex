@@ -27,7 +27,7 @@ defmodule Akedia.Media.AvatarUploader do
   end
 
   # Provide a default URL if there hasn't been a file uploaded
-  def default_url(version, scope) do
+  def default_url(_version, _scope) do
     "/images/me.jpg"
   end
 
