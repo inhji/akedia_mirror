@@ -5,7 +5,7 @@ defmodule AkediaWeb.ListenController do
 
   def index(conn, params) do
     page = Listens.listens_paginated(params)
-    albums = Listens.group_by_album(9)
+    albums = Listens.group_by_album(9, weeks: -1)
 
     render(conn, "index.html",
       page: page,

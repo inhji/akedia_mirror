@@ -119,5 +119,7 @@ defmodule AkediaWeb.Router do
     resources "/channels", ChannelController do
       resources "/feeds", FeedController
     end
+
+    get "/mentions", MentionController, :index
   end
 end

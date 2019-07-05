@@ -18,5 +18,11 @@
       </span>
       <span>Channels</span>
     <% end %>
+    <%= active_link(@conn, to: Routes.mention_path(@conn, :index), class_active: "is-active", wrap_tag: :li) do %>
+      <span class="icon is-small">
+        <i class="icon-webmention"></i>
+      </span>
+      <span>Mentions</span>
+    <% end %>
   </ul>
 </nav>
