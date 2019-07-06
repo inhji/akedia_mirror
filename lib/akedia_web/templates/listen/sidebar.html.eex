@@ -1,18 +1,50 @@
 <div class="widget">
-  <h3 class="title">Top Albums</h3>
+  <h3 class="title">Top Albums this week</h3>
 
-  <div class="columns is-multiline is-mobile">
-    <%= for album <- @albums do %>
-    <div class="column is-one-third">
-      <a href="<%= Routes.album_url(@conn, :show, album.album) %>">
-        <figure class="image is-128x128">
-          <img src="<%= cover_url(album.album, :large) %>">
-        </figure>
-      </a>
-      <link rel="stylesheet" href="/css/master.css">
+  <%= for album <- @albums_weekly do %>
+  <div class="media is-marginless is-paddingless">
+    <div class="media-left">
+      <figure class="image is-64x64">
+        <img src="<%= cover_url(album.album) %>">
+      </figure>
     </div>
-    <% end %>
+    <div class="media-content">
+      <div>
+        <strong><%= album.album.name %></strong>
+        <span>(<%= album.listens %>)</span>
+      </div>
+      <progress class="progress" value="<%= album.listens %>" max="<%= @max_weekly %>"></progress>
+    </div>
   </div>
+  <% end %>
+
+  <p class="more">
+    <a href="<%= Routes.album_path(@conn, :index) %>">
+      <i class="fa fa-chevron-right has-text-red" aria-hidden="true"></i>
+      all_albums()
+    </a>
+  </p>
+</div>
+
+<div class="widget">
+  <h3 class="title">Top Albums overall</h3>
+
+  <%= for album <- @albums_overall do %>
+  <div class="media is-marginless is-paddingless">
+    <div class="media-left">
+      <figure class="image is-64x64">
+        <img src="<%= cover_url(album.album) %>">
+      </figure>
+    </div>
+    <div class="media-content">
+      <div>
+        <strong><%= album.album.name %></strong>
+        <span>(<%= album.listens %>)</span>
+      </div>
+      <progress class="progress" value="<%= album.listens %>" max="<%= @max_overall %>"></progress>
+    </div>
+  </div>
+  <% end %>
 
   <p class="more">
     <a href="<%= Routes.album_path(@conn, :index) %>">
