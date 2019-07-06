@@ -1,3 +1,7 @@
-<h1>Register</h1>
+<div class="columns">
+  <div class="column">
+    <h1 class="title">Register</h1>
 
-<%= render "form_register.html", Map.put(assigns, :action, Routes.user_path(@conn, :create)) %>
+    <%= render "form_register.html", Map.put(assigns, :action, Routes.user_path(@conn, :create)) %>
+  </div>
+</div>

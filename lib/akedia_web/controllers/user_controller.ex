@@ -5,7 +5,10 @@ defmodule AkediaWeb.UserController do
 
   def new(conn, _params) do
     changeset = Accounts.change_user(%Accounts.User{})
-    render(conn, "new.html", changeset: changeset)
+
+    conn
+    |> put_layout("bare.html")
+    |> render("new.html", changeset: changeset)
   end
 
   def create(conn, %{"user" => %{"credential" => credential_params} = user_params}) do
@@ -26,10 +29,11 @@ defmodule AkediaWeb.UserController do
           {:error, %Ecto.Changeset{} = changeset} ->
             render(conn, "new.html", changeset: changeset)
         end
+
       _ ->
-      conn
-      |> put_view(ErrorView)
-      |> render("register.html")
+        conn
+        |> put_view(ErrorView)
+        |> render("register.html")
     end
   end
 

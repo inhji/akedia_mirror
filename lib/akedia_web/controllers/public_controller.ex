@@ -1,6 +1,7 @@
 defmodule AkediaWeb.PublicController do
   use AkediaWeb, :controller
 
+  plug :plug_onboard
   plug :plug_assigns
 
   def index(conn, params) do
@@ -37,6 +38,15 @@ defmodule AkediaWeb.PublicController do
     conn
     |> assign(:topics, topics)
     |> assign(:last_listen, last_listen)
+  end
+
+  def plug_onboard(conn, _opts) do
+    if not conn.assigns.has_user do
+      conn
+      |> redirect(to: Routes.user_path(conn, :new))
+    else
+      conn
+    end
   end
 
   def post_type_filter(entity) do
