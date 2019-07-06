@@ -4,6 +4,10 @@ defmodule AkediaWeb.PublicView do
   alias AkediaWeb.{BookmarkView, PostView, LikeView}
 
   def render("meta.index.html", assigns) do
-    [title("Home", assigns)]
+    [title(assigns)]
+  end
+
+  def render("meta.tagged.html", assigns) do
+    [title("Tagged with '#{assigns.topic.text}'", assigns)]
   end
 end

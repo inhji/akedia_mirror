@@ -6,7 +6,7 @@ defmodule AkediaWeb.AlbumView do
   end
 
   def render("meta.edit.html", assigns) do
-    [title(assigns.album.name, assigns)]
+    [title("Edit '#{assigns.album.name}'", assigns)]
   end
 
   def musicbrainz_query_url(album) do

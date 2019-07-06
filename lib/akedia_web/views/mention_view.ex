@@ -1,6 +1,10 @@
 defmodule AkediaWeb.MentionView do
   use AkediaWeb, :view
 
+  def render("meta.index.html", assigns) do
+    [title("Recent Mentions", assigns)]
+  end
+
   def mention_action(mention) do
     case mention.wm_property do
       "like-of" -> "liked"

@@ -6,7 +6,7 @@ defmodule AkediaWeb.BookmarkView do
   end
 
   def render("meta.show.html", assigns) do
-    [title(assigns.bookmark.title, assigns)]
+    [title(assigns.bookmark, assigns)]
   end
 
   def render("scripts.edit.html", assigns), do: AkediaWeb.Helpers.Meta.admin_scripts(assigns)
