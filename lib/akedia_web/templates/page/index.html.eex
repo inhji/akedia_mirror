@@ -1,19 +1,9 @@
 <%= render SharedView, "nav/posts_nav.html", conn: @conn, path_helper: &Routes.page_path/2 %>
 
-<div class="content-wrapper">
-  <%= if !Enum.empty?(@pinned) do %>
-    <div class="grid">
-      <%= for page <- @pinned do %>
-      <%= render "page.html", conn: @conn, page: page, current_user: @current_user %>
-      <% end %>
-    </div>
+<%= if @home_page do %>
+  <h1 class="title"><%= @home_page.title %></h1>
 
-    <hr>
-  <% end %>
-
-  <div class="grid">
-    <%= for page <- @pages do %>
-      <%= render "page.html", conn: @conn, page: page, current_user: @current_user %>
-    <% end %>
-  </div>
-</div>
+  <%= to_html(@home_page) %>
+<% else %>
+  <p>There is no page with slug <em>home</em>.</p>
+<% end %>

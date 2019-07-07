@@ -4,70 +4,61 @@ defmodule AkediaWeb.PageController do
   alias Akedia.{Content, Media}
   alias Akedia.Content.Page
 
+  plug :plug_pinned_fallback
+
   def index(conn, _params) do
-    pages = Content.list_pages(is_published: true, is_pinned: false)
+    home_page = Content.get_home_page()
     pinned = Content.list_pages(is_published: true, is_pinned: true)
-    render(conn, "index.html", pages: pages, pinned: pinned)
+    render(conn, "index.html", pinned: pinned, home_page: home_page)
   end
 
   def drafts(conn, _params) do
-    pages = Content.list_pages(is_published: false, is_pinned: false)
+    home_page = Content.get_home_page()
     pinned = Content.list_pages(is_published: false, is_pinned: true)
-    render(conn, "index.html", pages: pages, pinned: pinned)
+    render(conn, "index.html", pinned: pinned, home_page: home_page)
   end
 
   def new(conn, _params) do
     changeset = Content.change_page(%Page{})
-    images = Media.list_images()
-
-    render(conn, "new.html", changeset: changeset, tags: [], images: images, image_ids: [])
+    render(conn, "new.html", changeset: changeset, tags: [])
   end
 
-  def create(conn, %{"page" => %{"topics" => topics, "images" => images} = page_params}) do
-    case Content.create_page(page_params) do
+  def create(conn, %{"page" => %{"topics" => topics, "entity" => entity} = page_params}) do
+    case Content.create_page(page_params, entity) do
       {:ok, page} ->
         Content.add_tags(page, topics)
-        Media.add_images(page, images)
 
         conn
         |> put_flash(:info, "Page created successfully.")
         |> redirect(to: Routes.page_path(conn, :show, page))
 
       {:error, %Ecto.Changeset{} = changeset} ->
-        render(conn, "new.html", changeset: changeset, tags: [], image_ids: [], images: images)
+        render(conn, "new.html", changeset: changeset, tags: [])
     end
   end
 
   def show(conn, %{"id" => id}) do
     page = Content.get_page!(id)
-    render(conn, "show.html", page: page)
+    pinned = Content.list_pages(is_published: true, is_pinned: true)
+    render(conn, "show.html", page: page, pinned: pinned)
   end
 
   def edit(conn, %{"id" => id}) do
     page = Content.get_page!(id)
     tags = Content.tags_loaded(page)
     changeset = Content.change_page(page)
-    image_ids = Media.images_loaded(page)
-    images = Media.list_images()
 
     render(conn, "edit.html",
       page: page,
       changeset: changeset,
-      tags: tags,
-      images: images,
-      image_ids: image_ids
+      tags: tags
     )
   end
 
-  def update(conn, %{
-        "id" => id,
-        "page" => %{"topics" => topics, "images" => images} = page_params
-      }) do
+  def update(conn, %{"id" => id, "page" => %{"topics" => topics} = page_params}) do
     page = Content.get_page!(id)
-    image_ids = Media.images_loaded(page)
     tags = Content.tags_loaded(page)
     Content.update_tags(page, topics)
-    Media.update_images(page, images)
 
     case Content.update_page(page, page_params) do
       {:ok, page} ->
@@ -79,9 +70,7 @@ defmodule AkediaWeb.PageController do
         render(conn, "edit.html",
           page: page,
           changeset: changeset,
-          tags: tags,
-          images: images,
-          image_ids: image_ids
+          tags: tags
         )
     end
   end
@@ -93,5 +82,9 @@ defmodule AkediaWeb.PageController do
     conn
     |> put_flash(:info, "Page deleted successfully.")
     |> redirect(to: Routes.page_path(conn, :index))
+  end
+
+  def plug_pinned_fallback(%{:assigns => assigns} = conn, _params) do
+    assign(conn, :pinned, Map.get(assigns, :pinned, []))
   end
 end

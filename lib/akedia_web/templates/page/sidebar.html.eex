@@ -1,0 +1,20 @@
+<div class="menu widget">
+  <p class="menu-label">
+    Menu
+  </p>
+  <ul class="menu-list">
+    <%= active_link @conn,
+        "Home",
+        to: Routes.page_path(@conn, :index),
+        active: :exact,
+        class_active: "is-active",
+        wrap_tag: :li %>
+    <%= for page <- @pinned do %>
+      <%= active_link @conn,
+          page.title,
+          to: Routes.page_path(@conn, :show, page),
+          class_active: "is-active",
+          wrap_tag: :li %>
+    <% end %>
+  </ul>
+</div>

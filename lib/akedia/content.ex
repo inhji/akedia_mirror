@@ -125,7 +125,10 @@ defmodule Akedia.Content do
   # Page
 
   def list_pages(opts \\ []) do
-    list(Page, opts)
+    list_query(Page, opts)
+    |> where([p], p.title != "Home")
+    |> Repo.all()
+    |> Repo.preload(entity: [:topics, :images, :syndications])
   end
 
   def get_page!(id) do
@@ -134,9 +137,17 @@ defmodule Akedia.Content do
     |> Repo.preload(@preloads)
   end
 
-  def create_page(attrs \\ %{}) do
-    create_with_entity(Page, attrs)
+  def get_home_page() do
+    Page
+    |> Repo.get_by(title: "Home")
+    |> Repo.preload(@preloads)
   end
+
+  def create_page(attrs \\ %{}),
+    do: create_with_entity(Page, attrs)
+
+  def create_page(attrs, entity_attrs),
+    do: create_with_entity(Page, attrs, entity_attrs)
 
   def update_page(%Page{} = page, attrs) do
     page
@@ -494,14 +505,19 @@ defmodule Akedia.Content do
   end
 
   def list(schema, options \\ []) do
+    schema
+    |> list_query(options)
+    |> Repo.all()
+    |> Repo.preload(entity: [:topics, :images, :syndications])
+  end
+
+  def list_query(schema, options \\ []) do
     sort_options = options[:order_by] || [desc: :inserted_at]
 
     schema
     |> join(:inner, [s], e in Entity, on: s.entity_id == e.id)
     |> maybe_where(options, [:is_published, :is_pinned])
     |> order_by(^sort_options)
-    |> Repo.all()
-    |> Repo.preload(entity: [:topics, :images, :syndications])
   end
 
   def maybe_where(query, options, valid_options) do
