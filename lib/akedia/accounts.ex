@@ -3,6 +3,8 @@ defmodule Akedia.Accounts do
   alias Akedia.Repo
   alias Akedia.Accounts.{User, Credential, Profile}
 
+  @user_preloads [:credential, :profiles]
+
   def count_users do
     Repo.aggregate(from(u in User), :count, :id)
   end
@@ -10,18 +12,19 @@ defmodule Akedia.Accounts do
   def get_user!() do
     User
     |> Repo.one!()
-    |> Repo.preload([:credential, :profiles])
+    |> Repo.preload(@user_preloads)
   end
 
   def get_user!(id) do
     User
     |> Repo.get!(id)
-    |> Repo.preload([:credential, :profiles])
+    |> Repo.preload(@user_preloads)
   end
 
   def get_user(id) do
     User
     |> Repo.get(id)
+    |> Repo.preload(@user_preloads)
   end
 
   def has_user?() do
@@ -35,7 +38,9 @@ defmodule Akedia.Accounts do
         where: c.email == ^email,
         select: u
 
-    Repo.one(query)
+    query
+    |> Repo.one()
+    |> Repo.preload(@user_preloads)
   end
 
   def create_user(attrs \\ %{}) do
