@@ -1,5 +1,6 @@
 <time class="dt-published" datetime="<%= date_iso(@schema.inserted_at) %>">
   <%= link date_fuzzy(@schema.inserted_at),
       to: @url_helper.(@conn, :show, @schema),
+      title: @schema.inserted_at,
       class: "has-text-grey u-url" %>
 </time>
