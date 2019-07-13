@@ -219,13 +219,10 @@ defmodule Akedia.Content do
   end
 
   def update_like(%Like{} = like, attrs) do
-    {:ok, like} =
-      like
-      |> Like.changeset(attrs)
-      |> Ecto.Changeset.cast_assoc(:entity, with: &Entity.changeset/2)
-      |> Repo.update()
-
     like
+    |> Like.changeset(attrs)
+    |> Ecto.Changeset.cast_assoc(:entity, with: &Entity.changeset/2)
+    |> Repo.update()
   end
 
   def delete_like(%Like{} = like) do
