@@ -17,4 +17,4 @@
 		previous: ~E(<i class="fa fa-caret-left" aria-hidden="true"></i>),
 		next: ~E(<i class="fa fa-caret-right" aria-hidden="true"></i>)
 	%>
-<%= end %>
+<% end %>

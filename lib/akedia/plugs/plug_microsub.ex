@@ -66,6 +66,8 @@ defmodule Akedia.Plugs.PlugMicrosub do
     send_resp(conn, 404, "Not found!")
   end
 
+  # Handle Actions
+
   def handle_action(conn, :get, :channels) do
     handler = get_opt(conn, :handler)
 
@@ -76,6 +78,30 @@ defmodule Akedia.Plugs.PlugMicrosub do
       {:error, code, reason} ->
         send_error(conn, reason, code)
     end
+  end
+
+  def handle_action(conn, :get, :timeline) do
+    handler = get_opt(conn, :handler)
+
+    with {:ok, channel} <- get_param(conn, "channel"),
+         {:ok, page_before, page_after} <- validate_paging(conn),
+         {:ok, items, paging} <- handler.handle_timeline(channel, page_before, page_after) do
+      send_response(conn, %{
+        items: items,
+        paging: paging
+      })
+    else
+      {:error, reason} ->
+        send_error(conn, reason)
+    end
+  end
+
+  def handle_action(conn, _, _) do
+    send_error(conn, "Bad Request (Catchall)")
+  end
+
+  def handle_action(conn, :post, :timeline, :mark_unread) do
+    send_response(conn, [])
   end
 
   def handle_action(conn, :post, :timeline, :mark_read) do
@@ -94,6 +120,10 @@ defmodule Akedia.Plugs.PlugMicrosub do
         last_read_entry = get_param!(conn, @param_last_read)
         handle_mark_read_before(conn, last_read_entry)
     end
+  end
+
+  def handle_action(conn, _, _, _) do
+    send_error(conn, "Bad Request (Catchall)")
   end
 
   def handle_mark_read_before(conn, before_id) do
@@ -128,30 +158,6 @@ defmodule Akedia.Plugs.PlugMicrosub do
     do: Map.values(entry_ids)
 
   def maybe_wrap_entry_ids(entry_ids), do: [entry_ids]
-
-  def handle_action(conn, :post, :timeline, :mark_unread) do
-    send_response(conn, [])
-  end
-
-  def handle_action(conn, :get, :timeline) do
-    handler = get_opt(conn, :handler)
-
-    with {:ok, channel} <- get_param(conn, "channel"),
-         {:ok, page_before, page_after} <- validate_paging(conn),
-         {:ok, items, paging} <- handler.handle_timeline(channel, page_before, page_after) do
-      send_response(conn, %{
-        items: items,
-        paging: paging
-      })
-    else
-      {:error, reason} ->
-        send_error(conn, reason)
-    end
-  end
-
-  def handle_action(conn, _, _) do
-    send_error(conn, "Bad Request (Catchall)")
-  end
 
   def validate_paging(conn) do
     page_before = get_param!(conn, "before")

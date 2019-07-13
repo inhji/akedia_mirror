@@ -4,7 +4,6 @@ defmodule Akedia.Indie.Micropub.Handler do
 
   alias Akedia.HTTP
   alias Akedia.Media
-  alias Akedia.Content.Post
   alias Akedia.Indie.Micropub.{Properties, Content}
   alias Akedia.Indie.Auth.Token
 

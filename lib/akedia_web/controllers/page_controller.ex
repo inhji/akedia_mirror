@@ -1,7 +1,7 @@
 defmodule AkediaWeb.PageController do
   use AkediaWeb, :controller
 
-  alias Akedia.{Content, Media}
+  alias Akedia.Content
   alias Akedia.Content.Page
 
   plug :plug_pinned_fallback

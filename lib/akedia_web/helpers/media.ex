@@ -1,5 +1,6 @@
 defmodule AkediaWeb.Helpers.Media do
   use Phoenix.HTML
+
   alias Akedia.Media.{
     FaviconUploader,
     ImageUploader,
@@ -7,47 +8,24 @@ defmodule AkediaWeb.Helpers.Media do
     AvatarUploader
   }
 
-  def image_url(nil, _), do: ""
   def image_url(nil), do: ""
-
-  def image_url(image, version) do
-    ImageUploader.url({image.name, image}, version)
-  end
-
   def image_url(image), do: image_url(image, :thumb)
+  def image_url(nil, _), do: ""
+  def image_url(image, version), do: ImageUploader.url({image.name, image}, version)
 
   def favicon_url(nil), do: ""
-
-  def favicon_url(favicon) do
-    FaviconUploader.url({favicon.name, favicon}, :original)
-  end
+  def favicon_url(favicon), do: FaviconUploader.url({favicon.name, favicon}, :original)
 
   def cover_url(nil), do: ""
+  def cover_url(album), do: CoverartUploader.url({album.cover, album}, :large)
   def cover_url(nil, _), do: ""
+  def cover_url(album, version), do: CoverartUploader.url({album.cover, album}, version)
 
-  def cover_url(album) do
-    CoverartUploader.url({album.cover, album}, :large)
-  end
+  def avatar_url(user), do: AvatarUploader.url({user.avatar, user}, :thumb)
+  def avatar_url(user, version), do: AvatarUploader.url({user.avatar, user}, version)
 
-  def cover_url(album, version) do
-    CoverartUploader.url({album.cover, album}, version)
-  end
-
-  def avatar_url(user) do
-    AvatarUploader.url({user.avatar, user}, :thumb)
-  end
-
-  def avatar_url(user, version) do
-    AvatarUploader.url({user.avatar, user}, version)
-  end
-
-  def img(image, version, attrs \\ []) do
-    img_tag(image_url(image, version), attrs)
-  end
-
-  def img(image) do
-    img(image, :thumb)
-  end
+  def img(image), do: img(image, :thumb)
+  def img(image, version, attrs \\ []), do: img_tag(image_url(image, version), attrs)
 
   def media_input(form, field, attrs) do
     content_tag :div, class: "input-group" do

@@ -1,5 +1,4 @@
 defmodule AkediaWeb.Helpers.User do
-  alias AkediaWeb.Router.Helpers, as: Routes
   import Plug.Conn, only: [get_session: 2]
 
   def logged_in?(conn) do

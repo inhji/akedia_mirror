@@ -14,7 +14,7 @@ defmodule AkediaWeb.Helpers.Meta do
     }
   end
 
-  def title(schema, %{:site_title => site_title} = assigns) when is_map(schema) do
+  def title(schema, %{:site_title => _site_title} = assigns) when is_map(schema) do
     page_title = schema.title || String.slice(schema.content, 0, 20) <> "…"
     title(page_title, assigns)
   end
