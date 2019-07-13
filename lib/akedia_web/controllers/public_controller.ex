@@ -22,7 +22,13 @@ defmodule AkediaWeb.PublicController do
 
   def tagged(conn, %{"topic" => topic}) do
     topic = Akedia.Content.get_topic!(topic)
-    entities = Enum.filter(topic.entities, &post_type_filter/1)
+
+    entities =
+      topic.entities
+      |> Enum.filter(&post_type_filter/1)
+      |> Enum.sort(fn f, s ->
+        NaiveDateTime.diff(f.inserted_at, s.inserted_at) >= 0
+      end)
 
     render(conn, "tagged.html",
       conn: conn,
