@@ -1,0 +1,5 @@
+<div class="widget">
+  <h1 class="title">Cover</h1>
+
+  <img src="<%= cover_url(@album, :large) %>" alt="">
+</div>

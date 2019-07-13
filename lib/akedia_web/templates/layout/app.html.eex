@@ -12,11 +12,12 @@
         <div class="columns">
           <main class="column is-two-thirds" id="content">
             <p class="notification is-info" role="alert"><%= get_flash(@conn, :info) %></p>
-            <p class="notification is-danger" role="alert"><%= get_flash(@conn, :error) %></p>          
+            <p class="notification is-danger" role="alert"><%= get_flash(@conn, :error) %></p>
             <%= render @view_module, @view_template, assigns %>
           </main>
           <aside class="column is-one-third" id="sidebar">
-            <%= render_existing(@view_module, "sidebar.html", assigns) %>
+            <%= render_existing(@view_module, "sidebar." <> @view_template, assigns) ||
+                render_existing(@view_module, "sidebar.html", assigns) %>
           </aside>
         </div>
       </div>
