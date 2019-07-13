@@ -97,8 +97,6 @@ defmodule Akedia.Accounts do
     Credential.changeset(credential, attrs)
   end
 
-  alias Akedia.Accounts.Profile
-
   def list_profiles do
     Profile
     |> order_by([desc: :public, desc: :rel_value, desc: :username])
