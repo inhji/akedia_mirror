@@ -18,6 +18,13 @@ defmodule Akedia.Listens do
     |> Repo.one!()
   end
 
+  def get_oldest_listen() do
+    Listen
+    |> order_by(desc: :listened_at)
+    |> limit(1)
+    |> Repo.one!()
+  end
+
   def group_by_artist(time_diff \\ nil) do
     group_by_artist_query(time_diff)
     |> Repo.all()
@@ -71,19 +78,26 @@ defmodule Akedia.Listens do
     end
   end
 
-  def group_by_track(artist) do
-    group_by_track_query(artist)
+  def group_by_track(limit \\ 9, time_diff \\ nil) do
+    group_by_track_query()
+    |> maybe_limit_by_time_diff(time_diff)
+    |> limit(^limit)
     |> Repo.all()
   end
 
-  def group_by_track_query(artist) do
+  def group_by_track_artist(artist) do
+    group_by_track_query()
+    |> where([l, a], artist_id: ^artist.id) 
+    |> Repo.all()
+  end
+
+  def group_by_track_query() do
     Listen
     |> select([l], %{
       listens: fragment("count (?) as listens", l.id),
       track: l.track
     })
-    |> group_by([l], l.track)
-    |> where([l, a], artist_id: ^artist.id)
+    |> group_by([l], [l.track])
     |> order_by(desc: fragment("listens"))
   end
 

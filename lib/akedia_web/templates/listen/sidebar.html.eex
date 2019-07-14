@@ -1,55 +1,45 @@
 <div class="widget">
-  <h3 class="title">Top Albums this week</h3>
+  <h3 class="title">Stats</h3>
 
-  <%= for album <- @albums_weekly do %>
+  <p>Listens recorded: <%= @total_entries %></p>
+  <p>First Listen: <%= date_fuzzy(@oldest_listen.listened_at) %> (<%= date_pretty(@oldest_listen.listened_at) %>)</p>
+</div>
+
+
+<div class="widget">
+  <h3 class="title">Top Tracks this week</h3>
+
+  <%= for item <- @tracks_weekly do %>
   <div class="media is-marginless is-paddingless">
-    <div class="media-left">
-      <figure class="image is-64x64">
-        <img src="<%= cover_url(album.album) %>">
-      </figure>
-    </div>
+    
     <div class="media-content">
       <div>
-        <strong><%= album.album.name %></strong>
-        <span>(<%= album.listens %>)</span>
+        <strong><%= item.track %></strong>
+        <span>(<%= item.listens %>)</span>
       </div>
-      <progress class="progress" value="<%= album.listens %>" max="<%= @max_weekly %>"></progress>
+      <progress class="progress" value="<%= item.listens %>" max="<%= @tracks_max %>"></progress>
     </div>
   </div>
   <% end %>
-
-  <p class="more">
-    <a href="<%= Routes.album_path(@conn, :index) %>">
-      <i class="fa fa-chevron-right has-text-red" aria-hidden="true"></i>
-      all_albums()
-    </a>
-  </p>
 </div>
 
 <div class="widget">
-  <h3 class="title">Top Albums overall</h3>
+  <h3 class="title">Top Albums this week</h3>
 
-  <%= for album <- @albums_overall do %>
+  <%= for item <- @albums_weekly do %>
   <div class="media is-marginless is-paddingless">
     <div class="media-left">
       <figure class="image is-64x64">
-        <img src="<%= cover_url(album.album) %>">
+        <img src="<%= cover_url(item.album) %>">
       </figure>
     </div>
     <div class="media-content">
       <div>
-        <strong><%= album.album.name %></strong>
-        <span>(<%= album.listens %>)</span>
+        <strong><%= item.album.name %></strong>
+        <span>(<%= item.listens %>)</span>
       </div>
-      <progress class="progress" value="<%= album.listens %>" max="<%= @max_overall %>"></progress>
+      <progress class="progress" value="<%= item.listens %>" max="<%= @albums_max %>"></progress>
     </div>
   </div>
   <% end %>
-
-  <p class="more">
-    <a href="<%= Routes.album_path(@conn, :index) %>">
-      <i class="fa fa-chevron-right has-text-red" aria-hidden="true"></i>
-      all_albums()
-    </a>
-  </p>
 </div>

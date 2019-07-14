@@ -35,7 +35,7 @@ defmodule AkediaWeb.ArtistController do
     listens =
       case artist do
         nil -> []
-        artist -> Listens.group_by_track(artist)
+        artist -> Listens.group_by_track_artist(artist)
       end
 
     max_value = max_listen_value(listens)
