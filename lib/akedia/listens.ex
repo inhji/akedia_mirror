@@ -20,7 +20,7 @@ defmodule Akedia.Listens do
 
   def get_oldest_listen() do
     Listen
-    |> order_by(desc: :listened_at)
+    |> order_by(asc: :listened_at)
     |> limit(1)
     |> Repo.one!()
   end
