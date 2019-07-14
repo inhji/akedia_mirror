@@ -13,7 +13,7 @@ defmodule Akedia.Media.AvatarUploader do
   end
 
   def transform(:thumb, _) do
-    {:convert, "-strip -thumbnail 200x200^ -gravity center -extent 100x100 -format png", :png}
+    {:convert, "-strip -thumbnail 200x200^ -gravity center -format png", :png}
   end
 
   # Override the persisted filenames:
