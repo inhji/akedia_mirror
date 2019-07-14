@@ -6,7 +6,8 @@
   </a>
   <div class="media-content">
     <p>
-      <strong><%= @listen.track %></strong> <small><%= date_fuzzy(@listen.listened_at) %></small>
+      <strong><%= @listen.track %></strong>
+      <small><%= time_tag(@listen.listened_at) %></small>
     </p>
     <p>
       <span class="has-text-grey">By </span><%= link @listen.artist.name, to: Routes.artist_url(@conn, :show, @listen.artist) %>
