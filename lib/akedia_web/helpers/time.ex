@@ -4,7 +4,7 @@ defmodule AkediaWeb.Helpers.Time do
   end
 
   def date_pretty(date) do
-    Timex.format!(date, "{D}. {Mfull} {YY}")
+    Timex.format!(date, "{D}. {Mfull} {YYYY}")
   end
 
   def date_fuzzy(date) do
