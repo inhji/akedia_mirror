@@ -1,12 +1,3 @@
-<div class="tabs is-marginless">
-  <ul>
-    <%= active_link @conn, "Recent", to: Routes.listen_path(@conn, :index),
-        active: :exact,
-        class_active: "is-active",
-        wrap_tag: :li %>
-  </ul>
-</div>
-
 <div class="tabs">
   <ul>
     <li><a class="has-text-grey">By Artist</a></li>

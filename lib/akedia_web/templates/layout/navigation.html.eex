@@ -1,67 +1,74 @@
 <nav class="navbar is-black" role="navigation" aria-label="main navigation">
-  <div class="container">
-    <div class="navbar-brand">
-      <a class="navbar-item" data-text="Inhji.de" href="/">
-        <%= render "logo.html" %>
-      </a>
+	<div class="container">
+		<div class="navbar-brand">
+			<a class="navbar-item" data-text="Inhji.de" href="/">
+				<%= render "logo.html" %>
+			</a>
 
-      <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
-        <span aria-hidden="true"></span>
-        <span aria-hidden="true"></span>
-        <span aria-hidden="true"></span>
-      </a>
-    </div>
+			<a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="mainNav">
+				<span aria-hidden="true"></span>
+				<span aria-hidden="true"></span>
+				<span aria-hidden="true"></span>
+			</a>
+		</div>
 
-    <div id="navbarBasicExample" class="navbar-menu">
-      <div class="navbar-start">
-        <%= active_link @conn,
-            to: Routes.bookmark_path(@conn, :index),
-            class_active: "is-active",
-            class: "navbar-item" do %>
-            <span class="icon">
-              <i class="fa fa-bookmark-o"></i>
-            </span>
-            <span>Bookmarks</span>
-        <% end %>
+		<div id="mainNav" class="navbar-menu">
+			<div class="navbar-start">
+				<%= active_link @conn,
+						to: Routes.bookmark_path(@conn, :index),
+						class_active: "is-active",
+						class: "navbar-item" do %>
+						<span class="icon">
+							<i class="fa fa-bookmark-o"></i>
+						</span>
+						<span>Bookmarks</span>
+				<% end %>
 
-        <%= active_link @conn,
-            to: Routes.post_path(@conn, :index),
-            class_active: "is-active",
-            class: "navbar-item" do %>
-            <span class="icon">
-              <i class="fa fa-sticky-note-o"></i>
-            </span>
-            <span>Posts</span>
-        <% end %>
+				<%= active_link @conn,
+						to: Routes.post_path(@conn, :index),
+						class_active: "is-active",
+						class: "navbar-item" do %>
+						<span class="icon">
+							<i class="fa fa-sticky-note-o"></i>
+						</span>
+						<span>Posts</span>
+				<% end %>
 
-        <%= active_link @conn,
-            class_active: "is-active",
-            to: Routes.listen_path(@conn, :index), class: "navbar-item" do %>
-            <span class="icon">
-              <i class="fa fa-music"></i>
-            </span>
-            <span>Listens</span>
-        <% end %>
-        <%= if @logged_in do %>
-          <%= active_link @conn,
-              class_active: "is-active",
-              to: Routes.page_path(@conn, :index), class: "navbar-item" do %>
-              <span class="icon">
-                <i class="fa fa-file-o"></i>
-              </span>
-              <span>Wiki</span>
-          <% end %>
+				<div class="navbar-item has-dropdown is-hoverable">
+					<%= active_link @conn,
+						to: Routes.listen_path(@conn, :index),
+						class_active: "is-active",
+						class: "navbar-link" do %>
+							<span class="icon">
+								<i class="fa fa-music"></i>
+							</span>
+							Listens					
+					<% end %>
+					<div class="navbar-dropdown">
+						<%= link "Albums", to: Routes.album_path(@conn, :index), class: "navbar-item" %>
+					</div>
+				</div>
 
-          <%= active_link @conn,
-              class_active: "is-active",
-              to: Routes.user_path(@conn, :show), class: "navbar-item" do %>
-              <span class="icon">
-                <i class="fa fa-user"></i>
-              </span>
-              <span>User</span>
-          <% end %>
-        <% end %>
-      </div>
-    </div>
-  </div>
+				<%= if @logged_in do %>
+					<%= active_link @conn,
+							class_active: "is-active",
+							to: Routes.page_path(@conn, :index), class: "navbar-item" do %>
+							<span class="icon">
+								<i class="fa fa-file-o"></i>
+							</span>
+							<span>Wiki</span>
+					<% end %>
+
+					<%= active_link @conn,
+							class_active: "is-active",
+							to: Routes.user_path(@conn, :show), class: "navbar-item" do %>
+							<span class="icon">
+								<i class="fa fa-user"></i>
+							</span>
+							<span>User</span>
+					<% end %>
+				<% end %>
+			</div>
+		</div>
+	</div>
 </nav>
