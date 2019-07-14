@@ -1,4 +1,20 @@
 <div class="widget">
+  <h3 class="title">me_elsewhere()</h3>
+
+  <div class="menu">
+    <ul class="menu-list">
+      <%= for profile <- Enum.filter(@current_user.profiles, fn p -> p.public end) do %>
+      <li>
+        <a href="<%= profile.url %>" target="_blank" rel="<%= profile.rel_value %>">
+          <i class="<%= profile.icon %> fa-lg"></i> <%= profile.name %>
+        </a>
+      </li>
+    <% end %>
+    </ul>
+  </div>
+</div>
+
+<div class="widget">
   <h3 class="title">last_listen()</h3>
 
   <%= render SharedView, "listens/listen.html", conn: @conn, listen: @last_listen %>
