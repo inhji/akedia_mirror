@@ -1,20 +1,27 @@
-<h1>Results for "<%= @query %>"</h1>
+<h1 class="title">Results for "<%= @query %>"</h1>
 
-<div class="search-results">
-  <%= for entity <- @entities do %>
-  <% schema = inner_type(entity) %>
-  <div class="row result">
-    <div class="col-md-2">
-      <div class="badge type <%= String.downcase(inner_name(schema)) %>"><%= inner_name(schema) %></div>
-    </div>
-    <div class="col-md-2">
-      <time> <%= date_fuzzy(schema.inserted_at) %> </time>
-    </div>
-    <div class="col-md-8">
-      <a href="<%= Akedia.url(schema) %>">
-        <%= Map.get(schema, :title) || Map.get(schema, :content) || Map.get(schema, :url) %>
-      </a>
-    </div>
-  </div>
+<section class="posts h-feed">
+<%= for entity <- @entities do %>
+  <%= if entity.bookmark do %>
+    <%= render BookmarkView, "bookmark.html",
+        conn: @conn,
+        bookmark: entity.bookmark,
+        current_user: @current_user %>
   <% end %>
-</div>
+
+  <%= if entity.post do %>
+    <%= render PostView, "post.html",
+        conn: @conn,
+        post: entity.post,
+        current_user: @current_user %>
+  <% end %>
+
+  <%= if entity.like do %>
+    <%= render LikeView, "like.html",
+        conn: @conn,
+        like: entity.like,
+        current_user: @current_user %>
+  <% end %>
+<% end %>
+</section>
+

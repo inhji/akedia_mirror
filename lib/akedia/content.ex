@@ -498,7 +498,11 @@ defmodule Akedia.Content do
       or_where: t.text in [^search_term],
       distinct: true,
       order_by: [desc: :inserted_at],
-      preload: [:bookmark, :page, :story, :topics, :post, :like]
+      preload: [
+        like: ^@preloads,
+        post: ^@preloads,
+        bookmark: [:favicon, ^@preloads]
+      ]
   end
 
   def list(schema, options \\ []) do
