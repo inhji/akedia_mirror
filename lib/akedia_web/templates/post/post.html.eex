@@ -1,11 +1,28 @@
 <article class="post h-entry">
   <div class="media">
+    <figure class="media-left">
+      <p class="image is-48x48">
+        <img src="<%= avatar_url(@current_user) %>" />
+      </p>
+    </figure>
     <div class="media-content">
+      <strong><%= @current_user.name %></strong>
+      <small>posted</small>
+      <small>
+        <time class="dt-published" datetime="<%= date_iso(@post.inserted_at) %>">
+          <%= link date_fuzzy(@post.inserted_at),
+              to: Routes.post_url(@conn, :show, @post),
+              title: @post.inserted_at,
+              class: "u-url" %>
+        </time>
+      </small>
+
       <%= if @post.title do %>
-      <h3 class="title has-text-weight-normal p-name">
+      <h3 class="is-size-4 title p-name">
         <%= @post.title %>
       </h3>
       <% end %>
+
       <div class="content e-content <%= unless @post.title do %>p-name<% end %>">
         <%= to_html(@post.content) %>
       </div>

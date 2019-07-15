@@ -1,6 +1,22 @@
 <article class="like h-entry">
   <div class="media">
+    <figure class="media-left">
+      <p class="image is-48x48">
+        <i class="fa fa-heart fa-3x has-text-primary"></i>
+      </p>
+    </figure>
     <div class="media-content">
+      <strong><%= @current_user.name %></strong>
+      <small>liked</small>
+      <small>
+        <time class="dt-published" datetime="<%= date_iso(@like.inserted_at) %>">
+          <%= link date_fuzzy(@like.inserted_at),
+              to: Routes.like_url(@conn, :show, @like),
+              title: @like.inserted_at,
+              class: "u-url" %>
+        </time>
+      </small>
+
       <h3 class="title has-text-weight-normal">
         <a href="<%= @like.url %>" class="u-like-of h-cite p-name">
           <%= @like.title || @like.url %>

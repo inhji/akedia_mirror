@@ -111,7 +111,7 @@ nav.navbar {
 }
 
 article {
-  margin-bottom: 4rem;
+  margin-bottom: 3rem;
 
   .title {
     .image {
@@ -150,7 +150,7 @@ article {
   .meta {
     .topics a {
       &::after {
-        content: " / "
+        content: " // "
       }
 
       &:last-child {
