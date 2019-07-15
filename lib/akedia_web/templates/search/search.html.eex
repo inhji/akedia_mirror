@@ -1,4 +1,5 @@
 <h1 class="title">Results for "<%= @query %>"</h1>
+<h2 class="subtitle"><%= Enum.count(@entities) %> posts found.</h2>
 
 <section class="posts h-feed">
 <%= for entity <- @entities do %>
