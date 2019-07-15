@@ -474,13 +474,11 @@ defmodule Akedia.Content do
   end
 
   def search_query(search_term) do
+    search_term = String.downcase(search_term)
+
     from e in Entity,
       left_join: b in assoc(e, :bookmark),
       on: e.id == b.entity_id,
-      left_join: p in assoc(e, :page),
-      on: e.id == p.entity_id,
-      left_join: s in assoc(e, :story),
-      on: e.id == s.entity_id,
       left_join: pp in assoc(e, :post),
       on: e.id == pp.entity_id,
       left_join: l in assoc(e, :like),
@@ -488,10 +486,6 @@ defmodule Akedia.Content do
       left_join: t in assoc(e, :topics),
       where: contains(b.title, ^search_term),
       or_where: contains(b.content, ^search_term),
-      or_where: contains(p.title, ^search_term),
-      or_where: contains(p.content, ^search_term),
-      or_where: contains(s.title, ^search_term),
-      or_where: contains(s.content, ^search_term),
       or_where: contains(pp.title, ^search_term),
       or_where: contains(pp.content, ^search_term),
       or_where: contains(l.url, ^search_term),
