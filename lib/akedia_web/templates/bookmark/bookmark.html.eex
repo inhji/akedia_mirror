@@ -5,7 +5,7 @@
         <%= if @bookmark.favicon do %>
           <img src="<%= favicon_url(@bookmark.favicon) %>">
         <% else %>
-          <img src="<%= Routes.static_path(@conn, "/images/bookmark.png") %>">
+          <i class="fa fa-bookmark-o fa-3x"></i>
         <% end %>
       </p>
     </figure>
