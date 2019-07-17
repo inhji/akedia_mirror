@@ -489,7 +489,7 @@ defmodule Akedia.Content do
       or_where: contains(pp.title, ^search_term),
       or_where: contains(pp.content, ^search_term),
       or_where: contains(l.url, ^search_term),
-      or_where: t.text in [^search_term],
+      or_where: contains(t.text, ^search_term),
       distinct: true,
       order_by: [desc: :inserted_at],
       preload: [
