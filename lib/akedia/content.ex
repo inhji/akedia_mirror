@@ -252,7 +252,7 @@ defmodule Akedia.Content do
     Topic
     |> join(:left, [t], et in EntityTopic, on: t.id == et.topic_id)
     |> group_by([t], t.id)
-    |> order_by([t, et], desc: count(et.id))
+    |> order_by([t, et], asc: t.text)
     |> select_merge([t, et], %{entity_count: count(et.id)})
   end
 
