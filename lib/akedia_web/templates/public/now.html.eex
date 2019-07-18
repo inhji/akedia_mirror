@@ -1,0 +1,35 @@
+<h1 class="title">Nowww</h1>
+
+<%= if @weather do %>
+	<div class="media">
+		<figure class="media-left">
+			<p class="image is-64x64">
+				<img src="<%= Routes.static_path(@conn, "/images/weather/#{@weather.icon}.svg")  %>">
+			</p>
+		</figure>
+		<div class="media-content">
+			<div class="content">
+				<p>
+					Right now it's <strong><%= @weather.temperature %> °C</strong> and <strong><%= @weather.text_now %></strong> where I live.
+					<br>
+					Weather propably will be <strong><%= @weather.text_hourly %></strong>
+				</p>
+			</div>
+		</div>
+	</div>
+<% else %>
+	<div>Weather still loading...</div>	
+<% end %>
+
+<hr />
+
+<div class="content">
+	<%= to_html(@current_user.bio) %>
+</div>
+
+<hr />
+	
+<div class="content">
+	<p>This page is inspired by <a href="https://nownownow.com">nownownow.com</a> created by <a href="https://sivers.org/">Derek Sivers.</a> Thanks.</p>
+	<p>Weather data <a href="https://darksky.net/poweredby/">powered by Dark Sky</a>. Icons by <a href="http://adamwhitcroft.com/climacons/">@adamwhitcroft</a>.</p>
+</div>
