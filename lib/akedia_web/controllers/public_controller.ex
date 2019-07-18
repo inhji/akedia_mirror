@@ -20,6 +20,12 @@ defmodule AkediaWeb.PublicController do
     )
   end
 
+  def now(conn, _params) do
+    weather = Akedia.Workers.Weather.get_weather()
+
+    render(conn, "now.html", weather: weather)
+  end
+
   def tagged(conn, %{"topic" => topic}) do
     topic = Akedia.Content.get_topic!(topic)
 

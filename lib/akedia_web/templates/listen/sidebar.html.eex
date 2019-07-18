@@ -2,7 +2,7 @@
   <h3 class="title">Stats</h3>
 
   <p>Listens recorded: <%= @total_entries %></p>
-  <p>First Listen: <%= date_fuzzy(@oldest_listen.listened_at) %> (<%= date_pretty(@oldest_listen.listened_at) %>)</p>
+  <p>First Listen: <%= date_fuzzy(@oldest_listen.listened_at) %> <span class="has-text-grey">(<%= date_pretty(@oldest_listen.listened_at) %>)</span></p>
 </div>
 
 <div class="widget">

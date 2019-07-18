@@ -90,6 +90,12 @@ nav.navbar {
     padding-bottom: 0.25rem;
     padding-right: 1rem;
   }
+
+  .content {
+    a {
+      @include nice-underline($white);
+    }
+  }
 }
 
 #sidebar {

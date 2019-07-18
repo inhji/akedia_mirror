@@ -14,7 +14,11 @@
         </small>
       </h1>
 
-      <h2 class="subtitle has-text-grey p-note"><%= @current_user.tagline %></h2>
+      <h2 class="subtitle has-text-grey p-note"><%= to_html(@current_user.tagline) %></h2>
+
+      <div class="content">
+        <a href="<%= Routes.public_path(@conn, :now) %>">What I'm up to right nowww</a>
+      </div>
     </div>
   </div>
 </div>
