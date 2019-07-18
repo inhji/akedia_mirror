@@ -241,8 +241,8 @@ defmodule Akedia.Content do
     |> Repo.preload(entities: [:bookmark, :story, :page, :post, :like])
   end
 
-  def list_topics(limit) do
-    list_topics_query()
+  def list_top_topics(limit) do
+    list_top_topics_query()
     |> limit(^limit)
     |> Repo.all()
     |> Repo.preload(entities: [:bookmark, :story, :page, :post, :like])
@@ -253,6 +253,14 @@ defmodule Akedia.Content do
     |> join(:left, [t], et in EntityTopic, on: t.id == et.topic_id)
     |> group_by([t], t.id)
     |> order_by([t, et], asc: t.text)
+    |> select_merge([t, et], %{entity_count: count(et.id)})
+  end
+
+  def list_top_topics_query() do
+    Topic
+    |> join(:left, [t], et in EntityTopic, on: t.id == et.topic_id)
+    |> group_by([t], t.id)
+    |> order_by([t, et], desc: count(et.id))
     |> select_merge([t, et], %{entity_count: count(et.id)})
   end
 
