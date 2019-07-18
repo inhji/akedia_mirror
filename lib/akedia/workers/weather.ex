@@ -1,7 +1,7 @@
 defmodule Akedia.Workers.Weather do
   use GenServer
 
-  @fetch_interval 30_000
+  @fetch_interval 600_000 # 10 Minutes
 
   # Client
 
@@ -9,8 +9,12 @@ defmodule Akedia.Workers.Weather do
     GenServer.start_link(__MODULE__, args, name: __MODULE__)
   end
 
-  def get_temperature() do
-  	GenServer.call(__MODULE__, :temp)
+  def get_weather() do
+    GenServer.call(__MODULE__, :weather)
+  end
+
+  def update() do
+    GenServer.cast(__MODULE__, :update)
   end
 
   # Server Callbacks
@@ -28,23 +32,18 @@ defmodule Akedia.Workers.Weather do
   end
 
   def handle_info(:weather_fetch, state) do
-    weather = fetch_weather(state)
-
-    temperature =
-      weather
-      |> Map.get("temperature")
-      |> to_celsius()
-      |> Float.round(1)
-
-    IO.inspect("Current temperature: #{temperature}")
-
-    schedule_weather_fetch()
-    {:noreply, Map.put(state, :temp, temperature)}
+    new_state = do_weather_fetch(state)
+    {:noreply, new_state}
   end
 
+  def handle_call(:weather, _from, state) do
+    {:reply, state[:weather], state}
+  end
 
-  def handle_call(:temp, _from, state) do
-  	{:reply, state[:temp], state}
+  def handle_cast(:update, state) do
+    new_state = do_weather_fetch(state)
+
+    {:noreply, new_state}
   end
 
   defp fetch_weather(state) do
@@ -52,11 +51,53 @@ defmodule Akedia.Workers.Weather do
     |> HTTPoison.get!()
     |> Map.get(:body)
     |> Jason.decode!()
-    |> Map.get("currently")
   end
 
   defp to_celsius(temp) do
     (temp - 32) * (5 / 9)
+  end
+
+  defp do_weather_fetch(state) do
+    weather =
+      state
+      |> fetch_weather()
+      |> get_weather()
+
+    IO.inspect(weather)
+
+    schedule_weather_fetch()
+    Map.put(state, :weather, weather)
+  end
+
+  def get_weather(data) do
+    temperature =
+      data
+      |> Map.get("currently")
+      |> Map.get("temperature")
+      |> to_celsius()
+      |> Float.round(1)
+
+    icon =
+      data
+      |> Map.get("currently")
+      |> Map.get("icon")
+
+    text_now =
+      data
+      |> Map.get("currently")
+      |> Map.get("summary")
+
+    text_hourly =
+      data
+      |> Map.get("hourly")
+      |> Map.get("summary")
+
+    %{
+      icon: icon,
+      temperature: temperature,
+      text_now: text_now,
+      text_hourly: text_hourly
+    }
   end
 
   defp schedule_weather_fetch do

@@ -15,7 +15,7 @@ defmodule Akedia.Application do
       # Start the Quantum Scheduler
       Akedia.Scheduler,
       # Start the Weather GenServer
-      # {Akedia.Workers.Weather, %{}}
+      {Akedia.Workers.Weather, %{}}
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
