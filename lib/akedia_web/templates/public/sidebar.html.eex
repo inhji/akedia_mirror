@@ -1,5 +1,5 @@
 <div class="widget">
-  <h3 class="title">me_elsewhere()</h3>
+  <h3 class="title">elsewhere()</h3>
 
   <div class="menu">
     <ul class="menu-list">
@@ -12,6 +12,14 @@
     <% end %>
     </ul>
   </div>
+</div>
+
+<div class="widget">
+  <h3 class="title">search()</h3>
+
+  <%= form_for @conn, Routes.search_path(@conn, :search), [method: :get], fn f -> %>
+    <%= search_input f, :query, class: "input" %>
+  <% end %>
 </div>
 
 <div class="widget">

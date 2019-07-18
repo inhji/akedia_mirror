@@ -20,6 +20,12 @@ defmodule AkediaWeb.PublicController do
     )
   end
 
+  def now(conn, _params) do
+    weather = Akedia.Workers.Weather.get_weather()
+
+    render(conn, "now.html", weather: weather)
+  end
+
   def tagged(conn, %{"topic" => topic}) do
     topic = Akedia.Content.get_topic!(topic)
 
@@ -38,7 +44,7 @@ defmodule AkediaWeb.PublicController do
   end
 
   def plug_assigns(conn, _opts) do
-    topics = Akedia.Content.list_topics(15)
+    topics = Akedia.Content.list_top_topics(15)
     last_listen = Akedia.Listens.listens(1)
 
     conn
