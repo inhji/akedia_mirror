@@ -13,7 +13,11 @@ config :elixir,
 config :akedia,
   ecto_repos: [Akedia.Repo]
 
-config :akedia, Akedia.Settings, site_title: "Inhji.de"
+config :akedia, Akedia.Settings, 
+  site_title: "Inhji.de",
+  # Uses the Darksky API (https://darksky.net)
+  weather_apikey: "5bf714000f441062afe7e92b9b64d3dc",
+  weather_location: "50.583830,8.677890"
 
 config :akedia, Akedia.Scheduler,
   jobs: [
