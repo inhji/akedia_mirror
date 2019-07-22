@@ -37,6 +37,7 @@ defmodule AkediaWeb.Router do
     get "/", PublicController, :index
     get "/tagged-with/:topic", PublicController, :tagged
     get "/now", PublicController, :now
+    get "/stream", PublicController, :stream
 
     get "/topics", TopicController, :index
     get "/search", SearchController, :search

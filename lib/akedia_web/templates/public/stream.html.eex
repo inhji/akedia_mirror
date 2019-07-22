@@ -1,0 +1,18 @@
+<%= if @page_number == 1 do %>
+	<%= render "feed_pinned.html",
+		conn: @conn,
+		entities: @pinned,
+		current_user: @current_user %>
+<% end %>
+
+<%= render "feed.html",
+	conn: @conn,
+	entities: @entities,
+	current_user: @current_user %>
+
+<%= if @total_pages != 1 do %>
+	<%= pagination_links @page,
+		previous: ~E(<i class="fa fa-caret-left" aria-hidden="true"></i>),
+		next: ~E(<i class="fa fa-caret-right" aria-hidden="true"></i>)
+	%>
+<% end %>

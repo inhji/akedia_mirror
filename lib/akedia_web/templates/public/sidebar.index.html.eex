@@ -1,0 +1,28 @@
+<div class="card">
+	<div class="card-content">
+		<%= if @weather do %>
+			<div class="media">
+				<figure class="media-left">
+					<p class="image is-32x32">
+						<img src="<%= Routes.static_path(@conn, "/images/weather/#{@weather.icon}.svg")  %>">
+					</p>
+				</figure>
+				<div class="media-content">
+					<div class="content">
+						<p>
+							Right now it's <%= @weather.temperature %> °C and <%= @weather.text_now %>
+						</p>
+					</div>
+				</div>
+			</div>
+		<% else %>
+			<div>Weather still loading...</div>	
+		<% end %>
+	</div>
+</div>
+
+<div class="card">
+  <div class="card-content">
+  	<%= render SharedView, "listens/listen.html", conn: @conn, listen: @last_listen %>
+  </div>
+</div>

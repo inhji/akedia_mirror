@@ -42,8 +42,16 @@ $navbar-item-active-color-dark: $primary;
 
 nav.navbar {
   .navbar-brand {
-    svg g {
-      fill: $white;
+    a {
+        svg g {
+          fill: $black;
+        }
+
+      &.is-active {
+        svg g {
+          fill: $primary;
+        }
+      }
     }
   }
 }
@@ -99,6 +107,10 @@ nav.navbar {
 }
 
 #sidebar {
+  .card {
+    margin-bottom: 1rem;
+  }
+
   .widget {
     margin-bottom: 3rem;
 

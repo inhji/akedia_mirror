@@ -4,11 +4,18 @@ defmodule AkediaWeb.PublicController do
   plug :plug_onboard
   plug :plug_assigns
 
+
   def index(conn, params) do
+    weather = Akedia.Workers.Weather.get_weather()
+
+    render(conn, "index.html", weather: weather)
+  end
+
+  def stream(conn, params) do
     page = Akedia.Content.list_entities_paginated(params)
     pinned = Akedia.Content.list_pinned_entities()
 
-    render(conn, "index.html",
+    render(conn, "stream.html",
       conn: conn,
       page: page,
       entities: page.entries,
@@ -21,9 +28,7 @@ defmodule AkediaWeb.PublicController do
   end
 
   def now(conn, _params) do
-    weather = Akedia.Workers.Weather.get_weather()
-
-    render(conn, "now.html", weather: weather)
+    render(conn, "now.html", [])
   end
 
   def tagged(conn, %{"topic" => topic}) do

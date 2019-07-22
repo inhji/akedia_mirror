@@ -16,9 +16,14 @@
 
       <h2 class="subtitle has-text-grey p-note"><%= to_html(@current_user.tagline) %></h2>
 
-      <div class="content">
-        <a href="<%= Routes.public_path(@conn, :now) %>">What I'm up to right nowww</a>
-      </div>
+      <p class="social">
+        <% public_profiles = Enum.filter(@current_user.profiles, fn p -> p.public end) %>
+        <%= for profile <- @current_user.profiles do %>
+          <a href="<%= profile.url %>" target="_blank" rel="<%= profile.rel_value %>">
+            <i class="<%= profile.icon %> fa-lg"></i>
+          </a>
+        <% end %>
+      </p>
     </div>
   </div>
 </div>

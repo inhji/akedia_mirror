@@ -15,10 +15,11 @@
             <p class="notification is-danger" role="alert"><%= get_flash(@conn, :error) %></p>
             <%= render @view_module, @view_template, assigns %>
           </main>
+          <%= if has_partial?("sidebar", assigns) do %>
           <aside class="column is-one-third" id="sidebar">
-            <%= render_existing(@view_module, "sidebar." <> @view_template, assigns) ||
-                render_existing(@view_module, "sidebar.html", assigns) %>
+            <%= raw(get_partial("sidebar", assigns)) %>
           </aside>
+          <% end %>
         </div>
       </div>
     </div>
