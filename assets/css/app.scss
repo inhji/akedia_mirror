@@ -12,7 +12,6 @@ $primary: $red;
 $link: $dark;
 $navbar-item-active-color: $primary;
 $menu-item-active-background-color: $primary;
-$footer-background-color: $black;
 $tabs-link-active-border-bottom-color: $primary;
 
 // Bulma Prefers-Dark Overrides
@@ -41,16 +40,12 @@ $navbar-item-active-color-dark: $primary;
 ::selection { background: $primary; color: $white; }
 
 nav.navbar {
+  border-bottom: 2px solid $primary;
+
   .navbar-brand {
     a {
-        svg g {
-          fill: $black;
-        }
-
-      &.is-active {
-        svg g {
-          fill: $primary;
-        }
+      svg g {
+        fill: $black;
       }
     }
   }
@@ -125,14 +120,6 @@ nav.navbar {
       display: block;
       margin-top: 1rem;
     }
-  }
-}
-
-#footer {
-  color: $grey-light;
-
-  a {
-    color: $red;
   }
 }
 

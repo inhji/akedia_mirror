@@ -1,1 +1,1 @@
-<%= render SharedView, "hcard.html", conn: @conn, current_user: @current_user %>
+<%= render SharedView, "hcard.html", assigns %>

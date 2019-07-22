@@ -1,25 +1,31 @@
+<%= if @logged_in do %>
 <div class="card">
-	<div class="card-content">
-		<%= if @weather do %>
-			<div class="media">
-				<figure class="media-left">
-					<p class="image is-32x32">
-						<img src="<%= Routes.static_path(@conn, "/images/weather/#{@weather.icon}.svg")  %>">
-					</p>
-				</figure>
-				<div class="media-content">
-					<div class="content">
-						<p>
-							Right now it's <%= @weather.temperature %> °C and <%= @weather.text_now %>
-						</p>
-					</div>
-				</div>
-			</div>
-		<% else %>
-			<div>Weather still loading...</div>	
-		<% end %>
+	<div class="card-content">		
+    <%= link "Profile", to: Routes.user_path(@conn, :show), class: "button" %>
 	</div>
 </div>
+<% end %>
+
+<%= if @weather do %>
+<div class="card">
+	<div class="card-content">	
+		<div class="media">
+			<figure class="media-left">
+				<p class="image is-32x32">
+					<img src="<%= Routes.static_path(@conn, "/images/weather/#{@weather.icon}.svg")  %>">
+				</p>
+			</figure>
+			<div class="media-content">
+				<div class="content">
+					<p>
+						Right now it's <%= @weather.temperature %> °C and <%= String.downcase(@weather.text_now) %>.
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<% end %>
 
 <div class="card">
   <div class="card-content">

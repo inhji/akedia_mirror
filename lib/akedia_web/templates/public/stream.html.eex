@@ -1,3 +1,5 @@
+<h1 class="title">Stream</h1>
+
 <%= if @page_number == 1 do %>
 	<%= render "feed_pinned.html",
 		conn: @conn,

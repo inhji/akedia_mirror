@@ -1,7 +1,9 @@
 <%= render SharedView, "nav/user_nav.html", assigns %>
 
-<%= render SharedView, "hcard.html", conn: @conn, current_user: @current_user %>
+<%= render SharedView, "hcard.html", assigns %>
 
 <hr />
 
 <%= link "Edit", to: Routes.user_path(@conn, :edit), class: "button is-info" %>
+
+<%= link "Logout", to: Routes.session_path(@conn, :delete), method: "delete", data: [confirm: "ಥ‿ಥ\nR u sure?"], class: "button is-danger" %>
