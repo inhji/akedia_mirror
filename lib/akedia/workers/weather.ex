@@ -1,5 +1,6 @@
 defmodule Akedia.Workers.Weather do
   use GenServer
+  require Logger
 
   @fetch_interval 600_000 # 10 Minutes
 
@@ -27,7 +28,7 @@ defmodule Akedia.Workers.Weather do
       |> Map.put(:key, settings[:weather_apikey])
       |> Map.put(:location, settings[:weather_location])
 
-    schedule_weather_fetch()
+    schedule_weather_fetch(10_000)
     {:ok, state}
   end
 
@@ -63,7 +64,7 @@ defmodule Akedia.Workers.Weather do
       |> fetch_weather()
       |> get_weather()
 
-    IO.inspect(weather)
+    Logger.info("Weather fetched!")
 
     schedule_weather_fetch()
     Map.put(state, :weather, weather)
@@ -102,5 +103,9 @@ defmodule Akedia.Workers.Weather do
 
   defp schedule_weather_fetch do
     Process.send_after(self(), :weather_fetch, @fetch_interval)
+  end
+
+  defp schedule_weather_fetch(wait_time) do
+    Process.send_after(self(), :weather_fetch, wait_time)
   end
 end
