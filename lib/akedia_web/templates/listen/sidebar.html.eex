@@ -1,44 +1,27 @@
-<div class="widget">
-  <h3 class="title">Stats</h3>
-
-  <p>Listens recorded: <%= @total_entries %></p>
-  <p>First Listen: <%= date_fuzzy(@oldest_listen.listened_at) %> <span class="has-text-grey">(<%= date_pretty(@oldest_listen.listened_at) %>)</span></p>
+<div class="card">
+  <div class="card-content">
+    <p>Listens recorded: <%= @total_entries %></p>
+    <p>First Listen: <%= date_fuzzy(@oldest_listen.listened_at) %> <span class="has-text-grey">(<%= date_pretty(@oldest_listen.listened_at) %>)</span></p>
+  </div>
 </div>
 
-<div class="widget">
-  <h3 class="title">Top Tracks this week</h3>
-
-  <%= for item <- @tracks_weekly do %>
-  <div class="media is-marginless is-paddingless">
-    
-    <div class="media-content">
-      <div>
-        <strong><%= item.track %></strong>
-        <span>(<%= item.listens %>)</span>
+<div class="card">
+  <div class="card-content">
+    <%= for item <- @albums_weekly do %>
+    <div class="media is-marginless is-paddingless">
+      <div class="media-left">
+        <figure class="image is-64x64">
+          <img src="<%= cover_url(item.album) %>">
+        </figure>
       </div>
-      <progress class="progress" value="<%= item.listens %>" max="<%= @tracks_max %>"></progress>
-    </div>
-  </div>
-  <% end %>
-</div>
-
-<div class="widget">
-  <h3 class="title">Top Albums this week</h3>
-
-  <%= for item <- @albums_weekly do %>
-  <div class="media is-marginless is-paddingless">
-    <div class="media-left">
-      <figure class="image is-64x64">
-        <img src="<%= cover_url(item.album) %>">
-      </figure>
-    </div>
-    <div class="media-content">
-      <div>
-        <strong><%= item.album.name %></strong>
-        <span>(<%= item.listens %>)</span>
+      <div class="media-content">
+        <div>
+          <strong><%= item.album.name %></strong>
+          <span>(<%= item.listens %>)</span>
+        </div>
+        <progress class="progress" value="<%= item.listens %>" max="<%= @albums_max %>"></progress>
       </div>
-      <progress class="progress" value="<%= item.listens %>" max="<%= @albums_max %>"></progress>
     </div>
+    <% end %>
   </div>
-  <% end %>
 </div>

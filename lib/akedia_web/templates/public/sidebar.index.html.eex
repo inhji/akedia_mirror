@@ -1,18 +1,32 @@
 <%= if @logged_in do %>
 <div class="card">
 	<div class="card-content">		
-    <%= link "Profile", to: Routes.user_path(@conn, :show), class: "button" %>
+    <aside class="menu">
+      <p class="menu-label">
+        User
+      </p>
+      <ul class="menu-list">
+        <li><%= link "Profile", to: Routes.user_path(@conn, :show) %></li>
+      </ul>
+      <p class="menu-label">
+        Administration
+      </p>
+       <ul class="menu-list">
+        <li><%= link "New Bookmark", to: Routes.bookmark_path(@conn, :new) %></li>
+        <li><%= link "New Post", to: Routes.post_path(@conn, :new) %></li>
+      </ul>
+    </aside>
 	</div>
 </div>
 <% end %>
 
 <%= if @weather do %>
-<div class="card">
+<div class="card weather">
 	<div class="card-content">	
 		<div class="media">
 			<figure class="media-left">
-				<p class="image is-48x48">
-					<img src="<%= Routes.static_path(@conn, "/images/weather/#{@weather.icon}.svg")  %>">
+				<p class="image is-64x64 <%= @weather.icon %>">
+					<%= render_existing SharedView, "weather/#{String.replace(@weather.icon, "-", "_")}.html" %>
 				</p>
 			</figure>
 			<div class="media-content">
@@ -27,7 +41,7 @@
 </div>
 <% end %>
 
-<div class="card">
+<div class="card listens">
   <div class="card-content">
   	<%= render SharedView, "listens/listen.html", conn: @conn, listen: @last_listen %>
   </div>
