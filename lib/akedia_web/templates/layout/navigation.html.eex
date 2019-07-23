@@ -33,10 +33,29 @@
 			</div>
 
 			<div class="navbar-end">
+				<%= if @logged_in do %>
+					<%= active_link @conn,
+							to: Routes.user_path(@conn, :show),
+							class_active: "is-active",
+							class: "navbar-item" do %>
+							<span class="icon">
+								<i class="fa fa-user"></i>
+							</span>
+							<span>User</span>
+					<% end %>
+				<% else %>
+					<%= active_link @conn,
+							to: Routes.session_path(@conn, :new),
+							class_active: "is-active",
+							class: "navbar-item" do %>
+							<span>Login</span>
+					<% end %>
+				<% end %>
+
 				<%= form_for @conn, Routes.search_path(@conn, :search), [method: :get, class: "navbar-item"], fn f -> %>
 			    <div class="field">
 			    	<p class="control has-icons-left">
-			    		<%= search_input f, :query, class: "input is-rounded", placeholder: "Search..." %>
+			    		<%= search_input f, :query, class: "input is-rounded", placeholder: "Search" %>
 			    		<span class="icon is-small is-left">
 			    			<i class="fa fa-search"></i>
 			    		</span>
