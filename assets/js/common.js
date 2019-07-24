@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
   if ($weatherCanvas) {
     const icon = $weatherCanvas.dataset["icon"]
-    const skyconsId = icon.toUpperCase().replace("-", "_")
+    const skyconsId = icon.toUpperCase().replace(/-/g, "_")
 
     skycons.add("weather", Skycons[skyconsId])
     skycons.play()
