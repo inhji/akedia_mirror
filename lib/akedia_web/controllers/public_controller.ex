@@ -7,8 +7,9 @@ defmodule AkediaWeb.PublicController do
 
   def index(conn, params) do
     weather = Akedia.Workers.Weather.get_weather()
+    latest_post = Akedia.Content.get_latest_post()
 
-    render(conn, "index.html", weather: weather)
+    render(conn, "index.html", weather: weather, latest_post: latest_post)
   end
 
   def stream(conn, params) do

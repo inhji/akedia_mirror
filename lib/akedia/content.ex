@@ -308,6 +308,14 @@ defmodule Akedia.Content do
     |> Repo.preload(@preloads)
   end
 
+  def get_latest_post() do
+    Post
+    |> order_by(desc: :inserted_at)
+    |> limit(1)
+    |> Repo.one!()
+    |> Repo.preload(@preloads)
+  end
+
   def create_post(attrs \\ %{}, is_published \\ true) do
     create_with_entity(Post, attrs, %{is_published: is_published})
   end

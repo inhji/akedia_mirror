@@ -1,1 +1,7 @@
 <%= render SharedView, "hcard.html", assigns %>
+
+<div class="card">
+	<div class="card-content">
+		<%= render PostView, "post.html", conn: @conn, current_user: @current_user, post: @latest_post %>
+	</div>
+</div>
