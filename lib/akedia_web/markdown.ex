@@ -15,11 +15,8 @@ defmodule AkediaWeb.Markdown do
   end
 
   def to_html(markdown) do
-    {blocks, context} = Earmark.parse(markdown, @opts)
-
-    blocks
-    |> replace_shortcodes()
-    |> render_markdown!(context)
+    markdown
+    |> Earmark.as_html!()
     |> Phoenix.HTML.raw()
   end
 
@@ -30,29 +27,29 @@ defmodule AkediaWeb.Markdown do
     html
   end
 
-  def render_markdown!(blocks, context) do
-    {_, html} = context.options.renderer.render(blocks, context)
-    html
-  end
+  # def render_markdown!(blocks, context) do
+  #   {_, html} = context.options.renderer.render(blocks, context)
+  #   html
+  # end
 
-  def replace_shortcodes(blocks) do
-    blocks
-    |> Enum.map(fn block ->
-      case block do
-        %{blocks: blocks} ->
-          %{block | blocks: replace_shortcodes(blocks)}
+  # def replace_shortcodes(blocks) do
+  #   blocks
+  #   |> Enum.map(fn block ->
+  #     case block do
+  #       %{blocks: blocks} ->
+  #         %{block | blocks: replace_shortcodes(blocks)}
 
-        %{lines: lines} ->
-          %{block | lines: Enum.map(lines, &replace_shortcode/1)}
+  #       %{lines: lines} ->
+  #         %{block | lines: Enum.map(lines, &replace_shortcode/1)}
 
-        _ ->
-          block
-      end
-    end)
-  end
+  #       _ ->
+  #         block
+  #     end
+  #   end)
+  # end
 
-  def replace_shortcode(line) do
-    line
-    |> String.replace(":done:", "👍")
-  end
+  # def replace_shortcode(line) do
+  #   line
+  #   |> String.replace(":done:", "👍")
+  # end
 end
