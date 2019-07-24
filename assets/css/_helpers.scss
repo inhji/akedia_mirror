@@ -12,6 +12,10 @@
   border-radius: $radius-rounded;
 }
 
+.is-slightly-rounded {
+  border-radius: 5px;
+}
+
 .media.is-dense {
   margin-top: 0;
   padding-top: 0;
