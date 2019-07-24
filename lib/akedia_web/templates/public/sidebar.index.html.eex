@@ -26,7 +26,7 @@
 		<div class="media">
 			<figure class="media-left">
 				<p class="image is-64x64">
-					<canvas id="weather" width="64" height="64" data-icon="<%= @weather.icon %>"></canvas>
+					<canvas id="weather" width="48" height="48" data-icon="<%= @weather.icon %>" class="<%= @weather.icon %>"></canvas>
 				</p>
 			</figure>
 			<div class="media-content">

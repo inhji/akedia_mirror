@@ -108,7 +108,27 @@ nav.navbar {
 
   .weather {
     canvas#weather {
-      padding-top: 0.3rem;
+      padding: 8px;
+      border-radius: 5px;
+
+      &.clear-night,
+      &.partly-cloudy-night {
+        background: #001eb3;
+      }
+
+      &.cloudy,
+      &.clear-day,
+      &.partly-cloudy-day,
+      &.rain,
+      &.sleet,
+      &.snow,
+      &.wind {
+        background: #00aaff;
+      }
+
+      &.fog {
+        background: grey;
+      }
     }
   }
 
