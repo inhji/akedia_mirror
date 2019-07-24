@@ -11,6 +11,7 @@ import css from "../css/app.scss"
 //
 import "phoenix_html"
 import Prism from 'prismjs'
+import Skycons from '../vendor/skycons.js'
 
 // Register Service Worker
 if ('serviceWorker' in navigator) {
@@ -25,6 +26,20 @@ if ('serviceWorker' in navigator) {
 document.addEventListener('DOMContentLoaded', function() {
   // Highlight Syntax
   Prism.highlightAll()
+
+  // Animated Weather
+  const $weatherCanvas = document.querySelector('canvas#weather')
+  const skycons = new Skycons({
+    monochrome: false
+  })
+
+  if ($weatherCanvas) {
+    const icon = $weatherCanvas.dataset["icon"]
+    const skyconsId = icon.toUpperCase().replace("-", "_")
+
+    skycons.add("weather", Skycons[skyconsId])
+    skycons.play()
+  }
 
   // Get all "navbar-burger" elements
   const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);

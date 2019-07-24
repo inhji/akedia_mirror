@@ -107,15 +107,8 @@ nav.navbar {
   }
 
   .weather {
-    .image {
-      background: transparent;
-      border-radius: 5px;
-    }
-
-    .image {
-      &.clear-night { background: navy; }
-      &.clear-day { background: lightblue; }
-      &.cloudy { background: grey; }
+    canvas#weather {
+      padding-top: 0.3rem;
     }
   }
 

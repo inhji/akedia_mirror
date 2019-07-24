@@ -25,8 +25,8 @@
 	<div class="card-content">	
 		<div class="media">
 			<figure class="media-left">
-				<p class="image is-64x64 <%= @weather.icon %>">
-					<%= render_existing SharedView, "weather/#{String.replace(@weather.icon, "-", "_")}.html" %>
+				<p class="image is-64x64">
+					<canvas id="weather" width="64" height="64" data-icon="<%= @weather.icon %>"></canvas>
 				</p>
 			</figure>
 			<div class="media-content">
