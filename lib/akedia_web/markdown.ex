@@ -1,7 +1,5 @@
 defmodule AkediaWeb.Markdown do
-  alias Earmark.Options
-
-  @opts %Options{
+  @opts %Earmark.Options{
     footnotes: true,
     code_class_prefix: "language-",
     breaks: true
@@ -16,7 +14,7 @@ defmodule AkediaWeb.Markdown do
 
   def to_html(markdown) do
     markdown
-    |> Earmark.as_html!()
+    |> Earmark.as_html!(@opts)
     |> Phoenix.HTML.raw()
   end
 
@@ -26,30 +24,4 @@ defmodule AkediaWeb.Markdown do
     {:safe, html} = to_html(markdown)
     html
   end
-
-  # def render_markdown!(blocks, context) do
-  #   {_, html} = context.options.renderer.render(blocks, context)
-  #   html
-  # end
-
-  # def replace_shortcodes(blocks) do
-  #   blocks
-  #   |> Enum.map(fn block ->
-  #     case block do
-  #       %{blocks: blocks} ->
-  #         %{block | blocks: replace_shortcodes(blocks)}
-
-  #       %{lines: lines} ->
-  #         %{block | lines: Enum.map(lines, &replace_shortcode/1)}
-
-  #       _ ->
-  #         block
-  #     end
-  #   end)
-  # end
-
-  # def replace_shortcode(line) do
-  #   line
-  #   |> String.replace(":done:", "👍")
-  # end
 end
