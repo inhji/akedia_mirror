@@ -30,6 +30,13 @@
 						class: "navbar-item" do %>
 						Now
 				<% end %>
+
+				<%= active_link @conn,
+						to: Routes.public_path(@conn, :about),
+						class_active: "is-active",
+						class: "navbar-item" do %>
+						About
+				<% end %>
 			</div>
 
 			<div class="navbar-end">

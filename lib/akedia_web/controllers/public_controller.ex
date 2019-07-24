@@ -31,6 +31,10 @@ defmodule AkediaWeb.PublicController do
     render(conn, "now.html", [])
   end
 
+  def about(conn, _params) do
+    render(conn, "about.html", [])
+  end
+
   def tagged(conn, %{"topic" => topic}) do
     topic = Akedia.Content.get_topic!(topic)
 
