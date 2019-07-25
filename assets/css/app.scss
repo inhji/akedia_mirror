@@ -219,6 +219,16 @@ article {
 
 // This needs to be last to override all other styles
 @include prefers-scheme(dark) {
+  nav.navbar {
+    .navbar-brand {
+      a {
+        svg g {
+          fill: $white;
+        }
+      }
+    }
+  }
+
   .pagination-link.is-current {
     color: $white;
     background-color: $dark;
