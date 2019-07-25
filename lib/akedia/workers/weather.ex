@@ -2,7 +2,8 @@ defmodule Akedia.Workers.Weather do
   use GenServer
   require Logger
 
-  @fetch_interval 600_000 # 10 Minutes
+  # 10 Minutes
+  @fetch_interval 600_000
 
   # Client
 
@@ -48,7 +49,12 @@ defmodule Akedia.Workers.Weather do
   end
 
   defp fetch_weather(state) do
-    "https://api.darksky.net/forecast/#{state[:key]}/#{state[:location]}"
+    url = "https://api.darksky.net/forecast/#{state[:key]}/#{state[:location]}"
+
+    Logger.info("Fetching weather...")
+    Logger.info("URL: #{url}")
+
+    url
     |> HTTPoison.get!()
     |> Map.get(:body)
     |> Jason.decode!()
@@ -65,6 +71,7 @@ defmodule Akedia.Workers.Weather do
       |> get_weather()
 
     Logger.info("Weather fetched!")
+    Logger.info("#{inspect(weather)}")
 
     schedule_weather_fetch()
     Map.put(state, :weather, weather)
@@ -78,27 +85,50 @@ defmodule Akedia.Workers.Weather do
       |> to_celsius()
       |> Float.round(1)
 
+    now =
+      data
+      |> Map.get("currently")
+      |> Map.get("summary")
+
+    summary =
+      data
+      |> today()
+      |> Map.get("summary")
+
     icon =
       data
-      |> Map.get("currently")
+      |> today()
       |> Map.get("icon")
 
-    text_now =
+    max =
       data
-      |> Map.get("currently")
-      |> Map.get("summary")
+      |> today()
+      |> Map.get("temperatureHigh")
+      |> to_celsius()
+      |> Float.round(1)
 
-    text_hourly =
+    min =
       data
-      |> Map.get("hourly")
-      |> Map.get("summary")
+      |> today()
+      |> Map.get("temperatureLow")
+      |> to_celsius()
+      |> Float.round(1)
 
     %{
-      icon: icon,
       temperature: temperature,
-      text_now: text_now,
-      text_hourly: text_hourly
+      now: now,
+      summary: summary,
+      icon: icon,
+      min: min,
+      max: max
     }
+  end
+
+  def today(data) do
+    data
+    |> Map.get("daily")
+    |> Map.get("data")
+    |> List.first()
   end
 
   defp schedule_weather_fetch do
