@@ -9,6 +9,7 @@ $primary: $red;
 @import "~bulma/sass/utilities/_all";
 
 // Bulma Overrides
+$body-background: $white;
 $link: $dark;
 $navbar-item-active-color: $primary;
 $menu-item-active-background-color: $primary;
@@ -96,7 +97,7 @@ nav.navbar {
 
   .content {
     a {
-      @include nice-underline($white);
+      @include nice-underline;
     }
   }
 }
@@ -167,7 +168,7 @@ article {
 
   .content {
     a {
-      @include nice-underline($white);
+      @include nice-underline;
     }
 
     a.footnote, a.reversefootnote {
@@ -243,10 +244,6 @@ article {
 
   article {
     .content {
-      a {
-        @include nice-underline($body-background-dark);
-      }
-
       a.footnote, a.reversefootnote {
         color: findColorInvert($primary);
         background: findColorInvert($white);
