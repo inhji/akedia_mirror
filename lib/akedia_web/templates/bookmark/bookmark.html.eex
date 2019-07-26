@@ -28,7 +28,7 @@
         </a>
       </h3>
       <div class="content e-content">
-        <%= to_html(@bookmark.content) %>
+        <%= to_html(@bookmark) %>
       </div>
       <%= render SharedView, "post/post_meta.html",
           conn: @conn,
