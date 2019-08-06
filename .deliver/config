@@ -1,12 +1,12 @@
 APP="akedia"
 
-BUILD_HOST="inhji.de"
+BUILD_HOST="pi3.local"
 BUILD_USER="akedia"
-BUILD_AT="/home/akedia/akedia/build"
+BUILD_AT="/opt/akedia/build"
 
-PRODUCTION_HOSTS="inhji.de"
+PRODUCTION_HOSTS="pi3.local"
 PRODUCTION_USER="akedia"
-DELIVER_TO="/home/akedia/akedia/release"
+DELIVER_TO="/opt/akedia/release"
 
 AUTO_VERSION=git-revision
 START_DEPLOY=true
