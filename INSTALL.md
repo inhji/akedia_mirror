@@ -2,6 +2,82 @@
 
 ## Server
 
+### Raspberry Pi (with Raspbian 10 Buster)
+
+Install dependencies
+
+```bash
+# Base packages
+apt install nginx build-essential imagemagick software-properties-common postgresql postgresql-contrib
+
+# Certbot
+add-apt-repository universe
+add-apt-repository ppa:certbot/certbot
+apt install certbot python-certbot-nginx
+
+# Node 11, see https://github.com/nodesource/distributions#deb
+curl -sL https://deb.nodesource.com/setup_11.x | sudo -E bash -
+sudo apt-get install -y nodejs
+```
+
+Add Akedia User and App Dir
+
+```bash
+sudo useradd -r -s /bin/false -m -d /var/lib/pleroma -U pleroma
+sudo mkdir /opt/akedia
+sudo chown -R akedia:akedia /opt/akedia
+```
+
+Install asdf-vm
+
+```bash
+# Clone asdf
+sudo -Hu akedia $SHELL
+git clone https://github.com/asdf-vm/asdf.git ~/.asdf
+cd ~/.asdf
+git checkout "$(git describe --abbrev=0 --tags)"
+
+# Add to bashrc
+echo -e '\n. $HOME/.asdf/asdf.sh' >> ~/.bashrc
+echo -e '\n. $HOME/.asdf/completions/asdf.bash' >> ~/.bashrc
+source ~/.bashrc
+
+# Add plugins
+asdf plugin-add erlang
+asdf plugin-add elixir
+```
+
+Install Erlang
+
+```bash
+sudo -Hu akedia $SHELL
+asdf list-all erlang
+# > This will take several hours
+asdf install erlang <version>
+```
+
+Install Elixir
+
+```bash
+sudo -Hu akedia $SHELL
+asdf list-all elixir
+asdf install elixir <version>
+```
+
+Initial Directory Structure
+
+```bash
+sudo -Hu akedia $SHELL
+mkdir -p /opt/akedia/{config,build,release,tzdata/release_ets}
+# Add tzdata database
+cd /opt/akedia/tzdata/release_ets
+wget https://github.com/lau/tzdata/blob/master/priv/release_ets/2019a.v2.ets
+```
+
+
+
+### Ubuntu 18.04 LTS
+
 ```bash
 # Basis Pakete
 apt install nginx build-essential imagemagick software-properties-common postgresql postgresql-contrib
