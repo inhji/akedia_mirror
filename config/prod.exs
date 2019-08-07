@@ -20,9 +20,6 @@ config :akedia, AkediaWeb.Endpoint,
 # Do not print debug messages in production
 config :logger, level: :debug
 
-# Don't store tzdata data in priv in production
-config :tzdata, :data_dir, "/home/akedia/akedia/tzdata"
-
 # ## SSL Support
 #
 # To get SSL working, you will need to add the `https` key
