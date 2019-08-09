@@ -23,7 +23,7 @@ sudo apt-get install -y nodejs
 Add Akedia User and App Dir
 
 ```bash
-sudo useradd -r -s /bin/false -m -d /var/lib/pleroma -U pleroma
+sudo useradd -r -s /bin/false -m -d /var/lib/akedia -U akedia
 sudo mkdir /opt/akedia
 sudo chown -R akedia:akedia /opt/akedia
 ```
