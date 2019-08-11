@@ -52,6 +52,8 @@ sudo chown -R akedia:akedia /opt/akedia
 ```bash
 sudo -Hu akedia $SHELL
 mkdir -p /opt/akedia/{config,build,release,tzdata/release_ets}
+cd /opt/akedia/build
+git init
 # Add tzdata database
 cd /opt/akedia/tzdata/release_ets
 wget https://github.com/lau/tzdata/blob/master/priv/release_ets/2019a.v2.ets
