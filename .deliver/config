@@ -28,7 +28,7 @@ pre_erlang_get_and_update_deps() {
 pre_erlang_generate_release() {
   status "Removing stale start_erl.data"
   __sync_remote "
-    rm '$DELIVER_TO/var/start_erl.data'
+    rm '/opt/akedia/release/akedia/var/start_erl.data'
   "
 }
 
