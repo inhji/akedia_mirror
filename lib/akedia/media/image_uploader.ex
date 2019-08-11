@@ -2,7 +2,7 @@ defmodule Akedia.Media.ImageUploader do
   use Arc.Definition
   use Arc.Ecto.Definition
 
-  @versions [:original, :thumb, :mini]
+  @versions [:original, :thumb, :mini, :wide]
 
   # Whitelist file extensions:
   def validate({file, _}) do
@@ -11,6 +11,10 @@ defmodule Akedia.Media.ImageUploader do
 
   def transform(:thumb, _) do
     {:convert, "-strip -thumbnail 500x500^ -gravity center -extent 500x500 -format png", :png}
+  end
+
+  def transform(:wide, _) do
+    {:convert, "-strip -thumbnail 600x450^ -gravity center -extent 600x450 -format png", :png}
   end
 
   def transform(:mini, _) do

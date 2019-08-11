@@ -1,24 +1,44 @@
+
 <section class="posts h-feed">
 <%= for entity <- @entities do %>
   <%= if entity.bookmark do %>
-    <%= render BookmarkView, "bookmark.html",
-        conn: @conn,
-        bookmark: entity.bookmark,
-        current_user: @current_user %>
+    <div class="card">
+      <div class="card-content">
+        <%= render BookmarkView, "bookmark.html",
+            conn: @conn,
+            bookmark: entity.bookmark,
+            current_user: @current_user %>
+      </div>
+    </div>
   <% end %>
 
   <%= if entity.post do %>
-    <%= render PostView, "post.html",
-        conn: @conn,
-        post: entity.post,
-        current_user: @current_user %>
+    <div class="card">
+      <%= if entity.image do %>
+      <div class="card-image">
+        <figure class="image is-4by3">
+          <img src="<%= image_url(entity.image, :wide) %>">
+        </figure>
+      </div>
+      <% end %>
+      <div class="card-content">
+        <%= render PostView, "post.html",
+            conn: @conn,
+            post: entity.post,
+            current_user: @current_user %>
+      </div>
+    </div>
   <% end %>
 
   <%= if entity.like do %>
-    <%= render LikeView, "like.html",
-        conn: @conn,
-        like: entity.like,
-        current_user: @current_user %>
+    <div class="card">
+      <div class="card-content">
+        <%= render LikeView, "like.html",
+            conn: @conn,
+            like: entity.like,
+            current_user: @current_user %>
+      </div>
+    </div>
   <% end %>
 <% end %>
 </section>

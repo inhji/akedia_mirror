@@ -12,13 +12,13 @@ defmodule Akedia.Content.Entity do
     field :bridgy_fed, :boolean, default: false
 
     many_to_many(:topics, Topic, join_through: "entity_topics")
-    many_to_many(:images, Image, join_through: "entity_images")
 
     has_one :bookmark, Bookmark
     has_one :page, Page
     has_one :story, Story
     has_one :like, Like
     has_one :post, Post
+    has_one :image, Image
 
     has_many :syndications, Syndication
     has_many :mentions, Akedia.Mentions.Mention

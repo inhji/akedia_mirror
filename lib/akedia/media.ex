@@ -16,10 +16,26 @@ defmodule Akedia.Media do
     |> Repo.insert()
   end
 
+  def maybe_create_image(attrs \\ %{}) do
+    if attrs.name do
+      create_image(attrs)
+    end
+  end
+
   def update_image(%Image{} = image, attrs) do
     image
     |> Image.changeset(attrs)
     |> Repo.update()
+  end
+
+  def maybe_update_image(image, attrs) do
+    if attrs.name do
+      if !!image do
+        update_image(image, attrs)
+      else
+        create_image(attrs)
+      end  
+    end
   end
 
   def delete_image(%Image{} = image) do

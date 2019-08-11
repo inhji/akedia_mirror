@@ -6,14 +6,29 @@
         User
       </p>
       <ul class="menu-list">
-        <li><%= link "Profile", to: Routes.user_path(@conn, :show) %></li>
+        <li>
+        	<%= link to: Routes.user_path(@conn, :show) do %>
+						<i class="fa fa-user"></i>
+        		<span>Profile</span>
+        	<% end %>
+        </li>
       </ul>
       <p class="menu-label">
-        Administration
+        Content
       </p>
        <ul class="menu-list">
-        <li><%= link "New Bookmark", to: Routes.bookmark_path(@conn, :new) %></li>
-        <li><%= link "New Post", to: Routes.post_path(@conn, :new) %></li>
+        <li>
+        	<%= link to: Routes.bookmark_path(@conn, :new) do %>
+        		<i class="fa fa-bookmark-o"></i>
+        		<span>New Bookmark</span>
+        	<% end %>
+        </li>
+        <li>
+        	<%= link to: Routes.post_path(@conn, :new) do %>
+        		<i class="fa fa-sticky-note-o"></i>
+        		<span>New Post</span>
+        	<% end %>
+        </li>
       </ul>
     </aside>
 	</div>

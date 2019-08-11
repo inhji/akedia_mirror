@@ -40,17 +40,7 @@
 			</div>
 
 			<div class="navbar-end">
-				<%= if @logged_in do %>
-					<%= active_link @conn,
-							to: Routes.user_path(@conn, :show),
-							class_active: "is-active",
-							class: "navbar-item" do %>
-							<span class="icon">
-								<i class="fa fa-user"></i>
-							</span>
-							<span>User</span>
-					<% end %>
-				<% else %>
+				<%= if !@logged_in do %>
 					<%= active_link @conn,
 							to: Routes.session_path(@conn, :new),
 							class_active: "is-active",

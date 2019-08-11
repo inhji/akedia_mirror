@@ -3,6 +3,7 @@ defmodule AkediaWeb.PostController do
 
   alias Akedia.Content
   alias Akedia.Content.Post
+  alias Akedia.Media
 
   def index(conn, _params) do
     posts = Content.list_posts(is_published: true)
@@ -20,9 +21,15 @@ defmodule AkediaWeb.PostController do
   end
 
   def create(conn, %{"post" => %{"topics" => topics} = post_params}) do
+    IO.inspect(post_params)
+
     case Content.create_post(post_params) do
       {:ok, post} ->
         Content.add_tags(post, topics)
+        Media.maybe_create_image(%{
+          name: Map.get(post_params, "image", nil),
+          entity_id: post.entity_id
+        })
         Que.add(Akedia.Workers.Webmention, post)
 
         conn
@@ -52,7 +59,12 @@ defmodule AkediaWeb.PostController do
 
     case Content.update_post(post, post_params) do
       {:ok, post} ->
+        IO.inspect(post)
         Que.add(Akedia.Workers.Webmention, post)
+        Media.maybe_update_image(post.entity.image, %{
+          name: Map.get(post_params, "image", nil),
+          entity_id: post.entity_id
+        })
 
         conn
         |> put_flash(:info, "Post updated successfully.")

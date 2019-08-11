@@ -9,7 +9,7 @@ defmodule Akedia.Media.Image do
     field :text, :string
     field :path, :string
 
-    many_to_many(:entities, Entity, join_through: "entity_images")
+    belongs_to :entity, Entity
 
     timestamps()
   end
@@ -17,8 +17,8 @@ defmodule Akedia.Media.Image do
   @doc false
   def changeset(image, attrs) do
     image
-    |> cast(attrs, [:text, :path])
+    |> cast(attrs, [:text, :path, :entity_id])
     |> cast_attachments(attrs, [:name], allow_paths: true)
-    |> validate_required([:name, :text, :path])
+    |> validate_required([:name, :entity_id, :path])
   end
 end

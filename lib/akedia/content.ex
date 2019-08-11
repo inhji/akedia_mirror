@@ -14,7 +14,7 @@ defmodule Akedia.Content do
     Syndication
   }
 
-  @preloads [entity: [:topics, :images, :syndications, mentions: [:author]]]
+  @preloads [entity: [:topics, :image, :syndications, mentions: [:author]]]
 
   # Entity
 
@@ -47,6 +47,7 @@ defmodule Akedia.Content do
       on: entity.id == bookmark.entity_id,
       order_by: [desc: :inserted_at],
       preload: [
+        :image,
         like: ^@preloads,
         post: ^@preloads,
         bookmark: [:favicon, ^@preloads]
@@ -128,7 +129,7 @@ defmodule Akedia.Content do
     list_query(Page, opts)
     |> where([p], p.title != "Home")
     |> Repo.all()
-    |> Repo.preload(entity: [:topics, :images, :syndications])
+    |> Repo.preload(entity: [:topics, :image, :syndications])
   end
 
   def get_page!(id) do
@@ -316,8 +317,8 @@ defmodule Akedia.Content do
     |> Repo.preload(@preloads)
   end
 
-  def create_post(attrs \\ %{}, is_published \\ true) do
-    create_with_entity(Post, attrs, %{is_published: is_published})
+  def create_post(attrs \\ %{}, entity_attrs \\ %{is_published: true}) do
+    create_with_entity(Post, attrs, entity_attrs)
   end
 
   def update_post(%Post{} = post, attrs) do
@@ -519,7 +520,7 @@ defmodule Akedia.Content do
     schema
     |> list_query(options)
     |> Repo.all()
-    |> Repo.preload(entity: [:topics, :images, :syndications])
+    |> Repo.preload(entity: [:topics, :image, :syndications])
   end
 
   def list_query(schema, options \\ []) do
