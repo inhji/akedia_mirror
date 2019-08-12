@@ -3,17 +3,6 @@
 	<div class="card-content">		
     <aside class="menu">
       <p class="menu-label">
-        User
-      </p>
-      <ul class="menu-list">
-        <li>
-        	<%= link to: Routes.user_path(@conn, :show) do %>
-						<i class="fa fa-user"></i>
-        		<span>Profile</span>
-        	<% end %>
-        </li>
-      </ul>
-      <p class="menu-label">
         Content
       </p>
        <ul class="menu-list">
@@ -61,5 +50,8 @@
 <div class="card listens">
   <div class="card-content">
   	<%= render SharedView, "listens/listen.html", conn: @conn, listen: @last_listen %>
+  </div>
+  <div class="card-footer">
+    <%= link "Listens", to: Routes.listen_path(@conn, :index), class: "card-footer-item" %>
   </div>
 </div>

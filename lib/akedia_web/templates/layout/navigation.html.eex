@@ -40,15 +40,6 @@
 			</div>
 
 			<div class="navbar-end">
-				<%= if !@logged_in do %>
-					<%= active_link @conn,
-							to: Routes.session_path(@conn, :new),
-							class_active: "is-active",
-							class: "navbar-item" do %>
-							<span>Login</span>
-					<% end %>
-				<% end %>
-
 				<%= form_for @conn, Routes.search_path(@conn, :search), [method: :get, class: "navbar-item"], fn f -> %>
 			    <div class="field">
 			    	<p class="control has-icons-left">
@@ -59,6 +50,16 @@
 			    	</p>
 			    </div>
 			  <% end %>
+
+				<%= if @logged_in do %>
+			    <a class="navbar-item" href="<%= Routes.user_path(@conn, :show) %>">
+			      <img src="<%= avatar_url(@current_user) %>">		   
+			    </a>
+		    <% else %>
+			    <a class="navbar-item" href="<%= Routes.session_path(@conn, :new) %>">
+			      <img src="<%= avatar_url(@current_user) %>">		   
+			    </a>
+		    <% end %>
 			</div>
 		</div>
 	</div>
