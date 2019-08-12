@@ -16,6 +16,6 @@
   </div>
 
   <div class="form-group">
-    <%= submit "Login", class: "button" %>
+    <%= submit "Login", class: "button is-success" %>
   </div>
 <% end %>
