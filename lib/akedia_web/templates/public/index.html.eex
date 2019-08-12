@@ -1,1 +1,19 @@
 <%= render SharedView, "hcard.html", assigns %>
+
+<%= for post <- @posts do %>
+<div class="card">
+  <%= if post.entity.image do %>
+  <div class="card-image">
+    <figure class="image is-4by3">
+      <img src="<%= image_url(post.entity.image, :wide) %>">
+    </figure>
+  </div>
+  <% end %>
+  <div class="card-content">
+    <%= render PostView, "post.html",
+        conn: @conn,
+        post: post,
+        current_user: @current_user %>
+  </div>
+</div>
+<% end %>

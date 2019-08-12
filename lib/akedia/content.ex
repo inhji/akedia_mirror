@@ -525,10 +525,12 @@ defmodule Akedia.Content do
 
   def list_query(schema, options \\ []) do
     sort_options = options[:order_by] || [desc: :inserted_at]
+    limit_options = options[:limit] || nil
 
     schema
     |> join(:inner, [s], e in Entity, on: s.entity_id == e.id)
     |> maybe_where(options, [:is_published, :is_pinned])
+    |> maybe_limit(limit_options)
     |> order_by(^sort_options)
   end
 
@@ -538,6 +540,12 @@ defmodule Akedia.Content do
         do: where(q, [_s, e], field(e, ^p) == ^options[p]),
         else: q
     end)
+  end
+
+  def maybe_limit(query, nil), do: query
+  def maybe_limit(query, limit) do
+    query
+    |> limit(^limit)
   end
 
   def create_with_entity(schema, attrs \\ %{}) do
