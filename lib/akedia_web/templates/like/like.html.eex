@@ -1,33 +1,35 @@
-<article class="like h-entry">
-  <div class="media">
-    <figure class="media-left">
-      <p class="image is-48x48">
-        <i class="fa fa-heart fa-3x has-text-primary"></i>
-      </p>
-    </figure>
-    <div class="media-content">
-      <strong><%= @current_user.name %></strong>
-      <small>liked</small>
-      <small>
-        <time class="dt-published" datetime="<%= date_iso(@like.inserted_at) %>">
-          <%= link date_fuzzy(@like.inserted_at),
-              to: Routes.like_url(@conn, :show, @like),
-              title: @like.inserted_at,
-              class: "u-url" %>
-        </time>
-      </small>
+<div class="card">
+  <article class="card-content like h-entry">
+    <div class="media">
+      <figure class="media-left">
+        <p class="image is-48x48">
+          <i class="fa fa-heart fa-3x has-text-primary"></i>
+        </p>
+      </figure>
+      <div class="media-content">
+        <strong><%= @current_user.name %></strong>
+        <small>liked</small>
+        <small>
+          <time class="dt-published" datetime="<%= date_iso(@like.inserted_at) %>">
+            <%= link date_fuzzy(@like.inserted_at),
+                to: Routes.like_url(@conn, :show, @like),
+                title: @like.inserted_at,
+                class: "u-url" %>
+          </time>
+        </small>
 
-      <h3 class="is-size-3">
-        <a href="<%= @like.url %>" class="u-like-of h-cite p-name">
-          <%= @like.title || @like.url %>
-        </a>
-      </h3>
-      <div class="content"></div>
-      <%= render SharedView, "post/post_meta.html",
-          conn: @conn,
-          schema: @like,
-          url_helper: &Routes.like_url/3,
-          current_user: @current_user %>
+        <h3 class="is-size-3">
+          <a href="<%= @like.url %>" class="u-like-of h-cite p-name">
+            <%= @like.title || @like.url %>
+          </a>
+        </h3>
+        <div class="content"></div>
+        <%= render SharedView, "post/post_meta.html",
+            conn: @conn,
+            schema: @like,
+            url_helper: &Routes.like_url/3,
+            current_user: @current_user %>
+      </div>
     </div>
-  </div>
-</article>
+  </article>
+</div>

@@ -27,9 +27,8 @@ defmodule AkediaWeb.PostController do
       {:ok, post} ->
         Content.add_tags(post, topics)
         Media.maybe_create_image(%{
-          name: Map.get(post_params, "image", nil),
-          entity_id: post.entity_id
-        })
+          name: Map.get(post_params, "image", nil)
+        }, post.entity_id)
         Que.add(Akedia.Workers.Webmention, post)
 
         conn

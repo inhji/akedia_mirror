@@ -90,4 +90,7 @@ defmodule Akedia.Indie.Micropub.Properties do
 
   def is_published?(%{"post-status" => ["draft"]}), do: false
   def is_published?(_), do: true
+
+  def get_photo(%{"photo" => [photo]}), do: photo
+  def get_photo(_), do: nil
 end

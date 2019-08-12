@@ -16,11 +16,20 @@ defmodule Akedia.Media do
     |> Repo.insert()
   end
 
-  def maybe_create_image(attrs \\ %{}) do
-    if attrs.name do
-      create_image(attrs)
-    end
+  def maybe_create_image(%Plug.Upload{} = file, entity_id) do
+    create_image(%{
+      name: file,
+      entity_id: entity_id
+    })
   end
+
+  def maybe_create_image(%{:name => _name} = attrs, entity_id) do
+    attrs
+    |> Map.put(:entity_id, entity_id)
+    |> create_image()
+  end
+
+  def maybe_create_image(_, _), do: nil
 
   def update_image(%Image{} = image, attrs) do
     image

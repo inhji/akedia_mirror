@@ -14,7 +14,7 @@ defmodule Akedia.Indie.Micropub.Content do
       "url" => url
     }
 
-    case Content.create_bookmark(attrs, is_published) do
+    case Content.create_bookmark(attrs, %{is_published: is_published}) do
       {:ok, bookmark} ->
         Que.add(Workers.Favicon, bookmark)
         Akedia.Content.add_tags(bookmark, tags)
@@ -30,7 +30,7 @@ defmodule Akedia.Indie.Micropub.Content do
   def create_like(url, is_published) do
     attrs = %{"url" => url}
 
-    case Content.create_like(attrs, is_published) do
+    case Content.create_like(attrs, %{is_published: is_published}) do
       {:ok, like} ->
         Que.add(Workers.Webmention, like)
         Que.add(Workers.URLScraper, like)
@@ -43,13 +43,15 @@ defmodule Akedia.Indie.Micropub.Content do
     end
   end
 
-  def create_post(title, content, tags, reply_to, is_published) do
+  def create_post(title, content, tags, reply_to, is_published, photo
+    ) do
     attrs = %{"content" => content, "title" => title, "reply_to" => reply_to}
 
-    case Content.create_post(attrs, is_published) do
+    case Content.create_post(attrs, %{is_published: is_published}) do
       {:ok, post} ->
         Que.add(Workers.Webmention, post)
         Logger.info("Post created!")
+        Akedia.Media.maybe_create_image(photo, post.entity_id)
         Akedia.Content.add_tags(post, tags)
         {:ok, :created, Akedia.url(post)}
 
