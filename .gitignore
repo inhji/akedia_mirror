@@ -47,6 +47,7 @@ npm-debug.log
 .deliver/releases/
 
 .mix_tasks
+akedia.pid
 
 /.elixir_ls/
 
