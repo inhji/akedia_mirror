@@ -91,8 +91,7 @@ defmodule Akedia.MixProject do
       {:html_sanitize_ex, "~> 1.3"},
       {:atomex, "~> 0.3.0"},
       {:emojix, "~> 0.1.0"},
-      {:ex_doc, "~> 0.19", only: :dev, runtime: false},
-      {:pid_file, "~> 0.1.1"}
+      {:ex_doc, "~> 0.19", only: :dev, runtime: false}
     ]
   end
 
