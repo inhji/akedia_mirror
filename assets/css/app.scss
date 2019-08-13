@@ -64,6 +64,20 @@ nav.navbar {
   }
 }
 
+.notification {
+  &.is-danger {
+    border: 1px solid $danger;
+    background-color: lighten($danger, 40%);
+    color: $danger;
+  }
+
+  &.is-info {
+    border: 1px solid $info;
+    background-color: lighten($info, 40%);
+    color: $info;
+  }
+}
+
 .social a {
   margin-right: 0.3rem;
 }
