@@ -1,4 +1,5 @@
 import Vue from 'vue'
+import tags from 'bulma-tagsinput'
 
 const app = new Vue({
   el: "form.vue",
@@ -6,6 +7,9 @@ const app = new Vue({
     charCount: 0,
     maxChars: 400,
     zenActive: false
+  },
+  mounted() {
+    tags.attach()
   },
   methods: {
     updateCharCount(e) {

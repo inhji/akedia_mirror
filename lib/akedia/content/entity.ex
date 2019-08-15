@@ -7,7 +7,7 @@ defmodule Akedia.Content.Entity do
 
   schema "entities" do
     field :is_pinned, :boolean, default: false
-    field :is_published, :boolean, default: false
+    field :is_published, :boolean, default: true
 
     field :bridgy_fed, :boolean, default: false
 
