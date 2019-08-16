@@ -182,8 +182,8 @@ defmodule Akedia.Content do
     |> Repo.preload(:favicon)
   end
 
-  def create_bookmark(attrs \\ %{}, is_published \\ true) do
-    create_with_entity(Bookmark, attrs, %{is_published: is_published})
+  def create_bookmark(attrs \\ %{}, entity_attrs \\ %{ is_published: true }) do
+    create_with_entity(Bookmark, attrs, entity_attrs)
   end
 
   def update_bookmark(%Bookmark{} = bookmark, attrs) do
@@ -215,8 +215,8 @@ defmodule Akedia.Content do
     |> Repo.preload(@preloads)
   end
 
-  def create_like(attrs \\ %{}, is_published \\ true) do
-    create_with_entity(Like, attrs, %{is_published: is_published})
+  def create_like(attrs \\ %{}, entity_attrs \\ %{ is_published: true }) do
+    create_with_entity(Like, attrs, entity_attrs)
   end
 
   def update_like(%Like{} = like, attrs) do
