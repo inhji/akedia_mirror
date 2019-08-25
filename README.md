@@ -1,4 +1,4 @@
-<img src="akedia.jpg" alt="akedia logo" width="200"/>
+<img src="src/branch/master/akedia.jpg" alt="akedia logo" width="200"/>
 
 # Akedia
 
