@@ -1,5 +1,5 @@
 <footer class="footer" id="footer">
   <div class="container">
-    <p>&copy; 2019 by Jonathan Jenne. Powered by <a href="https://github.com/inhji/akedia" target="_blank" rel="noreferrer">Akedia v<%= version() %></a>.</p>
+    <p>&copy; 2019 by <%= @current_user.name %>. Powered by <a href="https://github.com/inhji/akedia" target="_blank" rel="noreferrer">Akedia v<%= version() %></a>.</p>
   </div>
 </footer>
