@@ -7,9 +7,9 @@ User=akedia
 Group=akedia
 Restart=on-failure
 
-WorkingDirectory=/home/akedia/akedia/release/akedia/bin
-ExecStart=/home/akedia/akedia/release/akedia/bin/akedia start
-ExecStop=/home/akedia/akedia/release/akedia/bin/akedia start
+WorkingDirectory=/opt/akedia/release/akedia/bin
+ExecStart=/opt/akedia/release/akedia/bin/akedia start
+ExecStop=/opt/akedia/release/akedia/bin/akedia start
 
 [Install]
 WantedBy=multi-user.target
