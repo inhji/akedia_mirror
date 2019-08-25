@@ -1,4 +1,4 @@
-![Akedia](akedia.jpg =250x)
+<img src="Akedia.jpg" alt="akedia logo" width="200"/>
 
 # Akedia
 
