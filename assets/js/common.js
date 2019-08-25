@@ -9,6 +9,8 @@ import css from "../css/app.scss"
 //
 // Import dependencies
 //
+import jquery from "jquery"
+import "imagelightbox"
 import "phoenix_html"
 import Prism from 'prismjs'
 import Skycons from '../vendor/skycons.js'
@@ -23,9 +25,14 @@ if ('serviceWorker' in navigator) {
   });
 }
 
-document.addEventListener('DOMContentLoaded', function() {
+jquery(function() {
   // Highlight Syntax
   Prism.highlightAll()
+
+  jquery('a[data-imagelightbox="x"]').imageLightbox({
+    overlay:true,
+    caption: false // TODO: enable later when sanitized and html props on post exist
+  });
 
   // Animated Weather
   const $weatherCanvas = document.querySelector('canvas#weather')

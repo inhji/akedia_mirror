@@ -1,8 +1,10 @@
-<div class="card">
+<section class="card post">
   <%= if @post.entity.image do %>
   <div class="card-image">
     <figure class="image is-4by3">
-      <img src="<%= image_url(@post.entity.image, :wide) %>">
+      <a href="<%= image_url(@post.entity.image, :original) %>" data-imagelightbox="x">
+        <img src="<%= image_url(@post.entity.image, :wide) %>">
+      </a>
     </figure>
   </div>
   <% end %>
@@ -42,4 +44,4 @@
       </div>
     </div>
   </article>
-</div>
+</section>
