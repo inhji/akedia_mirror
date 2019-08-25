@@ -1,4 +1,9 @@
 <div class="card">
+  <header class="card-header">
+    <p class="card-header-title">
+      Stats
+    </p>
+  </header>
   <div class="card-content">
     <p>Listens recorded: <%= @total_entries %></p>
     <p>First Listen: <%= date_fuzzy(@oldest_listen.listened_at) %> <span class="has-text-grey">(<%= date_pretty(@oldest_listen.listened_at) %>)</span></p>
@@ -6,6 +11,11 @@
 </div>
 
 <div class="card">
+  <header class="card-header">
+    <p class="card-header-title">
+      Top Albums this week
+    </p>
+  </header>
   <div class="card-content">
     <%= for item <- @albums_weekly do %>
     <div class="media is-marginless is-paddingless">
