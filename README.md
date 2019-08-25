@@ -1,4 +1,4 @@
-![Akedia](akedia.jpg)
+![Akedia](akedia.jpg =250x)
 
 # Akedia
 
