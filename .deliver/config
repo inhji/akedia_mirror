@@ -30,7 +30,7 @@ post_extract_release_archive() {
   __remote "
     [ -f ~/.profile ] && source ~/.profile
     set -e
-    cd $DELIVER_TO/$APP/var $SILENCE
+    cd /opt/akedia/release/akedia/var $SILENCE
     rm start_erl.data
   "
 }
