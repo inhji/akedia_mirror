@@ -57,7 +57,7 @@
 			    </a>
 		    <% else %>
 			    <a class="navbar-item" href="<%= Routes.session_path(@conn, :new) %>">
-			      <img src="<%= avatar_url(@current_user) %>">		   
+			      Login
 			    </a>
 		    <% end %>
 			</div>
