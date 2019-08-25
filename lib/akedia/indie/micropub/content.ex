@@ -4,9 +4,10 @@ defmodule Akedia.Indie.Micropub.Content do
   alias Akedia.Content
 
   def create_bookmark(title, content, url, tags, is_published) do
-    content = if content == "." do
-      content = nil
-    end
+    content =
+      if content == "." do
+        content = nil
+      end
 
     attrs = %{
       "title" => title,
@@ -43,11 +44,14 @@ defmodule Akedia.Indie.Micropub.Content do
     end
   end
 
-  def create_post(title, content, tags, reply_to, is_published, photo
-    ) do
+  def create_post(title, content, tags, reply_to, is_published, photo, targets) do
     attrs = %{"content" => content, "title" => title, "reply_to" => reply_to}
 
-    case Content.create_post(attrs, %{is_published: is_published}) do
+    bridgy_fed =
+      targets
+      |> Enum.any?(fn t -> t == "https://fed.brid.gy" end)
+
+    case Content.create_post(attrs, %{is_published: is_published, bridgy_fed: bridgy_fed}) do
       {:ok, post} ->
         Que.add(Workers.Webmention, post)
         Logger.info("Post created!")

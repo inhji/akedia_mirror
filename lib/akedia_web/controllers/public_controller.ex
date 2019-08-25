@@ -10,8 +10,6 @@ defmodule AkediaWeb.PublicController do
     options = [limit: 10, order_by: [desc: :inserted_at]]
     page = Akedia.Content.list_posts_paginated(options, params)
 
-    IO.inspect(page)
-
     render(conn, "index.html",
       weather: weather,
       page: page,

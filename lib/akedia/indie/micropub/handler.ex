@@ -18,6 +18,7 @@ defmodule Akedia.Indie.Micropub.Handler do
     content = Properties.get_content(properties)
     is_published = Properties.is_published?(properties)
     photo = Properties.get_photo(properties)
+    syndication_targets = Properties.get_syndication_targets(properties)
 
     case Token.verify_token(access_token, "create") do
       :ok ->
@@ -35,7 +36,16 @@ defmodule Akedia.Indie.Micropub.Handler do
           :post ->
             Logger.info("Creating new post..")
             reply_to = Properties.get_reply_to(properties)
-            Content.create_post(title, content, tags, reply_to, is_published, photo)
+
+            Content.create_post(
+              title,
+              content,
+              tags,
+              reply_to,
+              is_published,
+              photo,
+              syndication_targets
+            )
 
           :unknown ->
             Logger.warn("Unknown or unsupported post type")
@@ -112,7 +122,15 @@ defmodule Akedia.Indie.Micropub.Handler do
   def handle_syndicate_to_query(access_token) do
     case Token.verify_token(access_token, nil) do
       :ok ->
-        response = %{"syndicate-to": []}
+        response = %{
+          "syndicate-to": [
+            %{
+              "uid" => "https://fed.brid.gy",
+              "name" => "Brid.gy Fed"
+            }
+          ]
+        }
+
         {:ok, response}
 
       error ->

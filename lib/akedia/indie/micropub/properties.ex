@@ -93,4 +93,7 @@ defmodule Akedia.Indie.Micropub.Properties do
 
   def get_photo(%{"photo" => [photo]}), do: photo
   def get_photo(_), do: nil
+
+  def get_syndication_targets(%{"mp-syndicate-to" => targets}), do: targets
+  def get_syndication_targets(_), do: []
 end
