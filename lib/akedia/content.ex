@@ -303,6 +303,12 @@ defmodule Akedia.Content do
     list(Post, opts)
   end
 
+  def list_posts_paginated(opts \\ [], params \\ %{}) do
+    list_query(Post, opts)
+    |> preload(entity: [:topics, :image, :syndications])
+    |> Repo.paginate(params)
+  end
+
   def get_post!(id) do
     Post
     |> Repo.get_by!(slug: id)

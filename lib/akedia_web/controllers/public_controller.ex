@@ -4,12 +4,23 @@ defmodule AkediaWeb.PublicController do
   plug :plug_onboard
   plug :plug_assigns
 
-
   def index(conn, params) do
     weather = Akedia.Workers.Weather.get_weather()
-    posts = Akedia.Content.list_posts([limit: 10, order_by: [desc: :inserted_at]])
 
-    render(conn, "index.html", weather: weather, posts: posts)
+    options = [limit: 10, order_by: [desc: :inserted_at]]
+    page = Akedia.Content.list_posts_paginated(options, params)
+
+    IO.inspect(page)
+
+    render(conn, "index.html",
+      weather: weather,
+      page: page,
+      posts: page.entries,
+      page_number: page.page_number,
+      page_size: page.page_size,
+      total_pages: page.total_pages,
+      total_entries: page.total_entries
+    )
   end
 
   def stream(conn, params) do
