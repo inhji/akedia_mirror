@@ -247,6 +247,8 @@ article {
 // This needs to be last to override all other styles
 @include prefers-scheme(dark) {
   nav.navbar {
+    border-bottom: 2px solid $grey-darker;
+
     .navbar-brand {
       a {
         svg g {
