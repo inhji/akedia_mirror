@@ -31,7 +31,7 @@ jquery(function() {
 
   jquery('a[data-imagelightbox="x"]').imageLightbox({
     overlay:true,
-    caption: false // TODO: enable later when sanitized and html props on post exist
+    caption: true
   });
 
   // Animated Weather
