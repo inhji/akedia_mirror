@@ -34,8 +34,13 @@
         <% end %>
 
         <div class="content e-content <%= unless @post.title do %>p-name<% end %>">
-          <%= to_html(@post) %>
+          <%= if @post.content_html do %>
+            <%= raw(@post.content_html) %>
+          <% else %>
+            <%= to_html(@post) %>
+          <% end %>        
         </div>
+
         <%= render SharedView, "post/post_meta.html",
             conn: @conn,
             schema: @post,
