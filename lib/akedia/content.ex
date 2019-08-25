@@ -182,7 +182,7 @@ defmodule Akedia.Content do
     |> Repo.preload(:favicon)
   end
 
-  def create_bookmark(attrs \\ %{}, entity_attrs \\ %{ is_published: true }) do
+  def create_bookmark(attrs \\ %{}, entity_attrs \\ %{is_published: true}) do
     create_with_entity(Bookmark, attrs, entity_attrs)
   end
 
@@ -215,7 +215,7 @@ defmodule Akedia.Content do
     |> Repo.preload(@preloads)
   end
 
-  def create_like(attrs \\ %{}, entity_attrs \\ %{ is_published: true }) do
+  def create_like(attrs \\ %{}, entity_attrs \\ %{is_published: true}) do
     create_with_entity(Like, attrs, entity_attrs)
   end
 
@@ -270,9 +270,9 @@ defmodule Akedia.Content do
     |> Repo.get_by!(slug: id)
     |> Repo.preload(
       entities: [
-        like: [entity: [:topics, :syndications]],
-        post: [entity: [:topics, :syndications]],
-        bookmark: [:favicon, entity: [:topics, :syndications]]
+        like: [entity: [:topics, :syndications, :image]],
+        post: [entity: [:topics, :syndications, :image]],
+        bookmark: [:favicon, entity: [:topics, :syndications, :image]]
       ]
     )
   end
@@ -543,6 +543,7 @@ defmodule Akedia.Content do
   end
 
   def maybe_limit(query, nil), do: query
+
   def maybe_limit(query, limit) do
     query
     |> limit(^limit)
