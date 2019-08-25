@@ -21,21 +21,21 @@
 						to: Routes.public_path(@conn, :stream),
 						class_active: "is-active",
 						class: "navbar-item" do %>
-						Stream
+						STREAM
 				<% end %>
 
 				<%= active_link @conn,
 						to: Routes.public_path(@conn, :now),
 						class_active: "is-active",
 						class: "navbar-item" do %>
-						Now
+						NOW
 				<% end %>
 
 				<%= active_link @conn,
 						to: Routes.public_path(@conn, :about),
 						class_active: "is-active",
 						class: "navbar-item" do %>
-						About
+						ABOUT
 				<% end %>
 			</div>
 

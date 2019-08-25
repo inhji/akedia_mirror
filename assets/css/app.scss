@@ -44,8 +44,6 @@ $navbar-item-active-color-dark: $primary;
 
 nav.navbar {
   border-bottom: 2px solid $grey-lighter;
-  // border-image-source: repeating-linear-gradient(90deg, #f44336, #f44336 20px, #E91E63 40px, #E91E63 60px, #9C27B0 80px, #9C27B0 100px, #673AB7 110px, #673AB7 120px, #3F51B5 130px, #3F51B5 140px, #2196F3 150px, #2196F3 160px, #03A9F4 170px, #03A9F4 180px, #00BCD4 190px, #00BCD4 200px, #009688 210px, #009688 220px, #4CAF50 230px, #4CAF50 240px, #8BC34A 250px, #8BC34A 260px, #CDDC39 270px, #CDDC39 280px, #FFEB3B 290px, #FFEB3B 300px, #FFC107 310px, #FFC107 320px, #FF9800 330px, #FF9800 340px, #FF5722 350px, #FF5722 360px);
-  // border-image-slice: 1;
 
   .navbar-brand {
     a {
@@ -53,6 +51,10 @@ nav.navbar {
         fill: $black;
       }
     }
+  }
+
+  .navbar-menu {
+    letter-spacing: 2px;
   }
 }
 
