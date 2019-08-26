@@ -1,4 +1,4 @@
-<section class="card post">
+<section class="card post h-entry">
   <%= if @post.entity.image do %>
   <div class="card-image">
     <figure class="image is-4by3">
@@ -8,7 +8,7 @@
     </figure>
   </div>
   <% end %>
-  <article class="card-content post h-entry">
+  <article class="card-content post">
     <div class="media">
       <figure class="media-left">
         <p class="image is-48x48 is-rounded">
@@ -34,11 +34,7 @@
         <% end %>
 
         <div class="content e-content <%= unless @post.title do %>p-name<% end %>">
-          <%= if @post.content_html do %>
-            <%= raw(@post.content_html) %>
-          <% else %>
-            <%= to_html(@post) %>
-          <% end %>        
+          <%= raw(@post.content_html) %>
         </div>
 
         <%= render SharedView, "post/post_meta.html",
