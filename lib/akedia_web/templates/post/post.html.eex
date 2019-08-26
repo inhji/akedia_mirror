@@ -3,7 +3,7 @@
   <div class="card-image">
     <figure class="image is-4by3">
       <a href="<%= image_url(@post.entity.image, :original) %>" data-imagelightbox="x">
-        <img src="<%= image_url(@post.entity.image, :wide) %>" alt="<%= @post.content_sanitized %>">
+        <img class="u-photo" src="<%= image_url(@post.entity.image, :wide) %>" alt="<%= @post.content_sanitized %>">
       </a>
     </figure>
   </div>
