@@ -26,6 +26,11 @@
                 class: "u-url" %>
           </time>
         </small>
+        <%= if @post.entity.is_pinned do %>
+        <small class="has-text-grey">
+          <i class="fa fa-lock" title="Pinned"></i>
+        </small>
+        <% end %>
 
         <%= if @post.title do %>
         <h3 class="is-size-4 title p-name">
