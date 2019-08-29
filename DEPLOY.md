@@ -13,11 +13,13 @@ mix edeliver migrate production
 
 ## Deploy an upgrade
 
+> Right now pgrading does not work reliably due to a possible bug in edeliver. Should rather do a new release each time.
+
 There are two tasks to deploy an upgrade:
 
 ### Upgrade
 
-Upgrading cleans all dependencies from the previous build and therefore takes longer
+Upgrading cleans all dependencies from the previous build and therefore takes longer than `mix hotfix`.
 
 ```bash
 mix upgrade
