@@ -35,10 +35,9 @@
 			</figure>
 			<div class="media-content">
 				<div class="content">
-					<strong><%= @weather.now %> at <%= @weather.temperature %> °C</strong>
-					<small>(Lo: <%= @weather.min %> / Hi: <%= @weather.max %>)</small>
+					<strong><%= @weather.now %> at <%= @weather.temperature %> °C (<%= round(@weather.humidity * 100) %>% Humid.)</strong>
 					<p>
-						Looks like it's going to be <%= String.downcase(@weather.summary) %>
+						Looks like it's going to be from <em><%= @weather.min %> °C</em> to <em><%= @weather.max %> °C</em> and <%= String.downcase(@weather.summary) %>
 					</p>
 				</div>
 			</div>

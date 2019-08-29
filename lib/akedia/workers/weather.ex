@@ -80,14 +80,19 @@ defmodule Akedia.Workers.Weather do
   def get_weather(data) do
     temperature =
       data
-      |> Map.get("currently")
+      |> currently()
       |> Map.get("temperature")
       |> to_celsius()
       |> Float.round(1)
 
+    humidity =
+      data
+      |> currently()
+      |> Map.get("humidity")
+
     now =
       data
-      |> Map.get("currently")
+      |> currently()
       |> Map.get("summary")
 
     summary =
@@ -97,7 +102,7 @@ defmodule Akedia.Workers.Weather do
 
     icon =
       data
-      |> today()
+      |> currently()
       |> Map.get("icon")
 
     max =
@@ -116,6 +121,7 @@ defmodule Akedia.Workers.Weather do
 
     %{
       temperature: temperature,
+      humidity: humidity,
       now: now,
       summary: summary,
       icon: icon,
@@ -129,6 +135,11 @@ defmodule Akedia.Workers.Weather do
     |> Map.get("daily")
     |> Map.get("data")
     |> List.first()
+  end
+
+  def currently(data) do
+    data
+    |> Map.get("currently")
   end
 
   defp schedule_weather_fetch do
