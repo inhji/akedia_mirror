@@ -76,7 +76,7 @@ defmodule Akedia.MixProject do
       {:webmentions, "~> 0.3.4"},
       {:slugger, "~> 0.3.0"},
       {:microformats2, "~> 0.2.1"},
-      {:floki, "~> 0.21.0"},
+      {:floki, "~> 0.22.0"},
       {:indieweb, "~> 0.0.42"},
       {:scrivener_ecto, "~> 2.0"},
       {:scrivener_html, "~> 1.8"},
