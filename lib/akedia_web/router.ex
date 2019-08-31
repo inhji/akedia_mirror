@@ -44,7 +44,6 @@ defmodule AkediaWeb.Router do
     get "/search", SearchController, :search
     get "/feed", AtomController, :index
 
-    resources "/stories", StoryController, only: [:show, :index]
     resources "/bookmarks", BookmarkController, only: [:show, :index]
     resources "/pages", PageController, only: [:show, :index]
     resources "/images", ImageController, only: [:show, :index]
@@ -53,7 +52,7 @@ defmodule AkediaWeb.Router do
 
     scope "/listens" do
       get "/", ListenController, :index
-      
+
       resources "/artists", ArtistController, only: [:show, :index]
       resources "/albums", AlbumController, only: [:show, :index]
     end
@@ -104,9 +103,6 @@ defmodule AkediaWeb.Router do
 
     resources "/posts", PostController, except: [:show, :index]
     get "/posts/drafts", PostController, :drafts
-
-    resources "/stories", StoryController, except: [:show, :index]
-    get "/stories/drafts", StoryController, :drafts
 
     resources "/bookmarks", BookmarkController, except: [:show, :index]
     get "/bookmarks/drafts", BookmarkController, :drafts

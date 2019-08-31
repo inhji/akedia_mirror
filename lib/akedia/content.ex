@@ -5,7 +5,6 @@ defmodule Akedia.Content do
   alias Akedia.Content.{
     Entity,
     Page,
-    Story,
     Bookmark,
     Topic,
     EntityTopic,
@@ -62,7 +61,7 @@ defmodule Akedia.Content do
   def get_entity!(id) do
     Entity
     |> Repo.get!(id)
-    |> Repo.preload([:bookmark, :story, :page, :like, :post])
+    |> Repo.preload([:bookmark, :page, :like, :post])
   end
 
   def create_entity(attrs \\ %{}) do
@@ -88,39 +87,6 @@ defmodule Akedia.Content do
 
   def change_entity(%Entity{} = entity) do
     Entity.changeset(entity, %{})
-  end
-
-  # Story
-
-  def list_stories(opts \\ []) do
-    list(Story, opts)
-  end
-
-  def get_story!(id) do
-    Story
-    |> Repo.get_by!(slug: id)
-    |> Repo.preload(@preloads)
-  end
-
-  def create_story(attrs \\ %{}) do
-    create_with_entity(Story, attrs)
-  end
-
-  def update_story(%Story{} = story, attrs) do
-    story
-    |> Story.changeset(attrs)
-    |> Ecto.Changeset.cast_assoc(:entity, with: &Entity.changeset/2)
-    |> Repo.update()
-  end
-
-  def delete_story(%Story{} = story) do
-    Repo.delete(story)
-    delete_entity(story.entity_id)
-    {:ok, story}
-  end
-
-  def change_story(%Story{} = story) do
-    Story.changeset(story, %{})
   end
 
   # Page
@@ -239,14 +205,14 @@ defmodule Akedia.Content do
   def list_topics() do
     list_topics_query()
     |> Repo.all()
-    |> Repo.preload(entities: [:bookmark, :story, :page, :post, :like])
+    |> Repo.preload(entities: [:bookmark, :page, :post, :like])
   end
 
   def list_top_topics(limit) do
     list_top_topics_query()
     |> limit(^limit)
     |> Repo.all()
-    |> Repo.preload(entities: [:bookmark, :story, :page, :post, :like])
+    |> Repo.preload(entities: [:bookmark, :page, :post, :like])
   end
 
   def list_topics_query() do
