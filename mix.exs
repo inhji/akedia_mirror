@@ -62,7 +62,7 @@ defmodule Akedia.MixProject do
       {:gettext, "~> 0.11"},
       {:jason, "~> 1.0"},
       {:plug_cowboy, "~> 2.0"},
-      {:earmark, "~> 1.3"},
+      {:earmark, "~> 1.3.6"},
       {:arc, "~> 0.11.0"},
       {:arc_ecto, "~> 0.11.1"},
       {:ex_machina, "~> 2.3", only: :test},
