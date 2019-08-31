@@ -10,16 +10,7 @@ defmodule Akedia.MixProject do
       compilers: [:phoenix, :gettext] ++ Mix.compilers(),
       start_permanent: Mix.env() == :prod,
       aliases: aliases(),
-      deps: deps(),
-
-      # Docs
-      name: "Akedia",
-      source_url: "https://github.com/inhji/akedia",
-      homepage_url: "https://inhji.de",
-      docs: [
-        main: "Akedia",
-        extras: ["DEPLOY.md", "INSTALL.md"]
-      ]
+      deps: deps()
     ]
   end
 
