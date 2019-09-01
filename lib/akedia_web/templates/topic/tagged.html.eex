@@ -9,7 +9,6 @@
   <%= for entity <- @topic.entities do %>
     <% {content, type, content_path} = case entity do
       %{bookmark: %{id: _}} -> {entity.bookmark, "Bookmark", &Routes.bookmark_path/3}
-      %{page: %{id: _}} -> {entity.page, "Page", &Routes.page_path/3}
       %{post: %{id: _}} -> {entity.post, "Post", &Routes.post_path/3}
       %{like: %{id: _}} -> {entity.like, "Like", &Routes.like_path/3}
     end %>    

@@ -45,7 +45,6 @@ defmodule AkediaWeb.Router do
     get "/feed", AtomController, :index
 
     resources "/bookmarks", BookmarkController, only: [:show, :index]
-    resources "/pages", PageController, only: [:show, :index]
     resources "/images", ImageController, only: [:show, :index]
     resources "/likes", LikeController, only: [:show, :index]
     resources "/posts", PostController, only: [:show, :index]
@@ -106,9 +105,6 @@ defmodule AkediaWeb.Router do
 
     resources "/bookmarks", BookmarkController, except: [:show, :index]
     get "/bookmarks/drafts", BookmarkController, :drafts
-
-    resources "/pages", PageController, except: [:show, :index]
-    get "/pages/drafts", PageController, :drafts
 
     resources "/likes", LikeController, except: [:show, :index]
     get "/likes/drafts", LikeController, :drafts

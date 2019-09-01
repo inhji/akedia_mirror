@@ -1,9 +1,0 @@
-<%= render SharedView, "nav/posts_nav.html", conn: @conn, path_helper: &Routes.page_path/2 %>
-
-<%= if @home_page do %>
-  <h1 class="title"><%= @home_page.title %></h1>
-
-  <%= to_html(@home_page) %>
-<% else %>
-  <p>There is no page with slug <em>home</em>.</p>
-<% end %>

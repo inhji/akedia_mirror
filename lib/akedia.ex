@@ -8,7 +8,7 @@ defmodule Akedia do
   Contexts are also responsible for managing your data, regardless
   if it comes from the database, an external API or others.
   """
-  alias Akedia.Content.{Bookmark, Like, Page, Post}
+  alias Akedia.Content.{Bookmark, Like, Post}
   alias AkediaWeb.Router.Helpers, as: Routes
   alias AkediaWeb.Endpoint
 
@@ -30,6 +30,5 @@ defmodule Akedia do
 
   defp do_url(%Like{} = like), do: Routes.like_url(Endpoint, :show, like)
   defp do_url(%Bookmark{} = bookmark), do: Routes.bookmark_url(Endpoint, :show, bookmark)
-  defp do_url(%Page{} = page), do: Routes.page_url(Endpoint, :show, page)
   defp do_url(%Post{} = post), do: Routes.post_url(Endpoint, :show, post)
 end
