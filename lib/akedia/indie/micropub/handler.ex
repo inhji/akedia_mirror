@@ -105,7 +105,15 @@ defmodule Akedia.Indie.Micropub.Handler do
     case Token.verify_token(access_token, nil) do
       :ok ->
         media_url = HTTP.abs_url(Akedia.url(), "/indie/micropub/media")
-        response = %{"media-endpoint": media_url, "syndicate-to": []}
+
+        syndication_targets = [
+          %{
+            "uid" => "https://fed.brid.gy/",
+            "name" => "Bridgy Fed"
+          }
+        ]
+
+        response = %{"media-endpoint": media_url, "syndicate-to": syndication_targets}
         {:ok, response}
 
       error ->

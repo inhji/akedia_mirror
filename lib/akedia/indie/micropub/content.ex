@@ -49,7 +49,7 @@ defmodule Akedia.Indie.Micropub.Content do
 
     bridgy_fed =
       targets
-      |> Enum.any?(fn t -> t == "https://fed.brid.gy" end)
+      |> Enum.any?(fn t -> t == "https://fed.brid.gy/" end)
 
     case Content.create_post(attrs, %{is_published: is_published, bridgy_fed: bridgy_fed}) do
       {:ok, post} ->
