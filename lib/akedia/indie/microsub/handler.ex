@@ -1,5 +1,5 @@
 defmodule Akedia.Indie.Microsub.Handler do
-  @behaviour Akedia.Plugs.PlugMicrosub.HandlerBehaviour
+  @behaviour AkediaWeb.Plugs.PlugMicrosub.HandlerBehaviour
 
   alias Akedia.Feeds
 

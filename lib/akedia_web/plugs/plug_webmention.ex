@@ -1,4 +1,4 @@
-defmodule Akedia.Plugs.PlugWebmention do
+defmodule AkediaWeb.Plugs.PlugWebmention do
   @moduledoc """
   A plug for building a Microsub server.
   """

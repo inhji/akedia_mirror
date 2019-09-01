@@ -1,4 +1,4 @@
-defmodule Akedia.Plugs.PlugMicrosub do
+defmodule AkediaWeb.Plugs.PlugMicrosub do
   @moduledoc """
   A plug for building a Microsub server.
   """

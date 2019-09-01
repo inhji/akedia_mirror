@@ -1,4 +1,4 @@
-defmodule Akedia.Plugs.PlugWebmention.HandlerBehaviour do
+defmodule AkediaWeb.Plugs.PlugWebmention.HandlerBehaviour do
   @moduledoc """
   Behaviour defining the interface for a PlugMicrosub Handler
   """

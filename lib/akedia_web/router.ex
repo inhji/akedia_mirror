@@ -1,7 +1,7 @@
 defmodule AkediaWeb.Router do
   use AkediaWeb, :router
   # alias AkediaWeb.Plugs.PlugIndieAuth
-  import AkediaWeb.Plugs.User,
+  import AkediaWeb.Plugs.PlugAssignUser,
     only: [
       assign_user: 2,
       check_user: 2,
@@ -9,7 +9,7 @@ defmodule AkediaWeb.Router do
       check_loggedin: 2
     ]
 
-  import AkediaWeb.Plugs.Settings, only: [assign_settings: 2]
+  import AkediaWeb.Plugs.PlugAssignSettings, only: [assign_settings: 2]
 
   pipeline :browser do
     plug :accepts, ["html"]
@@ -75,19 +75,14 @@ defmodule AkediaWeb.Router do
             json_encoder: Phoenix.json_library()
 
     forward "/microsub",
-            Akedia.Plugs.PlugMicrosub,
+            AkediaWeb.Plugs.PlugMicrosub,
             handler: Akedia.Indie.Microsub.Handler,
             json_encoder: Phoenix.json_library()
 
     forward "/webmention",
-            Akedia.Plugs.PlugWebmention,
+            AkediaWeb.Plugs.PlugWebmention,
             handler: Akedia.Indie.Webmentions.Handler,
             json_encoder: Phoenix.json_library()
-
-    # forward "/auth",
-    #         PlugIndieAuth,
-    #         handler: Akedia.Indie.IndieAuth.Handler,
-    #         json_encoder: Phoenix.json_library()
   end
 
   scope "/user", AkediaWeb do
