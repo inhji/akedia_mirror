@@ -56,6 +56,7 @@ defmodule Akedia.MixProject do
       {:earmark, "~> 1.3.6"},
       {:arc, "~> 0.11.0"},
       {:arc_ecto, "~> 0.11.1"},
+      {:ex_machina, "~> 2.3", only: :test},
       {:distillery, "~> 2.0"},
       {:edeliver, "~> 1.6"},
       {:plug_micropub, git: "https://github.com/inhji/plug_micropub.git", branch: "master"},
