@@ -2,6 +2,8 @@
 
 <%= render_many @listens, SharedView, "listens/listen.html", as: :listen, conn: @conn %>
 
+<br />
+
 <%= pagination_links @page,
   previous: ~E(<i class="fa fa-caret-left" aria-hidden="true"></i>),
   next: ~E(<i class="fa fa-caret-right" aria-hidden="true"></i>)
