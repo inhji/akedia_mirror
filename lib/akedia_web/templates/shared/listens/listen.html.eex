@@ -1,7 +1,7 @@
 <div class="media is-dense">
   <a class="media-left" href="<%= Routes.album_url(@conn, :show, @listen.album) %>">
     <figure class="image is-64x64">
-      <img src="<%= cover_url(@listen.album, :thumb) %>">
+      <img src="<%= coverart_url(@listen.album, :thumb) %>">
     </figure>
   </a>
   <div class="media-content">

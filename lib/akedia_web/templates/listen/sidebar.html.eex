@@ -21,7 +21,7 @@
     <div class="media is-marginless is-paddingless">
       <div class="media-left">
         <figure class="image is-64x64">
-          <img src="<%= cover_url(item.album) %>">
+          <img src="<%= coverart_url(item.album) %>">
         </figure>
       </div>
       <div class="media-content">

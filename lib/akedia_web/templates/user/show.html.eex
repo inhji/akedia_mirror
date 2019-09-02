@@ -1,5 +1,7 @@
 <%= render SharedView, "nav/user_nav.html", assigns %>
 
+<img src="<%= cover_url(@current_user) %>">
+
 <%= render SharedView, "hcard.html", assigns %>
 
 <hr />

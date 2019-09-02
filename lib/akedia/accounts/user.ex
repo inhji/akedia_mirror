@@ -10,6 +10,7 @@ defmodule Akedia.Accounts.User do
     field :bio, :string, default: ""
     field :tagline, :string, default: ""
     field :avatar, Akedia.Media.AvatarUploader.Type
+    field :cover, Akedia.Media.CoverUploader.Type
 
     has_one(:credential, Credential)
     has_many(:profiles, Profile)
@@ -21,7 +22,7 @@ defmodule Akedia.Accounts.User do
   def changeset(user, attrs) do
     user
     |> cast(attrs, [:name, :username, :bio, :tagline])
-    |> cast_attachments(attrs, [:avatar])
+    |> cast_attachments(attrs, [:avatar, :cover])
     |> validate_required([:name, :username])
     |> unique_constraint(:username)
   end

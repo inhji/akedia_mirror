@@ -5,7 +5,8 @@ defmodule AkediaWeb.Helpers.Media do
     FaviconUploader,
     ImageUploader,
     CoverartUploader,
-    AvatarUploader
+    AvatarUploader,
+    CoverUploader
   }
 
   def image_url(nil), do: ""
@@ -16,10 +17,13 @@ defmodule AkediaWeb.Helpers.Media do
   def favicon_url(nil), do: ""
   def favicon_url(favicon), do: FaviconUploader.url({favicon.name, favicon}, :original)
 
-  def cover_url(nil), do: ""
-  def cover_url(album), do: CoverartUploader.url({album.cover, album}, :large)
-  def cover_url(nil, _), do: ""
-  def cover_url(album, version), do: CoverartUploader.url({album.cover, album}, version)
+  def coverart_url(nil), do: ""
+  def coverart_url(album), do: CoverartUploader.url({album.cover, album}, :large)
+  def coverart_url(nil, _), do: ""
+  def coverart_url(album, version), do: CoverartUploader.url({album.cover, album}, version)
+
+  def cover_url(user), do: CoverUploader.url({user.cover, user}, :wide)
+  def cover_urt(user, version), do: CoverUploader.url({user.cover, user}, version)
 
   def avatar_url(user), do: AvatarUploader.url({user.avatar, user}, :thumb)
   def avatar_url(user, version), do: AvatarUploader.url({user.avatar, user}, version)
