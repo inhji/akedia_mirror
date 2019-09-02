@@ -21,25 +21,32 @@
 						to: Routes.public_path(@conn, :stream),
 						class_active: "is-active",
 						class: "navbar-item" do %>
-						STREAM
+						Stream
 				<% end %>
 
+				<%= active_link @conn,
+						to: Routes.listen_path(@conn, :index),
+						class_active: "is-active",
+						class: "navbar-item" do %>
+						Listens
+				<% end %>
+			</div>
+
+			<div class="navbar-end">
 				<%= active_link @conn,
 						to: Routes.public_path(@conn, :now),
 						class_active: "is-active",
 						class: "navbar-item" do %>
-						NOW
+						Now
 				<% end %>
 
 				<%= active_link @conn,
 						to: Routes.public_path(@conn, :about),
 						class_active: "is-active",
 						class: "navbar-item" do %>
-						ABOUT
+						About
 				<% end %>
-			</div>
 
-			<div class="navbar-end">
 				<%= form_for @conn, Routes.search_path(@conn, :search), [method: :get, class: "navbar-item"], fn f -> %>
 			    <div class="field">
 			    	<p class="control has-icons-left">
