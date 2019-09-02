@@ -53,7 +53,8 @@
 
 				<%= if @logged_in do %>
 			    <a class="navbar-item" href="<%= Routes.user_path(@conn, :show) %>">
-			      <img src="<%= avatar_url(@current_user) %>">		   
+			      <span style="margin-right: 0.5rem;"><%= @current_user.username %> </span>
+			      <img src="<%= avatar_url(@current_user) %>" class="is-rounded">		   
 			    </a>
 		    <% else %>
 			    <a class="navbar-item" href="<%= Routes.session_path(@conn, :new) %>">
