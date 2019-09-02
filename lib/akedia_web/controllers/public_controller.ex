@@ -24,6 +24,7 @@ defmodule AkediaWeb.PublicController do
   def stream(conn, params) do
     page = Akedia.Content.list_entities_paginated(params)
     pinned = Akedia.Content.list_pinned_entities()
+    type = Map.get(params, "type")
 
     render(conn, "stream.html",
       conn: conn,
@@ -33,7 +34,8 @@ defmodule AkediaWeb.PublicController do
       page_size: page.page_size,
       total_pages: page.total_pages,
       total_entries: page.total_entries,
-      pinned: pinned
+      pinned: pinned,
+      type: type
     )
   end
 

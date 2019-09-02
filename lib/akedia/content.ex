@@ -22,15 +22,47 @@ defmodule Akedia.Content do
     |> Repo.all()
   end
 
-  def list_entities_paginated(params \\ %{}) do
-    query = entity_query()
+  def list_entities_paginated(%{"type" => type} = params) do
+    query =
+      from entity in entity_query(),
+        where: [is_published: true]
+
+    query
+    |> filter_entity_query(type)
+    |> Repo.paginate(params)
+  end
+
+  def list_entities_paginated(params) do
+    query =
+      from entity in entity_query(),
+        where: [is_published: true]
+
     Repo.paginate(query, params)
+  end
+
+  def filter_entity_query(query, "post") do
+    where(query, [e, l, p, b], not is_nil(p.id))
+  end
+
+  def filter_entity_query(query, "like") do
+    where(query, [e, l, p, b], not is_nil(l.id))
+  end
+
+  def filter_entity_query(query, "bookmark") do
+    where(query, [e, l, p, b], not is_nil(b.id))
+  end
+
+  def filter_entity_query(query, _) do
+    query
+    |> where([e, l, p, b], not is_nil(p.id))
+    |> or_where([e, l, p, b], not is_nil(l.id))
+    |> or_where([e, l, p, b], not is_nil(b.id))
   end
 
   def list_pinned_entities() do
     query =
       from entity in entity_query(),
-        where: [is_pinned: true]
+        where: [is_pinned: true, is_published: true]
 
     Repo.all(query)
   end
@@ -50,10 +82,6 @@ defmodule Akedia.Content do
         post: ^@preloads,
         bookmark: [:favicon, ^@preloads]
       ],
-      where: not is_nil(like.id),
-      or_where: not is_nil(post.id),
-      or_where: not is_nil(bookmark.id),
-      where: [is_published: true],
       select: entity
   end
 
