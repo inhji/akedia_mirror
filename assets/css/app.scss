@@ -44,18 +44,12 @@ $navbar-item-active-color-dark: $primary;
 ::selection { background: $primary; color: $white; }
 
 nav.navbar {
-  border-bottom: 2px solid $grey-lighter;
-
   .navbar-brand {
     a {
       svg g {
         fill: $light;
       }
     }
-  }
-
-  .navbar-menu {
-    letter-spacing: 2px;
   }
 }
 
