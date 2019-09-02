@@ -5,10 +5,26 @@
 	<div class="card-content">
 		<div class="menu">
 			<ul class="menu-list">
-				<li><%= link "All Posts", to: Routes.public_path(@conn, :stream) %></li>
-				<li><%= link "Posts", to: Routes.public_path(@conn, :stream, type: "post") %></li>
-				<li><%= link "Bookmarks", to: Routes.public_path(@conn, :stream, type: "bookmark") %></li>
-				<li><%= link "Like", to: Routes.public_path(@conn, :stream, type: "like") %></li>
+				<%= active_link @conn, "All Posts", 
+					to: Routes.public_path(@conn, :stream),
+					class_active: "is-active",
+					active: :exact_with_params,
+					wrap_tag: :li %>
+				<%= active_link @conn, "Posts",
+					to: Routes.public_path(@conn, :stream, type: "post"),
+					class_active: "is-active",
+					active: :inclusive_with_params,
+					wrap_tag: :li %>
+				<%= active_link @conn, "Bookmarks",
+					to: Routes.public_path(@conn, :stream, type: "bookmark"),
+					class_active: "is-active",
+					active: :inclusive_with_params,
+					wrap_tag: :li %>
+				<%= active_link @conn, "Like",
+					to: Routes.public_path(@conn, :stream, type: "like"),
+					class_active: "is-active",
+					active: :inclusive_with_params,
+					wrap_tag: :li %>
 			</ul>
 		</div>
 	</div>
