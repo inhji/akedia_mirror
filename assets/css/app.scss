@@ -75,13 +75,26 @@ nav.navbar {
   }
 }
 
+.cover-container {
+  position: relative;
+  margin-top: -48px;
+  margin-bottom: 2rem;
+
+  .cover-content {
+    position: absolute;
+    bottom: 6px;
+    padding: 2rem;
+    background: rgba(255,255,255, 0.2);
+    z-index: 10;
+    width: 100%;
+  }
+}
+
 .social a {
   margin-right: 0.3rem;
 }
 
 .author-card {
-  margin-bottom: 4rem;
-
   .media + .media {
     border-top: 0;
   }

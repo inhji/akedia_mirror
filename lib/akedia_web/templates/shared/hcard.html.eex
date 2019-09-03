@@ -14,7 +14,7 @@
         </small>
       </h1>
 
-      <h2 class="subtitle has-text-grey p-note"><%= to_html(@current_user.tagline) %></h2>
+      <h2 class="subtitle p-note"><%= to_html(@current_user.tagline) %></h2>
 
       <p class="social">
         <% public_profiles = Enum.filter(@current_user.profiles, fn p -> p.public end) %>
