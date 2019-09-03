@@ -23,7 +23,7 @@ defmodule AkediaWeb.Helpers.Media do
   def coverart_url(album, version), do: CoverartUploader.url({album.cover, album}, version)
 
   def cover_url(user), do: CoverUploader.url({user.cover, user}, :wide)
-  def cover_urt(user, version), do: CoverUploader.url({user.cover, user}, version)
+  def cover_url(user, version), do: CoverUploader.url({user.cover, user}, version)
 
   def avatar_url(user), do: AvatarUploader.url({user.avatar, user}, :thumb)
   def avatar_url(user, version), do: AvatarUploader.url({user.avatar, user}, version)
