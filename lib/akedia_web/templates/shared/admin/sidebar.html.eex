@@ -1,0 +1,37 @@
+<div class="card">
+  <div class="card-content">
+    <div class="menu">
+      <p class="menu-label">
+        Admin
+      </p>
+      <ul class="menu-list">
+        <li><%= link "Home", to: Routes.admin_path(@conn, :index) %></li>
+      </ul>
+      <p class="menu-label">
+        User
+      </p>
+      <ul class="menu-list">
+        <li><%= active_link @conn, "Edit User", 
+                to: Routes.user_path(@conn, :edit),
+                class_active: "is-active" %></li>
+        <li><%= active_link @conn, "Edit Profiles", 
+                to: Routes.profile_path(@conn, :index),
+                class_active: "is-active" %></li>
+      </ul>
+      <p class="menu-label">
+        Content
+      </p>
+      <ul class="menu-list">
+        <li><%= active_link @conn, "Posts", 
+                to: Routes.post_path(@conn, :index),
+                class_active: "is-active" %></li>
+        <li><%= active_link @conn, "Bookmarks", 
+                to: Routes.bookmark_path(@conn, :index),
+                class_active: "is-active" %></li>
+        <li><%= active_link @conn, "Likes", 
+                to: Routes.like_path(@conn, :index),
+                class_active: "is-active" %></li>
+      </ul>
+    </div>
+  </div>
+</div>

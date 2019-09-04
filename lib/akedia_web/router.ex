@@ -1,15 +1,9 @@
 defmodule AkediaWeb.Router do
   use AkediaWeb, :router
-  # alias AkediaWeb.Plugs.PlugIndieAuth
-  import AkediaWeb.Plugs.PlugAssignUser,
-    only: [
-      assign_user: 2,
-      check_user: 2,
-      refresh_user: 2,
-      check_loggedin: 2
-    ]
 
-  import AkediaWeb.Plugs.PlugAssignSettings, only: [assign_settings: 2]
+  import AkediaWeb.Plugs.PlugAssignUser
+  import AkediaWeb.Plugs.PlugAssignSettings
+  import AkediaWeb.Plugs.PlugAdminLayout
 
   pipeline :browser do
     plug :accepts, ["html"]
@@ -31,6 +25,10 @@ defmodule AkediaWeb.Router do
     plug :check_user
   end
 
+  pipeline :admin do
+    plug :admin_layout
+  end
+
   scope "/", AkediaWeb do
     pipe_through [:browser]
 
@@ -44,16 +42,16 @@ defmodule AkediaWeb.Router do
     get "/search", SearchController, :search
     get "/feed", AtomController, :index
 
-    resources "/bookmarks", BookmarkController, only: [:show, :index]
-    resources "/images", ImageController, only: [:show, :index]
-    resources "/likes", LikeController, only: [:show, :index]
-    resources "/posts", PostController, only: [:show, :index]
+    resources "/bookmarks", BookmarkController, only: [:show]
+    resources "/images", ImageController, only: [:show]
+    resources "/likes", LikeController, only: [:show]
+    resources "/posts", PostController, only: [:show]
 
     scope "/listens" do
       get "/", ListenController, :index
 
-      resources "/artists", ArtistController, only: [:show, :index]
-      resources "/albums", AlbumController, only: [:show, :index]
+      resources "/artists", ArtistController, only: [:show]
+      resources "/albums", AlbumController, only: [:show]
     end
 
     scope "/auth" do
@@ -64,6 +62,36 @@ defmodule AkediaWeb.Router do
       post "/login", SessionController, :create
       delete "/logout", SessionController, :delete
     end
+  end
+
+  scope "/admin", AkediaWeb do
+    pipe_through [:browser, :auth, :admin]
+
+    get "/", AdminController, :index
+
+    resources "/user", UserController, only: [:show, :edit, :update], singleton: true
+    resources "/user/profiles", ProfileController
+
+    resources "/posts", PostController, except: [:show]
+    get "/posts/drafts", PostController, :drafts
+
+    resources "/bookmarks", BookmarkController, except: [:show]
+    get "/bookmarks/drafts", BookmarkController, :drafts
+
+    resources "/likes", LikeController, except: [:show]
+    get "/likes/drafts", LikeController, :drafts
+
+    resources "/topics", TopicController, except: [:show]
+    resources "/images", ImageController, except: [:show]
+
+    resources "/artists", ArtistController, except: [:show]
+    resources "/albums", AlbumController, except: [:show]
+
+    resources "/channels", ChannelController do
+      resources "/feeds", FeedController
+    end
+
+    get "/mentions", MentionController, :index
   end
 
   scope "/indie" do
@@ -83,37 +111,5 @@ defmodule AkediaWeb.Router do
             AkediaWeb.Plugs.PlugWebmention,
             handler: Akedia.Indie.Webmentions.Handler,
             json_encoder: Phoenix.json_library()
-  end
-
-  scope "/user", AkediaWeb do
-    pipe_through [:browser, :auth]
-
-    resources "/", UserController, only: [:show, :edit, :update], singleton: true
-    resources "/profiles", ProfileController
-  end
-
-  scope "/admin", AkediaWeb do
-    pipe_through [:browser, :auth]
-
-    resources "/posts", PostController, except: [:show, :index]
-    get "/posts/drafts", PostController, :drafts
-
-    resources "/bookmarks", BookmarkController, except: [:show, :index]
-    get "/bookmarks/drafts", BookmarkController, :drafts
-
-    resources "/likes", LikeController, except: [:show, :index]
-    get "/likes/drafts", LikeController, :drafts
-
-    resources "/topics", TopicController, except: [:show, :index]
-    resources "/images", ImageController, except: [:show, :index]
-
-    resources "/artists", ArtistController, except: [:show, :index]
-    resources "/albums", AlbumController, except: [:show]
-
-    resources "/channels", ChannelController do
-      resources "/feeds", FeedController
-    end
-
-    get "/mentions", MentionController, :index
   end
 end

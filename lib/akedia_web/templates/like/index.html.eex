@@ -5,5 +5,3 @@
     <%= render "like.html", Map.put(assigns, :like, like) %>
   <% end %>
 </div>
-
-<span><%= link "New Like", to: Routes.like_path(@conn, :new), class: "btn btn-primary" %></span>

@@ -1,5 +1,3 @@
-<%= render SharedView, "nav/user_nav.html", assigns %>
-
 <%= for profile <- @profiles do %>
 <article class="media is-marginless">
   <figure class="media-left">

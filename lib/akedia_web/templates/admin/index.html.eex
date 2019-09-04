@@ -1,0 +1,24 @@
+<div class="card">
+  <div class="card-content">
+    <div class="level">
+      <div class="level-item has-text-centered">
+        <div>
+          <p class="heading">Posts</p>
+          <p class="title">3,456</p>
+        </div>
+      </div>
+      <div class="level-item has-text-centered">
+        <div>
+          <p class="heading">Bookmarks</p>
+          <p class="title">123</p>
+        </div>
+      </div>
+      <div class="level-item has-text-centered">
+        <div>
+          <p class="heading">Likes</p>
+          <p class="title">456K</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

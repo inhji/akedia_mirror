@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%= render "head.html", assigns %>
+
+  <body class="has-navbar-fixed-top">
+    <section class="section is-paddingless">
+      <%= render "navigation.html", conn: @conn, logged_in: @logged_in, current_user: @current_user %>
+    </section>
+
+    <div class="section">
+      <div class="container">
+        <div class="columns">
+          <aside class="column is-one-fifth" id="sidebar">
+            <%= render SharedView, "admin/sidebar.html", assigns %>
+          </aside>
+
+          <main class="column is-four-fifths" id="content">
+            <p class="notification is-info" role="alert"><%= get_flash(@conn, :info) %></p>
+            <p class="notification is-danger" role="alert"><%= get_flash(@conn, :error) %></p>
+            <%= render @view_module, @view_template, assigns %>
+          </main>
+        </div>
+      </div>
+    </div>
+
+    <script type="text/javascript" src="<%= Routes.static_path(@conn, "/js/admin.js") %>"></script>
+  </body>
+</html>

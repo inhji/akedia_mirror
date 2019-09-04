@@ -12,6 +12,12 @@
       </span>
       <span>Profiles</span>
     <% end %>
+    <%= active_link(@conn, to: Routes.profile_path(@conn, :index), class_active: "is-active", wrap_tag: :li) do %>
+      <span class="icon is-small">
+        <i class="fa fa-key"></i>
+      </span>
+      <span>Security</span>
+    <% end %>
     <%= active_link(@conn, to: Routes.channel_path(@conn, :index), class_active: "is-active", wrap_tag: :li) do %>
       <span class="icon is-small">
         <i class="fa fa-rss-square"></i>
