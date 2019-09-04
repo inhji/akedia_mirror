@@ -13,7 +13,7 @@ defmodule Akedia.Media.CoverUploader do
   end
 
   def transform(:wide, _) do
-    {:convert, "-strip -thumbnail 1000x300^ -gravity center -format png", :png}
+    {:convert, "-strip -gravity center -crop 100%x60% -format png", :png}
   end
 
   # Override the persisted filenames:

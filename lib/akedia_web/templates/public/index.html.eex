@@ -1,12 +1,11 @@
 <div class="cover-container">
-	<img src="<%= cover_url(@current_user, :original) %>" class="cover-image">
+	<img src="<%= cover_url(@current_user, :wide) %>" class="cover-image">
 	<div class="cover-content">
 		<%= render SharedView, "hcard.html", assigns %>
 	</div>
 </div>
 
 <div class="columns">
-	
 	<div class="column is-two-thirds">
 		<%= for post <- @posts do %>
 		  <%= render PostView, "post.html",
@@ -22,12 +21,6 @@
 			%>
 		<% end %>
 	</div>
-
-
-
-
-
-
 
 	<aside id="sidebar" class="column">
 		<%= if @logged_in do %>
