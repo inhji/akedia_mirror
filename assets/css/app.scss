@@ -33,25 +33,16 @@ $navbar-item-active-color-dark: $primary;
 @import "~openwebicons/css/openwebicons.css";
 @import "~imagelightbox/dist/imagelightbox.min.css";
 
-@import "phoenix";
+@import "notification";
 @import "helpers";
 @import "zen";
 @import "tagcloud";
+@import "navbar";
 
 // @import "debug";
 
 ::-moz-selection { background: $primary; color: $white; }
 ::selection { background: $primary; color: $white; }
-
-nav.navbar {
-  .navbar-brand {
-    a {
-      svg g {
-        fill: $light;
-      }
-    }
-  }
-}
 
 .media {
   .media-left {
@@ -61,23 +52,9 @@ nav.navbar {
   }
 }
 
-.notification {
-  &.is-danger {
-    border: 1px solid $danger;
-    background-color: lighten($danger, 40%);
-    color: $danger;
-  }
-
-  &.is-info {
-    border: 1px solid $info;
-    background-color: lighten($info, 40%);
-    color: $info;
-  }
-}
-
 .cover-container {
   position: relative;
-  margin-top: -48px;
+  margin-top: -3rem;
   margin-bottom: 2rem;
 
   .cover-content {
@@ -87,6 +64,14 @@ nav.navbar {
     background: rgba(255,255,255, 0.2);
     z-index: 10;
     width: 100%;
+  }
+}
+
+@media screen and (max-width: $tablet) {
+  .cover-container {
+    margin-top: -1rem;
+    margin-left: -1rem;
+    margin-right: -1rem;
   }
 }
 
@@ -253,18 +238,6 @@ article {
 
 // This needs to be last to override all other styles
 @include prefers-scheme(dark) {
-  nav.navbar {
-    border-bottom: 2px solid $grey-darker;
-
-    .navbar-brand {
-      a {
-        svg g {
-          fill: $white;
-        }
-      }
-    }
-  }
-
   .pagination-link.is-current {
     color: $white;
     background-color: $dark;

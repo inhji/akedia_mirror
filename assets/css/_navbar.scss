@@ -1,0 +1,21 @@
+nav.navbar {
+  .navbar-brand {
+    a {
+      svg g {
+        fill: $light;
+      }
+    }
+  }
+}
+
+@include prefers-scheme(dark) {
+	nav.navbar {
+    .navbar-brand {
+      a {
+        svg g {
+          fill: $white;
+        }
+      }
+    }
+  }
+}
