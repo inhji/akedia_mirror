@@ -1,3 +1,35 @@
+<div class="columns">
+  <div class="column">
+    <div class="card">
+      <div class="card-content">
+        Hi <%= @current_user.username %>
+      </div>
+    </div>
+  </div>
+  <div class="column">
+    <%= if @weather do %>
+    <div class="card weather">
+      <div class="card-content">  
+        <div class="media">
+          <figure class="media-left">
+            <p class="image is-64x64">
+              <canvas id="weather" width="48" height="48" data-icon="<%= @weather.icon %>" class="<%= @weather.icon %>"></canvas>
+            </p>
+          </figure>
+          <div class="media-content">
+            <div class="content">
+              <div><%= @weather.now %> at <%= @weather.temperature %> °C with <%= round(@weather.humidity * 100) %>% Humidity</div>
+              <div>Today: From <%= @weather.min %> °C to <%= @weather.max %> °C</div>
+              <div><%= @weather.summary %></div>         
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <% end %>
+  </div>
+</div>
+
 <div class="card">
   <div class="card-content">
     <div class="level">

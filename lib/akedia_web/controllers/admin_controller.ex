@@ -2,6 +2,8 @@ defmodule AkediaWeb.AdminController do
   use AkediaWeb, :controller
 
   def index(conn, _params) do
-    render(conn, "index.html")
+    weather = Akedia.Workers.Weather.get_weather()
+
+    render(conn, "index.html", weather: weather)
   end
 end

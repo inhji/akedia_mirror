@@ -120,35 +120,35 @@ svg.emoji-icon {
   }
 }
 
+.weather {
+  canvas#weather {
+    padding: 8px;
+    border-radius: 5px;
+
+    &.clear-night,
+    &.partly-cloudy-night {
+      background: #006ab3;
+    }
+
+    &.cloudy,
+    &.clear-day,
+    &.partly-cloudy-day,
+    &.rain,
+    &.sleet,
+    &.snow,
+    &.wind {
+      background: #00aaff;
+    }
+
+    &.fog {
+      background: $grey;
+    }
+  }
+}
+
 #sidebar {
   .card {
     margin-bottom: 1rem;
-  }
-
-  .weather {
-    canvas#weather {
-      padding: 8px;
-      border-radius: 5px;
-
-      &.clear-night,
-      &.partly-cloudy-night {
-        background: #001eb3;
-      }
-
-      &.cloudy,
-      &.clear-day,
-      &.partly-cloudy-day,
-      &.rain,
-      &.sleet,
-      &.snow,
-      &.wind {
-        background: #00aaff;
-      }
-
-      &.fog {
-        background: grey;
-      }
-    }
   }
 
   .listens {
