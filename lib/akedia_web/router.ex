@@ -19,6 +19,7 @@ defmodule AkediaWeb.Router do
 
   pipeline :api do
     plug :accepts, ["json"]
+    plug :fetch_session
   end
 
   pipeline :auth do
@@ -28,6 +29,10 @@ defmodule AkediaWeb.Router do
   pipeline :admin do
     plug :admin_layout
   end
+
+  # -----------------------------------------------------
+  # Public Routes
+  # -----------------------------------------------------
 
   scope "/", AkediaWeb do
     pipe_through [:browser]
@@ -64,10 +69,15 @@ defmodule AkediaWeb.Router do
     end
   end
 
+  # -----------------------------------------------------
+  # Admin Routes
+  # -----------------------------------------------------
+
   scope "/admin", AkediaWeb do
     pipe_through [:browser, :auth, :admin]
 
     get "/", AdminController, :index
+    get "/webauthn", AdminController, :webauthn
 
     resources "/user", UserController, only: [:show, :edit, :update], singleton: true
     resources "/user/profiles", ProfileController
@@ -94,22 +104,33 @@ defmodule AkediaWeb.Router do
     get "/mentions", MentionController, :index
   end
 
-  scope "/indie" do
+  # -----------------------------------------------------
+  # API Routes
+  # -----------------------------------------------------
+
+  scope "/api" do
     pipe_through [:api]
 
-    forward "/micropub",
-            PlugMicropub,
-            handler: Akedia.Indie.Micropub.Handler,
-            json_encoder: Phoenix.json_library()
+    scope "/webauthn" do
+      post "/", AkediaWeb.WebauthnController, :create
+      post "/callback", AkediaWeb.WebauthnController, :callback
+    end
 
-    forward "/microsub",
-            AkediaWeb.Plugs.PlugMicrosub,
-            handler: Akedia.Indie.Microsub.Handler,
-            json_encoder: Phoenix.json_library()
+    scope "/indie" do
+      forward "/micropub",
+              PlugMicropub,
+              handler: Akedia.Indie.Micropub.Handler,
+              json_encoder: Phoenix.json_library()
 
-    forward "/webmention",
-            AkediaWeb.Plugs.PlugWebmention,
-            handler: Akedia.Indie.Webmentions.Handler,
-            json_encoder: Phoenix.json_library()
+      forward "/microsub",
+              AkediaWeb.Plugs.PlugMicrosub,
+              handler: Akedia.Indie.Microsub.Handler,
+              json_encoder: Phoenix.json_library()
+
+      forward "/webmention",
+              AkediaWeb.Plugs.PlugWebmention,
+              handler: Akedia.Indie.Webmentions.Handler,
+              json_encoder: Phoenix.json_library()
+    end
   end
 end

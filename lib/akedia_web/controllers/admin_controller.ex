@@ -6,4 +6,8 @@ defmodule AkediaWeb.AdminController do
 
     render(conn, "index.html", weather: weather)
   end
+
+  def webauthn(conn, _params) do
+    render(conn, "webauthn.html")
+  end
 end

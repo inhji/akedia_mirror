@@ -6,6 +6,7 @@
       </p>
       <ul class="menu-list">
         <li><%= link "Home", to: Routes.admin_path(@conn, :index) %></li>
+        <li><%= link "Webauthn", to: Routes.admin_path(@conn, :webauthn) %></li>
       </ul>
       <p class="menu-label">
         User

@@ -7,6 +7,10 @@ defmodule Akedia.Accounts.Credential do
     field :email, :string
     field :encrypted_password, :string
 
+    field :device_name, :string
+    field :external_id, :string
+    field :public_key, :string
+
     belongs_to(:user, User)
 
     timestamps()

@@ -11,7 +11,7 @@ function callback(url, body) {
     },
     credentials: 'same-origin'
   }).then(function() {
-    window.location.replace("/")
+    window.location.replace("/admin/webauthn")
   });
 }
 
