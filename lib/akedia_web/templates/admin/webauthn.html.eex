@@ -1,7 +1,13 @@
+<h2 class="title">Devices</h2>
+
+<%= @credential.device_name %>
+
+
+
+<h2 class="title">Register new Device</h2>
+
 <%= form_for @conn, Routes.webauthn_path(@conn, :create), [id: "registration-create", class: "form"], fn f -> %>
-  <%= label f, :name %>
-  <%= text_input f, :name, class: "input" %>
-  <%= label f, :credential_name%>
-  <%= text_input f, :credential_name, class: "input" %>
+  <%= label f, :device_name%>
+  <%= text_input f, :device_name, class: "input" %>
   <%= submit "Register", class: "button" %>
 <% end %>

@@ -8,6 +8,9 @@ defmodule AkediaWeb.AdminController do
   end
 
   def webauthn(conn, _params) do
-    render(conn, "webauthn.html")
+    user = Akedia.Accounts.get_user!()
+    credential = Akedia.Accounts.get_credential_by_user(user.id)
+
+    render(conn, "webauthn.html", credential: credential)
   end
 end

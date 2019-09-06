@@ -19,7 +19,14 @@ defmodule Akedia.Accounts.Credential do
   @doc false
   def changeset(credential, attrs) do
     credential
-    |> cast(attrs, [:email, :encrypted_password, :user_id])
+    |> cast(attrs, [
+      :email,
+      :encrypted_password,
+      :user_id,
+      :device_name,
+      :external_id,
+      :public_key
+    ])
     |> validate_required([:email, :encrypted_password, :user_id])
     |> unique_constraint(:email)
     |> update_change(:encrypted_password, &Bcrypt.hash_pwd_salt/1)

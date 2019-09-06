@@ -33,9 +33,8 @@ function callback(data) {
     // Registration
     if (credentialOptions["user"]) {
       credentialOptions["user"]["id"] = Encoder.strToBin(credentialOptions["user"]["id"]);
-      var credential_name = document.getElementById("registration-create").querySelector("input[name='credential_name']").value;
-      var name = document.getElementById("registration-create").querySelector("input[name='name']").value;
-      var callback_url = `${webauthnUrl}/callback?credential_name=${credential_name}&name=${name}`;
+      var device_name = document.getElementById("registration-create").querySelector("input[name='device_name']").value;
+      var callback_url = `${webauthnUrl}/callback?device_name=${device_name}&name=${name}`;
       
       Credential.create(encodeURI(callback_url), credentialOptions);
     }
