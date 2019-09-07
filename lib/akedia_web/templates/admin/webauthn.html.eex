@@ -1,13 +1,34 @@
-<h2 class="title">Devices</h2>
+<h1 class="title">Webauthn</h1>
+
+<h2 class="subtitle">Devices</h2>
 
 <%= @credential.device_name %>
 
+<div class="table-container">
+	<table class="table">
+	  <thead>
+	    <tr>
+	      <th>Device</th>
+	      <th>External Id</th>
+	      <th>Public Key</th>
+	    </tr>
+	  </thead>
+	  <tbody>
+	    <tr>
+	      <td><%= @credential.device_name %></td>
+	      <td><%= @credential.external_id %></td>
+	      <td><%= @credential.public_key %></td>
+	    </tr>
+	  </tbody>
+	</table>
+</div>
 
-
-<h2 class="title">Register new Device</h2>
+<h2 class="subtitle">Register new Device</h2>
 
 <%= form_for @conn, Routes.webauthn_path(@conn, :create), [id: "registration-create", class: "form"], fn f -> %>
-  <%= label f, :device_name%>
-  <%= text_input f, :device_name, class: "input" %>
-  <%= submit "Register", class: "button" %>
+	<div class="field">
+  	<%= label f, :device_name, class: "label" %>
+  	<%= text_input f, :device_name, class: "input" %>
+	</div>
+  <%= submit "Register", class: "button is-success" %>
 <% end %>
