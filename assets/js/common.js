@@ -10,9 +10,12 @@ import css from "../css/app.scss"
 // Import dependencies
 //
 import jquery from "jquery"
+import Prism from 'prismjs'
+
 import "imagelightbox"
 import "phoenix_html"
-import Prism from 'prismjs'
+
+import "./webauthn.js"
 import Skycons from '../vendor/skycons.js'
 
 // Register Service Worker

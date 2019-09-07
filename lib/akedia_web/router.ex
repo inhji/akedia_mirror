@@ -65,6 +65,10 @@ defmodule AkediaWeb.Router do
 
       get "/login", SessionController, :new
       post "/login", SessionController, :create
+
+      get "/webauthn", SessionController, :webauthn_new
+      post "/webauthn", SessionController, :webauthn_create
+
       delete "/logout", SessionController, :delete
     end
   end
@@ -114,6 +118,7 @@ defmodule AkediaWeb.Router do
     scope "/webauthn" do
       post "/", AkediaWeb.WebauthnController, :create
       post "/callback", AkediaWeb.WebauthnController, :callback
+      post "/session_callback", AkediaWeb.SessionController, :webauthn_callback
     end
 
     scope "/indie" do

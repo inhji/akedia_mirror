@@ -1,7 +1,7 @@
 // Credits: https://github.com/cedarcode/webauthn-rails-demo-app
 import * as Encoder from "./encoder";
 
-function callback(url, body) {
+function callback(url, body, redirect_url) {
   fetch(url, {
     method: "POST",
     body: JSON.stringify(body),
@@ -11,7 +11,7 @@ function callback(url, body) {
     },
     credentials: 'same-origin'
   }).then(function() {
-    window.location.replace("/admin/webauthn")
+    window.location.replace(redirect_url)
   });
 }
 
@@ -24,7 +24,7 @@ function create(callbackUrl, credentialOptions) {
         clientDataJSON: Encoder.binToStr(attestation.response.clientDataJSON),
         attestationObject: Encoder.binToStr(attestation.response.attestationObject)
       }
-    });
+    }, "/admin/webauthn");
   }).catch(function(error) {
     console.log(error);
   });
@@ -36,7 +36,7 @@ function get(credentialOptions) {
   navigator.credentials.get({ "publicKey": credentialOptions }).then(function(credential) {
     var assertionResponse = credential.response;
 
-    callback("/api/session/callback", {
+    callback("/api/webauthn/session_callback", {
       id: Encoder.binToStr(credential.rawId),
       response: {
         clientDataJSON: Encoder.binToStr(assertionResponse.clientDataJSON),
@@ -44,7 +44,7 @@ function get(credentialOptions) {
         userHandle: Encoder.binToStr(assertionResponse.userHandle),
         authenticatorData: Encoder.binToStr(assertionResponse.authenticatorData)
       }
-    });
+    }, "/");
   }).catch(function(error) {
     console.log(error);
   });
