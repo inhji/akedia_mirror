@@ -104,7 +104,7 @@ defmodule Akedia.Indie.Micropub.Handler do
   def handle_config_query(access_token) do
     case Token.verify_token(access_token, nil) do
       :ok ->
-        media_url = HTTP.abs_url(Akedia.url(), "/indie/micropub/media")
+        media_url = HTTP.abs_url(Akedia.url(), "/api/indie/micropub/media")
 
         syndication_targets = [
           %{
