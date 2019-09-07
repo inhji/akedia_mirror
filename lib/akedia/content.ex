@@ -430,6 +430,20 @@ defmodule Akedia.Content do
 
   # Query Utils
 
+  def schema_per_month(schema) do
+    schema
+    |> group_by([l], fragment("date_trunc('month', ?)", l.inserted_at))
+    |> select([l], count(l.id))
+    |> Repo.all()
+  end
+
+  def schema_per_week(schema) do
+    schema
+    |> group_by([l], fragment("date_trunc('week', ?)", l.inserted_at))
+    |> select([l], count(l.id))
+    |> Repo.all()
+  end
+
   def search(search_term) do
     search_query(search_term)
     |> Repo.all()

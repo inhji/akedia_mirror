@@ -18,6 +18,13 @@ defmodule Akedia.Listens do
     |> Repo.one!()
   end
 
+  def listens_per_month() do
+    Listen
+    |> group_by([l], fragment("date_trunc('month', ?)", l.listened_at))
+    |> select([l], count(l.id))
+    |> Repo.all()
+  end
+
   def get_oldest_listen() do
     Listen
     |> order_by(asc: :listened_at)
@@ -87,7 +94,7 @@ defmodule Akedia.Listens do
 
   def group_by_track_artist(artist) do
     group_by_track_query()
-    |> where([l, a], artist_id: ^artist.id) 
+    |> where([l, a], artist_id: ^artist.id)
     |> Repo.all()
   end
 

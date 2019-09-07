@@ -31,25 +31,30 @@
 </div>
 
 <div class="card">
-  <div class="card-content">
-    <div class="level">
-      <div class="level-item has-text-centered">
-        <div>
-          <p class="heading">Posts</p>
-          <p class="title">3,456</p>
-        </div>
+  <div class="card-content">    
+    <div class="columns">
+      <div class="column">
+        <p class="heading">Listens per Month</p>
+        <div class="chart" style="height: 40px" data-dailychart-values='<%= Enum.join(@listens, ",") %>' data-dailychart-close="0"></div>
       </div>
-      <div class="level-item has-text-centered">
-        <div>
-          <p class="heading">Bookmarks</p>
-          <p class="title">123</p>
-        </div>
+    </div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-content">    
+    <div class="columns">
+      <div class="column">
+        <p class="heading">Posts per Week</p>
+        <div class="chart" style="height: 40px" data-dailychart-values='<%= Enum.join(@posts, ",") %>' data-dailychart-close="0"></div>
       </div>
-      <div class="level-item has-text-centered">
-        <div>
-          <p class="heading">Likes</p>
-          <p class="title">456K</p>
-        </div>
+      <div class="column">
+        <p class="heading">Bookmarks per Week</p>
+        <div class="chart" style="height: 40px" data-dailychart-values='<%= Enum.join(@bookmarks, ",") %>' data-dailychart-close="0"></div>
+      </div>
+      <div class="column">
+        <p class="heading">Likes per Week</p>
+        <div class="chart" style="height: 40px" data-dailychart-values='<%= Enum.join(@likes, ",") %>' data-dailychart-close="0"></div>
       </div>
     </div>
   </div>

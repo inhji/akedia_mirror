@@ -1,63 +1,11 @@
 import "phoenix_html"
-//import Vue from 'vue'
-import tags from 'bulma-tagsinput'
-import * as Credential from "./webauthn/credential"
-import * as Encoder from "./webauthn/encoder"
+import "./webauthn.js"
+import "./new_post.js"
+import Dailychart from 'dailychart'
 
-const webauthnUrl = "/api/webauthn"
-
-// const app = new Vue({
-//   el: "form.vue",
-//   data: {
-//     charCount: 0,
-//     maxChars: 400,
-//     zenActive: false
-//   },
-//   mounted() {
-//     tags.attach()
-//   },
-//   methods: {
-//     updateCharCount(e) {
-//       const charCount = e.target.value.length
-//       this.charCount = charCount
-//     },
-//     closeZen() {
-//       this.zenActive = false
-//     }
-//   }
-// })
-
-function callback(data) {
-    var credentialOptions = data;
-    credentialOptions["challenge"] = Encoder.strToBin(credentialOptions["challenge"]);
-    // Registration
-    if (credentialOptions["user"]) {
-      credentialOptions["user"]["id"] = Encoder.strToBin(credentialOptions["user"]["id"]);
-      var device_name = document.getElementById("registration-create").querySelector("input[name='device_name']").value;
-      var callback_url = `${webauthnUrl}/callback?device_name=${device_name}&name=${name}`;
-      
-      Credential.create(encodeURI(callback_url), credentialOptions);
-    }
-}
-
-[document.getElementById("registration-create")].filter(item => item).forEach((registrationForm) => {
-    registrationForm.addEventListener("submit", (e) => {
-        e.preventDefault();
-        let data = new FormData(e.target);
-        const url = webauthnUrl;
-        fetch(url, {
-            method: "POST",
-            body: data
-        })
-        .then((response) => {
-          console.log(response);
-           return response.json();
-        }).then((data) => {
-          callback(data)
-        }).catch((e) => {
-          console.error(e);
-        });
-    });
-});
-
-
+document.addEventListener('DOMContentLoaded', function () {
+  Dailychart.create('.chart', { 
+    lineWidth: 2,
+    colorPositive: "#000" 
+  });
+})
