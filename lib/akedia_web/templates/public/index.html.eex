@@ -1,5 +1,4 @@
-<div class="cover-container">
-	<img src="<%= cover_url(@current_user, :wide) %>" class="cover-image">
+<div class="cover-container" style="background-image: url(<%= cover_url(@current_user, :wide) %>)">
 	<div class="cover-content">
 		<%= render SharedView, "hcard.html", assigns %>
 	</div>

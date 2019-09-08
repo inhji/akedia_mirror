@@ -53,25 +53,21 @@ $navbar-item-active-color-dark: $primary;
 }
 
 .cover-container {
-  position: relative;
-  margin-top: -3rem;
+  padding-top: 20rem;
   margin-bottom: 2rem;
+  margin-top: -3rem;
+  background-size: cover;
 
   .cover-content {
-    position: absolute;
-    bottom: 6px;
-    padding: 2rem;
-    background: rgba(255,255,255, 0.2);
-    z-index: 10;
-    width: 100%;
+    padding: 1.5rem;
+    background: rgba(255, 255, 255, 0.5);
   }
 }
 
 @media screen and (max-width: $tablet) {
   .cover-container {
-    margin-top: -1rem;
-    margin-left: -1rem;
-    margin-right: -1rem;
+    margin-top: 0;
+    padding-top: 5rem;
   }
 }
 
