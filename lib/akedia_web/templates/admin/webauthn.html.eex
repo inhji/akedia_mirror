@@ -2,8 +2,6 @@
 
 <h2 class="subtitle">Devices</h2>
 
-<%= @credential.device_name %>
-
 <div class="table-container">
 	<table class="table">
 	  <thead>
