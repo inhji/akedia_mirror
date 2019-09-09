@@ -16,7 +16,7 @@
             <%= render @view_module, @view_template, assigns %>
           </main>
           <%= if has_partial?("sidebar", assigns) do %>
-          <aside class="column is-one-third" id="sidebar">
+          <aside class="column is-one-third is-paddingless-top" id="sidebar">
             <%= raw(get_partial("sidebar", assigns)) %>
           </aside>
           <% end %>
