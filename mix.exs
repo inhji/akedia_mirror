@@ -76,7 +76,8 @@ defmodule Akedia.MixProject do
       {:html_sanitize_ex, "~> 1.3"},
       {:atomex, "~> 0.3.0"},
       {:emojix, "~> 0.1.0"},
-      {:web_authn_ex, "~> 0.1.1"}
+      {:web_authn_ex, "~> 0.1.1"},
+      {:totpex, "~> 0.1.3"}
     ]
   end
 
