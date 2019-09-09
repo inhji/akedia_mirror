@@ -4,6 +4,20 @@
 
 > „Der Dämon der Trägheit, der auch Mittagsdämon genannt wird, ist belastender als alle anderen Dämonen.“
 
+# Features
+
+* Topics
+* Likes
+* Bookmarks
+* Posts (+ Images)
+* Sending Webmentions
+* Microformats
+* Weather
+* Syncing Listens with [Listenbrainz](https://listenbrainz.org)
+* Coverart Grabber
+* 2FactorAuth (U2F + TOTP Fallback)
+* Admin Dashboard
+
 ## Docs
 
 * [How To Install](INSTALL.md)
