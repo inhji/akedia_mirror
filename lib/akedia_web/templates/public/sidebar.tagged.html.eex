@@ -1,0 +1,42 @@
+<div class="card">
+	<div class="card-header">
+		<h3 class="card-header-title">Post Types</h3>
+	</div>
+	<div class="card-content">
+		<div class="menu">
+			<ul class="menu-list">
+				<%= active_link @conn, "All Posts", 
+					to: Routes.public_path(@conn, :tagged, @topic),
+					class_active: "is-active",
+					active: :exact_with_params,
+					wrap_tag: :li %>
+				<%= active_link @conn, "Posts",
+					to: Routes.public_path(@conn, :tagged, @topic, type: "post"),
+					class_active: "is-active",
+					active: :inclusive_with_params,
+					wrap_tag: :li %>
+				<%= active_link @conn, "Bookmarks",
+					to: Routes.public_path(@conn, :tagged, @topic, type: "bookmark"),
+					class_active: "is-active",
+					active: :inclusive_with_params,
+					wrap_tag: :li %>
+				<%= active_link @conn, "Like",
+					to: Routes.public_path(@conn, :tagged, @topic, type: "like"),
+					class_active: "is-active",
+					active: :inclusive_with_params,
+					wrap_tag: :li %>
+			</ul>
+		</div>
+	</div>
+</div>
+
+<div class="card">
+  <div class="card-content">
+    <%= render SharedView, "tag_cloud.html", assigns %>
+  </div>
+  <footer class="card-footer">
+    <a href="<%= Routes.topic_path(@conn, :index) %>" class="card-footer-item">
+      All Topics
+    </a>
+  </footer>
+</div>
