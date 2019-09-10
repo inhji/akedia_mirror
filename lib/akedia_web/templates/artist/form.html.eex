@@ -1,19 +1,67 @@
-<%= form_for @changeset, @action, fn f -> %>
+<%= form_for @changeset, @action, [multipart: true], fn f -> %>
   <%= if @changeset.action do %>
     <div class="alert alert-danger">
       <p>Oops, something went wrong! Please check the errors below.</p>
     </div>
   <% end %>
 
-  <%= label f, :name %>
-  <%= text_input f, :name %>
-  <%= error_tag f, :name %>
+  <div class="field is-horizontal">
+    <div class="field-label is-normal">
+      <%= label f, :name, class: "label" %>
+    </div>
 
-  <%= label f, :mbid %>
-  <%= text_input f, :mbid %>
-  <%= error_tag f, :mbid %>
+    <div class="field-body">
+      <div class="field">
+        <div class="control">
+          <%= text_input f, :name, class: "input" %>
+        </div>
+      </div>
+    </div>    
+    
+    <%= error_tag f, :name %>
+  </div>
+
+  <div class="field is-horizontal">
+    <div class="field-label is-normal">
+      <%= label f, :mbid, class: "label" %>
+    </div>
+
+    <div class="field-body">
+      <div class="field">
+        <div class="control">
+          <%= text_input f, :mbid, class: "input" %>
+        </div>
+      </div>
+    </div>    
+    
+    <%= error_tag f, :mbid %>
+  </div>
+
+  <div class="field is-horizontal">
+    <div class="field-label is-normal">
+      <%= label f, :image, class: "label" %>
+    </div>
+
+    <div class="field-body">
+      <div class="field">
+        <div class="file">
+          <label class="file-label">
+            <%= file_input f, :image, class: "file-input" %>
+            <span class="file-cta">
+              <span class="file-icon">
+                <i class="fa fa-upload"></i>
+              </span>
+              <span class="file-label">
+                Choose a file…
+              </span>
+            </span>
+          </label>
+        </div>
+      </div>
+    </div>    
+  </div>
 
   <div>
-    <%= submit "Save" %>
+    <%= submit "Save", class: "button is-success" %>
   </div>
 <% end %>

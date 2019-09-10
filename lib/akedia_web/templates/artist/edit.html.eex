@@ -1,5 +1,3 @@
-<h1>Edit Artist</h1>
+<h1 class="title">Edit Artist</h1>
 
 <%= render "form.html", Map.put(assigns, :action, Routes.artist_path(@conn, :update, @artist)) %>
-
-<span><%= link "Back", to: Routes.artist_path(@conn, :index) %></span>

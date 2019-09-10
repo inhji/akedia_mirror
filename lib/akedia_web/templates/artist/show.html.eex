@@ -1,16 +1,5 @@
-<%= render SharedView, "nav/listen_nav.html", assigns %>
+<%= render "artist.html", assigns %>
 
-<h1 class="title">
-  <%= @artist.name %>
-</h1>
-
-<%= for listen <- @listens do %>
-<div class="media is-dense">
-  <div class="media-content">
-    <p>
-      <strong><%= listen.track %></strong> <small><%= listen.listens %></small>
-      <progress class="progress is-primary" value="<%= listen.listens %>" max="<%= @max %>">15%</progress>
-    </p>
-  </div>
-</div>
+<%= if @current_user do %>
+	<%= link "Edit", to: Routes.artist_url(@conn, :edit, @artist.id), class: "button is-success" %>
 <% end %>
