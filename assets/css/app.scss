@@ -101,14 +101,6 @@ svg.emoji-icon {
 }
 
 #content {
-  >h1.title {
-    display: inline-block;
-    font-weight: normal;
-    border-bottom: 2px solid $red;
-    padding-bottom: 0.25rem;
-    padding-right: 1rem;
-  }
-
   .content {
     a {
       @include nice-underline;
