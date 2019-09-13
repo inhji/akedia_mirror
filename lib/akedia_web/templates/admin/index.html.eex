@@ -35,7 +35,7 @@
     <div class="columns">
       <div class="column">
         <p class="heading">Listens per Month</p>
-        <div class="chart" style="height: 40px" data-dailychart-values='<%= Enum.join(@listens, ",") %>' data-dailychart-close="0"></div>
+        <canvas id="likes-per-month" height="100px"></canvas>
       </div>
     </div>
   </div>
@@ -46,15 +46,15 @@
     <div class="columns">
       <div class="column">
         <p class="heading">Posts per Week</p>
-        <div class="chart" style="height: 40px" data-dailychart-values='<%= Enum.join(@posts, ",") %>' data-dailychart-close="0"></div>
+        <canvas id="posts-per-week" height="150px"></canvas>
       </div>
       <div class="column">
         <p class="heading">Bookmarks per Week</p>
-        <div class="chart" style="height: 40px" data-dailychart-values='<%= Enum.join(@bookmarks, ",") %>' data-dailychart-close="0"></div>
+        <canvas id="bookmarks-per-week" height="150px"></canvas>
       </div>
       <div class="column">
         <p class="heading">Likes per Week</p>
-        <div class="chart" style="height: 40px" data-dailychart-values='<%= Enum.join(@likes, ",") %>' data-dailychart-close="0"></div>
+        <canvas id="likes-per-week" height="150px"></canvas>
       </div>
     </div>
   </div>

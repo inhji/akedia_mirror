@@ -19,9 +19,13 @@ defmodule Akedia.Listens do
   end
 
   def listens_per_month() do
+    time_ago = Timex.shift(DateTime.utc_now(), years: -1)
+
     Listen
-    |> group_by([l], fragment("date_trunc('month', ?)", l.listened_at))
-    |> select([l], count(l.id))
+    |> select([l], [count(l.id), fragment("date_trunc('month', ?) as month", l.listened_at)])
+    |> order_by([l], fragment("month"))
+    |> group_by([l], fragment("month"))
+    |> where([l], l.listened_at > ^time_ago)
     |> Repo.all()
   end
 
