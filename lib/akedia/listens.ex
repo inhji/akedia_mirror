@@ -32,32 +32,27 @@ defmodule Akedia.Listens do
     |> Repo.one!()
   end
 
-  def group_by_artist(time_diff \\ nil) do
-    group_by_artist_query(time_diff)
+  def group_by_artist(limit \\ 9, time_diff \\ nil) do
+    group_by_artist_query(limit, time_diff)
     |> Repo.all()
+    |> Enum.map(fn artist ->
+      %{
+        listens: artist.listens,
+        artist: get_artist!(artist.id)
+      }
+    end)
   end
 
-  def group_by_artist_query(time_diff \\ nil) do
+  def group_by_artist_query(limit, time_diff) do
     Listen
     |> join(:left, [l], a in Artist, on: l.artist_id == a.id)
-    |> group_by([l, a], a.name)
+    |> group_by([l, a], a.id)
     |> maybe_limit_by_time_diff(time_diff)
     |> select([listen, artist], %{
       listens: fragment("count (?) as listens", listen.id),
-      artist: artist.name
+      id: artist.id
     })
-    |> limit(100)
-    |> order_by(desc: fragment("listens"))
-  end
-
-  def group_by_album_query() do
-    Listen
-    |> join(:left, [l], a in Album, on: l.album_id == a.id)
-    |> group_by([l, a], a.id)
-    |> select([l, a], %{
-      listens: fragment("count (?) as listens", l.id),
-      id: a.id
-    })
+    |> limit(^limit)
     |> order_by(desc: fragment("listens"))
   end
 
@@ -72,6 +67,17 @@ defmodule Akedia.Listens do
         album: get_album!(al.id)
       }
     end)
+  end
+
+  def group_by_album_query() do
+    Listen
+    |> join(:left, [l], a in Album, on: l.album_id == a.id)
+    |> group_by([l, a], a.id)
+    |> select([l, a], %{
+      listens: fragment("count (?) as listens", l.id),
+      id: a.id
+    })
+    |> order_by(desc: fragment("listens"))
   end
 
   def maybe_limit_by_time_diff(query, time_diff) do

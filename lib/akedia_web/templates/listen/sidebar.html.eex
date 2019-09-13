@@ -35,3 +35,30 @@
     <% end %>
   </div>
 </div>
+
+<div class="card">
+  <header class="card-header">
+    <p class="card-header-title">
+      Top Artists this week
+    </p>
+  </header>
+  <div class="card-content">
+    <%= for item <- @artists_weekly do %>
+    <% IO.inspect(item) %>
+    <div class="media is-marginless is-paddingless">
+      <div class="media-left">
+        <figure class="image is-64x64">
+          <img src="<%= artistimage_url(item.artist) %>">
+        </figure>
+      </div>
+      <div class="media-content">
+        <div>
+          <strong><%= item.artist.name %></strong>
+          <span>(<%= item.listens %>)</span>
+        </div>
+        <progress class="progress" value="<%= item.listens %>" max="<%= @artists_max %>"></progress>
+      </div>
+    </div>
+    <% end %>
+  </div>
+</div>
