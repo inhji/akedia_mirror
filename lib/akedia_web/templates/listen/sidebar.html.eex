@@ -53,7 +53,7 @@
       </div>
       <div class="media-content">
         <div>
-          <strong><%= item.artist.name %></strong>
+          <strong><%= link item.artist.name, to: Routes.artist_url(@conn, :show, item.artist) %></strong>
           <span>(<%= item.listens %>)</span>
         </div>
         <progress class="progress" value="<%= item.listens %>" max="<%= @artists_max %>"></progress>
