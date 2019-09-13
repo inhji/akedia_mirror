@@ -17,7 +17,7 @@ defmodule Akedia.Listens.Artist do
     artist
     |> cast(attrs, [:name, :mbid])
     |> cast_attachments(attrs, [:image])
-    |> validate_required([:name, :mbid])
+    |> validate_required([:name])
     |> unique_constraint(:name)
   end
 end
