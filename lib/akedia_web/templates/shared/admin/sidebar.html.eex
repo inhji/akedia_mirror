@@ -23,14 +23,30 @@
         Content
       </p>
       <ul class="menu-list">
+        <li>
+          <a>Create New</a>
+          <ul>
+            <li><%= active_link @conn, "Post", 
+                    class_active: "is-active",
+                    active: :exact,
+                    to: Routes.post_path(@conn, :new) %></li>
+            <li><%= active_link @conn, "Bookmark", 
+                    class_active: "is-active",
+                    active: :exact,
+                    to: Routes.bookmark_path(@conn, :new) %></li>
+          </ul>
+        </li>
         <li><%= active_link @conn, "Posts", 
                 to: Routes.post_path(@conn, :index),
+                active: :exact,
                 class_active: "is-active" %></li>
         <li><%= active_link @conn, "Bookmarks", 
                 to: Routes.bookmark_path(@conn, :index),
+                active: :exact,
                 class_active: "is-active" %></li>
         <li><%= active_link @conn, "Likes", 
                 to: Routes.like_path(@conn, :index),
+                active: :exact,
                 class_active: "is-active" %></li>
       </ul>
     </div>
