@@ -14,10 +14,7 @@ config :akedia,
 
 config :akedia, Akedia.Settings,
   site_title: "Inhji.de",
-  # Uses the Darksky API (https://darksky.net)
-  weather_apikey: "5bf714000f441062afe7e92b9b64d3dc",
-  weather_location: "50.583830,8.677890",
-  totp_secret: "QRSF45JiUpLyG1zjqyHjRYGC4ZIvAdkajywOVa8PCF+kZwtdd0A/XtikP9ZCQ79A"
+  weather_location: "50.583830,8.677890"
 
 config :akedia, Akedia.Scheduler,
   jobs: [
