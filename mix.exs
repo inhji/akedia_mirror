@@ -77,7 +77,9 @@ defmodule Akedia.MixProject do
       {:atomex, "~> 0.3.0"},
       {:emojix, "~> 0.1.0"},
       {:web_authn_ex, "~> 0.1.1"},
-      {:totpex, "~> 0.1.3"}
+      {:totpex, "~> 0.1.3"},
+      {:qr_code, "~> 2.1.0"},
+      {:xml_builder, "~> 2.1.1", override: true}
     ]
   end
 

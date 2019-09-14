@@ -22,32 +22,6 @@
 	</div>
 
 	<aside id="sidebar" class="column">
-		<%= if @logged_in do %>
-		<div class="card">
-			<div class="card-content">		
-		    <aside class="menu">
-		      <p class="menu-label">
-		        Content
-		      </p>
-		       <ul class="menu-list">
-		        <li>
-		        	<%= link to: Routes.bookmark_path(@conn, :new) do %>
-		        		<i class="fa fa-bookmark-o"></i>
-		        		<span>New Bookmark</span>
-		        	<% end %>
-		        </li>
-		        <li>
-		        	<%= link to: Routes.post_path(@conn, :new) do %>
-		        		<i class="fa fa-sticky-note-o"></i>
-		        		<span>New Post</span>
-		        	<% end %>
-		        </li>
-		      </ul>
-		    </aside>
-			</div>
-		</div>
-		<% end %>
-
 		<%= if @weather do %>
 		<div class="card weather">
 			<div class="card-content">	

@@ -1,10 +1,16 @@
 defmodule AkediaWeb.SessionController do
   use AkediaWeb, :controller
   alias Akedia.{Accounts, Auth}
+  require Logger
+
+  @preauth_flag :authorized_for_two_factor
 
   def new(conn, _params) do
     changeset = Accounts.change_credential(%Accounts.Credential{})
-    render(conn, "new.html", changeset: changeset)
+
+    conn
+    |> delete_session(:authorized_for_two_factor)
+    |> render("new.html", changeset: changeset)
   end
 
   def create(conn, %{"credential" => %{"email" => email, "password" => password}}) do
@@ -12,8 +18,8 @@ defmodule AkediaWeb.SessionController do
       {:ok, user} ->
         if user.credential.public_key do
           conn
-          |> put_session(:authorized_for_webauthn, true)
-          |> redirect(to: Routes.session_path(conn, :webauthn_new))
+          |> put_session(@preauth_flag, true)
+          |> redirect(to: Routes.session_path(conn, :two_factor))
         else
           conn
           |> Auth.login(user)
@@ -29,19 +35,23 @@ defmodule AkediaWeb.SessionController do
     end
   end
 
-  def webauthn_new(conn, _params) do
-    # case get_session(conn, :authorized_for_webauthn) do
-    #   true ->
-    #     conn
-    #     |> delete_session(:authorized_for_webauthn)
-    #     |> render("webauthn_new.html")
+  def two_factor(conn, _params) do
+    case get_session(conn, @preauth_flag) do
+      true ->
+        conn
+        |> delete_session(@preauth_flag)
+        |> render("two_factor.html")
 
-    #   _ ->
-    #     redirect(conn, to: Routes.admin_path(conn, :index))
-    # end
+      _ ->
+        Logger.info("Preauth Flag not found, redirecting..")
 
-    # disable check for developing
-    render(conn, "webauthn_new.html")
+        conn
+        |> put_flash(:error, "BRUH")
+        |> redirect(to: Routes.public_path(conn, :index))
+    end
+
+    # DEV ONLY
+    # render(conn,  "two_factor.html")
   end
 
   def webauthn_create(conn, _params) do
@@ -98,6 +108,26 @@ defmodule AkediaWeb.SessionController do
       end
 
     json(conn, %{})
+  end
+
+  def totp_create(conn, %{"totp" => totp}) do
+    user = Accounts.get_user!()
+
+    secret =
+      Akedia.Settings.get(:totp_secret)
+      |> Base.encode32()
+
+    case Totpex.validate_totp(secret, totp, grace_periods: 1) do
+      true ->
+        conn
+        |> Auth.login(user)
+        |> redirect(to: Routes.public_path(conn, :index))
+
+      false ->
+        conn
+        |> put_flash(:error, "BRUH")
+        |> render("totp.html")
+    end
   end
 
   def delete(conn, _params) do

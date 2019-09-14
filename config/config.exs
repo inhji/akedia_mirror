@@ -7,17 +7,17 @@
 # General application configuration
 use Mix.Config
 
-config :elixir,
-  :time_zone_database, Tzdata.TimeZoneDatabase
+config :elixir, :time_zone_database, Tzdata.TimeZoneDatabase
 
 config :akedia,
   ecto_repos: [Akedia.Repo]
 
-config :akedia, Akedia.Settings, 
+config :akedia, Akedia.Settings,
   site_title: "Inhji.de",
   # Uses the Darksky API (https://darksky.net)
   weather_apikey: "5bf714000f441062afe7e92b9b64d3dc",
-  weather_location: "50.583830,8.677890"
+  weather_location: "50.583830,8.677890",
+  totp_secret: "QRSF45JiUpLyG1zjqyHjRYGC4ZIvAdkajywOVa8PCF+kZwtdd0A/XtikP9ZCQ79A"
 
 config :akedia, Akedia.Scheduler,
   jobs: [

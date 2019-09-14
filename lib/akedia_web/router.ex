@@ -64,8 +64,9 @@ defmodule AkediaWeb.Router do
       get "/login", SessionController, :new
       post "/login", SessionController, :create
 
-      get "/webauthn", SessionController, :webauthn_new
+      get "/two_factor", SessionController, :two_factor
       post "/webauthn", SessionController, :webauthn_create
+      post "/totp", SessionController, :totp_create
 
       delete "/logout", SessionController, :delete
     end
@@ -80,6 +81,7 @@ defmodule AkediaWeb.Router do
 
     get "/", AdminController, :index
     get "/webauthn", AdminController, :webauthn
+    get "/totp", AdminController, :totp
 
     resources "/user", UserController, only: [:show, :edit, :update], singleton: true
     resources "/user/profiles", ProfileController
