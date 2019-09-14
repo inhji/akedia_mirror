@@ -1,7 +1,7 @@
 <section class="card post h-entry">
   <%= if @post.entity.image do %>
   <div class="card-image">
-    <figure class="image is-4by3">
+    <figure class="image">
       <a href="<%= image_url(@post.entity.image, :original) %>" data-imagelightbox="x">
         <img class="u-photo" src="<%= image_url(@post.entity.image, :wide) %>" alt="<%= @post.content_sanitized %>">
       </a>

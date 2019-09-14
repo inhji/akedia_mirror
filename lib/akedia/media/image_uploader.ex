@@ -9,16 +9,8 @@ defmodule Akedia.Media.ImageUploader do
     ~w(.jpg .jpeg .gif .png) |> Enum.member?(Path.extname(file.file_name) |> String.downcase())
   end
 
-  def transform(:thumb, _) do
-    {:convert, "-strip -thumbnail 500x500^ -gravity center -extent 500x500 -format png", :png}
-  end
-
   def transform(:wide, _) do
-    {:convert, "-strip -thumbnail 600x450^ -gravity center -extent 600x450 -format png", :png}
-  end
-
-  def transform(:mini, _) do
-    {:convert, "-strip -thumbnail 100x100^ -gravity center -extent 100x100 -format png", :png}
+    {:convert, "-strip -thumbnail 600x450^ -format png", :png}
   end
 
   # Override the persisted filenames:
