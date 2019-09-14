@@ -22,12 +22,10 @@ defmodule Akedia.Workers.Weather do
   # Server Callbacks
 
   def init(state) do
-    settings = Application.get_env(:akedia, Akedia.Settings)
-
     state =
       state
-      |> Map.put(:key, settings[:weather_apikey])
-      |> Map.put(:location, settings[:weather_location])
+      |> Map.put(:key, Akedia.Settings.get(:weather_apikey))
+      |> Map.put(:location, Akedia.Settings.get(:weather_location))
 
     schedule_weather_fetch(10_000)
     {:ok, state}
