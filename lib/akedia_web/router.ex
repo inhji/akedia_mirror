@@ -2,7 +2,6 @@ defmodule AkediaWeb.Router do
   use AkediaWeb, :router
 
   import AkediaWeb.Plugs.PlugAssignUser
-  import AkediaWeb.Plugs.PlugAssignSettings
   import AkediaWeb.Plugs.PlugAdminLayout
 
   pipeline :browser do
@@ -14,7 +13,6 @@ defmodule AkediaWeb.Router do
     plug :check_loggedin
     plug :assign_user
     plug :refresh_user
-    plug :assign_settings
   end
 
   pipeline :api do
