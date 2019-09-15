@@ -22,6 +22,7 @@
 
 * [How To Install](INSTALL.md)
 * [How To Deploy](DEPLOY.md)
+* [How To Backup & Restore](BACKUP.md)
 
 ## Credits
 
