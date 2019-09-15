@@ -1,4 +1,18 @@
-<%= render "artist.html", assigns %>
+<div class="media">
+  <div class="media-left">
+    <figure class="image is-128x128">
+      <img src="<%= artistimage_url(@artist) %>">
+    </figure>
+  </div>
+  <div class="media-content">
+    <h1 class="title"><%= @artist.name %></h1>
+    <h2 class="subtitle"><%= Enum.count(@artist.listens) %> Listens total</h2>
+    <div id="artist-listen-chart"
+     	data-dailychart-values="<%= listen_string(@listens_per_month) %>"
+     	data-dailychart-close="<% listen_average(@listens_per_month) %>"
+    	data-dailychart-length="<% listen_count(@listens_per_month) %>"></div>
+  </div>
+</div>
 
 <%= for track <- Enum.take(@popular_tracks, 5) do %>
 	<div class="media">

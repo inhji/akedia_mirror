@@ -18,6 +18,15 @@ defmodule Akedia.Listens do
     |> Repo.one!()
   end
 
+  def listens_per_month_by_artist(artist_id) do
+    Listen
+    |> select([l], count(l.id))
+    |> order_by([l], fragment("date_trunc('month', ?)", l.listened_at))
+    |> group_by([l], fragment("date_trunc('month', ?)", l.listened_at))
+    |> where([l], l.artist_id == ^artist_id)
+    |> Repo.all()
+  end
+
   def listens_per_month() do
     time_ago = Timex.shift(DateTime.utc_now(), years: -1)
 

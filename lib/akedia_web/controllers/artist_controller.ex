@@ -31,6 +31,7 @@ defmodule AkediaWeb.ArtistController do
 
   def show(conn, %{"id" => artist_id}) do
     artist = Listens.get_artist!(artist_id)
+    listens_per_month = Listens.listens_per_month_by_artist(artist_id)
 
     popular_tracks =
       case artist do
@@ -51,6 +52,7 @@ defmodule AkediaWeb.ArtistController do
 
     render(conn, "show.html",
       popular_tracks: popular_tracks,
+      listens_per_month: listens_per_month,
       artist: artist
     )
   end

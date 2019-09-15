@@ -11,6 +11,7 @@ import css from "../css/app.scss"
 //
 import jquery from "jquery"
 import Prism from 'prismjs'
+import Dailychart from 'dailychart'
 
 import "imagelightbox"
 import "phoenix_html"
@@ -31,6 +32,8 @@ if ('serviceWorker' in navigator) {
 jquery(function() {
   // Highlight Syntax
   Prism.highlightAll()
+
+  Dailychart.create('#artist-listen-chart', { lineWidth: 2, height: 30, width: 150 });
 
   jquery('a[data-imagelightbox="x"]').imageLightbox({
     overlay:true,
