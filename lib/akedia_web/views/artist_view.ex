@@ -13,7 +13,6 @@ defmodule AkediaWeb.ArtistView do
     Enum.join(list, ",")
   end
 
-  def listen_average(list) do
-    Enum.reduce([1, 2, 3], &+/2) / Enum.count(list)
-  end
+  def listen_average([]), do: 0
+  def listen_average(list), do: Enum.reduce(list, &+/2) / Enum.count(list)
 end
