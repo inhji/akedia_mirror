@@ -1,5 +1,20 @@
 <%= render "artist.html", assigns %>
 
+<%= for track <- Enum.take(@popular_tracks, 5) do %>
+	<div class="media">
+		<figure class="media-left">
+      <p class="image is-48x48">      	
+        <img src="<%= coverart_url(track.album) %>" />
+      </p>
+    </figure>
+		<div class="media-content">
+			<strong><%= track.name %></strong>
+			<p><%= track.listens %> Listens</p>
+		</div>
+	</div>
+<% end %>
+
 <%= if @current_user do %>
+	<hr />
 	<%= link "Edit", to: Routes.artist_url(@conn, :edit, @artist.id), class: "button is-success" %>
 <% end %>

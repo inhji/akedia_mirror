@@ -9,6 +9,8 @@ defmodule Akedia.Listens.Artist do
     field :name, :string
     field :image, ArtistimageUploader.Type
 
+    has_many :listens, Akedia.Listens.Listen
+
     timestamps()
   end
 

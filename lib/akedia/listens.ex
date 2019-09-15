@@ -112,9 +112,10 @@ defmodule Akedia.Listens do
     Listen
     |> select([l], %{
       listens: fragment("count (?) as listens", l.id),
-      track: l.track
+      track: l.track,
+      album_id: l.album_id
     })
-    |> group_by([l], [l.track])
+    |> group_by([l], [l.track, l.album_id])
     |> order_by(desc: fragment("listens"))
   end
 
@@ -122,7 +123,11 @@ defmodule Akedia.Listens do
     Repo.all(Artist)
   end
 
-  def get_artist!(id), do: Repo.get!(Artist, id)
+  def get_artist!(id) do
+    Artist
+    |> Repo.get!(id)
+    |> Repo.preload(:listens)
+  end
 
   def create_artist(attrs \\ %{}) do
     %Artist{}

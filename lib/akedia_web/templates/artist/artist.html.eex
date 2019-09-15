@@ -6,6 +6,6 @@
   </div>
   <div class="media-content">
     <h1 class="title"><%= @artist.name %></h1>
-    <h2 class="subtitle">LOL</h2>
+    <h2 class="subtitle"><%= Enum.count(@artist.listens) %> Listens total</h2>
   </div>
 </div>

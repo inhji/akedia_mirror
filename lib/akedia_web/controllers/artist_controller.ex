@@ -32,18 +32,26 @@ defmodule AkediaWeb.ArtistController do
   def show(conn, %{"id" => artist_id}) do
     artist = Listens.get_artist!(artist_id)
 
-    listens =
+    popular_tracks =
       case artist do
         nil -> []
         artist -> Listens.group_by_track_artist(artist)
       end
 
-    max_value = max_listen_value(listens)
+    popular_tracks =
+      Enum.map(popular_tracks, fn track ->
+        album = Listens.get_album!(track.album_id)
+
+        %{
+          name: track.track,
+          album: album,
+          listens: track.listens
+        }
+      end)
 
     render(conn, "show.html",
-      listens: listens,
-      artist: artist,
-      max: max_value
+      popular_tracks: popular_tracks,
+      artist: artist
     )
   end
 
