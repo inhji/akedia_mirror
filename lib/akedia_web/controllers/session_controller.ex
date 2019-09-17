@@ -26,6 +26,11 @@ defmodule AkediaWeb.SessionController do
           |> redirect(to: Routes.admin_path(conn, :index))
         end
 
+      # === DEVDOOR ===
+      # conn
+      # |> Auth.login(user)
+      # |> redirect(to: Routes.admin_path(conn, :index))
+
       {:error, reason} ->
         changeset = Accounts.change_credential(%Accounts.Credential{email: email})
 
