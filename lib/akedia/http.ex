@@ -19,7 +19,6 @@ defmodule Akedia.HTTP do
               |> Floki.find(selector)
               |> List.first()
               |> Floki.text()
-              |> IO.inspect()
 
             {name, value}
           end)

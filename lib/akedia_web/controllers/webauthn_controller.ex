@@ -24,8 +24,6 @@ defmodule AkediaWeb.WebauthnController do
       credential_options
       |> Map.put(:challenge, challenge)
 
-    IO.inspect(credential_options)
-
     json(conn, credential_options)
   end
 
@@ -53,9 +51,6 @@ defmodule AkediaWeb.WebauthnController do
             "external_id" => Base.encode64(att_resp.credential.id),
             "public_key" => Base.encode64(public_key)
           }
-
-          IO.inspect("Updating credential...")
-          IO.inspect(credential_params)
 
           # TODO: Update credentials for user
           user = Accounts.get_user!()

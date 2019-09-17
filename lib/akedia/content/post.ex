@@ -32,8 +32,6 @@ defmodule Akedia.Content.Post do
   end
 
   def maybe_update_html(changeset) do
-    IO.inspect(changeset)
-
     case get_change(changeset, :content) do
       nil ->
         changeset
@@ -45,8 +43,6 @@ defmodule Akedia.Content.Post do
   end
 
   def maybe_update_sanitized(changeset) do
-    IO.inspect(changeset)
-
     case get_change(changeset, :content_html) do
       nil ->
         changeset

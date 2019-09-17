@@ -32,7 +32,6 @@
   </header>
   <div class="card-content">
     <%= for item <- @artists_weekly do %>
-    <% IO.inspect(item) %>
     <div class="media is-marginless is-paddingless">
       <div class="media-left">
         <figure class="image is-64x64">
