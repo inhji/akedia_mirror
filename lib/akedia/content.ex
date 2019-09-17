@@ -131,8 +131,8 @@ defmodule Akedia.Content do
     |> Repo.preload(:favicon)
   end
 
-  def create_bookmark(attrs \\ %{}, entity_attrs \\ %{is_published: true}) do
-    create_with_entity(Bookmark, attrs, entity_attrs)
+  def create_bookmark(attrs \\ %{}) do
+    create_with_entity(Bookmark, attrs)
   end
 
   def update_bookmark(%Bookmark{} = bookmark, attrs) do
@@ -164,8 +164,8 @@ defmodule Akedia.Content do
     |> Repo.preload(@preloads)
   end
 
-  def create_like(attrs \\ %{}, entity_attrs \\ %{is_published: true}) do
-    create_with_entity(Like, attrs, entity_attrs)
+  def create_like(attrs \\ %{}) do
+    create_with_entity(Like, attrs)
   end
 
   def update_like(%Like{} = like, attrs) do
@@ -272,8 +272,8 @@ defmodule Akedia.Content do
     |> Repo.preload(@preloads)
   end
 
-  def create_post(attrs \\ %{}, entity_attrs \\ %{is_published: true}) do
-    create_with_entity(Post, attrs, entity_attrs)
+  def create_post(attrs \\ %{}) do
+    create_with_entity(Post, attrs)
   end
 
   def update_post(%Post{} = post, attrs) do
@@ -520,14 +520,18 @@ defmodule Akedia.Content do
     |> limit(^limit)
   end
 
-  def create_with_entity(schema, attrs \\ %{}) do
-    create_with_entity(schema, attrs, %{is_published: false})
+  def create_with_entity(schema, attrs, entity_attrs) do
+    do_create_with_entity(schema, attrs)
   end
 
-  def create_with_entity(schema, attrs, entity_attrs) do
-    Repo.transaction(fn ->
-      {:ok, entity} = create_entity(entity_attrs)
+  def create_with_entity(schema, attrs) do
+    do_create_with_entity(schema, attrs)
+  end
 
+  defp do_create_with_entity(schema, %{"entity" => entity} = attrs) do
+    {:ok, entity} = create_entity(entity)
+
+    Repo.transaction(fn ->
       schema_attrs =
         attrs
         |> key_to_atom()
