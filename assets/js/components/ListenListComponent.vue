@@ -46,12 +46,8 @@
 <template>
 	<div class="card">
 	  <div class="card-content">    
-	    <div class="columns">
-	      <div class="column">
-	        <p class="heading">Listens per Month</p>
-	        <canvas id="likes-per-month" height="100px"></canvas>
-	      </div>
-	    </div>
-	  </div>
+      <p class="heading">Listens per Month</p>
+      <canvas id="likes-per-month" height="100px"></canvas>
+    </div>
 	</div>
 </template>

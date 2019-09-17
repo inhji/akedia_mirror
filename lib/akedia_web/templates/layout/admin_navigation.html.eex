@@ -1,0 +1,73 @@
+<nav class="navbar is-dark is-fixed-top" role="navigation" aria-label="main navigation">
+	<div class="navbar-brand">
+		<%= active_link @conn,
+				to: Routes.public_path(@conn, :index),
+				class_active: "is-active",
+				class: "navbar-item" do %>
+				<%= render "logo.html" %>
+		<% end %>	
+	</div>
+
+	<div id="mainNav" class="navbar-menu">
+		<div class="navbar-start">
+			<%= active_link @conn,
+					to: Routes.public_path(@conn, :stream),
+					class_active: "is-active",
+					class: "navbar-item" do %>
+					Stream
+			<% end %>
+
+			<%= active_link @conn,
+					to: Routes.listen_path(@conn, :index),
+					class_active: "is-active",
+					class: "navbar-item" do %>
+					Listens
+			<% end %>
+		</div>
+
+		<div class="navbar-end">
+			<%= active_link @conn,
+					to: Routes.public_path(@conn, :now),
+					class_active: "is-active",
+					class: "navbar-item" do %>
+					Now
+			<% end %>
+
+			<%= active_link @conn,
+					to: Routes.public_path(@conn, :about),
+					class_active: "is-active",
+					class: "navbar-item" do %>
+					About
+			<% end %>
+
+			<%= form_for @conn, Routes.search_path(@conn, :search), [method: :get, class: "navbar-item"], fn f -> %>
+		    <div class="field">
+		    	<p class="control has-icons-left">
+		    		<%= search_input f, :query, class: "input is-rounded", placeholder: "Search" %>
+		    		<span class="icon is-small is-left">
+		    			<i class="fa fa-search"></i>
+		    		</span>
+		    	</p>
+		    </div>
+		  <% end %>
+
+			<%= if @logged_in do %>
+		    <div class="navbar-item has-dropdown is-hoverable">
+	        <a class="navbar-link">
+	          Admin
+	        </a>
+
+	        <div class="navbar-dropdown">
+	        	<%= link "Dashboard", to: Routes.admin_path(@conn, :index), class: "navbar-item" %>
+	          <hr class="navbar-divider">
+	          <%= link "Logout", to: Routes.session_path(@conn, :delete), method: "delete", data: [confirm: "ಥ‿ಥ\nR u sure?"], class: "navbar-item" %>        
+	        </div>
+	      </div>
+	    <% else %>
+		    <a class="navbar-item" href="<%= Routes.session_path(@conn, :new) %>">
+		      Login
+		    </a>
+	    <% end %>
+		</div>
+	</div>
+</nav>

@@ -3,8 +3,7 @@
 // Custom Variables
 $layout-width: 600px;
 
-$red: #dd3344;
-$primary: $red;
+$radius-slightly-rounded: 3px;
 
 @import "~bulma/sass/utilities/_all";
 
@@ -14,6 +13,12 @@ $link: $dark;
 $navbar-item-active-color: $primary;
 $menu-item-active-background-color: $primary;
 $tabs-link-active-border-bottom-color: $primary;
+
+$menu-label-color: $dark;
+$menu-label-font-size: 1rem;
+$menu-label-letter-spacing: 0.07rem;
+$menu-item-hover-background-color: $grey-lighter;
+$menu-item-active-background-color: $dark;
 
 // Bulma Prefers-Dark Overrides
 $link-dark: $grey-lighter;
@@ -29,6 +34,7 @@ $navbar-item-active-color-dark: $primary;
 @import "~bulma-tagsinput/dist/css/bulma-tagsinput";
 @import "~bulma-switch/dist/css/bulma-switch";
 @import "~bulma-divider/dist/css/bulma-divider";
+@import "~bulma-admin-bar/sass/bulma-admin-bar.scss";
 
 @import "~fork-awesome/scss/fork-awesome.scss";
 @import "~openwebicons/css/openwebicons.css";
@@ -101,12 +107,49 @@ svg.emoji-icon {
   background-size: cover;
 }
 
-#content {
+#content, #admin {
   .content {
     a {
       @include nice-underline;
     }
   }
+}
+
+  .is-animiated-on-collapse {
+    vertical-align: top;
+  }
+
+nav.main-nav { 
+  ul.main-nav-list {
+    background-color: $dark;
+    font-size: 1rem;
+    min-width: 200px;
+  }
+
+
+}
+
+#admin-sidebar {
+  background-color: $white-ter;
+
+
+
+  .menu-label {
+    color: $light;
+    font-weight: normal;
+    border-radius: $radius-slightly-rounded;
+    text-transform: none;
+  }
+
+  .menu-list li a {
+    border-radius: $radius-slightly-rounded;
+  }
+
+  #label-create { background-color: $success; }
+  #label-content { background-color: $info; }
+  #label-indie { background-color: $warning; color: $dark; }
+  #label-user { background-color: $primary; }
+  #label-settings { background-color: $danger; }
 }
 
 .weather {
@@ -216,6 +259,8 @@ article {
 }
 
 @media screen and (max-width: $tablet) {
+  .navbar
+
   .section {
     padding: 1rem;
   }

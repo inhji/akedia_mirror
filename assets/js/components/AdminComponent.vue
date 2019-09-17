@@ -10,6 +10,15 @@
 	   	</div>
    	</div>
 
+   	<div class="columns">
+   		<div class="column">
+   			<listen-list-component></listen-list-component>
+   		</div>
+   		<div class="column">
+   			<post-list-component></post-list-component>
+   		</div>
+   	</div>
+
 		<listen-list-component></listen-list-component>
 		<post-list-component></post-list-component> 	
    </div>

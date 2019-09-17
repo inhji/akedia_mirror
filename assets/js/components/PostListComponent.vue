@@ -63,12 +63,8 @@
 <template>
 	<div class="card">
 	  <div class="card-content">    
-	    <div class="columns">
-	      <div class="column">
-	        <p class="heading">Posts per Month</p>
-	        <canvas id="posts-per-week" height="100px"></canvas>
-	      </div>
-	    </div>
+      <p class="heading">Posts per Month</p>
+      <canvas id="posts-per-week" height="100px"></canvas>
 	  </div>
 	</div>
 </template>

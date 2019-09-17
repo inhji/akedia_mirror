@@ -1,17 +1,20 @@
-<%= render SharedView, "nav/user_nav.html", assigns %>
+<h1 class="title">Mentions</h1>
 
 <%= for mention <- @mentions do %>
   <div class="media">
     <a class="media-left" href="<%= mention.author.url %>" target="_blank">
-      <figure class="image is-32x32">
+      <figure class="image is-64x64 is-rounded">
         <img src="<%= mention.author.photo %>">
       </figure>
     </a>
     <div class="media-content">
       <strong><%= mention.author.name %></strong>
-      <span><%= mention_action(mention) %></span>
-      <a href="<%= mention.target %>"><%= mention_target_path(mention) %></a>
-      <span class="has-text-grey"><%= date_fuzzy(mention.published_at) %></span>
+      <small><%= date_fuzzy(mention.published_at) %></small>
+
+      <div class="content">
+        <%= mention_action(mention) %>
+        <a href="<%= mention.target %>">on a post.</a>
+      </div>
     </div>
   </div>
 <% end %>
