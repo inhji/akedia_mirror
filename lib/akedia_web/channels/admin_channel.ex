@@ -18,8 +18,10 @@ defmodule AkediaWeb.AdminChannel do
 
   def handle_in("get_posts", _params, socket) do
     posts = Akedia.Content.schema_per_week(Akedia.Content.Post)
+    bookmarks = Akedia.Content.schema_per_week(Akedia.Content.Bookmark)
+    likes = Akedia.Content.schema_per_week(Akedia.Content.Like)
 
-    push(socket, "on_posts", %{posts: posts})
+    push(socket, "on_posts", %{posts: posts, bookmarks: bookmarks, likes: likes})
     {:noreply, socket}
   end
 
