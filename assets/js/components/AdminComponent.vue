@@ -11,10 +11,7 @@
    	</div>
 
 		<listen-list-component></listen-list-component>
-		<post-list-component></post-list-component>
-
-		
-   	
+		<post-list-component></post-list-component> 	
    </div>
 </template>
 <script>
