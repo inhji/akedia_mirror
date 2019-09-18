@@ -6,7 +6,7 @@
 	   	<h2 class="subtitle">{{ greeting }}</h2>
 	   	</div>
 	   	<div class="column">
-	   		WEATHER
+	   		<weather-component></weather-component>
 	   	</div>
    	</div>
 
@@ -18,9 +18,6 @@
    			<post-list-component></post-list-component>
    		</div>
    	</div>
-
-		<listen-list-component></listen-list-component>
-		<post-list-component></post-list-component> 	
    </div>
 </template>
 <script>
@@ -28,11 +25,13 @@
 	import {Socket} from "phoenix"
 	import ListenListComponent from './ListenListComponent.vue'
 	import PostListComponent from './PostListComponent.vue'
+  import WeatherComponent from './WeatherComponent.vue'
 
   export default {
   	components: {
   		ListenListComponent,
-  		PostListComponent
+  		PostListComponent,
+      WeatherComponent
   	},
   	data: function () {
   		return {

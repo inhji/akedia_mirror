@@ -7,7 +7,7 @@ defmodule AkediaWeb.PublicController do
   def index(conn, params) do
     weather = Akedia.Workers.Weather.get_weather()
 
-    options = [limit: 10, order_by: [desc: :inserted_at]]
+    options = [limit: 10, order_by: [desc: :inserted_at], is_published: true]
     page = Akedia.Content.list_posts_paginated(options, params)
 
     render(conn, "index.html",

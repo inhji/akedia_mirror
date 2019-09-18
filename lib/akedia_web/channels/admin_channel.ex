@@ -12,7 +12,7 @@ defmodule AkediaWeb.AdminChannel do
   def handle_in("get_listens", _params, socket) do
     listens = Akedia.Listens.listens_per_month()
 
-    push(socket, "on_listens", %{listens: listens})
+    push(socket, "listens", %{listens: listens})
     {:noreply, socket}
   end
 
@@ -21,21 +21,28 @@ defmodule AkediaWeb.AdminChannel do
     bookmarks = Akedia.Content.schema_per_week(Akedia.Content.Bookmark)
     likes = Akedia.Content.schema_per_week(Akedia.Content.Like)
 
-    push(socket, "on_posts", %{posts: posts, bookmarks: bookmarks, likes: likes})
+    push(socket, "posts", %{posts: posts, bookmarks: bookmarks, likes: likes})
     {:noreply, socket}
   end
 
   def handle_in("get_bookmarks", _params, socket) do
     bookmarks = Akedia.Content.schema_per_week(Akedia.Content.Bookmark)
 
-    push(socket, "on_bookmarks", %{bookmarks: bookmarks})
+    push(socket, "bookmarks", %{bookmarks: bookmarks})
     {:noreply, socket}
   end
 
   def handle_in("get_likes", _params, socket) do
     likes = Akedia.Content.schema_per_week(Akedia.Content.Like)
 
-    push(socket, "on_likes", %{likes: likes})
+    push(socket, "likes", %{likes: likes})
+    {:noreply, socket}
+  end
+
+  def handle_in("get_weather", _params, socket) do
+    weather = Akedia.Workers.Weather.get_weather()
+
+    push(socket, "weather", %{weather: weather})
     {:noreply, socket}
   end
 end

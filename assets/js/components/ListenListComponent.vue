@@ -1,3 +1,12 @@
+<template>
+	<div class="card">
+	  <div class="card-content">    
+      <p class="heading">Listens per Month</p>
+      <canvas id="likes-per-month" height="100px"></canvas>
+    </div>
+	</div>
+</template>
+
 <script>
 	import {Socket} from "phoenix"
 	import moment from 'moment'
@@ -37,17 +46,8 @@
 
 	export default{
 		mounted: function () {			
-			channel.on("on_listens", handleListens)
+			channel.on("listens", handleListens)
 			channel.push("get_listens")
 		},
 	}
 </script>
-
-<template>
-	<div class="card">
-	  <div class="card-content">    
-      <p class="heading">Listens per Month</p>
-      <canvas id="likes-per-month" height="100px"></canvas>
-    </div>
-	</div>
-</template>
