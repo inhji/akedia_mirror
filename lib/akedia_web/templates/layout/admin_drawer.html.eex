@@ -7,62 +7,62 @@
     </li>
   </ul>
   <p class="menu-label">
-    Create New
+    <i class="fa fa-circle has-text-success"></i> Create New
   </p>
   <ul class="menu-list">
     <li>
       <%= active_link @conn, class_active: "is-active", active: :exact, to: Routes.post_path(@conn, :new) do %>
-        Post
+        <i class="fa fa-comment-o"></i> Post
       <% end %>
     </li>
     <li>
       <%= active_link @conn, class_active: "is-active", active: :exact, to: Routes.bookmark_path(@conn, :new) do %>
-        Bookmark
+        <i class="fa fa-bookmark-o"></i> Bookmark
       <% end %>
     </li>
   </ul>
   <p class="menu-label">
-    User
+    <i class="fa fa-circle has-text-primary"></i> User
   </p>
   <ul class="menu-list">
     <li>
       <%= active_link @conn, class_active: "is-active", active: :exact, to: Routes.user_path(@conn, :edit) do %>
-        Edit User
+        <i class="fa fa-user"></i> Edit User
       <% end %>
     </li>
     <li>
       <%= active_link @conn, class_active: "is-active", active: :exact, to: Routes.profile_path(@conn, :index) do %>
-        Profiles
+       <i class="fa fa-globe-w"></i> Profiles
       <% end %>
     </li>
   </ul>
   <p class="menu-label">
-    Indie!
+    <i class="fa fa-circle has-text-warning"></i> Indie!
   </p>
   <ul class="menu-list">
     <li>
       <%= active_link @conn, class_active: "is-active", active: :exact, to: Routes.channel_path(@conn, :index) do %>
-        Channels
+        <i class="fa fa-rss"></i> Channels
       <% end %>
     </li>
     <li>
       <%= active_link @conn, class_active: "is-active", active: :exact, to: Routes.mention_path(@conn, :index) do %>
-        Mentions
+        <i class="icon-fediverse"></i> Mentions
       <% end %>
     </li>
   </ul>
   <p class="menu-label">
-    Settings
+    <i class="fa fa-circle has-text-danger"></i> Settings
   </p>
   <ul class="menu-list">
     <li>
       <%= active_link @conn, class_active: "is-active", active: :exact, to: Routes.admin_path(@conn, :webauthn) do %>
-        Webauthn
+        <i class="fa fa-tablet"></i> Webauthn
       <% end %>
     </li>
     <li>
       <%= active_link @conn, class_active: "is-active", active: :exact, to: Routes.admin_path(@conn, :totp) do %>
-        TOTP
+        <i class="fa fa-key-modern"></i> TOTP
       <% end %>
     </li>
   </ul>
