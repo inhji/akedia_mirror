@@ -1,0 +1,69 @@
+<aside class="menu" style="padding: 1rem;">
+  <ul class="menu-list">
+    <li>
+      <%= active_link @conn, class_active: "is-active", active: :exact, to: Routes.admin_path(@conn, :index) do %>
+        <i class="fa fa-dashboard"></i> Dashboard
+      <% end %>
+    </li>
+  </ul>
+  <p class="menu-label">
+    Create New
+  </p>
+  <ul class="menu-list">
+    <li>
+      <%= active_link @conn, class_active: "is-active", active: :exact, to: Routes.post_path(@conn, :new) do %>
+        Post
+      <% end %>
+    </li>
+    <li>
+      <%= active_link @conn, class_active: "is-active", active: :exact, to: Routes.bookmark_path(@conn, :new) do %>
+        Bookmark
+      <% end %>
+    </li>
+  </ul>
+  <p class="menu-label">
+    User
+  </p>
+  <ul class="menu-list">
+    <li>
+      <%= active_link @conn, class_active: "is-active", active: :exact, to: Routes.user_path(@conn, :edit) do %>
+        Edit User
+      <% end %>
+    </li>
+    <li>
+      <%= active_link @conn, class_active: "is-active", active: :exact, to: Routes.profile_path(@conn, :index) do %>
+        Profiles
+      <% end %>
+    </li>
+  </ul>
+  <p class="menu-label">
+    Indie!
+  </p>
+  <ul class="menu-list">
+    <li>
+      <%= active_link @conn, class_active: "is-active", active: :exact, to: Routes.channel_path(@conn, :index) do %>
+        Channels
+      <% end %>
+    </li>
+    <li>
+      <%= active_link @conn, class_active: "is-active", active: :exact, to: Routes.mention_path(@conn, :index) do %>
+        Mentions
+      <% end %>
+    </li>
+  </ul>
+  <p class="menu-label">
+    Settings
+  </p>
+  <ul class="menu-list">
+    <li>
+      <%= active_link @conn, class_active: "is-active", active: :exact, to: Routes.admin_path(@conn, :webauthn) do %>
+        Webauthn
+      <% end %>
+    </li>
+    <li>
+      <%= active_link @conn, class_active: "is-active", active: :exact, to: Routes.admin_path(@conn, :totp) do %>
+        TOTP
+      <% end %>
+    </li>
+  </ul>
+</aside>

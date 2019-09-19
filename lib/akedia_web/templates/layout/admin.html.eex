@@ -2,133 +2,32 @@
 <html lang="en">
   <%= render "head.html", assigns %>
 
-  <body class="has-navbar-fixed-top full-screen-app">
-    <nav class="main-nav">
-      <ul class="main-nav-list">
-        <!-- Dashboard -->
+  <body>
+    <header class="section is-paddingless">
+      <%= render "admin_navigation.html", assigns %>
+    </header>
 
-        <%= active_link @conn, class_active: "is-active", active: :exact,
-          class: "has-text-white",
-          to: Routes.admin_path(@conn, :index) do %>
-          <li>
-            <span class="fa fa-fw fa-dashboard is-show-on-collapse"></span>
-            <span class="is-animiated-on-collapse">Dashboard</span>
-          </li>
-        <% end %>   
+    <nav id="menu">
+      <nav class="navbar" role="navigation" aria-label="main navigation"></nav>
 
-        <!-- Create New -->
-
-        <li>
-          <span class="fa fa-fw fa-plus is-show-on-collapse has-text-success"></span>
-          <span class="is-animiated-on-collapse">Create New</span>
-        </li>
-        <%= active_link @conn, class_active: "is-active", active: :exact,
-          class: "has-text-white",
-          to: Routes.post_path(@conn, :new) do %>
-          <li>
-            <span class="fa fa-fw is-show-on-collapse"></span>
-            <span class="is-animiated-on-collapse">Post</span>
-          </li>
-        <% end %>  
-        <%= active_link @conn, class_active: "is-active", active: :exact,
-          class: "has-text-white",
-          to: Routes.bookmark_path(@conn, :new) do %>
-          <li>
-            <span class="fa fa-fw is-show-on-collapse"></span>
-            <span class="is-animiated-on-collapse">Bookmark</span>
-          </li>
-        <% end %>  
-
-        <!-- User -->
-
-        <li>
-          <span class="fa fa-fw fa-user is-show-on-collapse has-text-primary"></span>
-          <span class="is-animiated-on-collapse">User</span>
-        </li>
-        <%= active_link @conn, class_active: "is-active", active: :exact,
-          class: "has-text-white",
-          to: Routes.user_path(@conn, :edit) do %>
-          <li>
-            <span class="fa fa-fw is-show-on-collapse"></span>
-            <span class="is-animiated-on-collapse">Edit User</span>
-          </li>
-        <% end %>  
-        <%= active_link @conn, class_active: "is-active", active: :exact,
-          class: "has-text-white",
-          to: Routes.profile_path(@conn, :index) do %>
-          <li>
-            <span class="fa fa-fw is-show-on-collapse"></span>
-            <span class="is-animiated-on-collapse">Profiles</span>
-          </li>
-        <% end %>  
-
-        <!-- Indie! -->
-
-        <li>
-          <span class="fa fa-fw icon-fediverse is-show-on-collapse has-text-warning"></span>
-          <span class="is-animiated-on-collapse">Indie!</span>
-        </li>
-        <%= active_link @conn, class_active: "is-active", active: :exact,
-          class: "has-text-white",
-          to: Routes.channel_path(@conn, :index) do %>
-          <li>
-            <span class="fa fa-fw is-show-on-collapse"></span>
-            <span class="is-animiated-on-collapse">Channels</span>
-          </li>
-        <% end %>  
-        <%= active_link @conn, class_active: "is-active", active: :exact,
-          class: "has-text-white",
-          to: Routes.mention_path(@conn, :index) do %>
-          <li>
-            <span class="fa fa-fw is-show-on-collapse"></span>
-            <span class="is-animiated-on-collapse">Mentions</span>
-          </li>
-        <% end %>  
-
-        <!-- Settings -->
-
-        <li>
-          <span class="fa fa-fw fa-cog is-show-on-collapse has-text-danger"></span>
-          <span class="is-animiated-on-collapse">Settings</span>
-        </li>
-
-        <%= active_link @conn, class_active: "is-active", active: :exact,
-          class: "has-text-white",
-          to: Routes.admin_path(@conn, :webauthn) do %>
-          <li>
-            <span class="fa fa-fw is-show-on-collapse"></span>
-            <span class="is-animiated-on-collapse">Webauthn</span>
-          </li>
-        <% end %> 
-
-        <%= active_link @conn, class_active: "is-active", active: :exact,
-          class: "has-text-white",
-          to: Routes.admin_path(@conn, :totp) do %>
-          <li>
-            <span class="fa fa-fw is-show-on-collapse"></span>
-            <span class="is-animiated-on-collapse">TOTP</span>
-          </li>
-        <% end %> 
-      </ul>
+      <%= render "admin_drawer.html", assigns %>
     </nav>
 
-    <section class="section is-paddingless">
-      <%= render "admin_navigation.html", conn: @conn, logged_in: @logged_in, current_user: @current_user %>
-    </section>
+    <main id="panel">
+      <main>
+        <div class="section">
+          <main id="content">
+            <div class="container">
+              <p class="notification is-info" role="alert"><%= get_flash(@conn, :info) %></p>
+              <p class="notification is-danger" role="alert"><%= get_flash(@conn, :error) %></p>
+              <%= render @view_module, @view_template, assigns %>
+            </div>     
+          </main>
+        </div>
+      </main>
+    </main> 
 
-    <main class="is-fullwidth is-scrollable-y">
-      <div class="section">
-        <main id="content">
-          <div class="container">
-            <p class="notification is-info" role="alert"><%= get_flash(@conn, :info) %></p>
-            <p class="notification is-danger" role="alert"><%= get_flash(@conn, :error) %></p>
-            <%= render @view_module, @view_template, assigns %>
-          </div>     
-        </main>
-      </div>
-    </main>
-
-    <script type="text/javascript" src="<%= Routes.static_path(@conn, "/js/common.js") %>"></script>
-    <script type="text/javascript" src="<%= Routes.static_path(@conn, "/js/admin.js") %>"></script>
+    <script type="text/javascript" src='<%= Routes.static_path(@conn, "/js/common.js") %>'></script>
+    <script type="text/javascript" src='<%= Routes.static_path(@conn, "/js/admin.js") %>'></script>
   </body>
 </html>

@@ -34,7 +34,6 @@ $navbar-item-active-color-dark: $primary;
 @import "~bulma-tagsinput/dist/css/bulma-tagsinput";
 @import "~bulma-switch/dist/css/bulma-switch";
 @import "~bulma-divider/dist/css/bulma-divider";
-@import "~bulma-admin-bar/sass/bulma-admin-bar.scss";
 
 @import "~fork-awesome/scss/fork-awesome.scss";
 @import "~openwebicons/css/openwebicons.css";
@@ -45,11 +44,17 @@ $navbar-item-active-color-dark: $primary;
 @import "zen";
 @import "tagcloud";
 @import "navbar";
+@import "slideout";
 
 // @import "debug";
 
 ::-moz-selection { background: $primary; color: $white; }
 ::selection { background: $primary; color: $white; }
+
+body {
+  width: 100%;
+  height: 100%;
+}
 
 .media {
   .media-left {
