@@ -65,5 +65,10 @@
         <i class="fa fa-key-modern"></i> TOTP
       <% end %>
     </li>
+    <li>
+      <%= link to: Routes.session_path(@conn, :delete), method: "delete", data: [confirm: "ಥ‿ಥ\nR u sure?"], class: "has-text-danger" do %>
+        <i class="fa fa-power-off"></i> Logout
+      <% end %>
+    </li>
   </ul>
 </aside>
