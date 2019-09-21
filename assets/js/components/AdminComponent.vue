@@ -10,6 +10,15 @@
 	   	</div>
    	</div>
 
+    <div class="columns">
+      <div class="column">
+        <feed-entry-list-component />
+      </div>
+      <div class="column"></div>
+    </div>
+
+    <hr />
+
    	<div class="columns">
    		<div class="column">
    			<listen-list-component></listen-list-component>
@@ -26,12 +35,14 @@
 	import ListenListComponent from './ListenListComponent.vue'
 	import PostListComponent from './PostListComponent.vue'
   import WeatherComponent from './WeatherComponent.vue'
+  import FeedEntryListComponent from './FeedEntryListComponent.vue'
 
   export default {
   	components: {
   		ListenListComponent,
   		PostListComponent,
-      WeatherComponent
+      WeatherComponent,
+      FeedEntryListComponent
   	},
   	data: function () {
   		return {

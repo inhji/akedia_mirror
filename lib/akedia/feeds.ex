@@ -1,6 +1,6 @@
 defmodule Akedia.Feeds do
   @moduledoc """
-  The Indie.Microsub context.
+  The Indie.Feeds context.
   """
 
   @default_entry_limit 10
@@ -97,6 +97,15 @@ defmodule Akedia.Feeds do
     %FeedEntry{feed_id: feed_id}
     |> FeedEntry.changeset(attrs)
     |> Repo.insert()
+  end
+
+  def list_unread_entries() do
+    FeedEntry
+    |> select([entry, f, c], entry)
+    |> join(:left, [entry], f in Feed, on: entry.feed_id == f.id)
+    |> where(is_read: false)
+    |> order_by([e], desc: e.published_at)
+    |> Repo.all()
   end
 
   def list_feed_entries_query(channel_id) do
