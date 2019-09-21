@@ -19,14 +19,7 @@ document.addEventListener('DOMContentLoaded', function () {
 	new Vue({ 
 		render: h => h(AppComponent),
 	}).$mount('#app')
-
-	// Toggle button
-	document.querySelector('.toggle-button').addEventListener('click', function() {
-	  slideout.toggle();
-	});
 })
-
-
 
 const toggleListeners = document.querySelectorAll('[toggles]');
 
