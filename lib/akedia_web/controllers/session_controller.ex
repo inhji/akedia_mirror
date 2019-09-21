@@ -131,7 +131,7 @@ defmodule AkediaWeb.SessionController do
       false ->
         conn
         |> put_flash(:error, "BRUH")
-        |> render("totp.html")
+        |> render("two_factor.html")
     end
   end
 
