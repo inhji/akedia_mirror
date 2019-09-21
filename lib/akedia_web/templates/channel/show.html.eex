@@ -1,5 +1,3 @@
-<%= render SharedView, "nav/user_nav.html", assigns %>
-
 <h1 class="title"><%= @channel.name %></h1>
 
 <%= for feed <- @channel.feeds do %>
