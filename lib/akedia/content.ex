@@ -131,8 +131,12 @@ defmodule Akedia.Content do
     |> Repo.preload(:favicon)
   end
 
-  def create_bookmark(attrs \\ %{}) do
+  def create_bookmark(attrs) do
     create_with_entity(Bookmark, attrs)
+  end
+
+  def create_bookmark(attrs, entity_attrs) do
+    create_with_entity(Bookmark, attrs, entity_attrs)
   end
 
   def update_bookmark(%Bookmark{} = bookmark, attrs) do
@@ -164,8 +168,12 @@ defmodule Akedia.Content do
     |> Repo.preload(@preloads)
   end
 
-  def create_like(attrs \\ %{}) do
+  def create_like(attrs) do
     create_with_entity(Like, attrs)
+  end
+
+  def create_like(attrs, entity_attrs) do
+    create_with_entity(Like, attrs, entity_attrs)
   end
 
   def update_like(%Like{} = like, attrs) do
@@ -272,8 +280,12 @@ defmodule Akedia.Content do
     |> Repo.preload(@preloads)
   end
 
-  def create_post(attrs \\ %{}) do
+  def create_post(attrs) do
     create_with_entity(Post, attrs)
+  end
+
+  def create_post(attrs, entity_attrs) do
+    create_with_entity(Post, attrs, entity_attrs)
   end
 
   def update_post(%Post{} = post, attrs) do
