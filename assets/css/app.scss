@@ -275,6 +275,16 @@ article {
   }
 }
 
+@media screen and (min-width: $tablet) {
+  .slideout-panel {
+    margin-left: 256px;
+  }
+
+  .slideout-menu {
+    display: block;
+  }
+}
+
 // This needs to be last to override all other styles
 @include prefers-scheme(dark) {
   .pagination-link.is-current {
