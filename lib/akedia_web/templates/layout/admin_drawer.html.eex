@@ -1,8 +1,8 @@
 <aside class="menu" style="padding: 1rem;">
   <ul class="menu-list">
     <li>
-      <%= active_link @conn, class_active: "is-active", active: :exact, to: Routes.admin_path(@conn, :index) do %>
-        <i class="fa fa-dashboard"></i> Dashboard
+      <%= active_link @conn, class_active: "is-active", active: :exact, to: Routes.public_path(@conn, :index) do %>
+        <i class="fa fa-home"></i> Back to site
       <% end %>
     </li>
   </ul>

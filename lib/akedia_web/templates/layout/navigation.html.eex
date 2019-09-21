@@ -59,21 +59,9 @@
 			  <% end %>
 
 				<%= if @logged_in do %>
-			    <div class="navbar-item has-dropdown is-hoverable">
-		        <a class="navbar-link">
-		          Admin
-		        </a>
-
-		        <div class="navbar-dropdown">
-		        	<%= link "Dashboard", to: Routes.admin_path(@conn, :index), class: "navbar-item" %>
-		          <hr class="navbar-divider">
-		          <%= link "Logout", to: Routes.session_path(@conn, :delete), method: "delete", data: [confirm: "ಥ‿ಥ\nR u sure?"], class: "navbar-item" %>        
-		        </div>
-		      </div>
+					<%= link "Admin", to: Routes.admin_path(@conn, :index), class: "navbar-item" %>
 		    <% else %>
-			    <a class="navbar-item" href="<%= Routes.session_path(@conn, :new) %>">
-			      Login
-			    </a>
+					<%= link "Login", to: Routes.session_path(@conn, :new), class: "navbar-item" %>
 		    <% end %>
 			</div>
 		</div>

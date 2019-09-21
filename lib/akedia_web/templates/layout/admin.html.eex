@@ -2,7 +2,7 @@
 <html lang="en">
   <%= render "head.html", assigns %>
 
-  <body>
+  <body class="has-navbar-fixed-top">
     <header class="section is-paddingless">
       <%= render "admin_navigation.html", assigns %>
     </header>
