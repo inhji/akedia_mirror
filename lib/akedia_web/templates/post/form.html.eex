@@ -5,138 +5,92 @@
     </div>
   <% end %>
 
-  <div class="field is-horizontal">
-    <div class="field-label is-normal">
-      <%= label f, :title, class: "label" %>
+  <div class="field">
+    <%= label f, :title, class: "label" %>
+    <div class="control">
+      <%= text_input f, :title,
+        class: "input",
+        placeholder: "Title" %>
     </div>
-
-    <div class="field-body">
-      <div class="field">
-        <div class="control">
-          <%= text_input f, :title,
-            class: "input",
-            placeholder: "Title" %>
-        </div>
-
-      </div>
-    </div>    
-    
     <%= error_tag f, :title %>
   </div>
 
-  <div class="field is-horizontal">
-    <div class="field-label is-normal">
-      <%= label f, :content, class: "label" %>
-    </div>
-
-    <div class="field-body">
-      <div class="field">
-        <div class="zen">
-          <input type="checkbox" id="zen-toggle-comment" v-model="zenActive">
-          <div class="zen-backdrop">
-            <%= textarea f, :content,
-              class: "textarea",
-              rows: 10,
-              "@input": "updateCharCount",
-              "@keyup.escape": "closeZen" %>
-            <label for="zen-toggle-comment">Zen Mode</label>
-          </div>
-        </div>
-        <p class="help is-pulled-right">{{charCount}}/{{maxChars}}</p>
-        <%= error_tag f, :content %>
+  <div class="field">
+    <%= label f, :content, class: "label" %>
+    <div class="zen">
+      <input type="checkbox" id="zen-toggle-comment" v-model="zenActive">
+      <div class="zen-backdrop">
+        <%= textarea f, :content,
+          class: "textarea",
+          rows: 10,
+          "@input": "updateCharCount",
+          "@keyup.escape": "closeZen" %>
+        <label for="zen-toggle-comment">Zen Mode</label>
       </div>
-      
+    </div>
+    <p class="help is-pulled-right">{{charCount}}/{{maxChars}}</p>
+    <%= error_tag f, :content %>
+  </div>
+
+  <div class="field">
+    <%= label f, :image, class: "label" %>
+    <div class="file">
+      <label class="file-label">
+        <%= file_input f, :image, class: "file-input" %>
+        <span class="file-cta">
+          <span class="file-icon">
+            <i class="fa fa-upload"></i>
+          </span>
+          <span class="file-label">
+            Choose a file…
+          </span>
+        </span>
+      </label>
     </div>
   </div>
 
-  <div class="field is-horizontal">
-    <div class="field-label is-normal">
-      <%= label f, :image, class: "label" %>
-    </div>
-
-    <div class="field-body">
-      <div class="field">
-        <div class="file">
-          <label class="file-label">
-            <%= file_input f, :image, class: "file-input" %>
-            <span class="file-cta">
-              <span class="file-icon">
-                <i class="fa fa-upload"></i>
-              </span>
-              <span class="file-label">
-                Choose a file…
-              </span>
-            </span>
-          </label>
-        </div>
-      </div>
-    </div>    
-  </div>
-
-  <div class="field is-horizontal">
-    <div class="field-label is-normal">
-      <%= label f, :reply_to, class: "label" %>
-    </div>
-
-    <div class="field-body">
-      <div class="field">
-        <div class="control">
-          <%= text_input f, :reply_to, class: "input" %>
-        </div> 
-      </div>
-    </div>    
-    
+  <div class="field">
+    <%= label f, :reply_to, class: "label" %>
+    <div class="control">
+      <%= text_input f, :reply_to, class: "input" %>
+    </div> 
     <%= error_tag f, :reply_to %>
   </div>
 
-  <div class="field is-horizontal">
-    <div class="field-label is-normal">
-      <%= label f, :topics, class: "label" %>
+  <div class="field">
+    <%= label f, :topics, class: "label" %>
+    <div class="control">
+      <%= text_input f, :topics, value: @tags, class: "input", type: "tags" %>           
     </div>
-
-    <div class="field-body">
-        <div class="field">
-          <div class="control">
-            <%= text_input f, :topics, value: @tags, class: "input", type: "tags" %>           
-          </div>
-        </div>
-    </div>    
-    
     <%= error_tag f, :topics %>
   </div>
 
-  <div class="field is-horizontal">
-    <div class="field-label">
-      <%= label f, :Settings, class: "label" %>
+  <div class="field">&nbsp;</div>
+
+  <%= inputs_for f, :entity, fn(ef) -> %>
+
+  <div class="field">
+    <%= label ef, :settings, class: "label" %>
+
+    <div class="field">
+      <%= checkbox ef, :is_published, class: "switch is-rounded" %>
+      <%= label ef, :is_published %>    
+    </div>   
+
+    <div class="field">
+      <%= checkbox ef, :is_pinned, class: "switch is-rounded" %>
+      <%= label ef, :is_pinned %>
     </div>
 
-    <div class="field-body">
-      <%= inputs_for f, :entity, fn(ef) -> %>
-
-      <div class="field">
-        <div class="control">
-          <%= checkbox ef, :is_published, class: "switch is-rounded is-info" %>
-          <%= label ef, :is_published %>       
-        </div>
-      </div>
-
-      <div class="field">
-        <div class="control">
-          <%= checkbox ef, :is_pinned, class: "switch is-rounded" %>
-          <%= label ef, :is_pinned %>
-        </div>
-      </div>
-
-      <div class="field">
-        <div class="control">
-          <%= checkbox ef, :bridgy_fed, class: "switch is-rounded" %>
-          <%= label ef, :bridgy_fed %>
-        </div>
-      </div>
-
-      <% end %>
+    <div class="field">
+      <%= checkbox ef, :bridgy_fed, class: "switch is-rounded" %>
+      <%= label ef, :bridgy_fed %>
     </div>
+    
   </div>
+
+
+  <% end %>
 
   <div class="field">&nbsp;</div>
 
