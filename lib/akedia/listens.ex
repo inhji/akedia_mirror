@@ -20,7 +20,7 @@ defmodule Akedia.Listens do
 
   def listens_per_month_by_artist(artist_id) do
     Listen
-    |> select([l], count(l.id))
+    |> select([l], [count(l.id), fragment("date_trunc('month', ?) as month", l.listened_at)])
     |> order_by([l], fragment("date_trunc('month', ?)", l.listened_at))
     |> group_by([l], fragment("date_trunc('month', ?)", l.listened_at))
     |> where([l], l.artist_id == ^artist_id)
@@ -41,6 +41,13 @@ defmodule Akedia.Listens do
   def get_oldest_listen() do
     Listen
     |> order_by(asc: :listened_at)
+    |> limit(1)
+    |> Repo.one!()
+  end
+
+  def get_newest_listen() do
+    Listen
+    |> order_by(desc: :listened_at)
     |> limit(1)
     |> Repo.one!()
   end

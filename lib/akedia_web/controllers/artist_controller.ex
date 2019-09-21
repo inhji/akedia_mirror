@@ -29,18 +29,47 @@ defmodule AkediaWeb.ArtistController do
     render(conn, "new.html", changeset: changeset)
   end
 
+  def fill_list(0), do: []
+  def fill_list(count), do: Enum.reduce(1..count, [], fn i, acc -> acc ++ [0] end)
+
+  def get_duration(start_date, end_date) do
+    if Timex.after?(start_date, end_date) do
+      0
+    else
+      Timex.Interval.new(from: start_date, until: end_date, step: [months: 1])
+      |> Timex.Interval.duration(:months)
+    end
+  end
+
+  def sparkline(artist_id) do
+    listens_per_month = Listens.listens_per_month_by_artist(artist_id)
+    oldest = Listens.get_oldest_listen()
+    newest = Listens.get_newest_listen()
+
+    [count_first, date_first] = List.first(listens_per_month)
+    [count_last, date_last] = List.last(listens_per_month)
+
+    beginning_interval = get_duration(oldest.listened_at, date_first)
+    end_interval = get_duration(date_last, newest.listened_at)
+
+    filled_listens =
+      listens_per_month
+      |> Enum.map(listens_per_month, fn [count, date] -> count end)
+
+    fill_list(beginning_interval) ++
+      filled_listens ++
+      fill_list(end_interval)
+  end
+
   def show(conn, %{"id" => artist_id}) do
     artist = Listens.get_artist!(artist_id)
-    listens_per_month = Listens.listens_per_month_by_artist(artist_id)
+
+    listens_per_month = []
 
     popular_tracks =
-      case artist do
-        nil -> []
-        artist -> Listens.group_by_track_artist(artist)
-      end
-
-    popular_tracks =
-      Enum.map(popular_tracks, fn track ->
+      artist
+      |> Listens.group_by_track_artist()
+      |> Enum.map(fn track ->
         album = Listens.get_album!(track.album_id)
 
         %{
