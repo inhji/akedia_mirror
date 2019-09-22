@@ -84,6 +84,8 @@ defmodule AkediaWeb.ArtistController do
 
   def show(conn, %{"id" => artist_id}) do
     artist = Listens.get_artist!(artist_id)
+    oldest = Listens.get_oldest_listen()
+    newest = Listens.get_newest_listen()
 
     listens_per_month = sparkline(artist_id)
 
@@ -103,6 +105,8 @@ defmodule AkediaWeb.ArtistController do
     render(conn, "show.html",
       popular_tracks: popular_tracks,
       listens_per_month: listens_per_month,
+      oldest: oldest,
+      newest: newest,
       artist: artist
     )
   end

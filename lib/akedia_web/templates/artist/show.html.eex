@@ -7,11 +7,15 @@
   <div class="media-content">
     <h1 class="title"><%= @artist.name %></h1>
     <h2 class="subtitle"><%= Enum.count(@artist.listens) %> Listens total</h2>
-    <div id="artist-listen-chart"
-     	data-dailychart-values="<%= listen_string(@listens_per_month) %>"
-     	data-dailychart-close="0"
-    	data-dailychart-length="<% listen_count(@listens_per_month) %>"></div>
-    <small class="has-text-grey">All time listens</small>
+
+    <div class="listen-chart" style="width: 200px;">
+      <div id="artist-listen-chart"
+       	data-dailychart-values="<%= listen_string(@listens_per_month) %>"
+       	data-dailychart-close="0"
+      	data-dailychart-length="<% listen_count(@listens_per_month) %>"></div>
+      <small class="has-text-grey is-pulled-left"><%= Timex.format!(@oldest.listened_at, "{YYYY}") %></small>
+      <small class="has-text-grey is-pulled-right"><%= Timex.format!(@newest.listened_at, "{YYYY}") %></small>
+    </div>
   </div>
 </div>
 
