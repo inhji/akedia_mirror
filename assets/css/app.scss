@@ -67,20 +67,19 @@ body {
 
 .cover-container {
   padding-top: 20rem;
-  margin-bottom: 2rem;
-  margin-top: -3rem;
   background-size: cover;
+  margin: -3rem 0 0 0;
 
   .cover-content {
-    padding: 1.5rem;
+    padding: 1.5rem 3rem;
     background: rgba(255, 255, 255, 0.5);
   }
 }
 
-@media screen and (max-width: $tablet) {
+@media screen and (max-width: $desktop) {
   .cover-container {
-    margin-top: 0;
-    padding-top: 5rem;
+    padding-top: 10rem;
+    margin: -3rem -1.5rem 0 -1.5rem;
   }
 }
 
@@ -100,8 +99,6 @@ svg.emoji-icon {
 }
 
 .card {
-  margin-bottom: 4rem;
-
   &> .card-content > article {
     margin-bottom: 0;
   }
@@ -213,7 +210,7 @@ nav.main-nav {
 }
 
 article {
-  margin-bottom: 3rem;
+  margin-bottom: 1.5rem;
 
   .title {
     .image {

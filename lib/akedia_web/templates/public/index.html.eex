@@ -1,6 +1,10 @@
-<div class="cover-container" style="background-image: url(<%= cover_url(@current_user, :wide) %>)">
-	<div class="cover-content">
-		<%= render SharedView, "hcard.html", assigns %>
+<div class="columns">
+	<div class="column">
+		<div class="cover-container" style="background-image: url(<%= cover_url(@current_user, :wide) %>)">
+			<div class="cover-content">
+				<%= render SharedView, "hcard.html", assigns %>
+			</div>
+		</div>
 	</div>
 </div>
 
