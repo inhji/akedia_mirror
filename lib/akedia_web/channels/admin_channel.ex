@@ -45,4 +45,11 @@ defmodule AkediaWeb.AdminChannel do
     push(socket, "weather", %{weather: weather})
     {:noreply, socket}
   end
+
+  def handle_in("get_feed_entries", _params, socket) do
+    entries = Akedia.Feeds.list_unread_entries()
+
+    push(socket, "feed_entries", %{entries: entries})
+    {:noreply, socket}
+  end
 end

@@ -2,6 +2,7 @@ defmodule Akedia.Feeds.FeedEntry do
   use Ecto.Schema
   import Ecto.Changeset
 
+  @derive {Jason.Encoder, only: [:author, :summary, :title, :url, :published_at]}
   schema "feed_entries" do
     field :author, :string
     field :summary, :string

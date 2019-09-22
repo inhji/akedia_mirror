@@ -7,7 +7,7 @@
 		</figure>
 		<div class="media-content">
 			<div class="content">
-				<strong>{{ weather.now }} at {{ weather.temperature }} °C ({{weather.humidity * 100}}% Humidity)</strong>
+				<strong>{{ weather.now }} at {{ weather.temperature }} °C ({{Math.round(weather.humidity * 100)}}% Humidity)</strong>
 				<p>
 					Looks like it's going to be from {{weather.min}} to {{weather.max}} and {{weather.summary.toLowerCase()}}
 				</p>
