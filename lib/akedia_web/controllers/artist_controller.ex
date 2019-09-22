@@ -41,6 +41,27 @@ defmodule AkediaWeb.ArtistController do
     end
   end
 
+  def fill_gaps(listens) do
+    new_list =
+      for {[count, listen], index} <- Enum.with_index(listens) do
+        case next = Enum.at(listens, index + 1) do
+          nil ->
+            count
+
+          [next_count, next_listen] ->
+            duration =
+              Timex.Interval.new(from: listen, until: next_listen)
+              |> Timex.Interval.duration(:months)
+              |> fill_list()
+
+            IO.inspect(duration)
+            [count] ++ duration
+        end
+      end
+
+    List.flatten(new_list)
+  end
+
   def sparkline(artist_id) do
     listens_per_month = Listens.listens_per_month_by_artist(artist_id)
     oldest = Listens.get_oldest_listen()
@@ -54,7 +75,7 @@ defmodule AkediaWeb.ArtistController do
 
     filled_listens =
       listens_per_month
-      |> Enum.map(listens_per_month, fn [count, date] -> count end)
+      |> fill_gaps()
 
     fill_list(beginning_interval) ++
       filled_listens ++
@@ -64,7 +85,7 @@ defmodule AkediaWeb.ArtistController do
   def show(conn, %{"id" => artist_id}) do
     artist = Listens.get_artist!(artist_id)
 
-    listens_per_month = []
+    listens_per_month = sparkline(artist_id)
 
     popular_tracks =
       artist

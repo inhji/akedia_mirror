@@ -1,6 +1,6 @@
 <div class="media">
   <div class="media-left">
-    <figure class="image is-128x128">
+    <figure class="image is-196x196">
       <img src="<%= artistimage_url(@artist) %>">
     </figure>
   </div>
@@ -9,8 +9,9 @@
     <h2 class="subtitle"><%= Enum.count(@artist.listens) %> Listens total</h2>
     <div id="artist-listen-chart"
      	data-dailychart-values="<%= listen_string(@listens_per_month) %>"
-     	data-dailychart-close="<% listen_average(@listens_per_month) %>"
+     	data-dailychart-close="0"
     	data-dailychart-length="<% listen_count(@listens_per_month) %>"></div>
+    <small class="has-text-grey">All time listens</small>
   </div>
 </div>
 

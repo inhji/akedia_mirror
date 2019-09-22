@@ -33,7 +33,13 @@ jquery(function() {
   // Highlight Syntax
   Prism.highlightAll()
 
-  Dailychart.create('#artist-listen-chart', { lineWidth: 2, height: 30, width: 150 });
+  Dailychart.create('#artist-listen-chart', { 
+    lineWidth: 2, 
+    height: 30, 
+    width: 200,
+    colorPositive: '#00d1b2',
+    fillPositive: '#00d1b290'
+  });
 
   jquery('a[data-imagelightbox="x"]').imageLightbox({
     overlay:true,
