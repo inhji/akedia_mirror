@@ -1,6 +1,6 @@
-defmodule Akedia.PlugMicrosub.PlugMicrosubTest do
+defmodule AkediaWeb.PlugMicrosub.PlugMicrosubTest do
   use Akedia.DataCase
-  alias Akedia.Plugs.PlugMicrosub
+  alias AkediaWeb.Plugs.PlugMicrosub
 
   describe "maybe_wrap_entry_ids/1" do
     test "maybe_wrap_entry_ids/1 returns a list if entry_ids is a list" do
