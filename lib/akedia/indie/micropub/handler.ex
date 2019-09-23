@@ -7,6 +7,13 @@ defmodule Akedia.Indie.Micropub.Handler do
   alias Akedia.Indie.Micropub.{Properties, Content}
   alias Akedia.Indie.Auth.Token
 
+  @syndication_targets [
+    %{
+      "uid" => "https://fed.brid.gy/",
+      "name" => "Bridgy Fed"
+    }
+  ]
+
   @impl true
   def handle_create(type, properties, access_token) do
     Logger.info("Micropub Handler engaged")
@@ -105,15 +112,7 @@ defmodule Akedia.Indie.Micropub.Handler do
     case Token.verify_token(access_token, nil) do
       :ok ->
         media_url = HTTP.abs_url(Akedia.url(), "/api/indie/micropub/media")
-
-        syndication_targets = [
-          %{
-            "uid" => "https://fed.brid.gy/",
-            "name" => "Bridgy Fed"
-          }
-        ]
-
-        response = %{"media-endpoint": media_url, "syndicate-to": syndication_targets}
+        response = %{"media-endpoint": media_url, "syndicate-to": @syndication_targets}
         {:ok, response}
 
       error ->
