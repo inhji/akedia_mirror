@@ -17,7 +17,13 @@ defmodule AkediaWeb.Helpers.Meta do
   end
 
   def title(schema, assigns) when is_map(schema) do
-    page_title = schema.title || String.slice(schema.content, 0, 20) <> "…"
+    page_title =
+      cond do
+        schema.title -> schema.title
+        schema.content -> String.slice(schema.content, 0, 20) <> "…"
+        true -> "Untitled"
+      end
+
     title(page_title, assigns)
   end
 

@@ -533,16 +533,18 @@ defmodule Akedia.Content do
   end
 
   def create_with_entity(schema, attrs, entity_attrs) do
-    do_create_with_entity(schema, attrs)
+    {:ok, entity} = create_entity(entity_attrs)
+
+    do_create_with_entity(schema, attrs, entity)
   end
 
-  def create_with_entity(schema, attrs) do
-    do_create_with_entity(schema, attrs)
-  end
-
-  defp do_create_with_entity(schema, %{"entity" => entity} = attrs) do
+  def create_with_entity(schema, %{"entity" => entity} = attrs) do
     {:ok, entity} = create_entity(entity)
 
+    do_create_with_entity(schema, attrs, entity)
+  end
+
+  defp do_create_with_entity(schema, attrs, entity) do
     Repo.transaction(fn ->
       schema_attrs =
         attrs
