@@ -1,6 +1,6 @@
 <h1 class="title">Webauthn</h1>
 
-<h2 class="subtitle">Devices</h2>
+<h2 class="subtitle">Currently registered device</h2>
 
 <div class="table-container">
 	<table class="table">
@@ -14,14 +14,14 @@
 	  <tbody>
 	    <tr>
 	      <td><%= @credential.device_name %></td>
-	      <td><%= @credential.external_id %></td>
-	      <td><%= @credential.public_key %></td>
+	      <td><%= String.slice(@credential.external_id, 0..20) %>..</td>
+	      <td><%= String.slice(@credential.public_key, 0..20) %>..</td>
 	    </tr>
 	  </tbody>
 	</table>
 </div>
 
-<h2 class="subtitle">Register new Device</h2>
+<h2 class="subtitle">Register new Device (will override registered device)</h2>
 
 <%= form_for @conn, Routes.webauthn_path(@conn, :create), [id: "registration-create", class: "form"], fn f -> %>
 	<div class="field">
