@@ -1,5 +1,5 @@
 import "phoenix_html"
-import "./webauthn.js"
+import "./webauthn/register.js"
 import "./new_post.js"
 import Chart from "chart.js"
 import moment from "moment"

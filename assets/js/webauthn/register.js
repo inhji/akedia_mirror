@@ -1,8 +1,7 @@
-import * as Credential from "./webauthn/credential"
-import * as Encoder from "./webauthn/encoder"
+import * as Credential from "./credential"
+import * as Encoder from "./encoder"
 
 const webauthnUrl = "/api/webauthn"
-const loginUrl = "/auth/webauthn"
 
 function callback(data) {
   var credentialOptions = data;
@@ -13,15 +12,20 @@ function callback(data) {
     var device_name = document.getElementById("registration-create").querySelector("input[name='device_name']").value;
     var callback_url = `${webauthnUrl}/callback?device_name=${device_name}&name=${name}`;
     
+    console.log("Creating credentials:")
+    console.log(credentialOptions)
     Credential.create(encodeURI(callback_url), credentialOptions);
   }
 }
 
 [document.getElementById("registration-create")].filter(item => item).forEach((registrationForm) => {
+  console.log("Creating submit handler")
   registrationForm.addEventListener("submit", (e) => {
     e.preventDefault();
     let data = new FormData(e.target);
     const url = webauthnUrl;
+
+    console.log("Calling api to get challenge")
     fetch(url, {
         method: "POST",
         body: data
@@ -35,27 +39,4 @@ function callback(data) {
       console.error(e);
     });
   });
-});
-
-document.addEventListener("DOMContentLoaded", function () {
-  const form = document.querySelector("#session-create")
-
-  if (!form) {
-    return
-  }
-
-  fetch(loginUrl, {method: "POST", body: new FormData(form) })
-    .then((response) => {
-      return response.json();
-    }).then((data) => {
-      console.log(data)
-      var credentialOptions = data;
-      credentialOptions["challenge"] = Encoder.strToBin(credentialOptions["challenge"]);
-      credentialOptions["allowCredentials"].forEach(function(cred, i){
-        cred["id"] = Encoder.strToBin(cred["id"]);
-      })
-      Credential.get(credentialOptions);
-    }).catch((e) => {
-      console.log(e);
-    });
 });

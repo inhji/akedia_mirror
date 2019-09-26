@@ -16,7 +16,7 @@ import Dailychart from 'dailychart'
 import "imagelightbox"
 import "phoenix_html"
 
-import "./webauthn.js"
+import "./webauthn/login.js"
 import Skycons from '../vendor/skycons.js'
 
 // Register Service Worker
