@@ -28,7 +28,7 @@ defmodule Akedia.Slug do
   end
 
   def get_slug(changeset) do
-    [:title, :content, :url, :text]
+    [:title, :content, :url, :text, :name]
     |> Enum.map(&get_slug_from(changeset, &1))
     |> Enum.filter(&is_binary/1)
     |> List.first()
@@ -37,6 +37,13 @@ defmodule Akedia.Slug do
 
   def get_slug_from(changeset, :title) do
     case get_field(changeset, :title) do
+      nil -> nil
+      title -> title
+    end
+  end
+
+  def get_slug_from(changeset, :name) do
+    case get_field(changeset, :name) do
       nil -> nil
       title -> title
     end

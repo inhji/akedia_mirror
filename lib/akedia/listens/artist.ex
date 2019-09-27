@@ -7,6 +7,7 @@ defmodule Akedia.Listens.Artist do
   schema "artists" do
     field :mbid, :string
     field :name, :string
+    field :slug, :string
     field :image, ArtistimageUploader.Type
 
     has_many :listens, Akedia.Listens.Listen
@@ -19,6 +20,7 @@ defmodule Akedia.Listens.Artist do
     artist
     |> cast(attrs, [:name, :mbid])
     |> cast_attachments(attrs, [:image])
+    |> Akedia.Slug.maybe_generate_slug(add_random: false)
     |> validate_required([:name])
     |> unique_constraint(:name)
   end

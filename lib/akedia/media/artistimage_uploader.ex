@@ -18,7 +18,7 @@ defmodule Akedia.Media.ArtistimageUploader do
 
   # Override the persisted filenames:
   def filename(version, {_file, scope}) do
-    "#{scope.mbid}_#{version}"
+    "#{scope.slug || scope.mbid}_#{version}"
   end
 
   # Override the storage directory:
