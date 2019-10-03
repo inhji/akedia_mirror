@@ -1,7 +1,19 @@
 <%= render SharedView, "nav/topic_nav.html", assigns %>
 
-<h1 class="title">Tagged with “<%= @topic.text %>”</h1>
-<h2 class="subtitle has-text-grey"><%= Enum.count(@entities) %> posts found.</h2>
+<section class="hero">
+  <div class="hero-body">
+    <div class="container">
+      <h1 class="title">
+        <%= @topic.text %> <small class="has-text-grey"><%= Enum.count(@entities) %> posts</small>
+      </h1>
+      <%= if @topic.description do %>
+      <h2 class="subtitle">
+        Hero subtitle
+      </h2>
+      <% end %>
+    </div>
+  </div>
+</section>
 
 <%= render "feed.html",
     conn: @conn,
