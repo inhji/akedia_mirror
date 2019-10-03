@@ -199,6 +199,13 @@ defmodule Akedia.Content do
     |> Repo.preload(entities: [:bookmark, :post, :like])
   end
 
+  def list_pinned_topics() do
+    list_top_topics_query()
+    |> where([t, et], t.is_pinned == true)
+    |> Repo.all()
+    |> Repo.preload(entities: [:bookmark, :post, :like])
+  end
+
   def list_top_topics(limit) do
     list_top_topics_query()
     |> limit(^limit)

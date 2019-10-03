@@ -58,5 +58,31 @@
 				<% end %>
 			</div>
 		</div>
+
+		<div class="card pinned-topics">
+			<div class="card-header">
+				<p class="card-header-title">Trendinglol</p>
+			</div>
+			<div class="card-content">
+				<%= for topic <- @pinned_topics do %>
+					<article class="media">
+					  <figure class="media-left">
+					    <p class="image is-16x16">
+					    	<%= if topic.icon do %>
+					      	<i class="fa <%= topic.icon %>"></i>
+					    	<% else %>
+					      	<i class="fa fa-circle-o"></i>
+					    	<% end %>
+					    </p>
+					  </figure>
+					  <div class="media-content">
+					    <div class="content">
+					    	<p><%= link topic.text, to: Routes.public_path(@conn, :tagged, topic) %></p>					    
+					    </div>					   
+					  </div>
+					</article>
+				<% end %>
+			</div>
+		</div>
 	</aside>
 </div>

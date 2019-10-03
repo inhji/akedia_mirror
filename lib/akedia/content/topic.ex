@@ -8,6 +8,9 @@ defmodule Akedia.Content.Topic do
   schema "topics" do
     field :text, :string
     field :slug, :string
+    field :description, :string
+    field :icon, :string
+    field :is_pinned, :boolean, default: true
     field :entity_count, :integer, virtual: true
 
     many_to_many(:entities, Entity, join_through: "entity_topics")
@@ -18,7 +21,7 @@ defmodule Akedia.Content.Topic do
   @doc false
   def changeset(topic, attrs) do
     topic
-    |> cast(attrs, [:text])
+    |> cast(attrs, [:text, :description, :icon, :is_pinned])
     |> validate_required([:text])
     |> Slug.maybe_generate_slug(add_random: false)
     |> unique_constraint(:slug)
