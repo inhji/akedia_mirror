@@ -66,11 +66,11 @@ defmodule AkediaWeb.PublicController do
 
   def plug_assigns(conn, _opts) do
     topics = Akedia.Content.list_top_topics(15)
-    last_listen = Akedia.Listens.listens(1)
+    last_listens = Akedia.Listens.listens(3)
 
     conn
     |> assign(:topics, topics)
-    |> assign(:last_listen, last_listen)
+    |> assign(:last_listens, last_listens)
   end
 
   def plug_onboard(conn, _opts) do

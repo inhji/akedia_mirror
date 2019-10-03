@@ -15,7 +15,7 @@ defmodule Akedia.Listens do
     |> order_by(desc: :listened_at)
     |> limit(^limit)
     |> preload([:artist, :album])
-    |> Repo.one!()
+    |> Repo.all()
   end
 
   def listens_per_month_by_artist(artist_id) do

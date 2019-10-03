@@ -12,9 +12,9 @@
 	<div class="column is-two-thirds">
 		<%= for post <- @posts do %>
 		  <%= render PostView, "post.html",
-		      conn: @conn,
-		      post: post,
-		      current_user: @current_user %>
+			  conn: @conn,
+			  post: post,
+			  current_user: @current_user %>
 		<% end %>
 
 		<%= if @total_pages != 1 do %>
@@ -49,12 +49,14 @@
 		<% end %>
 
 		<div class="card listens">
-		  <div class="card-content">
-		  	<%= render SharedView, "listens/listen.html", conn: @conn, listen: @last_listen %>
-		  </div>
-		  <div class="card-footer">
-		    <%= link "Listens", to: Routes.listen_path(@conn, :index), class: "card-footer-item" %>
-		  </div>
+			<div class="card-header">
+				<p class="card-header-title">Last listens</p>
+			</div>
+			<div class="card-content">
+				<%= for listen <- @last_listens do %>
+					<%= render SharedView, "listens/listen.html", conn: @conn, listen: listen %>
+				<% end %>
+			</div>
 		</div>
 	</aside>
 </div>
