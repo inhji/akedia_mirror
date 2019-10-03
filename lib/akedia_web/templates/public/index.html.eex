@@ -61,11 +61,11 @@
 
 		<div class="card pinned-topics">
 			<div class="card-header">
-				<p class="card-header-title">Trendinglol</p>
+				<p class="card-header-title">Pinned topics</p>
 			</div>
 			<div class="card-content">
 				<%= for topic <- @pinned_topics do %>
-					<article class="media">
+					<article class="media is-dense">
 					  <figure class="media-left">
 					    <p class="image is-16x16">
 					    	<%= if topic.icon do %>
@@ -76,9 +76,10 @@
 					    </p>
 					  </figure>
 					  <div class="media-content">
-					    <div class="content">
-					    	<p><%= link topic.text, to: Routes.public_path(@conn, :tagged, topic) %></p>					    
-					    </div>					   
+					    <p>
+					    	<strong><%= link topic.text, to: Routes.public_path(@conn, :tagged, topic) %></strong>
+					    	<small><%= topic.entity_count %> posts</small>
+					    </p>					    
 					  </div>
 					</article>
 				<% end %>
