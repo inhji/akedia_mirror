@@ -1,5 +1,19 @@
 import Vue from 'vue'
 import tags from 'bulma-tagsinput'
+import EmojiButton from 'emoji-button'
+
+window.addEventListener('DOMContentLoaded', () => {
+  const button = document.querySelector('#emoji-button')
+  const picker = new EmojiButton()
+
+  picker.on('emoji', emoji => {
+    document.querySelector('#content-area').value += emoji
+  })
+
+  button.addEventListener('click', () => {
+    picker.pickerVisible ? picker.hidePicker() : picker.showPicker(button)
+  })
+})
 
 if (document.querySelector("form.vue")) {
   new Vue({

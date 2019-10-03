@@ -21,6 +21,7 @@
       <input type="checkbox" id="zen-toggle-comment" v-model="zenActive">
       <div class="zen-backdrop">
         <%= textarea f, :content,
+          id: "content-area",
           class: "textarea",
           rows: 10,
           "@input": "updateCharCount",
@@ -31,6 +32,8 @@
     <p class="help is-pulled-right">{{charCount}}/{{maxChars}}</p>
     <%= error_tag f, :content %>
   </div>
+
+  <a id="emoji-button" class="button">🤩 Emoji</a>
 
   <div class="field">
     <%= label f, :image, class: "label" %>
