@@ -60,7 +60,7 @@ defmodule Akedia.MixProject do
       {:distillery, "~> 2.0"},
       {:edeliver, "~> 1.6"},
       {:plug_micropub, git: "https://github.com/inhji/plug_micropub.git", branch: "master"},
-      {:httpoison, "~> 1.5", override: true},
+      {:httpoison, "~> 1.6", override: true},
       {:timex, "~> 3.5"},
       {:que, "~> 0.10.0"},
       {:quantum, "~> 2.3"},
