@@ -1,6 +1,6 @@
 <%= render SharedView, "nav/topic_nav.html", assigns %>
 
-<section class="hero">
+<section class="hero is-light card">
   <div class="hero-body">
     <div class="container">
       <h1 class="title">
@@ -8,7 +8,7 @@
       </h1>
       <%= if @topic.description do %>
       <h2 class="subtitle">
-        Hero subtitle
+        <%= @topic.description %>
       </h2>
       <% end %>
     </div>
