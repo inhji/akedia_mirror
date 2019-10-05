@@ -101,7 +101,7 @@
 
 	<%= for entity <- @entities do %>	
 		<%= if entity.bookmark do %>
-			<div class="grid-item">
+			<div class="grid-item <%= bookmark_class(entity.bookmark) %>">
 		  	<%= render BookmarkView, "bookmark.html",
 		    	conn: @conn,
 		      	bookmark: entity.bookmark,

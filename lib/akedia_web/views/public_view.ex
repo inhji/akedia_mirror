@@ -12,11 +12,21 @@ defmodule AkediaWeb.PublicView do
   end
 
   def post_class(post) do
-    IO.inspect(post)
   	if String.length(post.content_sanitized) > 200 do
   	  "width-2"
   	else
   	  ""
   	end
+  end
+
+  def bookmark_class(bookmark) do
+    cond do
+      not is_nil(bookmark.title) and String.length(bookmark.title) > 50 -> 
+        "width-2"
+      not is_nil(bookmark.content) and String.length(bookmark.content) > 200 -> 
+        "width-2"
+      true ->
+        ""
+    end
   end
 end
