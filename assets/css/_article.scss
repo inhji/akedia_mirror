@@ -1,0 +1,49 @@
+article {
+  .title {
+    .image {
+      display: inline-block;
+      vertical-align: bottom;
+    }
+  }
+
+  .content {
+    a {
+      @include nice-underline;
+    }
+
+    a.footnote, a.reversefootnote {
+      @include no-underline;
+      background: $grey-lighter;
+      border-radius: $radius-rounded;
+      padding: 0 0.25rem;
+
+      &:hover {
+        color: $white;
+        background: $primary;
+      }
+    }
+
+    blockquote {
+      border: none;
+      font-family: serif;
+      font-size: 120%;
+
+      p:before { content: '“';}
+      p:after { content: '”'; }
+    }
+  }
+
+  .meta {
+    .topics a {
+      &::after {
+        content: " // "
+      }
+
+      &:last-child {
+        &::after {
+          content: none;
+        }
+      }
+    }
+  }
+}
