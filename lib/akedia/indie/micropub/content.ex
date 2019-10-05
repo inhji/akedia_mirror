@@ -6,7 +6,7 @@ defmodule Akedia.Indie.Micropub.Content do
   def create_bookmark(title, content, url, tags, is_published) do
     content =
       if content == "." do
-        content = nil
+        nil
       end
 
     attrs = %{

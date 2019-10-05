@@ -30,7 +30,7 @@ defmodule AkediaWeb.ArtistController do
   end
 
   def fill_list(0), do: []
-  def fill_list(count), do: Enum.reduce(1..count, [], fn i, acc -> acc ++ [0] end)
+  def fill_list(count), do: Enum.reduce(1..count, [], fn _, acc -> acc ++ [0] end)
 
   def get_duration(start_date, end_date) do
     if Timex.after?(start_date, end_date) do
@@ -44,17 +44,16 @@ defmodule AkediaWeb.ArtistController do
   def fill_gaps(listens) do
     new_list =
       for {[count, listen], index} <- Enum.with_index(listens) do
-        case next = Enum.at(listens, index + 1) do
+        case Enum.at(listens, index + 1) do
           nil ->
             count
 
-          [next_count, next_listen] ->
+          [_, next_listen] ->
             duration =
               Timex.Interval.new(from: listen, until: next_listen)
               |> Timex.Interval.duration(:months)
               |> fill_list()
 
-            IO.inspect(duration)
             [count] ++ duration
         end
       end
@@ -67,8 +66,8 @@ defmodule AkediaWeb.ArtistController do
     oldest = Listens.get_oldest_listen()
     newest = Listens.get_newest_listen()
 
-    [count_first, date_first] = List.first(listens_per_month)
-    [count_last, date_last] = List.last(listens_per_month)
+    [_, date_first] = List.first(listens_per_month)
+    [_, date_last] = List.last(listens_per_month)
 
     beginning_interval = get_duration(oldest.listened_at, date_first)
     end_interval = get_duration(date_last, newest.listened_at)

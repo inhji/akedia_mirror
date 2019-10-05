@@ -108,7 +108,7 @@ defmodule AkediaWeb.SessionController do
           |> Auth.login(user)
           |> put_status(:ok)
 
-        {:error, reason} ->
+        {:error, _reason} ->
           conn |> put_status(403)
       end
 

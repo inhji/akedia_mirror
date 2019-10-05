@@ -6,10 +6,7 @@ defmodule AkediaWeb.PublicController do
 
   def index(conn, params) do
     weather = Akedia.Workers.Weather.get_weather()
-
-    options = [limit: 20, order_by: [desc: :inserted_at], is_published: true]
     page = Akedia.Content.list_entities_paginated(params)
-    type = Map.get(params, "type")
 
     render(conn, "index.html",
       weather: weather,

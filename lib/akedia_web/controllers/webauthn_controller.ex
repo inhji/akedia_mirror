@@ -62,7 +62,7 @@ defmodule AkediaWeb.WebauthnController do
           |> put_session(:user_id, user.id)
           |> configure_session(renew: true)
 
-        {:error, reason} ->
+        {:error, _reason} ->
           conn
           |> put_status(:forbidden)
       end
