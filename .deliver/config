@@ -11,9 +11,7 @@ PRODUCTION_HOSTS="159.69.81.247"
 PRODUCTION_USER="akedia"
 DELIVER_TO="$APP_HOME/release"
 
-AUTO_VERSION=git-revision
 START_DEPLOY=true
-ECTO_REPOSITORY=Elixir.Akedia.Repo
 
 pre_erlang_get_and_update_deps() {
   status "Copying production secrets" # log output prepended with "----->"
