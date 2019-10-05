@@ -2,7 +2,7 @@
   <div class="card-content">
     <h1 class="title">My Listens</h1>
     <h2 class="subtitle">
-      I've recorded <%= @total_entries %> so far, the first one <%= date_fuzzy(@oldest_listen.listened_at) %>.
+      I've recorded <%= @total_entries %> listens so far, the first one <%= date_fuzzy(@oldest_listen.listened_at) %>.
     </h2>
   </div>
 </div>
