@@ -1,53 +1,14 @@
-<div class="columns">
-	<div class="column">
-		<div class="cover-container" style="background-image: url(<%= cover_url(@current_user, :wide) %>)">
-			<div class="cover-content">
+<div class="grid">
+	<div class="grid-sizer"></div>
+	<div class="grid-item width-2">
+		<div class="card listens">
+			<div class="card-content">
 				<%= render SharedView, "hcard.html", assigns %>
 			</div>
 		</div>
 	</div>
-</div>
 
-<div class="columns">
-	<div class="column is-two-thirds">
-		<%= for post <- @posts do %>
-		  <%= render PostView, "post.html",
-			  conn: @conn,
-			  post: post,
-			  current_user: @current_user %>
-		<% end %>
-
-		<%= if @total_pages != 1 do %>
-			<%= pagination_links @page,
-				previous: ~E(<i class="fa fa-caret-left" aria-hidden="true"></i>),
-				next: ~E(<i class="fa fa-caret-right" aria-hidden="true"></i>)
-			%>
-		<% end %>
-	</div>
-
-	<aside id="sidebar" class="column">
-		<%= if @weather do %>
-		<div class="card weather">
-			<div class="card-content">	
-				<div class="media">
-					<figure class="media-left">
-						<p class="image is-64x64">
-							<canvas id="weather" width="48" height="48" data-icon="<%= @weather.icon %>" class="<%= @weather.icon %>"></canvas>
-						</p>
-					</figure>
-					<div class="media-content">
-						<div class="content">
-							<strong><%= @weather.now %> at <%= @weather.temperature %> °C (<%= round(@weather.humidity * 100) %>% Humid.)</strong>
-							<p>
-								Looks like it's going to be from <em><%= @weather.min %> °C</em> to <em><%= @weather.max %> °C</em> and <%= String.downcase(@weather.summary) %>
-							</p>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<% end %>
-
+	<div class="grid-item">
 		<div class="card listens">
 			<div class="card-header">
 				<p class="card-header-title">Last listens</p>
@@ -58,7 +19,44 @@
 				<% end %>
 			</div>
 		</div>
+	</div>
 
+	<div class="grid-item">
+		<div class="card">
+			<div class="card-header">
+				<h3 class="card-header-title">Post Types</h3>
+			</div>
+			<div class="card-content">
+				<div class="menu">
+					<ul class="menu-list">
+						<%= active_link @conn, "All Posts", 
+							to: Routes.public_path(@conn, :index),
+							class_active: "is-active",
+							active: :exact_with_params,
+							wrap_tag: :li %>
+						<%= active_link @conn, "Posts",
+							to: Routes.public_path(@conn, :index, type: "post"),
+							class_active: "is-active",
+							active: :inclusive_with_params,
+							wrap_tag: :li %>
+						<%= active_link @conn, "Bookmarks",
+							to: Routes.public_path(@conn, :index, type: "bookmark"),
+							class_active: "is-active",
+							active: :inclusive_with_params,
+							wrap_tag: :li %>
+						<%= active_link @conn, "Likes",
+							to: Routes.public_path(@conn, :index, type: "like"),
+							class_active: "is-active",
+							active: :inclusive_with_params,
+							wrap_tag: :li %>
+					</ul>
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+	<div class="grid-item">
 		<div class="card pinned-topics">
 			<div class="card-header">
 				<p class="card-header-title">Pinned topics</p>
@@ -85,5 +83,55 @@
 				<% end %>
 			</div>
 		</div>
-	</aside>
+	</div>
+
+	<div class="grid-item">
+		<%= if @weather do %>
+		<div class="card weather">
+			<div class="card-header">
+				<p class="card-header-title">The fucking weather</p>
+			</div>
+			<div class="card-content">	
+				<%= render SharedView, "weather.html", assigns %>
+			</div>
+		</div>
+		<% end %>
+	</div>
+
+
+	<%= for entity <- @entities do %>	
+		<%= if entity.bookmark do %>
+			<div class="grid-item">
+		  	<%= render BookmarkView, "bookmark.html",
+		    	conn: @conn,
+		      	bookmark: entity.bookmark,
+		      	current_user: @current_user %>
+		    </div>
+		<% end %>
+
+		<%= if entity.post do %>
+			<div class="grid-item <%= post_class(entity.post) %>">
+		  	<%= render PostView, "post.html",
+		    	conn: @conn,
+		    	post: entity.post,
+		    	current_user: @current_user %>
+			</div>  
+		<% end %>
+
+		<%= if entity.like do %>
+			<div class="grid-item">
+		  	<%= render LikeView, "like.html",
+		    	conn: @conn,
+		    	like: entity.like,
+		    	current_user: @current_user %>
+			</div>  
+		<% end %>
+	<% end %>
 </div>
+
+<%= if @total_pages != 1 do %>
+	<%= pagination_links @page,
+		previous: ~E(<i class="fa fa-caret-left" aria-hidden="true"></i>),
+		next: ~E(<i class="fa fa-caret-right" aria-hidden="true"></i>)
+	%>
+<% end %>

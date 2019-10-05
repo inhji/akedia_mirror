@@ -1,0 +1,32 @@
+$grid_width: 1368;
+
+.grid {
+	.card {
+		margin-bottom: 10px;
+	}
+}
+
+
+.grid:after {
+  content: '';
+  display: block;
+  clear: both;
+}
+
+.grid-sizer, .grid-item { width: 100%; }
+
+.grid-item {
+  float: left;
+}
+
+@media screen and (min-width: 768px) {
+  .grid-sizer {
+  	width: ($grid_width / 4) - 10px;
+  }
+  .grid-item { 
+  	width: ($grid_width / 4) - 10px;
+  }
+  .grid-item.width-2 {
+  	width: ($grid_width / 2) - 10px;
+  }
+}

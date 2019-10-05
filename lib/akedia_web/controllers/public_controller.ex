@@ -7,35 +7,18 @@ defmodule AkediaWeb.PublicController do
   def index(conn, params) do
     weather = Akedia.Workers.Weather.get_weather()
 
-    options = [limit: 10, order_by: [desc: :inserted_at], is_published: true]
-    page = Akedia.Content.list_posts_paginated(options, params)
+    options = [limit: 20, order_by: [desc: :inserted_at], is_published: true]
+    page = Akedia.Content.list_entities_paginated(params)
+    type = Map.get(params, "type")
 
     render(conn, "index.html",
       weather: weather,
-      page: page,
-      posts: page.entries,
-      page_number: page.page_number,
-      page_size: page.page_size,
-      total_pages: page.total_pages,
-      total_entries: page.total_entries
-    )
-  end
-
-  def stream(conn, params) do
-    page = Akedia.Content.list_entities_paginated(params)
-    pinned = Akedia.Content.list_pinned_entities()
-    type = Map.get(params, "type")
-
-    render(conn, "stream.html",
-      conn: conn,
       page: page,
       entities: page.entries,
       page_number: page.page_number,
       page_size: page.page_size,
       total_pages: page.total_pages,
-      total_entries: page.total_entries,
-      pinned: pinned,
-      type: type
+      total_entries: page.total_entries
     )
   end
 

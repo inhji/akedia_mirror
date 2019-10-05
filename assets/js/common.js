@@ -9,9 +9,10 @@ import css from "../css/app.scss"
 //
 // Import dependencies
 //
-import jquery from "jquery"
+import $ from "jquery"
 import Prism from 'prismjs'
 import Dailychart from 'dailychart'
+import Masonry from 'masonry-layout'
 
 import "imagelightbox"
 import "phoenix_html"
@@ -23,15 +24,23 @@ import Skycons from '../vendor/skycons.js'
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('/sw.js')
     .then(function(reg){
-      console.log("Service worker registered.");
+      console.debug("Service worker registered.");
    }).catch(function(err) {
-      console.log("Service worker not registered. This happened:", err)
+      console.error("Service worker not registered. This happened:", err)
   });
 }
 
-jquery(function() {
+$(function() {
   // Highlight Syntax
   Prism.highlightAll()
+
+  const grid = document.querySelector(".grid")
+  const msnry = new Masonry(grid, {
+    itemSelector: '.grid-item',
+    columnWidth: '.grid-sizer',
+    percentPosition: false,
+    gutter: 10
+  })
 
   Dailychart.create('#artist-listen-chart', { 
     lineWidth: 2, 
@@ -41,7 +50,7 @@ jquery(function() {
     fillPositive: '#00d1b290'
   });
 
-  jquery('a[data-imagelightbox="x"]').imageLightbox({
+  $('a[data-imagelightbox="x"]').imageLightbox({
     overlay:true,
     caption: true
   });

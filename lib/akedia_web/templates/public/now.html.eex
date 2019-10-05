@@ -1,11 +1,16 @@
-<h1 class="title">Nowww</h1>
+<div class="card">
+	<div class="card-content">
+		<h1 class="title">Nowww</h1>
 
-<div class="content">
-	<%= to_html(@current_user.bio) %>
-</div>
+		<div class="content">
+			<%= to_html(@current_user.bio) %>
+		</div>
 
-<hr />
-	
-<div class="content">
-	<p>This page is inspired by <a href="https://nownownow.com">nownownow.com</a> created by <a href="https://sivers.org/">Derek Sivers.</a></p>
+		<hr />
+			
+		<div class="content">
+			<p>This page is inspired by <a href="https://nownownow.com">nownownow.com</a> created by <a href="https://sivers.org/">Derek Sivers.</a></p>
+		</div>
+
+	</div>
 </div>

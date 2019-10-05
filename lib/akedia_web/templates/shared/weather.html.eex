@@ -1,0 +1,15 @@
+<div class="media">
+	<figure class="media-left">
+		<p class="image is-64x64">
+			<canvas id="weather" width="48" height="48" data-icon="<%= @weather.icon %>" class="<%= @weather.icon %>"></canvas>
+		</p>
+	</figure>
+	<div class="media-content">
+		<div class="content">
+			<strong><%= @weather.now %> at <%= @weather.temperature %> °C (<%= round(@weather.humidity * 100) %>% Humid.)</strong>
+			<p>
+				Looks like it's going to be from <em><%= @weather.min %> °C</em> to <em><%= @weather.max %> °C</em> and <%= String.downcase(@weather.summary) %>
+			</p>
+		</div>
+	</div>
+</div>

@@ -8,7 +8,7 @@ $radius-slightly-rounded: 3px;
 @import "~bulma/sass/utilities/_all";
 
 // Bulma Overrides
-$body-background: $white;
+$body-background: $primary;
 $dimensions: 16 24 32 48 64 96 128 196;
 $link: $dark;
 $navbar-item-active-color: $primary;
@@ -46,15 +46,19 @@ $navbar-item-active-color-dark: $primary;
 @import "tagcloud";
 @import "navbar";
 @import "slideout";
+@import "masonry";
 
 // @import "debug";
 
 ::-moz-selection { background: $primary; color: $white; }
 ::selection { background: $primary; color: $white; }
 
+* { box-sizing: border-box; }
+
 body {
   width: 100%;
   height: 100%;
+  background: $primary;
 }
 
 .media {
@@ -65,12 +69,15 @@ body {
   }
 }
 
+.pagination-link {
+  background: $white;
+}
+
 .emoji-picker { z-index: 999; }
 
 .cover-container {
   padding-top: 20rem;
   background-size: cover;
-  margin: -3rem 0 0 0;
 
   .cover-content {
     padding: 1.5rem 3rem;
@@ -101,6 +108,8 @@ svg.emoji-icon {
 }
 
 .card {
+  margin-bottom: 1rem;
+
   &> .card-content > article {
     margin-bottom: 0;
   }
@@ -183,37 +192,7 @@ nav.main-nav {
   }
 }
 
-#sidebar {
-  .card {
-    margin-bottom: 1.5rem;
-  }
-
-  .listens {
-    .image img {
-      border-radius: 5px;
-    }
-  }
-
-  .widget {
-    margin-bottom: 3rem;
-
-    >.title {
-      font-weight: normal;
-      margin-bottom: 0.5rem;
-      padding-bottom: 0.25rem;
-      border-bottom: 2px solid $red;
-    }
-
-    .more {
-      display: block;
-      margin-top: 1rem;
-    }
-  }
-}
-
 article {
-  margin-bottom: 1.5rem;
-
   .title {
     .image {
       display: inline-block;
@@ -264,8 +243,6 @@ article {
 }
 
 @media screen and (max-width: $tablet) {
-  .navbar
-
   .section {
     padding: 1rem;
   }

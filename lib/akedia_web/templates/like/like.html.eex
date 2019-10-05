@@ -18,7 +18,7 @@
           </time>
         </small>
 
-        <h3 class="is-size-3">
+        <h3 class="is-size-4">
           <a href="<%= @like.url %>" class="u-like-of h-cite p-name">
             <%= @like.title || @like.url %>
           </a>

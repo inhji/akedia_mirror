@@ -1,17 +1,18 @@
-<section class="hero">
-  <div class="hero-body">
-    <div class="container">
-      <h1 class="title">
-        My Listens
-      </h1>
-      <h2 class="subtitle">
-        I've recorded <%= @total_entries %> so far, the first one <%= date_fuzzy(@oldest_listen.listened_at) %>.
-      </h2>
-    </div>
+<div class="card">
+  <div class="card-content">
+    <h1 class="title">My Listens</h1>
+    <h2 class="subtitle">
+      I've recorded <%= @total_entries %> so far, the first one <%= date_fuzzy(@oldest_listen.listened_at) %>.
+    </h2>
   </div>
-</section>
+</div>
 
-<%= render_many @listens, SharedView, "listens/listen.html", as: :listen, conn: @conn %>
+<div class="card">
+  <div class="card-content">
+    <%= render_many @listens, SharedView, "listens/listen.html", as: :listen, conn: @conn %>
+  </div>
+</div>
+
 
 <br />
 
