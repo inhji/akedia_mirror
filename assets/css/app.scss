@@ -90,13 +90,6 @@ body {
   }
 }
 
-@media screen and (max-width: $desktop) {
-  .cover-container {
-    padding-top: 10rem;
-    margin: -3rem -1.5rem 0 -1.5rem;
-  }
-}
-
 .social a {
   margin-right: 0.3rem;
 }
@@ -197,6 +190,13 @@ nav.main-nav {
   }
 }
 
+
+@media screen and (max-width: $desktop) {
+  .cover-container {
+    padding-top: 10rem;
+    margin: -3rem -1.5rem 0 -1.5rem;
+  }
+}
 
 
 @media screen and (max-width: $tablet) {
