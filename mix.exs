@@ -95,9 +95,9 @@ defmodule Akedia.MixProject do
       "ecto.reset": ["ecto.drop", "ecto.setup"],
       test: ["ecto.create --quiet", "ecto.migrate", "test"],
       build: ["edeliver build release"],
-      upgrade: ["edeliver upgrade production"],
+      deploy: ["edeliver deploy release to production"],
       restart: ["edeliver restart production"],
-      hotfix: ["edeliver upgrade production --skip-git-clean"]
+      migrate: ["edeliver migrate production"]
     ]
   end
 end
