@@ -1,0 +1,24 @@
+<div class="card">
+  <header class="card-header">
+    <p class="card-header-title">
+      Top Tracks this week
+    </p>
+  </header>
+  <div class="card-content">
+    <%= for item <- @tracks_weekly do %>
+    <div class="media is-dense">
+      <a class="media-left" href="<%= Routes.album_url(@conn, :show, item.album) %>">
+        <figure class="image is-64x64">
+          <img src="<%= coverart_url(item.album) %>">
+        </figure>
+      </a>
+      <div class="media-content">
+        <div>
+          <strong><%= item.track %></strong> <span>(<%= item.listens %>)</span>
+        </div>
+        <progress class="progress" value="<%= item.listens %>" max="<%= @tracks_max %>"></progress>
+      </div>
+    </div>
+    <% end %>
+  </div>
+</div>

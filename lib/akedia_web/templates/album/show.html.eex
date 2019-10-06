@@ -1,6 +1,7 @@
-<%= render "album.html", conn: @conn, album: @album %>
+<div class="card">
+	<%= render "album.html", conn: @conn, album: @album %>
+</div>
 
 <%= if @logged_in do %>
-  <hr />
   <%= link "Edit", to: Routes.album_path(@conn, :edit, @album), class: "button is-info" %>
 <% end %>

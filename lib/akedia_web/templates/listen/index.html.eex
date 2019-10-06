@@ -7,9 +7,25 @@
   </div>
 </div>
 
-<div class="card">
-  <div class="card-content">
-    <%= render_many @listens, SharedView, "listens/listen.html", as: :listen, conn: @conn %>
+<div class="columns">
+  <div class="column">
+    <div class="card">
+      <div class="card-content">
+        <%= render_many @listens, SharedView, "listens/listen.html", as: :listen, conn: @conn %>
+      </div>
+    </div>
+  </div>
+
+  <div class="column">
+    <%= render "weekly_albums.html", assigns %>
+  </div>
+
+  <div class="column">
+    <%= render "weekly_artists.html", assigns %>
+  </div>
+
+  <div class="column">
+    <%= render "weekly_tracks.html", assigns %>
   </div>
 </div>
 

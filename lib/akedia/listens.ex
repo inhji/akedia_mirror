@@ -116,6 +116,13 @@ defmodule Akedia.Listens do
     |> maybe_limit_by_time_diff(time_diff)
     |> limit(^limit)
     |> Repo.all()
+    |> Enum.map(fn track ->
+      %{
+        track: track.track,
+        listens: track.listens,
+        album: get_album!(track.album_id)
+      }
+    end)
   end
 
   def group_by_track_artist(artist) do
