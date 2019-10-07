@@ -74,12 +74,22 @@ body {
   }
 }
 
-.pagination-link {
-  background: $white;
-}
+.pagination {
+  margin: 2rem 0 0 0;
 
-.pagination-ellipsis {
-  background: $white;
+  .pagination-link {
+    background: $white;
+    border: none;
+    box-shadow: 0 2px 3px rgba(10, 10, 10, 0.1), 0 0 0 1px rgba(10, 10, 10, 0.1);
+
+    &.is-current{
+      background: $dark;
+    }
+  }
+
+  .pagination-ellipsis {
+    background: $white;
+  }
 }
 
 .emoji-picker { z-index: 999; }
