@@ -10,9 +10,19 @@ defmodule AkediaWeb.AlbumView do
   end
 
   def musicbrainz_query_url(album) do
-    artist = album.artist.name
-    |> URI.encode_www_form()
-    |> String.downcase()
+    artist =
+      album.artist.name
+      |> URI.encode_www_form()
+      |> String.downcase()
+
     "https://musicbrainz.org/search?query=#{artist}&type=artist&method=indexed"
+  end
+
+  def listen_count(list) do
+    Enum.count(list)
+  end
+
+  def listen_string(list) do
+    Enum.join(list, ",")
   end
 end

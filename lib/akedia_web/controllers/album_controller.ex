@@ -34,7 +34,18 @@ defmodule AkediaWeb.AlbumController do
 
   def show(conn, %{"id" => id}) do
     album = Listens.get_album!(id)
-    render(conn, "show.html", album: album)
+
+    oldest = Listens.get_oldest_listen()
+    newest = Listens.get_newest_listen()
+    listens = Listens.listens_per_month_by_album(album.id)
+    listens_per_month = Listens.Sparkline.create(listens, oldest, newest)
+
+    render(conn, "show.html",
+      listens_per_month: listens_per_month,
+      oldest: oldest,
+      newest: newest,
+      album: album
+    )
   end
 
   def edit(conn, %{"id" => id}) do
