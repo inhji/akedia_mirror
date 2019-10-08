@@ -1,73 +1,73 @@
-<aside class="menu" style="padding: 1rem;">
+<aside class="menu has-background-light" style="padding: 1rem;">
   <ul class="menu-list">
     <li>
       <%= active_link @conn, class_active: "is-active", active: :exact, to: Routes.public_path(@conn, :index) do %>
-        <i class="fa fa-home"></i> Back to site
+        <span class="icon"><i class="fa fa-home"></i></span> Back to site
       <% end %>
     </li>
   </ul>
   <p class="menu-label">
-    <i class="fa fa-circle has-text-success"></i> Create New
+    <span class="icon"><i class="fa fa-circle has-text-success"></i></span> Create
   </p>
   <ul class="menu-list">
     <li>
       <%= active_link @conn, class_active: "is-active", active: :exact, to: Routes.post_path(@conn, :new) do %>
-        <i class="fa fa-comment-o"></i> Post
+        <span class="icon"><i class="fa fa-comment"></i></span> New Post
       <% end %>
     </li>
     <li>
       <%= active_link @conn, class_active: "is-active", active: :exact, to: Routes.bookmark_path(@conn, :new) do %>
-        <i class="fa fa-bookmark-o"></i> Bookmark
+        <span class="icon"><i class="fa fa-bookmark"></i></span> New Bookmark
       <% end %>
     </li>
   </ul>
   <p class="menu-label">
-    <i class="fa fa-circle has-text-primary"></i> User
+    <span class="icon"><i class="fa fa-circle has-text-primary"></i></span> User
   </p>
   <ul class="menu-list">
     <li>
       <%= active_link @conn, class_active: "is-active", active: :exact, to: Routes.user_path(@conn, :edit) do %>
-        <i class="fa fa-user"></i> Edit User
+        <span class="icon"><i class="fa fa-user"></i></span> Edit User
       <% end %>
     </li>
     <li>
       <%= active_link @conn, class_active: "is-active", active: :exact, to: Routes.profile_path(@conn, :index) do %>
-       <i class="fa fa-globe-w"></i> Profiles
+       <span class="icon"><i class="fa fa-globe-w"></i></span> Profiles
       <% end %>
     </li>
   </ul>
   <p class="menu-label">
-    <i class="fa fa-circle has-text-warning"></i> Indie!
+    <span class="icon"><i class="fa fa-circle has-text-warning"></i></span> Indie!
   </p>
   <ul class="menu-list">
     <li>
       <%= active_link @conn, class_active: "is-active", active: :exact, to: Routes.channel_path(@conn, :index) do %>
-        <i class="fa fa-rss"></i> Channels
+        <span class="icon"><i class="fa fa-rss"></i></span> Channels
       <% end %>
     </li>
     <li>
       <%= active_link @conn, class_active: "is-active", active: :exact, to: Routes.mention_path(@conn, :index) do %>
-        <i class="icon-fediverse"></i> Mentions
+        <span class="icon"><i class="icon-fediverse"></i></span> Mentions
       <% end %>
     </li>
   </ul>
   <p class="menu-label">
-    <i class="fa fa-circle has-text-danger"></i> Settings
+    <span class="icon"><i class="fa fa-circle has-text-danger"></i></span> Settings
   </p>
   <ul class="menu-list">
     <li>
       <%= active_link @conn, class_active: "is-active", active: :exact, to: Routes.admin_path(@conn, :webauthn) do %>
-        <i class="fa fa-tablet"></i> Webauthn
+        <span class="icon"><i class="fa fa-tablet"></i></span> Webauthn
       <% end %>
     </li>
     <li>
       <%= active_link @conn, class_active: "is-active", active: :exact, to: Routes.admin_path(@conn, :totp) do %>
-        <i class="fa fa-key-modern"></i> TOTP
+        <span class="icon"><i class="fa fa-key-modern"></i></span> TOTP
       <% end %>
     </li>
     <li>
       <%= link to: Routes.session_path(@conn, :delete), method: "delete", data: [confirm: "ಥ‿ಥ\nR u sure?"], class: "has-text-danger" do %>
-        <i class="fa fa-power-off"></i> Logout
+        <span class="icon"><i class="fa fa-power-off"></i></span> Logout
       <% end %>
     </li>
   </ul>
