@@ -10,7 +10,7 @@ defmodule Akedia.Content.Topic do
     field :slug, :string
     field :description, :string
     field :icon, :string
-    field :is_pinned, :boolean, default: true
+    field :is_pinned, :boolean, default: false
     field :entity_count, :integer, virtual: true
 
     many_to_many(:entities, Entity, join_through: "entity_topics")
