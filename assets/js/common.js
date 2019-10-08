@@ -34,13 +34,14 @@ $(function() {
   // Highlight Syntax
   Prism.highlightAll()
 
-  const grid = document.querySelector(".grid")
-  const msnry = new Masonry(grid, {
-    itemSelector: '.grid-item',
-    columnWidth: '.grid-sizer',
-    percentPosition: false,
-    gutter: 10
-  })
+  document.querySelectorAll(".grid").forEach(grid => {
+    const msnry = new Masonry(grid, {
+      itemSelector: '.grid-item',
+      columnWidth: '.grid-sizer',
+      percentPosition: false,
+      gutter: 10
+    })
+  })  
 
   Dailychart.create('#artist-listen-chart', { 
     lineWidth: 2, 

@@ -1,5 +1,6 @@
 <div class="grid">
 	<div class="grid-sizer"></div>
+
 	<div class="grid-item width-2">
 		<div class="card listens">
 			<div class="card-content">
@@ -10,9 +11,6 @@
 
 	<div class="grid-item">
 		<div class="card listens">
-			<div class="card-header">
-				<p class="card-header-title">Last listens</p>
-			</div>
 			<div class="card-content">
 				<%= for listen <- @last_listens do %>
 					<%= render SharedView, "listens/listen.html", conn: @conn, listen: listen %>
@@ -22,10 +20,15 @@
 	</div>
 
 	<div class="grid-item">
-		<div class="card">
-			<div class="card-header">
-				<h3 class="card-header-title">Post Types</h3>
+		<div class="card tag-cloud">
+			<div class="card-content">
+				<%= render SharedView, "tag_cloud.html", assigns %>
 			</div>
+		</div>
+	</div>
+
+	<div class="grid-item">
+		<div class="card">
 			<div class="card-content">
 				<div class="menu">
 					<ul class="menu-list">
@@ -53,14 +56,20 @@
 				</div>
 			</div>
 		</div>
+	</div>
 
+	<div class="grid-item">
+		<%= if @weather do %>
+		<div class="card weather">
+			<div class="card-content">	
+				<%= render SharedView, "weather.html", assigns %>
+			</div>
+		</div>
+		<% end %>
 	</div>
 
 	<div class="grid-item">
 		<div class="card pinned-topics">
-			<div class="card-header">
-				<p class="card-header-title">Pinned topics</p>
-			</div>
 			<div class="card-content">
 				<%= for topic <- @pinned_topics do %>
 					<article class="media is-dense">
@@ -84,20 +93,10 @@
 			</div>
 		</div>
 	</div>
+</div>
 
-	<div class="grid-item">
-		<%= if @weather do %>
-		<div class="card weather">
-			<div class="card-header">
-				<p class="card-header-title">The fucking weather</p>
-			</div>
-			<div class="card-content">	
-				<%= render SharedView, "weather.html", assigns %>
-			</div>
-		</div>
-		<% end %>
-	</div>
-
+<div class="grid">
+	<div class="grid-sizer"></div>
 
 	<%= for entity <- @entities do %>	
 		<%= if entity.bookmark do %>
