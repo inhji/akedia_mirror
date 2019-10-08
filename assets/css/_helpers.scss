@@ -45,7 +45,7 @@
 }
 
 @mixin nice-underline() {
-  @include nice-underline-helper($body-background)
+  @include nice-underline-helper($white)
 
   @include prefers-scheme(dark) {
     @include nice-underline-helper($body-background-dark)
