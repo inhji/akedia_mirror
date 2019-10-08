@@ -3,7 +3,7 @@
     <div class="media">
       <figure class="media-left">
         <p class="image is-48x48">
-          <i class="fa fa-heart fa-3x has-text-primary"></i>
+          <i class="fa fa-heart fa-3x has-text-secondary"></i>
         </p>
       </figure>
       <div class="media-content">

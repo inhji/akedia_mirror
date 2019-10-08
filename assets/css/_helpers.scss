@@ -34,6 +34,10 @@
   color: $red;
 }
 
+.has-text-secondary {
+  color: $secondary;
+}
+
 @mixin prefers-scheme($scheme) {
   @media (prefers-color-scheme: $scheme) {
     @content;
@@ -51,9 +55,9 @@
 @mixin nice-underline-helper($background-color) {
   text-decoration: none;
   padding: 10px 0;
-  background-image: -webkit-linear-gradient($primary, $primary);
-  background-image: -o-linear-gradient($primary, $primary);
-  background-image: linear-gradient($primary, $primary);
+  background-image: -webkit-linear-gradient($secondary, $secondary);
+  background-image: -o-linear-gradient($secondary, $secondary);
+  background-image: linear-gradient($secondary, $secondary);
   background-repeat: no-repeat;
   background-size: 100% 1px;
   background-position: center bottom 29%;
