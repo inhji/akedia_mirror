@@ -15,7 +15,9 @@ defmodule Akedia.Application do
       # Start the Quantum Scheduler
       Akedia.Scheduler,
       # Start the Weather GenServer
-      {Akedia.Workers.Weather, %{}}
+      {Akedia.Workers.Weather, %{}},
+      # Start the Listenbrainz Now GenServer
+      {Akedia.Workers.ListenbrainzNow, %{username: "inhji"}}
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html

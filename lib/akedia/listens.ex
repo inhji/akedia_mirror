@@ -161,6 +161,12 @@ defmodule Akedia.Listens do
     |> Repo.preload(:listens)
   end
 
+  def get_artist_by_name!(name) do
+    Artist
+    |> Repo.get_by!(name: name)
+    |> Repo.preload(:listens)
+  end
+
   def create_artist(attrs \\ %{}) do
     %Artist{}
     |> Artist.changeset(attrs)
@@ -206,6 +212,12 @@ defmodule Akedia.Listens do
     |> Repo.preload(:artist)
   end
 
+  def get_album_by_name!(name) do
+    Album
+    |> Repo.get_by!(name: name)
+    |> Repo.preload(:artist)
+  end
+
   def create_album(attrs \\ %{}) do
     %Album{}
     |> Album.changeset(attrs)
@@ -233,5 +245,36 @@ defmodule Akedia.Listens do
 
   def change_album(%Album{} = album) do
     Album.changeset(album, %{})
+  end
+
+  def get_listening_to_now() do
+    case Akedia.Workers.ListenbrainzNow.get_now() do
+      nil ->
+        nil
+
+      response ->
+        metadata =
+          response
+          |> Map.get(:track_metadata)
+
+        album =
+          metadata
+          |> Map.get(:release_name)
+          |> Akedia.Listens.get_album_by_name!()
+
+        artist =
+          metadata
+          |> Map.get(:artist_name)
+          |> Akedia.Listens.get_artist_by_name!()
+
+        track = Map.get(metadata, :track_name)
+
+        %{
+          album: album,
+          artist: artist,
+          track: track,
+          listened_at: nil
+        }
+    end
   end
 end

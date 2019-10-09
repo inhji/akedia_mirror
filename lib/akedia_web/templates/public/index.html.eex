@@ -1,3 +1,6 @@
+
+
+
 <div class="grid">
 	<div class="grid-sizer"></div>
 
@@ -12,6 +15,9 @@
 	<div class="grid-item">
 		<div class="card listens">
 			<div class="card-content">
+				<%= if @listening_to_now do %>
+				<%= render SharedView, "listens/listen.html", conn: @conn, listen: @listening_to_now %>
+				<% end %>
 				<%= for listen <- @last_listens do %>
 					<%= render SharedView, "listens/listen.html", conn: @conn, listen: listen %>
 				<% end %>

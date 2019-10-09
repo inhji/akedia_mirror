@@ -7,7 +7,11 @@
   <div class="media-content">
     <p>
       <strong><%= @listen.track %></strong>
-      <small><%= time_tag(@listen.listened_at) %></small>
+      <%= if @listen.listened_at do %>
+        <small><%= time_tag(@listen.listened_at) %></small>
+      <% else %>
+        <small class="has-text-secondary">Now!</small>
+      <% end %>
     </p>
     <p>
       <span class="has-text-grey">By </span><%= link @listen.artist.name, to: Routes.artist_url(@conn, :show, @listen.artist) %>
