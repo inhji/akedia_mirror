@@ -51,10 +51,10 @@ defmodule Akedia.MixProject do
       {:edeliver, "~> 1.6"},
       {:ex_machina, "~> 2.3", only: :test},
       {:feeder_ex, "~> 1.1"},
-      {:floki, "~> 0.22.0"},
+      {:floki, "~> 0.23.0"},
       {:gettext, "~> 0.11"},
       {:html_sanitize_ex, "~> 1.3"},
-      {:httpoison, "~> 1.6", override: true},
+      {:httpoison, "~> 1.6"},
       {:indieweb, "~> 0.0.42"},
       {:jason, "~> 1.0"},
       {:microformats2, "~> 0.2.1"},
@@ -77,7 +77,7 @@ defmodule Akedia.MixProject do
       {:totpex, "~> 0.1.3"},
       {:tzdata, "~> 1.0.0"},
       {:web_authn_ex, "~> 0.1.1"},
-      {:webmentions, "~> 0.3.4"},
+      {:webmentions, git: "https://github.com/inhji/webmentions-elixir", branch: "update-deps"},
       {:xml_builder, "~> 2.1.1", override: true}
     ]
   end

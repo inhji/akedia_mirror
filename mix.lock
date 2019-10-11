@@ -36,7 +36,7 @@
   "feeder": {:hex, :feeder, "2.3.2", "18792e18ae2928885e1859ecfbac6fc7a2ec6e99efa51828160e530b2a188c8b", [:make], [], "hexpm"},
   "feeder_ex": {:hex, :feeder_ex, "1.1.0", "0be3732255cdb45dec949e0ede6852b5261c9ff173360e8274a6ac65183b2b55", [:mix], [{:feeder, "~> 2.2", [hex: :feeder, repo: "hexpm", optional: false]}], "hexpm"},
   "file_system": {:hex, :file_system, "0.2.7", "e6f7f155970975789f26e77b8b8d8ab084c59844d8ecfaf58cbda31c494d14aa", [:mix], [], "hexpm"},
-  "floki": {:hex, :floki, "0.22.0", "ac0449f1ac9db6769679c84c37ba63e64c64438b48bd0526788add86aabd9e80", [:mix], [{:html_entities, "~> 0.4.0", [hex: :html_entities, repo: "hexpm", optional: false]}, {:mochiweb, "~> 2.15", [hex: :mochiweb, repo: "hexpm", optional: false]}], "hexpm"},
+  "floki": {:hex, :floki, "0.23.0", "956ab6dba828c96e732454809fb0bd8d43ce0979b75f34de6322e73d4c917829", [:mix], [{:html_entities, "~> 0.4.0", [hex: :html_entities, repo: "hexpm", optional: false]}], "hexpm"},
   "gen_stage": {:hex, :gen_stage, "0.14.2", "6a2a578a510c5bfca8a45e6b27552f613b41cf584b58210f017088d3d17d0b14", [:mix], [], "hexpm"},
   "gen_state_machine": {:hex, :gen_state_machine, "2.0.5", "9ac15ec6e66acac994cc442dcc2c6f9796cf380ec4b08267223014be1c728a95", [:mix], [], "hexpm"},
   "gettext": {:hex, :gettext, "0.17.0", "abe21542c831887a2b16f4c94556db9c421ab301aee417b7c4fbde7fbdbe01ec", [:mix], [], "hexpm"},
@@ -106,6 +106,6 @@
   "unicode_util_compat": {:hex, :unicode_util_compat, "0.4.1", "d869e4c68901dd9531385bb0c8c40444ebf624e60b6962d95952775cac5e90cd", [:rebar3], [], "hexpm"},
   "unsafe": {:hex, :unsafe, "1.0.1", "a27e1874f72ee49312e0a9ec2e0b27924214a05e3ddac90e91727bc76f8613d8", [:mix], [], "hexpm"},
   "web_authn_ex": {:hex, :web_authn_ex, "0.1.1", "c37516c16b2e9325b9727b3b5f3b7f2a347bd3372e2011f903b141c386860397", [:mix], [{:jason, "~> 1.0", [hex: :jason, repo: "hexpm", optional: false]}], "hexpm"},
-  "webmentions": {:hex, :webmentions, "0.3.4", "1cfcddd23a0d6ae23fa7bfeb4ab0531012ebe7eeb0941db5311cd70254d182cb", [:mix], [{:floki, "~> 0.15", [hex: :floki, repo: "hexpm", optional: false]}, {:httpoison, "~> 0.11", [hex: :httpoison, repo: "hexpm", optional: false]}], "hexpm"},
+  "webmentions": {:git, "https://github.com/inhji/webmentions-elixir", "86c66c7c95b8b9ec6528e6ec17a3c852ad7c5daa", [branch: "update-deps"]},
   "xml_builder": {:hex, :xml_builder, "2.1.1", "2d6d665f09cf1319e3e1c46035755271b414d99ad8615d0bd6f337623e0c885b", [:mix], [], "hexpm"},
 }
