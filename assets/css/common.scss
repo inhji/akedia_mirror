@@ -40,10 +40,8 @@ $navbar-item-active-color-dark: $primary;
 
 @import "notification";
 @import "helpers";
-@import "zen";
 @import "tagcloud";
 @import "navbar";
-@import "slideout";
 @import "masonry";
 @import "article";
 
@@ -222,16 +220,6 @@ nav.main-nav {
 
   .title {
     font-size: 1.5rem;
-  }
-}
-
-@media screen and (min-width: $tablet) {
-  .slideout-panel {
-    margin-left: 256px;
-  }
-
-  .slideout-menu {
-    display: block;
   }
 }
 

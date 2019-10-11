@@ -5,6 +5,16 @@ const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
 
+function recursiveIssuer(m) {
+  if (m.issuer) {
+    return recursiveIssuer(m.issuer);
+  } else if (m.name) {
+    return m.name;
+  } else {
+    return false;
+  }
+}
+
 module.exports = (env, options) => ({
   optimization: {
     minimizer: [
@@ -14,7 +24,25 @@ module.exports = (env, options) => ({
         sourceMap: false
       }),
       new OptimizeCSSAssetsPlugin({})
-    ]
+    ],
+    splitChunks: {
+      cacheGroups: {
+        commonStyles: {
+          name: 'common',
+          test: (m, c, entry = 'common') =>
+            m.constructor.name === 'CssModule' && recursiveIssuer(m) === entry,
+          chunks: 'all',
+          enforce: true,
+        },
+        adminStyles: {
+          name: 'admin',
+          test: (m, c, entry = 'admin') =>
+            m.constructor.name === 'CssModule' && recursiveIssuer(m) === entry,
+          chunks: 'all',
+          enforce: true,
+        },
+      },
+    },
   },
   resolve: {
     alias: {
@@ -42,7 +70,7 @@ module.exports = (env, options) => ({
         loader: 'vue-loader'
       },
       {
-        test: /\.(css|sass|scss)$/,
+        test: /\.(sass|scss)$/,
         use: [
           MiniCssExtractPlugin.loader,
           {
@@ -70,6 +98,19 @@ module.exports = (env, options) => ({
         ]
       },
       {
+        test: /\.css$/,
+        use: [
+          MiniCssExtractPlugin.loader,
+          {
+            loader: 'css-loader',
+            options: {
+              importLoaders: 2,
+              sourceMap: true
+            }
+          }
+        ]
+      },
+      {
         test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
         use: [{
           loader: 'file-loader',
@@ -84,7 +125,7 @@ module.exports = (env, options) => ({
   plugins: [
     new VueLoaderPlugin(),
     new MiniCssExtractPlugin({
-      filename: '../css/app.css'
+      filename: '../css/[name].css'
     }),
     new CopyWebpackPlugin([{
       from: 'static/',

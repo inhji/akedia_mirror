@@ -35,3 +35,13 @@
 .slideout-open .slideout-menu {
   display: block;
 }
+
+@media screen and (min-width: $tablet) {
+  .slideout-panel {
+    margin-left: 256px;
+  }
+
+  .slideout-menu {
+    display: block;
+  }
+}
