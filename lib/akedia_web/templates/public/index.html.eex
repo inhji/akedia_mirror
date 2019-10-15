@@ -124,7 +124,7 @@
 		<% end %>
 
 		<%= if entity.like do %>
-			<div class="grid-item">
+			<div class="grid-item <%= like_class(entity.like) %>">
 		  	<%= render LikeView, "like.html",
 		    	conn: @conn,
 		    	like: entity.like,
