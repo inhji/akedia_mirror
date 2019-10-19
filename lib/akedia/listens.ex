@@ -258,9 +258,10 @@ defmodule Akedia.Listens do
           |> Map.get(:track_metadata)
 
         album =
-          metadata
-          |> Map.get(:release_name)
-          |> Akedia.Listens.get_album_by_name!()
+          case Map.get(metadata, :release_name) do
+            nil -> nil
+            release -> Akedia.Listens.get_album_by_name!(release)
+          end
 
         artist =
           metadata

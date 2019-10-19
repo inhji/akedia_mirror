@@ -1,9 +1,17 @@
 <div class="media is-dense">
+  <%= if @listen.album do %>
   <a class="media-left" href="<%= Routes.album_url(@conn, :show, @listen.album) %>">
     <figure class="image is-64x64">
       <img src="<%= coverart_url(@listen.album, :thumb) %>">
     </figure>
   </a>
+  <% else %>
+  <div class="media-left">
+    <figure class="image is-64x64">
+      <img src="<%= Routes.static_path(@conn, "/images/album.png") %>">
+    </figure>
+  </div>
+  <% end %>
   <div class="media-content">
     <p>
       <strong><%= @listen.track %></strong>
