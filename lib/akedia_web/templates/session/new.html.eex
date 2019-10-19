@@ -1,7 +1,9 @@
 <div class="columns">
   <div class="column is-half is-offset-one-quarter">
-		<h1 class="title">Login</h1>
-
-		<%= render "form.html", Map.put(assigns, :action, Routes.session_path(@conn, :create)) %>
+  	<div class="card">
+  		<div class="card-content">
+				<%= render "form.html", Map.put(assigns, :action, Routes.session_path(@conn, :create)) %>
+  		</div>
+  	</div>
 	</div>
 </div>
