@@ -57,7 +57,7 @@ defmodule Akedia.MixProject do
       {:httpoison, "~> 1.6"},
       {:indieweb, "~> 0.0.42"},
       {:jason, "~> 1.0"},
-      {:microformats2, "~> 0.2.1"},
+      {:microformats2, "0.2.1"},
       {:phoenix, "~> 1.4.0"},
       {:phoenix_active_link, "~> 0.2.1"},
       {:phoenix_ecto, "~> 4.0"},

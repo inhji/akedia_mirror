@@ -6,7 +6,7 @@
     "watch": "webpack --mode development --watch"
   },
   "dependencies": {
-    "bulma": "^0.7.5",
+    "bulma": "^0.8.0",
     "bulma-divider": "^0.2.0",
     "bulma-prefers-dark": "0.1.0-beta.0",
     "bulma-switch": "^2.0.0",
@@ -26,9 +26,9 @@
     "vue": "^2.6.10"
   },
   "devDependencies": {
-    "@babel/core": "^7.6.3",
+    "@babel/core": "^7.6.4",
     "@babel/preset-env": "^7.6.3",
-    "autoprefixer": "^9.6.4",
+    "autoprefixer": "^9.6.5",
     "babel-loader": "^8.0.6",
     "babel-plugin-prismjs": "^1.1.1",
     "copy-webpack-plugin": "^5.0.4",
@@ -42,7 +42,7 @@
     "uglifyjs-webpack-plugin": "^2.2.0",
     "vue-loader": "^15.7.1",
     "vue-template-compiler": "^2.6.10",
-    "webpack": "4.37.0",
+    "webpack": "^4.41.2",
     "webpack-cli": "^3.3.9"
   }
 }
