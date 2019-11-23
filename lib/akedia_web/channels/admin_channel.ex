@@ -9,13 +9,6 @@ defmodule AkediaWeb.AdminChannel do
     {:error, %{reason: "unauthorized"}}
   end
 
-  def handle_in("get_listens", _params, socket) do
-    listens = Akedia.Listens.listens_per_month()
-
-    push(socket, "listens", %{listens: listens})
-    {:noreply, socket}
-  end
-
   def handle_in("get_posts", _params, socket) do
     posts = Akedia.Content.schema_per_week(Akedia.Content.Post)
     bookmarks = Akedia.Content.schema_per_week(Akedia.Content.Bookmark)

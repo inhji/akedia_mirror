@@ -14,8 +14,6 @@
 			<ul>
 				<li>Weather Data powered by <a href="https://darksky.net">DarkSky</a></li>
 				<li>Weather Icons by <a href="https://github.com/darkskyapp/skycons">@darkskyapp</a> with color modifications by <a href="https://github.com/maxdow/skycons">@maxdow</a></li>
-				<li>Listens fetched from <a href="https://listenbrainz.org/">ListenBrainz</a></li>
-				<li>Cover Art fetched from <a href="http://coverartarchive.org/">Cover Art Archive</a></li>
 			</ul>
 
 			<p>Thanks a bunch, y'all!</p>	

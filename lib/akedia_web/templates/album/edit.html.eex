@@ -1,9 +1,0 @@
-<h1 class="title">Edit Album</h1>
-
-<%= render "form.html", Map.put(assigns, :action, Routes.album_path(@conn, :update, @album)) %>
-
-<hr />
-
-<a href="<%= musicbrainz_query_url(@album) %>" class="button is-info">
-  Search on Musicbrainz
-</a>

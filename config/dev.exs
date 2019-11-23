@@ -57,10 +57,7 @@ config :akedia, AkediaWeb.Endpoint,
     ]
   ]
 
-config :akedia, Akedia.Scheduler,
-  jobs: [
-    {"*/3 * * * *", {Que, :add, [Akedia.Workers.Listenbrainz, "inhji"]}}
-  ]
+config :akedia, Akedia.Scheduler, jobs: []
 
 # Do not include metadata nor timestamps in development logs
 config :logger, :console, format: "[$level] $message\n"
