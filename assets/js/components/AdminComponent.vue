@@ -21,9 +21,6 @@
 
    	<div class="columns">
    		<div class="column">
-   			<listen-list-component></listen-list-component>
-   		</div>
-   		<div class="column">
    			<post-list-component></post-list-component>
    		</div>
    	</div>
@@ -32,14 +29,12 @@
 <script>
 	import moment from 'moment'
 	import {Socket} from "phoenix"
-	import ListenListComponent from './ListenListComponent.vue'
 	import PostListComponent from './PostListComponent.vue'
   import WeatherComponent from './WeatherComponent.vue'
   import FeedEntryListComponent from './FeedEntryListComponent.vue'
 
   export default {
   	components: {
-  		ListenListComponent,
   		PostListComponent,
       WeatherComponent,
       FeedEntryListComponent

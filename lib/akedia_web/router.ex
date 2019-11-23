@@ -49,13 +49,6 @@ defmodule AkediaWeb.Router do
     resources "/likes", LikeController, only: [:show]
     resources "/posts", PostController, only: [:show]
 
-    scope "/listens" do
-      get "/", ListenController, :index
-
-      resources "/artists", ArtistController, only: [:show]
-      resources "/albums", AlbumController, only: [:show]
-    end
-
     scope "/auth" do
       get "/register", UserController, :new
       post "/register", UserController, :create

@@ -8,8 +8,6 @@ defmodule AkediaWeb.PublicController do
     page = Akedia.Content.list_entities_paginated(params)
     topics = Akedia.Content.list_top_topics(15)
     pinned_topics = Akedia.Content.list_pinned_topics()
-    last_listens = Akedia.Listens.listens(3)
-    listening_to_now = Akedia.Listens.get_listening_to_now()
 
     render(conn, "index.html",
       weather: weather,
@@ -19,10 +17,8 @@ defmodule AkediaWeb.PublicController do
       page_size: page.page_size,
       total_pages: page.total_pages,
       total_entries: page.total_entries,
-      last_listens: last_listens,
       pinned_topics: pinned_topics,
-      topics: topics,
-      listening_to_now: listening_to_now
+      topics: topics
     )
   end
 
