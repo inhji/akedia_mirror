@@ -25,7 +25,6 @@
 		}),
 		methods: {
 			handleEntries: function ({ entries }) {
-				console.log(this)
 				this.entries = entries
 			},
 			formatDate: function (date) {
