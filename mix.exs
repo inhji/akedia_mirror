@@ -59,7 +59,7 @@ defmodule Akedia.MixProject do
       {:jason, "~> 1.0"},
       {:microformats2, "0.2.1"},
       {:phoenix, "~> 1.4.0"},
-      {:phoenix_active_link, "~> 0.2.1"},
+      {:phoenix_active_link, "~> 0.3.0"},
       {:phoenix_ecto, "~> 4.0"},
       {:phoenix_html, "~> 2.11"},
       {:phoenix_live_reload, "~> 1.2", only: :dev},
