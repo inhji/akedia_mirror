@@ -9,9 +9,11 @@ $radius-slightly-rounded: 3px;
 @import "~bulma/sass/utilities/_all";
 
 // Bulma Overrides
-$body-background: $primary;
+$body-background: $grey;
 $dimensions: 16 24 32 48 64 96 128 196;
 $link: $dark;
+$family-sans-serif: "Segoe UI", "Ubuntu", "Arial", sans-serif;
+$family-primary: $family-sans-serif;
 
 $menu-label-color: $dark;
 $menu-label-font-size: 1rem;

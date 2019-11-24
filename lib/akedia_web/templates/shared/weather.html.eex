@@ -7,9 +7,7 @@
 	<div class="media-content">
 		<div class="content">
 			<strong><%= @weather.now %> at <%= @weather.temperature %> °C (<%= round(@weather.humidity * 100) %>% Humid.)</strong>
-			<p>
-				Looks like it's going to be from <em><%= @weather.min %> °C</em> to <em><%= @weather.max %> °C</em> and <%= String.downcase(@weather.summary) %>
-			</p>
+			<p><%= @weather.summary %> (<%= @weather.min %> °C/<%= @weather.max %> °C)</p>
 		</div>
 	</div>
 </div>

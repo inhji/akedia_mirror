@@ -12,7 +12,6 @@ import commonCss from "../css/common.scss"
 import $ from "jquery"
 import Prism from 'prismjs'
 import Dailychart from 'dailychart'
-import Masonry from 'masonry-layout'
 
 import "imagelightbox"
 import "phoenix_html"
@@ -34,15 +33,6 @@ $(function() {
   // Highlight Syntax
   Prism.highlightAll()
 
-  document.querySelectorAll(".grid").forEach(grid => {
-    const msnry = new Masonry(grid, {
-      itemSelector: '.grid-item',
-      columnWidth: '.grid-sizer',
-      percentPosition: false,
-      gutter: 10
-    })
-  })  
-
   Dailychart.create('#artist-listen-chart', { 
     lineWidth: 2, 
     height: 30, 
@@ -55,20 +45,6 @@ $(function() {
     overlay:true,
     caption: true
   });
-
-  // Animated Weather
-  const $weatherCanvas = document.querySelector('canvas#weather')
-  const skycons = new Skycons({
-    monochrome: false
-  })
-
-  if ($weatherCanvas) {
-    const icon = $weatherCanvas.dataset["icon"]
-    const skyconsId = icon.toUpperCase().replace(/-/g, "_")
-
-    skycons.add("weather", Skycons[skyconsId])
-    skycons.play()
-  }
 
   // Get all "navbar-burger" elements
   const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);

@@ -15,15 +15,6 @@
       </h1>
 
       <h2 class="subtitle p-note"><%= to_html(@current_user.tagline) %></h2>
-
-      <p class="social">
-        <% public_profiles = Enum.filter(@current_user.profiles, fn p -> p.public end) %>
-        <%= for profile <- public_profiles do %>
-          <a href="<%= profile.url %>" target="_blank" rel="<%= profile.rel_value %>">
-            <i class="<%= profile.icon %> fa-lg"></i>
-          </a>
-        <% end %>
-      </p>
     </div>
   </div>
 </div>
