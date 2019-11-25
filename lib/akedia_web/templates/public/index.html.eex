@@ -9,14 +9,17 @@
 
 		<div class="card">
 			<div class="card-content">
-				<p class="social">
-				  <% public_profiles = Enum.filter(@current_user.profiles, fn p -> p.public end) %>
-				  <%= for profile <- public_profiles do %>
-				    <a href="<%= profile.url %>" target="_blank" rel="<%= profile.rel_value %>">
-				      <i class='<%= profile.icon || "fa-circle-o" %> fa fa-lg'></i> <%= profile.name %>
-				    </a>
-				  <% end %>
-				</p>
+				<aside class="social menu">
+					<ul class="menu-list">
+					  <% public_profiles = Enum.filter(@current_user.profiles, fn p -> p.public end) %>
+					  <%= for profile <- public_profiles do %>
+					    <li><a href="<%= profile.url %>" target="_blank" rel="<%= profile.rel_value %>">
+					      <i class='<%= profile.icon || "fa-circle-o" %> fa fa-lg'></i>
+					      <span><%= profile.name %></span>
+					    </a></li>
+					  <% end %>
+					</ul>
+				</aside>
 			</div>
 		</div>
 	</div>
