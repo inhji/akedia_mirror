@@ -16,19 +16,36 @@
 		</div>
 
 		<div id="mainNav" class="navbar-menu">
-			<div class="navbar-end">
-				<%= active_link @conn,
-						to: Routes.public_path(@conn, :now),
-						class_active: "is-active",
-						class: "navbar-item" do %>
-						Now
-				<% end %>
-
+			<div class="navbar-start">
 				<%= active_link @conn,
 						to: Routes.public_path(@conn, :about),
 						class_active: "is-active",
 						class: "navbar-item" do %>
-						About
+						<div class="image">
+							<i class="fa fa-user fa-lg"></i>
+							<span>About</span>
+						</div>
+				<% end %>
+
+				<%= if @logged_in do %>
+					<%= link to: Routes.admin_path(@conn, :index), class: "navbar-item has-text-danger" do %>
+						<div class="image">
+							<i class="fa fa-search fa-lg"></i>
+							<span>Admin</span>
+						</div>			
+					<% end %>
+		    <% else %>
+					<%= link "Login", to: Routes.session_path(@conn, :new), class: "navbar-item" %>
+		    <% end %>
+			</div>
+
+			<div class="navbar-end">
+				<% public_profiles = Enum.filter(@current_user.profiles, fn p -> p.public end) %>
+				<%= for profile <- public_profiles do %>
+				  <a href="<%= profile.url %>" title="<%= profile.name %>" class="navbar-item" target="_blank" rel="<%= profile.rel_value %>">
+				    <i class='<%= profile.icon || "fa-circle-o" %> fa fa-lg'></i>
+				    <span class="is-hidden-tablet"><%= profile.name %></span>
+				  </a>
 				<% end %>
 
 				<%= form_for @conn, Routes.search_path(@conn, :search), [method: :get, class: "navbar-item"], fn f -> %>
@@ -41,12 +58,6 @@
 			    	</p>
 			    </div>
 			  <% end %>
-
-				<%= if @logged_in do %>
-					<%= link "Admin", to: Routes.admin_path(@conn, :index), class: "navbar-item" %>
-		    <% else %>
-					<%= link "Login", to: Routes.session_path(@conn, :new), class: "navbar-item" %>
-		    <% end %>
 			</div>
 		</div>
 	</div>

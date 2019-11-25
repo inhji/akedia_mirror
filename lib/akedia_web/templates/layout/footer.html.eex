@@ -1,6 +1,6 @@
 <footer class="footer" id="footer">
   <div class="container">
-    <p>&copy; 2019 by <%= @current_user.name %>. Powered by <a href="https://github.com/inhji/akedia" target="_blank" rel="noreferrer">Akedia v<%= version() %></a>.</p>
-    <p>All artist and album images are copyrighted by their respective copyright owners.</p>
+    <p class="has-text-grey">Page Background by <a href="https://www.freepik.com/free-photos-vectors/background">starline @ www.freepik.com</a></p>
+    <p class="has-text-grey">&copy; 2019 by <%= @current_user.name %> • Powered by <a href="https://github.com/inhji/akedia" target="_blank" rel="noreferrer">Akedia v<%= version() %></a></p>
   </div>
 </footer>

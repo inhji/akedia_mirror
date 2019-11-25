@@ -14,6 +14,7 @@ $dimensions: 16 24 32 48 64 96 128 196;
 $link: $dark;
 $family-sans-serif: "Segoe UI", "Ubuntu", "Arial", sans-serif;
 $family-primary: $family-sans-serif;
+$navbar-breakpoint: $tablet;
 
 $menu-label-color: $dark;
 $menu-label-font-size: 1rem;
@@ -101,8 +102,8 @@ body#admin {
   background-size: cover;
 
   .cover-content {
-    padding: 1.5rem 3rem;
-    background: rgba(255, 255, 255, 0.5);
+    padding: 1.5rem 1.5rem;
+    background: rgba(255, 255, 255, 0.6);
   }
 }
 
@@ -206,7 +207,6 @@ nav.main-nav {
 @media screen and (max-width: $desktop) {
   .cover-container {
     padding-top: 10rem;
-    margin: -3rem -1.5rem 0 -1.5rem;
   }
 }
 

@@ -2,7 +2,7 @@
 <html lang="en">
   <%= render "head.html", assigns %>
 
-  <body class="has-navbar-fixed-top">
+  <body class="has-navbar-fixed-top" style='background-image: url(<%= Routes.static_path(@conn, "/images/bg.jpg") %>); background-position: top center;'>
     <section class="section is-paddingless">
       <%= render "navigation.html", conn: @conn, logged_in: @logged_in, current_user: @current_user %>
     </section>

@@ -9,12 +9,12 @@
       <h1 class="title has-text-weight-normal">
         <span class="p-name"><%= @current_user.name %></span>
         <a href="/" rel="me" class="u-url url uid"></a>
-        <small class="has-text-secondary">
+        <small class="has-text-secondary is-size-4">
           @<span class="p-nickname">inhji</span>
         </small>
       </h1>
-
-      <h2 class="subtitle p-note"><%= to_html(@current_user.tagline) %></h2>
+      <h2 class="subtitle p-note" style="clear:both;"><%= to_html(@current_user.tagline) %></h2>
     </div>
   </div>
+  
 </div>
