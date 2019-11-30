@@ -11,8 +11,8 @@ config :logger, level: :warn
 
 # Configure your database
 config :akedia, Akedia.Repo,
-  username: "akedia",
-  password: "akedia",
+  username: "postgres",
+  password: "postgres",
   database: "akedia_test",
   hostname: "localhost",
   pool: Ecto.Adapters.SQL.Sandbox
