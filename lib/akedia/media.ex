@@ -29,6 +29,13 @@ defmodule Akedia.Media do
     |> create_image()
   end
 
+  def maybe_create_image(photo_url, entity_id) when is_binary(photo_url) do
+    create_image(%{
+      name: photo_url,
+      entity_id: entity_id
+    })
+  end
+
   def maybe_create_image(_, _), do: nil
 
   def update_image(%Image{} = image, attrs) do
@@ -43,7 +50,7 @@ defmodule Akedia.Media do
         update_image(image, attrs)
       else
         create_image(attrs)
-      end  
+      end
     end
   end
 
