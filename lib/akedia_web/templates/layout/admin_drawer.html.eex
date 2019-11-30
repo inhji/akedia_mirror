@@ -41,11 +41,6 @@
   </p>
   <ul class="menu-list">
     <li>
-      <%= active_link @conn, class_active: "is-active", active: :exact, to: Routes.channel_path(@conn, :index) do %>
-        <span class="icon"><i class="fa fa-rss"></i></span> Channels
-      <% end %>
-    </li>
-    <li>
       <%= active_link @conn, class_active: "is-active", active: :exact, to: Routes.mention_path(@conn, :index) do %>
         <span class="icon"><i class="icon-fediverse"></i></span> Mentions
       <% end %>

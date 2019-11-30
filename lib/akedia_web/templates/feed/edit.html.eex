@@ -1,9 +1,0 @@
-<h1 class="title">
-  <%= if Map.has_key?(@feed, :title) do %>
-    <%= @feed.title %>
-  <% else %>
-    <%= @feed.url %>
-  <% end %>
-</h1>
-
-<%= render "form.html", Map.put(assigns, :action, Routes.channel_feed_path(@conn, :update, @channel_id, @feed)) %>

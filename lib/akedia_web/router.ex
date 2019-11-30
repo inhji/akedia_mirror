@@ -90,10 +90,6 @@ defmodule AkediaWeb.Router do
     resources "/topics", TopicController, except: [:show]
     resources "/images", ImageController, except: [:show]
 
-    resources "/channels", ChannelController do
-      resources "/feeds", FeedController
-    end
-
     get "/mentions", MentionController, :index
   end
 
@@ -114,11 +110,6 @@ defmodule AkediaWeb.Router do
       forward "/micropub",
               PlugMicropub,
               handler: Akedia.Indie.Micropub.Handler,
-              json_encoder: Phoenix.json_library()
-
-      forward "/microsub",
-              AkediaWeb.Plugs.PlugMicrosub,
-              handler: Akedia.Indie.Microsub.Handler,
               json_encoder: Phoenix.json_library()
 
       forward "/webmention",

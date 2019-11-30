@@ -1,3 +1,0 @@
-<h1 class="title">Edit Channel</h1>
-
-<%= render "form.html", Map.put(assigns, :action, Routes.channel_path(@conn, :update, @channel)) %>

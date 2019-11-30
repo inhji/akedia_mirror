@@ -77,9 +77,6 @@
         </span> Indie
       </p>
       <ul class="menu-list">
-        <li><%= active_link @conn, "Channels", 
-                to: Routes.channel_path(@conn, :index),
-                class_active: "is-active" %></li>
         <li><%= active_link @conn, "Mentions", 
                 to: Routes.mention_path(@conn, :index),
                 class_active: "is-active" %></li>
