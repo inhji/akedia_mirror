@@ -11,6 +11,22 @@ defmodule AkediaWeb.SharedView do
     end
   end
 
+  def has_meta?(schema) do
+    has_reply?(schema) or has_url?(schema) or has_topics?(schema)
+  end
+
+  def has_topics?(schema) do
+    !Enum.empty?(schema.entity.topics)
+  end
+
+  def has_reply?(schema) do
+    Map.has_key?(schema, :reply_to) and not is_nil(schema.reply_to)
+  end
+
+  def has_url?(schema) do
+    Map.has_key?(schema, :url)
+  end
+
   def short_url(url) do
     uri = URI.parse(url)
     Path.join(uri.host, uri.path)

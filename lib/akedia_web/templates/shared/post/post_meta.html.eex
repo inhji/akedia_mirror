@@ -1,11 +1,25 @@
 <aside class="meta">
 	<small>
-	  <%= render SharedView, "post/post_bridgy.html", schema: @schema %>
-	  <%= render SharedView, "post/post_icon.html", schema: @schema %>
+		<%= if has_meta?(@schema) do %>
+	  <%= render SharedView, "post/post_icon.html", conn: @conn, schema: @schema %>
+		<% end %>
+
+		<%= if has_url?(@schema) do %>
 	  <%= render SharedView, "post/post_url.html", conn: @conn, schema: @schema %>
+	  <% end %>
+
+	  <%= if has_reply?(@schema) do %>
 	  <%= render SharedView, "post/post_reply.html", conn: @conn, schema: @schema %>
+	  <% end %>
+
+	  <%= if has_topics?(@schema) do %>
 	  <%= render SharedView, "post/post_topics.html", conn: @conn, topics: @schema.entity.topics %>
+	  <% end %>
+
 	  <%= render SharedView, "post/post_syndications.html", conn: @conn, schema: @schema %>
+
+	  <!-- Invisible Indie Web Stuff -->
+	  <%= render SharedView, "post/post_bridgy.html", schema: @schema %>
 	  <%= render SharedView, "post/post_author.html", conn: @conn, current_user: @current_user %>
 	</small>
 </aside>
