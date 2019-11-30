@@ -42,7 +42,7 @@
 			<div class="navbar-end">
 				<% public_profiles = Enum.filter(@current_user.profiles, fn p -> p.public end) %>
 				<%= for profile <- public_profiles do %>
-				  <a href="<%= profile.url %>" title="<%= profile.name %>" class="navbar-item" target="_blank" rel="<%= profile.rel_value %>">
+				  <a href="<%= profile.url %>" title="<%= profile.name %>" class="navbar-item is-hidden-mobile" target="_blank" rel="<%= profile.rel_value %>">
 				    <i class='<%= profile.icon || "fa-circle-o" %> fa fa-lg'></i>
 				    <span class="is-hidden-tablet"><%= profile.name %></span>
 				  </a>
