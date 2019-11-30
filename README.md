@@ -18,9 +18,9 @@
 
 ## Docs
 
-* [How To Install](INSTALL.md)
-* [How To Deploy](DEPLOY.md)
-* [How To Backup & Restore](BACKUP.md)
+* [How To Install](docs/INSTALL.md)
+* [How To Deploy](docs/DEPLOY.md)
+* [How To Backup & Restore](docs/BACKUP.md)
 
 ## Credits
 
