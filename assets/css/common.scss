@@ -47,6 +47,23 @@ $navbar-item-active-color-dark: $primary;
 @import "navbar";
 @import "masonry";
 @import "article";
+@import "prism";
+
+.content {
+  .tag, .number {
+    display: inline;
+    padding: inherit;
+    font-size: inherit;
+    line-height: inherit;
+    text-align: inherit;
+    vertical-align: inherit;
+    border-radius: inherit;
+    font-weight: inherit;
+    white-space: inherit;
+    background: inherit;
+    margin: inherit;
+  }
+}
 
 // @import "debug";
 
@@ -132,26 +149,12 @@ svg.emoji-icon {
   background-size: cover;
 }
 
-#content, #admin {
-  .content {
-    a {
-      @include nice-underline;
-    }
-  }
-}
-
-  .is-animiated-on-collapse {
-    vertical-align: top;
-  }
-
 nav.main-nav { 
   ul.main-nav-list {
     background-color: $dark;
     font-size: 1rem;
     min-width: 200px;
   }
-
-
 }
 
 #admin-sidebar {

@@ -11,6 +11,19 @@ article {
       @include nice-underline;
     }
 
+    code, pre {
+      white-space: pre-wrap; 
+      word-break: break-word;
+    }
+
+    pre {
+      a.url-link {
+        @include no-underline;
+        color: white;
+      }
+    }
+
+
     a.footnote, a.reversefootnote {
       @include no-underline;
       background: $grey-lighter;
