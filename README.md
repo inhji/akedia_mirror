@@ -13,8 +13,6 @@
 * Sending Webmentions
 * Microformats
 * Weather
-* Syncing Listens with [Listenbrainz](https://listenbrainz.org)
-* Coverart Grabber
 * 2FactorAuth (U2F + TOTP Fallback)
 * Admin Dashboard
 
