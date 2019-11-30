@@ -10,13 +10,6 @@
 	   	</div>
    	</div>
 
-    <div class="columns">
-      <div class="column">
-        <feed-entry-list-component />
-      </div>
-      <div class="column"></div>
-    </div>
-
     <hr />
 
    	<div class="columns">
@@ -31,13 +24,11 @@
 	import {Socket} from "phoenix"
 	import PostListComponent from './PostListComponent.vue'
   import WeatherComponent from './WeatherComponent.vue'
-  import FeedEntryListComponent from './FeedEntryListComponent.vue'
 
   export default {
   	components: {
   		PostListComponent,
-      WeatherComponent,
-      FeedEntryListComponent
+      WeatherComponent
   	},
   	data: function () {
   		return {
