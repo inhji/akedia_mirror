@@ -20,9 +20,7 @@
             "autolinker"
             ,"highlight-keywords"
             ,"command-line"
-          ],
-          "theme": "funky",
-          "css": true
+          ]
       }]
     ]
 }
