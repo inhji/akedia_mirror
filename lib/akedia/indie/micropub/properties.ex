@@ -75,8 +75,8 @@ defmodule Akedia.Indie.Micropub.Properties do
   def get_title(%{"name" => [title]}), do: title
   def get_title(_), do: nil
 
+  def get_content(%{"content" => [%{"html" => content_html}]}), do: content_html
   def get_content(%{"content" => [content]}), do: content
-  def get_content(%{"content" => [%{"html" => [content_html]}]}), do: content_html
   def get_content(_), do: nil
 
   def get_bookmarked_url(%{"bookmark-of" => [url]}), do: url
