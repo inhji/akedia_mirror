@@ -30,7 +30,7 @@
 				<%= if @logged_in do %>
 					<%= link to: Routes.admin_path(@conn, :index), class: "navbar-item has-text-danger" do %>
 						<div class="image">
-							<i class="fa fa-search fa-lg"></i>
+							<i class="fa fa-gear fa-lg"></i>
 							<span>Admin</span>
 						</div>			
 					<% end %>
