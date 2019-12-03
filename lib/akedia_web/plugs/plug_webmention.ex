@@ -28,6 +28,8 @@ defmodule AkediaWeb.Plugs.PlugWebmention do
   post "/hook" do
     handler = get_opt(conn, :handler)
 
+    Logger.info("Webmention hook route hit. Webmention handler engaging!")
+
     with json <- keys_to_atoms(conn.params),
          :ok <- handler.handle_receive(json) do
       send_response(conn)

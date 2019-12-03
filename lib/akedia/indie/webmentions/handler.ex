@@ -7,6 +7,9 @@ defmodule Akedia.Indie.Webmentions.Handler do
 
   @impl true
   def handle_receive(%{:target => target, :post => post} = body) do
+    Logger.info("Receiving webmention from webmention.io!")
+    Logger.info("Target: #{target}")
+
     with {:ok, author} <- maybe_create_author(post.author),
          {:ok, schema} <- Helpers.get_post_by_url(target) do
       entity_id = schema.entity.id
@@ -19,8 +22,12 @@ defmodule Akedia.Indie.Webmentions.Handler do
       })
       |> Mentions.create_or_update_mention()
 
+      Logger.info("Webmention handled!")
+
       :ok
     else
+      Logger.warn("There was an error while handling the mention.")
+
       _ -> {:error, "Bad Request"}
     end
   end
