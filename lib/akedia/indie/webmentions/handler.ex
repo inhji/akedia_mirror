@@ -26,8 +26,14 @@ defmodule Akedia.Indie.Webmentions.Handler do
 
       :ok
     else
+      {:error, error} ->
+        Logger.warn("There was an error while handling the mention:")
+        Logger.warn("#{inspect(error)}")
+
+        {:error, "Bad Request"}
+
       _ ->
-        Logger.warn("There was an error while handling the mention.")
+        Logger.warn("Unexpected error while handling the mention.")
 
         {:error, "Bad Request"}
     end
@@ -77,7 +83,7 @@ defmodule Akedia.Indie.Webmentions.Handler do
       nil ->
         case Mentions.create_author(author) do
           {:ok, author} -> {:ok, author}
-          {:error, _error} -> {:error, "Bad Request"}
+          {:error, error} -> {:error, error}
         end
 
       author ->
