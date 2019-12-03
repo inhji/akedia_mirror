@@ -47,7 +47,9 @@ defmodule Akedia.Indie.Webmentions.Handler do
       content_html: Map.get(content, :html),
       content_plain: Map.get(content, :text),
       url: Map.get(post, :url),
-      published_at: Akedia.DateTime.to_datetime(post.published)
+      published_at:
+        Akedia.DateTime.to_datetime(post.published) ||
+          Akedia.DateTime.to_datetime(post[:"wm-received"])
     }
   end
 

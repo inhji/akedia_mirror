@@ -16,7 +16,7 @@ defmodule Akedia.DateTime do
     )
   end
 
-  def to_datetime_utc(nil), do: nil
+  def to_datetime(_), do: nil
 
   def to_datetime_utc(datetime_string) when is_binary(datetime_string) do
     {:ok, datetime_utc} =
@@ -26,6 +26,8 @@ defmodule Akedia.DateTime do
 
     datetime_utc
   end
+
+  def to_datetime_utc(_), do: nil
 
   def to_string(datetime) do
     DateTime.to_iso8601(datetime)
