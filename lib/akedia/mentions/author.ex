@@ -17,6 +17,6 @@ defmodule Akedia.Mentions.Author do
   def changeset(author, attrs) do
     author
     |> cast(attrs, [:name, :photo, :type, :url])
-    |> validate_required([:name, :photo, :type, :url])
+    |> validate_required([:name, :type, :url])
   end
 end
