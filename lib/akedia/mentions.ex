@@ -5,6 +5,7 @@ defmodule Akedia.Mentions do
 
   def list_mentions do
     Mention
+    |> order_by(desc: :inserted_at)
     |> Repo.all()
     |> Repo.preload([:author, :entity])
   end
