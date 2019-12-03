@@ -26,7 +26,7 @@ sudo -u postgres psql
 ```
 
 ```sql
-CREATE NEW DATABASE akedia_prod;
+CREATE DATABASE akedia_prod;
 ```
 
 2. Import data
