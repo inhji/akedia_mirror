@@ -26,9 +26,10 @@ defmodule Akedia.Indie.Webmentions.Handler do
 
       :ok
     else
-      Logger.warn("There was an error while handling the mention.")
+      _ ->
+        Logger.warn("There was an error while handling the mention.")
 
-      _ -> {:error, "Bad Request"}
+        {:error, "Bad Request"}
     end
   end
 
