@@ -33,14 +33,7 @@ module.exports = (env, options) => ({
             m.constructor.name === 'CssModule' && recursiveIssuer(m) === entry,
           chunks: 'all',
           enforce: true,
-        },
-        adminStyles: {
-          name: 'admin',
-          test: (m, c, entry = 'admin') =>
-            m.constructor.name === 'CssModule' && recursiveIssuer(m) === entry,
-          chunks: 'all',
-          enforce: true,
-        },
+        }
       },
     },
   },
@@ -50,8 +43,7 @@ module.exports = (env, options) => ({
     }
   },
   entry: {
-    common: './js/common.js',
-    admin: './js/admin.js'
+    common: './js/common.js'
   },
   output: {
     filename: '[name].js',
