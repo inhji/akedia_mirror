@@ -2,7 +2,6 @@ defmodule AkediaWeb.Router do
   use AkediaWeb, :router
 
   import AkediaWeb.Plugs.PlugAssignUser
-  import AkediaWeb.Plugs.PlugAdminLayout
 
   pipeline :browser do
     plug :accepts, ["html"]
@@ -24,10 +23,6 @@ defmodule AkediaWeb.Router do
     plug :check_user
   end
 
-  pipeline :admin do
-    plug :admin_layout
-  end
-
   # -----------------------------------------------------
   # Public Routes
   # -----------------------------------------------------
@@ -37,7 +32,6 @@ defmodule AkediaWeb.Router do
 
     get "/", PublicController, :index
     get "/tagged-with/:topic", PublicController, :tagged
-    get "/now", PublicController, :now
     get "/about", PublicController, :about
 
     get "/topics", TopicController, :index
@@ -68,15 +62,16 @@ defmodule AkediaWeb.Router do
   # Admin Routes
   # -----------------------------------------------------
 
+  scope "/user", AkediaWeb do
+    pipe_through [:browser, :auth]
+
+    resources "/", UserController, only: [:show, :edit, :update], singleton: true
+    resources "/profiles", ProfileController
+    get "/security", UserController, :security
+  end
+
   scope "/admin", AkediaWeb do
-    pipe_through [:browser, :auth, :admin]
-
-    get "/", AdminController, :index
-    get "/webauthn", AdminController, :webauthn
-    get "/totp", AdminController, :totp
-
-    resources "/user", UserController, only: [:show, :edit, :update], singleton: true
-    resources "/user/profiles", ProfileController
+    pipe_through [:browser, :auth]
 
     resources "/posts", PostController, except: [:show]
     get "/posts/drafts", PostController, :drafts

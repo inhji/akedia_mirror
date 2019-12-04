@@ -64,4 +64,23 @@ defmodule AkediaWeb.UserController do
         render(conn, "edit.html", user: user, changeset: changeset)
     end
   end
+
+  def security(conn, _params) do
+    user = Akedia.Accounts.get_user!()
+    issuer = user.username
+    email = user.credential.email
+
+    qr_code =
+      Akedia.Settings.get(:totp_secret)
+      |> Base.encode32()
+      |> totp_qr_string(issuer, email)
+      |> QRCode.QR.create!()
+      |> QRCode.Svg.to_base64()
+
+    render(conn, "security.html", qr_code: qr_code)
+  end
+
+  defp totp_qr_string(secret, issuer, email) do
+    "otpauth://totp/#{issuer}:#{email}?secret=#{secret}&issuer=#{issuer}&algorithm=SHA1&digits=6&period=30"
+  end
 end

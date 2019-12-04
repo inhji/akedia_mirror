@@ -1,1 +1,5 @@
-<%= render "form.html", Map.put(assigns, :action, Routes.user_path(@conn, :update)) %>
+<div class="card">
+	<div class="card-content">
+		<%= render "form.html", Map.put(assigns, :action, Routes.user_path(@conn, :update)) %>
+	</div>
+</div>

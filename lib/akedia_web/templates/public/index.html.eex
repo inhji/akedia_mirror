@@ -7,6 +7,40 @@
 			</div>
 		</div>
 
+		<div class="card">
+			<div class="card-content">
+				<div class="menu">
+					<ul class="menu-list">
+					  <li>
+					    <%= active_link @conn, class_active: "is-active", active: :exact, to: Routes.post_path(@conn, :new) do %>
+					      <span class="icon"><i class="fa fa-comment"></i></span> New Post
+					    <% end %>
+					  </li>
+					  <li>
+					    <%= active_link @conn, class_active: "is-active", active: :exact, to: Routes.bookmark_path(@conn, :new) do %>
+					      <span class="icon"><i class="fa fa-bookmark"></i></span> New Bookmark
+					    <% end %>
+					  </li>
+					  <li>
+			        <%= active_link @conn, class_active: "is-active", active: :exact, to: Routes.mention_path(@conn, :index) do %>
+			          <span class="icon"><i class="icon-fediverse"></i></span> Mentions
+			        <% end %>
+			      </li>
+			      <li>
+			        <%= active_link @conn, class_active: "is-active", active: :exact, to: Routes.user_path(@conn, :security) do %>
+			          <span class="icon"><i class="fa fa-key-modern"></i></span> Security
+			        <% end %>
+			      </li>
+			      <li>
+			        <%= link to: Routes.session_path(@conn, :delete), method: "delete", data: [confirm: "ಥ‿ಥ\nR u sure?"], class: "has-text-danger" do %>
+			          <span class="icon"><i class="fa fa-power-off"></i></span> Logout
+			        <% end %>
+			      </li>
+					</ul>				
+				</div>
+			</div>
+		</div>
+
 		<div class="card is-hidden-tablet">
 			<div class="card-content">
 				<aside class="social menu">

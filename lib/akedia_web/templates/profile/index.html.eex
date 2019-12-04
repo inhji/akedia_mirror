@@ -1,31 +1,37 @@
-<%= for profile <- @profiles do %>
-<article class="media is-marginless">
-  <figure class="media-left">
-    <p class="image is-16x16">
-      <%= if profile.icon do %>
-        <i class="<%= profile.icon %>"></i>
-      <% else %>
-        <i class="fa fa-circle"></i>
-      <% end %>
-    </p>
-  </figure>
-  <div class="media-content">
-    <p>
-      <strong><%= profile.name %></strong> <small><%= visibility(profile) %></small>
-      <br>
-      <%= link profile.url, to: profile.url, target: "_blank" %>
-    </p>
-    <small class="has-text-grey">
-      rel=<%= profile.rel_value %>
-    </small>
-  </div>
-  <div class="media-right">
-    <%= link "Edit", to: Routes.profile_path(@conn, :edit, profile), class: "button is-info" %>
-    <%= link "Delete", to: Routes.profile_path(@conn, :delete, profile), method: :delete, data: [confirm: "Are you sure?"], class: "button is-danger" %>
-  </div>
-</article>
-<% end %>
+<div class="card">
+  <div class="card-content">
+    <span><%= link "New Profile", to: Routes.profile_path(@conn, :new), class: "button is-success" %></span>
 
-<hr />
+    <hr />
 
-<span><%= link "New Profile", to: Routes.profile_path(@conn, :new), class: "button is-success" %></span>
+    <%= for profile <- @profiles do %>
+    <article class="media is-marginless">
+      <figure class="media-left">
+        <p class="image is-16x16">
+          <%= if profile.icon do %>
+            <i class="<%= profile.icon %>"></i>
+          <% else %>
+            <i class="fa fa-circle"></i>
+          <% end %>
+        </p>
+      </figure>
+      <div class="media-content">
+        <p>
+          <strong><%= profile.name %></strong> <small><%= visibility(profile) %></small>
+          <br>
+          <%= link profile.url, to: profile.url, target: "_blank" %>
+        </p>
+        <small class="has-text-grey">
+          rel=<%= profile.rel_value %>
+        </small>
+      </div>
+      <div class="media-right">
+        <%= link "Edit", to: Routes.profile_path(@conn, :edit, profile), class: "button is-info" %>
+        <%= link "Delete", to: Routes.profile_path(@conn, :delete, profile), method: :delete, data: [confirm: "Are you sure?"], class: "button is-danger" %>
+      </div>
+    </article>
+    <% end %>
+
+
+  </div>
+</div>

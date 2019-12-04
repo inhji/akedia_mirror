@@ -27,14 +27,7 @@
 						</div>
 				<% end %>
 
-				<%= if @logged_in do %>
-					<%= link to: Routes.admin_path(@conn, :index), class: "navbar-item has-text-danger" do %>
-						<div class="image">
-							<i class="fa fa-gear fa-lg"></i>
-							<span>Admin</span>
-						</div>			
-					<% end %>
-		    <% else %>
+				<%= if not @logged_in do %>
 					<%= link "Login", to: Routes.session_path(@conn, :new), class: "navbar-item" %>
 		    <% end %>
 			</div>

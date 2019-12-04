@@ -1,3 +1,0 @@
-<h1 class="title">Yo TOTP Code</h1>
-
-<img src='data:image/svg+xml; base64, <%= @qr_code %>' />
