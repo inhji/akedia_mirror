@@ -15,11 +15,13 @@ defmodule Akedia.Indie.Micropub.Content do
       "url" => url
     }
 
+    Logger.info("Creating bookmark: #{inspect(attrs)}")
+
     case Content.create_bookmark(attrs, %{is_published: is_published}) do
       {:ok, bookmark} ->
         Que.add(Workers.Favicon, bookmark)
         Akedia.Content.add_tags(bookmark, tags)
-        Logger.info("Bookmark created!")
+        Logger.info("Bookmark created: #{inspect(bookmark)}")
         {:ok, :created, Akedia.url(bookmark)}
 
       {:error, error} ->
@@ -30,6 +32,8 @@ defmodule Akedia.Indie.Micropub.Content do
 
   def create_like(url, is_published) do
     attrs = %{"url" => url}
+
+    Logger.info("Creating like: #{inspect(attrs)}")
 
     case Content.create_like(attrs, %{is_published: is_published}) do
       {:ok, like} ->
