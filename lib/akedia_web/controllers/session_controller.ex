@@ -23,7 +23,7 @@ defmodule AkediaWeb.SessionController do
         else
           conn
           |> Auth.login(user)
-          |> redirect(to: Routes.admin_path(conn, :index))
+          |> redirect(to: Routes.public_path(conn, :index))
         end
 
       # === DEVDOOR ===
