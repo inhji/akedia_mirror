@@ -7,8 +7,11 @@ defmodule Akedia.Accounts.User do
   schema "users" do
     field :name, :string
     field :username, :string
-    field :bio, :string, default: ""
+
     field :tagline, :string, default: ""
+    field :about, :string, default: ""
+    field :now, :string, default: ""
+
     field :avatar, Akedia.Media.AvatarUploader.Type
     field :cover, Akedia.Media.CoverUploader.Type
 
@@ -21,7 +24,7 @@ defmodule Akedia.Accounts.User do
   @doc false
   def changeset(user, attrs) do
     user
-    |> cast(attrs, [:name, :username, :bio, :tagline])
+    |> cast(attrs, [:name, :username, :now, :about, :tagline])
     |> cast_attachments(attrs, [:avatar, :cover])
     |> validate_required([:name, :username])
     |> unique_constraint(:username)
