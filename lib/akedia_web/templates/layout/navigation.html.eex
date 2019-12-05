@@ -18,7 +18,7 @@
 		<div id="mainNav" class="navbar-menu">
 			<div class="navbar-start">
 				<%= active_link @conn,
-						to: Routes.public_path(@conn, :about),
+						to: Routes.user_path(@conn, :show),
 						class_active: "is-active",
 						class: "navbar-item" do %>
 						<div class="image">

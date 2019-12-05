@@ -1,9 +1,55 @@
-<%= render SharedView, "nav/user_nav.html", assigns %>
+<div class="cover-container card" style="background-image: url(<%= cover_url(@current_user, :wide) %>)">
+	<div class="cover-content">
+		<%= render SharedView, "hcard.html", assigns %>
+	</div>
+</div>
 
-<%= render SharedView, "hcard.html", assigns %>
+<%= if @logged_in do %>
+<div class="card">
+	<div class="card-content">
+		<div class="field is-grouped">
+		  <div class="control">
+  		  <%= active_link @conn, class_active: "is-active", active: :exact, to: Routes.user_path(@conn, :edit), class: "button is-primary" do %>
+  	      <span class="icon"><i class="fa fa-user"></i></span>
+  	      <span>Edit User</span>
+  	    <% end %>
+		  </div>
+			<div class="control">
+				<%= active_link @conn, class_active: "is-active", active: :exact, to: Routes.profile_path(@conn, :index), class: "button is-info" do %>
+					<span class="icon"><i class="fa fa-globe-w"></i></span>
+					<span>Profiles</span>
+				<% end %>
+			</div>
+		</div>
+	</div>
+</div>
+<% end %>
 
-<hr />
+<div class="card">
+	<div class="card-content">
+		<h2 class="title">About Me</h1>
 
-<%= link "Edit", to: Routes.user_path(@conn, :edit), class: "button is-info" %>
+		<div class="content is-size-5">
+			<%= to_html(@current_user.about) %>
+		</div>
 
-<%= link "Logout", to: Routes.session_path(@conn, :delete), method: "delete", data: [confirm: "ಥ‿ಥ\nR u sure?"], class: "button is-danger" %>
+		<h2 class="title"><a name="now">Nowww</a></h2>
+
+		<div class="content is-size-5">
+			<%= to_html(@current_user.now) %>
+		</div>
+
+		<h2 class="title">About this Site</h2>
+
+		<div class="content is-size-5">
+			<ul>
+				<li>Weather Data powered by <a href="https://darksky.net">DarkSky</a></li>
+				<li>Weather Icons by <a href="https://github.com/darkskyapp/skycons">@darkskyapp</a> with color modifications by <a href="https://github.com/maxdow/skycons">@maxdow</a></li>
+				
+			</ul>
+			<p>Thanks a bunch, y'all!</p>	
+		</div>
+	</div>
+</div>
+
+

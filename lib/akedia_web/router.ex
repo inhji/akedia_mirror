@@ -32,7 +32,7 @@ defmodule AkediaWeb.Router do
 
     get "/", PublicController, :index
     get "/tagged-with/:topic", PublicController, :tagged
-    get "/about", PublicController, :about
+    get "/about", UserController, :show
 
     get "/topics", TopicController, :index
     get "/search", SearchController, :search
@@ -65,7 +65,7 @@ defmodule AkediaWeb.Router do
   scope "/user", AkediaWeb do
     pipe_through [:browser, :auth]
 
-    resources "/", UserController, only: [:show, :edit, :update], singleton: true
+    resources "/", UserController, only: [:edit, :update], singleton: true
     resources "/profiles", ProfileController
     get "/security", UserController, :security
   end

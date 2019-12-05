@@ -22,7 +22,7 @@
   </div>
 
   <div class="field">
-    <%= label f, "Short Bio", class: "label" %>
+    <%= label f, :tagline, class: "label" %>
     <div class="control">
       <%= textarea f, :tagline, class: "textarea" %>
     </div>
@@ -30,18 +30,33 @@
   </div>
 
   <div class="field">
-    <%= label f, :bio, class: "label" %>
+    <%= label f, :now, class: "label" %>
     <div class="zen">
       <input type="checkbox" id="zen-toggle-comment">
-      <%= label f, :bio, class: "label" %>
+      <%= label f, :now, class: "label" %>
       <div class="zen-backdrop">
-        <%= textarea f, :bio,
+        <%= textarea f, :now,
             class: "textarea",
             rows: 5 %>
         <label for="zen-toggle-comment">Zen Mode</label>
       </div>
     </div>
-    <%= error_tag f, :bio %>
+    <%= error_tag f, :now %>
+  </div>
+
+  <div class="field">
+    <%= label f, :about, class: "label" %>
+    <div class="zen">
+      <input type="checkbox" id="zen-toggle-comment">
+      <%= label f, :about, class: "label" %>
+      <div class="zen-backdrop">
+        <%= textarea f, :about,
+            class: "textarea",
+            rows: 5 %>
+        <label for="zen-toggle-comment">Zen Mode</label>
+      </div>
+    </div>
+    <%= error_tag f, :about %>
   </div>
 
   <div class="field">
