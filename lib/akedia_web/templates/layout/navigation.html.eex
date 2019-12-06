@@ -1,9 +1,8 @@
-<nav class="navbar is-dark is-fixed-top" role="navigation" aria-label="main navigation">
+<nav class="navbar is-dark is-very-dark is-fixed-top" role="navigation" aria-label="main navigation">
 	<div class="container">
 		<div class="navbar-brand">
 			<%= active_link @conn,
 					to: Routes.public_path(@conn, :index),
-					class_active: "is-active",
 					class: "navbar-item" do %>
 					<%= render "logo.html" %>
 			<% end %>
