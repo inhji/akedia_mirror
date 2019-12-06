@@ -1,26 +1,29 @@
 {
-    "presets": [
-        "@babel/preset-env"
-    ],
-    "plugins": [
-      ["prismjs", {
-          "languages": [
-            "javascript"
-            ,"css"
-            ,"markup"
-            ,"nginx"
-            ,"yaml"
-            ,"elixir"
-            ,"bash"
-            ,"scss"
-            ,"sql"
-            ,"coffeescript"
-          ],
-          "plugins": [
-            "autolinker"
-            ,"highlight-keywords"
-            ,"command-line"
-          ]
-      }]
+  "presets": [
+      "@babel/preset-env"
+  ],
+  "plugins": [
+    [
+      "prismjs", {
+        "languages": [
+          "javascript"
+          ,"css"
+          ,"markup"
+          ,"nginx"
+          ,"yaml"
+          ,"elixir"
+          ,"bash"
+          ,"scss"
+          ,"sql"
+          ,"coffeescript"
+          ,"git"
+        ],
+        "plugins": [
+          "autolinker"
+          ,"highlight-keywords"
+          ,"command-line",
+        ]
+      }
     ]
+  ]
 }
