@@ -64,4 +64,8 @@ defmodule Akedia.HTTP do
   def base_url(url) do
     url_part(url, :scheme) <> "://" <> url_part(url, :host)
   end
+
+  def sanitize_hostname(hostname) do
+    String.trim_trailing(hostname, "/")
+  end
 end

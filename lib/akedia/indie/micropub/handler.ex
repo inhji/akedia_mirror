@@ -5,7 +5,7 @@ defmodule Akedia.Indie.Micropub.Handler do
   alias Akedia.HTTP
   alias Akedia.Media
   alias Akedia.Indie.Micropub.{Properties, Content}
-  alias Akedia.Indie.Auth.Token
+  alias Akedia.Accounts
 
   @syndication_targets [
     %{
@@ -20,6 +20,8 @@ defmodule Akedia.Indie.Micropub.Handler do
     Logger.info("Post type is #{inspect(type)}")
     Logger.info("Properies: #{inspect(properties)}")
 
+    %{url: token_endpoint} = Accounts.get_profile_by_rel_value("token_endpoint")
+
     tags = Properties.get_tags(properties)
     title = Properties.get_title(properties)
     content = Properties.get_content(properties)
@@ -27,7 +29,7 @@ defmodule Akedia.Indie.Micropub.Handler do
     photo = Properties.get_photo(properties)
     syndication_targets = Properties.get_syndication_targets(properties)
 
-    case Token.verify_token(access_token, "create") do
+    case Akedia.Indie.Token.verify(access_token, "create", token_endpoint) do
       :ok ->
         case Properties.get_type_by_props(properties) do
           :bookmark ->
@@ -70,9 +72,10 @@ defmodule Akedia.Indie.Micropub.Handler do
     Logger.info("Micropub Media Handler engaged")
     Logger.info("Uploaded file is #{inspect(file)}")
 
+    %{url: token_endpoint} = Accounts.get_profile_by_rel_value("token_endpoint")
     attrs = %{"name" => file, "text" => file.filename}
 
-    case Token.verify_token(access_token, "media") do
+    case Akedia.Indie.Token.verify(access_token, "media", token_endpoint) do
       :ok ->
         case Media.create_image(attrs) do
           {:ok, image} ->
@@ -109,7 +112,9 @@ defmodule Akedia.Indie.Micropub.Handler do
 
   @impl true
   def handle_config_query(access_token) do
-    case Token.verify_token(access_token, nil) do
+    %{url: token_endpoint} = Accounts.get_profile_by_rel_value("token_endpoint")
+
+    case Akedia.Indie.Token.verify(access_token, nil, token_endpoint) do
       :ok ->
         media_url = HTTP.abs_url(Akedia.url(), "/api/indie/micropub/media")
         response = %{"media-endpoint": media_url, "syndicate-to": @syndication_targets}
@@ -127,7 +132,9 @@ defmodule Akedia.Indie.Micropub.Handler do
 
   @impl true
   def handle_syndicate_to_query(access_token) do
-    case Token.verify_token(access_token, nil) do
+    %{url: token_endpoint} = Accounts.get_profile_by_rel_value("token_endpoint")
+
+    case Akedia.Indie.Token.verify(access_token, nil, token_endpoint) do
       :ok ->
         response = %{
           "syndicate-to": [

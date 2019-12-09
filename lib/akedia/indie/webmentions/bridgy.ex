@@ -1,7 +1,4 @@
 defmodule Akedia.Indie.Webmentions.Bridgy do
-  @bridgy_endpoint "https://brid.gy/publish/webmention"
-  @bridgy_github_target "https://brid.gy/publish/github"
-
   require Logger
 
   def maybe_publish_to_github(_, nil), do: nil
@@ -18,8 +15,10 @@ defmodule Akedia.Indie.Webmentions.Bridgy do
   end
 
   def do_publish_to_github(%{:entity_id => entity_id} = schema) do
+    endpoint = Akedia.Indie.config(:bridgy_endpoint, "")
+    target = Akedia.Indie.config(:bridgy_github_target, "")
     www_source = Akedia.url(schema)
-    www_target = URI.encode_www_form(@bridgy_github_target)
+    www_target = URI.encode_www_form(target)
     body = "source=#{www_source}&target=#{www_target}"
 
     headers = [
@@ -27,7 +26,7 @@ defmodule Akedia.Indie.Webmentions.Bridgy do
       Akedia.HTTP.user_agent()
     ]
 
-    case HTTPoison.post(@bridgy_endpoint, body, headers) do
+    case HTTPoison.post(endpoint, body, headers) do
       {:ok, %HTTPoison.Response{status_code: 201, body: body}} ->
         json = Jason.decode!(body)
 

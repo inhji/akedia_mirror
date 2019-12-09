@@ -1,7 +1,6 @@
 defmodule Akedia.Indie.Webmentions.Handler do
   @behaviour AkediaWeb.Plugs.PlugWebmention.HandlerBehaviour
   alias Akedia.Mentions
-  alias Akedia.Indie.Helpers
 
   require Logger
 
@@ -11,7 +10,7 @@ defmodule Akedia.Indie.Webmentions.Handler do
     Logger.info("Target: #{target}")
 
     with {:ok, author} <- maybe_create_author(post.author),
-         {:ok, schema} <- Helpers.get_post_by_url(target) do
+         {:ok, schema} <- Akedia.get_post_by_url(target) do
       entity_id = schema.entity.id
 
       prepare_mention(body)
