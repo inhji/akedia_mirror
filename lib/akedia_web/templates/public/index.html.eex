@@ -41,7 +41,7 @@
 			</div>
 		</div>
 
-		<div class="card is-hidden-tablet">
+		<div class="card">
 			<div class="card-content">
 				<aside class="social menu">
 					<ul class="menu-list">
