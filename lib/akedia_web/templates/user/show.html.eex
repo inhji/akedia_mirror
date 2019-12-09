@@ -29,19 +29,19 @@
 	<div class="card-content">
 		<h2 class="title">About Me</h1>
 
-		<div class="content is-size-5">
+		<div class="content">
 			<%= to_html(@current_user.about) %>
 		</div>
 
 		<h2 class="title"><a name="now">Nowww</a></h2>
 
-		<div class="content is-size-5">
+		<div class="content">
 			<%= to_html(@current_user.now) %>
 		</div>
 
 		<h2 class="title">About this Site</h2>
 
-		<div class="content is-size-5">
+		<div class="content">
 			<ul>
 				<li>Weather Data powered by <a href="https://darksky.net">DarkSky</a></li>
 				<li>Weather Icons by <a href="https://github.com/darkskyapp/skycons">@darkskyapp</a> with color modifications by <a href="https://github.com/maxdow/skycons">@maxdow</a></li>
