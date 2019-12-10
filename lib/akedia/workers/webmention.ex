@@ -14,14 +14,14 @@ defmodule Akedia.Workers.Webmention do
 
   def perform(%Like{:url => liked_url} = like) do
     Bridgy.maybe_publish_to_github(like, liked_url)
-    Indie.Webmentions.do_send_webmentions(Akedia.url(like), ".h-entry .title")
+    Indie.Webmentions.do_send_webmentions(Akedia.url(like), ".h-entry")
 
     :ok
   end
 
   def perform(%Bookmark{:url => bookmarked_url} = bookmark) do
     Bridgy.maybe_publish_to_github(bookmark, bookmarked_url)
-    Indie.Webmentions.do_send_webmentions(Akedia.url(bookmark), ".h-entry .title")
+    Indie.Webmentions.do_send_webmentions(Akedia.url(bookmark), ".h-entry")
 
     :ok
   end
