@@ -35,12 +35,12 @@ defmodule Akedia.Indie.Micropub.Handler do
           :bookmark ->
             Logger.info("Creating new bookmark..")
             url = Properties.get_bookmarked_url(properties)
-            Content.create_bookmark(title, content, url, tags, is_published)
+            Content.create_bookmark(title, content, url, tags, is_published, syndication_targets)
 
           :like ->
             Logger.info("Creating new like..")
             url = Properties.get_liked_url(properties)
-            Content.create_like(url, is_published)
+            Content.create_like(url, is_published, syndication_targets)
 
           :post ->
             Logger.info("Creating new post..")
@@ -137,12 +137,7 @@ defmodule Akedia.Indie.Micropub.Handler do
     case Akedia.Indie.Token.verify(access_token, nil, token_endpoint) do
       :ok ->
         response = %{
-          "syndicate-to": [
-            %{
-              "uid" => "https://fed.brid.gy",
-              "name" => "Brid.gy Fed"
-            }
-          ]
+          "syndicate-to": @syndication_targets
         }
 
         {:ok, response}

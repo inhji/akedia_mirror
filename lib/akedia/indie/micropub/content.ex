@@ -3,7 +3,11 @@ defmodule Akedia.Indie.Micropub.Content do
   alias Akedia.Workers
   alias Akedia.Content
 
-  def create_bookmark(title, content, url, tags, is_published) do
+  def enable_bridgy_fed?(targets) do
+    Enum.any?(targets, fn t -> t == "https://fed.brid.gy/" end)
+  end
+
+  def create_bookmark(title, content, url, tags, is_published, targets) do
     content =
       cond do
         content == "." -> nil
@@ -16,9 +20,11 @@ defmodule Akedia.Indie.Micropub.Content do
       "url" => url
     }
 
+    bridgy_fed = enable_bridgy_fed?(targets)
+
     Logger.info("Creating bookmark: #{inspect(attrs)}")
 
-    case Content.create_bookmark(attrs, %{is_published: is_published}) do
+    case Content.create_bookmark(attrs, %{is_published: is_published, bridgy_fed: bridgy_fed}) do
       {:ok, bookmark} ->
         Que.add(Workers.Favicon, bookmark)
         Akedia.Content.add_tags(bookmark, tags)
@@ -31,12 +37,13 @@ defmodule Akedia.Indie.Micropub.Content do
     end
   end
 
-  def create_like(url, is_published) do
+  def create_like(url, is_published, targets) do
     attrs = %{"url" => url}
+    bridgy_fed = enable_bridgy_fed?(targets)
 
     Logger.info("Creating like: #{inspect(attrs)}")
 
-    case Content.create_like(attrs, %{is_published: is_published}) do
+    case Content.create_like(attrs, %{is_published: is_published, bridgy_fed: bridgy_fed}) do
       {:ok, like} ->
         Que.add(Workers.Webmention, like)
         Que.add(Workers.URLScraper, like)
@@ -51,10 +58,7 @@ defmodule Akedia.Indie.Micropub.Content do
 
   def create_post(title, content, tags, reply_to, is_published, photo, targets) do
     attrs = %{"content" => content, "title" => title, "reply_to" => reply_to}
-
-    bridgy_fed =
-      targets
-      |> Enum.any?(fn t -> t == "https://fed.brid.gy/" end)
+    bridgy_fed = enable_bridgy_fed?(targets)
 
     case Content.create_post(attrs, %{is_published: is_published, bridgy_fed: bridgy_fed}) do
       {:ok, post} ->
