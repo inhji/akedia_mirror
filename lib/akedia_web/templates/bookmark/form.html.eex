@@ -70,6 +70,11 @@
         <%= checkbox ef, :is_pinned, class: "switch is-rounded" %>
         <%= label ef, :is_pinned %>
       </div>
+
+      <div class="field">
+        <%= checkbox ef, :bridgy_fed, class: "switch is-rounded" %>
+        <%= label ef, :bridgy_fed %>
+      </div>
       
     </div>
 

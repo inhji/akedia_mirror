@@ -3,7 +3,7 @@ defmodule AkediaWeb.BookmarkController do
 
   alias Akedia.Content
   alias Akedia.Content.Bookmark
-  alias Akedia.Workers.{Favicon}
+  alias Akedia.Workers.{Favicon, Webmention}
 
   def index(conn, _params) do
     bookmarks = Content.list_bookmarks(is_published: true)
@@ -24,6 +24,7 @@ defmodule AkediaWeb.BookmarkController do
     case Content.create_bookmark(bookmark_params) do
       {:ok, bookmark} ->
         Que.add(Favicon, bookmark)
+        Que.add(Webmention, bookmark)
         Content.add_tags(bookmark, topics)
 
         conn
@@ -54,6 +55,7 @@ defmodule AkediaWeb.BookmarkController do
     case Content.update_bookmark(bookmark, bookmark_params) do
       {:ok, bookmark} ->
         Que.add(Favicon, bookmark)
+        Que.add(Webmention, bookmark)
 
         conn
         |> put_flash(:info, "Bookmark updated successfully.")
