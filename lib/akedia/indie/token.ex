@@ -1,10 +1,11 @@
 defmodule Akedia.Indie.Token do
   require Logger
+  alias HTTPoison.Response
 
   def verify(access_token, required_scope, token_endpoint) do
     headers = [authorization: "Bearer #{access_token}", accept: "application/json"]
 
-    with %HTTPoison.Response{status_code: 200, body: body} <-
+    with {:ok, %Response{status_code: 200, body: body}} <-
            HTTPoison.get(token_endpoint, headers),
          {:ok, body_map} <- Jason.decode(body),
          :ok <- verify_token_response(body_map, required_scope) do
