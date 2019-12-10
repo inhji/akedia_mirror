@@ -7,6 +7,7 @@ defmodule AkediaWeb.AtomController do
 
   def index(conn, _params) do
     user = Akedia.Accounts.get_user!()
+
     feed =
       Akedia.Content.list_entities()
       |> build_feed(conn, user)
@@ -17,12 +18,17 @@ defmodule AkediaWeb.AtomController do
   end
 
   def build_feed(entities, conn, user) do
+    entries =
+      entities
+      |> Enum.map(&build_entry(&1, user))
+      |> Enum.filter(fn e -> !!e end)
+
     Feed.new(Akedia.url(), DateTime.utc_now(), "Inhji.de Homepage Feed")
     |> Feed.author(user.name, email: user.credential.email)
     |> Feed.link(Routes.atom_url(conn, :index), rel: "self", type: @content_type)
     |> Feed.link("https://inhji.superfeedr.com", rel: "hub")
     |> Feed.generator()
-    |> Feed.entries(Enum.map(entities, &build_entry(&1, user)))
+    |> Feed.entries(entries)
     |> Feed.build()
     |> Atomex.generate_document()
   end
@@ -46,6 +52,10 @@ defmodule AkediaWeb.AtomController do
     |> Entry.author(user.name, uri: Akedia.url())
     |> Entry.content(AkediaWeb.Markdown.to_html!(bookmark.content), type: "html")
     |> Entry.build()
+  end
+
+  def build_entry(_, user) do
+    nil
   end
 
   def convert_date(naive_date) do
