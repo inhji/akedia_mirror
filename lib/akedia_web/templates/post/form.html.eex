@@ -6,7 +6,6 @@
   <% end %>
 
   <div class="field">
-    <%= label f, :title, class: "label" %>
     <div class="control">
       <%= text_input f, :title,
         class: "input",
@@ -16,7 +15,6 @@
   </div>
 
   <div class="field">
-    <%= label f, :content, class: "label" %>
     <div class="zen">
       <input type="checkbox" id="zen-toggle-comment" v-model="zenActive">
       <div class="zen-backdrop">
@@ -25,7 +23,8 @@
           class: "textarea",
           rows: 10,
           "@input": "updateCharCount",
-          "@keyup.escape": "closeZen" %>
+          "@keyup.escape": "closeZen",
+          placeholder: "Compose an epic shitpost." %>
         <label for="zen-toggle-comment">Zen Mode</label>
       </div>
     </div>
@@ -97,16 +96,10 @@
 
   <div class="field">&nbsp;</div>
 
-  <div class="field is-horizontal">
-    <div class="field-label">
-      <!-- Left empty for spacing -->
-    </div>
-    <div class="field-body">
-      <div class="field">
-        <div class="control">
-          <%= submit "Save", class: "button is-success" %>
-        </div>
-      </div>
+  <div class="field">
+    <div class="control">
+      <%= submit "Save", class: "button is-success is-fullwidth" %>
     </div>
   </div>
+</div>
 <% end %>
