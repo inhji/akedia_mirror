@@ -1,5 +1,17 @@
 <footer class="footer" id="footer">
   <div class="container">
+    <p>
+      <ul>
+        <% public_profiles = Enum.filter(@current_user.profiles, fn p -> p.public end) %>
+        <%= for profile <- public_profiles do %>
+          <li><a href="<%= profile.url %>" target="_blank" rel="<%= profile.rel_value %>" title="<%= profile.name %>">
+            <i class='<%= profile.icon || "fa-circle-o" %> fa fa-lg has-text-grey'></i>
+
+          </a></li>
+        <% end %>
+      </ul>
+    </p>
+
     <p class="has-text-grey">&copy; 2019 by <%= @current_user.name %> • Powered by <a href="https://github.com/inhji/akedia" target="_blank" rel="noreferrer">Akedia v<%= version() %></a></p>
   </div>
 </footer>

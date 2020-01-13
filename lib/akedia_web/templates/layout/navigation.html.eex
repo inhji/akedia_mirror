@@ -1,48 +1,33 @@
-<nav class="navbar is-dark is-very-dark is-fixed-top" role="navigation" aria-label="main navigation">
-	<div class="container">
-		<div class="navbar-brand">
-			<%= active_link @conn,
-					to: Routes.public_path(@conn, :index),
-					class: "navbar-item" do %>
-					<%= render "logo.html" %>
-			<% end %>
-
-			<a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="mainNav">
-				<span aria-hidden="true"></span>
-				<span aria-hidden="true"></span>
-				<span aria-hidden="true"></span>
-			</a>
-		</div>
-
-		<div id="mainNav" class="navbar-menu">
-			<div class="navbar-start">
-				<%= active_link @conn,
-						to: Routes.user_path(@conn, :show),
-						class_active: "is-active",
-						class: "navbar-item" do %>
-						<div class="image">
-							<i class="fa fa-user fa-lg"></i>
-							<span>About</span>
-						</div>
-				<% end %>
-
-				<%= if not @logged_in do %>
-					<%= link "Login", to: Routes.session_path(@conn, :new), class: "navbar-item" %>
-		    <% end %>
-			</div>
-
-			<div class="navbar-end">
-				<%= form_for @conn, Routes.search_path(@conn, :search), [method: :get, class: "navbar-item"], fn f -> %>
-			    <div class="field">
-			    	<p class="control has-icons-left">
-			    		<%= search_input f, :query, class: "input is-rounded", placeholder: "Search" %>
-			    		<span class="icon is-small is-left">
-			    			<i class="fa fa-search"></i>
-			    		</span>
-			    	</p>
-			    </div>
-			  <% end %>
-			</div>
-		</div>
-	</div>
-</nav>
+<ul id="main-nav-list">
+  <%= if @current_user do %>
+    <li>
+      <%= link to: Routes.post_path(@conn, :new) do %>   
+        <div>New</div>
+      <% end %>
+    </li>
+    <li>
+      <%= link to: Routes.user_path(@conn, :edit) do %>
+        <div>Profile</div>
+      <% end %>
+    </li>
+    <li>
+      <%= link to: Routes.session_path(@conn, :delete), method: "delete", data: [confirm: "ಥ‿ಥ\nR u sure?"] do %>
+        Logout
+      <% end %>
+    </li>
+  <% else %>
+    <%= if @has_user do %>
+      <li>
+        <%= link to: Routes.login_path(@conn, :new) do %>
+          <div>Sign In</div>
+        <% end %>
+      </li>
+    <% else %>
+      <li>
+        <%= link to: Routes.signup_path(@conn, :new) do %>
+          <div>Create account</div>
+        <% end %>
+      </li>
+    <% end %>
+  <% end %>
+</ul>

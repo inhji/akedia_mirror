@@ -10,7 +10,6 @@ $radius-slightly-rounded: 3px;
 
 // Bulma Overrides
 $body-size: 17px;
-$body-background: $grey;
 $dimensions: 16 24 32 48 64 96 128 196;
 $link: $dark;
 $family-sans-serif: "Segoe UI", "Ubuntu", "Arial", sans-serif;
@@ -39,17 +38,22 @@ $navbar-item-active-color-dark: $primary;
 @import "~bulma-divider/dist/css/bulma-divider";
 
 @import "~fork-awesome/scss/fork-awesome.scss";
-@import "~openwebicons/css/openwebicons.css";
 @import "~imagelightbox/dist/imagelightbox.min.css";
 
 @import "notification";
 @import "helpers";
 @import "tagcloud";
-@import "navbar";
-@import "masonry";
 @import "article";
 @import "prism";
 @import "zen";
+
+@font-face {
+    font-family: 'Cabin Sketch';
+    src: url('../fonts/cabinsketch-regular-webfont.woff2') format('woff2'),
+         url('../fonts/cabinsketch-regular-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
 
 .content {
   .tag, .number {
@@ -67,6 +71,64 @@ $navbar-item-active-color-dark: $primary;
   }
 }
 
+.container {
+  max-width: 40rem;
+  margin: 0 auto;
+  padding: 1.5rem 1rem;
+}
+
+.main-nav {
+  background: white;
+  padding: 0;
+
+  ul {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: left;
+    list-style: none;
+  }
+  a {
+    padding: 1rem 1rem;
+    font-size: 1.3rem;
+    max-width: 140px;
+    font-weight: 300;
+    text-decoration: none;
+    display: flex;
+    align-items: flex-start;
+    color: #333;
+    &:hover, &:focus {
+      background: #efefef;
+      color: $blue;
+      svg {
+        fill: green; 
+      }
+      span {
+        color: black; 
+      }
+    }
+  }
+}
+
+@media (min-width: 1000px) {
+  .main-nav {
+    a {
+      max-width: 500px;
+      font-size: 1.5rem; 
+    }
+  }
+}
+
+.navigation {
+  border-bottom: solid 1px #dddddd;
+}
+
+.profile {
+  background-color: #efefef;
+  border-bottom: solid 1px #dddddd;
+}
+
 // @import "debug";
 
 ::-moz-selection { background: $primary; color: $white; }
@@ -77,12 +139,67 @@ $navbar-item-active-color-dark: $primary;
 body {
   width: 100%;
   height: 100%;
-  background: $body-background;
 
-  background-image: url("/images/bg.jpg");
-  background-size: auto 1000px;
-  background-repeat: repeat;
-  background-attachment: fixed;
+  font-family: "Helvetica", "Arial", sans-serif;
+
+  line-height: 1.5;
+  margin: 0;
+  padding: 0;
+
+  color: #566b78;
+}
+
+header {
+  background: #efefef;
+  border-bottom: solid 1px #dddddd;
+
+  .logo {
+    padding: 0 0.7rem;
+    display: inline-block;
+    height: 4rem;
+    width: 100%;
+
+    h1.title {
+      font-family: 'Cabin Sketch', cursive;
+      line-height: 4rem;
+      margin-left: 100px;
+      text-transform: uppercase;
+      font-size: 3rem;
+      color: #bbb;
+    }
+
+    h1,
+    h2,
+    strong {
+      color: #333;
+    }
+
+    h2 {
+      margin-top: 1em;
+      padding-top: 1em;
+    }
+
+    .image {
+      position: absolute;
+
+      img {
+        position: relative;
+        text-align: center;
+        width: 120px;
+
+        animation-name: hovering;
+        animation-duration: 3s;
+        animation-iteration-count: infinite;
+      }
+    }
+  }
+}
+
+@keyframes hovering {
+    0% { top: 0; }
+    30% { top: 2px; }
+    60% { top: 0 }
+    100% { top: 0; }
 }
 
 body#admin {
@@ -162,29 +279,6 @@ nav.main-nav {
     font-size: 1rem;
     min-width: 200px;
   }
-}
-
-#admin-sidebar {
-  background-color: $white-ter;
-
-
-
-  .menu-label {
-    color: $light;
-    font-weight: normal;
-    border-radius: $radius-slightly-rounded;
-    text-transform: none;
-  }
-
-  .menu-list li a {
-    border-radius: $radius-slightly-rounded;
-  }
-
-  #label-create { background-color: $success; }
-  #label-content { background-color: $info; }
-  #label-indie { background-color: $warning; color: $dark; }
-  #label-user { background-color: $primary; }
-  #label-settings { background-color: $danger; }
 }
 
 .weather {
