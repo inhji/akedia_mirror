@@ -16,7 +16,10 @@ import Dailychart from 'dailychart'
 import "imagelightbox"
 import "phoenix_html"
 
+import "./new_post.js"
 import "./webauthn/login.js"
+import "./webauthn/register.js"
+
 import Skycons from '../vendor/skycons.js'
 
 // Register Service Worker
