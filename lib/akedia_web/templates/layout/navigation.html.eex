@@ -1,5 +1,5 @@
 <ul id="main-nav-list">
-  <%= if @current_user do %>
+  <%= if @logged_in do %>
     <li>
       <%= link to: Routes.post_path(@conn, :new) do %>   
         <div>New</div>
