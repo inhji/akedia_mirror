@@ -15,6 +15,7 @@
       </nav>    
     </section>
 
+    <%= if @conn.request_path == "/" do %>
     <div class="profile">
       <div class="container">
         <%= render SharedView, "hcard.html", assigns %>
@@ -26,6 +27,7 @@
         <% end %>
       </div>
     </div>
+    <% end %>
 
     <main class="is-paddingless" id="content">
       <div class="container">
