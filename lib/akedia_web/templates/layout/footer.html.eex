@@ -10,5 +10,4 @@
   </ul>
 </p>
 
-<p class="has-text-grey">&copy; 2019 by <%= @current_user.name %> • Powered by <a href="https://github.com/inhji/akedia" target="_blank" rel="noreferrer">Akedia v<%= version() %></a></p>
-
+<p class="info clearfix has-text-grey">&copy; 2019 by <%= @current_user.name %> • Powered by <a href="https://github.com/inhji/akedia" target="_blank" rel="noreferrer">Akedia v<%= version() %></a></p>

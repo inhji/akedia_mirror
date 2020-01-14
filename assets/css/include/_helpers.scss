@@ -38,6 +38,10 @@
   color: $secondary;
 }
 
+.clearfix {
+  clear: both;
+}
+
 @mixin prefers-scheme($scheme) {
   @media (prefers-color-scheme: $scheme) {
     @content;
