@@ -51,9 +51,7 @@ $navbar-item-active-color-dark: $primary;
 @import "~bulma-tagsinput/dist/css/bulma-tagsinput";
 @import "~bulma-switch/dist/css/bulma-switch";
 @import "~bulma-divider/dist/css/bulma-divider";
-
 @import "~fork-awesome/scss/fork-awesome.scss";
-@import "~imagelightbox/dist/imagelightbox.min.css";
 
 @import "include/notification";
 @import "include/helpers";
@@ -61,6 +59,7 @@ $navbar-item-active-color-dark: $primary;
 @import "include/article";
 @import "include/prism";
 @import "include/zen";
+@import "include/lightbox";
 
 // $$$$$$$\                                
 // $$  __$$\                               
@@ -245,6 +244,10 @@ footer#footer {
 // $$ |  $$\ $$ |  $$ |$$ |  $$ | $$ |$$\ $$   ____|$$ |  $$ | $$ |$$\ 
 // \$$$$$$  |\$$$$$$  |$$ |  $$ | \$$$$  |\$$$$$$$\ $$ |  $$ | \$$$$  |
 //  \______/  \______/ \__|  \__|  \____/  \_______|\__|  \__|  \____/ 
+
+main#content {
+  background: url(/images/bg.jpg);
+}
 
 .content {
   .tag, .number {

@@ -2,10 +2,15 @@
   <%= if @post.entity.image do %>
   <div class="card-image">
     <figure class="image">
-      <a href="<%= image_url(@post.entity.image, :original) %>" data-imagelightbox="x">
+      <a href="#<%= @post.id %>">
         <img class="u-photo" src="<%= image_url(@post.entity.image, :wide) %>" alt="<%= @post.content_sanitized %>">
       </a>
     </figure>
+    
+    <!-- Hidden Lightbox Image -->
+    <a href="#_" class="lightbox" id="<%= @post.id %>">
+      <img src="<%= image_url(@post.entity.image, :original) %>">
+    </a>
   </div>
   <% end %>
   <div class="card-content">

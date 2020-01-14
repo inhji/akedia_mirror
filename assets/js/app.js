@@ -9,10 +9,8 @@ import appCss from "../css/app.scss"
 //
 // Import dependencies
 //
-import $ from "jquery"
 import Prism from 'prismjs'
 
-import "imagelightbox"
 import "phoenix_html"
 
 import "./new_post.js"
@@ -24,21 +22,14 @@ import Skycons from '../vendor/skycons.js'
 // Register Service Worker
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('/sw.js')
-    .then(function(reg){
-      console.debug("Service worker registered.");
-   }).catch(function(err) {
-      console.error("Service worker not registered. This happened:", err)
-  });
+    .catch(function(err) {
+        console.error("Service worker not registered. This happened:", err)
+    });
 }
 
-$(function() {
+document.addEventListener("DOMContentLoaded", function () {
   // Highlight Syntax
   Prism.highlightAll()
-
-  $('a[data-imagelightbox="x"]').imageLightbox({
-    overlay:true,
-    caption: true
-  });
 
   // Get all "navbar-burger" elements
   const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
