@@ -1,4 +1,3 @@
-
 <section class="posts h-feed">
 <%= for entity <- @entities do %>
   <%= if entity.bookmark do %>

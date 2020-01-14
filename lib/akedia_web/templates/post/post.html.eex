@@ -1,4 +1,4 @@
-<section class="card post h-entry">
+<article class="card post h-entry">
   <%= if @post.entity.image do %>
   <div class="card-image">
     <figure class="image">
@@ -8,7 +8,7 @@
     </figure>
   </div>
   <% end %>
-  <article class="card-content post">
+  <div class="card-content">
     <div class="media">
       <figure class="media-left">
         <p class="image is-48x48 is-rounded">
@@ -49,5 +49,5 @@
             current_user: @current_user %>
       </div>
     </div>
-  </article>
-</section>
+  </div>
+</article>
