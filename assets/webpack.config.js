@@ -28,8 +28,8 @@ module.exports = (env, options) => ({
     splitChunks: {
       cacheGroups: {
         commonStyles: {
-          name: 'common',
-          test: (m, c, entry = 'common') =>
+          name: 'app',
+          test: (m, c, entry = 'app') =>
             m.constructor.name === 'CssModule' && recursiveIssuer(m) === entry,
           chunks: 'all',
           enforce: true,
@@ -43,7 +43,7 @@ module.exports = (env, options) => ({
     }
   },
   entry: {
-    common: './js/common.js'
+    app: './js/app.js'
   },
   output: {
     filename: '[name].js',
