@@ -18,7 +18,7 @@
   <% else %>
     <%= if @has_user do %>
       <li>
-        <%= link to: Routes.login_path(@conn, :new) do %>
+        <%= link to: Routes.session_path(@conn, :new) do %>
           <div>Sign In</div>
         <% end %>
       </li>

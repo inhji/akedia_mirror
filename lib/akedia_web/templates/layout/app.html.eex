@@ -2,16 +2,10 @@
 <html lang="en">
   <%= render "head.html", assigns %>
 
-  <body>
-    
-    <header>
+  <body>  
+    <header class="header">
       <div class="container">
-        <a href="/" class="logo">
-          <span class="image">
-            <img src="<%= Routes.static_path(@conn, "/images/cloud.png") %>"/>
-          </span>
-          <h1 class="title">inhji.de</h1>
-        </a>
+        <%= render "header.html", assigns %>
       </div>
     </header>
 
@@ -24,24 +18,30 @@
     <div class="profile">
       <div class="container">
         <%= render SharedView, "hcard.html", assigns %>
+        
+        <hr />
+
+        <%= if @current_user do %>
+          <a href="<%= Routes.profile_path(@conn, :index) %>" class="button is-info">Profiles</a>
+        <% end %>
       </div>
     </div>
 
-    <div class="section">
+    <main class="is-paddingless" id="content">
       <div class="container">
-        <main class=' is-paddingless' id="content">
-          <p class="notification is-info" role="alert"><%= get_flash(@conn, :info) %></p>
-          <p class="notification is-danger" role="alert"><%= get_flash(@conn, :error) %></p>
-          <%= render @view_module, @view_template, assigns %>
-        </main>
+        <p class="notification is-info" role="alert"><%= get_flash(@conn, :info) %></p>
+        <p class="notification is-danger" role="alert"><%= get_flash(@conn, :error) %></p>
+        <%= render @view_module, @view_template, assigns %>
       </div>
-    </div>
+    </main>
 
-    <section class="section is-paddingless">
-      <%= render "footer.html", assigns %>
-    </section>
+    <footer class="footer is-paddingless" id="footer">
+      <div class="container">
+        <%= render "footer.html", assigns %>
+      </div>
+    </footer>
 
-    <script type="text/javascript" src="<%= Routes.static_path(@conn, "/js/common.js") %>"></script>
+    <script type="text/javascript" src="<%= Routes.static_path(@conn, "/js/app.js") %>"></script>
 
     <!-- View Specific Scripts -->
     <%= render_existing(@view_module, "scripts." <> @view_template, assigns) ||
