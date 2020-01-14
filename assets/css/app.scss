@@ -1,5 +1,20 @@
 @charset "UTF-8";
 
+// Ascii Art created with: 
+// http://www.patorjk.com/software/taag/#p=display&f=Big%20Money-nw&t=Base
+
+//  $$$$$$\                       $$$$$$\  $$\           
+// $$  __$$\                     $$  __$$\ \__|          
+// $$ /  \__| $$$$$$\  $$$$$$$\  $$ /  \__|$$\  $$$$$$\  
+// $$ |      $$  __$$\ $$  __$$\ $$$$\     $$ |$$  __$$\ 
+// $$ |      $$ /  $$ |$$ |  $$ |$$  _|    $$ |$$ /  $$ |
+// $$ |  $$\ $$ |  $$ |$$ |  $$ |$$ |      $$ |$$ |  $$ |
+// \$$$$$$  |\$$$$$$  |$$ |  $$ |$$ |      $$ |\$$$$$$$ |
+//  \______/  \______/ \__|  \__|\__|      \__| \____$$ |
+//                                             $$\   $$ |
+//                                             \$$$$$$  |
+//                                              \______/ 
+
 // Custom Variables
 $layout-width: 600px;
 $secondary: #D1001F;
@@ -40,12 +55,28 @@ $navbar-item-active-color-dark: $primary;
 @import "~fork-awesome/scss/fork-awesome.scss";
 @import "~imagelightbox/dist/imagelightbox.min.css";
 
-@import "notification";
-@import "helpers";
-@import "tagcloud";
-@import "article";
-@import "prism";
-@import "zen";
+@import "include/notification";
+@import "include/helpers";
+@import "include/tagcloud";
+@import "include/article";
+@import "include/prism";
+@import "include/zen";
+
+// $$$$$$$\                                
+// $$  __$$\                               
+// $$ |  $$ | $$$$$$\   $$$$$$$\  $$$$$$\  
+// $$$$$$$\ | \____$$\ $$  _____|$$  __$$\ 
+// $$  __$$\  $$$$$$$ |\$$$$$$\  $$$$$$$$ |
+// $$ |  $$ |$$  __$$ | \____$$\ $$   ____|
+// $$$$$$$  |\$$$$$$$ |$$$$$$$  |\$$$$$$$\ 
+// \_______/  \_______|\_______/  \_______|                                        
+
+// @import "debug";
+
+::-moz-selection { background: $primary; color: $white; }
+::selection { background: $primary; color: $white; }
+
+* { box-sizing: border-box; }
 
 @font-face {
     font-family: 'Cabin Sketch';
@@ -54,87 +85,6 @@ $navbar-item-active-color-dark: $primary;
     font-weight: normal;
     font-style: normal;
 }
-
-.content {
-  .tag, .number {
-    display: inline;
-    padding: inherit;
-    font-size: inherit;
-    line-height: inherit;
-    text-align: inherit;
-    vertical-align: inherit;
-    border-radius: inherit;
-    font-weight: inherit;
-    white-space: inherit;
-    background: inherit;
-    margin: inherit;
-  }
-}
-
-.container {
-  max-width: 40rem;
-  margin: 0 auto;
-  padding: 1.5rem 1rem;
-}
-
-.main-nav {
-  background: white;
-  padding: 0;
-
-  ul {
-    margin: 0;
-    padding: 0;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: left;
-    list-style: none;
-  }
-  a {
-    padding: 1rem 1rem;
-    font-size: 1.3rem;
-    max-width: 140px;
-    font-weight: 300;
-    text-decoration: none;
-    display: flex;
-    align-items: flex-start;
-    color: #333;
-    &:hover, &:focus {
-      background: #efefef;
-      color: $blue;
-      svg {
-        fill: green; 
-      }
-      span {
-        color: black; 
-      }
-    }
-  }
-}
-
-@media (min-width: 1000px) {
-  .main-nav {
-    a {
-      max-width: 500px;
-      font-size: 1.5rem; 
-    }
-  }
-}
-
-.navigation {
-  border-bottom: solid 1px #dddddd;
-}
-
-.profile {
-  background-color: #efefef;
-  border-bottom: solid 1px #dddddd;
-}
-
-// @import "debug";
-
-::-moz-selection { background: $primary; color: $white; }
-::selection { background: $primary; color: $white; }
-
-* { box-sizing: border-box; }
 
 body {
   width: 100%;
@@ -148,6 +98,21 @@ body {
 
   color: #566b78;
 }
+
+.container {
+  max-width: 40rem;
+  margin: 0 auto;
+  padding: 1.5rem 1rem;
+}
+
+// $$\   $$\                           $$\                     
+// $$ |  $$ |                          $$ |                    
+// $$ |  $$ | $$$$$$\   $$$$$$\   $$$$$$$ | $$$$$$\   $$$$$$\  
+// $$$$$$$$ |$$  __$$\  \____$$\ $$  __$$ |$$  __$$\ $$  __$$\ 
+// $$  __$$ |$$$$$$$$ | $$$$$$$ |$$ /  $$ |$$$$$$$$ |$$ |  \__|
+// $$ |  $$ |$$   ____|$$  __$$ |$$ |  $$ |$$   ____|$$ |      
+// $$ |  $$ |\$$$$$$$\ \$$$$$$$ |\$$$$$$$ |\$$$$$$$\ $$ |      
+// \__|  \__| \_______| \_______| \_______| \_______|\__|    
 
 header {
   background: #efefef;
@@ -202,8 +167,81 @@ header {
     100% { top: 0; }
 }
 
-body#admin {
-  background: $white;
+.main-nav {
+  background: white;
+  padding: 0;
+
+  ul {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: left;
+    list-style: none;
+  }
+  a {
+    padding: 1rem 1rem;
+    font-size: 1.3rem;
+    max-width: 140px;
+    font-weight: 300;
+    text-decoration: none;
+    display: flex;
+    align-items: flex-start;
+    color: #333;
+    &:hover, &:focus {
+      background: #efefef;
+      color: $blue;
+      svg {
+        fill: green; 
+      }
+      span {
+        color: black; 
+      }
+    }
+  }
+}
+
+@media (min-width: 1000px) {
+  .main-nav {
+    a {
+      max-width: 500px;
+      font-size: 1.5rem; 
+    }
+  }
+}  
+
+.navigation {
+  border-bottom: solid 1px #dddddd;
+}
+
+.profile {
+  background-color: #efefef;
+  border-bottom: solid 1px #dddddd;
+}
+
+//  $$$$$$\                       $$\                          $$\     
+// $$  __$$\                      $$ |                         $$ |    
+// $$ /  \__| $$$$$$\  $$$$$$$\ $$$$$$\    $$$$$$\  $$$$$$$\ $$$$$$\   
+// $$ |      $$  __$$\ $$  __$$\\_$$  _|  $$  __$$\ $$  __$$\\_$$  _|  
+// $$ |      $$ /  $$ |$$ |  $$ | $$ |    $$$$$$$$ |$$ |  $$ | $$ |    
+// $$ |  $$\ $$ |  $$ |$$ |  $$ | $$ |$$\ $$   ____|$$ |  $$ | $$ |$$\ 
+// \$$$$$$  |\$$$$$$  |$$ |  $$ | \$$$$  |\$$$$$$$\ $$ |  $$ | \$$$$  |
+//  \______/  \______/ \__|  \__|  \____/  \_______|\__|  \__|  \____/ 
+
+.content {
+  .tag, .number {
+    display: inline;
+    padding: inherit;
+    font-size: inherit;
+    line-height: inherit;
+    text-align: inherit;
+    vertical-align: inherit;
+    border-radius: inherit;
+    font-weight: inherit;
+    white-space: inherit;
+    background: inherit;
+    margin: inherit;
+  }
 }
 
 .media {
@@ -211,10 +249,6 @@ body#admin {
     .image {
       text-align: center;
     }
-  }
-
-  .media-content {
-    overflow: auto;
   }
 }
 
