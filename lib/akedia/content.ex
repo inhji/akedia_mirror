@@ -35,7 +35,8 @@ defmodule Akedia.Content do
   def list_entities_paginated(params) do
     query =
       from entity in entity_query(),
-        where: [is_published: true]
+        where: [is_published: true],
+        preload: [context: [:author]]
 
     Repo.paginate(query, params)
   end

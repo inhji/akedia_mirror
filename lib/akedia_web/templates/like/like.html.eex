@@ -3,7 +3,11 @@
     <div class="media">
       <figure class="media-left">
         <p class="image is-48x48">
-          <i class="fa fa-heart fa-3x has-text-secondary"></i>
+          <%= if @like.entity.context do %>
+            <img src="<%= @like.entity.context.author.photo %>">
+          <% else %>
+            <i class="fa fa-heart fa-3x has-text-secondary"></i>
+          <% end %>
         </p>
       </figure>
       <div class="media-content">
@@ -18,11 +22,18 @@
           </time>
         </small>
 
+        <%= if @like.entity.context do %>
+        <h3 class="is-size-4">
+          <%= raw(@like.entity.context.content_html) %>
+        </h3>
+        <% else %>
         <h3 class="is-size-4">
           <a href="<%= @like.url %>" class="u-like-of h-cite p-name">
             <%= @like.title || @like.url %>
           </a>
         </h3>
+        <% end %>
+
         <div class="content"></div>
         <%= render SharedView, "post/post_meta.html",
             conn: @conn,
