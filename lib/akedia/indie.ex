@@ -1,7 +1,7 @@
 defmodule Akedia.Indie do
   import Ecto.Query, warn: false
   alias Akedia.Repo
-  alias Akedia.Indie.Author
+  alias Akedia.Indie.{Author, Context}
 
   def config(key, default) do
     config = Application.get_env(:akedia, Akedia.Indie)
@@ -20,8 +20,7 @@ defmodule Akedia.Indie do
   end
 
   def get_author_by_url(url) do
-    Author
-    |> Repo.get_by(url: url)
+    Author |> Repo.get_by(url: url)
   end
 
   def create_author(attrs \\ %{}) do
@@ -47,6 +46,32 @@ defmodule Akedia.Indie do
 
       author ->
         {:ok, author}
+    end
+  end
+
+  def get_context_by_url(url) do
+    Context |> Repo.get_by(url: url)
+  end
+
+  def create_context(attrs \\ %{}) do
+    %Context{}
+    |> Context.changeset(attrs)
+    |> Repo.insert()
+  end
+
+  def maybe_create_context(%{url: url} = context) do
+    case get_context_by_url(url) do
+      nil ->
+        case create_context(context) do
+          {:ok, context} ->
+            {:ok, context}
+
+          {:error, error} ->
+            {:error, error}
+        end
+
+      context ->
+        {:ok, context}
     end
   end
 end

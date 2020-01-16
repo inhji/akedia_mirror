@@ -7,16 +7,31 @@ defmodule Akedia.Workers.Context do
     {:ok, %{items: [item]}} = Akedia.Indie.Microformats.fetch(url)
 
     [author] = get_in(item, [:properties, :author])
+    [content_map] = get_in(item, [:properties, :content])
+    [published_at] = get_in(item, [:properties, :published])
+    [url] = get_in(item, [:properties, :url])
 
     %{
       name: [name],
       photo: [photo],
-      url: [url]
+      url: [author_url]
     } = author.properties
 
-    Akedia.Indie.maybe_create_author(%{
-      name: name,
-      photo: photo,
+    %{html: content_html, text: content} = content_map
+
+    {:ok, author} =
+      Akedia.Indie.maybe_create_author(%{
+        name: name,
+        photo: photo,
+        url: author_url
+      })
+
+    Akedia.Indie.maybe_create_context(%{
+      content: content,
+      content_html: content_html,
+      author_id: author.id,
+      entity_id: entity.id,
+      published_at: published_at,
       url: url
     })
   end

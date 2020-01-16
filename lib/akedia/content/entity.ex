@@ -20,6 +20,7 @@ defmodule Akedia.Content.Entity do
 
     has_many :syndications, Syndication
     has_many :mentions, Akedia.Mentions.Mention
+    has_one :context, Akedia.Indie.Context
 
     timestamps()
   end
