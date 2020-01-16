@@ -6,7 +6,7 @@ defmodule Akedia.Repo.Migrations.CreateIndieContexts do
       add :content, :text
       add :content_html, :text
       add :url, :string
-      add :published_at, :date
+      add :published_at, :naive_datetime
       add :author_id, references(:indie_authors, on_delete: :nothing)
       add :entity_id, references(:entities, on_delete: :delete_all)
 

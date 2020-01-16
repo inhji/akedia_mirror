@@ -49,6 +49,11 @@ defmodule Akedia.Indie do
     end
   end
 
+  def get_context!(id) do
+    Context
+    |> Repo.get!(id)
+  end
+
   def get_context_by_url(url) do
     Context |> Repo.get_by(url: url)
   end
@@ -73,5 +78,9 @@ defmodule Akedia.Indie do
       context ->
         {:ok, context}
     end
+  end
+
+  def delete_context(%Context{} = context) do
+    Repo.delete(context)
   end
 end
