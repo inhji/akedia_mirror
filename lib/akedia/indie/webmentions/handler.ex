@@ -1,6 +1,7 @@
 defmodule Akedia.Indie.Webmentions.Handler do
   @behaviour AkediaWeb.Plugs.PlugWebmention.HandlerBehaviour
   alias Akedia.Mentions
+  alias Akedia.Indie
 
   require Logger
 
@@ -9,7 +10,7 @@ defmodule Akedia.Indie.Webmentions.Handler do
     Logger.info("Receiving webmention from webmention.io!")
     Logger.info("Target: #{target}")
 
-    with {:ok, author} <- maybe_create_author(post.author),
+    with {:ok, author} <- Akedia.Indie.maybe_create_author(post.author),
          {:ok, schema} <- Akedia.get_post_by_url(target) do
       entity_id = schema.entity.id
 
@@ -67,26 +68,6 @@ defmodule Akedia.Indie.Webmentions.Handler do
       "in-reply-to" -> Map.put(result, :in_reply_to, Map.get(post, :"in-reply-to"))
       "like-of" -> Map.put(result, :like_of, Map.get(post, :"like-of"))
       "repost-of" -> Map.put(result, :repost_of, Map.get(post, :"repost-of"))
-    end
-  end
-
-  def maybe_create_author(author) do
-    author =
-      if author.url == "" do
-        Map.put(author, :url, "https://example.com")
-      else
-        author
-      end
-
-    case Mentions.get_author_by_url(author.url) do
-      nil ->
-        case Mentions.create_author(author) do
-          {:ok, author} -> {:ok, author}
-          {:error, error} -> {:error, error}
-        end
-
-      author ->
-        {:ok, author}
     end
   end
 end

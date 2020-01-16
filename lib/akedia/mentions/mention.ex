@@ -16,7 +16,7 @@ defmodule Akedia.Mentions.Mention do
     field :url, :string
     field :wm_property, :string
 
-    belongs_to :author, Akedia.Mentions.Author
+    belongs_to :author, Akedia.Indie.Author
     belongs_to :entity, Akedia.Content.Entity
 
     timestamps()
