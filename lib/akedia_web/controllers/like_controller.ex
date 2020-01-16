@@ -24,6 +24,7 @@ defmodule AkediaWeb.LikeController do
       {:ok, like} ->
         Que.add(Akedia.Workers.Webmention, like)
         Que.add(Akedia.Workers.URLScraper, like)
+        Que.add(Akedia.Workers.Context, like)
 
         conn
         |> put_flash(:info, "Like created successfully.")

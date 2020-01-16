@@ -47,6 +47,7 @@ defmodule Akedia.Indie.Micropub.Content do
       {:ok, like} ->
         Que.add(Workers.Webmention, like)
         Que.add(Workers.URLScraper, like)
+        Que.add(Workers.Context, like)
         Logger.info("Like created!")
         {:ok, :created, Akedia.url(like)}
 
