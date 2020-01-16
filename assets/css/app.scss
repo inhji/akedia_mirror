@@ -99,7 +99,7 @@ body {
 }
 
 .container {
-  max-width: 40rem;
+  max-width: 50rem;
   margin: 0 auto;
   padding: 1.5rem 1rem;
 }
@@ -249,6 +249,12 @@ main#content {
   background: url(/images/bg.jpg);
 }
 
+article.post, 
+article.bookmark, 
+article.like {
+  margin-bottom: 3rem;
+}
+
 .content {
   .tag, .number {
     display: inline;
@@ -306,14 +312,6 @@ main#content {
 svg.emoji-icon {
   width: 1rem;
   height: 1rem;
-}
-
-.card {
-  margin-bottom: 1rem;
-
-  &> .card-content > article {
-    margin-bottom: 0;
-  }
 }
 
 .intro {

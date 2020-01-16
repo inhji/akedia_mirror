@@ -1,5 +1,5 @@
-<div class="card">
-  <article class="card-content bookmark h-entry">
+<article class="card bookmark h-entry">
+  <div class="card-content">
     <div class="media">
       <figure class="media-left">
         <p class="image is-48x48">
@@ -38,5 +38,5 @@
             current_user: @current_user %>
       </div>
     </div>
-  </article>
-</div>
+  </div>
+</article>
