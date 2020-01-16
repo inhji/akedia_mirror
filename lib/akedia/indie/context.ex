@@ -5,7 +5,7 @@ defmodule Akedia.Indie.Context do
   schema "indie_contexts" do
     field :content, :string
     field :content_html, :string
-    field :published_at, :date
+    field :published_at, :naive_datetime
     field :url, :string
 
     belongs_to :author, Akedia.Indie.Author

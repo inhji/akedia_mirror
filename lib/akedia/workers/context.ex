@@ -26,12 +26,14 @@ defmodule Akedia.Workers.Context do
         url: author_url
       })
 
+    IO.inspect(Akedia.DateTime.to_datetime_utc(published_at))
+
     Akedia.Indie.maybe_create_context(%{
       content: content,
       content_html: content_html,
       author_id: author.id,
       entity_id: entity.id,
-      published_at: published_at,
+      published_at: Akedia.DateTime.to_datetime_utc(published_at),
       url: url
     })
   end
