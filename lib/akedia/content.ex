@@ -564,9 +564,13 @@ defmodule Akedia.Content do
         |> Kernel.struct()
         |> schema.changeset(schema_attrs)
 
-      case Repo.insert(changeset) |> Repo.preload(@preloads) do
-        {:ok, item} -> item
-        {:error, changeset} -> Repo.rollback(changeset)
+      case Repo.insert(changeset) do
+        {:ok, item} ->
+          item
+          |> Repo.preload(@preloads)
+
+        {:error, changeset} ->
+          Repo.rollback(changeset)
       end
     end)
   end
