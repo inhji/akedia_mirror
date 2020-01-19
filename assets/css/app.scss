@@ -58,6 +58,7 @@ $dimensions: 16 24 32 48 64 96 128 196;
 @import "~bulma-divider/dist/css/bulma-divider";
 @import "~fork-awesome/scss/fork-awesome.scss";
 
+@import "include/mixins";
 @import "include/notification";
 @import "include/helpers";
 @import "include/tagcloud";
@@ -101,12 +102,19 @@ $dimensions: 16 24 32 48 64 96 128 196;
 // $$ |  $$ |\$$$$$$$\ \$$$$$$$ |\$$$$$$$ |\$$$$$$$\ $$ |      
 // \__|  \__| \_______| \_______| \_______| \_______|\__|   
 
-.navbar.is-dark-purple {
-  background: $dark-purple;
+.navbar {
+  margin: 0 0.75rem;
+
+  &.is-dark-purple {
+    background: $dark-purple;
+  }
 }
 
 .profile {
-  padding: 1.5rem;
+  padding: 1.5rem 0;
+  margin: 0 1.5rem;
+
+  border-bottom: 3px solid $purple;
 
   h1 {
     color: $body-color;
