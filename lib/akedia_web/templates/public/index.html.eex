@@ -82,5 +82,11 @@
 			<%= render SharedView, "weather.html", assigns %>
 			<% end %>
 		</div>
+
+		<div class="card">
+			<div class="card-content">
+				<%= render SharedView, "tag_cloud.html", assigns %>
+			</div>
+		</div>
 	</div>
 </div>
