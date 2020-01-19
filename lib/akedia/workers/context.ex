@@ -3,7 +3,7 @@ defmodule Akedia.Workers.Context do
   use Que.Worker
   alias Akedia.Content.Like
 
-  def perform(%Like{url: url, entity: entity} = like) do
+  def perform(%Like{url: url, entity: entity} = _like) do
     case Akedia.Indie.Microformats.fetch(url) do
       {:ok, %{items: [item]}} ->
         [author] = get_in(item, [:properties, :author])

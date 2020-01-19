@@ -1,7 +1,6 @@
 defmodule Akedia.Indie.Webmentions.Handler do
   @behaviour AkediaWeb.Plugs.PlugWebmention.HandlerBehaviour
   alias Akedia.Mentions
-  alias Akedia.Indie
 
   require Logger
 

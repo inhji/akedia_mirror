@@ -4,16 +4,6 @@ defmodule AkediaWeb.Helpers.Meta do
 
   def site_title(), do: Akedia.Settings.get(:site_title)
 
-  def title(_assigns) do
-    ~E{
-      <title><%= site_title() %></title>
-    }
-  end
-
-  def title(page_title, assigns) do
-    title(assigns)
-  end
-
   def title(page_title, _assigns) when is_binary(page_title) do
     ~E{
       <title><%= page_title %> · <%= site_title() %></title>
@@ -29,6 +19,16 @@ defmodule AkediaWeb.Helpers.Meta do
       end
 
     title(page_title, assigns)
+  end
+
+  def title(_page_title, assigns) do
+    title(assigns)
+  end
+
+  def title(_assigns) do
+    ~E{
+      <title><%= site_title() %></title>
+    }
   end
 
   def admin_scripts(assigns) do

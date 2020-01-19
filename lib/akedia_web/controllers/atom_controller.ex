@@ -54,7 +54,7 @@ defmodule AkediaWeb.AtomController do
     |> Entry.build()
   end
 
-  def build_entry(_, user) do
+  def build_entry(_, _user) do
     nil
   end
 
