@@ -38,7 +38,7 @@
         </h3>
         <% end %>
 
-        <div class="content e-content <%= unless @post.title do %>p-name<% end %>">
+        <div class="content e-content <%= unless @post.title do %>p-name<% end %> has-text-light">
           <%= raw(@post.content_html) %>
         </div>
 
