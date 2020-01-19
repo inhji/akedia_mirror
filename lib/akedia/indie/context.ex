@@ -1,5 +1,6 @@
 defmodule Akedia.Indie.Context do
   use Ecto.Schema
+  use Arc.Ecto.Schema
   import Ecto.Changeset
 
   schema "indie_contexts" do
@@ -7,6 +8,7 @@ defmodule Akedia.Indie.Context do
     field :content_html, :string
     field :published_at, :naive_datetime
     field :url, :string
+    field :photo, Akedia.Media.ContextUploader.Type
 
     belongs_to :author, Akedia.Indie.Author
     belongs_to :entity, Akedia.Content.Entity
@@ -18,6 +20,7 @@ defmodule Akedia.Indie.Context do
   def changeset(context, attrs) do
     context
     |> cast(attrs, [:content, :content_html, :url, :published_at, :author_id, :entity_id])
+    |> cast_attachments(attrs, [:photo], allow_paths: true)
     |> validate_required([:content, :content_html, :url, :published_at, :author_id, :entity_id])
   end
 end

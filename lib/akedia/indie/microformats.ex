@@ -6,7 +6,7 @@ defmodule Akedia.Indie.Microformats do
       {:ok, %HTTPoison.Response{status_code: 200, body: body}} ->
         html =
           body
-          |> Floki.parse_document()
+          |> Floki.parse()
           |> Floki.raw_html()
 
         {:ok, Microformats2.parse(html, url)}

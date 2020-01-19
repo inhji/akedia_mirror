@@ -49,6 +49,12 @@ defmodule Akedia.Indie do
     end
   end
 
+  def update_author(%Author{} = author, attrs) do
+    author
+    |> Author.changeset(attrs)
+    |> Repo.update()
+  end
+
   def get_context!(id) do
     Context
     |> Repo.get!(id)
@@ -78,6 +84,12 @@ defmodule Akedia.Indie do
       context ->
         {:ok, context}
     end
+  end
+
+  def update_context(%Context{} = context, attrs) do
+    context
+    |> Context.changeset(attrs)
+    |> Repo.update()
   end
 
   def delete_context(%Context{} = context) do

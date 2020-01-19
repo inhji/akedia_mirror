@@ -69,6 +69,6 @@ defmodule AkediaWeb.LikeController do
 
     conn
     |> put_flash(:info, "Like deleted successfully.")
-    |> redirect(to: Routes.like_path(conn, :index))
+    |> redirect(to: Routes.public_path(conn, :index))
   end
 end

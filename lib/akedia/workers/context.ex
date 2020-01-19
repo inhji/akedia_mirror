@@ -22,20 +22,29 @@ defmodule Akedia.Workers.Context do
         {:ok, author} =
           Akedia.Indie.maybe_create_author(%{
             name: name,
-            photo: photo,
             url: author_url
           })
 
-        IO.inspect(Akedia.DateTime.to_datetime_utc(published_at))
+        Akedia.Indie.update_author(author, %{photo: photo})
 
-        Akedia.Indie.maybe_create_context(%{
-          content: content,
-          content_html: content_html,
-          author_id: author.id,
-          entity_id: entity.id,
-          published_at: Akedia.DateTime.to_datetime_utc(published_at),
-          url: url
-        })
+        {:ok, context} =
+          Akedia.Indie.maybe_create_context(%{
+            content: content,
+            content_html: content_html,
+            author_id: author.id,
+            entity_id: entity.id,
+            published_at: Akedia.DateTime.to_datetime_utc(published_at),
+            url: url
+          })
+
+        case OpenGraph.fetch(url) do
+          {:ok, %{image: context_photo}} ->
+            IO.inspect(context_photo)
+            Akedia.Indie.update_context(context, %{photo: context_photo})
+
+          _ ->
+            Logger.warn("Url #{url} does not contain opengraph data")
+        end
 
       _ ->
         Logger.warn("Url #{url} does not contain microformats")

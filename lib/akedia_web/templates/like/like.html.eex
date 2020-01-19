@@ -1,12 +1,19 @@
 <% has_context = !!@like.entity.context %>
 
 <article class="card like h-entry">
+  <%= if context_url(@like.entity.context) do %>
+  <div class="card-image">
+    <figure class="image">
+      <img src="<%= context_url(@like.entity.context) %>">
+    </figure>
+  </div>
+  <% end %>
   <div class="card-content">
     <div class="media">
       <figure class="media-left">
         <p class="image is-48x48">
           <%= if @like.entity.context do %>
-            <img src="<%= @like.entity.context.author.photo %>">
+            <img src="<%= author_url(@like.entity.context.author) %>">
           <% else %>
             <i class="fa fa-heart fa-3x has-text-secondary"></i>
           <% end %>
