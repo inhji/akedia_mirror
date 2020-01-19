@@ -9,15 +9,6 @@
       </nav>    
     </header>
 
-    <section class="profile">
-      <div class="columns">
-        <div class="column">
-          <%= render SharedView, "hcard.html", assigns %>
-        </div>
-        <div class="column"></div>
-      </div>
-    </section>
-
     <main class="is-paddingless" id="content">
       <p class="notification is-info" role="alert"><%= get_flash(@conn, :info) %></p>
       <p class="notification is-danger" role="alert"><%= get_flash(@conn, :error) %></p>

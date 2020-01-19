@@ -1,3 +1,12 @@
+<section class="profile">
+  <div class="columns">
+    <div class="column">
+      <%= render SharedView, "hcard.html", assigns %>
+    </div>
+    <div class="column"></div>
+  </div>
+</section>
+
 <div class="columns">
 	<%= if @logged_in do %>
 	<div class="column is-2">
