@@ -1,29 +1,75 @@
-<%= for entity <- @entities do %>	
-	<%= if entity.bookmark do %>
-	  	<%= render BookmarkView, "bookmark.html",
-	    		conn: @conn,
-	      	bookmark: entity.bookmark,
-	      	current_user: @current_user %>
+<div class="columns">
+	<%= if @logged_in do %>
+	<div class="column is-2">
+		<div class="card">
+			<div class="card-content">
+				<%= form_for @changeset, Routes.post_path(@conn, :create), fn f -> %>
+					<div class="field">
+					  <div class="control">
+					    <%= textarea f, :content,
+					    	rows: 5,
+					      class: "textarea is-small",
+					      placeholder: "content" %>
+					  </div>
+					</div>
+
+					<%= hidden_input f, :topics %>
+					
+					<%= inputs_for f, :entity, fn(ef) -> %>
+						<%= hidden_input ef, :is_published, value: "true" %>
+					<% end %>
+
+					<div class="field has-addons is-fullwidth">
+						<div class="control">
+							<%= submit "POST", class: "button is-small is-primary"  %> 
+						</div>
+						<div class="control">
+							<%= link to: Routes.post_path(@conn, :new), class: "button is-dark is-small" do %>
+								<i class="fa fa-coffee"></i>
+							<% end %>
+						</div>
+					</div>    
+				<% end %>
+			</div>
+		</div>
+	</div>
 	<% end %>
 
-	<%= if entity.post do %>
-	  	<%= render PostView, "post.html",
-	    		conn: @conn,
-	    		post: entity.post,
-	    		current_user: @current_user %>
-	<% end %>
+	<div class="column">
+		<%= for entity <- @entities do %>	
+			<%= if entity.bookmark do %>
+			  	<%= render BookmarkView, "bookmark.html",
+			    		conn: @conn,
+			      	bookmark: entity.bookmark,
+			      	current_user: @current_user %>
+			<% end %>
 
-	<%= if entity.like do %>
-	  	<%= render LikeView, "like.html",
-	    		conn: @conn,
-	    		like: entity.like,
-	    		current_user: @current_user %>
-	<% end %>
-<% end %>
+			<%= if entity.post do %>
+			  	<%= render PostView, "post.html",
+			    		conn: @conn,
+			    		post: entity.post,
+			    		current_user: @current_user %>
+			<% end %>
 
-<%= if @total_pages != 1 do %>
-	<%= pagination_links @page,
-		previous: ~E(<i class="fa fa-caret-left" aria-hidden="true"></i>),
-		next: ~E(<i class="fa fa-caret-right" aria-hidden="true"></i>)
-	%>
-<% end %>
+			<%= if entity.like do %>
+			  	<%= render LikeView, "like.html",
+			    		conn: @conn,
+			    		like: entity.like,
+			    		current_user: @current_user %>
+			<% end %>
+		<% end %>
+
+		<%= if @total_pages != 1 do %>
+			<%= pagination_links @page,
+				previous: ~E(<i class="fa fa-caret-left" aria-hidden="true"></i>),
+				next: ~E(<i class="fa fa-caret-right" aria-hidden="true"></i>)
+			%>
+		<% end %>
+	</div>
+
+	<div class="column">
+		<div class="card card-content">
+			<%= render SharedView, "weather.html", assigns %>
+		</div>
+	</div>
+</div>

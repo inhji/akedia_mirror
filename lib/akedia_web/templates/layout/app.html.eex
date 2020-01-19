@@ -2,45 +2,25 @@
 <html lang="en">
   <%= render "head.html", assigns %>
 
-  <body>  
-    <header class="header">
-      <div class="container">
-        <%= render "header.html", assigns %>
-      </div>
-    </header>
-
-    <section class="navigation">
-      <nav role="navigation" class="main-nav container" id="main-nav">
+  <body class="has-navbar-fixed-bottom">  
+    <header>
+      <nav role="navigation" class="main-nav" id="main-nav">
         <%= render "navigation.html", assigns %>
       </nav>    
+    </header>
+
+    <section class="profile">
+      <%= render SharedView, "hcard.html", assigns %>
     </section>
 
-    <%= if @conn.request_path == "/" do %>
-    <div class="profile">
-      <div class="container">
-        <%= render SharedView, "hcard.html", assigns %>
-        
-        <hr />
-
-        <%= if @current_user do %>
-          <a href="<%= Routes.profile_path(@conn, :index) %>" class="button is-info">Profiles</a>
-        <% end %>
-      </div>
-    </div>
-    <% end %>
-
     <main class="is-paddingless" id="content">
-      <div class="container">
-        <p class="notification is-info" role="alert"><%= get_flash(@conn, :info) %></p>
-        <p class="notification is-danger" role="alert"><%= get_flash(@conn, :error) %></p>
-        <%= render @view_module, @view_template, assigns %>
-      </div>
+      <p class="notification is-info" role="alert"><%= get_flash(@conn, :info) %></p>
+      <p class="notification is-danger" role="alert"><%= get_flash(@conn, :error) %></p>
+      <%= render @view_module, @view_template, assigns %>
     </main>
 
-    <footer class="footer is-paddingless" id="footer">
-      <div class="container">
-        <%= render "footer.html", assigns %>
-      </div>
+    <footer class="footer" id="footer">
+      <%= render "footer.html", assigns %>
     </footer>
 
     <script type="text/javascript" src="<%= Routes.static_path(@conn, "/js/app.js") %>"></script>

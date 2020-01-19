@@ -1,14 +1,11 @@
 <%= if logged_in?(@conn) do %>
-<div class="card tabs is-fullwidth">
+<div class="card tabs is-boxed is-fullwidth">
   <ul>
-    <%= link to: @path_helper.(@conn, :index, %{}), wrap_tag: :li do %>
-      <span><i class="fa fa-arrow-left has-text-info"></i> Back</span>
+    <%= link to: @path_helper.(@conn, :edit, @post), class: "nav-link has-text-light" do %>
+      <span><i class="fa fa-edit"></i> Edit</span>
     <% end %>
-    <%= link to: @path_helper.(@conn, :edit, @post), class: "nav-link" do %>
-      <span><i class="fa fa-edit has-text-success"></i> Edit</span>
-    <% end %>
-    <%= link to: @path_helper.(@conn, :delete, @post), method: :delete, data: [confirm: "Are you sure?"], class: "nav-link" do %>
-      <span><i class="fa fa-recycle has-text-danger"></i> Delete</span>
+    <%= link to: @path_helper.(@conn, :delete, @post), method: :delete, data: [confirm: "Are you sure?"], class: "nav-link has-text-light" do %>
+      <span><i class="fa fa-recycle"></i> Delete</span>
     <% end %>
   </ul>
 </div>

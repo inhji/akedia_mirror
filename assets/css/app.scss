@@ -16,30 +16,35 @@
 //                                              \______/ 
 
 // Custom Variables
-$layout-width: 600px;
-$secondary: #D1001F;
-
 $radius-slightly-rounded: 3px;
+
+$dark-purple: #050011;
+$purple: #4c00ff;
+
+$primary: $purple;
+$secondary: #fff;
 
 @import "~bulma/sass/utilities/_all";
 
 // Bulma Overrides
-$body-size: 17px;
+$background: $dark-purple;
+$body-color: $grey-light;
+$body-background-color: $dark-purple;
+
+
+$navbar-background-color: $dark-purple;
+$navbar-item-color: $grey-light;
+$navbar-item-hover-background-color: $dark-purple;
+
+$title-color: $grey-light;
+$subtitle-color: $grey-light;
+$link: $purple;
+
+$card-background-color: transparent;
+
+$footer-background-color: $dark-purple;
+
 $dimensions: 16 24 32 48 64 96 128 196;
-$link: $dark;
-$family-sans-serif: "Segoe UI", "Ubuntu", "Arial", sans-serif;
-$family-primary: $family-sans-serif;
-$navbar-breakpoint: $tablet;
-
-$menu-label-color: $dark;
-$menu-label-font-size: 1rem;
-$menu-label-letter-spacing: 0.07rem;
-$menu-item-hover-background-color: $grey-lighter;
-$menu-item-active-background-color: $dark;
-
-// Bulma Prefers-Dark Overrides
-$link-dark: $grey-lighter;
-$navbar-item-active-color-dark: $primary;
 
 @import "~bulma/sass/base/_all";
 @import "~bulma/sass/elements/_all";
@@ -85,24 +90,7 @@ $navbar-item-active-color-dark: $primary;
     font-style: normal;
 }
 
-body {
-  width: 100%;
-  height: 100%;
-
-  font-family: "Helvetica", "Arial", sans-serif;
-
-  line-height: 1.5;
-  margin: 0;
-  padding: 0;
-
-  color: #566b78;
-}
-
-.container {
-  max-width: 50rem;
-  margin: 0 auto;
-  padding: 1.5rem 1rem;
-}
+.container {}
 
 // $$\   $$\                           $$\                     
 // $$ |  $$ |                          $$ |                    
@@ -111,111 +99,18 @@ body {
 // $$  __$$ |$$$$$$$$ | $$$$$$$ |$$ /  $$ |$$$$$$$$ |$$ |  \__|
 // $$ |  $$ |$$   ____|$$  __$$ |$$ |  $$ |$$   ____|$$ |      
 // $$ |  $$ |\$$$$$$$\ \$$$$$$$ |\$$$$$$$ |\$$$$$$$\ $$ |      
-// \__|  \__| \_______| \_______| \_______| \_______|\__|    
+// \__|  \__| \_______| \_______| \_______| \_______|\__|   
 
-header {
-  background: #efefef;
-  border-bottom: solid 1px #dddddd;
-
-  .logo {
-    padding: 0 0.7rem;
-    display: inline-block;
-    height: 4rem;
-    width: 100%;
-
-    h1.title {
-      font-family: 'Cabin Sketch', cursive;
-      line-height: 4rem;
-      margin-left: 100px;
-      text-transform: uppercase;
-      font-size: 3rem;
-      color: #bbb;
-    }
-
-    h1,
-    h2,
-    strong {
-      color: #333;
-    }
-
-    h2 {
-      margin-top: 1em;
-      padding-top: 1em;
-    }
-
-    .image {
-      position: absolute;
-
-      img {
-        position: relative;
-        text-align: center;
-        width: 120px;
-
-        animation-name: hovering;
-        animation-duration: 3s;
-        animation-iteration-count: infinite;
-      }
-    }
-  }
-}
-
-@keyframes hovering {
-    0% { top: 0; }
-    30% { top: 2px; }
-    60% { top: 0 }
-    100% { top: 0; }
-}
-
-.main-nav {
-  background: white;
-  padding: 0;
-
-  ul {
-    margin: 0;
-    padding: 0;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: left;
-    list-style: none;
-  }
-  a {
-    padding: 1rem 1rem;
-    font-size: 1.3rem;
-    max-width: 140px;
-    font-weight: 300;
-    text-decoration: none;
-    display: flex;
-    align-items: flex-start;
-    color: #333;
-    &:hover, &:focus {
-      background: #efefef;
-      color: $blue;
-      svg {
-        fill: green; 
-      }
-      span {
-        color: black; 
-      }
-    }
-  }
-}
-
-@media (min-width: 1000px) {
-  .main-nav {
-    a {
-      max-width: 500px;
-      font-size: 1.5rem; 
-    }
-  }
-}  
-
-.navigation {
-  border-bottom: solid 1px #dddddd;
+.navbar.is-dark-purple {
+  background: $dark-purple;
 }
 
 .profile {
-  background-color: #efefef;
-  border-bottom: solid 1px #dddddd;
+  padding: 1.5rem;
+
+  h1 {
+    color: $body-color;
+  }
 }
 
 // $$$$$$$$\                   $$\                         
@@ -245,14 +140,26 @@ footer#footer {
 // \$$$$$$  |\$$$$$$  |$$ |  $$ | \$$$$  |\$$$$$$$\ $$ |  $$ | \$$$$  |
 //  \______/  \______/ \__|  \__|  \____/  \_______|\__|  \__|  \____/ 
 
-main#content {
-  background: url(/images/bg.jpg);
+#weather {
+  padding: 0.4rem;
 }
 
-article.post, 
-article.bookmark, 
-article.like {
-  margin-bottom: 3rem;
+main#content {
+  .card {
+    box-shadow: none;
+  }
+
+  article.post, 
+  article.bookmark, 
+  article.like {
+    margin-bottom: 1rem;
+
+    .post-header {
+      strong {
+        color: $title-color;
+      }
+    }
+  }
 }
 
 .content {

@@ -31,6 +31,18 @@ document.addEventListener("DOMContentLoaded", function () {
   // Highlight Syntax
   Prism.highlightAll()
 
+  // Animated Weather
+  const $weatherCanvas = document.querySelector('canvas#weather')
+  const skycons = new Skycons({ monochrome: false })
+
+  if ($weatherCanvas) {
+    const icon = $weatherCanvas.dataset["icon"]
+    const skyconsId = icon.toUpperCase().replace(/-/g, "_")
+
+    skycons.add("weather", Skycons[skyconsId])
+    skycons.play()
+  }
+
   // Get all "navbar-burger" elements
   const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
 

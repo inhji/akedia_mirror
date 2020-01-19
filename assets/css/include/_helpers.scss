@@ -1,3 +1,13 @@
+.field.has-addons.is-fullwidth {
+  .control {
+    width: 100%;
+
+    .button {
+      width: 100%;
+    }
+  }
+}
+
 .dot:before {
   content: '·';
 }

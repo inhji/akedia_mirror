@@ -1,8 +1,8 @@
 <aside class="meta">
 	<small>
-		<%= if has_meta?(@schema) do %>
 	  <%= render SharedView, "post/post_icon.html", conn: @conn, schema: @schema %>
-		<% end %>
+
+		<%= render SharedView, "post/post_date.html", conn: @conn, schema: @schema, url_helper: @url_helper %>
 
 		<%= if has_url?(@schema) do %>
 	  <%= render SharedView, "post/post_url.html", conn: @conn, schema: @schema %>

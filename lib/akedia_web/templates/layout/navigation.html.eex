@@ -1,33 +1,33 @@
-<ul id="main-nav-list">
-  <%= if @logged_in do %>
-    <li>
-      <%= link to: Routes.post_path(@conn, :new) do %>   
-        <div>New</div>
+<nav class="navbar is-dark-purple is-fixed-bottom">
+  <div class="navbar-brand">
+    <a class="navbar-item" href="/">
+      <strong>Inhji.de</strong>
+    </a>
+    <div class="navbar-burger burger" data-target="mainNav">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div>
+
+  <div id="mainNav" class="navbar-menu">
+    <div class="navbar-end">
+      <%= if not @logged_in do %>
+        <%= link "Login", to: Routes.session_path(@conn, :new), class: "navbar-item" %>
+      <% else %>
+        <%= link "User", to: Routes.user_path(@conn, :edit), class: "navbar-item" %>
+        <%= link "Logout", to: Routes.session_path(@conn, :delete), method: "delete", data: [confirm: "ಥ‿ಥ\nR u sure?"], class: "navbar-item" %>
       <% end %>
-    </li>
-    <li>
-      <%= link to: Routes.user_path(@conn, :edit) do %>
-        <div>Profile</div>
+      <%= form_for @conn, Routes.search_path(@conn, :search), [method: :get, class: "navbar-item"], fn f -> %>
+        <div class="field">
+          <p class="control has-icons-left">
+            <%= search_input f, :query, class: "input is-rounded", placeholder: "Search" %>
+            <span class="icon is-small is-left">
+              <i class="fa fa-search"></i>
+            </span>
+          </p>
+        </div>
       <% end %>
-    </li>
-    <li>
-      <%= link to: Routes.session_path(@conn, :delete), method: "delete", data: [confirm: "ಥ‿ಥ\nR u sure?"] do %>
-        Logout
-      <% end %>
-    </li>
-  <% else %>
-    <%= if @has_user do %>
-      <li>
-        <%= link to: Routes.session_path(@conn, :new) do %>
-          <div>Sign In</div>
-        <% end %>
-      </li>
-    <% else %>
-      <li>
-        <%= link to: Routes.user_path(@conn, :new) do %>
-          <div>Create account</div>
-        <% end %>
-      </li>
-    <% end %>
-  <% end %>
-</ul>
+    </div>
+  </div>
+</nav>

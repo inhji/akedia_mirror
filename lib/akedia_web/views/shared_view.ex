@@ -12,7 +12,8 @@ defmodule AkediaWeb.SharedView do
   end
 
   def has_meta?(schema) do
-    has_reply?(schema) or has_url?(schema) or has_topics?(schema)
+    # has_reply?(schema) or has_url?(schema) or has_topics?(schema)
+    true
   end
 
   def has_topics?(schema) do

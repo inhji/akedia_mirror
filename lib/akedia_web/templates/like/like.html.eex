@@ -11,16 +11,10 @@
         </p>
       </figure>
       <div class="media-content">
-        <strong><%= @current_user.name %></strong>
-        <small>liked</small>
-        <small>
-          <time class="dt-published" datetime="<%= date_iso(@like.inserted_at) %>">
-            <%= link date_fuzzy(@like.inserted_at),
-                to: Routes.like_url(@conn, :show, @like),
-                title: @like.inserted_at,
-                class: "u-url" %>
-          </time>
-        </small>
+        <div class="post-header">
+          <strong><%= @current_user.name %></strong>
+          <small>liked</small>
+        </div>       
 
         <%= if @like.entity.context do %>
         <h3 class="is-size-4">

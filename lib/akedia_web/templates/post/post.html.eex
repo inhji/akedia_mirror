@@ -21,16 +21,11 @@
         </p>
       </figure>
       <div class="media-content">
-        <strong><%= @current_user.name %></strong>
-        <small>posted</small>
-        <small>
-          <time class="dt-published" datetime="<%= date_iso(@post.inserted_at) %>">
-            <%= link date_fuzzy(@post.inserted_at),
-                to: Routes.post_url(@conn, :show, @post),
-                title: @post.inserted_at,
-                class: "u-url" %>
-          </time>
-        </small>
+        <div class="post-header">
+          <strong><%= @current_user.name %></strong>      
+          <small>posted</small>
+        </div>
+
         <%= if @post.entity.is_pinned do %>
         <small class="has-text-grey">
           <i class="fa fa-lock" title="Pinned"></i>

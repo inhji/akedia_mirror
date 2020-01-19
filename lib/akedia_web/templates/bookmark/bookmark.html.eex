@@ -13,14 +13,6 @@
       <div class="media-content">
         <strong><%= @current_user.name %></strong>
         <small>bookmarked</small>
-        <small>
-          <time class="dt-published" datetime="<%= date_iso(@bookmark.inserted_at) %>">
-            <%= link date_fuzzy(@bookmark.inserted_at),
-                to: Routes.bookmark_url(@conn, :show, @bookmark),
-                title: @bookmark.inserted_at,
-                class: "u-url" %>
-          </time>
-        </small>
 
         <h3 class="is-size-4 title">
           <a href="<%= @bookmark.url %>"

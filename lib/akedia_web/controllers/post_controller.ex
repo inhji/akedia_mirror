@@ -21,22 +21,21 @@ defmodule AkediaWeb.PostController do
   end
 
   def create(conn, %{"post" => %{"topics" => topics} = post_params}) do
+    IO.inspect(post_params)
+
     case Content.create_post(post_params) do
       {:ok, post} ->
         Content.add_tags(post, topics)
 
         Media.maybe_create_image(
-          %{
-            name: Map.get(post_params, "image", nil)
-          },
+          %{name: Map.get(post_params, "image", nil)},
           post.entity_id
         )
 
         Que.add(Akedia.Workers.Webmention, post)
 
         conn
-        |> put_flash(:info, "Post created successfully.")
-        |> redirect(to: Routes.post_path(conn, :show, post))
+        |> redirect(to: Routes.public_path(conn, :index))
 
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "new.html", changeset: changeset, tags: [])

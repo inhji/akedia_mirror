@@ -10,6 +10,10 @@ defmodule AkediaWeb.Helpers.Meta do
     }
   end
 
+  def title(page_title, assigns) do
+    title(assigns)
+  end
+
   def title(page_title, _assigns) when is_binary(page_title) do
     ~E{
       <title><%= page_title %> · <%= site_title() %></title>
@@ -19,8 +23,8 @@ defmodule AkediaWeb.Helpers.Meta do
   def title(schema, assigns) when is_map(schema) do
     page_title =
       cond do
-        schema.title -> schema.title
-        schema.content -> String.slice(schema.content, 0, 20) <> "…"
+        Map.has_key?(schema, :title) -> schema.title
+        Map.has_key?(schema, :content) -> String.slice(schema.content, 0, 20) <> "…"
         true -> "Untitled"
       end
 
