@@ -1,3 +1,5 @@
+<% has_context = !!@like.entity.context %>
+
 <article class="card like h-entry">
   <div class="card-content">
     <div class="media">
@@ -13,20 +15,22 @@
       <div class="media-content">
         <div class="post-header">
           <strong><%= @current_user.name %></strong>
-          <small>liked</small>
-        </div>       
+          <%= if has_context do %>
+            <small>liked a post by <span class="has-text-light"><%= @like.entity.context.author.name %></span></small>
+          <% else %>
+            <small>liked a post</small>
+          <% end %>
+        </div>
 
-        <%= if @like.entity.context do %>
-        <h3 class="is-size-4">
-          <%= raw(@like.entity.context.content_html) %>
+        <h3 class="is-size-4 title">
+          <%= if has_context do %>
+            <%= raw(@like.entity.context.content_html) %>
+          <% else %>
+            <a href="<%= @like.url %>" class="u-like-of h-cite p-name">
+              <%= @like.title || @like.url %>
+            </a>
+          <% end %>
         </h3>
-        <% else %>
-        <h3 class="is-size-4">
-          <a href="<%= @like.url %>" class="u-like-of h-cite p-name">
-            <%= @like.title || @like.url %>
-          </a>
-        </h3>
-        <% end %>
 
         <div class="content"></div>
         <%= render SharedView, "post/post_meta.html",

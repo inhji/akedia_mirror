@@ -154,12 +154,22 @@ main#content {
   article.like {
     margin-bottom: 1rem;
 
+    .title {
+      font-weight: normal;
+
+      a {
+        color: $grey-light;
+      }
+    }
+
     .post-header {
       strong {
         color: $title-color;
       }
     }
   }
+
+
 }
 
 .content {
@@ -175,14 +185,6 @@ main#content {
     white-space: inherit;
     background: inherit;
     margin: inherit;
-  }
-}
-
-.media {
-  .media-left {
-    .image {
-      text-align: center;
-    }
   }
 }
 
@@ -205,35 +207,6 @@ main#content {
 }
 
 .emoji-picker { z-index: 999; }
-
-.cover-container {
-  padding-top: 20rem;
-  background-size: cover;
-
-  .cover-content {
-    padding: 1.5rem 1.5rem;
-    background: rgba(255, 255, 255, 0.6);
-  }
-}
-
-svg.emoji-icon {
-  width: 1rem;
-  height: 1rem;
-}
-
-.intro {
-  padding: 10rem 0;
-  background-position: center;
-  background-size: cover;
-}
-
-nav.main-nav { 
-  ul.main-nav-list {
-    background-color: $dark;
-    font-size: 1rem;
-    min-width: 200px;
-  }
-}
 
 .weather {
   canvas#weather {

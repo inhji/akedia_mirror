@@ -20,6 +20,7 @@
             <%= @bookmark.title %>
           </a>
         </h3>
+        
         <div class="content e-content">
           <%= to_html(@bookmark) %>
         </div>
