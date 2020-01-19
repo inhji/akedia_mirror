@@ -25,6 +25,7 @@ defmodule Akedia.MixProject do
         :runtime_tools,
         :timex,
         :que,
+        :open_graph,
         :scrivener_ecto,
         :scrivener_html
       ]
@@ -58,6 +59,7 @@ defmodule Akedia.MixProject do
       {:indieweb, "~> 0.0.42"},
       {:jason, "~> 1.0"},
       {:microformats2, "0.2.1"},
+      {:open_graph, "~> 0.0.4"},
       {:phoenix, "~> 1.4.0"},
       {:phoenix_active_link, "~> 0.3.0"},
       {:phoenix_ecto, "~> 4.0"},

@@ -65,6 +65,7 @@
   "mochiweb": {:hex, :mochiweb, "2.18.0", "eb55f1db3e6e960fac4e6db4e2db9ec3602cc9f30b86cd1481d56545c3145d2e", [:rebar3], [], "hexpm"},
   "msgpax": {:hex, :msgpax, "2.2.3", "02be0be1b440a12d7e6f6c45662463d53d01a30b5bd4ab806276453b455f820a", [:mix], [{:plug, "~> 1.0", [hex: :plug, repo: "hexpm", optional: true]}], "hexpm"},
   "nimble_parsec": {:hex, :nimble_parsec, "0.5.1", "c90796ecee0289dbb5ad16d3ad06f957b0cd1199769641c961cfe0b97db190e0", [:mix], [], "hexpm"},
+  "open_graph": {:hex, :open_graph, "0.0.4", "0790882d5735286abc8391b37d2707613ecd74ebdc5340be664d3df345cd8cae", [:mix], [{:httpoison, "~> 1.5", [hex: :httpoison, repo: "hexpm", optional: false]}], "hexpm"},
   "parallel": {:hex, :parallel, "0.0.3", "d1c9a03f0fd6c85ba174938b9823db51e01a68f9f0e76e3f3e11989cbeb607e7", [:mix], [], "hexpm"},
   "parse_trans": {:hex, :parse_trans, "3.3.0", "09765507a3c7590a784615cfd421d101aec25098d50b89d7aa1d66646bc571c1", [:rebar3], [], "hexpm"},
   "phoenix": {:hex, :phoenix, "1.4.11", "d112c862f6959f98e6e915c3b76c7a87ca3efd075850c8daa7c3c7a609014b0d", [:mix], [{:jason, "~> 1.0", [hex: :jason, repo: "hexpm", optional: true]}, {:phoenix_pubsub, "~> 1.1", [hex: :phoenix_pubsub, repo: "hexpm", optional: false]}, {:plug, "~> 1.8.1 or ~> 1.9", [hex: :plug, repo: "hexpm", optional: false]}, {:plug_cowboy, "~> 1.0 or ~> 2.0", [hex: :plug_cowboy, repo: "hexpm", optional: true]}, {:telemetry, "~> 0.4", [hex: :telemetry, repo: "hexpm", optional: false]}], "hexpm"},
