@@ -69,7 +69,9 @@
 
 	<div class="column">
 		<div class="card card-content">
+			<%= if @weather do %>
 			<%= render SharedView, "weather.html", assigns %>
+			<% end %>
 		</div>
 	</div>
 </div>
