@@ -24,12 +24,18 @@ defmodule Akedia.Indie do
   end
 
   def create_author(attrs \\ %{}) do
+    IO.inspect("create_author")
+    IO.inspect(attrs)
+
     %Author{}
     |> Author.changeset(attrs)
     |> Repo.insert()
   end
 
   def maybe_create_author(%{url: url} = author) do
+    IO.inspect("maybe_create_author")
+    IO.inspect(author)
+
     author =
       if url == "" do
         Map.put(author, :url, "https://example.com")
@@ -53,6 +59,11 @@ defmodule Akedia.Indie do
     author
     |> Author.changeset(attrs)
     |> Repo.update()
+  end
+
+  def delete_author(%Author{} = author) do
+    author
+    |> Repo.delete()
   end
 
   def get_context!(id) do

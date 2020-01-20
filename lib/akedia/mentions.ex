@@ -32,6 +32,11 @@ defmodule Akedia.Mentions do
     |> Repo.update()
   end
 
+  def delete_mention(%Mention{} = mention) do
+    mention
+    |> Repo.delete()
+  end
+
   def create_or_update_mention(%{:source => source, :target => target} = attrs) do
     case get_mention(source, target) do
       nil -> create_mention(attrs)

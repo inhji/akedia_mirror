@@ -9,7 +9,10 @@ defmodule Akedia.Indie.Webmentions.Handler do
     Logger.info("Receiving webmention from webmention.io!")
     Logger.info("Target: #{target}")
 
+    IO.inspect(post)
+
     with {:ok, author} <- Akedia.Indie.maybe_create_author(post.author),
+         {:ok, author} <- Akedia.Indie.update_author(author, %{photo: post.author.photo}),
          {:ok, schema} <- Akedia.get_post_by_url(target) do
       entity_id = schema.entity.id
 
