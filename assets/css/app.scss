@@ -104,7 +104,7 @@ $dimensions: 16 24 32 48 64 96 128 196;
 // \__|  \__| \_______| \_______| \_______| \_______|\__|   
 
 .navbar {
-  margin: 0 0.75rem;
+  padding: 0 0.75rem;
 
   &.is-dark-purple {
     background: $dark-purple;
