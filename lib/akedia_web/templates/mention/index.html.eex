@@ -6,7 +6,7 @@
       <div class="media">
         <a class="media-left" href="<%= mention.author.url %>" target="_blank">
           <figure class="image is-64x64 is-rounded">
-            <img src="<%= mention.author.photo %>">
+            <img src="<%= author_url(mention.author) %>">
           </figure>
         </a>
         <div class="media-content">
