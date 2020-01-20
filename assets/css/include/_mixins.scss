@@ -5,19 +5,15 @@
 }
 
 @mixin nice-underline() {
-  @include nice-underline-helper($white)
-
-  @include prefers-scheme(dark) {
-    @include nice-underline-helper($body-background-dark)
-  }
+  @include nice-underline-helper($body-background-color)
 }
 
 @mixin nice-underline-helper($background-color) {
   text-decoration: none;
   padding: 10px 0;
-  background-image: -webkit-linear-gradient($secondary, $secondary);
-  background-image: -o-linear-gradient($secondary, $secondary);
-  background-image: linear-gradient($secondary, $secondary);
+  background-image: -webkit-linear-gradient($primary, $primary);
+  background-image: -o-linear-gradient($primary, $primary);
+  background-image: linear-gradient($primary, $primary);
   background-repeat: no-repeat;
   background-size: 100% 1px;
   background-position: center bottom 29%;

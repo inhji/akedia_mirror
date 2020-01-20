@@ -15,6 +15,7 @@
       <%= if not @logged_in do %>
         <%= link "Login", to: Routes.session_path(@conn, :new), class: "navbar-item" %>
       <% else %>
+        <%= link "Profiles", to: Routes.profile_path(@conn, :index), class: "navbar-item" %>
         <%= link "User", to: Routes.user_path(@conn, :edit), class: "navbar-item" %>
         <%= link "Logout", to: Routes.session_path(@conn, :delete), method: "delete", data: [confirm: "ಥ‿ಥ\nR u sure?"], class: "navbar-item" %>
       <% end %>

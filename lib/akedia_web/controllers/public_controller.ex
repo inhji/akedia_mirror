@@ -7,7 +7,7 @@ defmodule AkediaWeb.PublicController do
     weather = Akedia.Workers.Weather.get_weather()
     page = Akedia.Content.list_entities_paginated(params)
     post_changeset = Akedia.Content.change_post(%Akedia.Content.Post{})
-    topics = Akedia.Content.list_topics()
+    topics = Akedia.Content.list_top_topics(15)
 
     render(conn, "index.html",
       changeset: post_changeset,

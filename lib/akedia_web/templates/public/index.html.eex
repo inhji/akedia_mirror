@@ -3,7 +3,21 @@
     <div class="column">
       <%= render SharedView, "hcard.html", assigns %>
     </div>
-    <div class="column"></div>
+    <div class="column is-hidden-touch is-hidden-desktop-only"></div>
+    <div class="column">
+    	<div class="columns is-multiline is-mobile">
+    		<%= for profile <- @current_user.profiles do %>
+	    		<%= if profile.public do %>
+	    		<div class="column">
+	    			<a href="<%= profile.url %>">
+	    				<i class="<%= profile.icon %> fa-2x has-valign-middle"></i>
+	    				<span><%= profile.name %></span>
+	    			</a>
+	    		</div>
+	    		<% end %>
+    		<% end %>
+    	</div>
+    </div>
   </div>
 </section>
 
