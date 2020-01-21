@@ -10,8 +10,8 @@
 	    		<%= if profile.public do %>
 	    		<div class="column">
 	    			<a href="<%= profile.url %>">
-	    				<i class="<%= profile.icon %> fa-2x has-valign-middle"></i>
-	    				<span><%= profile.name %></span>
+	    				<i class="<%= profile.icon %> fa-2x has-valign-middle has-text-grey"></i>
+	    				<span class="has-text-grey"><%= profile.name %></span>
 	    			</a>
 	    		</div>
 	    		<% end %>
