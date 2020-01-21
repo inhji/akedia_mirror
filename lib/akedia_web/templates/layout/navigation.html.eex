@@ -19,7 +19,7 @@
         <%= link "User", to: Routes.user_path(@conn, :edit), class: "navbar-item" %>
         <%= link "Logout", to: Routes.session_path(@conn, :delete), method: "delete", data: [confirm: "ಥ‿ಥ\nR u sure?"], class: "navbar-item" %>
       <% end %>
-      <%= form_for @conn, Routes.search_path(@conn, :search), [method: :get, class: "navbar-item"], fn f -> %>
+      <%= form_for @conn, Routes.public_path(@conn, :search), [method: :get, class: "navbar-item"], fn f -> %>
         <div class="field">
           <p class="control has-icons-left">
             <%= search_input f, :query, class: "input is-rounded", placeholder: "Search" %>

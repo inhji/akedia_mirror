@@ -1,0 +1,21 @@
+<% search_results = Enum.count(@entities) %>
+
+<section class="hero is-primary is-bold card">
+  <div class="hero-body">
+    <h1 class="title">Results for "<%= @query %>"</h1>
+    <h2 class="subtitle"><%= search_results %> posts found.</h2>
+  </div>
+</section>
+
+<%= if search_results > 0 do %>
+
+<div class="card">
+  <div class="card-content">
+    <%= render "feed.html", assigns %>
+  </div>
+</div>
+
+<% end %>
+
+
+

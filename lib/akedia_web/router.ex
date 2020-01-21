@@ -32,10 +32,10 @@ defmodule AkediaWeb.Router do
 
     get "/", PublicController, :index
     get "/tagged-with/:topic", PublicController, :tagged
-    get "/about", UserController, :show
+    get "/search", PublicController, :search
 
+    get "/about", UserController, :show
     get "/topics", TopicController, :index
-    get "/search", SearchController, :search
     get "/feed", AtomController, :index
 
     resources "/bookmarks", BookmarkController, only: [:show]

@@ -31,6 +31,11 @@ defmodule AkediaWeb.PublicController do
     render(conn, "about.html", [])
   end
 
+  def search(conn, %{"query" => query}) do
+    entities = Akedia.Content.search(query)
+    render(conn, "search.html", query: query, entities: entities)
+  end
+
   def tagged(conn, %{"topic" => topic}) do
     topic = Akedia.Content.get_topic!(topic)
     topics = Akedia.Content.list_top_topics(15)
