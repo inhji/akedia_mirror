@@ -1,21 +1,24 @@
 <%= render SharedView, "nav/topic_nav.html", assigns %>
 
-<section class="hero is-light card">
+<section class="hero is-primary is-bold card">
   <div class="hero-body">
-    <div class="container">
-      <h1 class="title">
-        <%= @topic.text %> <small class="has-text-grey"><%= Enum.count(@entities) %> posts</small>
-      </h1>
-      <%= if @topic.description do %>
-      <h2 class="subtitle">
-        <%= @topic.description %>
-      </h2>
-      <% end %>
-    </div>
+    <h1 class="title">
+      <%= @topic.text %> <small class="has-text-grey"><%= Enum.count(@entities) %> posts</small>
+    </h1>
+    <%= if @topic.description do %>
+    <h2 class="subtitle">
+      <%= @topic.description %>
+    </h2>
+    <% end %>
   </div>
 </section>
 
-<%= render "feed.html",
-    conn: @conn,
-    entities: @entities,
-    current_user: @current_user %>
+<div class="columns is-desktop">
+  <div class="column">
+    <%= render "feed.html",
+        conn: @conn,
+        entities: @entities,
+        current_user: @current_user %>
+  </div>
+  <div class="column"></div>
+</div>
