@@ -3,6 +3,36 @@ defmodule Akedia.Workers.Context do
   use Que.Worker
   alias Akedia.Content.Like
 
+  def find_node_info(url) do
+    host = Akedia.HTTP.hostname(url)
+
+    case Akedia.HTTP.get_json("https://#{host}/.well-known/nodeinfo") do
+      {:ok, %{status_code: 200, body: body}} ->
+        nodeinfo_url =
+          body
+          |> Jason.decode!()
+          |> Map.get("links")
+          |> hd
+          |> Map.get("href")
+
+        {:ok, nodeinfo_url}
+
+      error ->
+        IO.inspect(error)
+        {:error, :no_nodeinfo_found}
+    end
+  end
+
+  def fetch_node_info(url) do
+    with {:ok, nodeinfo_url} <- find_node_info(url),
+         {:ok, %{status_code: 200, body: body}} <- Akedia.HTTP.get_json(nodeinfo_url),
+         {:ok, json} <- Jason.decode!(body) do
+      {:ok, json}
+    else
+      error -> error
+    end
+  end
+
   def perform(%Like{url: url, entity: entity} = _like) do
     case Akedia.Indie.Microformats.fetch(url) do
       {:ok, %{items: [item]}} ->
