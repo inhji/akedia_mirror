@@ -1,9 +1,14 @@
 defmodule Akedia.HTTP do
+  @accept_json {"Accept", "application/ld+json,application/activity+json"}
   @user_agent {"User-Agent", "Akedia/0.x (https://inhji.de)"}
   @options [follow_redirect: true]
 
   def get(url), do: HTTPoison.get(url, [@user_agent], @options)
   def get!(url), do: HTTPoison.get!(url, [@user_agent], @options)
+
+  def get_json(url) do
+    HTTPoison.get(url, [@user_agent, @accept_json], @options)
+  end
 
   def head(url), do: HTTPoison.head(url, [@user_agent], @options)
 
