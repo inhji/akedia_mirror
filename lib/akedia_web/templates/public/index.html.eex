@@ -3,7 +3,13 @@
     <div class="column">
       <%= render SharedView, "hcard.html", assigns %>
     </div>
-    <div class="column is-hidden-touch is-hidden-desktop-only"></div>
+    <div class="column is-hidden-touch is-hidden-desktop-only">
+    	<div class="card card-content">
+				<%= if @weather do %>
+				<%= render SharedView, "weather.html", assigns %>
+				<% end %>
+			</div>
+    </div>
     <div class="column">
     	<div class="columns is-multiline is-mobile">
     		<%= for profile <- @current_user.profiles do %>
@@ -31,8 +37,8 @@
 					  <div class="control">
 					    <%= textarea f, :content,
 					    	rows: 5,
-					      class: "textarea is-small",
-					      placeholder: "content" %>
+					      class: "textarea",
+					      placeholder: "To compose an epic.." %>
 					  </div>
 					</div>
 
@@ -44,11 +50,20 @@
 
 					<div class="field has-addons is-fullwidth">
 						<div class="control">
-							<%= submit "POST", class: "button is-small is-primary"  %> 
+							<button onClick="javascript:this.parent.submit()" class="button is-small is-primary" value="Post">
+								<span class="icon"><i class="fa fa-rocket"></i></span> <span class="is-hidden-desktop"> Post Now!</span> 
+							</button>
 						</div>
 						<div class="control">
-							<%= link to: Routes.post_path(@conn, :new), class: "button is-dark is-small" do %>
-								<i class="fa fa-coffee"></i>
+							<%= link to: Routes.post_path(@conn, :new), class: "button is-dark is-small", title: "New Post" do %>
+								<span class="icon"><i class="fa fa-coffee"></i></span>
+								<span class="is-hidden-desktop"> New Post!</span> 
+							<% end %>
+						</div>
+						<div class="control">
+							<%= link to: Routes.like_path(@conn, :new), class: "button is-light is-small", title: "New Like" do %>
+								<span class="icon"><i class="fa fa-heart"></i></span>
+								<span class="is-hidden-desktop"> New Like!</span> 
 							<% end %>
 						</div>
 					</div>    
@@ -70,13 +85,10 @@
 	</div>
 
 	<div class="column">
-		<div class="card card-content">
-			<%= if @weather do %>
-			<%= render SharedView, "weather.html", assigns %>
-			<% end %>
-		</div>
-
 		<div class="card">
+			<div class="card-header">
+				<div class="card-header-title">Tags</div>
+			</div>
 			<div class="card-content">
 				<%= render SharedView, "tag_cloud.html", assigns %>
 			</div>

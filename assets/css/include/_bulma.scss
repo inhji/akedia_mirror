@@ -1,0 +1,12 @@
+.card {
+  .card-header {
+    .card-header-title {
+      font-size: $card-header-title-size;
+      letter-spacing: $card-header-title-letter-spacing;
+      margin-bottom: -4rem;
+      color: white;
+      opacity: 0.2;
+      z-index: -1;
+    }
+  }
+}

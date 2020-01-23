@@ -21,6 +21,16 @@
     <%= error_tag f, :username %>
   </div>
 
+  <%= inputs_for f, :credential, fn fc -> %>
+    <div class="field">
+      <%= label fc, :email, class: "label" %>
+      <div class="control">
+        <%= text_input fc, :email, class: "input" %>
+      </div>
+      <%= error_tag fc, :email %>
+    </div>
+  <% end %>
+
   <div class="field">
     <%= label f, :tagline, class: "label" %>
     <div class="control">
@@ -92,16 +102,6 @@
       </label>
     </div>
   </div>
-
-  <%= inputs_for f, :credential, fn fc -> %>
-    <div class="field">
-      <%= label fc, :email, class: "label" %>
-      <div class="control">
-        <%= text_input fc, :email, class: "input" %>
-      </div>
-      <%= error_tag fc, :email %>
-    </div>
-  <% end %>
 
   <div class="field">
     <div class="control">

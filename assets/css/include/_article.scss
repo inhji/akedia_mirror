@@ -7,10 +7,6 @@ article {
   }
 
   .content {
-    a {
-      @include nice-underline;
-    }
-
     code, pre {
       white-space: pre-wrap; 
       word-break: break-word;

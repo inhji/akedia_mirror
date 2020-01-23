@@ -18,8 +18,9 @@
 // Custom Variables
 $radius-slightly-rounded: 3px;
 
-$dark-purple: #050011;
 $purple: #4c00ff;
+$dark-purple: #050011;
+$light-purple: #6940fb;
 
 $primary: $purple;
 $secondary: #fff;
@@ -36,12 +37,18 @@ $navbar-background-color: $dark-purple;
 $navbar-item-color: $grey-light;
 $navbar-item-hover-background-color: $dark-purple;
 
+$text: $grey-light;
+$text-strong: $grey-light;
+
 $title-color: $grey-light;
 $subtitle-color: $grey-light;
-$link: $dark;
-$link-hover: $purple;
+
+$link: $light;
+$link-hover: $light-purple;
 
 $card-background-color: transparent;
+$card-header-title-size: 3rem;
+$card-header-title-letter-spacing: 3px;
 
 $footer-background-color: $dark-purple;
 
@@ -59,6 +66,7 @@ $dimensions: 16 24 32 48 64 96 128 196;
 @import "~bulma-divider/dist/css/bulma-divider";
 @import "~fork-awesome/scss/fork-awesome.scss";
 
+@import "include/bulma";
 @import "include/mixins";
 @import "include/notification";
 @import "include/helpers";
@@ -93,6 +101,21 @@ $dimensions: 16 24 32 48 64 96 128 196;
 }
 
 .container {}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.input, .textarea, select .select {
+  color: $dark;
+  letter-spacing: 1px;
+  font-size: 1rem;
+}
+
+::placeholder {
+  color: $dark;
+  opacity: 1;
+}
 
 // $$\   $$\                           $$\                     
 // $$ |  $$ |                          $$ |                    
