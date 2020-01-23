@@ -46,7 +46,6 @@ defmodule Akedia.Indie.Micropub.Content do
     case Content.create_like(attrs, %{is_published: is_published, bridgy_fed: bridgy_fed}) do
       {:ok, like} ->
         Que.add(Workers.Webmention, like)
-        Que.add(Workers.URLScraper, like)
         Que.add(Workers.Context, like)
         Logger.info("Like created!")
         {:ok, :created, Akedia.url(like)}
