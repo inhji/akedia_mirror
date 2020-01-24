@@ -32,6 +32,14 @@
     resize: none;
     box-shadow: none;
   }
+
+  label {
+    background: $purple;
+    top: unset;
+    bottom: 0;
+    padding: 15px;
+    color: $grey-light;
+  }
 }
 
 .zen label {

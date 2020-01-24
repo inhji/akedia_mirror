@@ -13,3 +13,11 @@
     }
   }
 }
+
+.input, .textarea, select .select, .input input {
+  color: $grey-light;
+  background: $dark-purple;
+  border-color :$purple;
+  letter-spacing: 1px;
+  font-size: 1rem;
+}
