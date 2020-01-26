@@ -98,7 +98,8 @@ defmodule Akedia.MixProject do
       build: ["edeliver build release"],
       deploy: ["edeliver deploy release to production"],
       restart: ["edeliver restart production"],
-      migrate: ["edeliver migrate production"]
+      migrate: ["edeliver migrate production"],
+      d: ["run deploy.exs"]
     ]
   end
 end
