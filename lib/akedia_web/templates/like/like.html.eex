@@ -29,7 +29,7 @@
           <% end %>
         </div>
 
-        <h3 class="is-size-4 title">
+        <h3 class="is-size-4">
           <%= if has_context do %>
             <%= raw(@like.entity.context.content_html) %>
           <% else %>

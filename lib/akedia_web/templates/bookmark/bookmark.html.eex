@@ -13,15 +13,14 @@
       <div class="media-content">
         <strong><%= @current_user.name %></strong>
         <small>bookmarked</small>
-
-        <h3 class="is-size-4 title">
+        <small>
           <a href="<%= @bookmark.url %>"
             class="u-bookmark-of h-cite p-name">
             <%= @bookmark.title %>
           </a>
-        </h3>
+        </small>
         
-        <div class="content e-content">
+        <div class="content e-content is-size-4">
           <%= to_html(@bookmark) %>
         </div>
         <%= render SharedView, "post/post_meta.html",
