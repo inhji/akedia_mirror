@@ -13,7 +13,7 @@
     </h1>
 
     <p class="content p-note">
-      <%= @current_user.tagline %>
+      <%= to_html(@current_user.tagline) %>
     </p>
   </div>
 </aside>
