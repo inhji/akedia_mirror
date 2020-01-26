@@ -7,9 +7,9 @@
   </div>
 </section>
 
-<div class="columns">
+<div class="columns is-desktop">
 	<%= if @logged_in do %>
-	<div class="column is-2">
+	<div class="column is-one-quarter-desktop">
 		<div class="card">
 			<div class="card-content">
 				<%= form_for @changeset, Routes.post_path(@conn, :create), fn f -> %>
@@ -20,7 +20,7 @@
 					      <%= textarea f, :content,
 					        id: "content-area",
 					        class: "textarea",
-					        rows: 10,
+					        rows: 3,
 					        "@input": "updateCharCount",
 					        "@keyup.escape": "closeZen",
 					        placeholder: "Compose an epic shitpost." %>
