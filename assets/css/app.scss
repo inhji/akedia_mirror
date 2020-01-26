@@ -181,6 +181,14 @@ main#content {
     box-shadow: none;
   }
 
+  .invisible {
+    display: none;
+  }
+
+  .ellipsis:after {
+    content: "…"
+  }
+
   article.post, 
   article.bookmark, 
   article.like {
