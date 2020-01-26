@@ -4,7 +4,7 @@ defmodule Akedia.MixProject do
   def project do
     [
       app: :akedia,
-      version: "0.76.2",
+      version: "0.76.3",
       elixir: "~> 1.9",
       elixirc_paths: elixirc_paths(Mix.env()),
       compilers: [:phoenix, :gettext] ++ Mix.compilers(),
