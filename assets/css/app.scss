@@ -123,6 +123,12 @@ a:hover {
 .navbar {
   padding: 0 0.75rem;
 
+  .navbar-brand {
+    svg {
+      fill: $light;
+    }
+  }
+
   &.is-dark-purple {
     background: $dark-purple;
   }

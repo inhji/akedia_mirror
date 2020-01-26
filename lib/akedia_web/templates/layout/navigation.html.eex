@@ -1,8 +1,14 @@
-<nav class="navbar is-dark-purple is-fixed-top">
+<nav class="navbar is-dark-purple">
   <div class="navbar-brand">
-    <a class="navbar-item" href="/">
-      <strong>Inhji.de</strong>
-    </a>
+    <%= active_link @conn,
+        to: Routes.public_path(@conn, :index),
+        class_active: "is-active",
+        class: "navbar-item" do %>
+        <%= render "logo.html" %>
+    <% end %>
+    <span class="navbar-item is-expanded">
+      Technos & Psyche
+    </span>
     <div class="navbar-burger burger" data-target="mainNav">
       <span></span>
       <span></span>
@@ -11,6 +17,7 @@
   </div>
 
   <div id="mainNav" class="navbar-menu">
+    
     <div class="navbar-end">
       <%= if not @logged_in do %>
         <%= link "Login", to: Routes.session_path(@conn, :new), class: "navbar-item" %>

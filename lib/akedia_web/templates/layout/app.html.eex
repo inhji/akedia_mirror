@@ -2,7 +2,7 @@
 <html lang="en">
   <%= render "head.html", assigns %>
 
-  <body class="has-navbar-fixed-top">  
+  <body>  
     <header>
       <nav role="navigation" class="main-nav" id="main-nav">
         <%= render "navigation.html", assigns %>
