@@ -23,6 +23,12 @@ defmodule AkediaWeb.PublicController do
     )
   end
 
+  def queue(conn, _params) do
+    entities = Akedia.Content.list_queued_entities()
+
+    render(conn, "queue.html", entities: entities)
+  end
+
   def now(conn, _params) do
     render(conn, "now.html", [])
   end

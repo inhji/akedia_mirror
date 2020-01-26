@@ -61,11 +61,17 @@ defmodule Akedia.Content do
   end
 
   def list_pinned_entities() do
-    query =
+    Repo.all(
       from entity in entity_query(),
         where: [is_pinned: true, is_published: true]
+    )
+  end
 
-    Repo.all(query)
+  def list_queued_entities() do
+    Repo.all(
+      from entity in entity_query(),
+        where: [is_published: false]
+    )
   end
 
   def entity_query() do

@@ -1,0 +1,7 @@
+<div class="hero is-bold is-primary">
+  <div class="hero-body">
+    <h1 class="title">Queue</h1>
+  </div>
+</div>
+
+<%= render "feed.html", assigns %>

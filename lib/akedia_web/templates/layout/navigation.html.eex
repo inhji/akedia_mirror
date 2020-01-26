@@ -22,9 +22,23 @@
       <%= if not @logged_in do %>
         <%= link "Login", to: Routes.session_path(@conn, :new), class: "navbar-item" %>
       <% else %>
-        <%= link "Profiles", to: Routes.profile_path(@conn, :index), class: "navbar-item" %>
-        <%= link "User", to: Routes.user_path(@conn, :edit), class: "navbar-item" %>
-        <%= link "Logout", to: Routes.session_path(@conn, :delete), method: "delete", data: [confirm: "ಥ‿ಥ\nR u sure?"], class: "navbar-item" %>
+        <%= link "Queue", to: Routes.public_path(@conn, :queue), class: "navbar-item" %>
+
+        <div class="navbar-item has-dropdown is-hoverable is-primary">
+          <a class="navbar-link">
+            Hi, <%= @current_user.name %> !
+          </a>
+
+          <div class="navbar-dropdown">
+            <%= link "Identities", to: Routes.profile_path(@conn, :index), class: "navbar-item" %>
+            <%= link "Edit User", to: Routes.user_path(@conn, :edit), class: "navbar-item" %>
+            <a class="navbar-item">
+              Components
+            </a>
+            <hr class="navbar-divider">
+            <%= link "Logout", to: Routes.session_path(@conn, :delete), method: "delete", data: [confirm: "ಥ‿ಥ\nR u sure?"], class: "navbar-item" %>
+          </div>
+        </div>
       <% end %>
       <%= form_for @conn, Routes.public_path(@conn, :search), [method: :get, class: "navbar-item"], fn f -> %>
         <div class="field">

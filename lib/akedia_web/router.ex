@@ -24,6 +24,38 @@ defmodule AkediaWeb.Router do
   end
 
   # -----------------------------------------------------
+  # Admin Routes
+  # -----------------------------------------------------
+
+  scope "/user", AkediaWeb do
+    pipe_through [:browser, :auth]
+
+    resources "/", UserController, only: [:edit, :update], singleton: true
+    resources "/profiles", ProfileController
+    get "/security", UserController, :security
+  end
+
+  scope "/", AkediaWeb do
+    pipe_through [:browser, :auth]
+
+    resources "/posts", PostController, except: [:show]
+    get "/posts/drafts", PostController, :drafts
+
+    resources "/bookmarks", BookmarkController, except: [:show]
+    get "/bookmarks/drafts", BookmarkController, :drafts
+
+    resources "/likes", LikeController, except: [:show]
+    get "/likes/drafts", LikeController, :drafts
+
+    resources "/topics", TopicController, except: [:show]
+    resources "/images", ImageController, except: [:show]
+
+    get "/mentions", MentionController, :index
+
+    get "/queue", PublicController, :queue
+  end
+
+  # -----------------------------------------------------
   # Public Routes
   # -----------------------------------------------------
 
@@ -56,36 +88,6 @@ defmodule AkediaWeb.Router do
 
       delete "/logout", SessionController, :delete
     end
-  end
-
-  # -----------------------------------------------------
-  # Admin Routes
-  # -----------------------------------------------------
-
-  scope "/user", AkediaWeb do
-    pipe_through [:browser, :auth]
-
-    resources "/", UserController, only: [:edit, :update], singleton: true
-    resources "/profiles", ProfileController
-    get "/security", UserController, :security
-  end
-
-  scope "/admin", AkediaWeb do
-    pipe_through [:browser, :auth]
-
-    resources "/posts", PostController, except: [:show]
-    get "/posts/drafts", PostController, :drafts
-
-    resources "/bookmarks", BookmarkController, except: [:show]
-    get "/bookmarks/drafts", BookmarkController, :drafts
-
-    resources "/likes", LikeController, except: [:show]
-    get "/likes/drafts", LikeController, :drafts
-
-    resources "/topics", TopicController, except: [:show]
-    resources "/images", ImageController, except: [:show]
-
-    get "/mentions", MentionController, :index
   end
 
   # -----------------------------------------------------
