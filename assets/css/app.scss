@@ -131,6 +131,10 @@ a:hover {
     svg {
       fill: $light;
     }
+
+    .navbar-item {
+      justify-content: center;
+    }
   }
 
   &.is-dark-purple {
