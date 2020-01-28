@@ -51,6 +51,7 @@ defmodule Akedia.MixProject do
       {:ecto_sql, "~> 3.0"},
       {:edeliver, "~> 1.6"},
       {:ex_machina, "~> 2.3", only: :test},
+      {:ex_cli, "~> 0.1.0"},
       {:feeder_ex, "~> 1.1"},
       {:floki, "~> 0.23.1"},
       {:gettext, "~> 0.11"},
