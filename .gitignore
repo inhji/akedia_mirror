@@ -46,6 +46,8 @@ npm-debug.log
 
 .deliver/releases/
 
+.version
+
 .mix_tasks
 
 /.elixir_ls/

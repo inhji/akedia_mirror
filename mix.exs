@@ -96,11 +96,10 @@ defmodule Akedia.MixProject do
       "ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds.exs"],
       "ecto.reset": ["ecto.drop", "ecto.setup"],
       test: ["ecto.create --quiet", "ecto.migrate", "test"],
-      build: ["edeliver build release"],
-      deploy: ["edeliver deploy release to production"],
       restart: ["edeliver restart production"],
       migrate: ["edeliver migrate production"],
-      d: ["run deploy.exs"]
+      deploy_ex: ["edeliver deploy release to production"],
+      build_ex: ["edeliver build release"]
     ]
   end
 end
