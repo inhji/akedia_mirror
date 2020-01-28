@@ -27,4 +27,7 @@ defmodule AkediaWeb.SharedView do
     uri = URI.parse(url)
     Path.join(uri.host, uri.path)
   end
+
+  def microformats_class(%Akedia.Content.Bookmark{}), do: "u-bookmark-of"
+  def microformats_class(%Akedia.Content.Like{}), do: "u-like-of"
 end

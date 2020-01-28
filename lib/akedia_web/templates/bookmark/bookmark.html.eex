@@ -15,7 +15,7 @@
         <small>bookmarked</small>
         <small>
           <a href="<%= @bookmark.url %>"
-            class="u-bookmark-of h-cite p-name">
+            class="h-cite p-name">
             <%= @bookmark.title %>
           </a>
         </small>

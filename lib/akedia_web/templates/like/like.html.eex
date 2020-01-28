@@ -29,11 +29,13 @@
           <% end %>
         </div>
 
-        <h3 class="is-size-4">
+        <h3 class="is-size-4 h-cite p-name">
           <%= if has_context do %>
-            <%= raw(@like.entity.context.content_html) %>
+            <div class="e-content">
+              <%= raw(@like.entity.context.content_html) %>
+            </div>
           <% else %>
-            <a href="<%= @like.url %>" class="u-like-of h-cite p-name">
+            <a href="<%= @like.url %>">
               <%= @like.title || @like.url %>
             </a>
           <% end %>
