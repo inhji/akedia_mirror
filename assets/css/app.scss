@@ -28,10 +28,12 @@ $secondary: #fff;
 @import "~bulma/sass/utilities/_all";
 
 // Bulma Overrides
+$family-primary: 'Open Sans Regular', sans-serif;
+$family-logo: 'Open Sans Light', sans-serif;
+
 $background: $dark-purple;
 $body-color: $grey-light;
 $body-background-color: $dark-purple;
-
 
 $navbar-background-color: $dark-purple;
 $navbar-item-color: $grey-light;
@@ -97,11 +99,17 @@ $dimensions: 16 24 32 48 64 96 128 196;
 * { box-sizing: border-box; }
 
 @font-face {
-    font-family: 'Cabin Sketch';
-    src: url('../fonts/cabinsketch-regular-webfont.woff2') format('woff2'),
-         url('../fonts/cabinsketch-regular-webfont.woff') format('woff');
+    font-family: 'Open Sans Regular';
+    src: url('../fonts/OpenSans-Regular-webfont.woff') format('woff');
     font-weight: normal;
     font-style: normal;
+}
+
+@font-face {
+  font-family: 'Open Sans Light';
+  src: url('../fonts/OpenSans-Light-webfont.woff') format('woff');
+  font-weight: lighter;
+  font-style: normal;
 }
 
 .container {}
@@ -134,6 +142,9 @@ a:hover {
 
     .navbar-item {
       justify-content: center;
+      font-family: $family-logo;
+      font-weight: lighter;
+      font-size: 150%;
     }
   }
 
