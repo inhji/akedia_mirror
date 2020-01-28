@@ -540,11 +540,7 @@ defmodule Akedia.Content do
   end
 
   def maybe_limit(query, nil), do: query
-
-  def maybe_limit(query, limit) do
-    query
-    |> limit(^limit)
-  end
+  def maybe_limit(query, limit), do: limit(query, ^limit)
 
   def create_with_entity(schema, attrs, entity_attrs) do
     {:ok, entity} = create_entity(entity_attrs)
