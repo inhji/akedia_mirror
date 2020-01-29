@@ -198,6 +198,12 @@ footer#footer {
 main#content {
   .card {
     box-shadow: none;
+
+    .card-header {
+      .card-header-title {
+        font-weight: 300;
+      }
+    }
   }
 
   .invisible {

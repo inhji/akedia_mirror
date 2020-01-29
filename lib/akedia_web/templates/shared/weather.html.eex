@@ -6,9 +6,16 @@
 	</figure>
 	<div class="media-content">
 		<div class="content">
-			<strong class="has-text-light"><%= @weather.now %> at <%= @weather.temperature %> °C (<%= round(@weather.humidity * 100) %>% Humid.)</strong>
-			<p><%= @weather.summary %> (<%= @weather.min %> °C/<%= @weather.max %> °C)</p>
-			<%= @weather.icon %>
+			<strong class="has-text-light"><%= @weather.now %> at <%= @weather.temperature %> °C</strong>
+			<p>
+				<span><%= @weather.summary %></span>
+				<br />
+				<span class="has-text-info">Min <%= @weather.min %> °C</span>
+				<span class="dot"></span>
+				<span class="has-text-danger">Max <%= @weather.max %> °C</span>
+				<span class="dot"></span>
+				<span class="has-text-warning">Humidity <%= round(@weather.humidity * 100) %>%</span>
+			</p>
 		</div>
 	</div>
 </div>
