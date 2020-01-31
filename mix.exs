@@ -73,7 +73,7 @@ defmodule Akedia.MixProject do
       {:qr_code, "~> 2.1.0"},
       {:quantum, "~> 2.3"},
       {:que, "~> 0.10.0"},
-      {:scrivener_ecto, "~> 2.0"},
+      {:scrivener_ecto, "~> 2.0", override: true},
       {:scrivener_html, "~> 1.8"},
       {:slugger, "~> 0.3.0"},
       {:timex, "~> 3.5"},
