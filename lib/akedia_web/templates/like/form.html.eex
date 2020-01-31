@@ -1,39 +1,56 @@
-<%= form_for @changeset, @action, [class: "form like"], fn f -> %>
-  <%= if @changeset.action do %>
-    <div class="alert alert-danger">
-      <p>Oops, something went wrong! Please check the errors below.</p>
-    </div>
-  <% end %>
+<div class="card">
+  <div class="card-content">
+    <%= form_for @changeset, @action, [class: "form like"], fn f -> %>
+      <%= if @changeset.action do %>
+        <div class="alert alert-danger">
+          <p>Oops, something went wrong! Please check the errors below.</p>
+        </div>
+      <% end %>
 
-  <div class="field">
-    <%= label f, :title, class: "label" %>
-    <%= text_input f, :title,
-        type: "text",
-        class: "input",
-        placeholder: "Title" %>
-    <%= error_tag f, :title %>
-  </div>
+      <div class="field">
+        <%= label f, :title, class: "label" %>
+        <%= text_input f, :title,
+            type: "text",
+            class: "input",
+            placeholder: "Title" %>
+        <%= error_tag f, :title %>
+      </div>
 
-  <div class="field">
-    <%= label f, :url, class: "label" %>
-    <%= text_input f, :url,
-        type: "url",
-        class: "input",
-        placeholder: "URL" %>
-    <%= error_tag f, :url %>
-  </div>
+      <div class="field">
+        <%= label f, :url, class: "label" %>
+        <%= text_input f, :url,
+            type: "url",
+            class: "input",
+            placeholder: "URL" %>
+        <%= error_tag f, :url %>
+      </div>
 
-  <%= inputs_for f, :entity, fn(ef) -> %>
-  <div class="field">
-    <%= label f, :public, class: "checkbox" do %>
-      <%= checkbox ef, :is_published, class: "checkbox" %>
-      Is Published
+      <%= inputs_for f, :entity, fn(ef) -> %>
+      <div class="field">
+        <%= label ef, :settings, class: "label" %>
+
+        <div class="field">
+          <%= checkbox ef, :is_published, class: "switch is-rounded" %>
+          <%= label ef, :is_published %>    
+        </div>   
+
+        <div class="field">
+          <%= checkbox ef, :is_pinned, class: "switch is-rounded" %>
+          <%= label ef, :is_pinned %>
+        </div>
+
+        <div class="field">
+          <%= checkbox ef, :bridgy_fed, class: "switch is-rounded" %>
+          <%= label ef, :bridgy_fed %>
+        </div>
+        
+      </div>
+      <% end %>
+
+      <div class="field">
+        <%= submit "Save", class: "button is-success" %>
+      </div>
     <% end %>
-    <%= error_tag ef, :is_published %>
-  </div>
-  <% end %>
 
-  <div class="field">
-    <%= submit "Save", class: "button is-success" %>
   </div>
-<% end %>
+</div>
