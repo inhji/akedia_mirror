@@ -52,7 +52,9 @@ defmodule AkediaWeb.Router do
 
     get "/mentions", MentionController, :index
 
-    get "/queue", PublicController, :queue
+    scope "/queue" do
+      get "/", QueueController, :index
+    end
   end
 
   # -----------------------------------------------------

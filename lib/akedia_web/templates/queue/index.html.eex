@@ -4,4 +4,4 @@
   </div>
 </div>
 
-<%= render "feed.html", assigns %>
+<%= render AkediaWeb.PublicView, "feed.html", assigns %>
