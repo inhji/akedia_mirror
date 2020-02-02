@@ -27,9 +27,12 @@ $secondary: #fff;
 
 @import "~bulma/sass/utilities/_all";
 
+$open-sans: 'Open Sans Regular', sans-serif;
+$open-sans-light: 'Open Sans Light', sans-serif;
+
 // Bulma Overrides
-$family-primary: 'Open Sans Regular', sans-serif;
-$family-logo: 'Open Sans Light', sans-serif;
+$family-primary: $open-sans;
+$family-logo: $open-sans;
 
 $background: $dark-purple;
 $body-color: $grey-light;
@@ -145,15 +148,21 @@ main {
   padding: 0 0.75rem;
 
   .navbar-brand {
-    svg {
-      fill: $light;
+    .navbar-item {
+      font-size: 150%;
+
+      &:hover {
+        text-decoration: none;
+      }
     }
 
-    .navbar-item {
+    .site-title {
       justify-content: center;
-      font-family: $family-logo;
-      font-weight: lighter;
-      font-size: 150%;
+      font-family: $open-sans-light;
+
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-image: linear-gradient(141deg, #1b00cc 0%, #4c00ff 71%, #841aff 100%);
     }
   }
 
