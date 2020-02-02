@@ -112,8 +112,6 @@ $dimensions: 16 24 32 48 64 96 128 196;
   font-style: normal;
 }
 
-.container {}
-
 a:hover {
   text-decoration: underline;
 }
@@ -144,8 +142,6 @@ main {
 // \__|  \__| \_______| \_______| \_______| \_______|\__|   
 
 .navbar {
-  padding: 0 0.75rem;
-
   .navbar-brand {
     svg {
       fill: $light;
