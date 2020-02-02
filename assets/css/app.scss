@@ -123,6 +123,17 @@ a:hover {
   opacity: 1;
 }
 
+main {
+  .columns {
+    margin-right: 0;
+
+    .column {
+      padding-right: 0;
+    }
+  }
+}
+
+
 // $$\   $$\                           $$\                     
 // $$ |  $$ |                          $$ |                    
 // $$ |  $$ | $$$$$$\   $$$$$$\   $$$$$$$ | $$$$$$\   $$$$$$\  
