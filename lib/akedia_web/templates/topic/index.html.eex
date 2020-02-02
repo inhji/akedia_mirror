@@ -1,3 +1,11 @@
-<h1 class="title">Topics</h1>
+<div class="hero is-bold is-primary">
+  <div class="hero-body">
+    <h1 class="title">Topics</h1>
+  </div>
+</div>
 
-<%= render SharedView, "tag_cloud.html", assigns %>
+<div class="card">
+  <div class="card-content">
+    <%= render SharedView, "tag_cloud.html", assigns %>
+  </div>
+</div>
