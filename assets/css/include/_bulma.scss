@@ -14,6 +14,10 @@
   }
 }
 
+.media + .media {
+  border: none;
+}
+
 .input, .textarea, select .select, .input input {
   color: $grey-light;
   background: $dark-purple;

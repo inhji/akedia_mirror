@@ -1,6 +1,12 @@
+<div class="hero is-bold is-primary">
+  <div class="hero-body">
+    <h1 class="title">Indentities</h1>
+  </div>
+</div>
+
 <div class="card">
   <div class="card-content">
-    <span><%= link "New Profile", to: Routes.profile_path(@conn, :new), class: "button is-success" %></span>
+    <span><%= link "New Identity", to: Routes.profile_path(@conn, :new), class: "button is-success" %></span>
 
     <hr />
 
