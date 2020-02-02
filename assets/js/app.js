@@ -1,7 +1,7 @@
 // We need to import the CSS so that webpack will load it.
 // The MiniCssExtractPlugin is used to separate it out into
 // its own CSS file.
-import appCss from "../css/app.scss"
+import "../css/app.scss"
 
 // webpack automatically bundles all modules in your
 // entry points. Those entry points can be configured
@@ -10,10 +10,11 @@ import appCss from "../css/app.scss"
 // Import dependencies
 //
 import Prism from 'prismjs'
+import tags from 'bulma-tagsinput'
+import EmojiButton from '@joeattardi/emoji-button'
 
 import "phoenix_html"
 
-import "./new_post.js"
 import "./webauthn/login.js"
 import "./webauthn/register.js"
 
@@ -28,14 +29,45 @@ if ('serviceWorker' in navigator) {
 }
 
 document.addEventListener("DOMContentLoaded", function () {
+  const $form = document.querySelector("form.post")
+  const $weatherCanvas = document.querySelector('canvas#weather')
+  const $emojiButton = document.querySelector('#emoji-button')
+  const $zenTextarea = document.querySelector(".zen textarea")
+  const $zenCheckbox = document.querySelector(".zen input[type=checkbox]")
+  const ESC = 27
+
+  if ($form) {
+    // Attach Tagsinput
+    tags.attach()
+
+    // Add Zen Close from textarea
+    $zenTextarea.addEventListener("keydown", function (e) {
+      if (e.keyCode === ESC) {
+        $zenCheckbox.checked = false
+      }
+      console.log(e.keyCode)
+    })
+  }
+
+  if ($emojiButton) {
+    const picker = new EmojiButton()
+
+    picker.on('emoji', emoji => {
+      document.querySelector('#content-area').value += ` ${emoji} `
+    })
+
+    $emojiButton.addEventListener('click', () => {
+      picker.pickerVisible ? picker.hidePicker() : picker.showPicker($emojiButton)
+    })
+  }
+
+
   // Highlight Syntax
   Prism.highlightAll()
 
-  // Animated Weather
-  const $weatherCanvas = document.querySelector('canvas#weather')
-  const skycons = new Skycons({ monochrome: false })
-
+  // Animated Weather 
   if ($weatherCanvas) {
+    const skycons = new Skycons({ monochrome: false })
     const icon = $weatherCanvas.dataset["icon"]
     const skyconsId = icon.toUpperCase().replace(/-/g, "_")
 
@@ -43,13 +75,10 @@ document.addEventListener("DOMContentLoaded", function () {
     skycons.play()
   }
 
-  // Get all "navbar-burger" elements
+  // Navbar Burger
   const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
 
-  // Check if there are any navbar burgers
   if ($navbarBurgers.length > 0) {
-
-    // Add a click event on each of them
     $navbarBurgers.forEach( el => {
       el.addEventListener('click', () => {
 

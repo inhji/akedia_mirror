@@ -30,10 +30,4 @@ defmodule AkediaWeb.Helpers.Meta do
       <title><%= site_title() %></title>
     }
   end
-
-  def admin_scripts(assigns) do
-    ~E{
-      <script type="text/javascript" src="<%= Routes.static_path(@conn, "/js/admin.js") %>"></script>
-    }
-  end
 end
