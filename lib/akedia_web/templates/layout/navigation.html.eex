@@ -38,11 +38,11 @@
           </div>
         </div>
       <% end %>
-      <%= form_for @conn, Routes.public_path(@conn, :search), [method: :get, class: "navbar-item"], fn f -> %>
+      <%= form_for @conn, Routes.public_path(@conn, :search), [method: :get, class: "navbar-item navbar-search"], fn f -> %>
         <div class="field">
           <p class="control has-icons-left">
             <%= search_input f, :query, class: "input is-rounded", placeholder: "Search" %>
-            <span class="icon is-small is-left">
+            <span class="icon is-small is-left has-text-dark">
               <i class="fa fa-search"></i>
             </span>
           </p>

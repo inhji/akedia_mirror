@@ -142,6 +142,8 @@ main {
 // \__|  \__| \_______| \_______| \_______| \_______|\__|   
 
 .navbar {
+  padding: 0 0.75rem;
+
   .navbar-brand {
     svg {
       fill: $light;
@@ -155,20 +157,19 @@ main {
     }
   }
 
+  .navbar-search {
+    input {
+      border: none;
+    }
+  }
+
   &.is-dark-purple {
     background: $dark-purple;
   }
 }
 
 .profile {
-  padding: 1.5rem 0;
-  margin: 0 1.5rem;
-
-  border-bottom: 3px solid $purple;
-
-  h1 {
-    color: $body-color;
-  }
+  padding-bottom: 1.5rem;
 }
 
 // $$$$$$$$\                   $$\                         
@@ -220,28 +221,6 @@ main#content {
   .ellipsis:after {
     content: "…"
   }
-
-  article.post, 
-  article.bookmark, 
-  article.like {
-    margin-bottom: 1rem;
-
-    .title {
-      font-weight: normal;
-
-      a {
-        color: $grey-light;
-      }
-    }
-
-    .post-header {
-      strong {
-        color: $title-color;
-      }
-    }
-  }
-
-
 }
 
 .content {
@@ -329,24 +308,5 @@ main#content {
 
 // This needs to be last to override all other styles
 @include prefers-scheme(dark) {
-  .pagination-link.is-current {
-    color: $white;
-    background-color: $dark;
-    border-color: $primary;
-  }
-
-  .bookmark {
-    .image {
-      background-color: $white;
-    }
-  }
-
-  article {
-    .content {
-      a.footnote, a.reversefootnote {
-        color: findColorInvert($primary);
-        background: findColorInvert($white);
-      }
-    }
-  }
+  // TODO: Fill when we need a darkmode
 }

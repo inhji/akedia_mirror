@@ -1,10 +1,5 @@
 <section class="profile">
-  <div class="columns">
-    <div class="column">
-      <%= render SharedView, "hcard.html", assigns %>
-    </div>
-    <div class="column is-two-fifths is-one-fifth-tablet"></div>
-  </div>
+   <%= render SharedView, "hcard.html", assigns %>
 </section>
 
 <div class="columns is-desktop">

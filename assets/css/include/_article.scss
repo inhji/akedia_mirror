@@ -1,5 +1,17 @@
-article {
+article.post, 
+article.bookmark, 
+article.like {
+  margin-bottom: 1rem;
+
+  .post-header {
+    strong {
+      color: $title-color;
+    }
+  }
+
   .title {
+    font-weight: normal;
+
     .image {
       display: inline-block;
       vertical-align: bottom;
@@ -13,12 +25,10 @@ article {
     }
 
     pre {
-      a.url-link {
-        @include no-underline;
-        color: white;
+      a {
+        color: $purple;
       }
     }
-
 
     a.footnote, a.reversefootnote {
       @include no-underline;
@@ -45,7 +55,7 @@ article {
   .meta {
     .topics a {
       &::after {
-        content: " // "
+        content: " · "
       }
 
       &:last-child {
