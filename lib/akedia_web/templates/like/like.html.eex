@@ -29,19 +29,22 @@
           <% end %>
         </div>
 
-        <h3 class="is-size-4 h-cite p-name">
-          <%= if has_context do %>
-            <div class="e-content content">
-              <%= raw(@like.entity.context.content_html) %>
-            </div>
-          <% else %>
-            <a href="<%= @like.url %>" class="content">
-              <%= @like.title || @like.url %>
-            </a>
-          <% end %>
-        </h3>
+        <div class="post-content">
+          <h3 class="is-size-4 h-cite p-name">
+            <%= if has_context do %>
+              <div class="e-content content">
+                <%= raw(@like.entity.context.content_html) %>
+              </div>
+            <% else %>
+              <a href="<%= @like.url %>" class="content">
+                <%= @like.title || @like.url %>
+              </a>
+            <% end %>
+          </h3>
 
-        <div class="content"></div>
+          <div class="content"></div>
+        </div>
+
         <%= render SharedView, "post/post_meta.html",
             conn: @conn,
             schema: @like,
