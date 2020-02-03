@@ -28,6 +28,15 @@ defmodule AkediaWeb.SharedView do
     Path.join(uri.host, uri.path)
   end
 
+  def mention_type(wm_property) do
+    case wm_property do
+      "like-of" -> "Likes"
+      "in-reply-to" -> "Replies"
+      "bookmark-of" -> "Bookmarks"
+      action -> action
+    end
+  end
+
   def microformats_class(%Akedia.Content.Bookmark{}), do: "u-bookmark-of"
   def microformats_class(%Akedia.Content.Like{}), do: "u-like-of"
 end
