@@ -1,16 +1,12 @@
 <nav class="navbar is-dark-purple">
-  <div class="navbar-brand">
-    <a href="#" class="navbar-item site-logo">
-      <span class="icon">
-        <i class="fa fa-cloud has-text-light" aria-hidden="true"></i>
-      </span>
-    </a>        
-    <%= active_link @conn,
-        to: Routes.public_path(@conn, :index),
-        class_active: "is-active",
-        class: "navbar-item is-expanded site-title" do %>
-        Technos & Psyche
+  <div class="navbar-brand">     
+    <%= link to: Routes.public_path(@conn, :index),
+        class: "navbar-item site-logo" do %>
+        <span class="icon">
+          <i class="fa fa-cloud has-text-light" aria-hidden="true"></i>
+        </span>
     <% end %>
+    <span class="navbar-item is-expanded site-title">Technos & Psyche</span>
     <div class="navbar-burger burger" data-target="mainNav">
       <span></span>
       <span></span>
