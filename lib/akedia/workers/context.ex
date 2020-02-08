@@ -31,10 +31,7 @@ defmodule Akedia.Workers.Context do
 
       Logger.debug("Saving context photo..")
 
-      {:ok, context} = Akedia.Indie.update_context(context, %{photo: content_map[:photo]})
-    else
-      {:error, error} ->
-        Logger.warn("Context fetching failed: #{inspect(error)}")
+      {:ok, _context} = Akedia.Indie.update_context(context, %{photo: content_map[:photo]})
     end
   end
 
@@ -138,9 +135,6 @@ defmodule Akedia.Workers.Context do
     case Akedia.Indie.Microformats.fetch(url) do
       {:ok, %{items: [item]}} ->
         [author] = get_in(item, [:properties, :author])
-        [content_map] = get_in(item, [:properties, :content])
-        [published_at] = get_in(item, [:properties, :published])
-        [url] = get_in(item, [:properties, :url])
 
         %{
           name: [name],
