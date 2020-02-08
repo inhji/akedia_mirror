@@ -36,7 +36,9 @@ defmodule Akedia.Media do
     })
   end
 
-  def maybe_create_image(_, _), do: nil
+  def maybe_create_image(_, _) do
+    nil
+  end
 
   def update_image(%Image{} = image, attrs) do
     image

@@ -1,6 +1,5 @@
 defmodule AkediaWeb.Helpers.Meta do
   import Phoenix.HTML, only: [sigil_E: 2]
-  alias AkediaWeb.Router.Helpers, as: Routes
 
   def site_title(), do: Akedia.Settings.get(:site_title)
 

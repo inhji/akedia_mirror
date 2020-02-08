@@ -34,10 +34,10 @@ defmodule AkediaWeb.Helpers.Media do
     do: nil
 
   def context_url(%{photo: photo} = context),
-    do: ContextUploader.url({context.photo, context}, :wide)
+    do: ContextUploader.url({photo, context}, :wide)
 
   def context_url(%{photo: photo} = context, version),
-    do: ContextUploader.url({context.photo, context}, version)
+    do: ContextUploader.url({photo, context}, version)
 
   def img(image), do: img(image, :thumb)
   def img(image, version, attrs \\ []), do: img_tag(image_url(image, version), attrs)
