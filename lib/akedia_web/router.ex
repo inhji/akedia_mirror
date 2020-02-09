@@ -98,6 +98,7 @@ defmodule AkediaWeb.Router do
 
     scope "/.well_known" do
       get "/webfinger", WellKnownController, :webfinger
+      get "/host_meta", WellKnownController, :host_meta
     end
   end
 
