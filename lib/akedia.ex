@@ -14,10 +14,12 @@ defmodule Akedia do
 
   @url_types_regex ~r/\/(?<type>bookmarks|posts|likes)\/(?<slug>[\w\d-]*)\/?$/
 
+  def url(), do: url("")
+
   @doc """
   Returns the absolute url of the supplied path
   """
-  def url(path \\ "") do
+  def url(path) when is_binary(path) do
     Endpoint
     |> Routes.url()
     |> URI.merge(path)
@@ -28,7 +30,7 @@ defmodule Akedia do
   @doc """
   Returns the absolute url to the supplied post
   """
-  def url(schema), do: do_url(schema)
+  def url(schema) when is_map(schema), do: do_url(schema)
 
   defp do_url(%Like{} = like), do: Routes.like_url(Endpoint, :show, like)
   defp do_url(%Bookmark{} = bookmark), do: Routes.bookmark_url(Endpoint, :show, bookmark)
