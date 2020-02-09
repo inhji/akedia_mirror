@@ -24,6 +24,7 @@ defmodule AkediaWeb do
       import Plug.Conn
       import AkediaWeb.Gettext
       import AkediaWeb.Helpers.User, only: [logged_in?: 1]
+      import AkediaWeb.Responses
       alias AkediaWeb.Router.Helpers, as: Routes
       require Logger
     end
