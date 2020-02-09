@@ -47,7 +47,7 @@ defmodule AkediaWeb.Router do
     resources "/likes", LikeController, except: [:show]
     get "/likes/drafts", LikeController, :drafts
 
-    resources "/topics", TopicController, except: [:show]
+    resources "/topics", TopicController, except: [:index, :show]
     resources "/images", ImageController, except: [:show]
 
     get "/mentions", MentionController, :index
@@ -69,13 +69,13 @@ defmodule AkediaWeb.Router do
     get "/search", PublicController, :search
 
     get "/about", UserController, :show
-    get "/topics", TopicController, :index
     get "/feed", AtomController, :index
 
     resources "/bookmarks", BookmarkController, only: [:show]
     resources "/images", ImageController, only: [:show]
     resources "/likes", LikeController, only: [:show]
     resources "/posts", PostController, only: [:show]
+    resources "/topics", TopicController, only: [:index, :show]
 
     scope "/auth" do
       get "/register", UserController, :new
