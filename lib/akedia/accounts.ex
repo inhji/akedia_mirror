@@ -31,6 +31,16 @@ defmodule Akedia.Accounts do
     count_users() > 0
   end
 
+  @doc """
+  Checks if the user with `username` exists.
+  """
+  def user_exists?(username) do
+    case get_user!() do
+      nil -> false
+      user -> user.username == username
+    end
+  end
+
   def get_user_by_email(email) do
     query =
       from c in Credential,
@@ -99,7 +109,7 @@ defmodule Akedia.Accounts do
 
   def list_profiles do
     Profile
-    |> order_by([desc: :public, desc: :rel_value, desc: :username])
+    |> order_by(desc: :public, desc: :rel_value, desc: :username)
     |> Repo.all()
   end
 

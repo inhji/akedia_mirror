@@ -27,7 +27,8 @@ defmodule Akedia.MixProject do
         :que,
         :open_graph,
         :scrivener_ecto,
-        :scrivener_html
+        :scrivener_html,
+        :rsa_ex
       ]
     ]
   end
@@ -73,6 +74,7 @@ defmodule Akedia.MixProject do
       {:qr_code, "~> 2.1.0"},
       {:quantum, "~> 2.3"},
       {:que, "~> 0.10.0"},
+      {:rsa_ex, "~> 0.4"},
       {:scrivener_ecto, "~> 2.0", override: true},
       {:scrivener_html, "~> 1.8"},
       {:slugger, "~> 0.3.0"},

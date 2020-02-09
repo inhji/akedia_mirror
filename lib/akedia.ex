@@ -15,12 +15,12 @@ defmodule Akedia do
   @url_types_regex ~r/\/(?<type>bookmarks|posts|likes)\/(?<slug>[\w\d-]*)\/?$/
 
   @doc """
-  Returns the absolute url of the site.
+  Returns the absolute url of the supplied path
   """
-  def url() do
+  def url(path \\ "") do
     Endpoint
     |> Routes.url()
-    |> URI.parse()
+    |> URI.merge(path)
     |> to_string()
     |> String.trim_trailing("/")
   end
