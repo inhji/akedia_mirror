@@ -5,7 +5,7 @@ defmodule AkediaWeb.WellKnownController do
 
   plug :accepts, ["json", "jrd", "xrd"]
 
-  def index(conn, %{"resource" => resource}) do
+  def webfinger(conn, %{"resource" => resource}) do
     {:ok, regex} = Regex.compile("(acct:)?\\w+@#{Akedia.url()}")
 
     with true <- Regex.match?(regex, resource),
@@ -30,7 +30,7 @@ defmodule AkediaWeb.WellKnownController do
     end
   end
 
-  def index(conn, _params) do
+  def webfinger(conn, _params) do
     bad_request(conn)
   end
 
