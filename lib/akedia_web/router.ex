@@ -65,6 +65,7 @@ defmodule AkediaWeb.Router do
     pipe_through [:browser]
 
     get "/", PublicController, :index
+
     get "/tagged-with/:topic", PublicController, :tagged
     get "/search", PublicController, :search
 
@@ -89,6 +90,14 @@ defmodule AkediaWeb.Router do
       post "/totp", SessionController, :totp_create
 
       delete "/logout", SessionController, :delete
+    end
+
+    scope "/actor" do
+      get "/", ActorController, :index
+    end
+
+    scope "/.well_known" do
+      get "/webfinger", WellKnownController, :webfinger
     end
   end
 
