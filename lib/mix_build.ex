@@ -18,7 +18,7 @@ defmodule MixBuild do
             cond do
               comp == :gt ->
                 File.write!(version_file, current_version)
-                {:ok, "Newer version [${current_version}] found. Continuing with deploy."}
+                {:ok, "Newer version [#{current_version}] found. Continuing with deploy."}
 
               comp == :eq or comp == :lt ->
                 {:error, "Please increase version number before deploying!"}
