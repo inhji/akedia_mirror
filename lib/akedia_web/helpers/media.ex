@@ -27,17 +27,10 @@ defmodule AkediaWeb.Helpers.Media do
   def author_url(author), do: AuthorUploader.url({author.photo, author}, :thumb)
   def author_url(author, version), do: AuthorUploader.url({author.photo, author}, version)
 
-  def context_url(context, _) when is_nil(context),
-    do: nil
-
-  def context_url(context) when is_nil(context),
-    do: nil
-
-  def context_url(%{photo: photo} = context),
-    do: ContextUploader.url({photo, context}, :wide)
-
-  def context_url(%{photo: photo} = context, version),
-    do: ContextUploader.url({photo, context}, version)
+  def context_url(context, _) when is_nil(context), do: nil
+  def context_url(context) when is_nil(context), do: nil
+  def context_url(%{photo: photo} = context), do: ContextUploader.url({photo, context}, :wide)
+  def context_url(%{photo: photo} = context, v), do: ContextUploader.url({photo, context}, v)
 
   def img(image), do: img(image, :thumb)
   def img(image, version, attrs \\ []), do: img_tag(image_url(image, version), attrs)
