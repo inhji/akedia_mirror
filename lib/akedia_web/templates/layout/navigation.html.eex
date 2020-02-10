@@ -23,7 +23,7 @@
         <%= link "Queue", to: Routes.queue_path(@conn, :index), class: "navbar-item" %>
 
         <div class="navbar-item has-dropdown is-hoverable is-primary">
-          <a class="navbar-link">
+          <a class="navbar-link" href="<%= Routes.user_path(@conn, :show) %>">
             Hi, <%= @current_user.name %> !
           </a>
 
