@@ -1,4 +1,7 @@
 defmodule MixBuild do
+  @moduledoc """
+  Checks if version number was changed since last build.
+  """
   use ExCLI.DSL, mix_task: :build
   require Logger
 

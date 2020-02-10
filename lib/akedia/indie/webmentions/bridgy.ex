@@ -17,7 +17,7 @@ defmodule Akedia.Indie.Webmentions.Bridgy do
   def do_publish_to_github(%{:entity_id => entity_id} = schema) do
     endpoint = Akedia.Indie.config(:bridgy_endpoint, "")
     target = Akedia.Indie.config(:bridgy_github_target, "")
-    www_source = Akedia.url(schema)
+    www_source = Akedia.entity_url(schema)
     www_target = URI.encode_www_form(target)
     body = "source=#{www_source}&target=#{www_target}"
 

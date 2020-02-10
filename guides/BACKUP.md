@@ -1,4 +1,4 @@
-Backup & Restore
+Backup and Restore
 =================
 
 Backup

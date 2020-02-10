@@ -1,23 +1,39 @@
 defmodule Akedia do
   @moduledoc """
-  > „Der Dämon der Trägheit, der auch Mittagsdämon genannt wird, ist belastender als alle anderen Dämonen.“
-
-  Akedia keeps the contexts that define your domain
-  and business logic.
-
-  Contexts are also responsible for managing your data, regardless
-  if it comes from the database, an external API or others.
+  Akedia is the main Module and keeps some general helpers.
   """
   alias Akedia.Content.{Bookmark, Like, Post}
   alias AkediaWeb.Router.Helpers, as: Routes
   alias AkediaWeb.Endpoint
 
   @url_types_regex ~r/\/(?<type>bookmarks|posts|likes)\/(?<slug>[\w\d-]*)\/?$/
+  @type entity :: %Akedia.Content.Post{} | %Akedia.Content.Like{} | %Akedia.Content.Bookmark{}
 
+  @spec url() :: String.t()
+  @spec url(String.t()) :: String.t()
+  @spec domain() :: String.t()
+  @spec entity_from_url(String.t()) :: {:ok, entity} | {:error, nil}
+  @spec entity_url(entity) :: String.t()
+
+  @doc """
+  Returns the absolute url of the site with the trailing slash removed.
+
+  ## Example
+
+      iex> Akedia.url()
+      "http://localhost:4000"
+
+  """
   def url(), do: url("")
 
   @doc """
-  Returns the absolute url of the supplied path
+  Returns the absolute url of the supplied path with the trailing slash removed.
+
+  # Example
+
+      iex> Akedia.url("/some-path")
+      "http://localhost:4000/some-path"
+
   """
   def url(path) when is_binary(path) do
     Endpoint
@@ -28,12 +44,12 @@ defmodule Akedia do
   end
 
   @doc """
-  Returns the domain, including port of the site.
+  Returns the domain, including port, of the site.
 
-  # Examples
+  ## Example
 
-    iex> Akedia.domain()
-    "localhost:4000"
+      iex> Akedia.domain()
+      "localhost:4000"
 
   """
   def domain() do
@@ -45,17 +61,29 @@ defmodule Akedia do
 
   @doc """
   Returns the absolute url to the supplied post
-  """
-  def url(schema) when is_map(schema), do: do_url(schema)
 
-  defp do_url(%Like{} = like), do: Routes.like_url(Endpoint, :show, like)
-  defp do_url(%Bookmark{} = bookmark), do: Routes.bookmark_url(Endpoint, :show, bookmark)
-  defp do_url(%Post{} = post), do: Routes.post_url(Endpoint, :show, post)
+  ## Example
+
+      iex> Akedia.entity_url(%Post{})
+      "localhost:4000/posts/example-post"
+
+  """
+  def entity_url(schema) when is_map(schema), do: do_entity_url(schema)
+
+  defp do_entity_url(%Like{} = like), do: Routes.like_url(Endpoint, :show, like)
+  defp do_entity_url(%Bookmark{} = bookmark), do: Routes.bookmark_url(Endpoint, :show, bookmark)
+  defp do_entity_url(%Post{} = post), do: Routes.post_url(Endpoint, :show, post)
 
   @doc """
   Returns a Struct from the given url
+
+  ## Example
+
+      iex> Akedia.entity_by_url("localhost:4000/posts/example-post")
+      %Post{}
+
   """
-  def get_post_by_url(url) do
+  def entity_from_url(url) do
     case Regex.named_captures(@url_types_regex, url) do
       %{"type" => "bookmarks", "slug" => slug} ->
         {:ok, Akedia.Content.get_bookmark!(slug)}

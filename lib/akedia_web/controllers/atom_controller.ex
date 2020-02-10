@@ -34,21 +34,21 @@ defmodule AkediaWeb.AtomController do
   end
 
   def build_entry(%{:like => like} = _entity, user) when not is_nil(like) do
-    Entry.new(Akedia.url(like), convert_date(like.inserted_at), "Like of #{like.url}")
+    Entry.new(Akedia.entity_url(like), convert_date(like.inserted_at), "Like of #{like.url}")
     |> Entry.author(user.name, uri: Akedia.url())
     |> Entry.content("<p>Like of #{like.url}</p>", type: "html")
     |> Entry.build()
   end
 
   def build_entry(%{:post => post} = _entity, user) when not is_nil(post) do
-    Entry.new(Akedia.url(post), convert_date(post.inserted_at), post.title)
+    Entry.new(Akedia.entity_url(post), convert_date(post.inserted_at), post.title)
     |> Entry.author(user.name, uri: Akedia.url())
     |> Entry.content(AkediaWeb.Markdown.to_html!(post.content), type: "html")
     |> Entry.build()
   end
 
   def build_entry(%{:bookmark => bookmark} = _entity, user) when not is_nil(bookmark) do
-    Entry.new(Akedia.url(bookmark), convert_date(bookmark.inserted_at), bookmark.title)
+    Entry.new(Akedia.entity_url(bookmark), convert_date(bookmark.inserted_at), bookmark.title)
     |> Entry.author(user.name, uri: Akedia.url())
     |> Entry.content(AkediaWeb.Markdown.to_html!(bookmark.content), type: "html")
     |> Entry.build()

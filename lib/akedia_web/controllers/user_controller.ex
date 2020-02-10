@@ -3,6 +3,7 @@ defmodule AkediaWeb.UserController do
 
   alias Akedia.{Accounts, Repo, Auth}
   alias Akedia.Accounts.User
+  import Akedia.Helpers, only: [with_context: 1]
 
   def new(conn, _params) do
     changeset = Accounts.change_user(%Accounts.User{})
@@ -44,12 +45,9 @@ defmodule AkediaWeb.UserController do
   end
 
   def show(%{private: %{plug_format: "json" <> _rest}} = conn, _params) do
-    json =
-      Accounts.get_user!()
-      |> User.to_json()
-      |> Akedia.Helpers.with_context()
-
-    json(conn, json)
+    user = Accounts.get_user!()
+    json = User.to_json(user)
+    json(conn, with_context(json))
   end
 
   def edit(conn, _params) do

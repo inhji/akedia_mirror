@@ -10,7 +10,22 @@ defmodule Akedia.MixProject do
       compilers: [:phoenix, :gettext] ++ Mix.compilers(),
       start_permanent: Mix.env() == :prod,
       aliases: aliases(),
-      deps: deps()
+      deps: deps(),
+      source_url: "https://git.inhji.de/inhji/akedia",
+      homepage_url: "https://inhji.de",
+      docs: [
+        main: "Akedia",
+        logo: "akedia.jpg",
+        extras: [
+          "README.md",
+          "guides/BACKUP.md",
+          "guides/BRIDGY.md",
+          "guides/DEPLOY.md",
+          "guides/INSTALL.md"
+        ],
+        authors: ["Inhji"],
+        output: "docs"
+      ]
     ]
   end
 
@@ -51,6 +66,7 @@ defmodule Akedia.MixProject do
       {:earmark, "~> 1.4.0"},
       {:ecto_sql, "~> 3.0"},
       {:edeliver, "~> 1.6"},
+      {:ex_doc, "~> 0.21.3", only: :dev, runtime: false},
       {:ex_machina, "~> 2.3", only: :test},
       {:ex_cli, "~> 0.1.0"},
       {:feeder_ex, "~> 1.1"},

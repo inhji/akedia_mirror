@@ -13,7 +13,7 @@ defmodule Akedia.Indie.Webmentions.Handler do
 
     with {:ok, author} <- Akedia.Indie.maybe_create_author(post.author),
          {:ok, author} <- Akedia.Indie.update_author(author, %{photo: post.author.photo}),
-         {:ok, schema} <- Akedia.get_post_by_url(target) do
+         {:ok, schema} <- Akedia.entity_from_url(target) do
       entity_id = schema.entity.id
 
       prepare_mention(body)
