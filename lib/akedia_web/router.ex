@@ -79,6 +79,8 @@ defmodule AkediaWeb.Router do
     pipe_through :activitypub
 
     get "/user", UserController, :show
+    get "/inbox", InboxController, :index
+    get "/outbox", OutboxController, :index
   end
 
   # -----------------------------------------------------

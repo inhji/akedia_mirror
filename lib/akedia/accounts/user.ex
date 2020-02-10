@@ -42,8 +42,8 @@ defmodule Akedia.Accounts.User do
       "preferredUsername" => user.username,
       "name" => user.name,
       "summary" => user.tagline,
-      # "inbox" => inbox_url(),
-      # "outbox" => outbox_url(),
+      "inbox" => inbox_url(),
+      "outbox" => outbox_url(),
       # "followers" => follower_url(),
       # "following" => following_url(),
       "publicKey" => %{
@@ -60,6 +60,8 @@ defmodule Akedia.Accounts.User do
   end
 
   def actor_url(), do: Routes.user_url(AkediaWeb.Endpoint, :show)
+  def inbox_url(), do: Routes.inbox_url(AkediaWeb.Endpoint, :index)
+  def outbox_url(), do: Routes.outbox_url(AkediaWeb.Endpoint, :index)
   def pubkey_url(), do: actor_url() <> "#main-key"
 
   @doc false
