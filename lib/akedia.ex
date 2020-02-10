@@ -28,6 +28,22 @@ defmodule Akedia do
   end
 
   @doc """
+  Returns the domain, including port of the site.
+
+  # Examples
+
+    iex> Akedia.domain()
+    "localhost:4000"
+
+  """
+  def domain() do
+    Endpoint
+    |> Routes.url()
+    |> URI.parse()
+    |> Map.get(:authority)
+  end
+
+  @doc """
   Returns the absolute url to the supplied post
   """
   def url(schema) when is_map(schema), do: do_url(schema)

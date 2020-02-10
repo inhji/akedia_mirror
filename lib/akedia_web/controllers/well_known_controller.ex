@@ -6,23 +6,27 @@ defmodule AkediaWeb.WellKnownController do
   plug :accepts, ["json", "jrd", "xrd"]
 
   def webfinger(conn, %{"resource" => resource}) do
-    {:ok, regex} = Regex.compile("(acct:)?\\w+@#{Akedia.url()}")
+    {:ok, regex} = Regex.compile("(acct:)?\\w+@#{Akedia.domain()}")
 
     with true <- Regex.match?(regex, resource),
-         username <- extract_username(resource),
-         true <- Akedia.Accounts.user_exists?(username) do
-      conn
-      |> put_resp_content_type(MIME.type("jrd"))
-      |> json(%{
-        "subject" => resource,
-        "links" => [
-          %{
-            "rel" => "self",
-            "type" => "application/activity+json",
-            "href" => Akedia.Accounts.User.actor_url()
-          }
-        ]
-      })
+         username <- extract_username(resource) do
+      if Akedia.Accounts.user_exists?(username) do
+        conn
+        |> put_resp_content_type(MIME.type("jrd"))
+        |> json(%{
+          "subject" => resource,
+          "links" => [
+            %{
+              "rel" => "self",
+              "type" => "application/activity+json",
+              "href" => Akedia.Accounts.User.actor_url()
+            }
+          ]
+        })
+      else
+        Logger.warn("Webfinger: User #{username} does not exist!")
+        bad_request(conn)
+      end
     else
       error ->
         IO.inspect(error)
@@ -60,6 +64,6 @@ defmodule AkediaWeb.WellKnownController do
   defp extract_username(resource) do
     resource
     |> String.replace("acct:", "")
-    |> String.replace("@#{Akedia.url()}", "")
+    |> String.replace("@#{Akedia.domain()}", "")
   end
 end
