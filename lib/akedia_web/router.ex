@@ -2,6 +2,7 @@ defmodule AkediaWeb.Router do
   use AkediaWeb, :router
 
   import AkediaWeb.Plugs.PlugAssignUser
+  import AkediaWeb.Plugs.PlugFormat
 
   pipeline :browser do
     plug :accepts, ["html"]
@@ -14,6 +15,18 @@ defmodule AkediaWeb.Router do
     plug :refresh_user
   end
 
+  pipeline :activitypub do
+    plug :accepts, ~w(html json jsonap jsonld)
+    plug :fetch_session
+    plug :fetch_flash
+    plug :protect_from_forgery
+    plug :put_secure_browser_headers
+    plug :check_loggedin
+    plug :assign_user
+    plug :refresh_user
+    plug :put_req_format
+  end
+
   pipeline :api do
     plug :accepts, ["json"]
     plug :fetch_session
@@ -21,40 +34,6 @@ defmodule AkediaWeb.Router do
 
   pipeline :auth do
     plug :check_user
-  end
-
-  # -----------------------------------------------------
-  # Admin Routes
-  # -----------------------------------------------------
-
-  scope "/user", AkediaWeb do
-    pipe_through [:browser, :auth]
-
-    resources "/", UserController, only: [:edit, :update], singleton: true
-    resources "/profiles", ProfileController
-    get "/security", UserController, :security
-  end
-
-  scope "/", AkediaWeb do
-    pipe_through [:browser, :auth]
-
-    resources "/posts", PostController, except: [:show]
-    get "/posts/drafts", PostController, :drafts
-
-    resources "/bookmarks", BookmarkController, except: [:show]
-    get "/bookmarks/drafts", BookmarkController, :drafts
-
-    resources "/likes", LikeController, except: [:show]
-    get "/likes/drafts", LikeController, :drafts
-
-    resources "/topics", TopicController, except: [:index, :show]
-    resources "/images", ImageController, except: [:show]
-
-    get "/mentions", MentionController, :index
-
-    scope "/queue" do
-      get "/", QueueController, :index
-    end
   end
 
   # -----------------------------------------------------
@@ -90,13 +69,49 @@ defmodule AkediaWeb.Router do
       delete "/logout", SessionController, :delete
     end
 
-    scope "/actor" do
-      get "/", ActorController, :index
-    end
-
     scope "/.well_known" do
       get "/webfinger", WellKnownController, :webfinger
       get "/host_meta", WellKnownController, :host_meta
+    end
+  end
+
+  scope "/", AkediaWeb do
+    pipe_through :activitypub
+
+    get "/user", UserController, :show
+  end
+
+  # -----------------------------------------------------
+  # Admin Routes
+  # -----------------------------------------------------
+
+  scope "/user", AkediaWeb do
+    pipe_through [:browser, :auth]
+
+    resources "/", UserController, only: [:edit, :update], singleton: true
+    resources "/profiles", ProfileController
+    get "/security", UserController, :security
+  end
+
+  scope "/", AkediaWeb do
+    pipe_through [:browser, :auth]
+
+    resources "/posts", PostController, except: [:show]
+    get "/posts/drafts", PostController, :drafts
+
+    resources "/bookmarks", BookmarkController, except: [:show]
+    get "/bookmarks/drafts", BookmarkController, :drafts
+
+    resources "/likes", LikeController, except: [:show]
+    get "/likes/drafts", LikeController, :drafts
+
+    resources "/topics", TopicController, except: [:index, :show]
+    resources "/images", ImageController, except: [:show]
+
+    get "/mentions", MentionController, :index
+
+    scope "/queue" do
+      get "/", QueueController, :index
     end
   end
 
