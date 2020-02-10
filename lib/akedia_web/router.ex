@@ -69,9 +69,9 @@ defmodule AkediaWeb.Router do
       delete "/logout", SessionController, :delete
     end
 
-    scope "/.well_known" do
+    scope "/.well-known" do
       get "/webfinger", WellKnownController, :webfinger
-      get "/host_meta", WellKnownController, :host_meta
+      get "/host-meta", WellKnownController, :host_meta
     end
   end
 
