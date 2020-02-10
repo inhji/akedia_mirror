@@ -59,7 +59,7 @@ defmodule Akedia.Accounts.User do
     }
   end
 
-  def actor_url(), do: Routes.actor_url(AkediaWeb.Endpoint, :index)
+  def actor_url(), do: Routes.user_url(AkediaWeb.Endpoint, :show)
   def pubkey_url(), do: actor_url() <> "#main-key"
 
   @doc false

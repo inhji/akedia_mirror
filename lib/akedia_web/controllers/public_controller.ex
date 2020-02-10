@@ -9,7 +9,7 @@ defmodule AkediaWeb.PublicController do
     post_changeset = Akedia.Content.change_post(%Akedia.Content.Post{})
     topics = Akedia.Content.list_top_topics(15)
 
-    render(conn, "index.html",
+    data = [
       changeset: post_changeset,
       tags: [],
       weather: weather,
@@ -20,7 +20,9 @@ defmodule AkediaWeb.PublicController do
       page_size: page.page_size,
       total_pages: page.total_pages,
       total_entries: page.total_entries
-    )
+    ]
+
+    render(conn, "index.html", data)
   end
 
   def queue(conn, _params) do
