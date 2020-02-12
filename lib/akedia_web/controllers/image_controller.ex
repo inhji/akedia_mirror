@@ -4,6 +4,8 @@ defmodule AkediaWeb.ImageController do
   alias Akedia.Media
   alias Akedia.Media.Image
 
+  plug :check_user when action not in [:show]
+
   def index(conn, _params) do
     images = Media.list_images()
     render(conn, "index.html", images: images)
@@ -16,7 +18,6 @@ defmodule AkediaWeb.ImageController do
 
   @spec create(Plug.Conn.t(), map()) :: Plug.Conn.t()
   def create(conn, %{"image" => image_params}) do
-
     case Media.create_image(image_params) do
       {:ok, image} ->
         conn

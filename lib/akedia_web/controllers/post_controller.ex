@@ -5,6 +5,8 @@ defmodule AkediaWeb.PostController do
   alias Akedia.Content.Post
   alias Akedia.Media
 
+  plug :check_user when action not in [:show]
+
   def index(conn, _params) do
     posts = Content.list_posts(is_published: true)
     render(conn, "index.html", posts: posts)

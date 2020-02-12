@@ -4,6 +4,8 @@ defmodule AkediaWeb.LikeController do
   alias Akedia.Content
   alias Akedia.Content.Like
 
+  plug :check_user when action not in [:show]
+
   def index(conn, _params) do
     likes = Content.list_likes(is_published: true)
     render(conn, "index.html", likes: likes)

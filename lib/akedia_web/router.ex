@@ -1,7 +1,7 @@
 defmodule AkediaWeb.Router do
   use AkediaWeb, :router
 
-  import AkediaWeb.Plugs.PlugAssignUser
+  import AkediaWeb.Plugs.PlugUser
   import AkediaWeb.Plugs.PlugFormat
 
   pipeline :browser do
@@ -49,10 +49,10 @@ defmodule AkediaWeb.Router do
     get "/search", PublicController, :search
     get "/feed", AtomController, :index
 
-    resources "/bookmarks", BookmarkController, only: [:show]
-    resources "/images", ImageController, only: [:show]
-    resources "/likes", LikeController, only: [:show]
-    resources "/posts", PostController, only: [:show]
+    resources "/posts", PostController
+    resources "/bookmarks", BookmarkController
+    resources "/images", ImageController
+    resources "/likes", LikeController
     resources "/topics", TopicController, only: [:index, :show]
 
     scope "/auth" do
@@ -84,7 +84,7 @@ defmodule AkediaWeb.Router do
   end
 
   # -----------------------------------------------------
-  # Admin Routes
+  # Protected Routes
   # -----------------------------------------------------
 
   scope "/user", AkediaWeb do
@@ -95,20 +95,8 @@ defmodule AkediaWeb.Router do
     get "/security", UserController, :security
   end
 
-  scope "/", AkediaWeb do
+  scope "/admin", AkediaWeb do
     pipe_through [:browser, :auth]
-
-    resources "/posts", PostController, except: [:show]
-    get "/posts/drafts", PostController, :drafts
-
-    resources "/bookmarks", BookmarkController, except: [:show]
-    get "/bookmarks/drafts", BookmarkController, :drafts
-
-    resources "/likes", LikeController, except: [:show]
-    get "/likes/drafts", LikeController, :drafts
-
-    resources "/topics", TopicController, except: [:index, :show]
-    resources "/images", ImageController, except: [:show]
 
     get "/mentions", MentionController, :index
 

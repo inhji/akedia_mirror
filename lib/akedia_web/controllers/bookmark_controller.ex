@@ -5,6 +5,8 @@ defmodule AkediaWeb.BookmarkController do
   alias Akedia.Content.Bookmark
   alias Akedia.Workers.{Favicon, Webmention}
 
+  plug :check_user when action not in [:show]
+
   def index(conn, _params) do
     bookmarks = Content.list_bookmarks(is_published: true)
     render(conn, "index.html", bookmarks: bookmarks)
