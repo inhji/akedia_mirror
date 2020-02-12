@@ -92,13 +92,13 @@ defmodule Akedia.Workers.Context do
     case Akedia.ActivityPub.Discovery.fetch(url) do
       {:ok, object} ->
         photo =
-          if !Enum.empty?(Map.get(object, "attachment")) do
+          if Enum.empty?(Map.get(object, "attachment")) do
+            nil
+          else
             object
             |> Map.get("attachment")
             |> hd
             |> Map.get("url")
-          else
-            nil
           end
 
         {:ok,

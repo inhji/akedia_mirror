@@ -52,7 +52,6 @@ defmodule AkediaWeb.WebauthnController do
             "public_key" => Base.encode64(public_key)
           }
 
-          # TODO: Update credentials for user
           user = Accounts.get_user!()
           credential = Accounts.get_credential_by_user(user.id)
           Accounts.update_credential(credential, credential_params)

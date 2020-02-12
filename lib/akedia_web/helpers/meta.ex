@@ -1,4 +1,8 @@
 defmodule AkediaWeb.Helpers.Meta do
+  @moduledoc """
+  Defines Helpers for setting the page <title>
+  """
+
   import Phoenix.HTML, only: [sigil_E: 2]
 
   def site_title(), do: Akedia.Settings.get(:site_title)

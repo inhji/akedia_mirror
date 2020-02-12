@@ -33,11 +33,9 @@ defmodule AkediaWeb.Plugs.PlugMicrosub do
   get "/" do
     Logger.debug("Handling GET Request")
 
-    with {:ok, action, conn} <- get_action(conn) do
-      handle_action(conn, :get, action)
-    else
-      {:error, reason} ->
-        send_error(conn, reason)
+    case get_action(conn) do
+      {:ok, action, conn} -> handle_action(conn, :get, action)
+      {:error, reason} -> send_error(conn, reason)
     end
   end
 
@@ -71,12 +69,9 @@ defmodule AkediaWeb.Plugs.PlugMicrosub do
   def handle_action(conn, :get, :channels) do
     handler = get_opt(conn, :handler)
 
-    with {:ok, channels} <- handler.handle_list_channels() do
-      conn
-      |> send_response(%{channels: channels})
-    else
-      {:error, code, reason} ->
-        send_error(conn, reason, code)
+    case handler.handle_list_channels() do
+      {:ok, channels} -> send_response(conn, %{channels: channels})
+      {:error, code, reason} -> send_error(conn, reason, code)
     end
   end
 
@@ -107,18 +102,18 @@ defmodule AkediaWeb.Plugs.PlugMicrosub do
   def handle_action(conn, :post, :timeline, :mark_read) do
     Logger.debug("Timeline/MarkRead")
 
-    cond do
-      get_param!(conn, @param_entry) != nil ->
-        entry_ids =
-          conn
-          |> get_param!(@param_entry)
-          |> maybe_wrap_entry_ids()
+    if get_param!(conn, @param_entry) != nil do
+      entry_ids =
+        conn
+        |> get_param!(@param_entry)
+        |> maybe_wrap_entry_ids()
 
-        handle_mark_read(conn, entry_ids)
+      handle_mark_read(conn, entry_ids)
+    end
 
-      get_param!(conn, @param_last_read) != nil ->
-        last_read_entry = get_param!(conn, @param_last_read)
-        handle_mark_read_before(conn, last_read_entry)
+    if get_param!(conn, @param_last_read) != nil do
+      last_read_entry = get_param!(conn, @param_last_read)
+      handle_mark_read_before(conn, last_read_entry)
     end
   end
 
@@ -179,18 +174,18 @@ defmodule AkediaWeb.Plugs.PlugMicrosub do
   end
 
   def get_action(%{query_params: %{"action" => action}} = conn) do
-    if not Enum.member?(@supported_actions, action) do
-      {:error, "Unsupported action"}
-    else
+    if Enum.member?(@supported_actions, action) do
       {:ok, String.to_atom(action), conn}
+    else
+      {:error, "Unsupported action"}
     end
   end
 
   def get_action(%{params: %{"action" => action}} = conn) do
-    if not Enum.member?(@supported_actions, action) do
-      {:error, "Unsupported action"}
-    else
+    if Enum.member?(@supported_actions, action) do
       {:ok, String.to_atom(action), conn}
+    else
+      {:error, "Unsupported action"}
     end
   end
 
@@ -200,18 +195,18 @@ defmodule AkediaWeb.Plugs.PlugMicrosub do
   end
 
   def get_method(%{query_params: %{"method" => method}} = conn) do
-    if not Enum.member?(@supported_methods, method) do
-      {:error, "Unsupported method"}
-    else
+    if Enum.member?(@supported_methods, method) do
       {:ok, String.to_atom(method), conn}
+    else
+      {:error, "Unsupported method"}
     end
   end
 
   def get_method(%{params: %{"method" => method}} = conn) do
-    if not Enum.member?(@supported_methods, method) do
-      {:error, "Unsupported method"}
-    else
+    if Enum.member?(@supported_methods, method) do
       {:ok, String.to_atom(method), conn}
+    else
+      {:error, "Unsupported method"}
     end
   end
 

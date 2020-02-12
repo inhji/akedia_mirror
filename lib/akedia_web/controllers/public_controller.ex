@@ -64,11 +64,10 @@ defmodule AkediaWeb.PublicController do
   end
 
   def plug_onboard(conn, _opts) do
-    if not conn.assigns.has_user do
+    if conn.assigns.has_user do
       conn
-      |> redirect(to: Routes.user_path(conn, :new))
     else
-      conn
+      redirect(conn, to: Routes.user_path(conn, :new))
     end
   end
 

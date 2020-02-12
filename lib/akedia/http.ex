@@ -51,12 +51,10 @@ defmodule Akedia.HTTP do
   end
 
   def abs_url(relative_path) do
-    cond do
-      String.starts_with?(relative_path, "http") ->
-        relative_path
-
-      true ->
-        abs_url(Akedia.url(), relative_path)
+    if String.starts_with?(relative_path, "http") do
+      relative_path
+    else
+      abs_url(Akedia.url(), relative_path)
     end
   end
 

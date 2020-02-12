@@ -62,6 +62,7 @@ defmodule Akedia.MixProject do
       {:atomex, "~> 0.3.0"},
       {:bcrypt_elixir, "~> 2.0"},
       {:comeonin, "~> 5.1"},
+      {:credo, "~> 1.2", only: :dev},
       {:distillery, "~> 2.0"},
       {:earmark, "~> 1.4.0"},
       {:ecto_sql, "~> 3.0"},

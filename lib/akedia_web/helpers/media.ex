@@ -1,4 +1,8 @@
 defmodule AkediaWeb.Helpers.Media do
+  @moduledoc """
+  Defines helpers for image urls from various uploaders
+  """
+
   use Phoenix.HTML
 
   alias Akedia.Media.{
