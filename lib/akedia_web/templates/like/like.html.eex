@@ -23,7 +23,7 @@
         <div class="post-header">
           <strong><%= @current_user.name %></strong>
           <%= if has_context do %>
-            <small>liked a post by <span class="has-text-light"><%= @like.entity.context.author.name %></span></small>
+            <small>liked a post by <%= link @like.entity.context.author.name, to: @like.entity.context.author.url, class: "has-text-light" %></small>
           <% else %>
             <small>liked a post</small>
           <% end %>
