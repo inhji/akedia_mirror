@@ -1,5 +1,3 @@
-<% {verb, url, url_text} = post_verb(@schema) %> 
-
 <div class="post-header">
   <strong><%= @current_user.name %></strong>
   <small>
