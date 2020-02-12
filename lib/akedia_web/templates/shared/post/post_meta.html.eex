@@ -8,10 +8,6 @@
 	  <%= render SharedView, "post/post_url.html", conn: @conn, schema: @schema %>
 	  <% end %>
 
-	  <%= if has_reply?(@schema) do %>
-	  <%= render SharedView, "post/post_reply.html", conn: @conn, schema: @schema %>
-	  <% end %>
-
 	  <%= if has_topics?(@schema) do %>
 	  <%= render SharedView, "post/post_topics.html", conn: @conn, topics: @schema.entity.topics %>
 	  <% end %>

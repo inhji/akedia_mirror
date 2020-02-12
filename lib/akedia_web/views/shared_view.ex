@@ -1,5 +1,6 @@
 defmodule AkediaWeb.SharedView do
   use AkediaWeb, :view
+  alias Akedia.Content.{Like, Bookmark, Post}
 
   def github_syndication(%{:entity => %{:syndications => syndications}}) do
     case Enum.empty?(syndications) do
@@ -37,6 +38,43 @@ defmodule AkediaWeb.SharedView do
     end
   end
 
-  def microformats_class(%Akedia.Content.Bookmark{}), do: "u-bookmark-of"
-  def microformats_class(%Akedia.Content.Like{}), do: "u-like-of"
+  def post_verb(%Bookmark{title: title, url: url}) do
+    if title do
+      {"bookmarked ", url, title}
+    else
+      {"bookmarked", nil, nil}
+    end
+  end
+
+  def post_verb(%Like{entity: %{context: context}}) do
+    if context do
+      {"liked a post by ", context.author.url, context.author.name}
+    else
+      {"liked", nil, nil}
+    end
+  end
+
+  def post_verb(%Post{reply_to: reply_to}) do
+    if reply_to do
+      {"replied to ", reply_to, reply_to}
+    else
+      {"posted", nil, nil}
+    end
+  end
+
+  def render_post_verb({text, url, url_text}) do
+    if url do
+      raw(
+        content_tag(:span, [
+          content_tag(:span, text),
+          link(url_text, to: url)
+        ])
+      )
+    else
+      raw(content_tag(:span, text))
+    end
+  end
+
+  def microformats_class(%Bookmark{}), do: "u-bookmark-of"
+  def microformats_class(%Like{}), do: "u-like-of"
 end

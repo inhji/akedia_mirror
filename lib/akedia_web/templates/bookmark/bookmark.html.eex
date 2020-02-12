@@ -11,16 +11,9 @@
         </p>
       </figure>
       <div class="media-content">
-        <div class="post-header">
-          <strong><%= @current_user.name %></strong>
-          <small>bookmarked</small>
-          <small>
-            <a href="<%= @bookmark.url %>"
-              class="h-cite p-name">
-              <%= @bookmark.title %>
-            </a>
-          </small>
-        </div>
+        <%= render SharedView, "post/post_header.html",
+            schema: @bookmark,
+            current_user: @current_user %>
 
         <div class="post-content">
           <div class="content e-content is-size-4">

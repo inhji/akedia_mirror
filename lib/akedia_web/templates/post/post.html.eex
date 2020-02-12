@@ -21,10 +21,9 @@
         </p>
       </figure>
       <div class="media-content">
-        <div class="post-header">
-          <strong><%= @current_user.name %></strong>      
-          <small>posted</small>
-        </div>
+        <%= render SharedView, "post/post_header.html",
+            schema: @post,
+            current_user: @current_user %>
 
         <div class="post-content">
           <%= if @post.title do %>
