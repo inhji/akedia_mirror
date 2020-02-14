@@ -53,7 +53,7 @@ defmodule AkediaWeb.Router do
     resources "/bookmarks", BookmarkController
     resources "/images", ImageController
     resources "/likes", LikeController
-    resources "/topics", TopicController, only: [:index, :show]
+    resources "/topics", TopicController
 
     scope "/auth" do
       get "/register", UserController, :new

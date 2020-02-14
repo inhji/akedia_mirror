@@ -4,7 +4,7 @@ defmodule AkediaWeb.TopicController do
   alias Akedia.Content
   alias Akedia.Content.Topic
 
-  plug :check_user when action not in [:show]
+  plug :check_user when action not in [:index, :show]
 
   def index(conn, _params) do
     topics = Content.list_topics()
