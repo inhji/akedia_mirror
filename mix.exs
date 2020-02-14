@@ -77,7 +77,7 @@ defmodule Akedia.MixProject do
       {:httpoison, "~> 1.6"},
       {:jason, "~> 1.0"},
       {:microformats2,
-       git: "https://git.inhji.de/inhji/microformats2-elixir.git", branch: "master"},
+       git: "https://git.inhji.de/inhji/microformats2-elixir.git", branch: "update-floki"},
       {:open_graph, "~> 0.0.4"},
       {:phoenix, "~> 1.4.0"},
       {:phoenix_active_link, "~> 0.3.0"},

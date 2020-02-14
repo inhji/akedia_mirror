@@ -60,7 +60,7 @@
   "matrix_reloaded": {:hex, :matrix_reloaded, "2.2.1", "9786e97c20535e902dbe586b704ede6c00a6854609715fb161645df9cd99ca55", [:mix], [{:ex_maybe, "~> 1.0", [hex: :ex_maybe, repo: "hexpm", optional: false]}, {:result, "~> 1.3.0", [hex: :result, repo: "hexpm", optional: false]}], "hexpm"},
   "memento": {:hex, :memento, "0.3.1", "b2909390820550d8b90b68ec96f9e15ff8a45a28b6f97fa4a62ef50e87c2f9d9", [:mix], [], "hexpm"},
   "metrics": {:hex, :metrics, "1.0.1", "25f094dea2cda98213cecc3aeff09e940299d950904393b2a29d191c346a8486", [:rebar3], [], "hexpm"},
-  "microformats2": {:git, "https://git.inhji.de/inhji/microformats2-elixir.git", "4e5709637cfe01fe2c17e563c649f4baca8ca905", [branch: "master"]},
+  "microformats2": {:git, "https://git.inhji.de/inhji/microformats2-elixir.git", "51d499299796096aac7a01ad49d1a412bd5999c6", [branch: "update-floki"]},
   "mime": {:hex, :mime, "1.3.1", "30ce04ab3175b6ad0bdce0035cba77bba68b813d523d1aac73d9781b4d193cf8", [:mix], [], "hexpm"},
   "mimerl": {:hex, :mimerl, "1.2.0", "67e2d3f571088d5cfd3e550c383094b47159f3eee8ffa08e64106cdf5e981be3", [:rebar3], [], "hexpm"},
   "mochiweb": {:hex, :mochiweb, "2.18.0", "eb55f1db3e6e960fac4e6db4e2db9ec3602cc9f30b86cd1481d56545c3145d2e", [:rebar3], [], "hexpm"},
