@@ -3,7 +3,6 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
-const VueLoaderPlugin = require('vue-loader/lib/plugin')
 
 function recursiveIssuer(m) {
   if (m.issuer) {
@@ -37,11 +36,6 @@ module.exports = (env, options) => ({
       },
     },
   },
-  resolve: {
-    alias: {
-      'vue$': 'vue/dist/vue.esm.js'
-    }
-  },
   entry: {
     app: './js/app.js'
   },
@@ -56,10 +50,6 @@ module.exports = (env, options) => ({
         use: {
           loader: 'babel-loader'
         }
-      },
-      {
-        test: /\.vue$/,
-        loader: 'vue-loader'
       },
       {
         test: /\.(sass|scss)$/,
