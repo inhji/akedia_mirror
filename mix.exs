@@ -75,9 +75,9 @@ defmodule Akedia.MixProject do
       {:gettext, "~> 0.11"},
       {:html_sanitize_ex, "~> 1.3"},
       {:httpoison, "~> 1.6"},
-      {:indieweb, "~> 0.0.42"},
       {:jason, "~> 1.0"},
-      {:microformats2, "0.2.1"},
+      {:microformats2,
+       git: "https://git.inhji.de/inhji/microformats2-elixir.git", branch: "master"},
       {:open_graph, "~> 0.0.4"},
       {:phoenix, "~> 1.4.0"},
       {:phoenix_active_link, "~> 0.3.0"},
@@ -86,7 +86,7 @@ defmodule Akedia.MixProject do
       {:phoenix_live_reload, "~> 1.2", only: :dev},
       {:phoenix_pubsub, "~> 1.1"},
       {:plug_cowboy, "~> 2.0"},
-      {:plug_micropub, git: "https://github.com/inhji/plug_micropub.git", branch: "master"},
+      {:plug_micropub, git: "https://git.inhji.de/inhji/plug_micropub", branch: "master"},
       {:postgrex, ">= 0.0.0"},
       {:qr_code, "~> 2.1.0"},
       {:quantum, "~> 2.3"},
@@ -99,7 +99,7 @@ defmodule Akedia.MixProject do
       {:totpex, "~> 0.1.3"},
       {:tzdata, "~> 1.0.0"},
       {:web_authn_ex, "~> 0.1.1"},
-      {:webmentions, git: "https://github.com/inhji/webmentions-elixir", branch: "update-deps"},
+      {:webmentions, git: "https://git.inhji.de/inhji/webmentions-elixir", branch: "update-deps"},
       {:xml_builder, "~> 2.1.1", override: true}
     ]
   end
