@@ -53,7 +53,7 @@ defmodule Akedia.Workers.Weather do
     Logger.info("URL: #{url}")
 
     url
-    |> HTTPoison.get!()
+    |> Akedia.HTTP.get!()
     |> Map.get(:body)
     |> Jason.decode!()
   end

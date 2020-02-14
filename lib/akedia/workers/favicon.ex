@@ -1,7 +1,7 @@
 defmodule Akedia.Workers.Favicon do
   require Logger
   use Que.Worker
-  alias Akedia.{Repo, Media, HTTP}
+  alias Akedia.{Repo, Media}
   alias Akedia.Content.Bookmark
   alias Akedia.Indie.{Microformats, Favicon}
   alias Akedia.Indie.Microformats.HCard
@@ -16,7 +16,7 @@ defmodule Akedia.Workers.Favicon do
 
         favicon =
           bookmark_url
-          |> HTTP.hostname()
+          |> Akedia.Helpers.hostname()
           |> maybe_create_favicon(favicon_url)
 
         bookmark

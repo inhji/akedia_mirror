@@ -6,7 +6,7 @@ defmodule Akedia.Indie.Token do
     headers = [authorization: "Bearer #{access_token}", accept: "application/json"]
 
     with {:ok, %Response{status_code: 200, body: body}} <-
-           HTTPoison.get(token_endpoint, headers),
+           Akedia.HTTP.get(token_endpoint, headers),
          {:ok, body_map} <- Jason.decode(body),
          :ok <- verify_token_response(body_map, required_scope) do
       :ok
@@ -56,7 +56,7 @@ defmodule Akedia.Indie.Token do
   end
 
   defp verify_hostname_match(hostname) do
-    hostnames_match? = Akedia.HTTP.sanitize_hostname(hostname) == Akedia.url()
+    hostnames_match? = Akedia.Helpers.sanitize_hostname(hostname) == Akedia.url()
 
     case hostnames_match? do
       true ->

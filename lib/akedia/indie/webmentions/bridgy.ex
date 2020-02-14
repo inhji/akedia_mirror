@@ -23,10 +23,10 @@ defmodule Akedia.Indie.Webmentions.Bridgy do
 
     headers = [
       {"Content-Type", "application/x-www-form-urlencoded"},
-      Akedia.HTTP.user_agent()
+      Akedia.user_agent()
     ]
 
-    case HTTPoison.post(endpoint, body, headers) do
+    case Akedia.HTTP.post(endpoint, body, headers) do
       {:ok, %HTTPoison.Response{status_code: 201, body: body}} ->
         json = Jason.decode!(body)
 

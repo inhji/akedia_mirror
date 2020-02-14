@@ -8,7 +8,9 @@ defmodule Akedia do
 
   @url_types_regex ~r/\/(?<type>bookmarks|posts|likes)\/(?<slug>[\w\d-]*)\/?$/
   @type entity :: %Akedia.Content.Post{} | %Akedia.Content.Like{} | %Akedia.Content.Bookmark{}
+  @user_agent {"User-Agent", "Akedia/0.x (https://inhji.de)"}
 
+  @spec user_agent() :: {String.t(), String.t()}
   @spec url() :: String.t()
   @spec url(String.t()) :: String.t()
   @spec domain() :: String.t()
@@ -16,9 +18,14 @@ defmodule Akedia do
   @spec entity_url(entity) :: String.t()
 
   @doc """
+  Returns the custom useragent.
+  """
+  def user_agent(), do: @user_agent
+
+  @doc """
   Returns the absolute url of the site with the trailing slash removed.
 
-  ## Example
+  ## Examples
 
       iex> Akedia.url()
       "http://localhost:4000"
@@ -29,7 +36,7 @@ defmodule Akedia do
   @doc """
   Returns the absolute url of the supplied path with the trailing slash removed.
 
-  # Example
+  ## Examples
 
       iex> Akedia.url("/some-path")
       "http://localhost:4000/some-path"
@@ -46,7 +53,7 @@ defmodule Akedia do
   @doc """
   Returns the domain, including port, of the site.
 
-  ## Example
+  ## Examples
 
       iex> Akedia.domain()
       "localhost:4000"
