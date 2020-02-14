@@ -21,7 +21,7 @@ defmodule Akedia.HTTP do
           Enum.map(selectors, fn {name, selector} ->
             value =
               body
-              |> Floki.parse()
+              |> Floki.parse_document()
               |> Floki.find(selector)
               |> List.first()
               |> Floki.text()
