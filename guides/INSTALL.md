@@ -96,7 +96,7 @@ openssl dhparam -out /etc/nginx/dhparams.pem 4096
 
 Create new virtual host at `/etc/nginx/sites-available/akedia.conf`:
 
-```nginx
+```
 map $sent_http_content_type $expires {
   default                    off;
   text/html                  epoch;

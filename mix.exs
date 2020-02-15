@@ -13,20 +13,7 @@ defmodule Akedia.MixProject do
       deps: deps(),
       source_url: "https://git.inhji.de/inhji/akedia",
       homepage_url: "https://inhji.de",
-      docs: [
-        main: "readme",
-        logo: "akedia.jpg",
-        extras: [
-          "README.md",
-          "guides/BACKUP.md",
-          "guides/BRIDGY.md",
-          "guides/DEPLOY.md",
-          "guides/INSTALL.md"
-        ],
-        authors: ["Inhji"],
-        output: "docs",
-        source_url_pattern: "https://git.inhji.de/inhji/akedia/src/branch/master/%{path}#L%{line}"
-      ]
+      docs: docs()
     ]
   end
 
@@ -120,6 +107,68 @@ defmodule Akedia.MixProject do
       migrate: ["edeliver migrate production"],
       deploy_ex: ["edeliver deploy release to production"],
       build_ex: ["edeliver build release"]
+    ]
+  end
+
+  defp docs do
+    [
+      main: "readme",
+      logo: "akedia.jpg",
+      extras: [
+        "README.md",
+        "guides/BACKUP.md",
+        "guides/BRIDGY.md",
+        "guides/DEPLOY.md",
+        "guides/INSTALL.md"
+      ],
+      authors: ["Inhji"],
+      output: "docs",
+      source_url_pattern: "https://git.inhji.de/inhji/akedia/src/branch/master/%{path}#L%{line}",
+      nest_modules_by_prefix: [
+        AkediaWeb,
+        Akedia.Content,
+        Akedia.Media,
+        Akedia.Indie,
+        Akedia.Accounts,
+        Akedia.Workers
+      ],
+      groups_for_modules: [
+        Controllers: [
+          AkediaWeb.AtomController,
+          AkediaWeb.BookmarkController,
+          AkediaWeb.ImageController,
+          AkediaWeb.InboxController,
+          AkediaWeb.LikeController,
+          AkediaWeb.MentionController,
+          AkediaWeb.OutboxController,
+          AkediaWeb.PostController,
+          AkediaWeb.ProfileController,
+          AkediaWeb.PublicController,
+          AkediaWeb.QueueController,
+          AkediaWeb.SessionController,
+          AkediaWeb.TopicController,
+          AkediaWeb.UserController,
+          AkediaWeb.WebauthnController,
+          AkediaWeb.WellKnownController
+        ],
+        Views: [
+          AkediaWeb.BookmarkView,
+          AkediaWeb.ErrorView,
+          AkediaWeb.ImageView,
+          AkediaWeb.LayoutView,
+          AkediaWeb.LikeView,
+          AkediaWeb.MentionView,
+          AkediaWeb.PostView,
+          AkediaWeb.ProfileView,
+          AkediaWeb.PublicView,
+          AkediaWeb.QueueView,
+          AkediaWeb.RegistrationView,
+          AkediaWeb.SessionView,
+          AkediaWeb.SharedView,
+          AkediaWeb.TopicView,
+          AkediaWeb.UserView
+        ]
+      ]
     ]
   end
 end
