@@ -142,6 +142,8 @@ defmodule Akedia.MixProject do
         Like: &(&1[:model] == :like),
         Topic: &(&1[:model] == :topic),
         Syndication: &(&1[:model] == :syndication),
+        Author: &(&1[:model] == :author),
+        Context: &(&1[:model] == :context),
         Query: &(&1[:utils] == :query),
         Tag: &(&1[:utils] == :tag)
       ],
