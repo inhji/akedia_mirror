@@ -14,7 +14,7 @@ defmodule Akedia.MixProject do
       source_url: "https://git.inhji.de/inhji/akedia",
       homepage_url: "https://inhji.de",
       docs: [
-        main: "Akedia",
+        main: "readme",
         logo: "akedia.jpg",
         extras: [
           "README.md",
