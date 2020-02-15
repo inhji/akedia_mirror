@@ -8,8 +8,4 @@ defmodule AkediaWeb.BookmarkView do
   def render("meta.show.html", assigns) do
     [title(assigns.bookmark, assigns)]
   end
-
-  def tld(url) do
-    URI.parse(url).host
-  end
 end

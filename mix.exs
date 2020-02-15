@@ -167,6 +167,10 @@ defmodule Akedia.MixProject do
           AkediaWeb.SharedView,
           AkediaWeb.TopicView,
           AkediaWeb.UserView
+        ],
+        "Custom Mix Tasks": [
+          MixBuild,
+          MixDeploy
         ]
       ]
     ]
