@@ -43,7 +43,7 @@ defmodule Akedia.Indie.Token do
     Logger.info("ClientId: #{client_id}")
     Logger.info("Scopes: '#{scope}'")
 
-    supported_scopes = Akedia.Indie.config(:supported_scopes, [])
+    supported_scopes = Akedia.Config.get(:supported_scopes, [])
 
     with {:ok, _hostname} <- verify_hostname_match(hostname),
          {:ok, _scope} <- verify_scope_support(scope, required_scope, supported_scopes) do

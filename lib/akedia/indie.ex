@@ -3,11 +3,6 @@ defmodule Akedia.Indie do
   alias Akedia.Repo
   alias Akedia.Indie.{Author, Context}
 
-  def config(key, default) do
-    config = Application.get_env(:akedia, Akedia.Indie)
-    Keyword.get(config, key, default)
-  end
-
   def list_authors do
     Author
     |> Repo.all()

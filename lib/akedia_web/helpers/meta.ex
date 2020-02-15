@@ -5,7 +5,7 @@ defmodule AkediaWeb.Helpers.Meta do
 
   import Phoenix.HTML, only: [sigil_E: 2]
 
-  def site_title(), do: Akedia.Settings.get(:site_title)
+  def site_title(), do: Akedia.Config.get(:site_title)
 
   def title(page_title, _assigns) when is_binary(page_title) do
     ~E{

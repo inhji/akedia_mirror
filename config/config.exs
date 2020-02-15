@@ -12,7 +12,9 @@ config :elixir, :time_zone_database, Tzdata.TimeZoneDatabase
 config :akedia,
   ecto_repos: [Akedia.Repo]
 
-config :akedia, Akedia.Indie,
+config :akedia, Akedia.Config,
+  site_title: "Inhji.de",
+  weather_location: "50.583830,8.677890",
   bridgy_endpoint: "https://brid.gy/publish/webmention",
   bridgy_github_target: "https://brid.gy/publish/github",
   supported_scopes: [
@@ -29,10 +31,6 @@ config :akedia, Akedia.Indie,
     "block",
     "channels"
   ]
-
-config :akedia, Akedia.Settings,
-  site_title: "Inhji.de",
-  weather_location: "50.583830,8.677890"
 
 config :akedia, Akedia.Scheduler,
   jobs: [

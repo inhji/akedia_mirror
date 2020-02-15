@@ -24,8 +24,8 @@ defmodule Akedia.Workers.Weather do
   def init(state) do
     state =
       state
-      |> Map.put(:key, Akedia.Settings.get(:weather_apikey))
-      |> Map.put(:location, Akedia.Settings.get(:weather_location))
+      |> Map.put(:key, Akedia.Config.get(:weather_apikey))
+      |> Map.put(:location, Akedia.Config.get(:weather_location))
 
     schedule_weather_fetch(10_000)
     {:ok, state}

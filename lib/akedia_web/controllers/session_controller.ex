@@ -119,7 +119,7 @@ defmodule AkediaWeb.SessionController do
     user = Accounts.get_user!()
 
     secret =
-      Akedia.Settings.get(:totp_secret)
+      Akedia.Config.get(:totp_secret)
       |> Base.encode32()
 
     case Totpex.validate_totp(secret, totp, grace_periods: 1) do

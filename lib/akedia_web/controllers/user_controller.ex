@@ -79,7 +79,7 @@ defmodule AkediaWeb.UserController do
     email = user.credential.email
 
     qr_code =
-      Akedia.Settings.get(:totp_secret)
+      Akedia.Config.get(:totp_secret)
       |> Base.encode32()
       |> totp_qr_string(issuer, email)
       |> QRCode.QR.create!()
