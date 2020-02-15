@@ -20,7 +20,10 @@
       <%= if not @logged_in do %>
         <%= link "Login", to: Routes.session_path(@conn, :new), class: "navbar-item" %>
       <% else %>
-        <%= link "Queue", to: Routes.queue_path(@conn, :index), class: "navbar-item" %>
+        <%= link to: Routes.queue_path(@conn, :index), class: "navbar-item" do %>
+          <i class="fa fa-bell"></i>
+          <span class="is-hidden-desktop">Inbox</span>
+        <% end %>
 
         <div class="navbar-item has-dropdown is-hoverable is-primary">
           <a class="navbar-link" href="<%= Routes.user_path(@conn, :show) %>">
