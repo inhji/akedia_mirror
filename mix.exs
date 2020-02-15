@@ -132,6 +132,19 @@ defmodule Akedia.MixProject do
         Akedia.Accounts,
         Akedia.Workers
       ],
+      groups_for_functions: [
+        User: &(&1[:model] == :user),
+        Credential: &(&1[:model] == :credential),
+        Profile: &(&1[:model] == :profile),
+        Entity: &(&1[:model] == :entity),
+        Bookmark: &(&1[:model] == :bookmark),
+        Post: &(&1[:model] == :post),
+        Like: &(&1[:model] == :like),
+        Topic: &(&1[:model] == :topic),
+        Syndication: &(&1[:model] == :syndication),
+        Query: &(&1[:utils] == :query),
+        Tag: &(&1[:utils] == :tag)
+      ],
       groups_for_modules: [
         Controllers: [
           AkediaWeb.AtomController,

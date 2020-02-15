@@ -35,6 +35,55 @@ defmodule Akedia.Accounts.User do
     |> unique_constraint(:username)
   end
 
+  @doc """
+  Returns the actor url
+  """
+  def actor_url(), do: Routes.user_url(AkediaWeb.Endpoint, :show)
+
+  @doc """
+  Returns the inbox url
+  """
+  def inbox_url(), do: Routes.inbox_url(AkediaWeb.Endpoint, :index)
+
+  @doc """
+  Returns the outbox url
+  """
+  def outbox_url(), do: Routes.outbox_url(AkediaWeb.Endpoint, :index)
+
+  @doc """
+  Returns the public key url
+  """
+  def pubkey_url(), do: actor_url() <> "#main-key"
+
+  @doc """
+  Returns the user as an activity pub actor
+
+  ## Examples
+
+  ```
+  {
+    "@context": [
+      "https://www.w3.org/ns/activitystreams"
+    ],
+    "icon": {
+      "mediaType": "image/png",
+      "type": "Image",
+      "url": "http://localhost:4000/uploads/user/me_thumb.png?v=63746169254"
+    },
+    "id": "http://localhost:4000/about",
+    "name": "Inhji",
+    "preferredUsername": "inhji",
+    "publicKey": {
+      "id": "http://localhost:4000/about#main-key",
+      "owner": "http://localhost:4000/about",
+      "publicKeyPem": "-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA29XxA2UamqFZFuX9zwpU\neVC+zFRgSkDeTVAjdKbddDbTi0nXVbxQepVsvjG86jdj7v9XKNm3PfB54zJWGJ/8\nQ/rTK19TXwGsGrBBGvSl4asIn8erQQkWDhlzyghOpNznquunbXvt0KQRkcaXg6r2\nsQluKCTmV3NV+RpynlZd+OSZDyqBKmnzKbFAk5R1F05hyoANy9ogp6Ogae0vGkGJ\nOseOaam6HuXD1oOvd262BjfKVH0L9Y4wsb9yao7kAKNSTauyvfTkIuy9dv1qh1cj\ns+a41L+SnLMGMtMa/tERhl4sYglHzPAUrn2rSTpEM9+yMvsbph/khRkU3aMN36ov\nfQIDAQAB\n-----END PUBLIC KEY-----\n"
+    },
+    "summary": "*daydreamer*. \r\ntinkerer. depressionist. overthinker. rebel without a voice. bruhgrammer. catlover. slightly human.",
+    "type": "Person"
+  }
+  ```
+
+  """
   def to_json(%Akedia.Accounts.User{} = user) do
     %{
       "id" => actor_url(),
@@ -58,11 +107,6 @@ defmodule Akedia.Accounts.User do
       }
     }
   end
-
-  def actor_url(), do: Routes.user_url(AkediaWeb.Endpoint, :show)
-  def inbox_url(), do: Routes.inbox_url(AkediaWeb.Endpoint, :index)
-  def outbox_url(), do: Routes.outbox_url(AkediaWeb.Endpoint, :index)
-  def pubkey_url(), do: actor_url() <> "#main-key"
 
   @doc false
   defp maybe_generate_pub_key_pair(changeset) do
