@@ -24,7 +24,8 @@ defmodule Akedia.MixProject do
           "guides/INSTALL.md"
         ],
         authors: ["Inhji"],
-        output: "docs"
+        output: "docs",
+        source_url_pattern: "https://git.inhji.de/inhji/akedia/src/branch/master/%{path}#L%{line}"
       ]
     ]
   end
