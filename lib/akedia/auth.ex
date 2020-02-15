@@ -1,6 +1,7 @@
 defmodule Akedia.Auth do
   alias Akedia.{Accounts, Repo}
   import Plug.Conn
+  import Plug.Conn, only: [get_session: 2, put_session: 3, configure_session: 2, assign: 3]
 
   @error_message "Incorrect email or password"
 
@@ -26,7 +27,13 @@ defmodule Akedia.Auth do
   end
 
   def logout(conn) do
-    conn
-    |> configure_session(drop: true)
+    configure_session(conn, drop: true)
+  end
+
+  def logged_in?(conn) do
+    case get_session(conn, :user_id) do
+      nil -> false
+      _ -> true
+    end
   end
 end

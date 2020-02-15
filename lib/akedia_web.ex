@@ -22,8 +22,8 @@ defmodule AkediaWeb do
       use Phoenix.Controller, namespace: AkediaWeb
 
       import Plug.Conn
+      import Akedia.Auth, only: [logged_in?: 1]
       import AkediaWeb.Gettext
-      import AkediaWeb.Helpers.User, only: [logged_in?: 1]
       import AkediaWeb.Plugs.PlugUser
       import AkediaWeb.Responses
       alias AkediaWeb.Router.Helpers, as: Routes
@@ -46,11 +46,11 @@ defmodule AkediaWeb do
       use Phoenix.HTML
       use Timex
 
+      import Akedia.Auth, only: [logged_in?: 1]
+
       import AkediaWeb.ErrorHelpers
       import AkediaWeb.Gettext
-
       import AkediaWeb.Helpers.Media
-      import AkediaWeb.Helpers.User, only: [logged_in?: 1]
 
       import AkediaWeb.Helpers.Time,
         only: [date_iso: 1, date_pretty: 1, date_fuzzy: 1, time_tag: 1]
