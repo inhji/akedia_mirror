@@ -1,40 +1,12 @@
-defmodule Akedia.Workers.Context do
+defmodule Akedia.Context do
+  @moduledoc """
+  Fetches the context of a post from various sources
+  """
   require Logger
-  use Que.Worker
-  alias Akedia.Content.Like
 
-  def perform(%Like{url: url, entity: entity} = _like) do
-    with author_map <- get_author(url),
-         content_map <- get_content(url) do
-      IO.inspect(author_map)
-      IO.inspect(content_map)
-
-      Logger.debug("Creating author..")
-
-      {:ok, author} =
-        author_map
-        |> Map.drop([:photo])
-        |> Akedia.Indie.maybe_create_author()
-
-      Logger.debug("Saving author photo..")
-
-      {:ok, author} = Akedia.Indie.update_author(author, %{photo: author_map[:photo]})
-
-      Logger.debug("Creating context..")
-
-      {:ok, context} =
-        content_map
-        |> Map.drop([:photo])
-        |> Map.put_new(:author_id, author.id)
-        |> Map.put_new(:entity_id, entity.id)
-        |> Akedia.Indie.maybe_create_context()
-
-      Logger.debug("Saving context photo..")
-
-      {:ok, _context} = Akedia.Indie.update_context(context, %{photo: content_map[:photo]})
-    end
-  end
-
+  @doc """
+  Fetches the post content
+  """
   def get_content(url) do
     Enum.reduce_while(
       [
@@ -51,6 +23,9 @@ defmodule Akedia.Workers.Context do
     )
   end
 
+  @doc """
+  Fetches the post author
+  """
   def get_author(url) do
     Enum.reduce_while(
       [
@@ -67,7 +42,7 @@ defmodule Akedia.Workers.Context do
     )
   end
 
-  def maybe_get_content_from_microformats(url) do
+  defp maybe_get_content_from_microformats(url) do
     case Akedia.Indie.Microformats.fetch(url) do
       {:ok, %{items: [item]}} ->
         [content_map] = get_in(item, [:properties, :content])
@@ -88,7 +63,7 @@ defmodule Akedia.Workers.Context do
     end
   end
 
-  def maybe_get_content_from_activitypub(url) do
+  defp maybe_get_content_from_activitypub(url) do
     case Akedia.ActivityPub.Discovery.fetch(url) do
       {:ok, object} ->
         photo =
@@ -115,7 +90,7 @@ defmodule Akedia.Workers.Context do
     end
   end
 
-  def maybe_get_author_from_activitypub(url) do
+  defp maybe_get_author_from_activitypub(url) do
     case Akedia.ActivityPub.Discovery.discover_actor(url) do
       {:ok, %{"icon" => icon, "name" => name, "url" => url, "preferredUsername" => username}} ->
         {:ok,
@@ -131,7 +106,7 @@ defmodule Akedia.Workers.Context do
     end
   end
 
-  def maybe_get_author_from_microformats(url) do
+  defp maybe_get_author_from_microformats(url) do
     case Akedia.Indie.Microformats.fetch(url) do
       {:ok, %{items: [item]}} ->
         [author] = get_in(item, [:properties, :author])

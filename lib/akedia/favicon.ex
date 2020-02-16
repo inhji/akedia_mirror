@@ -1,4 +1,8 @@
 defmodule Akedia.Favicon do
+  @moduledoc """
+  Fetches the favicon for a url by looking at meta tags and favicon.ico
+  """
+
   def fetch(url) do
     uri = URI.parse(url)
     domain = "#{uri.scheme}://#{uri.host}"

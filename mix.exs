@@ -130,7 +130,10 @@ defmodule Akedia.MixProject do
         Akedia.Media,
         Akedia.Indie,
         Akedia.Accounts,
-        Akedia.Workers
+        Akedia.Workers,
+        Akedia.Favicon,
+        Akedia.Scraper,
+        Akedia.Context
       ],
       groups_for_functions: [
         User: &(&1[:model] == :user),
