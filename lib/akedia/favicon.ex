@@ -1,11 +1,9 @@
-defmodule Akedia.Indie.Favicon do
-  alias Akedia.HTTP
-
+defmodule Akedia.Favicon do
   def fetch(url) do
     uri = URI.parse(url)
     domain = "#{uri.scheme}://#{uri.host}"
 
-    case HTTP.get(domain) do
+    case Akedia.HTTP.get(domain) do
       {:ok, %HTTPoison.Response{status_code: 200, body: body}} ->
         find_favicon_url(domain, body)
 
@@ -20,7 +18,7 @@ defmodule Akedia.Indie.Favicon do
   defp find_favicon_in_root(domain) do
     favicon_url = "#{domain}/favicon.ico"
 
-    case HTTP.head(favicon_url) do
+    case Akedia.HTTP.head(favicon_url) do
       {:ok, %HTTPoison.Response{status_code: 200}} ->
         {:ok, favicon_url}
 

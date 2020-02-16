@@ -1,9 +1,9 @@
-defmodule Akedia.Workers.Favicon do
+defmodule Akedia.Favicon.Worker do
   require Logger
   use Que.Worker
   alias Akedia.{Repo, Media}
   alias Akedia.Content.Bookmark
-  alias Akedia.Indie.{Microformats, Favicon}
+  alias Akedia.Indie.{Microformats}
   alias Akedia.Indie.Microformats.HCard
 
   def perform(%Bookmark{url: bookmark_url} = bookmark) do
@@ -46,7 +46,7 @@ defmodule Akedia.Workers.Favicon do
   end
 
   def maybe_get_favicon_from_head(url) do
-    case Favicon.fetch(url) do
+    case Akedia.Favicon.fetch(url) do
       {:ok, favicon} ->
         {:ok, favicon}
 

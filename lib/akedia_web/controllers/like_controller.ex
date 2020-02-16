@@ -53,7 +53,7 @@ defmodule AkediaWeb.LikeController do
     case Content.update_like(like, like_params) do
       {:ok, like} ->
         Que.add(Akedia.Workers.Webmention, like)
-        Que.add(Akedia.Workers.URLScraper, like)
+        Que.add(Akedia.Scraper.Worker, like)
 
         conn
         |> put_flash(:info, "Like updated successfully.")

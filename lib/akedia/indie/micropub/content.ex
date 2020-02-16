@@ -1,6 +1,5 @@
 defmodule Akedia.Indie.Micropub.Content do
   require Logger
-  alias Akedia.Workers
   alias Akedia.Content
 
   def enable_bridgy_fed?(targets) do
@@ -27,7 +26,7 @@ defmodule Akedia.Indie.Micropub.Content do
 
     case Content.create_bookmark(attrs, %{is_published: is_published, bridgy_fed: bridgy_fed}) do
       {:ok, bookmark} ->
-        Que.add(Workers.Favicon, bookmark)
+        Que.add(Akedia.Favicon.Worker, bookmark)
         Akedia.Content.add_tags(bookmark, tags)
         Logger.info("Bookmark created: #{inspect(bookmark)}")
         {:ok, :created, Akedia.entity_url(bookmark)}
