@@ -109,6 +109,6 @@
   "unicode_util_compat": {:hex, :unicode_util_compat, "0.4.1", "d869e4c68901dd9531385bb0c8c40444ebf624e60b6962d95952775cac5e90cd", [:rebar3], [], "hexpm", "1d1848c40487cdb0b30e8ed975e34e025860c02e419cb615d255849f3427439d"},
   "unsafe": {:hex, :unsafe, "1.0.1", "a27e1874f72ee49312e0a9ec2e0b27924214a05e3ddac90e91727bc76f8613d8", [:mix], [], "hexpm"},
   "web_authn_ex": {:hex, :web_authn_ex, "0.1.1", "c37516c16b2e9325b9727b3b5f3b7f2a347bd3372e2011f903b141c386860397", [:mix], [{:jason, "~> 1.0", [hex: :jason, repo: "hexpm", optional: false]}], "hexpm", "69dc5b987641d9240359b3d0d7e9aaa8ed538030b6afb8767c5f06085178eac9"},
-  "webmentions": {:git, "https://git.inhji.de/inhji/webmentions-elixir", "86c66c7c95b8b9ec6528e6ec17a3c852ad7c5daa", [branch: "update-deps"]},
+  "webmentions": {:git, "https://git.inhji.de/inhji/webmentions-elixir", "205a2f69b75a268c0b8a1fb346aa9e907b4580a9", [branch: "update-deps"]},
   "xml_builder": {:hex, :xml_builder, "2.1.2", "90cb9ad382958934c78c6ddfbe6d385a8ce147d84b61cbfa83ec93a169d0feab", [:mix], [], "hexpm", "b89046041da2fbc1d51d31493ba31b9d5fc6223c93384bf513a1a9e1df9ec081"},
 }
