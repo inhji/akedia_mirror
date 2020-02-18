@@ -56,15 +56,12 @@ defmodule Akedia.Accounts.User do
   def pubkey_url(), do: actor_url() <> "#main-key"
 
   @doc """
-  Returns the user as an activity pub actor
+  Returns the user as an activity pub actor. Context needs to be added via `Akedia.Helpers.with_context/1` or `Akedia.Helpers.with_context/2`
 
   ## Examples
 
   ```
   {
-    "@context": [
-      "https://www.w3.org/ns/activitystreams"
-    ],
     "icon": {
       "mediaType": "image/png",
       "type": "Image",
