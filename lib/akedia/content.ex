@@ -610,20 +610,17 @@ defmodule Akedia.Content do
   #                                          \______/ 
 
   @doc utils: :query
-  def schema_per_month(schema) do
-    schema
-    |> select([l], [count(l.id), fragment("date_trunc('month', ?) as month", l.inserted_at)])
-    |> group_by([l], fragment("month"))
-    |> order_by([l], fragment("month"))
-    |> Repo.all()
-  end
+  def schema_per_month(schema), do: schema_per_range(schema, "month")
 
   @doc utils: :query
-  def schema_per_week(schema) do
+  def schema_per_week(schema), do: schema_per_range(schema, "week")
+
+  @doc utils: :query
+  def schema_per_range(schema, range) do
     schema
-    |> select([l], [count(l.id), fragment("date_trunc('week', ?) as week", l.inserted_at)])
-    |> group_by([l], fragment("week"))
-    |> order_by([l], fragment("week"))
+    |> select([l], [count(l.id), fragment("date_trunc(?, ?) as fragment", ^range, l.inserted_at)])
+    |> group_by([l], fragment("fragment"))
+    |> order_by([l], fragment("fragment"))
     |> Repo.all()
   end
 
