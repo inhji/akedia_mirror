@@ -59,7 +59,7 @@ defmodule Akedia.MixProject do
       {:ex_machina, "~> 2.3", only: :test},
       {:ex_cli, "~> 0.1.0"},
       {:feeder_ex, "~> 1.1"},
-      {:floki, "~> 0.25.0"},
+      {:floki, "~> 0.26.0"},
       {:gettext, "~> 0.11"},
       {:html_sanitize_ex, "~> 1.3"},
       {:httpoison, "~> 1.6"},
