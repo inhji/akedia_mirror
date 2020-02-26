@@ -9,6 +9,7 @@ defmodule Akedia.Content do
   * `Akedia.Content.Post`
   * `Akedia.Content.Syndication`
   """
+
   import Ecto.Query, warn: false
   alias Akedia.Repo
 
@@ -673,7 +674,7 @@ defmodule Akedia.Content do
     schema
     |> list_query(options)
     |> Repo.all()
-    |> Repo.preload(entity: [:topics, :image, :syndications])
+    |> Repo.preload(@preloads)
   end
 
   @doc utils: :query

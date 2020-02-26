@@ -1,7 +1,17 @@
-<%= render SharedView, "nav/posts_nav.html", conn: @conn, path_helper: &Routes.like_path/2, drafts: false %>
+<section class="hero is-primary is-bold card">
+  <div class="hero-body">
+    <h1 class="title">Showing likes</h1>
+    <h2 class="subtitle"><%= Enum.count(@likes) %> likes found.</h2>
+  </div>
+</section>
 
-<div class="content-wrapper">
-  <%= for like <- @likes do %>
-    <%= render "like.html", Map.put(assigns, :like, like) %>
-  <% end %>
+<div class="columns is-desktop">
+  <div class="column">
+    <div class="posts h-feed">
+      <%= for like <- @likes do %>
+        <%= render "like.html", Map.put(assigns, :like, like) %>
+      <% end %>
+    </div>
+  </div>
+  <div class="column"></div>
 </div>

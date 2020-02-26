@@ -1,13 +1,17 @@
-<%= render SharedView, "nav/posts_nav.html", conn: @conn, path_helper: &Routes.bookmark_path/2 %>
-
-<div class="h-feed">
-  <%= for bookmark <- @bookmarks do %>
-    <%= render "bookmark.html", conn: @conn, bookmark: bookmark, current_user: @current_user %>
-  <% end %>
-</div>
-
-<%= if Enum.empty?(@bookmarks) do %>
-  <div>
-    Doh!
+<section class="hero is-primary is-bold card">
+  <div class="hero-body">
+    <h1 class="title">Showing bookmarks</h1>
+    <h2 class="subtitle"><%= Enum.count(@bookmarks) %> bookmarks found.</h2>
   </div>
-<% end %>
+</section>
+
+<div class="columns is-desktop">
+  <div class="column">
+    <div class="posts h-feed">
+      <%= for bookmark <- @bookmarks do %>
+        <%= render "bookmark.html", conn: @conn, bookmark: bookmark, current_user: @current_user %>
+      <% end %>
+    </div>
+  </div>
+  <div class="column"></div>
+</div>
