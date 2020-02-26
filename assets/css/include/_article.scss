@@ -51,7 +51,8 @@ article.like {
     blockquote {
       border: none;
       font-family: serif;
-      font-size: 120%;
+      font-size: 110%;
+      padding: 1rem;
 
       p:before { content: '“';}
       p:after { content: '”'; }
