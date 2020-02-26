@@ -1,6 +1,6 @@
 <div class="post-header">
   <strong><%= @current_user.name %></strong>
-  <small>
+  <span>
     <%= render_post_verb(post_verb(@schema)) %>
-  </small>
+  </span>
 </div>
