@@ -1,0 +1,16 @@
+<div class="card">
+  <div class="card-content">
+    <aside class="menu">
+      <ul class="menu-list">
+        <%= active_link @conn, to: Routes.queue_path(@conn, :index), wrap_tag: :li do %>
+          <i class="fa fa-inbox" aria-hidden="true"></i>
+          <span>Inbox</span>
+        <% end %>
+        <%= active_link @conn, to: Routes.queue_path(@conn, :drafts), wrap_tag: :li do %>
+          <i class="fa fa-hourglass" aria-hidden="true"></i>
+          <span>Drafts</span>
+        <% end %>
+      </ul>
+    </aside>
+  </div>
+</div>

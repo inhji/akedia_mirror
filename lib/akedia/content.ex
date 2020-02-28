@@ -318,6 +318,13 @@ defmodule Akedia.Content do
   end
 
   @doc model: :post
+  def list_drafted_posts() do
+    list_query(Post, is_published: false)
+    |> where([p], not is_nil(p.title))
+    |> Repo.all()
+  end
+
+  @doc model: :post
   def list_posts_paginated(opts \\ [], params \\ %{}) do
     list_query(Post, opts)
     |> preload(entity: [:topics, :image, :syndications])

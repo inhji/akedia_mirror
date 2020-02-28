@@ -28,7 +28,7 @@
       <% else %>
         <%= link to: Routes.queue_path(@conn, :index), class: "navbar-item" do %>
           <i class="fa fa-bell"></i>
-          <span class="is-hidden-desktop">Inbox</span>
+          <span class="is-hidden-desktop">Queue</span>
         <% end %>
 
         <div class="navbar-item has-dropdown is-hoverable is-primary">

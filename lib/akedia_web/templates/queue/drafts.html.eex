@@ -1,0 +1,12 @@
+<div class="columns">
+  <div class="column is-2">
+    <%= render "sidebar.html", assigns %>
+  </div>
+  <div class="column">
+    <%= for post <- @posts do %>
+      <p class="is-size-3">
+        <%= link post.title, to: Routes.post_path(@conn, :show, post) %>
+      </p>
+    <% end %>
+  </div>
+</div>
