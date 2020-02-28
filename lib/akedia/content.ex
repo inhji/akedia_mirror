@@ -45,17 +45,6 @@ defmodule Akedia.Content do
   end
 
   @doc model: :entity
-  def list_entities_paginated(%{"type" => type} = params) do
-    query =
-      from entity in entity_query(),
-        where: [is_published: true]
-
-    query
-    |> filter_entity_query(type)
-    |> Repo.paginate(params)
-  end
-
-  @doc model: :entity
   def list_entities_paginated(params) do
     query =
       from entity in entity_query(),
@@ -63,45 +52,6 @@ defmodule Akedia.Content do
         preload: [context: [:author]]
 
     Repo.paginate(query, params)
-  end
-
-  @doc model: :entity
-  def filter_entity_query(query, "post") do
-    where(query, [e, l, p, b], not is_nil(p.id))
-  end
-
-  @doc model: :entity
-  def filter_entity_query(query, "like") do
-    where(query, [e, l, p, b], not is_nil(l.id))
-  end
-
-  @doc model: :entity
-  def filter_entity_query(query, "bookmark") do
-    where(query, [e, l, p, b], not is_nil(b.id))
-  end
-
-  @doc model: :entity
-  def filter_entity_query(query, _) do
-    query
-    |> where([e, l, p, b], not is_nil(p.id))
-    |> or_where([e, l, p, b], not is_nil(l.id))
-    |> or_where([e, l, p, b], not is_nil(b.id))
-  end
-
-  @doc model: :entity
-  def list_pinned_entities() do
-    Repo.all(
-      from entity in entity_query(),
-        where: [is_pinned: true, is_published: true]
-    )
-  end
-
-  @doc model: :entity
-  def list_queued_entities() do
-    Repo.all(
-      from entity in entity_query(),
-        where: [is_published: false]
-    )
   end
 
   @doc model: :entity
@@ -669,6 +619,9 @@ defmodule Akedia.Content do
       ]
   end
 
+  @doc """
+  Lists items of `schema`. For options, see `list_query/2`.
+  """
   @doc utils: :query
   def list(schema, options \\ []) do
     schema
@@ -677,6 +630,29 @@ defmodule Akedia.Content do
     |> Repo.preload(@preloads)
   end
 
+  @doc """
+  Creates a query which lists items of `schema`. Used by `list/2`.
+
+  ## Options
+
+  Options should be a keyword list and accepts the following fields:
+
+  * order_by
+  * limit
+  * is_published
+  * is_pinned
+
+  ## Examples
+
+      iex> list_query(%Akedia.Content.Post{}, order_by: [desc: :inserted_at])
+
+      iex> list_query(%Akedia.Content.Post{}, limit: 10)
+
+      iex> list_query(%Akedia.Content.Post{}, is_published: true)
+
+      iex> list_query(%Akedia.Content.Post{}, is_pinned: false)
+
+  """
   @doc utils: :query
   def list_query(schema, options \\ []) do
     sort_options = options[:order_by] || [desc: :inserted_at]
