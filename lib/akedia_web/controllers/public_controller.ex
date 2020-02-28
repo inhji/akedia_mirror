@@ -3,6 +3,14 @@ defmodule AkediaWeb.PublicController do
 
   plug :plug_onboard
 
+  def plug_onboard(conn, _opts) do
+    if conn.assigns.has_user do
+      conn
+    else
+      redirect(conn, to: Routes.user_path(conn, :new))
+    end
+  end
+
   def index(conn, params) do
     weather = Akedia.Workers.Weather.get_weather()
     page = Akedia.Content.list_entities_paginated(params)
@@ -23,20 +31,6 @@ defmodule AkediaWeb.PublicController do
     ]
 
     render(conn, "index.html", data)
-  end
-
-  def queue(conn, _params) do
-    entities = Akedia.Content.list_queued_entities()
-
-    render(conn, "queue.html", entities: entities)
-  end
-
-  def now(conn, _params) do
-    render(conn, "now.html", [])
-  end
-
-  def about(conn, _params) do
-    render(conn, "about.html", [])
   end
 
   def search(conn, %{"query" => query}) do
@@ -61,14 +55,6 @@ defmodule AkediaWeb.PublicController do
       entities: entities,
       topics: topics
     )
-  end
-
-  def plug_onboard(conn, _opts) do
-    if conn.assigns.has_user do
-      conn
-    else
-      redirect(conn, to: Routes.user_path(conn, :new))
-    end
   end
 
   def post_type_filter(entity) do
