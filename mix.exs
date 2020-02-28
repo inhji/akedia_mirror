@@ -77,7 +77,6 @@ defmodule Akedia.MixProject do
       {:plug_micropub, git: "https://git.inhji.de/inhji/plug_micropub", branch: "master"},
       {:postgrex, ">= 0.0.0"},
       {:qr_code, "~> 2.1.0"},
-      {:quantum, "~> 2.3"},
       {:que, "~> 0.10.0"},
       {:rsa_ex, "~> 0.4"},
       {:scrivener_ecto, "~> 2.0", override: true},

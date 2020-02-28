@@ -32,11 +32,6 @@ config :akedia, Akedia.Config,
     "channels"
   ]
 
-config :akedia, Akedia.Scheduler,
-  jobs: [
-    {"*/30 * * * *", {Que, :add, [Akedia.Workers.Feeder, nil]}}
-  ]
-
 # Configures the endpoint
 config :akedia, AkediaWeb.Endpoint,
   url: [host: "localhost"],
