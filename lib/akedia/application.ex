@@ -12,8 +12,6 @@ defmodule Akedia.Application do
       Akedia.Repo,
       # Start the endpoint when the application starts
       AkediaWeb.Endpoint,
-      # Start the Quantum Scheduler
-      Akedia.Scheduler,
       # Start the Weather GenServer
       {Akedia.Workers.Weather, %{}}
     ]
