@@ -1,4 +1,4 @@
-defmodule Akedia.Indie.Webmentions do
+defmodule Akedia.Webmention do
   require Logger
 
   def do_send_webmentions(url, selector) do
