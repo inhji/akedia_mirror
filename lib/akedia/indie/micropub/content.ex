@@ -45,7 +45,7 @@ defmodule Akedia.Indie.Micropub.Content do
 
     case Content.create_like(attrs, %{is_published: is_published, bridgy_fed: bridgy_fed}) do
       {:ok, like} ->
-        Que.add(Workers.Webmention, like)
+        Que.add(Akedia.Webmention.Worker, like)
         Que.add(Akedia.Context.Worker, like)
         Logger.info("Like created!")
         {:ok, :created, Akedia.entity_url(like)}
@@ -62,7 +62,7 @@ defmodule Akedia.Indie.Micropub.Content do
 
     case Content.create_post(attrs, %{is_published: is_published, bridgy_fed: bridgy_fed}) do
       {:ok, post} ->
-        Que.add(Workers.Webmention, post)
+        Que.add(Akedia.Webmention.Worker, post)
         Logger.info("Post created!")
         Akedia.Media.maybe_create_image(photo, post.entity_id)
         Akedia.Content.add_tags(post, tags)

@@ -1,4 +1,4 @@
-defmodule Akedia.Workers.Webmention do
+defmodule Akedia.Webmention.Worker do
   use Que.Worker
   require Logger
   alias Akedia.Content.{Post, Like, Bookmark}
