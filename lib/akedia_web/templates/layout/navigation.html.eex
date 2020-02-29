@@ -1,12 +1,12 @@
-<nav class="navbar is-dark-purple">
+<nav class="navbar is-dark-purple is-fixed-top">
   <div class="navbar-brand">     
     <%= link to: Routes.public_path(@conn, :index),
-        class: "navbar-item site-logo" do %>
-        <span class="icon">
+        class: "navbar-item is-expanded" do %>
+        <span class="icon site-logo">
           <i class="fa fa-cloud has-text-light" aria-hidden="true"></i>
         </span>
+        <span class="site-title">Technos & Psyche</span>
     <% end %>
-    <span class="navbar-item is-expanded site-title">Technos & Psyche</span>
     <div class="navbar-burger burger" data-target="mainNav">
       <span></span>
       <span></span>
