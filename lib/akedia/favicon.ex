@@ -43,37 +43,10 @@ defmodule Akedia.Favicon do
           name == "href"
         end)
 
-      {:ok, format_url(domain, path)}
+      {:ok, Akedia.Helpers.format_url(domain, path)}
     else
       find_favicon_in_root(domain)
     end
-  end
-
-  defp format_url(domain, path) do
-    uri_domain_host = URI.parse(domain).host
-    uri_path_host = URI.parse(path).host
-
-    cond do
-      # favicon is on another domain
-      uri_domain_host && uri_path_host && uri_domain_host != uri_path_host ->
-        append_scheme(domain, "#{path}")
-
-      # the favicon is an absolute path (within the same domain)
-      String.contains?(path, uri_domain_host) ->
-        append_scheme(domain, "#{path}")
-
-      # relative path starting with /
-      String.starts_with?(path, "/") ->
-        append_scheme(domain, "#{domain}#{path}")
-
-      true ->
-        append_scheme(domain, "#{domain}/#{path}")
-    end
-  end
-
-  defp append_scheme(domain, favicon_url) do
-    scheme = URI.parse(domain).scheme
-    if String.starts_with?(favicon_url, "//"), do: "#{scheme}:#{favicon_url}", else: favicon_url
   end
 
   defp find_favicon_link_tag(html) do

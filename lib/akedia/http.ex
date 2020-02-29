@@ -14,13 +14,16 @@ defmodule Akedia.HTTP do
   @options [follow_redirect: true]
 
   @doc false
-  def process_request_headers(headers), do: headers ++ [Akedia.user_agent()]
+  def process_request_headers(headers),
+    do: headers ++ [Akedia.user_agent()]
 
   @doc false
-  def process_request_options(options), do: options ++ @options
+  def process_request_options(options),
+    do: options ++ @options
 
   @doc """
   Sends an Accept header for activitypub
   """
-  def get_json(url), do: get(url, [Akedia.user_agent(), @accept_json], @options)
+  def get_json(url),
+    do: get(url, [Akedia.user_agent(), @accept_json], @options)
 end

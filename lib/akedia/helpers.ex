@@ -3,7 +3,9 @@ defmodule Akedia.Helpers do
   @context_name "@context"
   @format_string "{WDshort}, {0D} {Mshort} {YYYY} {h24}:{m}:{s} GMT"
 
-  def with_context(%{} = object), do: Map.put(object, @context_name, @default_context)
+  def with_context(%{} = object) do
+    Map.put(object, @context_name, @default_context)
+  end
 
   def with_context(%{} = object, extra_context) do
     new_context =
@@ -44,4 +46,33 @@ defmodule Akedia.Helpers do
     |> URI.parse()
     |> Map.get(part)
   end
+
+  def format_url(domain, path) do
+    uri_domain_host = URI.parse(domain).host
+    uri_path_host = URI.parse(path).host
+
+    cond do
+      # favicon is on another domain
+      uri_domain_host && uri_path_host && uri_domain_host != uri_path_host ->
+        append_scheme(domain, "#{path}")
+
+      # the favicon is an absolute path (within the same domain)
+      String.contains?(path, uri_domain_host) ->
+        append_scheme(domain, "#{path}")
+
+      # relative path starting with /
+      String.starts_with?(path, "/") ->
+        append_scheme(domain, "#{domain}#{path}")
+
+      true ->
+        append_scheme(domain, "#{domain}/#{path}")
+    end
+  end
+
+  def append_scheme(domain, favicon_url),
+    do:
+      if(String.starts_with?(favicon_url, "//"),
+        do: "#{scheme(domain)}:#{favicon_url}",
+        else: favicon_url
+      )
 end
