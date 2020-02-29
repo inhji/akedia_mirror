@@ -2,7 +2,7 @@ defmodule Akedia.Webmention.Worker do
   use Que.Worker
   require Logger
   alias Akedia.Content.{Post, Like, Bookmark}
-  alias Akedia.Indie.Webmentions.Bridgy
+  alias Akedia.Webmention.Bridgy
   alias Akedia.Indie
 
   def perform(%Post{:reply_to => reply_url} = post) do

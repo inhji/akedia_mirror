@@ -1,4 +1,4 @@
-defmodule Akedia.Indie.Webmentions.Bridgy do
+defmodule Akedia.Webmention.Bridgy do
   require Logger
 
   def maybe_publish_to_github(_, nil), do: nil

@@ -1,4 +1,4 @@
-defmodule Akedia.Indie.Webmentions.Handler do
+defmodule Akedia.Webmention.Handler do
   @behaviour AkediaWeb.Plugs.PlugWebmention.HandlerBehaviour
   alias Akedia.Mentions
 
