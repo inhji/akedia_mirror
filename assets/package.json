@@ -7,7 +7,7 @@
   },
   "dependencies": {
     "@joeattardi/emoji-button": "^2.12.1",
-    "bulma": "^0.8.0",
+    "bulma": "^0.8.1",
     "bulma-divider": "^0.2.0",
     "bulma-prefers-dark": "0.1.0-beta.0",
     "bulma-switch": "^2.0.0",
