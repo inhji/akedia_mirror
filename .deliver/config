@@ -3,7 +3,7 @@ APP="akedia"
 APP_HOME="/opt/akedia"
 USER_HOME="/var/lib/akedia"
 
-BUILD_HOST="159.69.81.247"
+BUILD_HOST="inhji.de"
 BUILD_USER="akedia"
 BUILD_AT="$APP_HOME/build"
 
