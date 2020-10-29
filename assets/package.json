@@ -7,7 +7,7 @@
   },
   "dependencies": {
     "@joeattardi/emoji-button": "^2.12.1",
-    "bulma": "^0.8.0",
+    "bulma": "^0.8.2",
     "bulma-divider": "^0.2.0",
     "bulma-prefers-dark": "0.1.0-beta.0",
     "bulma-switch": "^2.0.0",
@@ -15,24 +15,24 @@
     "fork-awesome": "^1.1.7",
     "phoenix": "file:../deps/phoenix",
     "phoenix_html": "file:../deps/phoenix_html",
-    "prismjs": "^1.19.0"
+    "prismjs": "^1.22.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.8.7",
-    "@babel/preset-env": "^7.8.7",
-    "autoprefixer": "^9.7.4",
-    "babel-loader": "^8.0.6",
+    "@babel/core": "^7.12.3",
+    "@babel/preset-env": "^7.12.1",
+    "autoprefixer": "^9.8.6",
+    "babel-loader": "^8.1.0",
     "babel-plugin-prismjs": "^2.0.1",
-    "copy-webpack-plugin": "^5.1.1",
-    "css-loader": "^3.4.2",
+    "copy-webpack-plugin": "^5.1.2",
+    "css-loader": "^3.6.0",
     "file-loader": "^5.1.0",
     "mini-css-extract-plugin": "^0.9.0",
-    "node-sass": "^4.13.1",
-    "optimize-css-assets-webpack-plugin": "^5.0.3",
+    "node-sass": "^4.14.1",
+    "optimize-css-assets-webpack-plugin": "^5.0.4",
     "postcss-loader": "^3.0.0",
     "sass-loader": "^8.0.2",
     "uglifyjs-webpack-plugin": "^2.2.0",
-    "webpack": "^4.42.0",
-    "webpack-cli": "^3.3.11"
+    "webpack": "^4.44.2",
+    "webpack-cli": "^3.3.12"
   }
 }
