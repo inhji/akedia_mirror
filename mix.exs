@@ -61,7 +61,7 @@ defmodule Akedia.MixProject do
       {:floki, "~> 0.26.0", override: true},
       {:gettext, "~> 0.11"},
       {:html_sanitize_ex, "~> 1.3"},
-      {:httpoison, "~> 1.6"},
+      {:httpoison, "~> 1.7", override: true},
       {:jason, "~> 1.0"},
       {:microformats2,
        git: "https://git.inhji.de/inhji/microformats2-elixir.git", branch: "update-floki"},
