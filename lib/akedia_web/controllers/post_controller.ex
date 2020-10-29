@@ -34,7 +34,7 @@ defmodule AkediaWeb.PostController do
           post.entity_id
         )
 
-        Que.add(Akedia.Workers.Webmention, post)
+        Que.add(Akedia.Webmention.Worker, post)
 
         conn
         |> redirect(to: Routes.public_path(conn, :index))
