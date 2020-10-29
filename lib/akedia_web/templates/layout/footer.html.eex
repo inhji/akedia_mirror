@@ -1,1 +1,1 @@
-<p class="info clearfix has-text-grey">&copy; 2019 by <%= @current_user.name %> • Powered by <a href="https://github.com/inhji/akedia" target="_blank" rel="noreferrer" class="has-text-grey-light">Akedia v<%= version() %></a></p>
+<p class="info clearfix has-text-grey">&copy; 2019 - 2020 by <%= @current_user.name %> • Powered by <a href="https://github.com/inhji/akedia" target="_blank" rel="noreferrer" class="has-text-grey-light">Akedia v<%= version() %></a></p>
