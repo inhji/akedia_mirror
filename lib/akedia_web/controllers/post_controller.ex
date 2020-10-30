@@ -34,7 +34,7 @@ defmodule AkediaWeb.PostController do
           post.entity_id
         )
 
-        Que.add(Akedia.Webmention.Worker, post)
+        Que.add(Akedia.Webmentions.Worker, post)
 
         conn
         |> redirect(to: Routes.public_path(conn, :index))
@@ -62,7 +62,7 @@ defmodule AkediaWeb.PostController do
 
     case Content.update_post(post, post_params) do
       {:ok, post} ->
-        Que.add(Akedia.Workers.Webmention, post)
+        Que.add(Akedia.Webmentions.Worker, post)
 
         Media.maybe_update_image(post.entity.image, %{
           name: Map.get(post_params, "image", nil),

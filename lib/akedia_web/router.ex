@@ -127,7 +127,7 @@ defmodule AkediaWeb.Router do
 
       forward "/webmention",
               AkediaWeb.Plugs.PlugWebmention,
-              handler: Akedia.Webmention.Handler,
+              handler: Akedia.Webmentions.Handler,
               json_encoder: Phoenix.json_library()
     end
   end
