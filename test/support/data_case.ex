@@ -29,7 +29,8 @@ defmodule Akedia.DataCase do
     :ok = Ecto.Adapters.SQL.Sandbox.checkout(Akedia.Repo)
 
     unless tags[:async] do
-      Ecto.Adapters.SQL.Sandbox.mode(Akedia.Repo, {:shared, self()})
+      #Ecto.Adapters.SQL.Sandbox.mode(Akedia.Repo, {:shared, self()})
+      Ecto.Adapters.SQL.Sandbox.mode(Akedia.Repo, :auto)
     end
 
     :ok

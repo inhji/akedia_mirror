@@ -23,15 +23,15 @@ pre_erlang_get_and_update_deps() {
   fi
 }
 
-post_extract_release_archive() {
-  status "Removing start_erl.data"
-  __remote "
-    [ -f ~/.profile ] && source ~/.profile
-    set -e
-    cd /opt/akedia/release/akedia/var $SILENCE
-    rm start_erl.data
-  "
-}
+#post_extract_release_archive() {
+#  status "Removing start_erl.data"
+#  __remote "
+#    [ -f ~/.profile ] && source ~/.profile
+#    set -e
+#    cd /opt/akedia/release/akedia/var $SILENCE
+#    rm start_erl.data
+#  "
+#}
 
 post_erlang_clean_compile() {
   status "Installing NPM dependencies" # log output prepended with "----->"

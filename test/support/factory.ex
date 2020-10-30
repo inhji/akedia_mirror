@@ -1,8 +1,6 @@
 defmodule Akedia.Factory do
   use ExMachina.Ecto, repo: Akedia.Repo
   alias Akedia.Accounts.{Credential, User, Profile}
-  alias Akedia.Content.{Story, Entity, Page, Bookmark}
-  alias Akedia.Media.Favicon
 
   def credential_factory do
     %Credential{

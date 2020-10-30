@@ -160,7 +160,7 @@ defmodule Akedia.Webmentions do
     {rslt, response} = HTTPoison.get(source_url, [], follow_redirects: true)
 
     if success?(rslt, response) do
-      Floki.parse(response.body)
+      Floki.parse_document(response.body)
       |> Floki.find("a, link")
       |> Enum.find(fn x ->
         {tagname, _, _} = x
