@@ -46,8 +46,8 @@ defmodule Akedia.UserTest do
       assert Accounts.count_users() == 0
     end
 
-    test "has_user?/0 checks if any user exists" do
-      assert Accounts.has_user?() == false
+    test "user_exists?/0 checks if any user exists" do
+      assert Accounts.user_exists?() == false
     end
 
     test "get_user_by_email/1 gets a user by email" do
