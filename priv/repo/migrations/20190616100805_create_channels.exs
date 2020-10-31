@@ -7,6 +7,5 @@ defmodule Akedia.Repo.Migrations.CreateChannels do
 
       timestamps()
     end
-
   end
 end

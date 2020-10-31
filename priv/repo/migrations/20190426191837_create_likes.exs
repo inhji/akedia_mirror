@@ -7,6 +7,5 @@ defmodule Akedia.Repo.Migrations.CreateLikes do
 
       timestamps()
     end
-
   end
 end

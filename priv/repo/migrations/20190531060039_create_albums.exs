@@ -9,6 +9,5 @@ defmodule Akedia.Repo.Migrations.CreateAlbums do
 
       timestamps()
     end
-
   end
 end

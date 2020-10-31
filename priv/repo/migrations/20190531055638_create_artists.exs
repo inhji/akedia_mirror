@@ -8,6 +8,5 @@ defmodule Akedia.Repo.Migrations.CreateArtists do
 
       timestamps()
     end
-
   end
 end

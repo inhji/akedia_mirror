@@ -12,7 +12,8 @@ defmodule WebmentionsTest do
     }
 
     with_mock HTTPoison, get: fn _url, _headers, _opts -> {:ok, doc} end do
-      assert Akedia.Webmentions.discover_endpoint("http://example.org") == {:ok, "http://example.org/webmentions"}
+      assert Akedia.Webmentions.discover_endpoint("http://example.org") ==
+               {:ok, "http://example.org/webmentions"}
     end
   end
 
@@ -24,7 +25,8 @@ defmodule WebmentionsTest do
     }
 
     with_mock HTTPoison, get: fn _url, _headers, _opts -> {:ok, doc} end do
-      assert Akedia.Webmentions.discover_endpoint("http://example.org") == {:ok, "http://example.org/webmentions"}
+      assert Akedia.Webmentions.discover_endpoint("http://example.org") ==
+               {:ok, "http://example.org/webmentions"}
     end
   end
 
@@ -36,7 +38,8 @@ defmodule WebmentionsTest do
     }
 
     with_mock HTTPoison, get: fn _url, _headers, _opts -> {:ok, doc} end do
-      assert Akedia.Webmentions.discover_endpoint("http://example.org") == {:ok, "http://example.org/webmentions"}
+      assert Akedia.Webmentions.discover_endpoint("http://example.org") ==
+               {:ok, "http://example.org/webmentions"}
     end
   end
 
@@ -57,7 +60,8 @@ defmodule WebmentionsTest do
     }
 
     with_mock HTTPoison, get: fn _url, _headers, _opts -> {:ok, doc} end do
-      assert Akedia.Webmentions.discover_endpoint("http://example.org") == {:ok, "http://example.org/webmentions"}
+      assert Akedia.Webmentions.discover_endpoint("http://example.org") ==
+               {:ok, "http://example.org/webmentions"}
     end
   end
 
@@ -72,7 +76,8 @@ defmodule WebmentionsTest do
     }
 
     with_mock HTTPoison, get: fn _url, _headers, _opts -> {:ok, doc} end do
-      assert Akedia.Webmentions.discover_endpoint("http://example.org") == {:ok, "http://example.org/webmentions"}
+      assert Akedia.Webmentions.discover_endpoint("http://example.org") ==
+               {:ok, "http://example.org/webmentions"}
     end
   end
 
@@ -87,7 +92,8 @@ defmodule WebmentionsTest do
     }
 
     with_mock HTTPoison, get: fn _url, _headers, _opts -> {:ok, doc} end do
-      assert Akedia.Webmentions.discover_endpoint("http://example.org") == {:ok, "http://example.org/webmentions"}
+      assert Akedia.Webmentions.discover_endpoint("http://example.org") ==
+               {:ok, "http://example.org/webmentions"}
     end
   end
 
@@ -107,7 +113,8 @@ defmodule WebmentionsTest do
     }
 
     with_mock HTTPoison, get: fn _url, _headers, _opts -> {:ok, doc} end do
-      assert Akedia.Webmentions.discover_endpoint("http://example.org") == {:ok, "http://example.org"}
+      assert Akedia.Webmentions.discover_endpoint("http://example.org") ==
+               {:ok, "http://example.org"}
     end
   end
 
@@ -129,7 +136,8 @@ defmodule WebmentionsTest do
   test "doesn't send a webmention to a rel=nofollow" do
     doc = %HTTPoison.Response{
       status_code: 200,
-      body: "<html class=\"h-entry\"><a rel=\"nofollow\" href=\"http://example.org/test\">blah</a>",
+      body:
+        "<html class=\"h-entry\"><a rel=\"nofollow\" href=\"http://example.org/test\">blah</a>",
       headers: [{"Link", "<http://example.org/webmentions>; rel=\"webmention\""}]
     }
 
@@ -165,8 +173,8 @@ defmodule WebmentionsTest do
            ) ==
              {:ok,
               [
-                {:ok, "https://git.inhji.de/repo-avatars/13-1cc19cd6c4cdc1cfaab6e83bd2fb93cd", nil,
-                 "no endpoint found"}
+                {:ok, "https://git.inhji.de/repo-avatars/13-1cc19cd6c4cdc1cfaab6e83bd2fb93cd",
+                 nil, "no endpoint found"}
               ]}
   end
 

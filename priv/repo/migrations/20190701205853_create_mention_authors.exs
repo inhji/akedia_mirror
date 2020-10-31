@@ -10,6 +10,5 @@ defmodule Akedia.Repo.Migrations.CreateMentionAuthors do
 
       timestamps()
     end
-
   end
 end

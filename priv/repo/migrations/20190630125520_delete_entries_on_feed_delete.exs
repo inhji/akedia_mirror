@@ -3,6 +3,7 @@ defmodule Akedia.Repo.Migrations.DeleteEntriesOnFeedDelete do
 
   def up do
     execute("ALTER TABLE feed_entries DROP CONSTRAINT feed_entries_feed_id_fkey")
+
     alter table(:feed_entries) do
       modify :feed_id, references(:feeds, on_delete: :delete_all)
     end
@@ -10,6 +11,7 @@ defmodule Akedia.Repo.Migrations.DeleteEntriesOnFeedDelete do
 
   def down do
     execute("ALTER TABLE feed_entries DROP CONSTRAINT feed_entries_feed_id_fkey")
+
     alter table(:feed_entries) do
       modify :feed_id, references(:feeds, on_delete: :nothing)
     end

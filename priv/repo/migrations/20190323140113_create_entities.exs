@@ -8,6 +8,5 @@ defmodule Akedia.Repo.Migrations.CreateEntities do
 
       timestamps()
     end
-
   end
 end

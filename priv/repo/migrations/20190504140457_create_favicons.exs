@@ -13,6 +13,5 @@ defmodule Akedia.Repo.Migrations.CreateFavicons do
       remove :favicon
       add :favicon_id, references(:favicons, on_delete: :nothing)
     end
-
   end
 end
