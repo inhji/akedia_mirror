@@ -1,29 +1,5 @@
-.card {
-  .card-header {
-    .card-header-title {
-      font-size: $card-header-title-size;
-      letter-spacing: $card-header-title-letter-spacing;
-      margin-bottom: -4rem;
-      color: white;
-      opacity: 0.3;
-      z-index: -1;
-      background: white;
-       -webkit-background-clip: text;
-       -webkit-text-fill-color: transparent;
-    }
-  }
-}
-
 .media + .media {
   border: none;
-}
-
-.input, .textarea, select .select, .input input {
-  color: $grey-light;
-  background: $dark-purple;
-  border-color :$purple;
-  letter-spacing: 1px;
-  font-size: 1rem;
 }
 
 .menu, .navbar {

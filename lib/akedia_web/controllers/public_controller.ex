@@ -13,7 +13,7 @@ defmodule AkediaWeb.PublicController do
 
   def index(conn, params) do
     weather = Akedia.Workers.Weather.get_weather()
-    page = Akedia.Content.list_entities_paginated(params)
+    page = Akedia.Content.list_posts_paginated([is_published: true], params)
     post_changeset = Akedia.Content.change_post(%Akedia.Content.Post{})
     topics = Akedia.Content.list_top_topics(15)
 
@@ -23,7 +23,7 @@ defmodule AkediaWeb.PublicController do
       weather: weather,
       topics: topics,
       page: page,
-      entities: page.entries,
+      posts: page.entries,
       page_number: page.page_number,
       page_size: page.page_size,
       total_pages: page.total_pages,

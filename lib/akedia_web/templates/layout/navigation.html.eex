@@ -1,11 +1,10 @@
-<nav class="navbar is-dark-purple is-fixed-top">
+<nav class="navbar is-fixed-top">
   <div class="navbar-brand">     
     <%= link to: Routes.public_path(@conn, :index),
         class: "navbar-item is-expanded" do %>
         <span class="icon site-logo">
-          <i class="fa fa-cloud has-text-light" aria-hidden="true"></i>
+          <i class="fa fa-cloud has-text-primary" aria-hidden="true"></i>
         </span>
-        <span class="site-title">Technos & Psyche</span>
     <% end %>
     <div class="navbar-burger burger" data-target="mainNav">
       <span></span>
@@ -31,9 +30,9 @@
           <span class="is-hidden-desktop">Queue</span>
         <% end %>
 
-        <div class="navbar-item has-dropdown is-hoverable is-primary">
-          <a class="navbar-link" href="<%= Routes.user_path(@conn, :show) %>">
-            Hi, <%= @current_user.name %> !
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link is-arrowless" href="<%= Routes.user_path(@conn, :show) %>">
+            <%= @current_user.name %>
           </a>
 
           <div class="navbar-dropdown">

@@ -13,8 +13,7 @@ module.exports = (env, options) => ({
     ]
   },
   entry: {
-    app: './js/app.js',
-    styles: './js/styles.js'
+    app: './js/app.js'
   },
   output: {
     filename: '[name].js',

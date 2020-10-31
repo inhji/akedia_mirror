@@ -1,4 +1,4 @@
-<div class="hero is-bold is-primary">
+<div class="hero is-primary is-bold">
   <div class="hero-body">
     <div class="columns">
       <div class="column">
@@ -9,9 +9,9 @@
             </figure>
           </div>
           <div class="media-content">
-            <h1 class="is-size-3">
-              <strong class="p-name fn title has-text-light"><%= @current_user.name %></strong>
-              <a href="/" rel="me" class="u-url url uid is-size-4">
+            <h1 class="">
+              <strong class="p-name fn title"><%= @current_user.name %></strong>
+              <a href="/" rel="me" class="u-url url uid subtitle">
                 <span>@</span><span class="p-nickname"><%= @current_user.username %></span>
               </a>
             </h1>
