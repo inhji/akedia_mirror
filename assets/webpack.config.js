@@ -1,43 +1,20 @@
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
-const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
-
-function recursiveIssuer(m) {
-  if (m.issuer) {
-    return recursiveIssuer(m.issuer);
-  } else if (m.name) {
-    return m.name;
-  } else {
-    return false;
-  }
-}
+const TerserPlugin = require('terser-webpack-plugin');
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 
 module.exports = (env, options) => ({
   optimization: {
+    minimize: true,
     minimizer: [
-      new UglifyJsPlugin({
-        cache: true,
-        parallel: true,
-        sourceMap: false
-      }),
-      new OptimizeCSSAssetsPlugin({})
-    ],
-    splitChunks: {
-      cacheGroups: {
-        commonStyles: {
-          name: 'app',
-          test: (m, c, entry = 'app') =>
-            m.constructor.name === 'CssModule' && recursiveIssuer(m) === entry,
-          chunks: 'all',
-          enforce: true,
-        }
-      },
-    },
+      new TerserPlugin(),
+      new CssMinimizerPlugin()
+    ]
   },
   entry: {
-    app: './js/app.js'
+    app: './js/app.js',
+    styles: './js/styles.js'
   },
   output: {
     filename: '[name].js',
@@ -54,39 +31,22 @@ module.exports = (env, options) => ({
       {
         test: /\.(sass|scss)$/,
         use: [
-          MiniCssExtractPlugin.loader,
+          {
+            loader: MiniCssExtractPlugin.loader,
+            options: {
+              publicPath: ''
+            }
+          },
           {
             loader: 'css-loader',
             options: {
               importLoaders: 2,
-              sourceMap: true
-            }
-          },
-          {
-            loader: 'postcss-loader',
-            options: {
-              plugins: () => [
-                require('autoprefixer')
-              ],
               sourceMap: true
             }
           },
           {
             loader: 'sass-loader',
             options: {
-              sourceMap: true
-            }
-          }
-        ]
-      },
-      {
-        test: /\.css$/,
-        use: [
-          MiniCssExtractPlugin.loader,
-          {
-            loader: 'css-loader',
-            options: {
-              importLoaders: 2,
               sourceMap: true
             }
           }
@@ -108,9 +68,10 @@ module.exports = (env, options) => ({
     new MiniCssExtractPlugin({
       filename: '../css/[name].css'
     }),
-    new CopyWebpackPlugin([{
-      from: 'static/',
-      to: '../'
-    }])
+    new CopyWebpackPlugin({
+      patterns: [
+        { from: 'static/', to: '../' }
+      ]
+    })
   ]
 });

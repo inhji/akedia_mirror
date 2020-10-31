@@ -11,7 +11,7 @@ import "../css/app.scss"
 //
 import Prism from 'prismjs'
 import tags from 'bulma-tagsinput'
-import EmojiButton from '@joeattardi/emoji-button'
+import { EmojiButton } from '@joeattardi/emoji-button';
 
 import "phoenix_html"
 
@@ -52,15 +52,14 @@ document.addEventListener("DOMContentLoaded", function () {
   if ($emojiButton) {
     const picker = new EmojiButton()
 
-    picker.on('emoji', emoji => {
-      document.querySelector('#content-area').value += ` ${emoji} `
+    picker.on('emoji', selection => {
+      document.querySelector('#content-area').value += ` ${selection.emoji} `
     })
 
     $emojiButton.addEventListener('click', () => {
-      picker.pickerVisible ? picker.hidePicker() : picker.showPicker($emojiButton)
+      picker.togglePicker($emojiButton)
     })
   }
-
 
   // Highlight Syntax
   Prism.highlightAll()
