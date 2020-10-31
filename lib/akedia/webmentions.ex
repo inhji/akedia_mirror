@@ -14,7 +14,7 @@ defmodule Akedia.Webmentions do
   end
 
   def send_webmentions_for_doc(html, source_url, root_selector \\ ".h-entry") do
-    document = Floki.parse(html)
+    {:ok, document} = Floki.parse_document(html)
     content = Floki.find(document, root_selector)
 
     links =
@@ -109,8 +109,10 @@ defmodule Akedia.Webmentions do
           {:ok, abs_link}
 
         is_text ->
+          {:ok, parsed_doc} = Floki.parse_document(response.body)
+
           mention_link =
-            Floki.parse(response.body)
+            parsed_doc
             |> Floki.find("[rel~=webmention]")
             |> List.first()
 
@@ -183,6 +185,11 @@ defmodule Akedia.Webmentions do
 
   def blank?(val) do
     String.trim(to_string(val)) == ""
+  end
+
+  def abs_uri(url, base_url, doc) when is_binary(doc) do
+    {:ok, parsed_doc} = Floki.parse_document(doc)
+    abs_uri(url, base_url, parsed_doc)
   end
 
   def abs_uri(url, base_url, doc) do
