@@ -119,7 +119,10 @@ defmodule Akedia.Webmentions do
           if mention_link == nil do
             {:ok, nil}
           else
-            {:ok, Floki.attribute(mention_link, "href") |> List.first() |> abs_uri(source_url, response.body)}
+            {:ok,
+             Floki.attribute(mention_link, "href")
+             |> List.first()
+             |> abs_uri(source_url, response.body)}
           end
 
         true ->
@@ -224,7 +227,12 @@ defmodule Akedia.Webmentions do
             Path.expand(parsed.path || "/", Path.dirname(parsed_new_base.path || "/"))
           end
 
-        URI.to_string(%{parsed | scheme: parsed_new_base.scheme, host: parsed_new_base.host, path: new_path})
+        URI.to_string(%{
+          parsed
+          | scheme: parsed_new_base.scheme,
+            host: parsed_new_base.host,
+            path: new_path
+        })
     end
   end
 
@@ -287,4 +295,3 @@ defmodule Akedia.Webmentions do
     end
   end
 end
-

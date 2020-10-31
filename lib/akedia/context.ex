@@ -43,7 +43,7 @@ defmodule Akedia.Context do
   end
 
   defp maybe_get_content_from_microformats(url) do
-    case Akedia.Indie.Microformats.fetch(url) do
+    case Akedia.Microformats2.parse(url) do
       {:ok, %{items: [item]}} ->
         [content_map] = get_in(item, [:properties, :content])
         [published_at] = get_in(item, [:properties, :published])
@@ -107,7 +107,7 @@ defmodule Akedia.Context do
   end
 
   defp maybe_get_author_from_microformats(url) do
-    case Akedia.Indie.Microformats.fetch(url) do
+    case Akedia.Microformats2.parse(url) do
       {:ok, %{items: [item]}} ->
         [author] = get_in(item, [:properties, :author])
 

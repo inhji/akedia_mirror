@@ -3,8 +3,7 @@ defmodule Akedia.Favicon.Worker do
   use Que.Worker
   alias Akedia.{Repo, Media}
   alias Akedia.Content.Bookmark
-  alias Akedia.Indie.{Microformats}
-  alias Akedia.Indie.Microformats.HCard
+  alias Akedia.Microformats2.Hcard
 
   def perform(%Bookmark{url: bookmark_url} = bookmark) do
     case get_favicon(bookmark_url) do
@@ -37,8 +36,8 @@ defmodule Akedia.Favicon.Worker do
   end
 
   def maybe_get_favicon_from_hcard(url) do
-    with {:ok, properties} <- Microformats.fetch_hcard(url),
-         {:ok, %HCard{photo: photo}} <- HCard.parse(properties) do
+    with {:ok, properties} <- Hcard.fetch_hcard(url),
+         {:ok, %Hcard{photo: photo}} <- Hcard.parse(properties) do
       {:ok, photo}
     else
       {:error, _} -> {:error, :no_favicon_in_hcard}
