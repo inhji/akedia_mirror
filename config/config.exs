@@ -33,7 +33,7 @@ config :akedia, Akedia.Config,
   ]
 
 config :git_ops,
-  mix_project: Tomie.Umbrella.MixProject,
+  mix_project: Akedia.MixProject,
   changelog_file: "CHANGELOG.md",
   repository_url: "https://git.inhji.de/inhji/akedia",
   types: [
