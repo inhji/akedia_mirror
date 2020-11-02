@@ -1,10 +1,12 @@
 defmodule Akedia.MixProject do
   use Mix.Project
 
+  @version "0.84.0"
+
   def project do
     [
       app: :akedia,
-      version: "0.83.0",
+      version: @version,
       elixir: "~> 1.9",
       elixirc_paths: elixirc_paths(Mix.env()),
       compilers: [:phoenix, :gettext] ++ Mix.compilers(),
