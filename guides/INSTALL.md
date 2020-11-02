@@ -61,7 +61,7 @@ wget https://github.com/lau/tzdata/blob/master/priv/release_ets/2019a.v2.ets
 
 ## Postgres
 
-Create akedia user & database
+### Create akedia user & database
 
 ```bash
 # Login as postgres user
@@ -72,7 +72,7 @@ createuser --interactive
 createdb akedia_prod
 ```
 
-Setup akedia database
+### Setup akedia database
 
 ```sql
 psql
@@ -179,7 +179,7 @@ server {
 
   # Nginx needs to be configured to alias requests to `/upload` to the uploads dir
   location /uploads {
-    alias /opt/akedia/release/akedia/uploads;
+    alias /opt/akedia/uploads;
   }
 
   location / {
@@ -211,9 +211,10 @@ User=akedia
 Group=akedia
 Restart=on-failure
 
-WorkingDirectory=/opt/akedia/release/akedia/bin
-ExecStart=/opt/akedia/release/akedia/bin/akedia start
-ExecStop=/opt/akedia/release/akedia/bin/akedia start
+EnvironmentFile=/opt/akedia/.env
+WorkingDirectory=/opt/akedia/_build/prod/rel/akedia/bin
+ExecStart=/opt/akedia/_build/prod/rel/akedia/bin/akedia daemon
+ExecStop=/opt/akedia/_build/prod/rel/akedia/bin/akedia stop
 
 [Install]
 WantedBy=multi-user.target
