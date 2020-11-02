@@ -35,6 +35,16 @@ config :akedia, AkediaWeb.Endpoint,
   ],
   secret_key_base: secret_key_base
 
+upload_dir =
+  System.get_env("UPLOAD_DIR") ||
+    raise """
+    environment variable UPLOAD_DIR is missing.
+    for example: /opt/akedia/uploads
+    """
+
+config :waffle,
+  storage_dir_prefix: upload_dir
+
 database_url =
   System.get_env("DATABASE_URL") ||
     raise """

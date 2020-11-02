@@ -1,9 +1,6 @@
 defmodule Akedia.Media.FaviconUploader do
-  use Arc.Definition
-  use Arc.Ecto.Definition
-
-  # Include ecto support (requires package arc_ecto installed):
-  # use Arc.Ecto.Definition
+  use Waffle.Definition
+  use Waffle.Ecto.Definition
 
   @versions [:original]
 
@@ -19,7 +16,7 @@ defmodule Akedia.Media.FaviconUploader do
 
   # Override the storage directory:
   def storage_dir(_, _) do
-    "uploads/favicons"
+    "favicons"
   end
 
   # Provide a default URL if there hasn't been a file uploaded

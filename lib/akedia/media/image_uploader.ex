@@ -1,6 +1,6 @@
 defmodule Akedia.Media.ImageUploader do
-  use Arc.Definition
-  use Arc.Ecto.Definition
+  use Waffle.Definition
+  use Waffle.Ecto.Definition
 
   @versions [:original, :thumb, :mini, :wide]
 
@@ -19,7 +19,7 @@ defmodule Akedia.Media.ImageUploader do
   end
 
   def base_path do
-    "uploads/images/"
+    "images/"
   end
 
   # Override the storage directory:

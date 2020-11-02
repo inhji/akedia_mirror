@@ -1,9 +1,6 @@
 defmodule Akedia.Media.AvatarUploader do
-  use Arc.Definition
-  use Arc.Ecto.Definition
-
-  # Include ecto support (requires package arc_ecto installed):
-  # use Arc.Ecto.Definition
+  use Waffle.Definition
+  use Waffle.Ecto.Definition
 
   @versions [:original, :thumb]
 
@@ -23,7 +20,7 @@ defmodule Akedia.Media.AvatarUploader do
 
   # Override the storage directory:
   def storage_dir(_, _) do
-    "uploads/user"
+    "user"
   end
 
   # Provide a default URL if there hasn't been a file uploaded

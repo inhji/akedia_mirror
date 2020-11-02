@@ -1,6 +1,6 @@
 defmodule Akedia.Media.ContextUploader do
-  use Arc.Definition
-  use Arc.Ecto.Definition
+  use Waffle.Definition
+  use Waffle.Ecto.Definition
 
   @versions [:original, :wide]
 
@@ -20,7 +20,7 @@ defmodule Akedia.Media.ContextUploader do
 
   # Override the storage directory:
   def storage_dir(_version, {_file, _scope}) do
-    "uploads/contexts"
+    "contexts"
   end
 
   # Provide a default URL if there hasn't been a file uploaded

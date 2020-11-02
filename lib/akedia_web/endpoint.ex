@@ -12,7 +12,7 @@ defmodule AkediaWeb.Endpoint do
     only: ~w(css fonts images js favicon.ico robots.txt site.webmanifest sw.js)
 
   plug Plug.Static,
-    at: "/uploads",
+    at: "/",
     from: Path.expand("./uploads"),
     gzip: false
 

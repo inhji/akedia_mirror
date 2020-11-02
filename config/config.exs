@@ -47,9 +47,6 @@ config :logger, :console,
 # Use Jason for JSON parsing in Phoenix
 config :phoenix, :json_library, Jason
 
-config :arc,
-  storage: Arc.Storage.Local
-
 config :scrivener_html,
   routes_helper: AkediaWeb.Router.Helpers,
   view_style: :bulma
@@ -58,6 +55,10 @@ config :mime, :types, %{
   "application/activity+json" => ["jsonap"],
   "application/xrd+xml" => ["xrd"]
 }
+
+config :waffle,
+  storage: Waffle.Storage.Local,
+  storage_dir_prefix: "uploads"
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.

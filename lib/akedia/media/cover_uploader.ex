@@ -1,9 +1,6 @@
 defmodule Akedia.Media.CoverUploader do
-  use Arc.Definition
-  use Arc.Ecto.Definition
-
-  # Include ecto support (requires package arc_ecto installed):
-  # use Arc.Ecto.Definition
+  use Waffle.Definition
+  use Waffle.Ecto.Definition
 
   @versions [:original, :wide]
 
@@ -30,13 +27,4 @@ defmodule Akedia.Media.CoverUploader do
   def default_url(_version, _scope) do
     "/images/cover.jpg"
   end
-
-  # Specify custom headers for s3 objects
-  # Available options are [:cache_control, :content_disposition,
-  #    :content_encoding, :content_length, :content_type,
-  #    :expect, :expires, :storage_class, :website_redirect_location]
-  #
-  # def s3_object_headers(version, {file, scope}) do
-  #   [content_type: MIME.from_path(file.file_name)]
-  # end
 end

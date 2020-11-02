@@ -1,6 +1,6 @@
 defmodule Akedia.Media.AuthorUploader do
-  use Arc.Definition
-  use Arc.Ecto.Definition
+  use Waffle.Definition
+  use Waffle.Ecto.Definition
 
   @versions [:original, :thumb]
 
@@ -20,7 +20,7 @@ defmodule Akedia.Media.AuthorUploader do
 
   # Override the storage directory:
   def storage_dir(_version, {_file, _scope}) do
-    "uploads/authors"
+    "authors"
   end
 
   # Provide a default URL if there hasn't been a file uploaded

@@ -1,6 +1,6 @@
 defmodule Akedia.Media.Image do
   use Ecto.Schema
-  use Arc.Ecto.Schema
+  use Waffle.Ecto.Schema
   import Ecto.Changeset
   alias Akedia.Content.Entity
 

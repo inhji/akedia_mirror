@@ -1,6 +1,6 @@
 defmodule Akedia.Indie.Author do
   use Ecto.Schema
-  use Arc.Ecto.Schema
+  use Waffle.Ecto.Schema
   import Ecto.Changeset
 
   schema "indie_authors" do

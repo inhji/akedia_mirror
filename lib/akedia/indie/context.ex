@@ -1,6 +1,6 @@
 defmodule Akedia.Indie.Context do
   use Ecto.Schema
-  use Arc.Ecto.Schema
+  use Waffle.Ecto.Schema
   import Ecto.Changeset
 
   schema "indie_contexts" do

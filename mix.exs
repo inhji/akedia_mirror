@@ -47,8 +47,6 @@ defmodule Akedia.MixProject do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
-      {:arc, "~> 0.11.0"},
-      {:arc_ecto, "~> 0.11.1"},
       {:atomex, "~> 0.3.0"},
       {:bcrypt_elixir, "~> 2.0"},
       {:credo, "~> 1.2", only: :dev},
@@ -57,14 +55,11 @@ defmodule Akedia.MixProject do
       {:ex_cli, "~> 0.1.0"},
       {:ex_doc, "~> 0.21.3", only: :dev, runtime: false},
       {:ex_machina, "~> 2.3", only: :test},
-      {:feeder_ex, "~> 1.1"},
-      {:floki, "~> 0.26.0", override: true},
+      {:floki, "~> 0.26.0"},
       {:gettext, "~> 0.11"},
       {:html_sanitize_ex, "~> 1.3"},
       {:httpoison, "~> 1.7"},
       {:jason, "~> 1.0"},
-      {:microformats2,
-       git: "https://git.inhji.de/inhji/microformats2-elixir.git", branch: "update-floki"},
       {:mock, "~> 0.3.6", only: :test},
       {:open_graph, "~> 0.0.4"},
       {:phoenix, "~> 1.4.0"},
@@ -79,12 +74,14 @@ defmodule Akedia.MixProject do
       {:qr_code, "~> 2.1.0"},
       {:que, "~> 0.10.0"},
       {:rsa_ex, "~> 0.4"},
-      {:scrivener_ecto, "~> 2.0", override: true},
+      {:scrivener_ecto, "~> 2.0", override: false},
       {:scrivener_html, "~> 1.8"},
       {:slugger, "~> 0.3.0"},
       {:timex, "~> 3.5"},
       {:totpex, "~> 0.1.3"},
       {:tzdata, "~> 1.0.0"},
+      {:waffle, "~> 1.1.3"},
+      {:waffle_ecto, "~> 0.0.9"},
       {:web_authn_ex, "~> 0.1.1"},
       {:xml_builder, "~> 2.1.1", override: true}
     ]

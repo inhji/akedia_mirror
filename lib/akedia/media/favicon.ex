@@ -1,6 +1,6 @@
 defmodule Akedia.Media.Favicon do
   use Ecto.Schema
-  use Arc.Ecto.Schema
+  use Waffle.Ecto.Schema
   import Ecto.Changeset
   alias Akedia.Media.FaviconUploader
 
