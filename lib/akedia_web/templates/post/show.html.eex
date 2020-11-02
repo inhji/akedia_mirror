@@ -1,10 +1,4 @@
 <%= render SharedView, "nav/post_nav.html", conn: @conn, post: @post, path_helper: &Routes.post_path/3 %>
 
-<div class="columns is-desktop">
-  <div class="column">
-    <%= render "post.html", conn: @conn, post: @post, current_user: @current_user %>
-  </div>
-  <div class="column">
-    <%= render SharedView, "mentions.html", schema: @post %>
-  </div>
-</div>
+<%= render "post.html", conn: @conn, post: @post, current_user: @current_user %>
+<%= render SharedView, "mentions.html", schema: @post %>

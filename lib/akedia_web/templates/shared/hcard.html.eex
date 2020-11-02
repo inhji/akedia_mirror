@@ -16,9 +16,9 @@
               </a>
             </h1>
 
-            <p class="content p-note">
+            <div class="subtitle p-note">
               <%= to_html(@current_user.tagline) %>
-            </p>
+            </div>
           </div>
         </aside>
       </div>
