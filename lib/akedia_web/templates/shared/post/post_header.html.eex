@@ -3,4 +3,10 @@
   <span>
     <%= render_post_verb(post_verb(@schema)) %>
   </span>
+  <span>
+  	<%= render SharedView, "post/post_date.html", 
+  		conn: @conn, 
+  		schema: @schema, 
+  		url_helper: @url_helper %>
+  </span>
 </div>
