@@ -11,7 +11,7 @@
 
 <div class="columns is-desktop">
   <div class="column">
-    <%= render "feed.html", assigns %>
+    <%= render "entity_feed.html", assigns %>
   </div>
   <div class="column"></div>
 </div>

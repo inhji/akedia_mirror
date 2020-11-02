@@ -10,7 +10,7 @@
 
 <div class="columns is-desktop">
 	<div class="column">
-		<%= render "feed.html", assigns %>
+		<%= render "post_feed.html", assigns %>
 
 		<%= if @total_pages != 1 do %>
 			<%= pagination_links @page,
