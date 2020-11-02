@@ -12,7 +12,9 @@
       </figure>
       <div class="media-content">
         <%= render SharedView, "post/post_header.html",
+            conn: @conn,
             schema: @bookmark,
+            url_helper: &Routes.bookmark_url/3,
             current_user: @current_user %>
 
         <div class="post-content">

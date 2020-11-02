@@ -21,7 +21,9 @@
       </figure>
       <div class="media-content">
         <%= render SharedView, "post/post_header.html",
+            conn: @conn,
             schema: @like,
+            url_helper: &Routes.like_url/3,
             current_user: @current_user %>
 
         <div class="post-content">
