@@ -5,12 +5,21 @@
  * Ported for PrismJS by Marc Backes [@themarcba]
  */
 
+code.inline {
+	padding: .15em .3em;
+}
+
+code.inline,
 code[class*="language-"],
 pre[class*="language-"] {
 	color: #f92aad;
 	text-shadow: 0 0 2px #100c0f, 0 0 5px #dc078e33, 0 0 10px #fff3;
 	background: none;
-	font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+	font-family: 'Fira Code', Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+}
+
+code[class*="language-"],
+pre[class*="language-"] {
 	font-size: 1em;
 	text-align: left;
 	white-space: pre;
@@ -37,6 +46,7 @@ pre[class*="language-"] {
 	overflow: auto;
 }
 
+code.inline,
 :not(pre)>code[class*="language-"],
 pre[class*="language-"] {
 	background-color: transparent !important;

@@ -50,12 +50,15 @@ article.like {
 
     blockquote {
       border: none;
-      font-family: serif;
-      font-size: 110%;
+      font-size: 120%;
       padding: 1rem;
+      font-family: $poppins-thin;
 
-      p:before { content: '“';}
-      p:after { content: '”'; }
+      color: white;
+      text-shadow: 0 0 2px #100c0f, 0 0 5px #dc078e33, 0 0 10px #fff3;
+
+      background-color: transparent !important;
+      background-image: linear-gradient(to bottom, #2a2139 75%, #34294f);
     }
   }
 
