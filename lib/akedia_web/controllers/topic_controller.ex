@@ -11,11 +11,6 @@ defmodule AkediaWeb.TopicController do
     render(conn, "index.html", topics: topics)
   end
 
-  def tagged(conn, %{"topic" => topic}) do
-    topic = Content.get_topic!(topic)
-    render(conn, "tagged.html", topic: topic)
-  end
-
   def new(conn, _params) do
     changeset = Content.change_topic(%Topic{})
     render(conn, "new.html", changeset: changeset)
