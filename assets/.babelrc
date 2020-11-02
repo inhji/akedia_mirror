@@ -17,6 +17,7 @@
           ,"sql"
           ,"coffeescript"
           ,"git"
+          ,"json"
         ],
         "plugins": [
           "autolinker"
