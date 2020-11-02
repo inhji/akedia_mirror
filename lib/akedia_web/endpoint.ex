@@ -1,6 +1,11 @@
 defmodule AkediaWeb.Endpoint do
   use Phoenix.Endpoint, otp_app: :akedia
 
+  plug Plug.Static,
+    at: "/",
+    from: Path.expand("./uploads"),
+    gzip: false
+
   # Serve at "/" the static files from "priv/static" directory.
   #
   # You should set gzip to true if you are running phx.digest
@@ -10,11 +15,6 @@ defmodule AkediaWeb.Endpoint do
     from: :akedia,
     gzip: false,
     only: ~w(css fonts images js favicon.ico robots.txt site.webmanifest sw.js)
-
-  plug Plug.Static,
-    at: "/",
-    from: Path.expand("./uploads"),
-    gzip: false
 
   # Code reloading can be explicitly enabled under the
   # :code_reloader configuration of your endpoint.
