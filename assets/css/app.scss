@@ -32,14 +32,16 @@ $poppins-light: 'Poppins Light', sans-serif;
 $poppins-thin: 'Poppins Thin', sans-serif;
 $fira-code: 'Fira Code', cursive;
 
-// Bulma Overrides
 $family-primary: $poppins-regular;
 $family-logo: $poppins-regular;
 $family-code: $fira-code;
 
-$link: $purple;
+$footer-background-color: $dark;
 
+$link: $purple;
 $dimensions: 16 24 32 48 64 96 128 196;
+
+$body-background-color: $white-bis;
 
 @import "~bulma/sass/base/_all";
 @import "~bulma/sass/elements/_all";
@@ -48,6 +50,7 @@ $dimensions: 16 24 32 48 64 96 128 196;
 @import "~bulma/sass/grid/_all";
 @import "~bulma/sass/layout/_all";
 @import "~bulma/sass/helpers/_all";
+
 @import "~bulma-prefers-dark/bulma-prefers-dark";
 @import "~bulma-tagsinput/dist/css/bulma-tagsinput";
 @import "~bulma-switch/dist/css/bulma-switch";
@@ -76,6 +79,11 @@ $dimensions: 16 24 32 48 64 96 128 196;
 
 ::-moz-selection { background: $primary; color: $white; }
 ::selection { background: $primary; color: $white; }
+
+::placeholder {
+  color: $dark;
+  opacity: 1;
+}
 
 * { box-sizing: border-box; }
 
@@ -111,11 +119,7 @@ a:hover {
   text-decoration: underline;
 }
 
-::placeholder {
-  color: $dark;
-  opacity: 1;
-}
-
+/*
 main {
   .columns {
     margin-right: 0;
@@ -125,7 +129,7 @@ main {
     }
   }
 }
-
+*/
 
 // $$\   $$\                           $$\                     
 // $$ |  $$ |                          $$ |                    
@@ -163,12 +167,6 @@ main {
       .icon {
         fill: $primary;
       }
-    }
-  }
-
-  .navbar-search {
-    input {
-      border: none;
     }
   }
 }

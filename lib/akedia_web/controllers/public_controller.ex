@@ -12,16 +12,12 @@ defmodule AkediaWeb.PublicController do
   end
 
   def index(conn, params) do
-    weather = Akedia.Workers.Weather.get_weather()
     page = Akedia.Content.list_posts_paginated([is_published: true], params)
     post_changeset = Akedia.Content.change_post(%Akedia.Content.Post{})
-    topics = Akedia.Content.list_top_topics(15)
 
     data = [
       changeset: post_changeset,
       tags: [],
-      weather: weather,
-      topics: topics,
       page: page,
       posts: page.entries,
       page_number: page.page_number,
