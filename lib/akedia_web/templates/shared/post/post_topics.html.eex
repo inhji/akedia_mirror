@@ -1,5 +1,4 @@
 <span class="topics">
-  <span class="dot"></span>
   <%= for topic <- @topics do %>
     <%= link topic.text, to: Routes.public_path(@conn, :tagged, topic), class: "p-category has-text-grey" %>
   <% end %>

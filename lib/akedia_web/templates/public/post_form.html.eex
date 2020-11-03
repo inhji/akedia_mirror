@@ -1,49 +1,45 @@
-<div class="card">
-	<div class="card-content">
-		<%= form_for @changeset, Routes.post_path(@conn, :create), fn f -> %>
-			<div class="field">
-			  <div class="zen">
-			    <input type="checkbox" id="zen-toggle-comment" v-model="zenActive">
-			    <div class="zen-backdrop">
-			      <%= textarea f, :content,
-			        id: "content-area",
-			        class: "textarea",
-			        rows: 3,
-			        "@input": "updateCharCount",
-			        "@keyup.escape": "closeZen",
-			        placeholder: "What is on your mind?" %>
-			      <label for="zen-toggle-comment">Zen Mode</label>
-			    </div>
-			  </div>
-			  <%= error_tag f, :content %>
+<section class="post-form">
+	<%= form_for @changeset, Routes.post_path(@conn, :create), fn f -> %>
+		<div class="field">
+			<div class="zen">
+			<input type="checkbox" id="zen-toggle-comment">
+			<div class="zen-backdrop">
+				<%= textarea f, :content,
+					id: "content-area",
+					class: "textarea",
+					rows: 3,
+					placeholder: "What is on your mind?" 
+				%>
+				<label for="zen-toggle-comment">Zen Mode</label>
 			</div>
+			</div>
+			<%= error_tag f, :content %>
+		</div>
 
-			<%= hidden_input f, :topics %>
-			
-			<%= inputs_for f, :entity, fn(ef) -> %>
-				<%= hidden_input ef, :is_published, value: "true" %>
-				<%= hidden_input ef, :bridgy_fed, value: "true" %>
-			<% end %>
-
-			<div class="field has-addons is-fullwidth">
-				<div class="control">
-					<button onClick="javascript:this.parent.submit()" class="button is-small is-primary" value="Post">
-						<span class="icon"><i class="fa fa-rocket"></i></span> <span class="is-hidden-desktop"> Post Now!</span> 
-					</button>
-				</div>
-				<div class="control">
-					<%= link to: Routes.post_path(@conn, :new), class: "button is-dark is-small", title: "New Post" do %>
-						<span class="icon"><i class="fa fa-coffee"></i></span>
-						<span class="is-hidden-desktop"> New Post!</span> 
-					<% end %>
-				</div>
-				<div class="control">
-					<%= link to: Routes.like_path(@conn, :new), class: "button is-light is-small", title: "New Like" do %>
-						<span class="icon"><i class="fa fa-heart"></i></span>
-						<span class="is-hidden-desktop"> New Like!</span> 
-					<% end %>
-				</div>
-			</div>    
+		<%= hidden_input f, :topics %>
+		
+		<%= inputs_for f, :entity, fn(ef) -> %>
+			<%= hidden_input ef, :is_published, value: "true" %>
+			<%= hidden_input ef, :bridgy_fed, value: "true" %>
 		<% end %>
-	</div>
-</div>
+
+		<div class="field has-addons is-fullwidth">
+			<div class="control">
+				<button onClick="javascript:this.parent.submit()" class="button is-primary" value="Post">
+					<span>Post Now</span> 
+				</button>
+			</div>
+			<div class="control">
+				<%= link to: Routes.post_path(@conn, :new), class: "button is-dark", title: "New Post" do %>
+					<span>New Post</span> 
+				<% end %>
+			</div>
+			<div class="control">
+				<%= link to: Routes.like_path(@conn, :new), class: "button is-dark", title: "New Like" do %>
+					<span>New Like</span> 
+				<% end %>
+			</div>
+		</div>    
+	<% end %>
+</section>
+

@@ -140,12 +140,10 @@ main {
   padding: 0 0.75rem;
 
   .navbar-brand {
-    .navbar-item {
-      font-size: 150%;
+    font-size: 150%;
 
-      &:hover {
-        text-decoration: none;
-      }
+    &:hover {
+      text-decoration: none;
     }
 
     .site-logo {
@@ -155,15 +153,24 @@ main {
     }
   }
 
+  .navbar-item {
+    .icon {
+      margin-right: 5px;
+      fill: $grey-dark;
+    }
+
+    &:hover {
+      .icon {
+        fill: $primary;
+      }
+    }
+  }
+
   .navbar-search {
     input {
       border: none;
     }
   }
-}
-
-.profile {
-  padding-bottom: 1.5rem;
 }
 
 // $$$$$$$$\                   $$\                         
@@ -198,26 +205,8 @@ footer#footer {
 }
 
 main#content {
-  margin: 0 auto;
+  margin: 3rem auto;
   max-width: 50rem;
-
-  .card {
-    box-shadow: none;
-
-    .card-header {
-      .card-header-title {
-        font-weight: 300;
-      }
-    }
-  }
-
-  .invisible {
-    display: none;
-  }
-
-  .ellipsis:after {
-    content: "…"
-  }
 }
 
 .content {
@@ -247,6 +236,10 @@ main#content {
       background: $purple;
     }
   }
+}
+
+section.post-form {
+  margin-top: 3rem;
 }
 
 .emoji-picker { z-index: 999; }

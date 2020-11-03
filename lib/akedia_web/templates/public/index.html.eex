@@ -14,55 +14,10 @@
 
 		<%= if @total_pages != 1 do %>
 			<%= pagination_links @page,
-				previous: ~E(<i class="fa fa-caret-left" aria-hidden="true"></i>),
-				next: ~E(<i class="fa fa-caret-right" aria-hidden="true"></i>)
+				previous: ~E(<span>←</span>),
+				next: ~E(<span>→</span>)
 			%>
 		<% end %>
 	</div>
-
-	<!--
-	<div class="column">
-		<div class="card">
-			<div class="card-header">
-				<div class="card-header-title">Weather</div>
-			</div>
-			<div class="card-content">
-				<%= if @weather do %>
-				<%= render SharedView, "weather.html", assigns %>
-				<% end %>
-			</div>
-		</div>
-
-		<div class="card">
-			<div class="card-header">
-				<div class="card-header-title">Social</div>
-			</div>
-			<div class="card-content">
-				<div class="columns is-multiline is-mobile">
-				<%= for profile <- @current_user.profiles do %>
-	    		<%= if profile.public do %>
-	    		<div class="column">
-	    			<a href="<%= profile.url %>">
-	    				<i class="<%= profile.icon %> fa-2x has-valign-middle has-text-grey"></i>
-	    				<span class="has-text-grey"><%= profile.name %></span>
-	    			</a>
-	    		</div>
-	    		<% end %>
-    		<% end %>
-    		</div>
-			</div>
-		</div>
-
-		<div class="card">
-			<div class="card-header">
-				<div class="card-header-title">Tags</div>
-			</div>
-			<div class="card-content">
-				<%= render SharedView, "tag_cloud.html", assigns %>
-			</div>
-		</div>
-
-	</div>
-	-->
 </div>
 
