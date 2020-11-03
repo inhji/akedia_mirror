@@ -5,6 +5,17 @@ See [Conventional Commits](Https://conventionalcommits.org) for commit guideline
 
 <!-- changelog -->
 
+## [v0.87.0](https://git.inhji.de/inhji/akedia/compare/v0.86.0...v0.87.0) (2020-11-03)
+
+
+
+
+### Features:
+
+* clean up and moar deisgn
+
+* update to phoenix 1.5 and frens
+
 ## [v0.86.0](https://git.inhji.de/inhji/akedia/compare/v0.85.0...v0.86.0) (2020-11-03)
 
 
