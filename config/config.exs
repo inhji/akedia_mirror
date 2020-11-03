@@ -61,7 +61,7 @@ config :akedia, AkediaWeb.Endpoint,
   url: [host: "localhost"],
   secret_key_base: "iVePfwoS3NVsO3P3lcGct/05yT8xDjWNANBanomxJtdlEn60UoUfYiyShUA5c3KH",
   render_errors: [view: AkediaWeb.ErrorView, accepts: ~w(html json)],
-  pubsub: [name: Akedia.PubSub, adapter: Phoenix.PubSub.PG2]
+  pubsub_server: Akedia.PubSub
 
 # Configures Elixir's Logger
 config :logger, :console,

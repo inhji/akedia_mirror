@@ -12,14 +12,13 @@ defmodule Akedia.Application do
       Akedia.Repo,
       # Start the endpoint when the application starts
       AkediaWeb.Endpoint,
-      # Start the Weather GenServer
-      {Akedia.Workers.Weather, %{}}
+      # Start the Pubsub server 
+      {Phoenix.PubSub, [name: Akedia.PubSub, adapter: Phoenix.PubSub.PG2]}
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
     # for other strategies and supported options
-    opts = [strategy: :one_for_one, name: Akedia.Supervisor]
-    Supervisor.start_link(children, opts)
+    Supervisor.start_link(children, strategy: :one_for_one, name: Akedia.Supervisor)
   end
 
   # Tell Phoenix to update the endpoint configuration

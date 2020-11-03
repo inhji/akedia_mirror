@@ -12,7 +12,7 @@
     <main id="content">
       <p class="notification is-info" role="alert"><%= get_flash(@conn, :info) %></p>
       <p class="notification is-danger" role="alert"><%= get_flash(@conn, :error) %></p>
-      <%= render @view_module, @view_template, assigns %>
+      <%= @inner_content %>
     </main>
 
     <footer class="footer" id="footer">
