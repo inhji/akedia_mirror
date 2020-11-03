@@ -17,7 +17,6 @@ totp_secret =
 	  """
 
 config :akedia, Akedia.Config,
-  weather_apikey: "815570eb6165c6ac0bda9382160dc284",
   totp_secret: totp_secret
 
 secret_key_base =

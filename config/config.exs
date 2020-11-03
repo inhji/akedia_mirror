@@ -14,7 +14,6 @@ config :akedia,
 
 config :akedia, Akedia.Config,
   site_title: "Inhji.de",
-  weather_location: "50.583830,8.677890",
   bridgy_endpoint: "https://brid.gy/publish/webmention",
   bridgy_github_target: "https://brid.gy/publish/github",
   supported_scopes: [
