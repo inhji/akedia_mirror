@@ -5,6 +5,15 @@ See [Conventional Commits](Https://conventionalcommits.org) for commit guideline
 
 <!-- changelog -->
 
+## [v0.86.0](https://git.inhji.de/inhji/akedia/compare/v0.85.0...v0.86.0) (2020-11-03)
+
+
+
+
+### Features:
+
+* homepage design tweaks
+
 ## [v0.85.0](https://git.inhji.de/inhji/akedia/compare/v0.84.1...v0.85.0) (2020-11-02)
 
 
