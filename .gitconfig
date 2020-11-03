@@ -1,1 +1,2 @@
-push.followTags::
+[push]
+	followTags = true
