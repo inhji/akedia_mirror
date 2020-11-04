@@ -21,6 +21,6 @@ defmodule Akedia.Indie.Context do
     context
     |> cast(attrs, [:content, :content_html, :url, :published_at, :author_id, :entity_id])
     |> cast_attachments(attrs, [:photo], allow_paths: true)
-    |> validate_required([:content, :content_html, :url, :published_at, :author_id, :entity_id])
+    |> validate_required([:url, :published_at, :author_id, :entity_id])
   end
 end
