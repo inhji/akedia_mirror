@@ -5,6 +5,21 @@ See [Conventional Commits](Https://conventionalcommits.org) for commit guideline
 
 <!-- changelog -->
 
+## [v0.87.1](https://git.inhji.de/inhji/akedia/compare/v0.87.0...v0.87.1) (2020-11-04)
+
+
+
+
+### Bug Fixes:
+
+* catch errors in context worker
+
+* allow context without content, for image only posts
+
+* add future body class scheme-dark for manual switching
+
+* remove weather configs
+
 ## [v0.87.0](https://git.inhji.de/inhji/akedia/compare/v0.86.0...v0.87.0) (2020-11-03)
 
 
