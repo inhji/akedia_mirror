@@ -15,33 +15,53 @@
 //                                             \$$$$$$  |
 //                                              \______/ 
 
+
 // Custom Variables
 $radius-slightly-rounded: 3px;
 
+// Colors
 $purple: #4c00ff;
 $dark-purple: #050011;
 $light-purple: #6940fb;
 
-$primary: $purple;
-$secondary: #fff;
-
-@import "~bulma/sass/utilities/_all";
-
+// Fonts
 $poppins-regular: 'Poppins Regular', sans-serif;
 $poppins-light: 'Poppins Light', sans-serif;
 $poppins-thin: 'Poppins Thin', sans-serif;
 $fira-code: 'Fira Code', cursive;
 
+$primary: $purple;
+$secondary: #fff;
+
+@import "~bulma/sass/utilities/_all";
+@import "~bulma-prefers-dark/sass/utilities/initial-variables";
+@import "~bulma-prefers-dark/sass/utilities/derived-variables";
+
+// Override prefers-scheme mixin
+@mixin prefers-scheme($scheme) {
+  @media (prefers-color-scheme: $scheme) {
+    @content
+  }
+
+  body.scheme-#{$scheme} {
+    @content
+  }
+}
+
+// Fonts
 $family-primary: $poppins-regular;
 $family-logo: $poppins-regular;
 $family-code: $fira-code;
 
-$footer-background-color: $dark;
-
+// General
 $link: $purple;
 $dimensions: 16 24 32 48 64 96 128 196;
 
+// Body
 $body-background-color: $white-bis;
+
+// Footer
+$footer-background-color: $dark;
 
 @import "~bulma/sass/base/_all";
 @import "~bulma/sass/elements/_all";
@@ -51,7 +71,13 @@ $body-background-color: $white-bis;
 @import "~bulma/sass/layout/_all";
 @import "~bulma/sass/helpers/_all";
 
-@import "~bulma-prefers-dark/bulma-prefers-dark";
+@include prefers-scheme(dark) {
+  @import "~bulma-prefers-dark/sass/base/_all";
+  @import "~bulma-prefers-dark/sass/elements/_all";
+  @import "~bulma-prefers-dark/sass/components/_all";
+  @import "~bulma-prefers-dark/sass/layout/_all";
+}
+
 @import "~bulma-tagsinput/dist/css/bulma-tagsinput";
 @import "~bulma-switch/dist/css/bulma-switch";
 @import "~bulma-divider/dist/css/bulma-divider";
@@ -292,9 +318,4 @@ section.post-form {
   .title {
     font-size: 1.5rem;
   }
-}
-
-// This needs to be last to override all other styles
-@include prefers-scheme(dark) {
-  // TODO: Fill when we need a darkmode
 }

@@ -59,7 +59,14 @@ article.like {
       padding: 1rem;
       font-family: $poppins-light;
       border: 1px solid #dddddd;
-      background: white;
+      background: $light;
+    }
+
+    @include prefers-scheme(dark) {
+      blockquote {
+        background: $black-bis;
+        border: 1px solid $grey-darker;
+      }
     }
   }
 
