@@ -10,4 +10,10 @@ defmodule AkediaWeb.QueueController do
 
     render(conn, "drafts.html", posts: drafts)
   end
+
+  def jobs(conn, _params) do
+  	jobs = Akedia.Jobs.list_job_queue()
+
+  	render(conn, "jobs.html", jobs: jobs)
+  end
 end

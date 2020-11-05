@@ -1,20 +1,28 @@
 defmodule Akedia.Favicon.Worker do
   require Logger
-  use Que.Worker
+
+  use Oban.Worker, 
+    queue: :default,
+    max_attempts: 3
+
   alias Akedia.{Repo, Media}
   alias Akedia.Content.Bookmark
   alias Akedia.Microformats2.Hcard
 
-  def perform(%Bookmark{url: bookmark_url} = bookmark) do
-    case get_favicon(bookmark_url) do
+  @impl Oban.Worker
+  def perform(%Oban.Job{args: %{"entity_id" => entity_id}}) do
+    entity = Akedia.Content.get_entity!(entity_id)
+    bookmark = entity.bookmark
+
+    case get_favicon(bookmark.url) do
       nil ->
-        Logger.debug("No favicon found for #{bookmark_url}")
+        Logger.debug("No favicon found for #{bookmark.url}")
 
       favicon_url ->
         Logger.debug(favicon_url)
 
         favicon =
-          bookmark_url
+          bookmark.url
           |> Akedia.Helpers.hostname()
           |> maybe_create_favicon(favicon_url)
 

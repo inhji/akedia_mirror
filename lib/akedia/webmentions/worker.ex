@@ -1,26 +1,24 @@
 defmodule Akedia.Webmentions.Worker do
-  use Que.Worker
-  require Logger
-  alias Akedia.Content.{Post, Like, Bookmark}
+  use Oban.Worker, 
+    queue: :default,
+    max_attempts: 3
 
-  def perform(%Post{:reply_to => reply_url} = post) do
-    Akedia.Webmentions.Bridgy.maybe_publish_to_github(post, reply_url)
-    Akedia.Webmentions.send_webmentions(Akedia.entity_url(post), ".h-entry")
+  @impl Oban.Worker
+  def perform(%Oban.Job{args: %{"entity_id" => entity_id}}) do
+    entity = Akedia.Content.get_entity!(entity_id)
 
-    :ok
-  end
+    cond do
+      entity.post -> 
+        Akedia.Webmentions.Bridgy.maybe_publish_to_github(entity.post, entity.post.reply_to)
+        Akedia.Webmentions.send_webmentions(Akedia.entity_url(entity.post), ".h-entry")
 
-  def perform(%Like{:url => liked_url} = like) do
-    Akedia.Webmentions.Bridgy.maybe_publish_to_github(like, liked_url)
-    Akedia.Webmentions.send_webmentions(Akedia.entity_url(like), ".h-entry")
+      entity.like ->
+        Akedia.Webmentions.Bridgy.maybe_publish_to_github(entity.like, entity.like.url)
+        Akedia.Webmentions.send_webmentions(Akedia.entity_url(entity.like), ".h-entry")
 
-    :ok
-  end
-
-  def perform(%Bookmark{:url => bookmarked_url} = bookmark) do
-    Akedia.Webmentions.Bridgy.maybe_publish_to_github(bookmark, bookmarked_url)
-    Akedia.Webmentions.send_webmentions(Akedia.entity_url(bookmark), ".h-entry")
-
-    :ok
+      entity.bookmark ->
+        Akedia.Webmentions.Bridgy.maybe_publish_to_github(entity.bookmark, entity.bookmark.url)
+        Akedia.Webmentions.send_webmentions(Akedia.entity_url(entity.bookmark), ".h-entry")
+    end
   end
 end

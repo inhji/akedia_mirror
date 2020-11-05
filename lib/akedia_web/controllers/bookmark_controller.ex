@@ -25,8 +25,14 @@ defmodule AkediaWeb.BookmarkController do
   def create(conn, %{"bookmark" => %{"topics" => topics} = bookmark_params}) do
     case Content.create_bookmark(bookmark_params) do
       {:ok, bookmark} ->
-        Que.add(Akedia.Favicon.Worker, bookmark)
-        Que.add(Webmention, bookmark)
+        %{entity_id: bookmark.entity_id}
+        |> Akedia.Favicon.Worker.new()
+        |> Oban.insert()
+        
+        %{entity_id: bookmark.entity_id}
+        |> Akedia.Webmentions.Worker.new()
+        |> Oban.insert()
+
         Content.add_tags(bookmark, topics)
 
         conn
@@ -56,8 +62,13 @@ defmodule AkediaWeb.BookmarkController do
 
     case Content.update_bookmark(bookmark, bookmark_params) do
       {:ok, bookmark} ->
-        Que.add(Akedia.Favicon.Worker, bookmark)
-        Que.add(Webmention, bookmark)
+        %{entity_id: bookmark.entity_id}
+        |> Akedia.Favicon.Worker.new()
+        |> Oban.insert()
+        
+        %{entity_id: bookmark.entity_id}
+        |> Akedia.Webmentions.Worker.new()
+        |> Oban.insert()
 
         conn
         |> put_flash(:info, "Bookmark updated successfully.")

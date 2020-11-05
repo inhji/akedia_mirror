@@ -16,3 +16,8 @@ config :akedia, Akedia.Repo,
   database: "akedia_test",
   hostname: "localhost",
   pool: Ecto.Adapters.SQL.Sandbox
+
+config :akedia, Oban, 
+	crontab: false, 
+	queues: false, 
+	plugins: false

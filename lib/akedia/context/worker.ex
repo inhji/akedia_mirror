@@ -1,12 +1,14 @@
 defmodule Akedia.Context.Worker do
 	require Logger
-	use Que.Worker
-	alias Akedia.Content.Like
-	alias Akedia.Context
 
-	def perform(%Like{url: url, entity: entity} = _like) do
-		with author_map <- Context.get_author(url),
-				 content_map <- Context.get_content(url) do
+	use Oban.Worker, 
+		queue: :default,
+		max_attempts: 3
+
+	@impl Oban.Worker
+	def perform(%Oban.Job{args: %{"url" => url, "entity_id" => entity_id}}) do
+		with author_map <- Akedia.Context.get_author(url),
+				 content_map <- Akedia.Context.get_content(url) do
 			Logger.debug("Creating author..")
 
 			{:ok, author} =
@@ -24,15 +26,12 @@ defmodule Akedia.Context.Worker do
 				content_map
 				|> Map.drop([:photo])
 				|> Map.put_new(:author_id, author.id)
-				|> Map.put_new(:entity_id, entity.id)
+				|> Map.put_new(:entity_id, entity_id)
 				|> Akedia.Indie.maybe_create_context()
 
 			Logger.debug("Saving context photo..")
 
 			{:ok, _context} = Akedia.Indie.update_context(context, %{photo: content_map[:photo]})
-		else
-			error ->
-				Logger.error(inspect(error))
 		end
 	end
 end

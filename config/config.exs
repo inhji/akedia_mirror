@@ -12,6 +12,11 @@ config :elixir, :time_zone_database, Tzdata.TimeZoneDatabase
 config :akedia,
   ecto_repos: [Akedia.Repo]
 
+config :akedia, Oban,
+  repo: Akedia.Repo,
+  plugins: [Oban.Plugins.Pruner],
+  queues: [default: 10]
+
 config :akedia, Akedia.Config,
   site_title: "Inhji.de",
   bridgy_endpoint: "https://brid.gy/publish/webmention",

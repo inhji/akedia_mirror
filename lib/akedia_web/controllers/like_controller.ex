@@ -24,8 +24,14 @@ defmodule AkediaWeb.LikeController do
   def create(conn, %{"like" => like_params}) do
     case Content.create_like(like_params) do
       {:ok, like} ->
-        Que.add(Akedia.Context.Worker, like)
-        Que.add(Akedia.Workers.Webmention, like)
+
+        %{url: like.url, entity_id: like.entity.id}
+        |> Akedia.Context.Worker.new()
+        |> Oban.insert()
+
+        %{entity_id: like.entity.id}
+        |> Akedia.Webmentions.Worker.new()
+        |> Oban.insert()
 
         conn
         |> put_flash(:info, "Like created successfully.")
@@ -51,9 +57,14 @@ defmodule AkediaWeb.LikeController do
     like = Content.get_like!(id)
 
     case Content.update_like(like, like_params) do
-      {:ok, like} ->
-        Que.add(Akedia.Workers.Webmention, like)
-        Que.add(Akedia.Scraper.Worker, like)
+      {:ok, like} ->    
+        %{url: like.url, entity_id: like.entity.id}
+        |> Akedia.Context.Worker.new()
+        |> Oban.insert()
+
+        %{entity_id: like.entity.id}
+        |> Akedia.Webmentions.Worker.new()
+        |> Oban.insert()
 
         conn
         |> put_flash(:info, "Like updated successfully.")

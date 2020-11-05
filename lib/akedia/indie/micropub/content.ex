@@ -26,7 +26,10 @@ defmodule Akedia.Indie.Micropub.Content do
 
     case Content.create_bookmark(attrs, %{is_published: is_published, bridgy_fed: bridgy_fed}) do
       {:ok, bookmark} ->
-        Que.add(Akedia.Favicon.Worker, bookmark)
+        %{entity_id: bookmark.entity_id}
+        |> Akedia.Favicon.Worker.new()
+        |> Oban.insert()
+
         Akedia.Content.add_tags(bookmark, tags)
         Logger.info("Bookmark created: #{inspect(bookmark)}")
         {:ok, :created, Akedia.entity_url(bookmark)}
@@ -45,8 +48,14 @@ defmodule Akedia.Indie.Micropub.Content do
 
     case Content.create_like(attrs, %{is_published: is_published, bridgy_fed: bridgy_fed}) do
       {:ok, like} ->
-        Que.add(Akedia.Webmentions.Worker, like)
-        Que.add(Akedia.Context.Worker, like)
+        %{url: like.url, entity_id: like.entity.id}
+        |> Akedia.Context.Worker.new()
+        |> Oban.insert()
+
+        %{entity_id: like.entity.id}
+        |> Akedia.Webmentions.Worker.new()
+        |> Oban.insert()
+
         Logger.info("Like created!")
         {:ok, :created, Akedia.entity_url(like)}
 
@@ -62,7 +71,10 @@ defmodule Akedia.Indie.Micropub.Content do
 
     case Content.create_post(attrs, %{is_published: is_published, bridgy_fed: bridgy_fed}) do
       {:ok, post} ->
-        Que.add(Akedia.Webmentions.Worker, post)
+        %{entity_id: post.entity.id}
+        |> Akedia.Webmentions.Worker.new()
+        |> Oban.insert()
+
         Logger.info("Post created!")
         Akedia.Media.maybe_create_image(photo, post.entity_id)
         Akedia.Content.add_tags(post, tags)
