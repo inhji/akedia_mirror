@@ -1,7 +1,7 @@
 defmodule Akedia.MixProject do
   use Mix.Project
 
-  @version "0.87.1"
+  @version "0.88.0"
 
   def project do
     [

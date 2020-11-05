@@ -5,6 +5,17 @@ See [Conventional Commits](Https://conventionalcommits.org) for commit guideline
 
 <!-- changelog -->
 
+## [v0.88.0](https://git.inhji.de/inhji/akedia/compare/v0.87.1...v0.88.0) (2020-11-05)
+
+
+
+
+### Features:
+
+* show jobs in queue
+
+* replace que with oban
+
 ## [v0.87.1](https://git.inhji.de/inhji/akedia/compare/v0.87.0...v0.87.1) (2020-11-04)
 
 
