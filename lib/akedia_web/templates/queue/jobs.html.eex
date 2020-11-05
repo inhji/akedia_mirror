@@ -1,0 +1,23 @@
+<div class="columns">
+  <div class="column is-3">
+    <%= render "sidebar.html", assigns %>
+  </div>
+  <div class="column">
+    <%= if Enum.empty?(@jobs) do %>
+      <div class="card">
+        <div class="card-content">
+          No jobs in queue, sorry.
+        </div>
+      </div>
+    <% end %>
+    <%= for job <- @jobs do %>
+      <div class="card">
+        <div class="card-content">
+          <%= job.worker %> @ <%= job.state %>
+
+          <span class="has-text-grey"><%= job.state %></span>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

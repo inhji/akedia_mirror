@@ -103,6 +103,7 @@ defmodule AkediaWeb.Router do
     scope "/queue" do
       get "/", QueueController, :index
       get "/drafts", QueueController, :drafts
+      get "/jobs", QueueController, :jobs
     end
   end
 
