@@ -4,9 +4,6 @@ defmodule Akedia.HTTP do
 
   * Custom User-Agent
   * Following redirects
-
-  Also contains a `scrape/2` function to scrape selector values from an url.
-
   """
   use HTTPoison.Base
 
@@ -25,5 +22,5 @@ defmodule Akedia.HTTP do
   Sends an Accept header for activitypub
   """
   def get_json(url),
-    do: get(url, [Akedia.user_agent(), @accept_json], @options)
+    do: get(url, [@accept_json])
 end
