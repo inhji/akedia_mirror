@@ -13,8 +13,8 @@ defmodule Akedia.Accounts.User do
     field :about, :string, default: ""
     field :now, :string, default: ""
 
-    field :avatar, Akedia.Media.AvatarUploader.Type
-    field :cover, Akedia.Media.CoverUploader.Type
+    field :avatar, Akedia.Accounts.AvatarUploader.Type
+    field :cover, Akedia.Accounts.CoverUploader.Type
 
     field :priv_key, :string
     field :pub_key, :string
