@@ -4,9 +4,12 @@
   </div>
   <div class="column">
     <%= for post <- @posts do %>
-      <p class="is-size-3">
-        <%= link post.title, to: Routes.post_path(@conn, :show, post) %>
-      </p>
+      <article class="card">
+        <div class="card-content">
+          <h3 class="title"><%= post.title || "No Title" %></h3>
+          <%= link post.inserted_at, to: Routes.post_path(@conn, :show, post), class: "subtitle" %>
+        </div>
+      </article>
     <% end %>
   </div>
 </div>

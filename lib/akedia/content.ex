@@ -320,7 +320,6 @@ defmodule Akedia.Content do
   @doc model: :post
   def list_drafted_posts() do
     list_query(Post, is_published: false)
-    |> where([p], not is_nil(p.title))
     |> Repo.all()
   end
 
