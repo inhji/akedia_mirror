@@ -1,6 +1,6 @@
 defmodule AkediaWeb.AtomController do
   use AkediaWeb, :controller
-  alias Atomex.{Feed, Entry}
+  alias Akedia.Atomex.{Feed, Entry}
   alias AkediaWeb.Router.Helpers, as: Routes
 
   @content_type "application/atom+xml"
