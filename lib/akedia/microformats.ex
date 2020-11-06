@@ -15,7 +15,10 @@ defmodule Akedia.Microformats2 do
     end
   end
 
-  def parse(content, url) when is_binary(content), do: parse(Floki.parse_document(content), url)
+  def parse(content, url) when is_binary(content) do
+    {:ok, document_tree} = Floki.parse_document(content)
+    parse(document_tree, url)
+  end
 
   def parse(content, url) do
     doc =
