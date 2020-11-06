@@ -5,6 +5,19 @@ See [Conventional Commits](Https://conventionalcommits.org) for commit guideline
 
 <!-- changelog -->
 
+## [v0.90.0](https://git.inhji.de/inhji/akedia/compare/v0.89.3...v0.90.0) (2020-11-06)
+
+
+
+
+### Features:
+
+* eat atomex
+
+### Bug Fixes:
+
+* microformats parsing
+
 ## [v0.89.3](https://git.inhji.de/inhji/akedia/compare/v0.89.2...v0.89.3) (2020-11-06)
 
 
