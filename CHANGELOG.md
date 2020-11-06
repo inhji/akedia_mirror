@@ -5,6 +5,25 @@ See [Conventional Commits](Https://conventionalcommits.org) for commit guideline
 
 <!-- changelog -->
 
+## [v0.89.1](https://git.inhji.de/inhji/akedia/compare/v0.89.0...v0.89.1) (2020-11-06)
+
+
+
+
+### Bug Fixes:
+
+* clean up http
+
+* warnings
+
+* prettier build scripts
+
+### Refactors:
+
+* move mention model to webmentions module
+
+* move avatar/cover uploaders to accounts
+
 ## [v0.89.0](https://git.inhji.de/inhji/akedia/compare/v0.88.0...v0.89.0) (2020-11-06)
 
 
