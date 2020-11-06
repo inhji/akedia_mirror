@@ -3,7 +3,6 @@ defmodule AkediaWeb.BookmarkController do
 
   alias Akedia.Content
   alias Akedia.Content.Bookmark
-  alias Akedia.Workers.{Webmention}
 
   plug :check_user when action not in [:show]
 
