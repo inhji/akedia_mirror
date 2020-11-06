@@ -3,6 +3,10 @@
     <%= render "sidebar.html", assigns %>
   </div>
   <div class="column">
-    here be dragons
+    <div class="card">
+    	<div class="card-content">
+    		<div class="title">here be dragons</div>
+    	</div>
+    </div>
   </div>
 </div>
