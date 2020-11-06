@@ -1,4 +1,4 @@
-defmodule Akedia.Media.AvatarUploader do
+defmodule Akedia.Accounts.AvatarUploader do
   use Waffle.Definition
   use Waffle.Ecto.Definition
 

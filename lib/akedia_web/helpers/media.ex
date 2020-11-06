@@ -7,9 +7,7 @@ defmodule AkediaWeb.Helpers.Media do
 
   alias Akedia.Media.{
     AuthorUploader,
-    AvatarUploader,
     ContextUploader,
-    CoverUploader,
     FaviconUploader,
     ImageUploader
   }
@@ -22,18 +20,18 @@ defmodule AkediaWeb.Helpers.Media do
   def favicon_url(nil), do: ""
   def favicon_url(favicon), do: FaviconUploader.url({favicon.name, favicon}, :original)
 
-  def cover_url(user), do: CoverUploader.url({user.cover, user}, :wide)
-  def cover_url(user, version), do: CoverUploader.url({user.cover, user}, version)
+  def cover_url(user), do: Akedia.Accounts.CoverUploader.url({user.cover, user}, :wide)
+  def cover_url(user, version), do: Akedia.Accounts.CoverUploader.url({user.cover, user}, version)
 
-  def avatar_url(user), do: AvatarUploader.url({user.avatar, user}, :thumb)
-  def avatar_url(user, version), do: AvatarUploader.url({user.avatar, user}, version)
+  def avatar_url(user), do: Akedia.Accounts.AvatarUploader.url({user.avatar, user}, :thumb)
+  def avatar_url(user, version), do: Akedia.Accounts.AvatarUploader.url({user.avatar, user}, version)
 
   def author_url(author), do: AuthorUploader.url({author.photo, author}, :thumb)
   def author_url(author, version), do: AuthorUploader.url({author.photo, author}, version)
 
   def context_url(context) when is_nil(context), do: nil
   def context_url(%{photo: photo} = context), do: ContextUploader.url({photo, context}, :wide)
-  
+
   def context_url(context, _) when is_nil(context), do: nil
   def context_url(%{photo: photo} = context, v), do: ContextUploader.url({photo, context}, v)
 

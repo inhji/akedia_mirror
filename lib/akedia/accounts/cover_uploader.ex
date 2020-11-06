@@ -1,4 +1,4 @@
-defmodule Akedia.Media.CoverUploader do
+defmodule Akedia.Accounts.CoverUploader do
   use Waffle.Definition
   use Waffle.Ecto.Definition
 
