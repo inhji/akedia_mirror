@@ -5,6 +5,15 @@ See [Conventional Commits](Https://conventionalcommits.org) for commit guideline
 
 <!-- changelog -->
 
+## [v0.89.3](https://git.inhji.de/inhji/akedia/compare/v0.89.2...v0.89.3) (2020-11-06)
+
+
+
+
+### Bug Fixes:
+
+* update all deps
+
 ## [v0.89.2](https://git.inhji.de/inhji/akedia/compare/v0.89.1...v0.89.2) (2020-11-06)
 
 
