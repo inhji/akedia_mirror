@@ -8,4 +8,5 @@ git pull
 ./build.sh
 EOSSH
 echo "Build complete, restarting..."
+echo "--------------------------"
 ssh -T akedia@inhji.de sudo systemctl restart akedia
