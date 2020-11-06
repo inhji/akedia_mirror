@@ -213,6 +213,7 @@ Restart=on-failure
 
 EnvironmentFile=/opt/akedia/.env
 WorkingDirectory=/opt/akedia/_build/prod/rel/akedia/bin
+ExecStartPre=/opt/akedia/_build/prod/rel/akedia/bin/akedia eval "Akedia.Release.migrate"
 ExecStart=/opt/akedia/_build/prod/rel/akedia/bin/akedia daemon
 ExecStop=/opt/akedia/_build/prod/rel/akedia/bin/akedia stop
 

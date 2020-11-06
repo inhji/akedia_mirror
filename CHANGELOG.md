@@ -5,6 +5,15 @@ See [Conventional Commits](Https://conventionalcommits.org) for commit guideline
 
 <!-- changelog -->
 
+## [v0.89.0](https://git.inhji.de/inhji/akedia/compare/v0.88.0...v0.89.0) (2020-11-06)
+
+
+
+
+### Features:
+
+* add release tasks for migrations
+
 ## [v0.88.0](https://git.inhji.de/inhji/akedia/compare/v0.87.1...v0.88.0) (2020-11-05)
 
 
