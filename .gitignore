@@ -46,10 +46,7 @@ npm-debug.log
 
 .deliver/releases/
 
-.version
+.env
+.env.sh
 
 .mix_tasks
-
-/.elixir_ls/
-
-*.code-workspace
