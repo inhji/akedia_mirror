@@ -1,4 +1,4 @@
-defmodule Akedia.Mentions.Mention do
+defmodule Akedia.Webmentions.Mention do
   use Ecto.Schema
   import Ecto.Changeset
 

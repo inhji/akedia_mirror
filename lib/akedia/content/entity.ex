@@ -19,7 +19,7 @@ defmodule Akedia.Content.Entity do
     has_one :image, Image
 
     has_many :syndications, Syndication
-    has_many :mentions, Akedia.Mentions.Mention
+    has_many :mentions, Akedia.Webmentions.Mention
     has_one :context, Akedia.Indie.Context
 
     timestamps()

@@ -10,7 +10,7 @@ defmodule Akedia.Indie.Author do
     field :url, :string
     field :type, :string, default: "card"
 
-    has_many :mentions, Akedia.Mentions.Mention
+    has_many :mentions, Akedia.Webmentions.Mention
     has_many :contexts, Akedia.Indie.Context
 
     timestamps()

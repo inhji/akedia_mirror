@@ -1,7 +1,7 @@
 defmodule Akedia.Mentions do
   import Ecto.Query, warn: false
   alias Akedia.Repo
-  alias Akedia.Mentions.Mention
+  alias Akedia.Webmentions.Mention
 
   def list_mentions do
     Mention
