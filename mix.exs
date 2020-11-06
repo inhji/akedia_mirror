@@ -52,7 +52,7 @@ defmodule Akedia.MixProject do
       {:earmark, "~> 1.4.0"},
       {:ecto_sql, "~> 3.0"},
       {:ex_cli, "~> 0.1.0"},
-      {:ex_doc, "~> 0.21.3", only: :dev, runtime: false},
+      {:ex_doc, "~> 0.23.0", only: :dev, runtime: false},
       {:ex_machina, "~> 2.3", only: :test},
       {:floki, "~> 0.26.0"},
       {:gettext, "~> 0.11"},
