@@ -90,22 +90,6 @@ defmodule Akedia.Context do
     end
   end
 
-  defp maybe_get_author_from_activitypub(url) do
-    case Akedia.ActivityPub.Discovery.discover_actor(url) do
-      {:ok, %{"icon" => icon, "name" => name, "url" => url, "preferredUsername" => username}} ->
-        {:ok,
-         %{
-           name: name,
-           url: url,
-           username: username,
-           photo: Map.get(icon, "url")
-         }}
-
-      {:error, error} ->
-        {:error, error}
-    end
-  end
-
   defp maybe_get_author_from_microformats(url) do
     case Akedia.Microformats2.parse(url) do
       {:ok, %{items: [item]}} ->
@@ -130,6 +114,22 @@ defmodule Akedia.Context do
         Logger.warn("Url #{url} does not contain microformats")
 
         {:error, :error}
+    end
+  end
+
+  defp maybe_get_author_from_activitypub(url) do
+    case Akedia.ActivityPub.Discovery.discover_actor(url) do
+      {:ok, %{"icon" => icon, "name" => name, "url" => url, "preferredUsername" => username}} ->
+        {:ok,
+         %{
+           name: name,
+           photo: Map.get(icon, "url"),
+           url: url,
+           username: username
+         }}
+
+      {:error, error} ->
+        {:error, error}
     end
   end
 end

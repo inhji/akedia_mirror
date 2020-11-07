@@ -5,6 +5,29 @@ See [Conventional Commits](Https://conventionalcommits.org) for commit guideline
 
 <!-- changelog -->
 
+## [v0.90.2](https://git.inhji.de/inhji/akedia/compare/v0.90.1...v0.90.2) (2020-11-07)
+
+
+
+
+### Bug Fixes:
+
+* add spacer helper class
+
+* add link to security to menu
+
+* rly rly use emojipicker css
+
+* improve queue and link
+
+### Refactors:
+
+* add a shitton of emojis to the post form
+
+* break out webauthn stuff into Akedia.Auth
+
+* clean up user pages
+
 ## [v0.90.1](https://git.inhji.de/inhji/akedia/compare/v0.90.0...v0.90.1) (2020-11-06)
 
 
