@@ -5,6 +5,15 @@ See [Conventional Commits](Https://conventionalcommits.org) for commit guideline
 
 <!-- changelog -->
 
+## [v0.90.3](https://git.inhji.de/inhji/akedia/compare/v0.90.2...v0.90.3) (2020-11-07)
+
+
+
+
+### Bug Fixes:
+
+* reference to old atomex
+
 ## [v0.90.2](https://git.inhji.de/inhji/akedia/compare/v0.90.1...v0.90.2) (2020-11-07)
 
 
