@@ -5,6 +5,19 @@ See [Conventional Commits](Https://conventionalcommits.org) for commit guideline
 
 <!-- changelog -->
 
+## [v0.91.0](https://git.inhji.de/inhji/akedia/compare/v0.90.3...v0.91.0) (2020-11-07)
+
+
+
+
+### Features:
+
+* Page specific JavaScript
+
+* trim fat off of bulma
+
+* optimize webpack build
+
 ## [v0.90.3](https://git.inhji.de/inhji/akedia/compare/v0.90.2...v0.90.3) (2020-11-07)
 
 
