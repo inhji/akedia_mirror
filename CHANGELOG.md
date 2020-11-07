@@ -5,6 +5,15 @@ See [Conventional Commits](Https://conventionalcommits.org) for commit guideline
 
 <!-- changelog -->
 
+## [v0.91.2](https://git.inhji.de/inhji/akedia/compare/v0.91.1...v0.91.2) (2020-11-07)
+
+
+
+
+### Bug Fixes:
+
+* remove emoji picker from app.scss
+
 ## [v0.91.1](https://git.inhji.de/inhji/akedia/compare/v0.91.0...v0.91.1) (2020-11-07)
 
 
