@@ -36,4 +36,30 @@ defmodule Akedia.Auth do
       _ -> true
     end
   end
+
+  def handle_webauthn(id, response, challenge) do
+    {:ok, authenticator_data} = response["authenticatorData"] |> Base.decode64()
+    {:ok, client_data_json} = response["clientDataJSON"] |> Base.decode64()
+    {:ok, signature} = response["signature"] |> Base.decode64()
+
+    user = Accounts.get_user!()
+
+    allowed_credentials = [
+      %{
+        id: Base.decode64!(user.credential.external_id),
+        public_key: Base.decode64!(user.credential.public_key)
+      }
+    ]
+
+    WebAuthnEx.AuthAssertionResponse.new(
+      id |> Base.decode64!(),
+      authenticator_data,
+      signature,
+      challenge,
+      Akedia.url(),
+      allowed_credentials,
+      nil,
+      client_data_json
+    )
+  end
 end

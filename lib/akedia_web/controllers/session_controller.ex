@@ -75,34 +75,11 @@ defmodule AkediaWeb.SessionController do
   end
 
   def webauthn_callback(conn, %{"id" => id, "response" => response}) do
-    {:ok, authenticator_data} = response["authenticatorData"] |> Base.decode64()
-    {:ok, client_data_json} = response["clientDataJSON"] |> Base.decode64()
-    {:ok, signature} = response["signature"] |> Base.decode64()
-
     challenge = get_session(conn, :challenge)
     user = Accounts.get_user!()
-
-    allowed_credentials = [
-      %{
-        id: Base.decode64!(user.credential.external_id),
-        public_key: Base.decode64!(user.credential.public_key)
-      }
-    ]
-
-    result =
-      WebAuthnEx.AuthAssertionResponse.new(
-        id |> Base.decode64!(),
-        authenticator_data,
-        signature,
-        challenge,
-        Akedia.url(),
-        allowed_credentials,
-        nil,
-        client_data_json
-      )
-
+    
     conn =
-      case result do
+      case Akedia.Auth.handle_webauthn(id, response, challenge) do
         {:ok, _} ->
           conn
           |> Auth.login(user)
@@ -130,7 +107,7 @@ defmodule AkediaWeb.SessionController do
 
       false ->
         conn
-        |> put_flash(:error, "BRUH")
+        |> put_flash(:error, "Authentication failed!")
         |> render("two_factor.html")
     end
   end
