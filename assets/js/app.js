@@ -11,10 +11,12 @@ function handleDOMContentLoaded() {
 
   const {view: view, path: path} = loadView(viewName);
 
-  console.log(`Mounting view for ${path}`)
-  view.mount();
-
-  window.currentView = view;
+  loadView(viewName)
+  	.then(function({view: view, path: path}) {
+  		console.log(`Mounting view for ${path}`)
+  		view.mount();
+  		window.currentView = view;
+  	})  
 }
 
 function handleDocumentUnload() {

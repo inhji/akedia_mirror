@@ -3,7 +3,8 @@
   "license": "MIT",
   "scripts": {
     "deploy": "webpack --mode production",
-    "watch": "webpack --mode development --watch"
+    "watch": "webpack --mode development --watch --color",
+    "stats": "webpack --profile --json > stats.json"
   },
   "dependencies": {
     "@joeattardi/emoji-button": "^4.3.0",

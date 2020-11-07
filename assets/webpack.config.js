@@ -29,7 +29,7 @@ module.exports = (env, options) => {
       rules: [
         {
           test: /\.js$/,
-          exclude: /node_modules/,
+          include: /assets\/js/,
           use: {
             loader: 'babel-loader',
             options: {
