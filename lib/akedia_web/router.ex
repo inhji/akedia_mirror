@@ -1,18 +1,20 @@
 defmodule AkediaWeb.Router do
   use AkediaWeb, :router
 
+  import Phoenix.LiveView.Router
   import AkediaWeb.Plugs.PlugUser
   import AkediaWeb.Plugs.PlugFormat
 
   pipeline :browser do
     plug :accepts, ["html"]
     plug :fetch_session
-    plug :fetch_flash
+    plug :fetch_live_flash
     plug :protect_from_forgery
     plug :put_secure_browser_headers
     plug :check_loggedin
     plug :assign_user
     plug :refresh_user
+    plug :put_root_layout, {AkediaWeb.LayoutView, :root}
   end
 
   pipeline :activitypub do

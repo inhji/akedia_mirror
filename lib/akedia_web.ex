@@ -26,6 +26,7 @@ defmodule AkediaWeb do
       import AkediaWeb.Gettext
       import AkediaWeb.Plugs.PlugUser
       import AkediaWeb.Responses
+      import Phoenix.LiveView.Controller
       alias AkediaWeb.Router.Helpers, as: Routes
       require Logger
     end
@@ -41,6 +42,7 @@ defmodule AkediaWeb do
       # Import convenience functions from controllers
       import Phoenix.Controller, only: [get_flash: 1, get_flash: 2, view_module: 1]
       import PhoenixActiveLink
+      import Phoenix.LiveView.Helpers
 
       # Use all HTML functionality (forms, tags, etc)
       use Phoenix.HTML

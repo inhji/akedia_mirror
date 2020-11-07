@@ -1,24 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-  <%= render "head.html", assigns %>
-
-  <body class="has-navbar-fixed-top" data-js-view-path="<%= js_view_path(@conn, @view_template) %>">  
-    <header>
-      <nav role="navigation" class="main-nav" id="main-nav">
-        <%= render "navigation.html", assigns %>
-      </nav>
-    </header>
-
-    <main id="content">
-      <p class="notification is-info" role="alert"><%= get_flash(@conn, :info) %></p>
-      <p class="notification is-danger" role="alert"><%= get_flash(@conn, :error) %></p>
-      <%= @inner_content %>
-    </main>
-
-    <footer class="footer" id="footer">
-      <%= render "footer.html", assigns %>
-    </footer>
-
-    <script type="text/javascript" src="<%= Routes.static_path(@conn, "/js/app.js") %>"></script>
-  </body>
-</html>
+<main id="content">
+  <p class="notification is-info" role="alert"><%= get_flash(@conn, :info) %></p>
+  <p class="notification is-danger" role="alert"><%= get_flash(@conn, :error) %></p>
+  <%= @inner_content %>
+</main>

@@ -1,6 +1,18 @@
 defmodule AkediaWeb.Endpoint do
   use Phoenix.Endpoint, otp_app: :akedia
 
+  @session_options [
+    store: :cookie,
+    key: "_akedia_key",
+    signing_salt: "2b6cefd2-907c-495a-8efb-3d2ec8b71263",
+    encryption_salt: "c27d3eef-ab92-4793-941a-b6ed5e7fa3ef",
+    max_age: 60 * 60 * 24 * 7 * 2, # 2 Weeks
+    http_only: true
+  ]
+
+  socket "/live", Phoenix.LiveView.Socket,
+    websocket: [connect_info: [session: @session_options]]
+
   plug Plug.Static,
     at: "/",
     from: Path.expand("./uploads"),
@@ -38,14 +50,7 @@ defmodule AkediaWeb.Endpoint do
   # The session will be stored in the cookie and signed,
   # this means its contents can be read but not tampered with.
   # Set :encryption_salt if you would also like to encrypt it.
-  plug Plug.Session,
-    store: :cookie,
-    key: "_akedia_key",
-    signing_salt: "2b6cefd2-907c-495a-8efb-3d2ec8b71263",
-    encryption_salt: "c27d3eef-ab92-4793-941a-b6ed5e7fa3ef",
-    # 2 Weeks
-    max_age: 60 * 60 * 24 * 7 * 2,
-    http_only: true
+  plug Plug.Session, @session_options
 
   plug AkediaWeb.Router
 end

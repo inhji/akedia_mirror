@@ -140,6 +140,10 @@ a:hover {
   text-decoration: underline;
 }
 
+main#content {
+  margin: 3rem auto;
+  max-width: 50rem;
+}
 
 // $$\   $$\                           $$\                     
 // $$ |  $$ |                          $$ |                    
@@ -207,15 +211,6 @@ footer#footer {
 // $$ |  $$\ $$ |  $$ |$$ |  $$ | $$ |$$\ $$   ____|$$ |  $$ | $$ |$$\ 
 // \$$$$$$  |\$$$$$$  |$$ |  $$ | \$$$$  |\$$$$$$$\ $$ |  $$ | \$$$$  |
 //  \______/  \______/ \__|  \__|  \____/  \_______|\__|  \__|  \____/ 
-
-#weather {
-  padding: 0.4rem;
-}
-
-main#content {
-  margin: 3rem auto;
-  max-width: 50rem;
-}
 
 .content {
   .tag, .number {
@@ -290,6 +285,8 @@ section.post-form {
 
 .emoji-picker { z-index: 999; }
 
+
+/*
 .weather {
   canvas#weather {
     padding: 8px;
@@ -314,7 +311,7 @@ section.post-form {
       background: $grey;
     }
   }
-}
+}*/
 
 
 // $$\      $$\                 $$\ $$\                  $$$$$$\  
@@ -326,19 +323,5 @@ section.post-form {
 // $$ | \_/ $$ |\$$$$$$$\ \$$$$$$$ |$$ |\$$$$$$$ |      \$$$$$$ / 
 // \__|     \__| \_______| \_______|\__| \_______|       \___$$$\ 
 
-@media screen and (max-width: $desktop) {
-  .cover-container {
-    padding-top: 10rem;
-  }
-}
-
-
-@media screen and (max-width: $tablet) {
-  .section {
-    padding: 1rem;
-  }
-
-  .title {
-    font-size: 1.5rem;
-  }
-}
+@media screen and (max-width: $desktop) {}
+@media screen and (max-width: $tablet) {}

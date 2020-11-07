@@ -16,8 +16,7 @@ module.exports = (env, options) => {
       ]
     },
     entry: {
-      'app': './js/app.js',
-      'styles': './js/styles.js'
+      'app': './js/app.js'
     },
     output: {
       filename: '[name].js',
@@ -31,15 +30,11 @@ module.exports = (env, options) => {
           test: /\.js$/,
           include: /assets\/js/,
           use: {
-            loader: 'babel-loader',
-            options: {
-              cacheDirectory: true
-            }
+            loader: 'babel-loader'
           }
         },
         {
           test: /\.[s]?css$/,
-          include: /assets\/css/,
           use: [
             devMode ? 'style-loader' : MiniCssExtractPlugin.loader,
             'css-loader',
