@@ -51,6 +51,7 @@
             <hr class="navbar-divider">
             <%= link "Identities", to: Routes.profile_path(@conn, :index), class: "navbar-item" %>
             <%= link "Edit User", to: Routes.user_path(@conn, :edit), class: "navbar-item" %>
+            <%= link "Security", to: Routes.user_path(@conn, :security), class: "navbar-item" %>
             <hr class="navbar-divider">
             <%= link "Logout", to: Routes.session_path(@conn, :delete), method: "delete", data: [confirm: "ಥ‿ಥ\nR u sure?"], class: "navbar-item" %>
           </div>
