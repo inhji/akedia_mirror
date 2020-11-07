@@ -5,6 +5,15 @@ See [Conventional Commits](Https://conventionalcommits.org) for commit guideline
 
 <!-- changelog -->
 
+## [v0.91.1](https://git.inhji.de/inhji/akedia/compare/v0.91.0...v0.91.1) (2020-11-07)
+
+
+
+
+### Bug Fixes:
+
+* more webpack bikeshedding
+
 ## [v0.91.0](https://git.inhji.de/inhji/akedia/compare/v0.90.3...v0.91.0) (2020-11-07)
 
 
