@@ -18,11 +18,6 @@
           ,"coffeescript"
           ,"git"
           ,"json"
-        ],
-        "plugins": [
-          "autolinker"
-          ,"highlight-keywords"
-          ,"command-line",
         ]
       }
     ]
