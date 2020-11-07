@@ -29,27 +29,28 @@
     <%= error_tag f, :content %>
   </div>
 
-  <a id="emoji-button" class="button">🤩 Emoji</a>
-
-  <div class="field">
-    <%= label f, :image, class: "label" %>
-    <div class="file">
-      <label class="file-label">
-        <%= file_input f, :image, class: "file-input" %>
-        <span class="file-cta">
-          <span class="file-icon">
-            <i class="fa fa-upload"></i>
-          </span>
-          <span class="file-label">
-            Choose a file…
-          </span>
-        </span>
-      </label>
+  <div class="columns">
+    <div class="column">
+       <a id="emoji-button" class="button">🐒 Insert Emoji</a>
+    </div>
+    <div class="column">
+      <div class="field">
+        <div class="file">
+          <label class="file-label">
+            <%= file_input f, :image, class: "file-input" %>
+            <span class="file-cta">             
+              <span class="file-label">
+                🖼️ Add Photo
+              </span>
+            </span>
+          </label>
+        </div>
+      </div>
     </div>
   </div>
 
   <div class="field">
-    <%= label f, :reply_to, class: "label" %>
+    <%= label f, :reply_to, "↩️ Reply To", class: "label" %>
     <div class="control">
       <%= text_input f, :reply_to, class: "input" %>
     </div> 
@@ -57,7 +58,7 @@
   </div>
 
   <div class="field">
-    <%= label f, :topics, class: "label" %>
+    <%= label f, :topics, "🏷️ Tags", class: "label" %>
     <div class="control">
       <%= text_input f, :topics, value: @tags, class: "input", type: "tags" %>           
     </div>
@@ -68,23 +69,28 @@
 
   <%= inputs_for f, :entity, fn(ef) -> %>
   <div class="field">
-    <%= label ef, :settings, class: "label" %>
+    <%= label ef, :settings, "⚙️ Settings", class: "label" %>
 
-    <div class="field">
-      <%= checkbox ef, :is_published, class: "switch is-rounded" %>
-      <%= label ef, :is_published %>    
-    </div>   
-
-    <div class="field">
-      <%= checkbox ef, :is_pinned, class: "switch is-rounded" %>
-      <%= label ef, :is_pinned %>
+    <div class="columns">
+      <div class="column">
+        <div class="field">
+          <%= checkbox ef, :is_published, class: "switch is-rounded" %>
+          <%= label ef, :is_published, "📦 Published" %>    
+        </div> 
+      </div>
+      <div class="column">
+        <div class="field">
+          <%= checkbox ef, :is_pinned, class: "switch is-rounded" %>
+          <%= label ef, :is_pinned, "📌 Pinned" %>
+        </div>
+      </div>
+      <div class="column">
+        <div class="field">
+          <%= checkbox ef, :bridgy_fed, class: "switch is-rounded" %>
+          <%= label ef, :bridgy_fed, "🕸️ Brid.gy Fed" %>
+        </div>
+      </div>
     </div>
-
-    <div class="field">
-      <%= checkbox ef, :bridgy_fed, class: "switch is-rounded" %>
-      <%= label ef, :bridgy_fed %>
-    </div>
-    
   </div>
   <% end %>
 
