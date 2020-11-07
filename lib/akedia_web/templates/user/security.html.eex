@@ -1,38 +1,41 @@
+
+<h1 class="title">Security</h1>
+
 <div class="card">
 	<div class="card-content">
-		<h1 class="title">Security</h1>
-
 		<h2 class="subtitle">Webauthn</h2>
 
-		<div class="table-container">
-			<table class="table">
-			  <thead>
-			    <tr>
-			      <th>Device</th>
-			      <th>External Id</th>
-			      <th>Public Key</th>
-			    </tr>
-			  </thead>
-			  <tbody>
-			    <tr>
-			      <td><%= @current_user.credential.device_name %></td>
-			      <td><%= String.slice(@current_user.credential.external_id, 0..20) %>..</td>
-			      <td><%= String.slice(@current_user.credential.public_key, 0..20) %>..</td>
-			    </tr>
-			  </tbody>
-			</table>
+		<div class="content" style="word-wrap: break-word;">
+			<dl>
+				<dt>Device</dt>
+				<dd><%= @current_user.credential.device_name %></dd>
+				<dt>External Id</dt>
+				<dd><%= String.slice(@current_user.credential.external_id, 0..999) %></dd>
+				<dt>Public Key</dt>
+				<dd><%= String.slice(@current_user.credential.public_key, 0..999) %></dd>
+			</dl>			
 		</div>
 
 		<%= form_for @conn, Routes.webauthn_path(@conn, :create), [id: "registration-create", class: "form"], fn f -> %>
 			<div class="field">
-		  	<%= label f, :device_name, class: "label" %>
-		  	<%= text_input f, :device_name, class: "input" %>
+				<%= label f, :device_name, "Register a new device", class: "label" %>
+				<%= text_input f, :device_name, class: "input" %>
 			</div>
-		  <%= submit "Register", class: "button is-success" %>
+			<%= submit "Register", class: "button is-primary" %>
 		<% end %>
-
-		<h2 class="subtitle">TOTP</h2>
-
-		<img src='data:image/svg+xml; base64, <%= @qr_code %>' width="400" />
 	</div>
 </div>
+
+<div class="spacer"></div>
+
+<div class="card">
+	<div class="card-content">
+		<h2 class="subtitle">TOTP</h2>
+
+		<img src='data:image/svg+xml; base64, <%= @qr_code %>' width="200" />
+	</div>
+</div>
+
+
+
+

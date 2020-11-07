@@ -69,37 +69,46 @@
     <%= error_tag f, :about %>
   </div>
 
-  <div class="field">
-    <%= label f, :avatar, class: "label" %>
-    <div class="file">
-      <label class="file-label">
-        <%= file_input f, :avatar, class: "file-input" %>
-        <span class="file-cta">
-          <span class="file-icon">
-            <i class="fa fa-upload"></i>
-          </span>
-          <span class="file-label">
-            Choose a file…
-          </span>
-        </span>
-      </label>
-    </div>
-  </div>
+  <div class="columns">
+    <div class="column">
+     <img src=" <%= avatar_url(@user) %>" style="max-width: 100%">
 
-  <div class="field">
-    <%= label f, :cover, class: "label" %>
-    <div class="file">
-      <label class="file-label">
-        <%= file_input f, :cover, class: "file-input" %>
-        <span class="file-cta">
-          <span class="file-icon">
-            <i class="fa fa-upload"></i>
-          </span>
-          <span class="file-label">
-            Choose a file…
-          </span>
-        </span>
-      </label>
+      <div class="field">
+        <%= label f, :avatar, class: "label" %>
+        <div class="file">
+          <label class="file-label">
+            <%= file_input f, :avatar, class: "file-input" %>
+            <span class="file-cta">
+              <span class="file-icon">
+                <i class="fa fa-upload"></i>
+              </span>
+              <span class="file-label">
+                Choose a file…
+              </span>
+            </span>
+          </label>
+        </div>
+      </div>
+    </div>
+    <div class="column">
+      <img src=" <%= cover_url(@user) %>" style="max-width: 100%">
+
+      <div class="field">
+        <%= label f, :cover, class: "label" %>
+        <div class="file">
+          <label class="file-label">
+            <%= file_input f, :cover, class: "file-input" %>
+            <span class="file-cta">
+              <span class="file-icon">
+                <i class="fa fa-upload"></i>
+              </span>
+              <span class="file-label">
+                Choose a file…
+              </span>
+            </span>
+          </label>
+        </div>
+      </div>
     </div>
   </div>
 

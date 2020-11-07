@@ -1,5 +1,5 @@
 <div class="columns">
-  <div class="column is-half is-offset-one-quarter">
+  <div class="column">
     <h1 class="title">Login <small class="has-text-grey">with a second factor</small></h1>
 
     <div class="card">
@@ -30,7 +30,7 @@
             <%= form_for @conn, Routes.session_path(@conn, :totp_create), [class: "form login"], fn f -> %>
               <div class="field is-grouped">
                 <div class="control is-expanded">
-                  <%= text_input f, :totp, class: "input", placeholder: "One time Password", required: true %>
+                  <%= text_input f, :totp, class: "input", placeholder: "One time Password", required: true, focus: true %>
                 </div>
                 <div class="control">
                   <%= submit "Login", class: "button is-success" %>
