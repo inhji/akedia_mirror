@@ -5,6 +5,15 @@ See [Conventional Commits](Https://conventionalcommits.org) for commit guideline
 
 <!-- changelog -->
 
+## [v0.91.3](https://git.inhji.de/inhji/akedia/compare/v0.91.2...v0.91.3) (2020-11-07)
+
+
+
+
+### Bug Fixes:
+
+* remove OptimizeCSSAssetsPlugin in favor of CssMinimizerPlugin
+
 ## [v0.91.2](https://git.inhji.de/inhji/akedia/compare/v0.91.1...v0.91.2) (2020-11-07)
 
 
