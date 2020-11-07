@@ -15,7 +15,6 @@
 //                                             \$$$$$$  |
 //                                              \______/ 
 
-
 // Custom Variables
 $radius-slightly-rounded: 3px;
 
@@ -34,19 +33,6 @@ $primary: $purple;
 $secondary: #fff;
 
 @import "~bulma/sass/utilities/_all";
-@import "~bulma-prefers-dark/sass/utilities/initial-variables";
-@import "~bulma-prefers-dark/sass/utilities/derived-variables";
-
-// Override prefers-scheme mixin
-@mixin prefers-scheme($scheme) {
-  @media (prefers-color-scheme: $scheme) {
-    @content
-  }
-
-  body.scheme-#{$scheme} {
-    @content
-  }
-}
 
 // Fonts
 $family-primary: $poppins-regular;
@@ -63,6 +49,18 @@ $body-background-color: $white-bis;
 // Footer
 $footer-background-color: $dark;
 
+// $$$$$$\                                              $$\               
+// \_$$  _|                                             $$ |              
+//   $$ |  $$$$$$\$$$$\   $$$$$$\   $$$$$$\   $$$$$$\ $$$$$$\    $$$$$$$\ 
+//   $$ |  $$  _$$  _$$\ $$  __$$\ $$  __$$\ $$  __$$\\_$$  _|  $$  _____|
+//   $$ |  $$ / $$ / $$ |$$ /  $$ |$$ /  $$ |$$ |  \__| $$ |    \$$$$$$\  
+//   $$ |  $$ | $$ | $$ |$$ |  $$ |$$ |  $$ |$$ |       $$ |$$\  \____$$\ 
+// $$$$$$\ $$ | $$ | $$ |$$$$$$$  |\$$$$$$  |$$ |       \$$$$  |$$$$$$$  |
+// \______|\__| \__| \__|$$  ____/  \______/ \__|        \____/ \_______/ 
+//                       $$ |                                             
+//                       $$ |                                             
+//                       \__|                                             
+
 @import "~bulma/sass/base/_all";
 @import "~bulma/sass/elements/_all";
 @import "~bulma/sass/components/_all";
@@ -71,48 +69,24 @@ $footer-background-color: $dark;
 @import "~bulma/sass/layout/_all";
 @import "~bulma/sass/helpers/_all";
 
-@include prefers-scheme(dark) {
-  @import "~bulma-prefers-dark/sass/base/_all";
-  @import "~bulma-prefers-dark/sass/elements/_all";
-  @import "~bulma-prefers-dark/sass/components/_all";
-  @import "~bulma-prefers-dark/sass/layout/_all";
-}
-
 @import "~bulma-tagsinput/dist/css/bulma-tagsinput";
 @import "~bulma-switch/dist/css/bulma-switch";
-@import "~bulma-divider/dist/css/bulma-divider";
 
-@import "include/bulma";
-@import "include/mixins";
-@import "include/notification";
 @import "include/helpers";
-@import "include/tagcloud";
 @import "include/article";
 @import "include/prism";
 @import "include/zen";
 @import "include/lightbox";
 @import "include/emojipicker";
 
-// $$$$$$$\                                
-// $$  __$$\                               
-// $$ |  $$ | $$$$$$\   $$$$$$$\  $$$$$$\  
-// $$$$$$$\ | \____$$\ $$  _____|$$  __$$\ 
-// $$  __$$\  $$$$$$$ |\$$$$$$\  $$$$$$$$ |
-// $$ |  $$ |$$  __$$ | \____$$\ $$   ____|
-// $$$$$$$  |\$$$$$$$ |$$$$$$$  |\$$$$$$$\ 
-// \_______/  \_______|\_______/  \_______|                                        
-
-// @import "debug";
-
-::-moz-selection { background: $primary; color: $white; }
-::selection { background: $primary; color: $white; }
-
-::placeholder {
-  color: $dark;
-  opacity: 1;
-}
-
-* { box-sizing: border-box; }
+// $$$$$$$$\                   $$\               
+// $$  _____|                  $$ |              
+// $$ |    $$$$$$\  $$$$$$$\ $$$$$$\    $$$$$$$\ 
+// $$$$$\ $$  __$$\ $$  __$$\\_$$  _|  $$  _____|
+// $$  __|$$ /  $$ |$$ |  $$ | $$ |    \$$$$$$\  
+// $$ |   $$ |  $$ |$$ |  $$ | $$ |$$\  \____$$\ 
+// $$ |   \$$$$$$  |$$ |  $$ | \$$$$  |$$$$$$$  |
+// \__|    \______/ \__|  \__|  \____/ \_______/                                    
 
 @font-face {
     font-family: 'Poppins Regular';
@@ -142,21 +116,31 @@ $footer-background-color: $dark;
   font-style: normal;
 }
 
+// $$$$$$$\                                
+// $$  __$$\                               
+// $$ |  $$ | $$$$$$\   $$$$$$$\  $$$$$$\  
+// $$$$$$$\ | \____$$\ $$  _____|$$  __$$\ 
+// $$  __$$\  $$$$$$$ |\$$$$$$\  $$$$$$$$ |
+// $$ |  $$ |$$  __$$ | \____$$\ $$   ____|
+// $$$$$$$  |\$$$$$$$ |$$$$$$$  |\$$$$$$$\ 
+// \_______/  \_______|\_______/  \_______|                                        
+
+// @import "debug";
+
+::-moz-selection { background: $primary; color: $white; }
+::selection { background: $primary; color: $white; }
+
+::placeholder {
+  color: $dark;
+  opacity: 1;
+}
+
+* { box-sizing: border-box; }
+
 a:hover {
   text-decoration: underline;
 }
 
-/*
-main {
-  .columns {
-    margin-right: 0;
-
-    .column {
-      padding-right: 0;
-    }
-  }
-}
-*/
 
 // $$\   $$\                           $$\                     
 // $$ |  $$ |                          $$ |                    
@@ -267,6 +251,44 @@ section.post-form {
   margin-top: 3rem;
 }
 
+// $$\      $$\ $$\                     
+// $$$\    $$$ |\__|                    
+// $$$$\  $$$$ |$$\  $$$$$$$\  $$$$$$$\ 
+// $$\$$\$$ $$ |$$ |$$  _____|$$  _____|
+// $$ \$$$  $$ |$$ |\$$$$$$\  $$ /      
+// $$ |\$  /$$ |$$ | \____$$\ $$ |      
+// $$ | \_/ $$ |$$ |$$$$$$$  |\$$$$$$$\ 
+// \__|     \__|\__|\_______/  \_______|
+
+.menu, .navbar {
+  a:hover { text-decoration: none; }
+}
+
+// Tagcloud classes
+@for $i from 1 through 30 {
+  .topic.count-#{$i} {
+    font-size: 100% + percentage(($i*5) / 100);
+  }
+}
+
+.notification {
+  &.is-danger {
+    border: 1px solid $danger;
+    background-color: lighten($danger, 40%);
+    color: $danger;
+  }
+
+  &.is-info {
+    border: 1px solid $info;
+    background-color: lighten($info, 40%);
+    color: $info;
+  }
+
+  &:empty {
+    display: none;
+  }
+}
+
 .emoji-picker { z-index: 999; }
 
 .weather {
@@ -294,6 +316,7 @@ section.post-form {
     }
   }
 }
+
 
 // $$\      $$\                 $$\ $$\                  $$$$$$\  
 // $$$\    $$$ |                $$ |\__|                $$  __$$\ 

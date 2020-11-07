@@ -16,7 +16,7 @@
           </div>
         </div>
 
-        <div class="is-divider" data-content="OR"></div>
+        <div class="spacer"></div>
 
         <div class="media">
           <div class="media-left">
