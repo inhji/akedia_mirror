@@ -30,7 +30,7 @@ defmodule AkediaWeb.AtomController do
     |> Feed.generator()
     |> Feed.entries(entries)
     |> Feed.build()
-    |> Atomex.generate_document()
+    |> Akedia.Atomex.generate_document()
   end
 
   def build_entry(%{:like => like} = _entity, user) when not is_nil(like) do
