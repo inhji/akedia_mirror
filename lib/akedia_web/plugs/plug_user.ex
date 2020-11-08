@@ -5,12 +5,9 @@ defmodule AkediaWeb.Plugs.PlugUser do
   alias AkediaWeb.{ErrorView, LayoutView}
 
   def check_user(conn, _) do
-    IO.inspect(get_session(conn, :user_id))
-
     case get_session(conn, :user_id) do
       nil ->
         conn
-        |> put_layout({LayoutView, "app.html"})
         |> put_view(ErrorView)
         |> assign(:logged_in, false)
         |> render("auth.html")

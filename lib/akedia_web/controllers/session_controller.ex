@@ -10,7 +10,7 @@ defmodule AkediaWeb.SessionController do
 
     conn
     |> delete_session(:authorized_for_two_factor)
-    |> render("new.html", changeset: changeset)
+    |> render("new.html", changeset: changeset, page_title: "Login")
   end
 
   def create(conn, %{"credential" => %{"email" => email, "password" => password}}) do
@@ -26,11 +26,6 @@ defmodule AkediaWeb.SessionController do
           |> redirect(to: Routes.public_path(conn, :index))
         end
 
-      # === DEVDOOR ===
-      # conn
-      # |> Auth.login(user)
-      # |> redirect(to: Routes.admin_path(conn, :index))
-
       {:error, reason} ->
         changeset = Accounts.change_credential(%Accounts.Credential{email: email})
 
@@ -45,18 +40,15 @@ defmodule AkediaWeb.SessionController do
       true ->
         conn
         |> delete_session(@preauth_flag)
-        |> render("two_factor.html")
+        |> render("two_factor.html", page_title: "Two Factor")
 
       _ ->
         Logger.info("Preauth Flag not found, redirecting..")
 
         conn
-        |> put_flash(:error, "BRUH")
+        |> put_flash(:error, "You had one job.. 🤦‍♂️")
         |> redirect(to: Routes.public_path(conn, :index))
     end
-
-    # DEV ONLY
-    # render(conn,  "two_factor.html")
   end
 
   def webauthn_create(conn, _params) do
