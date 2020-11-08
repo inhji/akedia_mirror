@@ -17,8 +17,13 @@ defmodule AkediaWeb.PostController do
     render(conn, "index.html", posts: posts)
   end
 
+  def new(conn, %{"content" => content}) do
+    changeset = Post.changeset(%Post{}, %{content: content})
+    render(conn, "new.html", changeset: changeset, tags: [])
+  end
+
   def new(conn, _params) do
-    changeset = Content.change_post(%Post{})
+    changeset = Post.changeset(%Post{}, %{})
     render(conn, "new.html", changeset: changeset, tags: [])
   end
 

@@ -79,6 +79,15 @@ defmodule AkediaWeb do
     end
   end
 
+  def live do
+    quote do
+      use Phoenix.LiveView
+      use Phoenix.HTML
+      import AkediaWeb.ErrorHelpers
+      alias AkediaWeb.Router.Helpers, as: Routes
+    end
+  end
+
   @doc """
   When used, dispatch to the appropriate controller/view/etc.
   """

@@ -16,7 +16,7 @@ defmodule AkediaWeb.LayoutView do
 
 	# Takes the resource name of the view module and removes the
 	# the ending *_view* string.
-	defp view_name(%{private: private} = conn) do
+	defp view_name(%{private: private} = _conn) do
 		private
 		|> Map.get(:phoenix_view)
 		|> Phoenix.Naming.resource_name
@@ -25,7 +25,7 @@ defmodule AkediaWeb.LayoutView do
 
 	# Removes the extion from the template and reutrns
 	# just the name.
-	defp template_name(%{private: private} = conn) do
+	defp template_name(%{private: private} = _conn) do
 		private
 		|> Map.get(:phoenix_template)
 		|> String.split(".")

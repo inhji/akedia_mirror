@@ -13,10 +13,8 @@ defmodule AkediaWeb.PublicController do
 
   def index(conn, params) do
     page = Akedia.Content.list_posts_paginated([is_published: true], params)
-    post_changeset = Akedia.Content.change_post(%Akedia.Content.Post{})
 
     data = [
-      changeset: post_changeset,
       tags: [],
       page: page,
       posts: page.entries,
