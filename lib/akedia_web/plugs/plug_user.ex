@@ -1,8 +1,8 @@
 defmodule AkediaWeb.Plugs.PlugUser do
   import Plug.Conn, only: [assign: 3, get_session: 2, configure_session: 2]
-  import Phoenix.Controller, only: [render: 2, put_layout: 2, put_view: 2]
+  import Phoenix.Controller, only: [render: 2, put_view: 2]
   alias Akedia.Accounts
-  alias AkediaWeb.{ErrorView, LayoutView}
+  alias AkediaWeb.ErrorView
 
   def check_user(conn, _) do
     case get_session(conn, :user_id) do
