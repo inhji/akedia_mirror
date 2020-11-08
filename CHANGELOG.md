@@ -5,6 +5,27 @@ See [Conventional Commits](Https://conventionalcommits.org) for commit guideline
 
 <!-- changelog -->
 
+## [v0.92.0](https://git.inhji.de/inhji/akedia/compare/v0.91.4...v0.92.0) (2020-11-08)
+
+
+
+
+### Features:
+
+* convert post form to live view, more opens the big form with content prefilled
+
+* add nprogress
+
+* add support for live templates
+
+### Bug Fixes:
+
+* make dynamic js loading work with live view, thanks to https://elixirforum.com/t/new-layouts-in-phoenix/30967
+
+### Refactors:
+
+* clean up some stuff
+
 ## [v0.91.4](https://git.inhji.de/inhji/akedia/compare/v0.91.3...v0.91.4) (2020-11-07)
 
 
