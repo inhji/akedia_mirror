@@ -5,6 +5,15 @@ See [Conventional Commits](Https://conventionalcommits.org) for commit guideline
 
 <!-- changelog -->
 
+## [v0.92.1](https://git.inhji.de/inhji/akedia/compare/v0.92.0...v0.92.1) (2020-11-08)
+
+
+
+
+### Bug Fixes:
+
+* secure session options
+
 ## [v0.92.0](https://git.inhji.de/inhji/akedia/compare/v0.91.4...v0.92.0) (2020-11-08)
 
 
