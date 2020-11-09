@@ -28,7 +28,7 @@ defmodule AkediaWeb.PublicController do
     render(conn, "index.html", data)
   end
 
-  def new(conn, params) do
+  def new(conn, _params) do
     conn
     |> put_layout("app_wide.html")
     |> live_render(AkediaWeb.PostFormLive)
