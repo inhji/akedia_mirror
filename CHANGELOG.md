@@ -5,6 +5,29 @@ See [Conventional Commits](Https://conventionalcommits.org) for commit guideline
 
 <!-- changelog -->
 
+## [v0.94.2](https://git.inhji.de/inhji/akedia/compare/v0.94.1...v0.94.2) (2020-11-09)
+
+
+
+
+### Bug Fixes:
+
+* enum.count on an integer is not a wise move
+
+* show bookmark svg when no favicon exists
+
+* bring back stupid glitch fix
+
+* prettier mentions
+
+* remove arbitrary spacing in hcard
+
+### Refactors:
+
+* clean up navigation
+
+* include nprogress css, tint progress bar purple
+
 ## [v0.94.1](https://git.inhji.de/inhji/akedia/compare/v0.94.0...v0.94.1) (2020-11-09)
 
 
