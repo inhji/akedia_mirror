@@ -1,5 +1,5 @@
 <section class="post-form">
-	<%= form_for @changeset, Routes.post_path(@conn, :create), fn f -> %>
+	<%= f = form_for @changeset, "#", [phx_change: :validate, phx_submit: :save] %>
 		<div class="field">
 			<%= textarea f, :content,
 				id: "content-area",
@@ -19,16 +19,12 @@
 
 		<div class="field has-addons is-fullwidth">
 			<div class="control">
-				<button onClick="javascript:this.parent.submit()" class="button is-primary" value="Post">
-					<span>Post Now</span> 
-				</button>
+				<button type="submit" class="button is-primary">Post Now</button>
 			</div>
 			<div class="control">
-				<%= link to: Routes.post_path(@conn, :new), class: "button" do %>
-					<span>More</span> 
-				<% end %>
+				<button phx-click="more" class="button">More</button>
 			</div>
-		</div>    
-	<% end %>
+		</div>
+	</form>
 </section>
 

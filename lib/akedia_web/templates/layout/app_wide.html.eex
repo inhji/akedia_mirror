@@ -1,0 +1,5 @@
+<main id="content" class="wide">
+  <p class="notification is-info" role="alert"><%= get_flash(@conn, :info) %></p>
+  <p class="notification is-danger" role="alert"><%= get_flash(@conn, :error) %></p>
+  <%= @inner_content %>
+</main>

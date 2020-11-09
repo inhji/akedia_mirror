@@ -2,6 +2,7 @@ defmodule AkediaWeb.PublicController do
   use AkediaWeb, :controller
 
   plug :plug_onboard
+  plug :check_user when action in [:new]
 
   def plug_onboard(conn, _opts) do
     if conn.assigns.has_user do
@@ -25,6 +26,12 @@ defmodule AkediaWeb.PublicController do
     ]
 
     render(conn, "index.html", data)
+  end
+
+  def new(conn, params) do
+    conn
+    |> put_layout("app_wide.html")
+    |> live_render(AkediaWeb.PostFormLive)
   end
 
   def search(conn, %{"query" => query}) do

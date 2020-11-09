@@ -17,11 +17,11 @@
 
   <div id="mainNav" class="navbar-menu">
 
+    <%= if @logged_in do %>
     <div class="navbar-start">
-      <%= link "Posts", to: Routes.post_path(@conn, :index), class: "navbar-item" %>
-      <%= link "Bookmarks", to: Routes.bookmark_path(@conn, :index), class: "navbar-item" %>
-      <%= link "Likes", to: Routes.like_path(@conn, :index), class: "navbar-item" %>
+      <%= link "NEw", to: Routes.public_path(@conn, :new), class: "navbar-item" %>
     </div>
+    <% end %>
     
     <div class="navbar-end">
       <%= form_for @conn, Routes.public_path(@conn, :search), [method: :get, class: "navbar-item navbar-search"], fn f -> %>

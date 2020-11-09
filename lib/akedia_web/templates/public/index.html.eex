@@ -3,7 +3,7 @@
 </section>
 
 <%= if @logged_in do %>
-	<%= live_render(@conn, AkediaWeb.PostFormLive) %>
+	<%= live_render(@conn, AkediaWeb.StatusFormLive) %>
 <% end %>
 
 <div class="columns is-desktop">

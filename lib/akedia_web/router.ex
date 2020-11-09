@@ -46,6 +46,7 @@ defmodule AkediaWeb.Router do
     pipe_through [:browser]
 
     get "/", PublicController, :index
+    get "/new", PublicController, :new
 
     get "/tagged-with/:topic", PublicController, :tagged
     get "/search", PublicController, :search

@@ -1,23 +1,20 @@
-defmodule AkediaWeb.PostFormLive do
+defmodule AkediaWeb.StatusFormLive do
 	use AkediaWeb, :live
 	alias Akedia.Content.Post
 
 	def mount(_params, _assigns, socket) do
 		changeset = Post.changeset(%Post{}, %{})
 
-		{:ok, assign(socket, changeset: changeset, tags: [])}
+		{:ok, assign(socket, changeset: changeset)}
 	end
 
 	def handle_event("validate", %{"post" => params}, socket) do
-		# TODO: Something causes the entity fields in inputs_for not get picket up
-		# and saved by the changeset.
-
 	  changeset =
 	    %Post{}
 	    |> Post.changeset(params)
 	    |> Map.put(:action, :insert)
 
-	  {:noreply, assign(socket, changeset: changeset, tags: [])}
+	  {:noreply, assign(socket, changeset: changeset)}
 	end
 
 	def handle_event("save", %{"post" => post_params}, socket) do
@@ -34,7 +31,7 @@ defmodule AkediaWeb.PostFormLive do
       	}
 
       {:error, %Ecto.Changeset{} = changeset} ->
-      	{:noreply, assign(socket, changeset: changeset, tags: [])}
+      	{:noreply, assign(socket, changeset: changeset)}
 		end
 	end
 
