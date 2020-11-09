@@ -53,7 +53,8 @@ config :akedia, AkediaWeb.Endpoint,
       ~r{priv/static/.*(js|css|png|jpeg|jpg|gif|svg)$},
       ~r{priv/gettext/.*(po)$},
       ~r{lib/akedia_web/views/.*(ex)$},
-      ~r{lib/akedia_web/templates/.*(eex)$}
+      ~r{lib/akedia_web/templates/.*(eex)$},
+      ~r{lib/akedia_web/live/.*(leex|ex)$}
     ]
   ]
 
