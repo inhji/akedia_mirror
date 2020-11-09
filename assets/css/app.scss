@@ -150,6 +150,12 @@ main#content.wide {
   max-width: 80rem;
 }
 
+// Prevents stupid padding glitch
+main {
+  .columns { margin-right: 0; }
+  .columns .column { padding-right: 0; }
+}
+
 // $$\   $$\                           $$\                     
 // $$ |  $$ |                          $$ |                    
 // $$ |  $$ | $$$$$$\   $$$$$$\   $$$$$$$ | $$$$$$\   $$$$$$\  
