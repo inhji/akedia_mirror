@@ -1,4 +1,4 @@
-<div class="hero is-primary is-bold card">
+<div class="hero is-primary is-bold">
   <div class="hero-body">
     <div class="columns">
       <div class="column">
@@ -22,7 +22,6 @@
           </div>
         </aside>
       </div>
-      <div class="column is-two-fifths is-one-fifth-tablet"></div>   
     </div>
   </div>
 </div>
