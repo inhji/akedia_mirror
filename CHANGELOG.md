@@ -5,6 +5,29 @@ See [Conventional Commits](Https://conventionalcommits.org) for commit guideline
 
 <!-- changelog -->
 
+## [v0.94.3](https://git.inhji.de/inhji/akedia/compare/v0.94.2...v0.94.3) (2020-11-09)
+
+
+
+
+### Bug Fixes:
+
+* add oban migration for versio 2.3.0
+
+* enum.count on an integer is not a wise move
+
+* show bookmark svg when no favicon exists
+
+* bring back stupid glitch fix
+
+* prettier mentions
+
+* correctly show reposts
+
+### Refactors:
+
+* clean up navigation
+
 ## [v0.94.2](https://git.inhji.de/inhji/akedia/compare/v0.94.1...v0.94.2) (2020-11-09)
 
 
