@@ -1,33 +1,35 @@
-<article class="card bookmark h-entry">
-  <div class="card-content">
-    <div class="media">
-      <figure class="media-left">
-        <p class="image is-48x48">
-          <%= if @bookmark.favicon do %>
-            <img src="<%= favicon_url(@bookmark.favicon) %>">
-          <% else %>
-            <i class="fa fa-bookmark-o fa-3x"></i>
-          <% end %>
-        </p>
-      </figure>
-      <div class="media-content">
-        <%= render SharedView, "post/post_header.html",
-            conn: @conn,
-            schema: @bookmark,
-            url_helper: &Routes.bookmark_url/3,
-            current_user: @current_user %>
+<article class="bookmark h-entry">
+  <div class="media">
+    <figure class="media-left">
+      <p class="image is-48x48">
+        <%= if @bookmark.favicon do %>
+          <img src="<%= favicon_url(@bookmark.favicon) %>">
+        <% else %>
+          <i class="fa fa-bookmark-o fa-3x"></i>
+        <% end %>
+      </p>
+    </figure>
+    <div class="media-content">
+      <div class="card"> 
+        <div class="card-content">
+          <%= render SharedView, "post/post_header.html",
+              conn: @conn,
+              schema: @bookmark,
+              url_helper: &Routes.bookmark_url/3,
+              current_user: @current_user %>
 
-        <div class="post-content">
-          <div class="content e-content is-size-4">
-            <%= to_html(@bookmark) %>
+          <div class="post-content">
+            <div class="content e-content is-size-4">
+              <%= to_html(@bookmark) %>
+            </div>
           </div>
+          
+          <%= render SharedView, "post/post_meta.html",
+              conn: @conn,
+              schema: @bookmark,
+              url_helper: &Routes.bookmark_url/3,
+              current_user: @current_user %>
         </div>
-        
-        <%= render SharedView, "post/post_meta.html",
-            conn: @conn,
-            schema: @bookmark,
-            url_helper: &Routes.bookmark_url/3,
-            current_user: @current_user %>
       </div>
     </div>
   </div>

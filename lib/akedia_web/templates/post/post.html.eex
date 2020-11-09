@@ -1,50 +1,52 @@
-<article class="card post h-entry">
-  <%= if @post.entity.image do %>
-  <div class="card-image">
-    <figure class="image">
-      <a href="#<%= @post.id %>">
-        <img class="u-photo" src="<%= image_url(@post.entity.image, :wide) %>" alt="<%= @post.content_sanitized %>">
-      </a>
-    </figure>
-    
-    <!-- Hidden Lightbox Image -->
-    <a href="#_" class="lightbox" id="<%= @post.id %>">
-      <img src="<%= image_url(@post.entity.image, :original) %>">
-    </a>
-  </div>
-  <% end %>
-  <div class="card-content">
-    <div class="media">
-      <figure class="media-left">
-        <p class="image is-48x48 is-rounded">
-          <img src="<%= avatar_url(@current_user) %>" />
-        </p>
-      </figure>
-      <div class="media-content">
-        <%= render SharedView, "post/post_header.html",
-            conn: @conn,
-            schema: @post,
-            url_helper: &Routes.post_url/3,
-            current_user: @current_user %>
+<article class="post h-entry">
+	<div class="media">
+		<figure class="media-left">
+			<p class="image is-48x48">
+				<img src="<%= avatar_url(@current_user) %>" />
+			</p>
+		</figure>
+		<div class="media-content">
+			<div class="card">
+				<%= if @post.entity.image do %>
+				<div class="card-image">
+					<figure class="image">
+						<a href="#<%= @post.id %>">
+							<img class="u-photo" src="<%= image_url(@post.entity.image, :wide) %>" alt="<%= @post.content_sanitized %>">
+						</a>
+					</figure>
+					
+					<!-- Hidden Lightbox Image -->
+					<a href="#_" class="lightbox" id="<%= @post.id %>">
+						<img src="<%= image_url(@post.entity.image, :original) %>">
+					</a>
+				</div>
+				<% end %>
+				<div class="card-content">      
+					<%= render SharedView, "post/post_header.html",
+							conn: @conn,
+							schema: @post,
+							url_helper: &Routes.post_url/3,
+							current_user: @current_user %>
 
-        <div class="post-content">
-          <%= if @post.title do %>
-          <h3 class="is-size-4 title p-name">
-            <%= @post.title %>
-          </h3>
-          <% end %>
+					<div class="post-content">
+						<%= if @post.title do %>
+						<h3 class="is-size-4 title p-name">
+							<%= @post.title %>
+						</h3>
+						<% end %>
 
-          <div class="content e-content <%= unless @post.title do %>p-name<% end %> is-size-4">
-            <%= raw(@post.content_html) %>
-          </div>
-        </div>
+						<div class="content e-content <%= unless @post.title do %>p-name<% end %> is-size-4">
+							<%= raw(@post.content_html) %>
+						</div>
+					</div>
 
-        <%= render SharedView, "post/post_meta.html",
-            conn: @conn,
-            schema: @post,
-            url_helper: &Routes.post_url/3,
-            current_user: @current_user %>
-      </div>
-    </div>
-  </div>
+					<%= render SharedView, "post/post_meta.html",
+							conn: @conn,
+							schema: @post,
+							url_helper: &Routes.post_url/3,
+							current_user: @current_user %>
+				</div>
+			</div>
+		</div>
+	</div>
 </article>

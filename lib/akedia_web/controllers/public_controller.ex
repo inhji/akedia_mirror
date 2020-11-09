@@ -12,12 +12,12 @@ defmodule AkediaWeb.PublicController do
   end
 
   def index(conn, params) do
-    page = Akedia.Content.list_posts_paginated([is_published: true], params)
+    page = Akedia.Content.list_entities_paginated(params)
 
     data = [
       tags: [],
       page: page,
-      posts: page.entries,
+      entities: page.entries,
       page_number: page.page_number,
       page_size: page.page_size,
       total_pages: page.total_pages,
