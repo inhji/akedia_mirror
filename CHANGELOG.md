@@ -5,6 +5,15 @@ See [Conventional Commits](Https://conventionalcommits.org) for commit guideline
 
 <!-- changelog -->
 
+## [v0.94.4](https://git.inhji.de/inhji/akedia/compare/v0.94.3...v0.94.4) (2020-11-09)
+
+
+
+
+### Bug Fixes:
+
+* show pinned topics in tag cloud
+
 ## [v0.94.3](https://git.inhji.de/inhji/akedia/compare/v0.94.2...v0.94.3) (2020-11-09)
 
 
