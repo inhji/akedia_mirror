@@ -68,7 +68,7 @@ defmodule Akedia.MixProject do
       {:phoenix_ecto, "~> 4.2"},
       {:phoenix_html, "~> 2.14"},
       {:phoenix_live_reload, "~> 1.3", only: :dev},
-      {:phoenix_live_view, "~> 0.14.8"},
+      {:phoenix_live_view, github: "phoenixframework/phoenix_live_view"},
       {:phoenix_pubsub, "~> 2.0"},
       {:plug_cowboy, "~> 2.4"},
       {:plug_micropub, git: "https://git.inhji.de/inhji/plug_micropub", branch: "master"},
