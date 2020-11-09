@@ -5,6 +5,19 @@ See [Conventional Commits](Https://conventionalcommits.org) for commit guideline
 
 <!-- changelog -->
 
+## [v0.94.0](https://git.inhji.de/inhji/akedia/compare/v0.93.0...v0.94.0) (2020-11-09)
+
+
+
+
+### Features:
+
+* use live view from github
+
+* wip new post form
+
+* show all entities again, massively improve article html
+
 ## [v0.93.0](https://git.inhji.de/inhji/akedia/compare/v0.92.1...v0.93.0) (2020-11-08)
 
 
