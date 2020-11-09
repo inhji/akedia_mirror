@@ -34,6 +34,7 @@ defmodule AkediaWeb.SharedView do
       "like-of" -> "Likes"
       "in-reply-to" -> "Replies"
       "bookmark-of" -> "Bookmarks"
+      "repost-of" -> "Reposts"
       action -> action
     end
   end
