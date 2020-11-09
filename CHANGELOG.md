@@ -5,6 +5,15 @@ See [Conventional Commits](Https://conventionalcommits.org) for commit guideline
 
 <!-- changelog -->
 
+## [v0.94.1](https://git.inhji.de/inhji/akedia/compare/v0.94.0...v0.94.1) (2020-11-09)
+
+
+
+
+### Bug Fixes:
+
+* add js view for post/edit
+
 ## [v0.94.0](https://git.inhji.de/inhji/akedia/compare/v0.93.0...v0.94.0) (2020-11-09)
 
 
