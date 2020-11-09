@@ -7,7 +7,7 @@
   </div>
 </section>
 
-<%= if not Enum.empty?(search_results) do %>
+<%= if search_results > 0 do %>
 
 <div class="columns is-desktop">
   <div class="column">
