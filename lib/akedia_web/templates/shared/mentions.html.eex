@@ -1,28 +1,30 @@
 <% grouped = Enum.group_by(@schema.entity.mentions, &Map.get(&1, :wm_property)) %>
 
-<%= for {type, mentions} <- grouped do %>
-  <div class="card">
-    <div class="card-content">
-      <h4 class="is-size-4 subtitle"> <%= Enum.count(mentions) %> <%= mention_type(type) %></h4>
-      <%= if not Enum.empty?(mentions) do %>
-        <%= for mention <- mentions do %>
-          <div class="media">
-            <a class="media-left" href="<%= mention.author.url %>" target="_blank">
-              <figure class="image is-64x64">
-                <img src="<%= author_url(mention.author)  %>">
-              </figure>
-            </a>
-            <div class="media-content content">
-              <strong><%= mention.author.name %></strong>
-              <small class="has-text-grey"><%= date_fuzzy(mention.published_at) %></small>
-              <p><%= raw(mention.content_html) %></p>
-              <p>
-                <a href="<%= mention.url %>" class="has-text-grey">Source</a>
-              </p>
+<section class="mentions">
+  <%= for {type, mentions} <- grouped do %>
+    <div class="card mention">
+      <div class="card-content">
+        <h4 class="is-size-4 subtitle"> <%= Enum.count(mentions) %> <%= mention_type(type) %></h4>
+        <%= if not Enum.empty?(mentions) do %>
+          <%= for mention <- mentions do %>
+            <div class="media">
+              <a class="media-left" href="<%= mention.author.url %>" target="_blank">
+                <figure class="image is-64x64">
+                  <img src="<%= author_url(mention.author)  %>">
+                </figure>
+              </a>
+              <div class="media-content content">
+                <strong><%= mention.author.name %></strong>
+                <small class="has-text-grey"><%= date_fuzzy(mention.published_at) %></small>
+                <p><%= raw(mention.content_html) %></p>
+                <p>
+                  <a href="<%= mention.url %>" class="has-text-grey">Source</a>
+                </p>
+              </div>
             </div>
-          </div>
+          <% end %>
         <% end %>
-      <% end %>
+      </div>
     </div>
-  </div>
-<% end %>
+  <% end %>
+</section>
