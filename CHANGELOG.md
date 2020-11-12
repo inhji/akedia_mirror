@@ -5,6 +5,19 @@ See [Conventional Commits](Https://conventionalcommits.org) for commit guideline
 
 <!-- changelog -->
 
+## [v0.95.0](https://git.inhji.de/inhji/akedia/compare/v0.94.4...v0.95.0) (2020-11-12)
+
+
+
+
+### Features:
+
+* add html and sanitized content to bookmarks
+
+### Refactors:
+
+* show bookmark title bigger, clean up post meta
+
 ## [v0.94.4](https://git.inhji.de/inhji/akedia/compare/v0.94.3...v0.94.4) (2020-11-09)
 
 
