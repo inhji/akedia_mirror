@@ -11,7 +11,7 @@ defmodule Akedia.Atomex.Feed do
   @doc """
   Create a new feed
   """
-  @spec new(binary(), DateTime.t, binary(), binary()) :: Akedia.Atomex.Feed.t
+  @spec new(binary(), DateTime.t(), binary(), binary()) :: Akedia.Atomex.Feed.t()
   def new(id, last_update_datetime, title, title_type \\ "text") do
     [
       {:id, nil, id},
@@ -58,21 +58,21 @@ defmodule Akedia.Atomex.Feed do
   @doc """
   Add an author to the feed. See `Akedia.Atomex.Types.Person` for accepted attributes
   """
-  @spec author(Akedia.Atomex.Feed.t, binary(), list()) :: Akedia.Atomex.Feed.t
+  @spec author(Akedia.Atomex.Feed.t(), binary(), list()) :: Akedia.Atomex.Feed.t()
   def author(feed, name, attributes \\ []),
     do: add_field(feed, Person.new(:author, name, attributes))
 
   @doc """
   Add a link to the feed. See `Akedia.Atomex.Types.Link` for accepted attributes
   """
-  @spec link(Akedia.Atomex.Feed.t, binary(), list()) :: Akedia.Atomex.Feed.t
+  @spec link(Akedia.Atomex.Feed.t(), binary(), list()) :: Akedia.Atomex.Feed.t()
   def link(feed, href, attributes \\ []),
     do: add_field(feed, Link.new(href, attributes))
 
   @doc """
   Add given entries to the feed
   """
-  @spec entries(Akedia.Atomex.Feed.t, list(Akedia.Atomex.Entry.t)) :: Akedia.Atomex.Feed.t
+  @spec entries(Akedia.Atomex.Feed.t(), list(Akedia.Atomex.Entry.t())) :: Akedia.Atomex.Feed.t()
   def entries(feed, entries),
     do: feed ++ entries
 

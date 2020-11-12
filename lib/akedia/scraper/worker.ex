@@ -1,6 +1,7 @@
 defmodule Akedia.Scraper.Worker do
   require Logger
-  use Oban.Worker, 
+
+  use Oban.Worker,
     queue: :default,
     max_attempts: 3
 

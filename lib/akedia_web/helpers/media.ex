@@ -24,7 +24,9 @@ defmodule AkediaWeb.Helpers.Media do
   def cover_url(user, version), do: Akedia.Accounts.CoverUploader.url({user.cover, user}, version)
 
   def avatar_url(user), do: Akedia.Accounts.AvatarUploader.url({user.avatar, user}, :thumb)
-  def avatar_url(user, version), do: Akedia.Accounts.AvatarUploader.url({user.avatar, user}, version)
+
+  def avatar_url(user, version),
+    do: Akedia.Accounts.AvatarUploader.url({user.avatar, user}, version)
 
   def author_url(author), do: AuthorUploader.url({author.photo, author}, :thumb)
   def author_url(author, version), do: AuthorUploader.url({author.photo, author}, version)

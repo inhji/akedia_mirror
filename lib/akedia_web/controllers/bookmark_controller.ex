@@ -27,7 +27,7 @@ defmodule AkediaWeb.BookmarkController do
         %{entity_id: bookmark.entity_id}
         |> Akedia.Favicon.Worker.new()
         |> Oban.insert()
-        
+
         %{entity_id: bookmark.entity_id}
         |> Akedia.Webmentions.Worker.new()
         |> Oban.insert()
@@ -45,6 +45,7 @@ defmodule AkediaWeb.BookmarkController do
 
   def show(conn, %{"id" => id}) do
     bookmark = Content.get_bookmark!(id)
+    IO.inspect(bookmark)
     render(conn, "show.html", bookmark: bookmark)
   end
 
@@ -64,7 +65,7 @@ defmodule AkediaWeb.BookmarkController do
         %{entity_id: bookmark.entity_id}
         |> Akedia.Favicon.Worker.new()
         |> Oban.insert()
-        
+
         %{entity_id: bookmark.entity_id}
         |> Akedia.Webmentions.Worker.new()
         |> Oban.insert()

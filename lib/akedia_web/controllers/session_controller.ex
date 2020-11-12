@@ -69,7 +69,7 @@ defmodule AkediaWeb.SessionController do
   def webauthn_callback(conn, %{"id" => id, "response" => response}) do
     challenge = get_session(conn, :challenge)
     user = Accounts.get_user!()
-    
+
     conn =
       case Akedia.Auth.handle_webauthn(id, response, challenge) do
         {:ok, _} ->

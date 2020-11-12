@@ -1,5 +1,5 @@
 defmodule Akedia.Webmentions.Worker do
-  use Oban.Worker, 
+  use Oban.Worker,
     queue: :default,
     max_attempts: 3
 
@@ -8,7 +8,7 @@ defmodule Akedia.Webmentions.Worker do
     entity = Akedia.Content.get_entity!(entity_id)
 
     cond do
-      entity.post -> 
+      entity.post ->
         Akedia.Webmentions.Bridgy.maybe_publish_to_github(entity.post, entity.post.reply_to)
         Akedia.Webmentions.send_webmentions(Akedia.entity_url(entity.post), ".h-entry")
 

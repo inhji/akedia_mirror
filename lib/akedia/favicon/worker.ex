@@ -1,7 +1,7 @@
 defmodule Akedia.Favicon.Worker do
   require Logger
 
-  use Oban.Worker, 
+  use Oban.Worker,
     queue: :default,
     max_attempts: 3
 
@@ -30,6 +30,8 @@ defmodule Akedia.Favicon.Worker do
         |> Bookmark.changeset(%{favicon_id: favicon.id})
         |> Repo.update!()
     end
+
+    :ok
   end
 
   def maybe_create_favicon(hostname, favicon_url) do

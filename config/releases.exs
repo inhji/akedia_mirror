@@ -9,15 +9,14 @@ import Config
 # kept out of version control and might be hard to recover
 # or recreate for your teammates (or yourself later on).
 
-totp_secret = 
-	System.get_env("TOTP_SECRET") ||
-	  raise """
-	  environment variable TOTP_SECRET is missing.
-	  You can generate one by calling: mix phx.gen.secret
-	  """
+totp_secret =
+  System.get_env("TOTP_SECRET") ||
+    raise """
+    environment variable TOTP_SECRET is missing.
+    You can generate one by calling: mix phx.gen.secret
+    """
 
-config :akedia, Akedia.Config,
-  totp_secret: totp_secret
+config :akedia, Akedia.Config, totp_secret: totp_secret
 
 secret_key_base =
   System.get_env("SECRET_KEY_BASE") ||

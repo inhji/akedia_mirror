@@ -29,15 +29,18 @@
 							current_user: @current_user %>
 
 					<div class="post-content">
-						<%= if @post.title do %>
-						<h3 class="is-size-4 title p-name">
-							<%= @post.title %>
-						</h3>
-						<% end %>
-
-						<div class="content e-content is-size-4 <%= unless @post.title do %>p-name<% end %>">
-							<%= raw(@post.content_html) %>
-						</div>
+					  <%= if @post.title do %>
+					    <h3 class="is-size-4 title p-name">
+					      <%= @post.title %>
+					    </h3>
+					    <div class="content e-content is-size-5">
+					      <%= raw(@post.content_html) %>
+					    </div>
+					  <% else %>
+					    <div class="content e-content is-size-4 p-name">
+					      <%= raw(@post.content_html) %>
+					    </div>
+					  <% end %>
 					</div>
 
 					<%= render SharedView, "post/post_meta.html",

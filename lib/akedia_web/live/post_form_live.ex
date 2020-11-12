@@ -1,54 +1,53 @@
 defmodule AkediaWeb.PostFormLive do
-	use AkediaWeb, :live
-	alias Akedia.Content.Post
+  use AkediaWeb, :live
+  alias Akedia.Content.Post
 
-	def mount(_params, _assigns, socket) do
-		changeset = Post.changeset(%Post{}, %{})
+  def mount(_params, _assigns, socket) do
+    changeset = Post.changeset(%Post{}, %{})
 
-		{:ok, assign(socket, changeset: changeset, tags: [])}
-	end
+    {:ok, assign(socket, changeset: changeset, tags: [])}
+  end
 
-	def handle_event("validate", %{"post" => params}, socket) do
-		# TODO: Something causes the entity fields in inputs_for not get picket up
-		# and saved by the changeset.
+  def handle_event("validate", %{"post" => params}, socket) do
+    # TODO: Something causes the entity fields in inputs_for not get picket up
+    # and saved by the changeset.
 
-	  changeset =
-	    %Post{}
-	    |> Post.changeset(params)
-	    |> Map.put(:action, :insert)
+    changeset =
+      %Post{}
+      |> Post.changeset(params)
+      |> Map.put(:action, :insert)
 
-	  {:noreply, assign(socket, changeset: changeset, tags: [])}
-	end
+    {:noreply, assign(socket, changeset: changeset, tags: [])}
+  end
 
-	def handle_event("save", %{"post" => post_params}, socket) do
-		case Akedia.Content.create_post(post_params) do
-			{:ok, post} ->
-				%{entity_id: post.entity_id}
+  def handle_event("save", %{"post" => post_params}, socket) do
+    case Akedia.Content.create_post(post_params) do
+      {:ok, post} ->
+        %{entity_id: post.entity_id}
         |> Akedia.Webmentions.Worker.new()
         |> Oban.insert()
 
         {:noreply,
-      		socket
-      		|> put_flash(:info, "Post created!")
-      		|> redirect(to: Routes.public_path(AkediaWeb.Endpoint, :index))
-      	}
+         socket
+         |> put_flash(:info, "Post created!")
+         |> redirect(to: Routes.public_path(AkediaWeb.Endpoint, :index))}
 
       {:error, %Ecto.Changeset{} = changeset} ->
-      	{:noreply, assign(socket, changeset: changeset, tags: [])}
-		end
-	end
+        {:noreply, assign(socket, changeset: changeset, tags: [])}
+    end
+  end
 
-	def handle_event("more", _params, socket) do
-		changeset = socket.assigns.changeset
+  def handle_event("more", _params, socket) do
+    changeset = socket.assigns.changeset
 
-		query_params = case changeset.valid? do
-			true -> %{:content => Ecto.Changeset.get_change(changeset, :content)}
-			_ -> %{}		
-		end
+    query_params =
+      case changeset.valid? do
+        true -> %{:content => Ecto.Changeset.get_change(changeset, :content)}
+        _ -> %{}
+      end
 
-		{:noreply, 
-			socket
-			|> redirect(to: Routes.post_path(AkediaWeb.Endpoint, :new, query_params))
-		}
-	end
+    {:noreply,
+     socket
+     |> redirect(to: Routes.post_path(AkediaWeb.Endpoint, :new, query_params))}
+  end
 end

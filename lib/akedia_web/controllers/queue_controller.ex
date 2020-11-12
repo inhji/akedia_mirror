@@ -12,8 +12,8 @@ defmodule AkediaWeb.QueueController do
   end
 
   def jobs(conn, _params) do
-  	jobs = Akedia.Jobs.list_job_queue()
+    jobs = Akedia.Jobs.list_job_queue()
 
-  	render(conn, "jobs.html", jobs: jobs)
+    render(conn, "jobs.html", jobs: jobs)
   end
 end

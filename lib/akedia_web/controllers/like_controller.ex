@@ -24,7 +24,6 @@ defmodule AkediaWeb.LikeController do
   def create(conn, %{"like" => like_params}) do
     case Content.create_like(like_params) do
       {:ok, like} ->
-
         %{url: like.url, entity_id: like.entity.id}
         |> Akedia.Context.Worker.new()
         |> Oban.insert()
@@ -57,7 +56,7 @@ defmodule AkediaWeb.LikeController do
     like = Content.get_like!(id)
 
     case Content.update_like(like, like_params) do
-      {:ok, like} ->    
+      {:ok, like} ->
         %{url: like.url, entity_id: like.entity.id}
         |> Akedia.Context.Worker.new()
         |> Oban.insert()
