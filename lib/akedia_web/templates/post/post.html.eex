@@ -35,7 +35,7 @@
 						</h3>
 						<% end %>
 
-						<div class="content e-content <%= unless @post.title do %>p-name<% end %> is-size-4">
+						<div class="content e-content is-size-4 <%= unless @post.title do %>p-name<% end %>">
 							<%= raw(@post.content_html) %>
 						</div>
 					</div>

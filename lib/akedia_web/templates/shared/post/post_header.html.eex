@@ -1,7 +1,7 @@
 <div class="post-header">
   <strong><%= @current_user.name %></strong>
   <span>
-    <%= render_post_verb(post_verb(@schema)) %>
+    <%= @schema |> get_post_verb() |> render_post_verb() %>
   </span>
   <span>
   	<%= render SharedView, "post/post_date.html", 

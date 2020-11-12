@@ -21,7 +21,17 @@
               current_user: @current_user %>
 
           <div class="post-content">
-            <div class="content e-content is-size-4">
+            <%= if @bookmark.title do %>
+            <h3 class="is-size-4 title p-name">
+              <%= link @bookmark.title, to: @bookmark.url %>
+            </h3>
+            <% end %>
+
+            <%= if @bookmark.title do %>
+            <div class="content e-content is-size-5">
+            <% else %>
+            <div class="content e-content is-size-4 p-name">
+            <% end %>       
               <%= to_html(@bookmark) %>
             </div>
           </div>

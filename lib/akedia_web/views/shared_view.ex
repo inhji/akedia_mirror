@@ -39,15 +39,11 @@ defmodule AkediaWeb.SharedView do
     end
   end
 
-  def post_verb(%Bookmark{title: title, url: url}) do
-    if title do
-      {"bookmarked ", url, title}
-    else
-      {"bookmarked", nil, nil}
-    end
+  def get_post_verb(%Bookmark{title: title, url: url}) do
+    {"bookmarked", nil, nil}
   end
 
-  def post_verb(%Like{entity: %{context: context}}) do
+  def get_post_verb(%Like{entity: %{context: context}}) do
     if context do
       {"liked a post by ", context.author.url, context.author.name}
     else
@@ -55,7 +51,7 @@ defmodule AkediaWeb.SharedView do
     end
   end
 
-  def post_verb(%Post{reply_to: reply_to}) do
+  def get_post_verb(%Post{reply_to: reply_to}) do
     if reply_to do
       {"replied to ", reply_to, reply_to}
     else
