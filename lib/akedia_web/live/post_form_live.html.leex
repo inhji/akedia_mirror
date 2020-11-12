@@ -25,10 +25,10 @@
 			    <%= error_tag f, :content %>
 			  </div>
 
-			  <div class="field">
+			  <div class="field" phx-update="ignore">
 			    <%= label f, :topics, "🏷️ Tags", class: "label" %>
 			    <div class="control">
-			      <%= text_input f, :topics, value: @tags, class: "input", type: "tags", phx_update: "ignore" %>           
+			      <%= text_input f, :topics, value: @tags, class: "input", type: "tags" %>
 			    </div>
 			    <%= error_tag f, :topics %>
 			  </div>
