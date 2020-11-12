@@ -5,6 +5,19 @@ See [Conventional Commits](Https://conventionalcommits.org) for commit guideline
 
 <!-- changelog -->
 
+## [v0.95.1](https://git.inhji.de/inhji/akedia/compare/v0.95.0...v0.95.1) (2020-11-12)
+
+
+
+
+### Bug Fixes:
+
+* tag input in post form live
+
+* add live view js hooks support
+
+* view loader string
+
 ## [v0.95.0](https://git.inhji.de/inhji/akedia/compare/v0.94.4...v0.95.0) (2020-11-12)
 
 
