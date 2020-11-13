@@ -10,7 +10,7 @@ defmodule AkediaWeb.LayoutView do
   in this combination of view/template.
   """
   def js_view_path(conn) do
-    [controller_name(conn), template_name(conn)]
+    [controller_name(conn), action_name(conn)]
     |> Enum.join("/")
   end
 
@@ -25,7 +25,7 @@ defmodule AkediaWeb.LayoutView do
 
   # Removes the extion from the template and reutrns
   # just the name.
-  defp template_name(%{private: private} = _conn) do
+  defp action_name(%{private: private} = _conn) do
     private
     |> Map.get(:phoenix_action)
     |> to_string()
