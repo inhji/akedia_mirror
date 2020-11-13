@@ -49,7 +49,7 @@
 				<div class="field">
 				  <%= label ef, :settings, "⚙️ Settings", class: "label" %>
 
-				  <div class="columns">
+				  <div class="columns" phx-update="ignore">
 				    <div class="column">
 				      <div class="field">
 				        <%= checkbox ef, :is_published, class: "switch is-rounded" %>

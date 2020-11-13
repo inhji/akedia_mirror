@@ -9,9 +9,6 @@ defmodule AkediaWeb.PostFormLive do
   end
 
   def handle_event("validate", %{"post" => params}, socket) do
-    # TODO: Something causes the entity fields in inputs_for not get picket up
-    # and saved by the changeset.
-
     changeset =
       %Post{}
       |> Post.changeset(params)
