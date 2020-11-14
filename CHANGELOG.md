@@ -5,6 +5,23 @@ See [Conventional Commits](Https://conventionalcommits.org) for commit guideline
 
 <!-- changelog -->
 
+## [v0.95.2](https://git.inhji.de/inhji/akedia/compare/v0.95.1...v0.95.2) (2020-11-14)
+
+
+
+
+### Bug Fixes:
+
+* small fixes
+
+* improve post form live, first working version
+
+* add global class helper
+
+* taginput being reset on live view update
+
+* rename template_name to action_name
+
 ## [v0.95.1](https://git.inhji.de/inhji/akedia/compare/v0.95.0...v0.95.1) (2020-11-12)
 
 
