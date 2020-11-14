@@ -37,7 +37,7 @@ defmodule Akedia.AtomexTest do
                <entry>
                  <summary>Hello World</summary>
                  <link href="https://example.com/entry/1" rel="alternate"/>
-                 <content>Hello World, I'm a very long content</content>
+                 <content>Hello World, I&apos;m a very long content</content>
                  <author>
                    <name>Andrew Latimer</name>
                    <uri>https://example.com/users/~Andrew</uri>
@@ -49,7 +49,7 @@ defmodule Akedia.AtomexTest do
                <entry>
                  <summary>Hello World</summary>
                  <link href="https://example.com/entry/2" rel="alternate"/>
-                 <content>Hello World, I'm a very long content</content>
+                 <content>Hello World, I&apos;m a very long content</content>
                  <author>
                    <name>Andrew Latimer</name>
                    <uri>https://example.com/users/~Andrew</uri>

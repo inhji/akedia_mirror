@@ -13,7 +13,11 @@ defmodule Akedia.Atomex do
   """
   @spec generate_document(Akedia.Atomex.Feed.t()) :: binary()
   def generate_document(feed) do
-    XmlBuilder.doc(feed)
+    feed
+    |> XmlBuilder.document()
+    |> XmlBuilder.generate()
+
+    # XmlBuilder.doc(feed)
   end
 
   @spec version() :: binary()

@@ -50,7 +50,10 @@ defmodule Akedia.Favicon do
   end
 
   defp find_favicon_link_tag(html) do
-    links = Floki.find(html, "link")
+    links =
+      html
+      |> Floki.parse_document()
+      |> Floki.find("link")
 
     Enum.find(links, fn {"link", attrs, _} ->
       Enum.any?(attrs, fn {name, value} ->

@@ -2,7 +2,6 @@
 	<small>
 		<%= if has_topics?(@schema) do %>
 			<%= render SharedView, "post/post_topics.html", conn: @conn, topics: @schema.entity.topics %>
-			<span class="dot" />
 			<%= render SharedView, "post/post_syndications.html", conn: @conn, schema: @schema %>
 		<% else %>
 			<%= render SharedView, "post/post_syndications.html", conn: @conn, schema: @schema %>
