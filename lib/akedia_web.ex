@@ -53,11 +53,10 @@ defmodule AkediaWeb do
       import AkediaWeb.ErrorHelpers
       import AkediaWeb.Gettext
       import AkediaWeb.Helpers.Media
+      import AkediaWeb.Helpers.Time
+      import AkediaWeb.Helpers.Meta
+      import AkediaWeb.Helpers.Markup, only: [class: 3, class: 2]
 
-      import AkediaWeb.Helpers.Time,
-        only: [date_iso: 1, date_pretty: 1, date_fuzzy: 1, time_tag: 1]
-
-      import AkediaWeb.Helpers.Meta, only: [title: 2, title: 1]
       import AkediaWeb.Markdown, only: [to_html: 1]
       alias AkediaWeb.Router.Helpers, as: Routes
       alias AkediaWeb.{SharedView, LayoutView}
@@ -83,6 +82,9 @@ defmodule AkediaWeb do
     quote do
       use Phoenix.LiveView
       use Phoenix.HTML
+
+      import AkediaWeb.Helpers.Markup, only: [class: 3, class: 2]
+
       import AkediaWeb.ErrorHelpers
       alias AkediaWeb.Router.Helpers, as: Routes
     end
