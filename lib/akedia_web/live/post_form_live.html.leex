@@ -1,76 +1,105 @@
 <section class="post-form">
 	<div class="tabs">
-	  <ul>
-	    <li><a>Post</a></li>
-	    <li><a>Bookmark</a></li>
-	    <li><a>Like</a></li>
-	  </ul>
+		<ul>
+			<li class='<%= class(@type == "post", "is-active") %>'>
+				<a phx-click="change_type" phx-value-type="post">Post</a>
+			</li>
+			<li class='<%= class(@type == "bookmark", "is-active") %>'>
+				<a phx-click="change_type" phx-value-type="bookmark">Bookmark</a>
+			</li>
+			<li class='<%= class(@type == "like", "is-active") %>'>
+				<a phx-click="change_type" phx-value-type="like">Like</a>
+			</li>
+		</ul>
 	</div>
 	
-	<%= f = form_for @changeset, "#", [phx_change: :validate, phx_submit: :save] %>
+	<%= f = form_for @changeset, "#", [phx_change: :validate, phx_submit: :save, as: "post"] %>
 		<div class="columns">
-			<div class="column">		
+			<div class="column">
 				<div class="field">
-			    <div class="zen">
-			      <input type="checkbox" id="zen-toggle-comment">
-			      <div class="zen-backdrop">
-			        <%= textarea f, :content,
-			          id: "content-area",
-			          class: "textarea",
-			          rows: 10,
-			          placeholder: "What's on your mind?" %>
-			        <label for="zen-toggle-comment">Zen Mode</label>
-			      </div>
-			    </div>
-			    <%= error_tag f, :content %>
-			  </div>
+				  <div class="control">
+				    <%= text_input f, :title,
+				      class: "input is-size-4",
+				      placeholder: "Title" %>
+				  </div>
+				  <%= error_tag f, :title %>
+				</div>
 
-			  <div class="field" phx-update="ignore">
-			    <%= label f, :topics, "🏷️ Tags", class: "label" %>
-			    <div class="control">
-			      <%= text_input f, :topics, value: @tags, class: "input", type: "tags" %>
-			    </div>
-			    <%= error_tag f, :topics %>
-			  </div>
-
-				<%= hidden_input f, :topics %>
-
-				<div class="field has-addons is-fullwidth">
-					<div class="control">
-						<button type="submit" class="button is-primary">Post Now</button>
+				<div class="field">
+					<div class="zen">
+						<input type="checkbox" id="zen-toggle-comment">
+						<div class="zen-backdrop">
+							<%= textarea f, :content,
+								id: "content-area",
+								class: "textarea",
+								rows: 10,
+								autofocus: true,
+								placeholder: "What's on your mind?" %>
+							<label for="zen-toggle-comment">Zen Mode</label>
+						</div>
 					</div>
-					<div class="control">
-						<button phx-click="more" class="button">More</button>
-					</div>
+					<%= error_tag f, :content %>
 				</div>
 			</div>
 			<div class="column">
 				<%= inputs_for f, :entity, fn(ef) -> %>
 				<div class="field">
-				  <%= label ef, :settings, "⚙️ Settings", class: "label" %>
+					<%= label ef, :settings, "⚙️ Settings", class: "label" %>
 
-				  <div class="columns" phx-update="ignore">
-				    <div class="column">
-				      <div class="field">
-				        <%= checkbox ef, :is_published, class: "switch is-rounded" %>
-				        <%= label ef, :is_published, "📦 Published" %>    
-				      </div> 
-				    </div>
-				    <div class="column">
-				      <div class="field">
-				        <%= checkbox ef, :is_pinned, class: "switch is-rounded" %>
-				        <%= label ef, :is_pinned, "📌 Pinned" %>
-				      </div>
-				    </div>
-				    <div class="column">
-				      <div class="field">
-				        <%= checkbox ef, :bridgy_fed, class: "switch is-rounded" %>
-				        <%= label ef, :bridgy_fed, "🕸️ Brid.gy Fed" %>
-				      </div>
-				    </div>
-				  </div>
+					<div class="columns" phx-update="ignore">
+						<div class="column">
+							<div class="field">
+								<%= checkbox ef, :is_published, class: "switch is-rounded" %>
+								<%= label ef, :is_published, "📦 Published" %>    
+							</div> 
+						</div>
+						<div class="column">
+							<div class="field">
+								<%= checkbox ef, :is_pinned, class: "switch is-rounded" %>
+								<%= label ef, :is_pinned, "📌 Pinned" %>
+							</div>
+						</div>
+						<div class="column">
+							<div class="field">
+								<%= checkbox ef, :bridgy_fed, class: "switch is-rounded" %>
+								<%= label ef, :bridgy_fed, "🕸️ Brid.gy Fed" %>
+							</div>
+						</div>
+					</div>
 				</div>
 				<% end %>
+
+				<div class="field">
+					<%= label f, :reply_to, "↩️ Reply to", class: "label" %>
+					<div class="control">
+						<%= url_input f, :reply_to, class: "input" %>
+					</div>
+					<%= error_tag f, :reply_to %>
+				</div>
+
+				<div class="field">
+					<%= label f, :url, "🌐 URL", class: "label" %>
+					<div class="control">
+						<%= url_input f, :url, class: "input" %>
+					</div>
+					<%= error_tag f, :url %>
+				</div>
+
+				<div class="field" phx-update="ignore">
+					<%= label f, :topics, "🏷️ Tags", class: "label" %>
+					<div class="control">
+						<%= text_input f, :topics, class: "input", type: "tags" %>
+					</div>
+					<%= error_tag f, :topics %>
+				</div>
+
+				<%= hidden_input f, :topics %>
+			</div>
+		</div>
+
+		<div class="field">
+			<div class="control">
+				<button type="submit" class="button is-primary">Post Now</button>
 			</div>
 		</div>
 	</form>
