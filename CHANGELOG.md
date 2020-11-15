@@ -5,6 +5,17 @@ See [Conventional Commits](Https://conventionalcommits.org) for commit guideline
 
 <!-- changelog -->
 
+## [v0.95.3](https://git.inhji.de/inhji/akedia/compare/v0.95.2...v0.95.3) (2020-11-15)
+
+
+
+
+### Bug Fixes:
+
+* reorder form fields, fix topic input spacing
+
+* remove status form from public/index
+
 ## [v0.95.2](https://git.inhji.de/inhji/akedia/compare/v0.95.1...v0.95.2) (2020-11-14)
 
 
