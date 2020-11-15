@@ -42,6 +42,32 @@
 				</div>
 			</div>
 			<div class="column">
+				<div class="field">
+					<%= label f, :reply_to, "↩️ Reply to", class: "label" %>
+					<div class="control">
+						<%= url_input f, :reply_to, class: "input" %>
+					</div>
+					<%= error_tag f, :reply_to %>
+				</div>
+
+				<div class="field">
+					<%= label f, :url, "🌐 URL", class: "label" %>
+					<div class="control">
+						<%= url_input f, :url, class: "input" %>
+					</div>
+					<%= error_tag f, :url %>
+				</div>
+
+				<div class="field" phx-update="ignore" style="padding-bottom: 0.5rem;">
+					<%= label f, :topics, "🏷️ Tags", class: "label" %>
+					<div class="control">
+						<%= text_input f, :topics, class: "input", type: "tags" %>
+					</div>
+					<%= error_tag f, :topics %>
+				</div>
+
+				<%= hidden_input f, :topics %>
+
 				<%= inputs_for f, :entity, fn(ef) -> %>
 				<div class="field">
 					<%= label ef, :settings, "⚙️ Settings", class: "label" %>
@@ -68,32 +94,6 @@
 					</div>
 				</div>
 				<% end %>
-
-				<div class="field">
-					<%= label f, :reply_to, "↩️ Reply to", class: "label" %>
-					<div class="control">
-						<%= url_input f, :reply_to, class: "input" %>
-					</div>
-					<%= error_tag f, :reply_to %>
-				</div>
-
-				<div class="field">
-					<%= label f, :url, "🌐 URL", class: "label" %>
-					<div class="control">
-						<%= url_input f, :url, class: "input" %>
-					</div>
-					<%= error_tag f, :url %>
-				</div>
-
-				<div class="field" phx-update="ignore">
-					<%= label f, :topics, "🏷️ Tags", class: "label" %>
-					<div class="control">
-						<%= text_input f, :topics, class: "input", type: "tags" %>
-					</div>
-					<%= error_tag f, :topics %>
-				</div>
-
-				<%= hidden_input f, :topics %>
 			</div>
 		</div>
 
