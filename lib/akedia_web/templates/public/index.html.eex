@@ -2,10 +2,6 @@
    <%= render SharedView, "hcard.html", assigns %>
 </section>
 
-<%= if @logged_in do %>
-	<%= live_render(@conn, AkediaWeb.StatusFormLive) %>
-<% end %>
-
 <div class="columns is-desktop">
 	<div class="column">
 		<%= render "entity_feed.html", assigns %>
