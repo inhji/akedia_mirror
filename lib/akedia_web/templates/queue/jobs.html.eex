@@ -3,21 +3,29 @@
     <%= render "sidebar.html", assigns %>
   </div>
   <div class="column">
-    <%= if Enum.empty?(@jobs) do %>
+    
       <div class="card">
         <div class="card-content">
+          <%= if Enum.empty?(@failed_jobs) do %>
           No jobs in queue, sorry.
+          <% end %>
+
+          <%= for job <- @failed_jobs do %>
+            <%= job.worker %> @ <%= job.state %>
+            <span class="has-text-grey"><%= job.state %></span>
+          <% end %>
         </div>
       </div>
-    <% end %>
-    <%= for job <- @jobs do %>
+
       <div class="card">
         <div class="card-content">
-          <%= job.worker %> @ <%= job.state %>
-
-          <span class="has-text-grey"><%= job.state %></span>
+          <%= for job <- @completed_jobs do %>
+            <%= job.worker %> <span class="has-text-success"><%= job.state %></span>
+            <time datetime="<%= job.completed_at %>"><%= Timex.from_now(job.completed_at) %></time>
+          <% end %>
         </div>
       </div>
-    <% end %>
+    
+    
   </div>
 </div>

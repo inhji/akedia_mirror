@@ -14,7 +14,7 @@ config :akedia,
 
 config :akedia, Oban,
   repo: Akedia.Repo,
-  plugins: [Oban.Plugins.Pruner],
+  plugins: [{Oban.Plugins.Pruner, max_age: 15 * 60}],
   queues: [default: 10]
 
 config :akedia, Akedia.Config,
