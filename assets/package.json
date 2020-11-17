@@ -7,7 +7,6 @@
     "stats": "webpack --profile --json > stats.json"
   },
   "dependencies": {
-    "@joeattardi/emoji-button": "^4.3.0",
     "bulma": "^0.9.1",
     "bulma-switch": "^2.0.0",
     "bulma-tagsinput": "^2.0.0",
