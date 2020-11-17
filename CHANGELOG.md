@@ -5,6 +5,17 @@ See [Conventional Commits](Https://conventionalcommits.org) for commit guideline
 
 <!-- changelog -->
 
+## [v0.95.4](https://git.inhji.de/inhji/akedia/compare/v0.95.3...v0.95.4) (2020-11-17)
+
+
+
+
+### Bug Fixes:
+
+* remove emojibutton from deps
+
+* increase job pruning time to 15 mins, show completed jobs
+
 ## [v0.95.3](https://git.inhji.de/inhji/akedia/compare/v0.95.2...v0.95.3) (2020-11-15)
 
 
