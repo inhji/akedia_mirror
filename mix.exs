@@ -55,7 +55,7 @@ defmodule Akedia.MixProject do
       {:ex_machina, "~> 2.3", only: :test},
       {:floki, "~> 0.29.0"},
       {:gettext, "~> 0.18"},
-      {:git_ops, "~> 2.0.1", only: [:dev, :test]},
+      {:git_ops, "~> 2.1.0", only: [:dev, :test]},
       {:html_sanitize_ex, "~> 1.3"},
       {:httpoison, "~> 1.7"},
       {:jason, "~> 1.0"},
